@@ -15,26 +15,40 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download source.lua and version
+      - name: Download version and check if release exists
+        id: check_release
         run: |
-          curl -s https://raw.githubusercontent.com/EdgeIY/infiniteyield/refs/heads/master/source -o src/source.lua
+          # Get version from upstream
           curl -s https://raw.githubusercontent.com/EdgeIY/infiniteyield/refs/heads/master/version -o version.json
-
-      - name: Parse version
-        id: get_version
-        run: |
           VERSION=$(jq -r '.Version' version.json)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
-      - name: Download preinjected commands
+          # Check if the release already exists
+          if gh release view "$VERSION" &> /dev/null; then
+            echo "Release $VERSION already exists. Skipping workflow."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Exit if release already exists
+        if: steps.check_release.outputs.skip == 'true'
+        run: echo "Release already exists. Exiting early."
+
+      - name: Download source.lua and preinjected commands
+        if: steps.check_release.outputs.skip == 'false'
         run: |
+          curl -s https://raw.githubusercontent.com/EdgeIY/infiniteyield/refs/heads/master/source -o src/source.lua
           curl -s https://raw.githubusercontent.com/jacklebeignet/zero-yield/refs/heads/main/preinjected.lua -o preinjected.lua
 
       - name: Modify and inject
+        if: steps.check_release.outputs.skip == 'false'
         run: |
-          VERSION=${{ steps.get_version.outputs.version }}
+          VERSION=${{ steps.check_release.outputs.version }}
 
-          # Replace all "Infinite" with "Zero"
+          # Replace "Infinite" with "Zero"
           sed -i 's/Infinite/Zero/g' src/source.lua
 
           # Replace internal version assignment
@@ -46,25 +60,27 @@ jobs:
           # Append injected commands
           cat preinjected.lua >> src/source.lua
 
-          # Write minified version to src/build.lua with a header comment
+          # Write minified version to build.lua with warning comment
           {
             echo "-- This file is generated automatically and is not meant to be modified."
             sed '/^\s*$/d;s/^\s*//;s/\s*$//' src/source.lua
           } > src/build.lua
 
       - name: Commit updated src files to repo
+        if: steps.check_release.outputs.skip == 'false'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/source.lua src/build.lua
-          git commit -m "Updated Zero Yield to v${{ steps.get_version.outputs.version }}"
+          git commit -m "Updated Zero Yield to v${{ steps.check_release.outputs.version }}"
           git push
 
       - name: Create GitHub release and clean up
+        if: steps.check_release.outputs.skip == 'false'
         run: |
-          VERSION=${{ steps.get_version.outputs.version }}
+          VERSION=${{ steps.check_release.outputs.version }}
           echo -e "## What’s New\n\n- Updated Zero Yield to version $VERSION" > notes.md
-          gh release create "$VERSION" src/build.lua --title "$VERSION" --notes-file notes.md
+          gh release create "$VERSION" src/source.lua src/build.lua --title "$VERSION" --notes-file notes.md
           rm notes.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
