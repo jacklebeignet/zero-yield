@@ -4705,6 +4705,7 @@ CMDs[#CMDs + 1] = {NAME = 'deleteselectedtool / dst', DESC = 'Removes any curren
 CMDs[#CMDs + 1] = {NAME = 'grabtools', DESC = 'Automatically get tools that are dropped'}
 CMDs[#CMDs + 1] = {NAME = 'ungrabtools / nograbtools', DESC = 'Disables grabtools'}
 CMDs[#CMDs + 1] = {NAME = 'copytools [player] (CLIENT)', DESC = 'Copies a players tools'}
+CMDs[#CMDs + 1] = {NAME = 'hideplayers / hplyrs', DESC = 'Hides all charater models'}
 CMDs[#CMDs + 1] = {NAME = 'dupetools / clonetools [num]', DESC = 'Duplicates your inventory tools a set ammount of times'}
 CMDs[#CMDs + 1] = {NAME = 'givetool / givetools', DESC = 'Gives all the tools you\'re holding to [player] using the attach method.'}
 CMDs[#CMDs + 1] = {NAME = 'droptools', DESC = 'Drops your tools'}
@@ -12348,6 +12349,24 @@ addcmd("alignmentkeys", {}, function(args, speaker)
     end)
     alignmentKeysEmotes = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.EmotesMenu)
     StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.EmotesMenu, false)
+end)
+
+addcmd("hideplayers", {"hplyrs"}, function(args, speaker)
+	local players = game:GetService("Players")
+	local player = players.LocalPlayer or players.PlayerAdded:Wait()
+
+	for i, plr in pairs(players:GetPlayers()) do
+		if plr.Name ~= speaker.Name then
+			local char = plr.Character
+			for i, child in pairs(char:GetChildren()) do
+				if child:IsA("Part") or child:IsA("MeshPart") then
+					child.Transparency = 1
+				elseif child:IsA("Accessory") then
+					child:FindFirstChild("Handle").Transparency = 1
+				end
+			end
+		end
+	end
 end)
 
 addcmd("unalignmentkeys", {"noalignmentkeys"}, function(args, speaker)
