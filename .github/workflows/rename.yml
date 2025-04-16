@@ -1,0 +1,26 @@
+name: Replace 'Infinite' with 'Zero'
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  replace-text:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Replace 'Infinite' with 'Zero' in source.lua
+        run: |
+          sed -i 's/Infinite/Zero/g' source.lua
+
+      - name: Commit and push if changes exist
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add source.lua
+          git commit -m "🔄 Replaced 'Infinite' with 'Zero' in source.lua" || echo "No changes to commit"
+          git push
