@@ -1,0 +1,55 @@
+name: Inject Commands and Create Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  inject-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch source.lua from Infinite Yield repository
+        run: |
+          SOURCE_URL="https://raw.githubusercontent.com/EdgeIY/infiniteyield/refs/heads/master/source"
+          curl -s $SOURCE_URL -o source.lua
+
+      - name: Inject commands from preinjected.lua into source.lua at the bottom
+        run: |
+          curl -s https://raw.githubusercontent.com/${{ github.repository }}/main/preinjected.lua -o preinjected.lua
+          SOURCE_CONTENT=$(cat source.lua)
+          PREINJECTED_CONTENT=$(cat preinjected.lua)
+          FINAL_SOURCE="$SOURCE_CONTENT\n$PREINJECTED_CONTENT"
+          FINAL_SOURCE=$(echo "$FINAL_SOURCE" | sed 's/Infinite/Zero/g')
+          echo "$FINAL_SOURCE" > source.lua
+
+      - name: Commit and push modified source.lua to the repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add source.lua
+          git commit -m "Updated source.lua for Zero Yield"
+          git push
+
+      - name: Create GitHub release with modified source.lua
+        run: |
+          VERSION_URL="https://raw.githubusercontent.com/EdgeIY/infiniteyield/refs/heads/master/version"
+          VERSION_JSON=$(curl -s $VERSION_URL)
+          VERSION=$(echo $VERSION_JSON | jq -r '.Version')
+
+          echo "Creating GitHub release with version $VERSION"
+          
+          # Prepare custom release notes with a "What's New" section
+          RELEASE_NOTES="## What’s New\n- Updated Zero Yield to version $VERSION"
+          
+          # Create the release with the modified source.lua and the formatted release notes
+          gh release create "$VERSION" source.lua --title "$VERSION" --notes "$RELEASE_NOTES"
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
