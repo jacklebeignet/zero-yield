@@ -1,4 +1,4 @@
-name: Build Release
+name: Build Commands and Create Release
 
 on:
   workflow_dispatch:
@@ -60,14 +60,11 @@ jobs:
           git commit -m "Updated Zero Yield to v${{ steps.get_version.outputs.version }}"
           git push
 
-      - name: Create GitHub release
+      - name: Create GitHub release and clean up
         run: |
           VERSION=${{ steps.get_version.outputs.version }}
-          gh release create "$VERSION" src/build.lua --title "$VERSION" --notes "$(cat <<EOF
-## What’s New
-
-- Updated Zero Yield to version $VERSION
-EOF
-)"
+          echo -e "## What’s New\n\n- Updated Zero Yield to version $VERSION" > notes.md
+          gh release create "$VERSION" src/build.lua --title "$VERSION" --notes-file notes.md
+          rm notes.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
