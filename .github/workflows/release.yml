@@ -1,4 +1,4 @@
-name: Inject Commands and Create Release
+name: Build Release
 
 on:
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
 
       - name: Download source.lua and version
         run: |
-          curl -s https://raw.githubusercontent.com/EdgeIY/infiniteyield/refs/heads/master/source -o source.lua
+          curl -s https://raw.githubusercontent.com/EdgeIY/infiniteyield/refs/heads/master/source -o src/source.lua
           curl -s https://raw.githubusercontent.com/EdgeIY/infiniteyield/refs/heads/master/version -o version.json
 
       - name: Parse version
@@ -35,29 +35,39 @@ jobs:
           VERSION=${{ steps.get_version.outputs.version }}
 
           # Replace all "Infinite" with "Zero"
-          sed -i 's/Infinite/Zero/g' source.lua
+          sed -i 's/Infinite/Zero/g' src/source.lua
 
-          # Replace any internal version assignment
-          sed -i "s/Version[:=] *['\"]\\?[0-9.]*['\"]\\?/Version = \"$VERSION\"/g" source.lua
+          # Replace internal version assignment
+          sed -i "s/Version[:=] *['\"]\\?[0-9.]*['\"]\\?/Version = \"$VERSION\"/g" src/source.lua
 
           # Prepend version comment
-          sed -i "1i-- Version: $VERSION" source.lua
+          sed -i "1i-- Version: $VERSION" src/source.lua
 
           # Append injected commands
-          cat preinjected.lua >> source.lua
+          cat preinjected.lua >> src/source.lua
 
-      - name: Commit updated source.lua to repo
+          # Write minified version to src/build.lua with a header comment
+          {
+            echo "-- This file is generated automatically and is not meant to be modified."
+            sed '/^\s*$/d;s/^\s*//;s/\s*$//' src/source.lua
+          } > src/build.lua
+
+      - name: Commit updated src files to repo
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add source.lua
-          git commit -m "Updated source.lua to Zero Yield v${{ steps.get_version.outputs.version }}"
+          git add src/source.lua src/build.lua
+          git commit -m "Updated Zero Yield to v${{ steps.get_version.outputs.version }}"
           git push
 
       - name: Create GitHub release
         run: |
           VERSION=${{ steps.get_version.outputs.version }}
-          NOTES="## What’s New\n- Updated Zero Yield to version $VERSION"
-          gh release create "$VERSION" source.lua --title "$VERSION" --notes "$NOTES"
+          gh release create "$VERSION" src/build.lua --title "$VERSION" --notes "$(cat <<EOF
+## What’s New
+
+- Updated Zero Yield to version $VERSION
+EOF
+)"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
