@@ -1,5 +1,5 @@
 # zero-yield
-An fork of Infinite Yield, that adds more commands than the default and updates automatically.
+A fork of Infinite Yield, that adds more essential commands than the default one.
 
 ## How To Use
 
