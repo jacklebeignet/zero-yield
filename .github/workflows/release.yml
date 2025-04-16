@@ -28,7 +28,7 @@ jobs:
 
       - name: Download preinjected commands
         run: |
-          curl -s https://raw.githubusercontent.com/${{ github.repository }}/main/preinjected.lua -o preinjected.lua
+          curl -s https://raw.githubusercontent.com/jacklebeignet/zero-yield/refs/heads/main/preinjected.lua -o preinjected.lua
 
       - name: Modify and inject
         run: |
