@@ -1,3 +1,5 @@
+-- This file will be injected into Infinite Yield, to add the commands Zero Yield has to offer 
+
 CMDs[#CMDs + 1] = {NAME = 'hideplayers / hplyrs', DESC = 'Hides all charater models'}
 CMDs[#CMDs + 1] = {NAME = 'showplayers / splyrs', DESC = 'Shows all charater models'}
 
