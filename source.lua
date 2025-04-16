@@ -1,3 +1,4 @@
+-- Version: 6.3.1
 if IY_LOADED and not _G.IY_DEBUG == true then
     -- error("Zero Yield is already running!", 0)
     return
@@ -13041,4 +13042,5 @@ task.spawn(function()
 	IntroBackground:Destroy()
 	minimizeHolder()
 	if IsOnMobile then notify("Unstable Device", "On mobile, Zero Yield may have issues or features that are not functioning correctly.") end
-end)\n404: Not Found
+end)
+404: Not Found
