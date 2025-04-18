@@ -2777,7 +2777,7 @@ reference = (function()
 		{113,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=4,Name="Header",Parent={112},Position=UDim2.new(0,8,0,5),Size=UDim2.new(1,-8,0,20),Text="Get Further Help",TextColor3=Color3.new(1,1,1),TextSize=20,TextXAlignment=0,ZIndex=10,}},
 		{114,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="Text",Parent={112},Position=UDim2.new(0,8,0,30),Size=UDim2.new(1,-8,0,32),Text="You can join the Discord server to get support with IY,  and read up on more documentation such as the Plugin API.",TextColor3=Color3.new(1,1,1),TextSize=14,TextWrapped=true,TextXAlignment=0,ZIndex=10,}},
 		{115,"Frame",{BackgroundColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),BorderSizePixel=0,Name="Line",Parent={112},Position=UDim2.new(0,10,1,-1),Size=UDim2.new(1,-20,0,1),Visible=false,ZIndex=10,}},
-		{116,"TextButton",{BackgroundColor3=Color3.new(0.48627451062202,0.61960786581039,0.85098040103912),BorderColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),Font=4,Name="InviteButton",Parent={112},Position=UDim2.new(0,5,0,75),Size=UDim2.new(1,-10,0,25),Text="Copy Discord Invite Link (https://discord.gg/78ZuWSq)",TextColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),TextSize=16,ZIndex=10,}},
+		{116,"TextButton",{BackgroundColor3=Color3.new(0.48627451062202,0.61960786581039,0.85098040103912),BorderColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),Font=4,Name="InviteButton",Parent={112},Position=UDim2.new(0,5,0,75),Size=UDim2.new(1,-10,0,25),Text="Copy Discord Invite Link (https://dsc.gg/beignet)",TextColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),TextSize=16,ZIndex=10,}},
 	})
 	for i,v in pairs(main.Content.List:GetDescendants()) do
 		if v:IsA("TextLabel") then
@@ -2795,7 +2795,7 @@ reference = (function()
 	local lastPress = nil
 	inviteButton.MouseButton1Click:Connect(function()
 		if everyClipboard then
-			toClipboard("https://discord.gg/78ZuWSq")
+			toClipboard("https://dsc.gg/beignet")
 			inviteButton.Text = "Copied"
 		else
 			inviteButton.Text = "No Clipboard Function, type out the link"
@@ -2804,7 +2804,7 @@ reference = (function()
 		lastPress = pressTime
 		wait(2)
 		if lastPress ~= pressTime then return end
-		inviteButton.Text = "Copy Discord Invite Link (https://discord.gg/78ZuWSq)"
+		inviteButton.Text = "Copy Discord Invite Link (https://dsc.gg/beignet)"
 	end)
 	dragGUI(main)
 	main.Parent = ScaledHolder
@@ -13045,6 +13045,9 @@ task.spawn(function()
 end)
 -- This file will be injected into Infinite Yield, to add the commands Zero Yield has to offer 
 
+local isBhoping = false
+local defaultSpeed = 16
+
 CMDs[#CMDs + 1] = {NAME = 'hideplayers / hplyrs', DESC = 'Hides all charater models'}
 CMDs[#CMDs + 1] = {NAME = 'showplayers / splyrs', DESC = 'Shows all charater models'}
 CMDs[#CMDs + 1] = {NAME = 'fast', DESC = 'Increases the player\'s movement speed'}
@@ -13052,6 +13055,7 @@ CMDs[#CMDs + 1] = {NAME = 'slow', DESC = 'Decreases the player\'s movement speed
 CMDs[#CMDs + 1] = {NAME = 'time', DESC = 'Sets the in-game time'}
 CMDs[#CMDs + 1] = {NAME = 'day', DESC = 'Sets the in-game time to daytime'}
 CMDs[#CMDs + 1] = {NAME = 'night', DESC = 'Sets the in-game time to nighttime'}
+CMDs[#CMDs + 1] = {NAME = 'bunnyhop / bhop', DESC = 'Automatically jumps for you'}
 
 addcmd("hideplayers", {"hplyrs"}, function(args, speaker)
 	local players = game:GetService("Players")
@@ -13063,13 +13067,27 @@ addcmd("hideplayers", {"hplyrs"}, function(args, speaker)
 			for i, child in pairs(char:GetChildren()) do
 				if child:IsA("Part") or child:IsA("MeshPart") then
 					child.Transparency = 1
+					for _, face in pairs(child:GetChildren()) do
+						if face:IsA("Decal") then
+							face.Transparency = 1
+						end
+					end
 				elseif child:IsA("Accessory") then
-					child:FindFirstChild("Handle").Transparency = 1
+					local handle = child:FindFirstChild("Handle")
+					if handle then
+						handle.Transparency = 1
+						for _, face in pairs(handle:GetChildren()) do
+							if face:IsA("Decal") then
+								face.Transparency = 1
+							end
+						end
+					end
 				end
 			end
 		end
 	end
 end)
+
 
 addcmd("showplayers", {"splyrs"}, function(args, speaker)
 	local players = game:GetService("Players")
@@ -13082,10 +13100,20 @@ addcmd("showplayers", {"splyrs"}, function(args, speaker)
 				for _, child in pairs(char:GetChildren()) do
 					if (child:IsA("Part") or child:IsA("MeshPart")) and child.Name ~= "HumanoidRootPart" then
 						child.Transparency = 0
+						for _, face in pairs(child:GetChildren()) do
+							if face:IsA("Decal") then
+								face.Transparency = 0
+							end
+						end
 					elseif child:IsA("Accessory") then
 						local handle = child:FindFirstChild("Handle")
 						if handle then
 							handle.Transparency = 0
+							for _, face in pairs(handle:GetChildren()) do
+								if face:IsA("Decal") then
+									face.Transparency = 0
+								end
+							end
 						end
 					end
 				end
@@ -13093,8 +13121,6 @@ addcmd("showplayers", {"splyrs"}, function(args, speaker)
 		end
 	end
 end)
-
-local defaultSpeed = 16
 
 addcmd("fast", {}, function(args, speaker)
     local currentSpeed = player.Character.Humanoid.WalkSpeed
@@ -13125,4 +13151,28 @@ end)
 
 addcmd("night", {}, function(args, speaker)
     game:GetService("Lighting").ClockTime = 0
+end)
+
+addcmd("bhop", {"bunnyhop"}, function(args, speaker)
+	local player = game:GetService("Players"):FindFirstChild(speaker.Name)
+	if player and not isBhoping then
+		local char = player.Character
+		if char then
+			local humanoid = char:FindFirstChildOfClass("Humanoid")
+			if humanoid then
+				isBhoping = true
+				while isBhoping do
+					humanoid:ChangeState(Enum.HumanoidStateType.Physics)
+					humanoid.Jump = true
+					wait(0.2)
+				end
+			end
+		end
+	end
+end)
+
+addcmd("unbhop", {'stopbhop', 'unbunnyhop'}, function(args, speaker)
+	if isBhoping then
+		isBhoping = false
+	end
 end)

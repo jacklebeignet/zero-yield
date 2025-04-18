@@ -1,2001 +1,2194 @@
 -- This file is generated automatically and is not meant to be modified.
--- Version: 6.3.1
-if IY_LOADED and not _G.IY_DEBUG == true then
--- error("Zero Yield is already running!", 0)
+
+if IY_LOADED and not _G.IY_DEBUG==true then
+
 return
 end
-pcall(function() getgenv().IY_LOADED = true end)
-local cloneref = cloneref or function(o) return o end
-COREGUI = cloneref(game:GetService("CoreGui"))
-Players = cloneref(game:GetService("Players"))
-if not game:IsLoaded() then
-local notLoaded = Instance.new("Message")
-notLoaded.Parent = COREGUI
-notLoaded.Text = "Zero Yield is waiting for the game to load"
+
+pcall(function()getgenv().IY_LOADED=true end)
+
+local a=cloneref or function(a)return a end
+COREGUI=a(game:GetService"CoreGui")
+Players=a(game:GetService"Players")
+
+if not game:IsLoaded()then
+local b=Instance.new"Message"
+b.Parent=COREGUI
+b.Text="Zero Yield is waiting for the game to load"
 game.Loaded:Wait()
-notLoaded:Destroy()
+b:Destroy()
 end
-currentVersion = "6.3.1"
-ScaledHolder = Instance.new("Frame")
-Scale = Instance.new("UIScale")
-Holder = Instance.new("Frame")
-Title = Instance.new("TextLabel")
-Dark = Instance.new("Frame")
-Cmdbar = Instance.new("TextBox")
-CMDsF = Instance.new("ScrollingFrame")
-cmdListLayout = Instance.new("UIListLayout")
-SettingsButton = Instance.new("ImageButton")
-ColorsButton = Instance.new("ImageButton")
-Settings = Instance.new("Frame")
-Prefix = Instance.new("TextLabel")
-PrefixBox = Instance.new("TextBox")
-Keybinds = Instance.new("TextLabel")
-StayOpen = Instance.new("TextLabel")
-Button = Instance.new("Frame")
-On = Instance.new("TextButton")
-Positions = Instance.new("TextLabel")
-EventBind = Instance.new("TextLabel")
-Plugins = Instance.new("TextLabel")
-Example = Instance.new("TextButton")
-Notification = Instance.new("Frame")
-Title_2 = Instance.new("TextLabel")
-Text_2 = Instance.new("TextLabel")
-CloseButton = Instance.new("TextButton")
-CloseImage = Instance.new("ImageLabel")
-PinButton = Instance.new("TextButton")
-PinImage = Instance.new("ImageLabel")
-Tooltip = Instance.new("Frame")
-Title_3 = Instance.new("TextLabel")
-Description = Instance.new("TextLabel")
-IntroBackground = Instance.new("Frame")
-Logo = Instance.new("ImageLabel")
-Credits = Instance.new("TextBox")
-KeybindsFrame = Instance.new("Frame")
-Close = Instance.new("TextButton")
-Add = Instance.new("TextButton")
-Delete = Instance.new("TextButton")
-Holder_2 = Instance.new("ScrollingFrame")
-Example_2 = Instance.new("Frame")
-Text_3 = Instance.new("TextLabel")
-Delete_2 = Instance.new("TextButton")
-KeybindEditor = Instance.new("Frame")
-background_2 = Instance.new("Frame")
-Dark_3 = Instance.new("Frame")
-Directions = Instance.new("TextLabel")
-BindTo = Instance.new("TextButton")
-TriggerLabel = Instance.new("TextLabel")
-BindTriggerSelect = Instance.new("TextButton")
-Add_2 = Instance.new("TextButton")
-Toggles = Instance.new("ScrollingFrame")
-ClickTP  = Instance.new("TextLabel")
-Select = Instance.new("TextButton")
-ClickDelete = Instance.new("TextLabel")
-Select_2 = Instance.new("TextButton")
-Cmdbar_2 = Instance.new("TextBox")
-Cmdbar_3 = Instance.new("TextBox")
-CreateToggle = Instance.new("TextLabel")
-Button_2 = Instance.new("Frame")
-On_2 = Instance.new("TextButton")
-shadow_2 = Instance.new("Frame")
-PopupText_2 = Instance.new("TextLabel")
-Exit_2 = Instance.new("TextButton")
-ExitImage_2 = Instance.new("ImageLabel")
-PositionsFrame = Instance.new("Frame")
-Close_3 = Instance.new("TextButton")
-Delete_5 = Instance.new("TextButton")
-Part = Instance.new("TextButton")
-Holder_4 = Instance.new("ScrollingFrame")
-Example_4 = Instance.new("Frame")
-Text_5 = Instance.new("TextLabel")
-Delete_6 = Instance.new("TextButton")
-TP = Instance.new("TextButton")
-AliasesFrame = Instance.new("Frame")
-Close_2 = Instance.new("TextButton")
-Delete_3 = Instance.new("TextButton")
-Holder_3 = Instance.new("ScrollingFrame")
-Example_3 = Instance.new("Frame")
-Text_4 = Instance.new("TextLabel")
-Delete_4 = Instance.new("TextButton")
-Aliases = Instance.new("TextLabel")
-PluginsFrame = Instance.new("Frame")
-Close_4 = Instance.new("TextButton")
-Add_3 = Instance.new("TextButton")
-Holder_5 = Instance.new("ScrollingFrame")
-Example_5 = Instance.new("Frame")
-Text_6 = Instance.new("TextLabel")
-Delete_7 = Instance.new("TextButton")
-PluginEditor = Instance.new("Frame")
-background_3 = Instance.new("Frame")
-Dark_2 = Instance.new("Frame")
-Img = Instance.new("ImageButton")
-AddPlugin = Instance.new("TextButton")
-FileName = Instance.new("TextBox")
-About = Instance.new("TextLabel")
-Directions_2 = Instance.new("TextLabel")
-shadow_3 = Instance.new("Frame")
-PopupText_3 = Instance.new("TextLabel")
-Exit_3 = Instance.new("TextButton")
-ExitImage_3 = Instance.new("ImageLabel")
-AliasHint = Instance.new("TextLabel")
-PluginsHint = Instance.new("TextLabel")
-PositionsHint = Instance.new("TextLabel")
-ToPartFrame = Instance.new("Frame")
-background_4 = Instance.new("Frame")
-ChoosePart = Instance.new("TextButton")
-CopyPath = Instance.new("TextButton")
-Directions_3 = Instance.new("TextLabel")
-Path = Instance.new("TextLabel")
-shadow_4 = Instance.new("Frame")
-PopupText_5 = Instance.new("TextLabel")
-Exit_4 = Instance.new("TextButton")
-ExitImage_5 = Instance.new("ImageLabel")
-logs = Instance.new("Frame")
-shadow = Instance.new("Frame")
-Hide = Instance.new("TextButton")
-ImageLabel = Instance.new("ImageLabel")
-PopupText = Instance.new("TextLabel")
-Exit = Instance.new("TextButton")
-ImageLabel_2 = Instance.new("ImageLabel")
-background = Instance.new("Frame")
-chat = Instance.new("Frame")
-Clear = Instance.new("TextButton")
-SaveChatlogs = Instance.new("TextButton")
-Toggle = Instance.new("TextButton")
-scroll_2 = Instance.new("ScrollingFrame")
-join = Instance.new("Frame")
-Toggle_2 = Instance.new("TextButton")
-Clear_2 = Instance.new("TextButton")
-scroll_3 = Instance.new("ScrollingFrame")
-listlayout = Instance.new("UIListLayout",scroll_3)
-selectChat = Instance.new("TextButton")
-selectJoin = Instance.new("TextButton")
+
+currentVersion="6.3.1"
+
+ScaledHolder=Instance.new"Frame"
+Scale=Instance.new"UIScale"
+Holder=Instance.new"Frame"
+Title=Instance.new"TextLabel"
+Dark=Instance.new"Frame"
+Cmdbar=Instance.new"TextBox"
+CMDsF=Instance.new"ScrollingFrame"
+cmdListLayout=Instance.new"UIListLayout"
+SettingsButton=Instance.new"ImageButton"
+ColorsButton=Instance.new"ImageButton"
+Settings=Instance.new"Frame"
+Prefix=Instance.new"TextLabel"
+PrefixBox=Instance.new"TextBox"
+Keybinds=Instance.new"TextLabel"
+StayOpen=Instance.new"TextLabel"
+Button=Instance.new"Frame"
+On=Instance.new"TextButton"
+Positions=Instance.new"TextLabel"
+EventBind=Instance.new"TextLabel"
+Plugins=Instance.new"TextLabel"
+Example=Instance.new"TextButton"
+Notification=Instance.new"Frame"
+Title_2=Instance.new"TextLabel"
+Text_2=Instance.new"TextLabel"
+CloseButton=Instance.new"TextButton"
+CloseImage=Instance.new"ImageLabel"
+PinButton=Instance.new"TextButton"
+PinImage=Instance.new"ImageLabel"
+Tooltip=Instance.new"Frame"
+Title_3=Instance.new"TextLabel"
+Description=Instance.new"TextLabel"
+IntroBackground=Instance.new"Frame"
+Logo=Instance.new"ImageLabel"
+Credits=Instance.new"TextBox"
+KeybindsFrame=Instance.new"Frame"
+Close=Instance.new"TextButton"
+Add=Instance.new"TextButton"
+Delete=Instance.new"TextButton"
+Holder_2=Instance.new"ScrollingFrame"
+Example_2=Instance.new"Frame"
+Text_3=Instance.new"TextLabel"
+Delete_2=Instance.new"TextButton"
+KeybindEditor=Instance.new"Frame"
+background_2=Instance.new"Frame"
+Dark_3=Instance.new"Frame"
+Directions=Instance.new"TextLabel"
+BindTo=Instance.new"TextButton"
+TriggerLabel=Instance.new"TextLabel"
+BindTriggerSelect=Instance.new"TextButton"
+Add_2=Instance.new"TextButton"
+Toggles=Instance.new"ScrollingFrame"
+ClickTP=Instance.new"TextLabel"
+Select=Instance.new"TextButton"
+ClickDelete=Instance.new"TextLabel"
+Select_2=Instance.new"TextButton"
+Cmdbar_2=Instance.new"TextBox"
+Cmdbar_3=Instance.new"TextBox"
+CreateToggle=Instance.new"TextLabel"
+Button_2=Instance.new"Frame"
+On_2=Instance.new"TextButton"
+shadow_2=Instance.new"Frame"
+PopupText_2=Instance.new"TextLabel"
+Exit_2=Instance.new"TextButton"
+ExitImage_2=Instance.new"ImageLabel"
+PositionsFrame=Instance.new"Frame"
+Close_3=Instance.new"TextButton"
+Delete_5=Instance.new"TextButton"
+Part=Instance.new"TextButton"
+Holder_4=Instance.new"ScrollingFrame"
+Example_4=Instance.new"Frame"
+Text_5=Instance.new"TextLabel"
+Delete_6=Instance.new"TextButton"
+TP=Instance.new"TextButton"
+AliasesFrame=Instance.new"Frame"
+Close_2=Instance.new"TextButton"
+Delete_3=Instance.new"TextButton"
+Holder_3=Instance.new"ScrollingFrame"
+Example_3=Instance.new"Frame"
+Text_4=Instance.new"TextLabel"
+Delete_4=Instance.new"TextButton"
+Aliases=Instance.new"TextLabel"
+PluginsFrame=Instance.new"Frame"
+Close_4=Instance.new"TextButton"
+Add_3=Instance.new"TextButton"
+Holder_5=Instance.new"ScrollingFrame"
+Example_5=Instance.new"Frame"
+Text_6=Instance.new"TextLabel"
+Delete_7=Instance.new"TextButton"
+PluginEditor=Instance.new"Frame"
+background_3=Instance.new"Frame"
+Dark_2=Instance.new"Frame"
+Img=Instance.new"ImageButton"
+AddPlugin=Instance.new"TextButton"
+FileName=Instance.new"TextBox"
+About=Instance.new"TextLabel"
+Directions_2=Instance.new"TextLabel"
+shadow_3=Instance.new"Frame"
+PopupText_3=Instance.new"TextLabel"
+Exit_3=Instance.new"TextButton"
+ExitImage_3=Instance.new"ImageLabel"
+AliasHint=Instance.new"TextLabel"
+PluginsHint=Instance.new"TextLabel"
+PositionsHint=Instance.new"TextLabel"
+ToPartFrame=Instance.new"Frame"
+background_4=Instance.new"Frame"
+ChoosePart=Instance.new"TextButton"
+CopyPath=Instance.new"TextButton"
+Directions_3=Instance.new"TextLabel"
+Path=Instance.new"TextLabel"
+shadow_4=Instance.new"Frame"
+PopupText_5=Instance.new"TextLabel"
+Exit_4=Instance.new"TextButton"
+ExitImage_5=Instance.new"ImageLabel"
+logs=Instance.new"Frame"
+shadow=Instance.new"Frame"
+Hide=Instance.new"TextButton"
+ImageLabel=Instance.new"ImageLabel"
+PopupText=Instance.new"TextLabel"
+Exit=Instance.new"TextButton"
+ImageLabel_2=Instance.new"ImageLabel"
+background=Instance.new"Frame"
+chat=Instance.new"Frame"
+Clear=Instance.new"TextButton"
+SaveChatlogs=Instance.new"TextButton"
+Toggle=Instance.new"TextButton"
+scroll_2=Instance.new"ScrollingFrame"
+join=Instance.new"Frame"
+Toggle_2=Instance.new"TextButton"
+Clear_2=Instance.new"TextButton"
+scroll_3=Instance.new"ScrollingFrame"
+listlayout=Instance.new("UIListLayout",scroll_3)
+selectChat=Instance.new"TextButton"
+selectJoin=Instance.new"TextButton"
+
 function randomString()
-local length = math.random(10,20)
-local array = {}
-for i = 1, length do
-array[i] = string.char(math.random(32, 126))
+local b=math.random(10,20)
+local c={}
+for d=1,b do
+c[d]=string.char(math.random(32,126))
 end
-return table.concat(array)
+return table.concat(c)
 end
-PARENT = nil
+
+PARENT=nil
 if get_hidden_gui or gethui then
-local hiddenUI = get_hidden_gui or gethui
-local Main = Instance.new("ScreenGui")
-Main.Name = randomString()
-Main.Parent = hiddenUI()
-PARENT = Main
-elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
-local Main = Instance.new("ScreenGui")
-Main.Name = randomString()
-syn.protect_gui(Main)
-Main.Parent = COREGUI
-PARENT = Main
-elseif COREGUI:FindFirstChild("RobloxGui") then
-PARENT = COREGUI.RobloxGui
+local b=get_hidden_gui or gethui
+local c=Instance.new"ScreenGui"
+c.Name=randomString()
+c.Parent=b()
+PARENT=c
+elseif(not is_sirhurt_closure)and(syn and syn.protect_gui)then
+local b=Instance.new"ScreenGui"
+b.Name=randomString()
+syn.protect_gui(b)
+b.Parent=COREGUI
+PARENT=b
+elseif COREGUI:FindFirstChild"RobloxGui"then
+PARENT=COREGUI.RobloxGui
 else
-local Main = Instance.new("ScreenGui")
-Main.Name = randomString()
-Main.Parent = COREGUI
-PARENT = Main
+local b=Instance.new"ScreenGui"
+b.Name=randomString()
+b.Parent=COREGUI
+PARENT=b
 end
-shade1 = {}
-shade2 = {}
-shade3 = {}
-text1 = {}
-text2 = {}
-scroll = {}
-ScaledHolder.Name = randomString()
-ScaledHolder.Size = UDim2.fromScale(1, 1)
-ScaledHolder.BackgroundTransparency = 1
-ScaledHolder.Parent = PARENT
-Scale.Name = randomString()
-Holder.Name = randomString()
-Holder.Parent = ScaledHolder
-Holder.Active = true
-Holder.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Holder.BorderSizePixel = 0
-Holder.Position = UDim2.new(1, -250, 1, -220)
-Holder.Size = UDim2.new(0, 250, 0, 220)
-Holder.ZIndex = 10
+
+shade1={}
+shade2={}
+shade3={}
+text1={}
+text2={}
+scroll={}
+
+ScaledHolder.Name=randomString()
+ScaledHolder.Size=UDim2.fromScale(1,1)
+ScaledHolder.BackgroundTransparency=1
+ScaledHolder.Parent=PARENT
+Scale.Name=randomString()
+
+Holder.Name=randomString()
+Holder.Parent=ScaledHolder
+Holder.Active=true
+Holder.BackgroundColor3=Color3.fromRGB(46,46,47)
+Holder.BorderSizePixel=0
+Holder.Position=UDim2.new(1,-250,1,-220)
+Holder.Size=UDim2.new(0,250,0,220)
+Holder.ZIndex=10
 table.insert(shade2,Holder)
-Title.Name = "Title"
-Title.Parent = Holder
-Title.Active = true
-Title.BackgroundColor3 = Color3.fromRGB(36,36,37)
-Title.BorderSizePixel = 0
-Title.Size = UDim2.new(0, 250, 0, 20)
-Title.Font = Enum.Font.SourceSans
-Title.TextSize = 18
-Title.Text = "Zero Yield FE v" .. currentVersion
+
+Title.Name="Title"
+Title.Parent=Holder
+Title.Active=true
+Title.BackgroundColor3=Color3.fromRGB(36,36,37)
+Title.BorderSizePixel=0
+Title.Size=UDim2.new(0,250,0,20)
+Title.Font=Enum.Font.SourceSans
+Title.TextSize=18
+Title.Text="Zero Yield FE v"..currentVersion
+
 do
-local emoji = ({
-["01 01"] = "🎆",
-[(function(Year)
-local A = math.floor(Year/100)
-local B = math.floor((13+8*A)/25)
-local C = (15-B+A-math.floor(A/4))%30
-local D = (4+A-math.floor(A/4))%7
-local E = (19*(Year%19)+C)%30
-local F = (2*(Year%4)+4*(Year%7)+6*E+D)%7
-local G = (22+E+F)
-if E == 29 and F == 6 then
-return "04 19"
-elseif E == 28 and F == 6 then
-return "04 18"
-elseif 31 < G then
-return ("04 %02d"):format(G-31)
+local b=({
+["01 01"]="🎆",
+[(function(b)
+local c=math.floor(b/100)
+local d=math.floor((13+8*c)/25)
+local e=(15-d+c-math.floor(c/4))%30
+local f=(4+c-math.floor(c/4))%7
+local g=(19*(b%19)+e)%30
+local h=(2*(b%4)+4*(b%7)+6*g+f)%7
+local i=(22+g+h)
+if g==29 and h==6 then
+return"04 19"
+elseif g==28 and h==6 then
+return"04 18"
+elseif 31<i then
+return("04 %02d"):format(i-31)
 end
-return ("03 %02d"):format(G)
-end)(tonumber(os.date"%Y"))] = "🥚",
-["10 31"] = "🎃",
-["12 25"] = "🎄"
-})[os.date("%m %d")]
-if emoji then
-Title.Text = ("%s %s %s"):format(emoji, Title.Text, emoji)
+return("03 %02d"):format(i)
+end)(tonumber(os.date"%Y"))]="🥚",
+["10 31"]="🎃",
+["12 25"]="🎄"
+})[os.date"%m %d"]
+if b then
+Title.Text=("%s %s %s"):format(b,Title.Text,b)
 end
 end
-Title.TextColor3 = Color3.new(1, 1, 1)
-Title.ZIndex = 10
+
+Title.TextColor3=Color3.new(1,1,1)
+Title.ZIndex=10
 table.insert(shade1,Title)
 table.insert(text1,Title)
-Dark.Name = "Dark"
-Dark.Parent = Holder
-Dark.Active = true
-Dark.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
-Dark.BorderSizePixel = 0
-Dark.Position = UDim2.new(0, 0, 0, 45)
-Dark.Size = UDim2.new(0, 250, 0, 175)
-Dark.ZIndex = 10
+
+Dark.Name="Dark"
+Dark.Parent=Holder
+Dark.Active=true
+Dark.BackgroundColor3=Color3.fromRGB(36,36,37)
+Dark.BorderSizePixel=0
+Dark.Position=UDim2.new(0,0,0,45)
+Dark.Size=UDim2.new(0,250,0,175)
+Dark.ZIndex=10
 table.insert(shade1,Dark)
-Cmdbar.Name = "Cmdbar"
-Cmdbar.Parent = Holder
-Cmdbar.BackgroundTransparency = 1
-Cmdbar.BorderSizePixel = 0
-Cmdbar.Position = UDim2.new(0, 5, 0, 20)
-Cmdbar.Size = UDim2.new(0, 240, 0, 25)
-Cmdbar.Font = Enum.Font.SourceSans
-Cmdbar.TextSize = 18
-Cmdbar.TextXAlignment = Enum.TextXAlignment.Left
-Cmdbar.TextColor3 = Color3.new(1, 1, 1)
-Cmdbar.Text = ""
-Cmdbar.ZIndex = 10
-Cmdbar.PlaceholderText = "Command Bar"
-CMDsF.Name = "CMDs"
-CMDsF.Parent = Holder
-CMDsF.BackgroundTransparency = 1
-CMDsF.BorderSizePixel = 0
-CMDsF.Position = UDim2.new(0, 5, 0, 45)
-CMDsF.Size = UDim2.new(0, 245, 0, 175)
-CMDsF.ScrollBarImageColor3 = Color3.fromRGB(78,78,79)
-CMDsF.BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-CMDsF.CanvasSize = UDim2.new(0, 0, 0, 0)
-CMDsF.MidImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-CMDsF.ScrollBarThickness = 8
-CMDsF.TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-CMDsF.VerticalScrollBarInset = 'Always'
-CMDsF.ZIndex = 10
+
+Cmdbar.Name="Cmdbar"
+Cmdbar.Parent=Holder
+Cmdbar.BackgroundTransparency=1
+Cmdbar.BorderSizePixel=0
+Cmdbar.Position=UDim2.new(0,5,0,20)
+Cmdbar.Size=UDim2.new(0,240,0,25)
+Cmdbar.Font=Enum.Font.SourceSans
+Cmdbar.TextSize=18
+Cmdbar.TextXAlignment=Enum.TextXAlignment.Left
+Cmdbar.TextColor3=Color3.new(1,1,1)
+Cmdbar.Text=""
+Cmdbar.ZIndex=10
+Cmdbar.PlaceholderText="Command Bar"
+
+CMDsF.Name="CMDs"
+CMDsF.Parent=Holder
+CMDsF.BackgroundTransparency=1
+CMDsF.BorderSizePixel=0
+CMDsF.Position=UDim2.new(0,5,0,45)
+CMDsF.Size=UDim2.new(0,245,0,175)
+CMDsF.ScrollBarImageColor3=Color3.fromRGB(78,78,79)
+CMDsF.BottomImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+CMDsF.CanvasSize=UDim2.new(0,0,0,0)
+CMDsF.MidImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+CMDsF.ScrollBarThickness=8
+CMDsF.TopImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+CMDsF.VerticalScrollBarInset='Always'
+CMDsF.ZIndex=10
 table.insert(scroll,CMDsF)
-cmdListLayout.Parent = CMDsF
-SettingsButton.Name = "SettingsButton"
-SettingsButton.Parent = Holder
-SettingsButton.BackgroundTransparency = 1
-SettingsButton.Position = UDim2.new(0, 230, 0, 0)
-SettingsButton.Size = UDim2.new(0, 20, 0, 20)
-SettingsButton.Image = "rbxassetid://1204397029"
-SettingsButton.ZIndex = 10
-ReferenceButton = Instance.new("ImageButton")
-ReferenceButton.Name = "ReferenceButton"
-ReferenceButton.Parent = Holder
-ReferenceButton.BackgroundTransparency = 1
-ReferenceButton.Position = UDim2.new(0, 212, 0, 2)
-ReferenceButton.Size = UDim2.new(0, 16, 0, 16)
-ReferenceButton.Image = "rbxassetid://3523243755"
-ReferenceButton.ZIndex = 10
-Settings.Name = "Settings"
-Settings.Parent = Holder
-Settings.Active = true
-Settings.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
-Settings.BorderSizePixel = 0
-Settings.Position = UDim2.new(0, 0, 0, 220)
-Settings.Size = UDim2.new(0, 250, 0, 175)
-Settings.ZIndex = 10
+
+cmdListLayout.Parent=CMDsF
+
+SettingsButton.Name="SettingsButton"
+SettingsButton.Parent=Holder
+SettingsButton.BackgroundTransparency=1
+SettingsButton.Position=UDim2.new(0,230,0,0)
+SettingsButton.Size=UDim2.new(0,20,0,20)
+SettingsButton.Image="rbxassetid://1204397029"
+SettingsButton.ZIndex=10
+
+ReferenceButton=Instance.new"ImageButton"
+ReferenceButton.Name="ReferenceButton"
+ReferenceButton.Parent=Holder
+ReferenceButton.BackgroundTransparency=1
+ReferenceButton.Position=UDim2.new(0,212,0,2)
+ReferenceButton.Size=UDim2.new(0,16,0,16)
+ReferenceButton.Image="rbxassetid://3523243755"
+ReferenceButton.ZIndex=10
+
+Settings.Name="Settings"
+Settings.Parent=Holder
+Settings.Active=true
+Settings.BackgroundColor3=Color3.fromRGB(36,36,37)
+Settings.BorderSizePixel=0
+Settings.Position=UDim2.new(0,0,0,220)
+Settings.Size=UDim2.new(0,250,0,175)
+Settings.ZIndex=10
 table.insert(shade1,Settings)
-SettingsHolder = Instance.new("ScrollingFrame")
-SettingsHolder.Name = "Holder"
-SettingsHolder.Parent = Settings
-SettingsHolder.BackgroundTransparency = 1
-SettingsHolder.BorderSizePixel = 0
-SettingsHolder.Size = UDim2.new(1,0,1,0)
-SettingsHolder.ScrollBarImageColor3 = Color3.fromRGB(78,78,79)
-SettingsHolder.BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-SettingsHolder.CanvasSize = UDim2.new(0, 0, 0, 235)
-SettingsHolder.MidImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-SettingsHolder.ScrollBarThickness = 8
-SettingsHolder.TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-SettingsHolder.VerticalScrollBarInset = 'Always'
-SettingsHolder.ZIndex = 10
+
+SettingsHolder=Instance.new"ScrollingFrame"
+SettingsHolder.Name="Holder"
+SettingsHolder.Parent=Settings
+SettingsHolder.BackgroundTransparency=1
+SettingsHolder.BorderSizePixel=0
+SettingsHolder.Size=UDim2.new(1,0,1,0)
+SettingsHolder.ScrollBarImageColor3=Color3.fromRGB(78,78,79)
+SettingsHolder.BottomImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+SettingsHolder.CanvasSize=UDim2.new(0,0,0,235)
+SettingsHolder.MidImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+SettingsHolder.ScrollBarThickness=8
+SettingsHolder.TopImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+SettingsHolder.VerticalScrollBarInset='Always'
+SettingsHolder.ZIndex=10
 table.insert(scroll,SettingsHolder)
-Prefix.Name = "Prefix"
-Prefix.Parent = SettingsHolder
-Prefix.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Prefix.BorderSizePixel = 0
-Prefix.BackgroundTransparency = 1
-Prefix.Position = UDim2.new(0, 5, 0, 5)
-Prefix.Size = UDim2.new(1, -10, 0, 20)
-Prefix.Font = Enum.Font.SourceSans
-Prefix.TextSize = 14
-Prefix.Text = "Prefix"
-Prefix.TextColor3 = Color3.new(1, 1, 1)
-Prefix.TextXAlignment = Enum.TextXAlignment.Left
-Prefix.ZIndex = 10
+
+Prefix.Name="Prefix"
+Prefix.Parent=SettingsHolder
+Prefix.BackgroundColor3=Color3.fromRGB(46,46,47)
+Prefix.BorderSizePixel=0
+Prefix.BackgroundTransparency=1
+Prefix.Position=UDim2.new(0,5,0,5)
+Prefix.Size=UDim2.new(1,-10,0,20)
+Prefix.Font=Enum.Font.SourceSans
+Prefix.TextSize=14
+Prefix.Text="Prefix"
+Prefix.TextColor3=Color3.new(1,1,1)
+Prefix.TextXAlignment=Enum.TextXAlignment.Left
+Prefix.ZIndex=10
 table.insert(shade2,Prefix)
 table.insert(text1,Prefix)
-PrefixBox.Name = "PrefixBox"
-PrefixBox.Parent = Prefix
-PrefixBox.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-PrefixBox.BorderSizePixel = 0
-PrefixBox.Position = UDim2.new(1, -20, 0, 0)
-PrefixBox.Size = UDim2.new(0, 20, 0, 20)
-PrefixBox.Font = Enum.Font.SourceSansBold
-PrefixBox.TextSize = 14
-PrefixBox.Text = ''
-PrefixBox.TextColor3 = Color3.new(0, 0, 0)
-PrefixBox.ZIndex = 10
+
+PrefixBox.Name="PrefixBox"
+PrefixBox.Parent=Prefix
+PrefixBox.BackgroundColor3=Color3.fromRGB(78,78,79)
+PrefixBox.BorderSizePixel=0
+PrefixBox.Position=UDim2.new(1,-20,0,0)
+PrefixBox.Size=UDim2.new(0,20,0,20)
+PrefixBox.Font=Enum.Font.SourceSansBold
+PrefixBox.TextSize=14
+PrefixBox.Text=''
+PrefixBox.TextColor3=Color3.new(0,0,0)
+PrefixBox.ZIndex=10
 table.insert(shade3,PrefixBox)
 table.insert(text2,PrefixBox)
-function makeSettingsButton(name,iconID,off)
-local button = Instance.new("TextButton")
-button.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-button.BorderSizePixel = 0
-button.Position = UDim2.new(0,0,0,0)
-button.Size = UDim2.new(1,0,0,25)
-button.Text = ""
-button.ZIndex = 10
-local icon = Instance.new("ImageLabel")
-icon.Name = "Icon"
-icon.Parent = button
-icon.Position = UDim2.new(0,5,0,5)
-icon.Size = UDim2.new(0,16,0,16)
-icon.BackgroundTransparency = 1
-icon.Image = iconID
-icon.ZIndex = 10
-if off then
-icon.ScaleType = Enum.ScaleType.Crop
-icon.ImageRectSize = Vector2.new(16,16)
-icon.ImageRectOffset = Vector2.new(off,0)
+
+function makeSettingsButton(b,c,d)
+local e=Instance.new"TextButton"
+e.BackgroundColor3=Color3.fromRGB(46,46,47)
+e.BorderSizePixel=0
+e.Position=UDim2.new(0,0,0,0)
+e.Size=UDim2.new(1,0,0,25)
+e.Text=""
+e.ZIndex=10
+local f=Instance.new"ImageLabel"
+f.Name="Icon"
+f.Parent=e
+f.Position=UDim2.new(0,5,0,5)
+f.Size=UDim2.new(0,16,0,16)
+f.BackgroundTransparency=1
+f.Image=c
+f.ZIndex=10
+if d then
+f.ScaleType=Enum.ScaleType.Crop
+f.ImageRectSize=Vector2.new(16,16)
+f.ImageRectOffset=Vector2.new(d,0)
 end
-local label = Instance.new("TextLabel")
-label.Name = "ButtonLabel"
-label.Parent = button
-label.BackgroundTransparency = 1
-label.Text = name
-label.Position = UDim2.new(0,28,0,0)
-label.Size = UDim2.new(1,-28,1,0)
-label.Font = Enum.Font.SourceSans
-label.TextColor3 = Color3.new(1, 1, 1)
-label.TextSize = 14
-label.ZIndex = 10
-label.TextXAlignment = Enum.TextXAlignment.Left
-table.insert(shade2,button)
-table.insert(text1,label)
-return button
+local g=Instance.new"TextLabel"
+g.Name="ButtonLabel"
+g.Parent=e
+g.BackgroundTransparency=1
+g.Text=b
+g.Position=UDim2.new(0,28,0,0)
+g.Size=UDim2.new(1,-28,1,0)
+g.Font=Enum.Font.SourceSans
+g.TextColor3=Color3.new(1,1,1)
+g.TextSize=14
+g.ZIndex=10
+g.TextXAlignment=Enum.TextXAlignment.Left
+table.insert(shade2,e)
+table.insert(text1,g)
+return e
 end
-ColorsButton = makeSettingsButton("Edit Theme","rbxassetid://4911962991")
-ColorsButton.Position = UDim2.new(0, 5, 0, 55)
-ColorsButton.Size = UDim2.new(1, -10, 0, 25)
-ColorsButton.Name = "Colors"
-ColorsButton.Parent = SettingsHolder
-Keybinds = makeSettingsButton("Edit Keybinds","rbxassetid://129697930")
-Keybinds.Position = UDim2.new(0, 5, 0, 85)
-Keybinds.Size = UDim2.new(1, -10, 0, 25)
-Keybinds.Name = "Keybinds"
-Keybinds.Parent = SettingsHolder
-Aliases = makeSettingsButton("Edit Aliases","rbxassetid://5147488658")
-Aliases.Position = UDim2.new(0, 5, 0, 115)
-Aliases.Size = UDim2.new(1, -10, 0, 25)
-Aliases.Name = "Aliases"
-Aliases.Parent = SettingsHolder
-StayOpen.Name = "StayOpen"
-StayOpen.Parent = SettingsHolder
-StayOpen.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-StayOpen.BorderSizePixel = 0
-StayOpen.BackgroundTransparency = 1
-StayOpen.Position = UDim2.new(0, 5, 0, 30)
-StayOpen.Size = UDim2.new(1, -10, 0, 20)
-StayOpen.Font = Enum.Font.SourceSans
-StayOpen.TextSize = 14
-StayOpen.Text = "Keep Menu Open"
-StayOpen.TextColor3 = Color3.new(1, 1, 1)
-StayOpen.TextXAlignment = Enum.TextXAlignment.Left
-StayOpen.ZIndex = 10
+
+ColorsButton=makeSettingsButton("Edit Theme","rbxassetid://4911962991")
+ColorsButton.Position=UDim2.new(0,5,0,55)
+ColorsButton.Size=UDim2.new(1,-10,0,25)
+ColorsButton.Name="Colors"
+ColorsButton.Parent=SettingsHolder
+
+Keybinds=makeSettingsButton("Edit Keybinds","rbxassetid://129697930")
+Keybinds.Position=UDim2.new(0,5,0,85)
+Keybinds.Size=UDim2.new(1,-10,0,25)
+Keybinds.Name="Keybinds"
+Keybinds.Parent=SettingsHolder
+
+Aliases=makeSettingsButton("Edit Aliases","rbxassetid://5147488658")
+Aliases.Position=UDim2.new(0,5,0,115)
+Aliases.Size=UDim2.new(1,-10,0,25)
+Aliases.Name="Aliases"
+Aliases.Parent=SettingsHolder
+
+StayOpen.Name="StayOpen"
+StayOpen.Parent=SettingsHolder
+StayOpen.BackgroundColor3=Color3.fromRGB(46,46,47)
+StayOpen.BorderSizePixel=0
+StayOpen.BackgroundTransparency=1
+StayOpen.Position=UDim2.new(0,5,0,30)
+StayOpen.Size=UDim2.new(1,-10,0,20)
+StayOpen.Font=Enum.Font.SourceSans
+StayOpen.TextSize=14
+StayOpen.Text="Keep Menu Open"
+StayOpen.TextColor3=Color3.new(1,1,1)
+StayOpen.TextXAlignment=Enum.TextXAlignment.Left
+StayOpen.ZIndex=10
 table.insert(shade2,StayOpen)
 table.insert(text1,StayOpen)
-Button.Name = "Button"
-Button.Parent = StayOpen
-Button.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Button.BorderSizePixel = 0
-Button.Position = UDim2.new(1, -20, 0, 0)
-Button.Size = UDim2.new(0, 20, 0, 20)
-Button.ZIndex = 10
+
+Button.Name="Button"
+Button.Parent=StayOpen
+Button.BackgroundColor3=Color3.fromRGB(78,78,79)
+Button.BorderSizePixel=0
+Button.Position=UDim2.new(1,-20,0,0)
+Button.Size=UDim2.new(0,20,0,20)
+Button.ZIndex=10
 table.insert(shade3,Button)
-On.Name = "On"
-On.Parent = Button
-On.BackgroundColor3 = Color3.fromRGB(150, 150, 151)
-On.BackgroundTransparency = 1
-On.BorderSizePixel = 0
-On.Position = UDim2.new(0, 2, 0, 2)
-On.Size = UDim2.new(0, 16, 0, 16)
-On.Font = Enum.Font.SourceSans
-On.FontSize = Enum.FontSize.Size14
-On.Text = ""
-On.TextColor3 = Color3.new(0, 0, 0)
-On.ZIndex = 10
-Positions = makeSettingsButton("Edit/Goto Waypoints","rbxassetid://5147488592")
-Positions.Position = UDim2.new(0, 5, 0, 145)
-Positions.Size = UDim2.new(1, -10, 0, 25)
-Positions.Name = "Waypoints"
-Positions.Parent = SettingsHolder
-EventBind = makeSettingsButton("Edit Event Binds","rbxassetid://5147695474",759)
-EventBind.Position = UDim2.new(0, 5, 0, 205)
-EventBind.Size = UDim2.new(1, -10, 0, 25)
-EventBind.Name = "EventBinds"
-EventBind.Parent = SettingsHolder
-Plugins = makeSettingsButton("Manage Plugins","rbxassetid://5147695474",743)
-Plugins.Position = UDim2.new(0, 5, 0, 175)
-Plugins.Size = UDim2.new(1, -10, 0, 25)
-Plugins.Name = "Plugins"
-Plugins.Parent = SettingsHolder
-Example.Name = "Example"
-Example.Parent = Holder
-Example.BackgroundTransparency = 1
-Example.BorderSizePixel = 0
-Example.Size = UDim2.new(0, 190, 0, 20)
-Example.Visible = false
-Example.Font = Enum.Font.SourceSans
-Example.TextSize = 18
-Example.Text = "Example"
-Example.TextColor3 = Color3.new(1, 1, 1)
-Example.TextXAlignment = Enum.TextXAlignment.Left
-Example.ZIndex = 10
+
+On.Name="On"
+On.Parent=Button
+On.BackgroundColor3=Color3.fromRGB(150,150,151)
+On.BackgroundTransparency=1
+On.BorderSizePixel=0
+On.Position=UDim2.new(0,2,0,2)
+On.Size=UDim2.new(0,16,0,16)
+On.Font=Enum.Font.SourceSans
+On.FontSize=Enum.FontSize.Size14
+On.Text=""
+On.TextColor3=Color3.new(0,0,0)
+On.ZIndex=10
+
+Positions=makeSettingsButton("Edit/Goto Waypoints","rbxassetid://5147488592")
+Positions.Position=UDim2.new(0,5,0,145)
+Positions.Size=UDim2.new(1,-10,0,25)
+Positions.Name="Waypoints"
+Positions.Parent=SettingsHolder
+
+EventBind=makeSettingsButton("Edit Event Binds","rbxassetid://5147695474",759)
+EventBind.Position=UDim2.new(0,5,0,205)
+EventBind.Size=UDim2.new(1,-10,0,25)
+EventBind.Name="EventBinds"
+EventBind.Parent=SettingsHolder
+
+Plugins=makeSettingsButton("Manage Plugins","rbxassetid://5147695474",743)
+Plugins.Position=UDim2.new(0,5,0,175)
+Plugins.Size=UDim2.new(1,-10,0,25)
+Plugins.Name="Plugins"
+Plugins.Parent=SettingsHolder
+
+Example.Name="Example"
+Example.Parent=Holder
+Example.BackgroundTransparency=1
+Example.BorderSizePixel=0
+Example.Size=UDim2.new(0,190,0,20)
+Example.Visible=false
+Example.Font=Enum.Font.SourceSans
+Example.TextSize=18
+Example.Text="Example"
+Example.TextColor3=Color3.new(1,1,1)
+Example.TextXAlignment=Enum.TextXAlignment.Left
+Example.ZIndex=10
 table.insert(text1,Example)
-Notification.Name = randomString()
-Notification.Parent = ScaledHolder
-Notification.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
-Notification.BorderSizePixel = 0
-Notification.Position = UDim2.new(1, -500, 1, 20)
-Notification.Size = UDim2.new(0, 250, 0, 100)
-Notification.ZIndex = 10
+
+Notification.Name=randomString()
+Notification.Parent=ScaledHolder
+Notification.BackgroundColor3=Color3.fromRGB(36,36,37)
+Notification.BorderSizePixel=0
+Notification.Position=UDim2.new(1,-500,1,20)
+Notification.Size=UDim2.new(0,250,0,100)
+Notification.ZIndex=10
 table.insert(shade1,Notification)
-Title_2.Name = "Title"
-Title_2.Parent = Notification
-Title_2.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Title_2.BorderSizePixel = 0
-Title_2.Size = UDim2.new(0, 250, 0, 20)
-Title_2.Font = Enum.Font.SourceSans
-Title_2.TextSize = 14
-Title_2.Text = "Notification Title"
-Title_2.TextColor3 = Color3.new(1, 1, 1)
-Title_2.ZIndex = 10
+
+Title_2.Name="Title"
+Title_2.Parent=Notification
+Title_2.BackgroundColor3=Color3.fromRGB(46,46,47)
+Title_2.BorderSizePixel=0
+Title_2.Size=UDim2.new(0,250,0,20)
+Title_2.Font=Enum.Font.SourceSans
+Title_2.TextSize=14
+Title_2.Text="Notification Title"
+Title_2.TextColor3=Color3.new(1,1,1)
+Title_2.ZIndex=10
 table.insert(shade2,Title_2)
 table.insert(text1,Title_2)
-Text_2.Name = "Text"
-Text_2.Parent = Notification
-Text_2.BackgroundTransparency = 1
-Text_2.BorderSizePixel = 0
-Text_2.Position = UDim2.new(0, 5, 0, 25)
-Text_2.Size = UDim2.new(0, 240, 0, 75)
-Text_2.Font = Enum.Font.SourceSans
-Text_2.TextSize = 16
-Text_2.Text = "Notification Text"
-Text_2.TextColor3 = Color3.new(1, 1, 1)
-Text_2.TextWrapped = true
-Text_2.ZIndex = 10
+
+Text_2.Name="Text"
+Text_2.Parent=Notification
+Text_2.BackgroundTransparency=1
+Text_2.BorderSizePixel=0
+Text_2.Position=UDim2.new(0,5,0,25)
+Text_2.Size=UDim2.new(0,240,0,75)
+Text_2.Font=Enum.Font.SourceSans
+Text_2.TextSize=16
+Text_2.Text="Notification Text"
+Text_2.TextColor3=Color3.new(1,1,1)
+Text_2.TextWrapped=true
+Text_2.ZIndex=10
 table.insert(text1,Text_2)
-CloseButton.Name = "CloseButton"
-CloseButton.Parent = Notification
-CloseButton.BackgroundTransparency = 1
-CloseButton.Position = UDim2.new(1, -20, 0, 0)
-CloseButton.Size = UDim2.new(0, 20, 0, 20)
-CloseButton.Text = ""
-CloseButton.ZIndex = 10
-CloseImage.Parent = CloseButton
-CloseImage.BackgroundColor3 = Color3.new(1, 1, 1)
-CloseImage.BackgroundTransparency = 1
-CloseImage.Position = UDim2.new(0, 5, 0, 5)
-CloseImage.Size = UDim2.new(0, 10, 0, 10)
-CloseImage.Image = "rbxassetid://5054663650"
-CloseImage.ZIndex = 10
-PinButton.Name = "PinButton"
-PinButton.Parent = Notification
-PinButton.BackgroundTransparency = 1
-PinButton.Size = UDim2.new(0, 20, 0, 20)
-PinButton.ZIndex = 10
-PinButton.Text = ""
-PinImage.Parent = PinButton
-PinImage.BackgroundColor3 = Color3.new(1, 1, 1)
-PinImage.BackgroundTransparency = 1
-PinImage.Position = UDim2.new(0, 3, 0, 3)
-PinImage.Size = UDim2.new(0, 14, 0, 14)
-PinImage.ZIndex = 10
-PinImage.Image = "rbxassetid://6234691350"
-Tooltip.Name = randomString()
-Tooltip.Parent = ScaledHolder
-Tooltip.Active = true
-Tooltip.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
-Tooltip.BackgroundTransparency = 0.1
-Tooltip.BorderSizePixel = 0
-Tooltip.Size = UDim2.new(0, 200, 0, 96)
-Tooltip.Visible = false
-Tooltip.ZIndex = 10
+
+CloseButton.Name="CloseButton"
+CloseButton.Parent=Notification
+CloseButton.BackgroundTransparency=1
+CloseButton.Position=UDim2.new(1,-20,0,0)
+CloseButton.Size=UDim2.new(0,20,0,20)
+CloseButton.Text=""
+CloseButton.ZIndex=10
+
+CloseImage.Parent=CloseButton
+CloseImage.BackgroundColor3=Color3.new(1,1,1)
+CloseImage.BackgroundTransparency=1
+CloseImage.Position=UDim2.new(0,5,0,5)
+CloseImage.Size=UDim2.new(0,10,0,10)
+CloseImage.Image="rbxassetid://5054663650"
+CloseImage.ZIndex=10
+
+PinButton.Name="PinButton"
+PinButton.Parent=Notification
+PinButton.BackgroundTransparency=1
+PinButton.Size=UDim2.new(0,20,0,20)
+PinButton.ZIndex=10
+PinButton.Text=""
+
+PinImage.Parent=PinButton
+PinImage.BackgroundColor3=Color3.new(1,1,1)
+PinImage.BackgroundTransparency=1
+PinImage.Position=UDim2.new(0,3,0,3)
+PinImage.Size=UDim2.new(0,14,0,14)
+PinImage.ZIndex=10
+PinImage.Image="rbxassetid://6234691350"
+
+Tooltip.Name=randomString()
+Tooltip.Parent=ScaledHolder
+Tooltip.Active=true
+Tooltip.BackgroundColor3=Color3.fromRGB(36,36,37)
+Tooltip.BackgroundTransparency=0.1
+Tooltip.BorderSizePixel=0
+Tooltip.Size=UDim2.new(0,200,0,96)
+Tooltip.Visible=false
+Tooltip.ZIndex=10
 table.insert(shade1,Tooltip)
-Title_3.Name = "Title"
-Title_3.Parent = Tooltip
-Title_3.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Title_3.BackgroundTransparency = 0.1
-Title_3.BorderSizePixel = 0
-Title_3.Size = UDim2.new(0, 200, 0, 20)
-Title_3.Font = Enum.Font.SourceSans
-Title_3.TextSize = 14
-Title_3.Text = ""
-Title_3.TextColor3 = Color3.new(1, 1, 1)
-Title_3.TextTransparency = 0.1
-Title_3.ZIndex = 10
+
+Title_3.Name="Title"
+Title_3.Parent=Tooltip
+Title_3.BackgroundColor3=Color3.fromRGB(46,46,47)
+Title_3.BackgroundTransparency=0.1
+Title_3.BorderSizePixel=0
+Title_3.Size=UDim2.new(0,200,0,20)
+Title_3.Font=Enum.Font.SourceSans
+Title_3.TextSize=14
+Title_3.Text=""
+Title_3.TextColor3=Color3.new(1,1,1)
+Title_3.TextTransparency=0.1
+Title_3.ZIndex=10
 table.insert(shade2,Title_3)
 table.insert(text1,Title_3)
-Description.Name = "Description"
-Description.Parent = Tooltip
-Description.BackgroundTransparency = 1
-Description.BorderSizePixel = 0
-Description.Size = UDim2.new(0,180,0,72)
-Description.Position = UDim2.new(0,10,0,18)
-Description.Font = Enum.Font.SourceSans
-Description.TextSize = 16
-Description.Text = ""
-Description.TextColor3 = Color3.new(1, 1, 1)
-Description.TextTransparency = 0.1
-Description.TextWrapped = true
-Description.ZIndex = 10
+
+Description.Name="Description"
+Description.Parent=Tooltip
+Description.BackgroundTransparency=1
+Description.BorderSizePixel=0
+Description.Size=UDim2.new(0,180,0,72)
+Description.Position=UDim2.new(0,10,0,18)
+Description.Font=Enum.Font.SourceSans
+Description.TextSize=16
+Description.Text=""
+Description.TextColor3=Color3.new(1,1,1)
+Description.TextTransparency=0.1
+Description.TextWrapped=true
+Description.ZIndex=10
 table.insert(text1,Description)
-IntroBackground.Name = "IntroBackground"
-IntroBackground.Parent = Holder
-IntroBackground.Active = true
-IntroBackground.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
-IntroBackground.BorderSizePixel = 0
-IntroBackground.Position = UDim2.new(0, 0, 0, 45)
-IntroBackground.Size = UDim2.new(0, 250, 0, 175)
-IntroBackground.ZIndex = 10
-Logo.Name = "Logo"
-Logo.Parent = Holder
-Logo.BackgroundTransparency = 1
-Logo.BorderSizePixel = 0
-Logo.Position = UDim2.new(0, 125, 0, 127)
-Logo.Size = UDim2.new(0, 10, 0, 10)
-Logo.Image = "rbxassetid://1352543873"
-Logo.ImageTransparency = 0
-Logo.ZIndex = 10
-Credits.Name = "Credits"
-Credits.Parent = Holder
-Credits.BackgroundTransparency = 1
-Credits.BorderSizePixel = 0
-Credits.Position = UDim2.new(0, 0, 0.9, 30)
-Credits.Size = UDim2.new(0, 250, 0, 20)
-Credits.Font = Enum.Font.SourceSansLight
-Credits.FontSize = Enum.FontSize.Size18
-Credits.Text = "Edge // Zwolf // Moon // Toon"
-Credits.TextColor3 = Color3.new(1, 1, 1)
-Credits.ZIndex = 10
-KeybindsFrame.Name = "KeybindsFrame"
-KeybindsFrame.Parent = Settings
-KeybindsFrame.Active = true
-KeybindsFrame.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
-KeybindsFrame.BorderSizePixel = 0
-KeybindsFrame.Position = UDim2.new(0, 0, 0, 175)
-KeybindsFrame.Size = UDim2.new(0, 250, 0, 175)
-KeybindsFrame.ZIndex = 10
+
+IntroBackground.Name="IntroBackground"
+IntroBackground.Parent=Holder
+IntroBackground.Active=true
+IntroBackground.BackgroundColor3=Color3.fromRGB(36,36,37)
+IntroBackground.BorderSizePixel=0
+IntroBackground.Position=UDim2.new(0,0,0,45)
+IntroBackground.Size=UDim2.new(0,250,0,175)
+IntroBackground.ZIndex=10
+
+Logo.Name="Logo"
+Logo.Parent=Holder
+Logo.BackgroundTransparency=1
+Logo.BorderSizePixel=0
+Logo.Position=UDim2.new(0,125,0,127)
+Logo.Size=UDim2.new(0,10,0,10)
+Logo.Image="rbxassetid://1352543873"
+Logo.ImageTransparency=0
+Logo.ZIndex=10
+
+Credits.Name="Credits"
+Credits.Parent=Holder
+Credits.BackgroundTransparency=1
+Credits.BorderSizePixel=0
+Credits.Position=UDim2.new(0,0,0.9,30)
+Credits.Size=UDim2.new(0,250,0,20)
+Credits.Font=Enum.Font.SourceSansLight
+Credits.FontSize=Enum.FontSize.Size18
+Credits.Text="Edge // Zwolf // Moon // Toon"
+Credits.TextColor3=Color3.new(1,1,1)
+Credits.ZIndex=10
+
+KeybindsFrame.Name="KeybindsFrame"
+KeybindsFrame.Parent=Settings
+KeybindsFrame.Active=true
+KeybindsFrame.BackgroundColor3=Color3.fromRGB(36,36,37)
+KeybindsFrame.BorderSizePixel=0
+KeybindsFrame.Position=UDim2.new(0,0,0,175)
+KeybindsFrame.Size=UDim2.new(0,250,0,175)
+KeybindsFrame.ZIndex=10
 table.insert(shade1,KeybindsFrame)
-Close.Name = "Close"
-Close.Parent = KeybindsFrame
-Close.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Close.BorderSizePixel = 0
-Close.Position = UDim2.new(0, 205, 0, 150)
-Close.Size = UDim2.new(0, 40, 0, 20)
-Close.Font = Enum.Font.SourceSans
-Close.TextSize = 14
-Close.Text = "Close"
-Close.TextColor3 = Color3.new(1, 1, 1)
-Close.ZIndex = 10
+
+Close.Name="Close"
+Close.Parent=KeybindsFrame
+Close.BackgroundColor3=Color3.fromRGB(46,46,47)
+Close.BorderSizePixel=0
+Close.Position=UDim2.new(0,205,0,150)
+Close.Size=UDim2.new(0,40,0,20)
+Close.Font=Enum.Font.SourceSans
+Close.TextSize=14
+Close.Text="Close"
+Close.TextColor3=Color3.new(1,1,1)
+Close.ZIndex=10
 table.insert(shade2,Close)
 table.insert(text1,Close)
-Add.Name = "Add"
-Add.Parent = KeybindsFrame
-Add.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Add.BorderSizePixel = 0
-Add.Position = UDim2.new(0, 5, 0, 150)
-Add.Size = UDim2.new(0, 40, 0, 20)
-Add.Font = Enum.Font.SourceSans
-Add.TextSize = 14
-Add.Text = "Add"
-Add.TextColor3 = Color3.new(1, 1, 1)
-Add.ZIndex = 10
+
+Add.Name="Add"
+Add.Parent=KeybindsFrame
+Add.BackgroundColor3=Color3.fromRGB(46,46,47)
+Add.BorderSizePixel=0
+Add.Position=UDim2.new(0,5,0,150)
+Add.Size=UDim2.new(0,40,0,20)
+Add.Font=Enum.Font.SourceSans
+Add.TextSize=14
+Add.Text="Add"
+Add.TextColor3=Color3.new(1,1,1)
+Add.ZIndex=10
 table.insert(shade2,Add)
 table.insert(text1,Add)
-Delete.Name = "Delete"
-Delete.Parent = KeybindsFrame
-Delete.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Delete.BorderSizePixel = 0
-Delete.Position = UDim2.new(0, 50, 0, 150)
-Delete.Size = UDim2.new(0, 40, 0, 20)
-Delete.Font = Enum.Font.SourceSans
-Delete.TextSize = 14
-Delete.Text = "Clear"
-Delete.TextColor3 = Color3.new(1, 1, 1)
-Delete.ZIndex = 10
+
+Delete.Name="Delete"
+Delete.Parent=KeybindsFrame
+Delete.BackgroundColor3=Color3.fromRGB(46,46,47)
+Delete.BorderSizePixel=0
+Delete.Position=UDim2.new(0,50,0,150)
+Delete.Size=UDim2.new(0,40,0,20)
+Delete.Font=Enum.Font.SourceSans
+Delete.TextSize=14
+Delete.Text="Clear"
+Delete.TextColor3=Color3.new(1,1,1)
+Delete.ZIndex=10
 table.insert(shade2,Delete)
 table.insert(text1,Delete)
-Holder_2.Name = "Holder"
-Holder_2.Parent = KeybindsFrame
-Holder_2.BackgroundTransparency = 1
-Holder_2.BorderSizePixel = 0
-Holder_2.Position = UDim2.new(0, 0, 0, 0)
-Holder_2.Size = UDim2.new(0, 250, 0, 145)
-Holder_2.ScrollBarImageColor3 = Color3.fromRGB(78,78,79)
-Holder_2.BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Holder_2.CanvasSize = UDim2.new(0, 0, 0, 0)
-Holder_2.MidImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Holder_2.ScrollBarThickness = 0
-Holder_2.TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Holder_2.VerticalScrollBarInset = 'Always'
-Holder_2.ZIndex = 10
-Example_2.Name = "Example"
-Example_2.Parent = KeybindsFrame
-Example_2.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Example_2.BorderSizePixel = 0
-Example_2.Size = UDim2.new(0, 10, 0, 20)
-Example_2.Visible = false
-Example_2.ZIndex = 10
+
+Holder_2.Name="Holder"
+Holder_2.Parent=KeybindsFrame
+Holder_2.BackgroundTransparency=1
+Holder_2.BorderSizePixel=0
+Holder_2.Position=UDim2.new(0,0,0,0)
+Holder_2.Size=UDim2.new(0,250,0,145)
+Holder_2.ScrollBarImageColor3=Color3.fromRGB(78,78,79)
+Holder_2.BottomImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+Holder_2.CanvasSize=UDim2.new(0,0,0,0)
+Holder_2.MidImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+Holder_2.ScrollBarThickness=0
+Holder_2.TopImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+Holder_2.VerticalScrollBarInset='Always'
+Holder_2.ZIndex=10
+
+Example_2.Name="Example"
+Example_2.Parent=KeybindsFrame
+Example_2.BackgroundColor3=Color3.fromRGB(46,46,47)
+Example_2.BorderSizePixel=0
+Example_2.Size=UDim2.new(0,10,0,20)
+Example_2.Visible=false
+Example_2.ZIndex=10
 table.insert(shade2,Example_2)
-Text_3.Name = "Text"
-Text_3.Parent = Example_2
-Text_3.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Text_3.BorderSizePixel = 0
-Text_3.Position = UDim2.new(0, 10, 0, 0)
-Text_3.Size = UDim2.new(0, 240, 0, 20)
-Text_3.Font = Enum.Font.SourceSans
-Text_3.TextSize = 14
-Text_3.Text = "nom"
-Text_3.TextColor3 = Color3.new(1, 1, 1)
-Text_3.TextXAlignment = Enum.TextXAlignment.Left
-Text_3.ZIndex = 10
+
+Text_3.Name="Text"
+Text_3.Parent=Example_2
+Text_3.BackgroundColor3=Color3.fromRGB(46,46,47)
+Text_3.BorderSizePixel=0
+Text_3.Position=UDim2.new(0,10,0,0)
+Text_3.Size=UDim2.new(0,240,0,20)
+Text_3.Font=Enum.Font.SourceSans
+Text_3.TextSize=14
+Text_3.Text="nom"
+Text_3.TextColor3=Color3.new(1,1,1)
+Text_3.TextXAlignment=Enum.TextXAlignment.Left
+Text_3.ZIndex=10
 table.insert(shade2,Text_3)
 table.insert(text1,Text_3)
-Delete_2.Name = "Delete"
-Delete_2.Parent = Text_3
-Delete_2.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Delete_2.BorderSizePixel = 0
-Delete_2.Position = UDim2.new(0, 200, 0, 0)
-Delete_2.Size = UDim2.new(0, 40, 0, 20)
-Delete_2.Font = Enum.Font.SourceSans
-Delete_2.TextSize = 14
-Delete_2.Text = "Delete"
-Delete_2.TextColor3 = Color3.new(0, 0, 0)
-Delete_2.ZIndex = 10
+
+Delete_2.Name="Delete"
+Delete_2.Parent=Text_3
+Delete_2.BackgroundColor3=Color3.fromRGB(78,78,79)
+Delete_2.BorderSizePixel=0
+Delete_2.Position=UDim2.new(0,200,0,0)
+Delete_2.Size=UDim2.new(0,40,0,20)
+Delete_2.Font=Enum.Font.SourceSans
+Delete_2.TextSize=14
+Delete_2.Text="Delete"
+Delete_2.TextColor3=Color3.new(0,0,0)
+Delete_2.ZIndex=10
 table.insert(shade3,Delete_2)
 table.insert(text2,Delete_2)
-KeybindEditor.Name = randomString()
-KeybindEditor.Parent = ScaledHolder
-KeybindEditor.Active = true
-KeybindEditor.BackgroundTransparency = 1
-KeybindEditor.Position = UDim2.new(0.5, -180, 0, -500)
-KeybindEditor.Size = UDim2.new(0, 360, 0, 20)
-KeybindEditor.ZIndex = 10
-background_2.Name = "background"
-background_2.Parent = KeybindEditor
-background_2.Active = true
-background_2.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
-background_2.BorderSizePixel = 0
-background_2.Position = UDim2.new(0, 0, 0, 20)
-background_2.Size = UDim2.new(0, 360, 0, 185)
-background_2.ZIndex = 10
+
+KeybindEditor.Name=randomString()
+KeybindEditor.Parent=ScaledHolder
+KeybindEditor.Active=true
+KeybindEditor.BackgroundTransparency=1
+KeybindEditor.Position=UDim2.new(0.5,-180,0,-500)
+KeybindEditor.Size=UDim2.new(0,360,0,20)
+KeybindEditor.ZIndex=10
+
+background_2.Name="background"
+background_2.Parent=KeybindEditor
+background_2.Active=true
+background_2.BackgroundColor3=Color3.fromRGB(36,36,37)
+background_2.BorderSizePixel=0
+background_2.Position=UDim2.new(0,0,0,20)
+background_2.Size=UDim2.new(0,360,0,185)
+background_2.ZIndex=10
 table.insert(shade1,background_2)
-Dark_3.Name = "Dark"
-Dark_3.Parent = background_2
-Dark_3.Active = true
-Dark_3.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Dark_3.BorderSizePixel = 0
-Dark_3.Position = UDim2.new(0, 135, 0, 0)
-Dark_3.Size = UDim2.new(0, 2, 0, 185)
-Dark_3.ZIndex = 10
+
+Dark_3.Name="Dark"
+Dark_3.Parent=background_2
+Dark_3.Active=true
+Dark_3.BackgroundColor3=Color3.fromRGB(46,46,47)
+Dark_3.BorderSizePixel=0
+Dark_3.Position=UDim2.new(0,135,0,0)
+Dark_3.Size=UDim2.new(0,2,0,185)
+Dark_3.ZIndex=10
 table.insert(shade2,Dark_3)
-Directions.Name = "Directions"
-Directions.Parent = background_2
-Directions.BackgroundTransparency = 1
-Directions.BorderSizePixel = 0
-Directions.Position = UDim2.new(0, 10, 0, 15)
-Directions.Size = UDim2.new(0, 115, 0, 90)
-Directions.ZIndex = 10
-Directions.Font = Enum.Font.SourceSans
-Directions.Text = "Click the button below and press a key/mouse button. Then select what you want to bind it to."
-Directions.TextColor3 = Color3.fromRGB(255, 255, 255)
-Directions.TextSize = 14.000
-Directions.TextWrapped = true
-Directions.TextYAlignment = Enum.TextYAlignment.Top
+
+Directions.Name="Directions"
+Directions.Parent=background_2
+Directions.BackgroundTransparency=1
+Directions.BorderSizePixel=0
+Directions.Position=UDim2.new(0,10,0,15)
+Directions.Size=UDim2.new(0,115,0,90)
+Directions.ZIndex=10
+Directions.Font=Enum.Font.SourceSans
+Directions.Text="Click the button below and press a key/mouse button. Then select what you want to bind it to."
+Directions.TextColor3=Color3.fromRGB(255,255,255)
+Directions.TextSize=14.000
+Directions.TextWrapped=true
+Directions.TextYAlignment=Enum.TextYAlignment.Top
 table.insert(text1,Directions)
-BindTo.Name = "BindTo"
-BindTo.Parent = background_2
-BindTo.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-BindTo.BorderSizePixel = 0
-BindTo.Position = UDim2.new(0, 10, 0, 95)
-BindTo.Size = UDim2.new(0, 115, 0, 50)
-BindTo.ZIndex = 10
-BindTo.Font = Enum.Font.SourceSans
-BindTo.Text = "Click to bind"
-BindTo.TextColor3 = Color3.fromRGB(255, 255, 255)
-BindTo.TextSize = 16.000
+
+BindTo.Name="BindTo"
+BindTo.Parent=background_2
+BindTo.BackgroundColor3=Color3.fromRGB(46,46,47)
+BindTo.BorderSizePixel=0
+BindTo.Position=UDim2.new(0,10,0,95)
+BindTo.Size=UDim2.new(0,115,0,50)
+BindTo.ZIndex=10
+BindTo.Font=Enum.Font.SourceSans
+BindTo.Text="Click to bind"
+BindTo.TextColor3=Color3.fromRGB(255,255,255)
+BindTo.TextSize=16.000
 table.insert(shade2,BindTo)
 table.insert(text1,BindTo)
-TriggerLabel.Name = "TriggerLabel"
-TriggerLabel.Parent = background_2
-TriggerLabel.BackgroundTransparency = 1
-TriggerLabel.Position = UDim2.new(0, 10, 0, 155)
-TriggerLabel.Size = UDim2.new(0, 45, 0, 20)
-TriggerLabel.ZIndex = 10
-TriggerLabel.Font = Enum.Font.SourceSans
-TriggerLabel.Text = "Trigger:"
-TriggerLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TriggerLabel.TextSize = 14.000
-TriggerLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+TriggerLabel.Name="TriggerLabel"
+TriggerLabel.Parent=background_2
+TriggerLabel.BackgroundTransparency=1
+TriggerLabel.Position=UDim2.new(0,10,0,155)
+TriggerLabel.Size=UDim2.new(0,45,0,20)
+TriggerLabel.ZIndex=10
+TriggerLabel.Font=Enum.Font.SourceSans
+TriggerLabel.Text="Trigger:"
+TriggerLabel.TextColor3=Color3.fromRGB(255,255,255)
+TriggerLabel.TextSize=14.000
+TriggerLabel.TextXAlignment=Enum.TextXAlignment.Left
 table.insert(text1,TriggerLabel)
-BindTriggerSelect.Name = "BindTo"
-BindTriggerSelect.Parent = background_2
-BindTriggerSelect.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-BindTriggerSelect.BorderSizePixel = 0
-BindTriggerSelect.Position = UDim2.new(0, 60, 0, 155)
-BindTriggerSelect.Size = UDim2.new(0, 65, 0, 20)
-BindTriggerSelect.ZIndex = 10
-BindTriggerSelect.Font = Enum.Font.SourceSans
-BindTriggerSelect.Text = "KeyDown"
-BindTriggerSelect.TextColor3 = Color3.fromRGB(255, 255, 255)
-BindTriggerSelect.TextSize = 16.000
+
+BindTriggerSelect.Name="BindTo"
+BindTriggerSelect.Parent=background_2
+BindTriggerSelect.BackgroundColor3=Color3.fromRGB(46,46,47)
+BindTriggerSelect.BorderSizePixel=0
+BindTriggerSelect.Position=UDim2.new(0,60,0,155)
+BindTriggerSelect.Size=UDim2.new(0,65,0,20)
+BindTriggerSelect.ZIndex=10
+BindTriggerSelect.Font=Enum.Font.SourceSans
+BindTriggerSelect.Text="KeyDown"
+BindTriggerSelect.TextColor3=Color3.fromRGB(255,255,255)
+BindTriggerSelect.TextSize=16.000
 table.insert(shade2,BindTriggerSelect)
 table.insert(text1,BindTriggerSelect)
-Add_2.Name = "Add"
-Add_2.Parent = background_2
-Add_2.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Add_2.BorderSizePixel = 0
-Add_2.Position = UDim2.new(0, 310, 0, 35)
-Add_2.Size = UDim2.new(0, 40, 0, 20)
-Add_2.ZIndex = 10
-Add_2.Font = Enum.Font.SourceSans
-Add_2.Text = "Add"
-Add_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-Add_2.TextSize = 14.000
+
+Add_2.Name="Add"
+Add_2.Parent=background_2
+Add_2.BackgroundColor3=Color3.fromRGB(46,46,47)
+Add_2.BorderSizePixel=0
+Add_2.Position=UDim2.new(0,310,0,35)
+Add_2.Size=UDim2.new(0,40,0,20)
+Add_2.ZIndex=10
+Add_2.Font=Enum.Font.SourceSans
+Add_2.Text="Add"
+Add_2.TextColor3=Color3.fromRGB(255,255,255)
+Add_2.TextSize=14.000
 table.insert(shade2,Add_2)
 table.insert(text1,Add_2)
-Toggles.Name = "Toggles"
-Toggles.Parent = background_2
-Toggles.BackgroundTransparency = 1
-Toggles.BorderSizePixel = 0
-Toggles.Position = UDim2.new(0, 150, 0, 125)
-Toggles.Size = UDim2.new(0, 200, 0, 50)
-Toggles.ZIndex = 10
-Toggles.BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Toggles.CanvasSize = UDim2.new(0, 0, 0, 50)
-Toggles.ScrollBarThickness = 8
-Toggles.TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Toggles.VerticalScrollBarInset = Enum.ScrollBarInset.Always
+
+Toggles.Name="Toggles"
+Toggles.Parent=background_2
+Toggles.BackgroundTransparency=1
+Toggles.BorderSizePixel=0
+Toggles.Position=UDim2.new(0,150,0,125)
+Toggles.Size=UDim2.new(0,200,0,50)
+Toggles.ZIndex=10
+Toggles.BottomImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+Toggles.CanvasSize=UDim2.new(0,0,0,50)
+Toggles.ScrollBarThickness=8
+Toggles.TopImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+Toggles.VerticalScrollBarInset=Enum.ScrollBarInset.Always
 table.insert(scroll,Toggles)
-ClickTP.Name = "Click TP (Hold Key & Click)"
-ClickTP.Parent = Toggles
-ClickTP.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-ClickTP.BorderSizePixel = 0
-ClickTP.Size = UDim2.new(0, 200, 0, 20)
-ClickTP.ZIndex = 10
-ClickTP.Font = Enum.Font.SourceSans
-ClickTP.Text = "    Click TP (Hold Key & Click)"
-ClickTP.TextColor3 = Color3.fromRGB(255, 255, 255)
-ClickTP.TextSize = 14.000
-ClickTP.TextXAlignment = Enum.TextXAlignment.Left
+
+ClickTP.Name="Click TP (Hold Key & Click)"
+ClickTP.Parent=Toggles
+ClickTP.BackgroundColor3=Color3.fromRGB(46,46,47)
+ClickTP.BorderSizePixel=0
+ClickTP.Size=UDim2.new(0,200,0,20)
+ClickTP.ZIndex=10
+ClickTP.Font=Enum.Font.SourceSans
+ClickTP.Text="    Click TP (Hold Key & Click)"
+ClickTP.TextColor3=Color3.fromRGB(255,255,255)
+ClickTP.TextSize=14.000
+ClickTP.TextXAlignment=Enum.TextXAlignment.Left
 table.insert(shade2,ClickTP)
 table.insert(text1,ClickTP)
-Select.Name = "Select"
-Select.Parent = ClickTP
-Select.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Select.BorderSizePixel = 0
-Select.Position = UDim2.new(0, 160, 0, 0)
-Select.Size = UDim2.new(0, 40, 0, 20)
-Select.ZIndex = 10
-Select.Font = Enum.Font.SourceSans
-Select.Text = "Add"
-Select.TextColor3 = Color3.fromRGB(0, 0, 0)
-Select.TextSize = 14.000
+
+Select.Name="Select"
+Select.Parent=ClickTP
+Select.BackgroundColor3=Color3.fromRGB(78,78,79)
+Select.BorderSizePixel=0
+Select.Position=UDim2.new(0,160,0,0)
+Select.Size=UDim2.new(0,40,0,20)
+Select.ZIndex=10
+Select.Font=Enum.Font.SourceSans
+Select.Text="Add"
+Select.TextColor3=Color3.fromRGB(0,0,0)
+Select.TextSize=14.000
 table.insert(shade3,Select)
 table.insert(text2,Select)
-ClickDelete.Name = "Click Delete (Hold Key & Click)"
-ClickDelete.Parent = Toggles
-ClickDelete.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-ClickDelete.BorderSizePixel = 0
-ClickDelete.Position = UDim2.new(0, 0, 0, 25)
-ClickDelete.Size = UDim2.new(0, 200, 0, 20)
-ClickDelete.ZIndex = 10
-ClickDelete.Font = Enum.Font.SourceSans
-ClickDelete.Text = "    Click Delete (Hold Key & Click)"
-ClickDelete.TextColor3 = Color3.fromRGB(255, 255, 255)
-ClickDelete.TextSize = 14.000
-ClickDelete.TextXAlignment = Enum.TextXAlignment.Left
+
+ClickDelete.Name="Click Delete (Hold Key & Click)"
+ClickDelete.Parent=Toggles
+ClickDelete.BackgroundColor3=Color3.fromRGB(46,46,47)
+ClickDelete.BorderSizePixel=0
+ClickDelete.Position=UDim2.new(0,0,0,25)
+ClickDelete.Size=UDim2.new(0,200,0,20)
+ClickDelete.ZIndex=10
+ClickDelete.Font=Enum.Font.SourceSans
+ClickDelete.Text="    Click Delete (Hold Key & Click)"
+ClickDelete.TextColor3=Color3.fromRGB(255,255,255)
+ClickDelete.TextSize=14.000
+ClickDelete.TextXAlignment=Enum.TextXAlignment.Left
 table.insert(shade2,ClickDelete)
 table.insert(text1,ClickDelete)
-Select_2.Name = "Select"
-Select_2.Parent = ClickDelete
-Select_2.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Select_2.BorderSizePixel = 0
-Select_2.Position = UDim2.new(0, 160, 0, 0)
-Select_2.Size = UDim2.new(0, 40, 0, 20)
-Select_2.ZIndex = 10
-Select_2.Font = Enum.Font.SourceSans
-Select_2.Text = "Add"
-Select_2.TextColor3 = Color3.fromRGB(0, 0, 0)
-Select_2.TextSize = 14.000
+
+Select_2.Name="Select"
+Select_2.Parent=ClickDelete
+Select_2.BackgroundColor3=Color3.fromRGB(78,78,79)
+Select_2.BorderSizePixel=0
+Select_2.Position=UDim2.new(0,160,0,0)
+Select_2.Size=UDim2.new(0,40,0,20)
+Select_2.ZIndex=10
+Select_2.Font=Enum.Font.SourceSans
+Select_2.Text="Add"
+Select_2.TextColor3=Color3.fromRGB(0,0,0)
+Select_2.TextSize=14.000
 table.insert(shade3,Select_2)
 table.insert(text2,Select_2)
-Cmdbar_2.Name = "Cmdbar_2"
-Cmdbar_2.Parent = background_2
-Cmdbar_2.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Cmdbar_2.BorderSizePixel = 0
-Cmdbar_2.Position = UDim2.new(0, 150, 0, 35)
-Cmdbar_2.Size = UDim2.new(0, 150, 0, 20)
-Cmdbar_2.ZIndex = 10
-Cmdbar_2.Font = Enum.Font.SourceSans
-Cmdbar_2.PlaceholderText = "Command"
-Cmdbar_2.Text = ""
-Cmdbar_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-Cmdbar_2.TextSize = 14.000
-Cmdbar_2.TextXAlignment = Enum.TextXAlignment.Left
-Cmdbar_3.Name = "Cmdbar_3"
-Cmdbar_3.Parent = background_2
-Cmdbar_3.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Cmdbar_3.BorderSizePixel = 0
-Cmdbar_3.Position = UDim2.new(0, 150, 0, 60)
-Cmdbar_3.Size = UDim2.new(0, 150, 0, 20)
-Cmdbar_3.ZIndex = 10
-Cmdbar_3.Font = Enum.Font.SourceSans
-Cmdbar_3.PlaceholderText = "Command 2"
-Cmdbar_3.Text = ""
-Cmdbar_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-Cmdbar_3.TextSize = 14.000
-Cmdbar_3.TextXAlignment = Enum.TextXAlignment.Left
-CreateToggle.Name = "CreateToggle"
-CreateToggle.Parent = background_2
-CreateToggle.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-CreateToggle.BackgroundTransparency = 1
-CreateToggle.BorderSizePixel = 0
-CreateToggle.Position = UDim2.new(0, 152, 0, 10)
-CreateToggle.Size = UDim2.new(0, 198, 0, 20)
-CreateToggle.ZIndex = 10
-CreateToggle.Font = Enum.Font.SourceSans
-CreateToggle.Text = "Create Toggle"
-CreateToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
-CreateToggle.TextSize = 14.000
-CreateToggle.TextXAlignment = Enum.TextXAlignment.Left
+
+Cmdbar_2.Name="Cmdbar_2"
+Cmdbar_2.Parent=background_2
+Cmdbar_2.BackgroundColor3=Color3.fromRGB(46,46,47)
+Cmdbar_2.BorderSizePixel=0
+Cmdbar_2.Position=UDim2.new(0,150,0,35)
+Cmdbar_2.Size=UDim2.new(0,150,0,20)
+Cmdbar_2.ZIndex=10
+Cmdbar_2.Font=Enum.Font.SourceSans
+Cmdbar_2.PlaceholderText="Command"
+Cmdbar_2.Text=""
+Cmdbar_2.TextColor3=Color3.fromRGB(255,255,255)
+Cmdbar_2.TextSize=14.000
+Cmdbar_2.TextXAlignment=Enum.TextXAlignment.Left
+
+Cmdbar_3.Name="Cmdbar_3"
+Cmdbar_3.Parent=background_2
+Cmdbar_3.BackgroundColor3=Color3.fromRGB(46,46,47)
+Cmdbar_3.BorderSizePixel=0
+Cmdbar_3.Position=UDim2.new(0,150,0,60)
+Cmdbar_3.Size=UDim2.new(0,150,0,20)
+Cmdbar_3.ZIndex=10
+Cmdbar_3.Font=Enum.Font.SourceSans
+Cmdbar_3.PlaceholderText="Command 2"
+Cmdbar_3.Text=""
+Cmdbar_3.TextColor3=Color3.fromRGB(255,255,255)
+Cmdbar_3.TextSize=14.000
+Cmdbar_3.TextXAlignment=Enum.TextXAlignment.Left
+
+CreateToggle.Name="CreateToggle"
+CreateToggle.Parent=background_2
+CreateToggle.BackgroundColor3=Color3.fromRGB(46,46,47)
+CreateToggle.BackgroundTransparency=1
+CreateToggle.BorderSizePixel=0
+CreateToggle.Position=UDim2.new(0,152,0,10)
+CreateToggle.Size=UDim2.new(0,198,0,20)
+CreateToggle.ZIndex=10
+CreateToggle.Font=Enum.Font.SourceSans
+CreateToggle.Text="Create Toggle"
+CreateToggle.TextColor3=Color3.fromRGB(255,255,255)
+CreateToggle.TextSize=14.000
+CreateToggle.TextXAlignment=Enum.TextXAlignment.Left
 table.insert(text1,CreateToggle)
-Button_2.Name = "Button"
-Button_2.Parent = CreateToggle
-Button_2.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Button_2.BorderSizePixel = 0
-Button_2.Position = UDim2.new(1, -20, 0, 0)
-Button_2.Size = UDim2.new(0, 20, 0, 20)
-Button_2.ZIndex = 10
+
+Button_2.Name="Button"
+Button_2.Parent=CreateToggle
+Button_2.BackgroundColor3=Color3.fromRGB(78,78,79)
+Button_2.BorderSizePixel=0
+Button_2.Position=UDim2.new(1,-20,0,0)
+Button_2.Size=UDim2.new(0,20,0,20)
+Button_2.ZIndex=10
 table.insert(shade3,Button_2)
-On_2.Name = "On"
-On_2.Parent = Button_2
-On_2.BackgroundColor3 = Color3.fromRGB(150, 150, 151)
-On_2.BackgroundTransparency = 1
-On_2.BorderSizePixel = 0
-On_2.Position = UDim2.new(0, 2, 0, 2)
-On_2.Size = UDim2.new(0, 16, 0, 16)
-On_2.ZIndex = 10
-On_2.Font = Enum.Font.SourceSans
-On_2.Text = ""
-On_2.TextColor3 = Color3.fromRGB(0, 0, 0)
-On_2.TextSize = 14.000
-shadow_2.Name = "shadow"
-shadow_2.Parent = KeybindEditor
-shadow_2.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-shadow_2.BorderSizePixel = 0
-shadow_2.Size = UDim2.new(0, 360, 0, 20)
-shadow_2.ZIndex = 10
+
+On_2.Name="On"
+On_2.Parent=Button_2
+On_2.BackgroundColor3=Color3.fromRGB(150,150,151)
+On_2.BackgroundTransparency=1
+On_2.BorderSizePixel=0
+On_2.Position=UDim2.new(0,2,0,2)
+On_2.Size=UDim2.new(0,16,0,16)
+On_2.ZIndex=10
+On_2.Font=Enum.Font.SourceSans
+On_2.Text=""
+On_2.TextColor3=Color3.fromRGB(0,0,0)
+On_2.TextSize=14.000
+
+shadow_2.Name="shadow"
+shadow_2.Parent=KeybindEditor
+shadow_2.BackgroundColor3=Color3.fromRGB(46,46,47)
+shadow_2.BorderSizePixel=0
+shadow_2.Size=UDim2.new(0,360,0,20)
+shadow_2.ZIndex=10
 table.insert(shade2,shadow_2)
-PopupText_2.Name = "PopupText_2"
-PopupText_2.Parent = shadow_2
-PopupText_2.BackgroundTransparency = 1
-PopupText_2.Size = UDim2.new(1, 0, 0.949999988, 0)
-PopupText_2.ZIndex = 10
-PopupText_2.Font = Enum.Font.SourceSans
-PopupText_2.Text = "Set Keybinds"
-PopupText_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-PopupText_2.TextSize = 14.000
-PopupText_2.TextWrapped = true
+
+PopupText_2.Name="PopupText_2"
+PopupText_2.Parent=shadow_2
+PopupText_2.BackgroundTransparency=1
+PopupText_2.Size=UDim2.new(1,0,0.949999988,0)
+PopupText_2.ZIndex=10
+PopupText_2.Font=Enum.Font.SourceSans
+PopupText_2.Text="Set Keybinds"
+PopupText_2.TextColor3=Color3.fromRGB(255,255,255)
+PopupText_2.TextSize=14.000
+PopupText_2.TextWrapped=true
 table.insert(text1,PopupText_2)
-Exit_2.Name = "Exit_2"
-Exit_2.Parent = shadow_2
-Exit_2.BackgroundTransparency = 1
-Exit_2.Position = UDim2.new(1, -20, 0, 0)
-Exit_2.Size = UDim2.new(0, 20, 0, 20)
-Exit_2.ZIndex = 10
-Exit_2.Text = ""
-ExitImage_2.Parent = Exit_2
-ExitImage_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ExitImage_2.BackgroundTransparency = 1
-ExitImage_2.Position = UDim2.new(0, 5, 0, 5)
-ExitImage_2.Size = UDim2.new(0, 10, 0, 10)
-ExitImage_2.ZIndex = 10
-ExitImage_2.Image = "rbxassetid://5054663650"
-PositionsFrame.Name = "PositionsFrame"
-PositionsFrame.Parent = Settings
-PositionsFrame.Active = true
-PositionsFrame.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
-PositionsFrame.BorderSizePixel = 0
-PositionsFrame.Size = UDim2.new(0, 250, 0, 175)
-PositionsFrame.Position = UDim2.new(0, 0, 0, 175)
-PositionsFrame.ZIndex = 10
+
+Exit_2.Name="Exit_2"
+Exit_2.Parent=shadow_2
+Exit_2.BackgroundTransparency=1
+Exit_2.Position=UDim2.new(1,-20,0,0)
+Exit_2.Size=UDim2.new(0,20,0,20)
+Exit_2.ZIndex=10
+Exit_2.Text=""
+
+ExitImage_2.Parent=Exit_2
+ExitImage_2.BackgroundColor3=Color3.fromRGB(255,255,255)
+ExitImage_2.BackgroundTransparency=1
+ExitImage_2.Position=UDim2.new(0,5,0,5)
+ExitImage_2.Size=UDim2.new(0,10,0,10)
+ExitImage_2.ZIndex=10
+ExitImage_2.Image="rbxassetid://5054663650"
+
+PositionsFrame.Name="PositionsFrame"
+PositionsFrame.Parent=Settings
+PositionsFrame.Active=true
+PositionsFrame.BackgroundColor3=Color3.fromRGB(36,36,37)
+PositionsFrame.BorderSizePixel=0
+PositionsFrame.Size=UDim2.new(0,250,0,175)
+PositionsFrame.Position=UDim2.new(0,0,0,175)
+PositionsFrame.ZIndex=10
 table.insert(shade1,PositionsFrame)
-Close_3.Name = "Close"
-Close_3.Parent = PositionsFrame
-Close_3.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Close_3.BorderSizePixel = 0
-Close_3.Position = UDim2.new(0, 205, 0, 150)
-Close_3.Size = UDim2.new(0, 40, 0, 20)
-Close_3.Font = Enum.Font.SourceSans
-Close_3.TextSize = 14
-Close_3.Text = "Close"
-Close_3.TextColor3 = Color3.new(1, 1, 1)
-Close_3.ZIndex = 10
+
+Close_3.Name="Close"
+Close_3.Parent=PositionsFrame
+Close_3.BackgroundColor3=Color3.fromRGB(46,46,47)
+Close_3.BorderSizePixel=0
+Close_3.Position=UDim2.new(0,205,0,150)
+Close_3.Size=UDim2.new(0,40,0,20)
+Close_3.Font=Enum.Font.SourceSans
+Close_3.TextSize=14
+Close_3.Text="Close"
+Close_3.TextColor3=Color3.new(1,1,1)
+Close_3.ZIndex=10
 table.insert(shade2,Close_3)
 table.insert(text1,Close_3)
-Delete_5.Name = "Delete"
-Delete_5.Parent = PositionsFrame
-Delete_5.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Delete_5.BorderSizePixel = 0
-Delete_5.Position = UDim2.new(0, 50, 0, 150)
-Delete_5.Size = UDim2.new(0, 40, 0, 20)
-Delete_5.Font = Enum.Font.SourceSans
-Delete_5.TextSize = 14
-Delete_5.Text = "Clear"
-Delete_5.TextColor3 = Color3.new(1, 1, 1)
-Delete_5.ZIndex = 10
+
+Delete_5.Name="Delete"
+Delete_5.Parent=PositionsFrame
+Delete_5.BackgroundColor3=Color3.fromRGB(46,46,47)
+Delete_5.BorderSizePixel=0
+Delete_5.Position=UDim2.new(0,50,0,150)
+Delete_5.Size=UDim2.new(0,40,0,20)
+Delete_5.Font=Enum.Font.SourceSans
+Delete_5.TextSize=14
+Delete_5.Text="Clear"
+Delete_5.TextColor3=Color3.new(1,1,1)
+Delete_5.ZIndex=10
 table.insert(shade2,Delete_5)
 table.insert(text1,Delete_5)
-Part.Name = "PartGoto"
-Part.Parent = PositionsFrame
-Part.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Part.BorderSizePixel = 0
-Part.Position = UDim2.new(0, 5, 0, 150)
-Part.Size = UDim2.new(0, 40, 0, 20)
-Part.Font = Enum.Font.SourceSans
-Part.TextSize = 14
-Part.Text = "Part"
-Part.TextColor3 = Color3.new(1, 1, 1)
-Part.ZIndex = 10
+
+Part.Name="PartGoto"
+Part.Parent=PositionsFrame
+Part.BackgroundColor3=Color3.fromRGB(46,46,47)
+Part.BorderSizePixel=0
+Part.Position=UDim2.new(0,5,0,150)
+Part.Size=UDim2.new(0,40,0,20)
+Part.Font=Enum.Font.SourceSans
+Part.TextSize=14
+Part.Text="Part"
+Part.TextColor3=Color3.new(1,1,1)
+Part.ZIndex=10
 table.insert(shade2,Part)
 table.insert(text1,Part)
-Holder_4.Name = "Holder"
-Holder_4.Parent = PositionsFrame
-Holder_4.BackgroundTransparency = 1
-Holder_4.BorderSizePixel = 0
-Holder_4.Position = UDim2.new(0, 0, 0, 0)
-Holder_4.Selectable = false
-Holder_4.Size = UDim2.new(0, 250, 0, 145)
-Holder_4.ScrollBarImageColor3 = Color3.fromRGB(78,78,79)
-Holder_4.BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Holder_4.CanvasSize = UDim2.new(0, 0, 0, 0)
-Holder_4.MidImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Holder_4.ScrollBarThickness = 0
-Holder_4.TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Holder_4.VerticalScrollBarInset = 'Always'
-Holder_4.ZIndex = 10
-Example_4.Name = "Example"
-Example_4.Parent = PositionsFrame
-Example_4.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Example_4.BorderSizePixel = 0
-Example_4.Size = UDim2.new(0, 10, 0, 20)
-Example_4.Visible = false
-Example_4.Position = UDim2.new(0, 0, 0, -5)
-Example_4.ZIndex = 10
+
+Holder_4.Name="Holder"
+Holder_4.Parent=PositionsFrame
+Holder_4.BackgroundTransparency=1
+Holder_4.BorderSizePixel=0
+Holder_4.Position=UDim2.new(0,0,0,0)
+Holder_4.Selectable=false
+Holder_4.Size=UDim2.new(0,250,0,145)
+Holder_4.ScrollBarImageColor3=Color3.fromRGB(78,78,79)
+Holder_4.BottomImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+Holder_4.CanvasSize=UDim2.new(0,0,0,0)
+Holder_4.MidImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+Holder_4.ScrollBarThickness=0
+Holder_4.TopImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+Holder_4.VerticalScrollBarInset='Always'
+Holder_4.ZIndex=10
+
+Example_4.Name="Example"
+Example_4.Parent=PositionsFrame
+Example_4.BackgroundColor3=Color3.fromRGB(46,46,47)
+Example_4.BorderSizePixel=0
+Example_4.Size=UDim2.new(0,10,0,20)
+Example_4.Visible=false
+Example_4.Position=UDim2.new(0,0,0,-5)
+Example_4.ZIndex=10
 table.insert(shade2,Example_4)
-Text_5.Name = "Text"
-Text_5.Parent = Example_4
-Text_5.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Text_5.BorderSizePixel = 0
-Text_5.Position = UDim2.new(0, 10, 0, 0)
-Text_5.Size = UDim2.new(0, 240, 0, 20)
-Text_5.Font = Enum.Font.SourceSans
-Text_5.TextSize = 14
-Text_5.Text = "Position"
-Text_5.TextColor3 = Color3.new(1, 1, 1)
-Text_5.TextXAlignment = Enum.TextXAlignment.Left
-Text_5.ZIndex = 10
+
+Text_5.Name="Text"
+Text_5.Parent=Example_4
+Text_5.BackgroundColor3=Color3.fromRGB(46,46,47)
+Text_5.BorderSizePixel=0
+Text_5.Position=UDim2.new(0,10,0,0)
+Text_5.Size=UDim2.new(0,240,0,20)
+Text_5.Font=Enum.Font.SourceSans
+Text_5.TextSize=14
+Text_5.Text="Position"
+Text_5.TextColor3=Color3.new(1,1,1)
+Text_5.TextXAlignment=Enum.TextXAlignment.Left
+Text_5.ZIndex=10
 table.insert(shade2,Text_5)
 table.insert(text1,Text_5)
-Delete_6.Name = "Delete"
-Delete_6.Parent = Text_5
-Delete_6.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Delete_6.BorderSizePixel = 0
-Delete_6.Position = UDim2.new(0, 200, 0, 0)
-Delete_6.Size = UDim2.new(0, 40, 0, 20)
-Delete_6.Font = Enum.Font.SourceSans
-Delete_6.TextSize = 14
-Delete_6.Text = "Delete"
-Delete_6.TextColor3 = Color3.new(0, 0, 0)
-Delete_6.ZIndex = 10
+
+Delete_6.Name="Delete"
+Delete_6.Parent=Text_5
+Delete_6.BackgroundColor3=Color3.fromRGB(78,78,79)
+Delete_6.BorderSizePixel=0
+Delete_6.Position=UDim2.new(0,200,0,0)
+Delete_6.Size=UDim2.new(0,40,0,20)
+Delete_6.Font=Enum.Font.SourceSans
+Delete_6.TextSize=14
+Delete_6.Text="Delete"
+Delete_6.TextColor3=Color3.new(0,0,0)
+Delete_6.ZIndex=10
 table.insert(shade3,Delete_6)
 table.insert(text2,Delete_6)
-TP.Name = "TP"
-TP.Parent = Text_5
-TP.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-TP.BorderSizePixel = 0
-TP.Position = UDim2.new(0, 155, 0, 0)
-TP.Size = UDim2.new(0, 40, 0, 20)
-TP.Font = Enum.Font.SourceSans
-TP.TextSize = 14
-TP.Text = "Goto"
-TP.TextColor3 = Color3.new(0, 0, 0)
-TP.ZIndex = 10
+
+TP.Name="TP"
+TP.Parent=Text_5
+TP.BackgroundColor3=Color3.fromRGB(78,78,79)
+TP.BorderSizePixel=0
+TP.Position=UDim2.new(0,155,0,0)
+TP.Size=UDim2.new(0,40,0,20)
+TP.Font=Enum.Font.SourceSans
+TP.TextSize=14
+TP.Text="Goto"
+TP.TextColor3=Color3.new(0,0,0)
+TP.ZIndex=10
 table.insert(shade3,TP)
 table.insert(text2,TP)
-AliasesFrame.Name = "AliasesFrame"
-AliasesFrame.Parent = Settings
-AliasesFrame.Active = true
-AliasesFrame.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
-AliasesFrame.BorderSizePixel = 0
-AliasesFrame.Position = UDim2.new(0, 0, 0, 175)
-AliasesFrame.Size = UDim2.new(0, 250, 0, 175)
-AliasesFrame.ZIndex = 10
+
+AliasesFrame.Name="AliasesFrame"
+AliasesFrame.Parent=Settings
+AliasesFrame.Active=true
+AliasesFrame.BackgroundColor3=Color3.fromRGB(36,36,37)
+AliasesFrame.BorderSizePixel=0
+AliasesFrame.Position=UDim2.new(0,0,0,175)
+AliasesFrame.Size=UDim2.new(0,250,0,175)
+AliasesFrame.ZIndex=10
 table.insert(shade1,AliasesFrame)
-Close_2.Name = "Close"
-Close_2.Parent = AliasesFrame
-Close_2.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Close_2.BorderSizePixel = 0
-Close_2.Position = UDim2.new(0, 205, 0, 150)
-Close_2.Size = UDim2.new(0, 40, 0, 20)
-Close_2.Font = Enum.Font.SourceSans
-Close_2.TextSize = 14
-Close_2.Text = "Close"
-Close_2.TextColor3 = Color3.new(1, 1, 1)
-Close_2.ZIndex = 10
+
+Close_2.Name="Close"
+Close_2.Parent=AliasesFrame
+Close_2.BackgroundColor3=Color3.fromRGB(46,46,47)
+Close_2.BorderSizePixel=0
+Close_2.Position=UDim2.new(0,205,0,150)
+Close_2.Size=UDim2.new(0,40,0,20)
+Close_2.Font=Enum.Font.SourceSans
+Close_2.TextSize=14
+Close_2.Text="Close"
+Close_2.TextColor3=Color3.new(1,1,1)
+Close_2.ZIndex=10
 table.insert(shade2,Close_2)
 table.insert(text1,Close_2)
-Delete_3.Name = "Delete"
-Delete_3.Parent = AliasesFrame
-Delete_3.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Delete_3.BorderSizePixel = 0
-Delete_3.Position = UDim2.new(0, 5, 0, 150)
-Delete_3.Size = UDim2.new(0, 40, 0, 20)
-Delete_3.Font = Enum.Font.SourceSans
-Delete_3.TextSize = 14
-Delete_3.Text = "Clear"
-Delete_3.TextColor3 = Color3.new(1, 1, 1)
-Delete_3.ZIndex = 10
+
+Delete_3.Name="Delete"
+Delete_3.Parent=AliasesFrame
+Delete_3.BackgroundColor3=Color3.fromRGB(46,46,47)
+Delete_3.BorderSizePixel=0
+Delete_3.Position=UDim2.new(0,5,0,150)
+Delete_3.Size=UDim2.new(0,40,0,20)
+Delete_3.Font=Enum.Font.SourceSans
+Delete_3.TextSize=14
+Delete_3.Text="Clear"
+Delete_3.TextColor3=Color3.new(1,1,1)
+Delete_3.ZIndex=10
 table.insert(shade2,Delete_3)
 table.insert(text1,Delete_3)
-Holder_3.Name = "Holder"
-Holder_3.Parent = AliasesFrame
-Holder_3.BackgroundTransparency = 1
-Holder_3.BorderSizePixel = 0
-Holder_3.Position = UDim2.new(0, 0, 0, 0)
-Holder_3.Size = UDim2.new(0, 250, 0, 145)
-Holder_3.ScrollBarImageColor3 = Color3.fromRGB(78,78,79)
-Holder_3.BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Holder_3.CanvasSize = UDim2.new(0, 0, 0, 0)
-Holder_3.MidImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Holder_3.ScrollBarThickness = 0
-Holder_3.TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Holder_3.VerticalScrollBarInset = 'Always'
-Holder_3.ZIndex = 10
-Example_3.Name = "Example"
-Example_3.Parent = AliasesFrame
-Example_3.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Example_3.BorderSizePixel = 0
-Example_3.Size = UDim2.new(0, 10, 0, 20)
-Example_3.Visible = false
-Example_3.ZIndex = 10
+
+Holder_3.Name="Holder"
+Holder_3.Parent=AliasesFrame
+Holder_3.BackgroundTransparency=1
+Holder_3.BorderSizePixel=0
+Holder_3.Position=UDim2.new(0,0,0,0)
+Holder_3.Size=UDim2.new(0,250,0,145)
+Holder_3.ScrollBarImageColor3=Color3.fromRGB(78,78,79)
+Holder_3.BottomImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+Holder_3.CanvasSize=UDim2.new(0,0,0,0)
+Holder_3.MidImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+Holder_3.ScrollBarThickness=0
+Holder_3.TopImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+Holder_3.VerticalScrollBarInset='Always'
+Holder_3.ZIndex=10
+
+Example_3.Name="Example"
+Example_3.Parent=AliasesFrame
+Example_3.BackgroundColor3=Color3.fromRGB(46,46,47)
+Example_3.BorderSizePixel=0
+Example_3.Size=UDim2.new(0,10,0,20)
+Example_3.Visible=false
+Example_3.ZIndex=10
 table.insert(shade2,Example_3)
-Text_4.Name = "Text"
-Text_4.Parent = Example_3
-Text_4.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Text_4.BorderSizePixel = 0
-Text_4.Position = UDim2.new(0, 10, 0, 0)
-Text_4.Size = UDim2.new(0, 240, 0, 20)
-Text_4.Font = Enum.Font.SourceSans
-Text_4.TextSize = 14
-Text_4.Text = "honk"
-Text_4.TextColor3 = Color3.new(1, 1, 1)
-Text_4.TextXAlignment = Enum.TextXAlignment.Left
-Text_4.ZIndex = 10
+
+Text_4.Name="Text"
+Text_4.Parent=Example_3
+Text_4.BackgroundColor3=Color3.fromRGB(46,46,47)
+Text_4.BorderSizePixel=0
+Text_4.Position=UDim2.new(0,10,0,0)
+Text_4.Size=UDim2.new(0,240,0,20)
+Text_4.Font=Enum.Font.SourceSans
+Text_4.TextSize=14
+Text_4.Text="honk"
+Text_4.TextColor3=Color3.new(1,1,1)
+Text_4.TextXAlignment=Enum.TextXAlignment.Left
+Text_4.ZIndex=10
 table.insert(shade2,Text_4)
 table.insert(text1,Text_4)
-Delete_4.Name = "Delete"
-Delete_4.Parent = Text_4
-Delete_4.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Delete_4.BorderSizePixel = 0
-Delete_4.Position = UDim2.new(0, 200, 0, 0)
-Delete_4.Size = UDim2.new(0, 40, 0, 20)
-Delete_4.Font = Enum.Font.SourceSans
-Delete_4.TextSize = 14
-Delete_4.Text = "Delete"
-Delete_4.TextColor3 = Color3.new(0, 0, 0)
-Delete_4.ZIndex = 10
+
+Delete_4.Name="Delete"
+Delete_4.Parent=Text_4
+Delete_4.BackgroundColor3=Color3.fromRGB(78,78,79)
+Delete_4.BorderSizePixel=0
+Delete_4.Position=UDim2.new(0,200,0,0)
+Delete_4.Size=UDim2.new(0,40,0,20)
+Delete_4.Font=Enum.Font.SourceSans
+Delete_4.TextSize=14
+Delete_4.Text="Delete"
+Delete_4.TextColor3=Color3.new(0,0,0)
+Delete_4.ZIndex=10
 table.insert(shade3,Delete_4)
 table.insert(text2,Delete_4)
-PluginsFrame.Name = "PluginsFrame"
-PluginsFrame.Parent = Settings
-PluginsFrame.Active = true
-PluginsFrame.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
-PluginsFrame.BorderSizePixel = 0
-PluginsFrame.Position = UDim2.new(0, 0, 0, 175)
-PluginsFrame.Size = UDim2.new(0, 250, 0, 175)
-PluginsFrame.ZIndex = 10
+
+PluginsFrame.Name="PluginsFrame"
+PluginsFrame.Parent=Settings
+PluginsFrame.Active=true
+PluginsFrame.BackgroundColor3=Color3.fromRGB(36,36,37)
+PluginsFrame.BorderSizePixel=0
+PluginsFrame.Position=UDim2.new(0,0,0,175)
+PluginsFrame.Size=UDim2.new(0,250,0,175)
+PluginsFrame.ZIndex=10
 table.insert(shade1,PluginsFrame)
-Close_4.Name = "Close"
-Close_4.Parent = PluginsFrame
-Close_4.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Close_4.BorderSizePixel = 0
-Close_4.Position = UDim2.new(0, 205, 0, 150)
-Close_4.Size = UDim2.new(0, 40, 0, 20)
-Close_4.Font = Enum.Font.SourceSans
-Close_4.TextSize = 14
-Close_4.Text = "Close"
-Close_4.TextColor3 = Color3.new(1, 1, 1)
-Close_4.ZIndex = 10
+
+Close_4.Name="Close"
+Close_4.Parent=PluginsFrame
+Close_4.BackgroundColor3=Color3.fromRGB(46,46,47)
+Close_4.BorderSizePixel=0
+Close_4.Position=UDim2.new(0,205,0,150)
+Close_4.Size=UDim2.new(0,40,0,20)
+Close_4.Font=Enum.Font.SourceSans
+Close_4.TextSize=14
+Close_4.Text="Close"
+Close_4.TextColor3=Color3.new(1,1,1)
+Close_4.ZIndex=10
 table.insert(shade2,Close_4)
 table.insert(text1,Close_4)
-Add_3.Name = "Add"
-Add_3.Parent = PluginsFrame
-Add_3.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Add_3.BorderSizePixel = 0
-Add_3.Position = UDim2.new(0, 5, 0, 150)
-Add_3.Size = UDim2.new(0, 40, 0, 20)
-Add_3.Font = Enum.Font.SourceSans
-Add_3.TextSize = 14
-Add_3.Text = "Add"
-Add_3.TextColor3 = Color3.new(1, 1, 1)
-Add_3.ZIndex = 10
+
+Add_3.Name="Add"
+Add_3.Parent=PluginsFrame
+Add_3.BackgroundColor3=Color3.fromRGB(46,46,47)
+Add_3.BorderSizePixel=0
+Add_3.Position=UDim2.new(0,5,0,150)
+Add_3.Size=UDim2.new(0,40,0,20)
+Add_3.Font=Enum.Font.SourceSans
+Add_3.TextSize=14
+Add_3.Text="Add"
+Add_3.TextColor3=Color3.new(1,1,1)
+Add_3.ZIndex=10
 table.insert(shade2,Add_3)
 table.insert(text1,Add_3)
-Holder_5.Name = "Holder"
-Holder_5.Parent = PluginsFrame
-Holder_5.BackgroundTransparency = 1
-Holder_5.BorderSizePixel = 0
-Holder_5.Position = UDim2.new(0, 0, 0, 0)
-Holder_5.Selectable = false
-Holder_5.Size = UDim2.new(0, 250, 0, 145)
-Holder_5.ScrollBarImageColor3 = Color3.fromRGB(78,78,79)
-Holder_5.BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Holder_5.CanvasSize = UDim2.new(0, 0, 0, 0)
-Holder_5.MidImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Holder_5.ScrollBarThickness = 0
-Holder_5.TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-Holder_5.VerticalScrollBarInset = 'Always'
-Holder_5.ZIndex = 10
-Example_5.Name = "Example"
-Example_5.Parent = PluginsFrame
-Example_5.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Example_5.BorderSizePixel = 0
-Example_5.Size = UDim2.new(0, 10, 0, 20)
-Example_5.Visible = false
-Example_5.ZIndex = 10
+
+Holder_5.Name="Holder"
+Holder_5.Parent=PluginsFrame
+Holder_5.BackgroundTransparency=1
+Holder_5.BorderSizePixel=0
+Holder_5.Position=UDim2.new(0,0,0,0)
+Holder_5.Selectable=false
+Holder_5.Size=UDim2.new(0,250,0,145)
+Holder_5.ScrollBarImageColor3=Color3.fromRGB(78,78,79)
+Holder_5.BottomImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+Holder_5.CanvasSize=UDim2.new(0,0,0,0)
+Holder_5.MidImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+Holder_5.ScrollBarThickness=0
+Holder_5.TopImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+Holder_5.VerticalScrollBarInset='Always'
+Holder_5.ZIndex=10
+
+Example_5.Name="Example"
+Example_5.Parent=PluginsFrame
+Example_5.BackgroundColor3=Color3.fromRGB(46,46,47)
+Example_5.BorderSizePixel=0
+Example_5.Size=UDim2.new(0,10,0,20)
+Example_5.Visible=false
+Example_5.ZIndex=10
 table.insert(shade2,Example_5)
-Text_6.Name = "Text"
-Text_6.Parent = Example_5
-Text_6.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Text_6.BorderSizePixel = 0
-Text_6.Position = UDim2.new(0, 10, 0, 0)
-Text_6.Size = UDim2.new(0, 240, 0, 20)
-Text_6.Font = Enum.Font.SourceSans
-Text_6.TextSize = 14
-Text_6.Text = "F4 > Toggle Fly"
-Text_6.TextColor3 = Color3.new(1, 1, 1)
-Text_6.TextXAlignment = Enum.TextXAlignment.Left
-Text_6.ZIndex = 10
+
+Text_6.Name="Text"
+Text_6.Parent=Example_5
+Text_6.BackgroundColor3=Color3.fromRGB(46,46,47)
+Text_6.BorderSizePixel=0
+Text_6.Position=UDim2.new(0,10,0,0)
+Text_6.Size=UDim2.new(0,240,0,20)
+Text_6.Font=Enum.Font.SourceSans
+Text_6.TextSize=14
+Text_6.Text="F4 > Toggle Fly"
+Text_6.TextColor3=Color3.new(1,1,1)
+Text_6.TextXAlignment=Enum.TextXAlignment.Left
+Text_6.ZIndex=10
 table.insert(shade2,Text_6)
 table.insert(text1,Text_6)
-Delete_7.Name = "Delete"
-Delete_7.Parent = Text_6
-Delete_7.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
-Delete_7.BorderSizePixel = 0
-Delete_7.Position = UDim2.new(0, 200, 0, 0)
-Delete_7.Size = UDim2.new(0, 40, 0, 20)
-Delete_7.Font = Enum.Font.SourceSans
-Delete_7.TextSize = 14
-Delete_7.Text = "Delete"
-Delete_7.TextColor3 = Color3.new(0, 0, 0)
-Delete_7.ZIndex = 10
+
+Delete_7.Name="Delete"
+Delete_7.Parent=Text_6
+Delete_7.BackgroundColor3=Color3.fromRGB(78,78,79)
+Delete_7.BorderSizePixel=0
+Delete_7.Position=UDim2.new(0,200,0,0)
+Delete_7.Size=UDim2.new(0,40,0,20)
+Delete_7.Font=Enum.Font.SourceSans
+Delete_7.TextSize=14
+Delete_7.Text="Delete"
+Delete_7.TextColor3=Color3.new(0,0,0)
+Delete_7.ZIndex=10
 table.insert(shade3,Delete_7)
 table.insert(text2,Delete_7)
-PluginEditor.Name = randomString()
-PluginEditor.Parent = ScaledHolder
-PluginEditor.BorderSizePixel = 0
-PluginEditor.Active = true
-PluginEditor.BackgroundTransparency = 1
-PluginEditor.Position = UDim2.new(0.5, -180, 0, -500)
-PluginEditor.Size = UDim2.new(0, 360, 0, 20)
-PluginEditor.ZIndex = 10
-background_3.Name = "background"
-background_3.Parent = PluginEditor
-background_3.Active = true
-background_3.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
-background_3.BorderSizePixel = 0
-background_3.Position = UDim2.new(0, 0, 0, 20)
-background_3.Size = UDim2.new(0, 360, 0, 160)
-background_3.ZIndex = 10
+
+PluginEditor.Name=randomString()
+PluginEditor.Parent=ScaledHolder
+PluginEditor.BorderSizePixel=0
+PluginEditor.Active=true
+PluginEditor.BackgroundTransparency=1
+PluginEditor.Position=UDim2.new(0.5,-180,0,-500)
+PluginEditor.Size=UDim2.new(0,360,0,20)
+PluginEditor.ZIndex=10
+
+background_3.Name="background"
+background_3.Parent=PluginEditor
+background_3.Active=true
+background_3.BackgroundColor3=Color3.fromRGB(36,36,37)
+background_3.BorderSizePixel=0
+background_3.Position=UDim2.new(0,0,0,20)
+background_3.Size=UDim2.new(0,360,0,160)
+background_3.ZIndex=10
 table.insert(shade1,background_3)
-Dark_2.Name = "Dark"
-Dark_2.Parent = background_3
-Dark_2.Active = true
-Dark_2.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-Dark_2.BorderSizePixel = 0
-Dark_2.Position = UDim2.new(0, 222, 0, 0)
-Dark_2.Size = UDim2.new(0, 2, 0, 160)
-Dark_2.ZIndex = 10
+
+Dark_2.Name="Dark"
+Dark_2.Parent=background_3
+Dark_2.Active=true
+Dark_2.BackgroundColor3=Color3.fromRGB(46,46,47)
+Dark_2.BorderSizePixel=0
+Dark_2.Position=UDim2.new(0,222,0,0)
+Dark_2.Size=UDim2.new(0,2,0,160)
+Dark_2.ZIndex=10
 table.insert(shade2,Dark_2)
-Img.Name = "Img"
-Img.Parent = background_3
-Img.BackgroundTransparency = 1
-Img.Position = UDim2.new(0, 242, 0, 3)
-Img.Size = UDim2.new(0, 100, 0, 95)
-Img.Image = "rbxassetid://4113050383"
-Img.ZIndex = 10
-AddPlugin.Name = "AddPlugin"
-AddPlugin.Parent = background_3
-AddPlugin.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-AddPlugin.BorderSizePixel = 0
-AddPlugin.Position = UDim2.new(0, 235, 0, 100)
-AddPlugin.Size = UDim2.new(0, 115, 0, 50)
-AddPlugin.Font = Enum.Font.SourceSans
-AddPlugin.TextSize = 14
-AddPlugin.Text = "Add Plugin"
-AddPlugin.TextColor3 = Color3.new(1, 1, 1)
-AddPlugin.ZIndex = 10
+
+Img.Name="Img"
+Img.Parent=background_3
+Img.BackgroundTransparency=1
+Img.Position=UDim2.new(0,242,0,3)
+Img.Size=UDim2.new(0,100,0,95)
+Img.Image="rbxassetid://4113050383"
+Img.ZIndex=10
+
+AddPlugin.Name="AddPlugin"
+AddPlugin.Parent=background_3
+AddPlugin.BackgroundColor3=Color3.fromRGB(46,46,47)
+AddPlugin.BorderSizePixel=0
+AddPlugin.Position=UDim2.new(0,235,0,100)
+AddPlugin.Size=UDim2.new(0,115,0,50)
+AddPlugin.Font=Enum.Font.SourceSans
+AddPlugin.TextSize=14
+AddPlugin.Text="Add Plugin"
+AddPlugin.TextColor3=Color3.new(1,1,1)
+AddPlugin.ZIndex=10
 table.insert(shade2,AddPlugin)
 table.insert(text1,AddPlugin)
-FileName.Name = "FileName"
-FileName.Parent = background_3
-FileName.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-FileName.BorderSizePixel = 0
-FileName.Position = UDim2.new(0.028, 0, 0.625, 0)
-FileName.Size = UDim2.new(0, 200, 0, 50)
-FileName.Font = Enum.Font.SourceSans
-FileName.TextSize = 14
-FileName.Text = "Plugin File Name"
-FileName.TextColor3 = Color3.new(1, 1, 1)
-FileName.ZIndex = 10
+
+FileName.Name="FileName"
+FileName.Parent=background_3
+FileName.BackgroundColor3=Color3.fromRGB(46,46,47)
+FileName.BorderSizePixel=0
+FileName.Position=UDim2.new(0.028,0,0.625,0)
+FileName.Size=UDim2.new(0,200,0,50)
+FileName.Font=Enum.Font.SourceSans
+FileName.TextSize=14
+FileName.Text="Plugin File Name"
+FileName.TextColor3=Color3.new(1,1,1)
+FileName.ZIndex=10
 table.insert(shade2,FileName)
 table.insert(text1,FileName)
-About.Name = "About"
-About.Parent = background_3
-About.BackgroundTransparency = 1
-About.BorderSizePixel = 0
-About.Position = UDim2.new(0, 17, 0, 10)
-About.Size = UDim2.new(0, 187, 0, 49)
-About.Font = Enum.Font.SourceSans
-About.TextSize = 14
-About.Text = "Plugins are .iy files and should be located in the 'workspace' folder of your exploit."
-About.TextColor3 = Color3.fromRGB(255, 255, 255)
-About.TextWrapped = true
-About.TextYAlignment = Enum.TextYAlignment.Top
-About.ZIndex = 10
+
+About.Name="About"
+About.Parent=background_3
+About.BackgroundTransparency=1
+About.BorderSizePixel=0
+About.Position=UDim2.new(0,17,0,10)
+About.Size=UDim2.new(0,187,0,49)
+About.Font=Enum.Font.SourceSans
+About.TextSize=14
+About.Text="Plugins are .iy files and should be located in the 'workspace' folder of your exploit."
+About.TextColor3=Color3.fromRGB(255,255,255)
+About.TextWrapped=true
+About.TextYAlignment=Enum.TextYAlignment.Top
+About.ZIndex=10
 table.insert(text1,About)
-Directions_2.Name = "Directions"
-Directions_2.Parent = background_3
-Directions_2.BackgroundTransparency = 1
-Directions_2.BorderSizePixel = 0
-Directions_2.Position = UDim2.new(0, 17, 0, 60)
-Directions_2.Size = UDim2.new(0, 187, 0, 49)
-Directions_2.Font = Enum.Font.SourceSans
-Directions_2.TextSize = 14
-Directions_2.Text = "Type the name of the plugin file you want to add below."
-Directions_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-Directions_2.TextWrapped = true
-Directions_2.TextYAlignment = Enum.TextYAlignment.Top
-Directions_2.ZIndex = 10
+
+Directions_2.Name="Directions"
+Directions_2.Parent=background_3
+Directions_2.BackgroundTransparency=1
+Directions_2.BorderSizePixel=0
+Directions_2.Position=UDim2.new(0,17,0,60)
+Directions_2.Size=UDim2.new(0,187,0,49)
+Directions_2.Font=Enum.Font.SourceSans
+Directions_2.TextSize=14
+Directions_2.Text="Type the name of the plugin file you want to add below."
+Directions_2.TextColor3=Color3.fromRGB(255,255,255)
+Directions_2.TextWrapped=true
+Directions_2.TextYAlignment=Enum.TextYAlignment.Top
+Directions_2.ZIndex=10
 table.insert(text1,Directions_2)
-shadow_3.Name = "shadow"
-shadow_3.Parent = PluginEditor
-shadow_3.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-shadow_3.BorderSizePixel = 0
-shadow_3.Size = UDim2.new(0, 360, 0, 20)
-shadow_3.ZIndex = 10
+
+shadow_3.Name="shadow"
+shadow_3.Parent=PluginEditor
+shadow_3.BackgroundColor3=Color3.fromRGB(46,46,47)
+shadow_3.BorderSizePixel=0
+shadow_3.Size=UDim2.new(0,360,0,20)
+shadow_3.ZIndex=10
 table.insert(shade2,shadow_3)
-PopupText_3.Name = "PopupText"
-PopupText_3.Parent = shadow_3
-PopupText_3.BackgroundTransparency = 1
-PopupText_3.Size = UDim2.new(1, 0, 0.95, 0)
-PopupText_3.ZIndex = 10
-PopupText_3.Font = Enum.Font.SourceSans
-PopupText_3.TextSize = 14
-PopupText_3.Text = "Add Plugins"
-PopupText_3.TextColor3 = Color3.new(1, 1, 1)
-PopupText_3.TextWrapped = true
+
+PopupText_3.Name="PopupText"
+PopupText_3.Parent=shadow_3
+PopupText_3.BackgroundTransparency=1
+PopupText_3.Size=UDim2.new(1,0,0.95,0)
+PopupText_3.ZIndex=10
+PopupText_3.Font=Enum.Font.SourceSans
+PopupText_3.TextSize=14
+PopupText_3.Text="Add Plugins"
+PopupText_3.TextColor3=Color3.new(1,1,1)
+PopupText_3.TextWrapped=true
 table.insert(text1,PopupText_3)
-Exit_3.Name = "Exit"
-Exit_3.Parent = shadow_3
-Exit_3.BackgroundTransparency = 1
-Exit_3.Position = UDim2.new(1, -20, 0, 0)
-Exit_3.Size = UDim2.new(0, 20, 0, 20)
-Exit_3.Text = ""
-Exit_3.ZIndex = 10
-ExitImage_3.Parent = Exit_3
-ExitImage_3.BackgroundColor3 = Color3.new(1, 1, 1)
-ExitImage_3.BackgroundTransparency = 1
-ExitImage_3.Position = UDim2.new(0, 5, 0, 5)
-ExitImage_3.Size = UDim2.new(0, 10, 0, 10)
-ExitImage_3.Image = "rbxassetid://5054663650"
-ExitImage_3.ZIndex = 10
-AliasHint.Name = "AliasHint"
-AliasHint.Parent = AliasesFrame
-AliasHint.BackgroundTransparency = 1
-AliasHint.BorderSizePixel = 0
-AliasHint.Position = UDim2.new(0, 25, 0, 40)
-AliasHint.Size = UDim2.new(0, 200, 0, 50)
-AliasHint.Font = Enum.Font.SourceSansItalic
-AliasHint.TextSize = 16
-AliasHint.Text = "Add aliases by using the 'addalias' command"
-AliasHint.TextColor3 = Color3.new(1, 1, 1)
-AliasHint.TextStrokeColor3 = Color3.new(1, 1, 1)
-AliasHint.TextWrapped = true
-AliasHint.ZIndex = 10
+
+Exit_3.Name="Exit"
+Exit_3.Parent=shadow_3
+Exit_3.BackgroundTransparency=1
+Exit_3.Position=UDim2.new(1,-20,0,0)
+Exit_3.Size=UDim2.new(0,20,0,20)
+Exit_3.Text=""
+Exit_3.ZIndex=10
+
+ExitImage_3.Parent=Exit_3
+ExitImage_3.BackgroundColor3=Color3.new(1,1,1)
+ExitImage_3.BackgroundTransparency=1
+ExitImage_3.Position=UDim2.new(0,5,0,5)
+ExitImage_3.Size=UDim2.new(0,10,0,10)
+ExitImage_3.Image="rbxassetid://5054663650"
+ExitImage_3.ZIndex=10
+
+AliasHint.Name="AliasHint"
+AliasHint.Parent=AliasesFrame
+AliasHint.BackgroundTransparency=1
+AliasHint.BorderSizePixel=0
+AliasHint.Position=UDim2.new(0,25,0,40)
+AliasHint.Size=UDim2.new(0,200,0,50)
+AliasHint.Font=Enum.Font.SourceSansItalic
+AliasHint.TextSize=16
+AliasHint.Text="Add aliases by using the 'addalias' command"
+AliasHint.TextColor3=Color3.new(1,1,1)
+AliasHint.TextStrokeColor3=Color3.new(1,1,1)
+AliasHint.TextWrapped=true
+AliasHint.ZIndex=10
 table.insert(text1,AliasHint)
-PluginsHint.Name = "PluginsHint"
-PluginsHint.Parent = PluginsFrame
-PluginsHint.BackgroundTransparency = 1
-PluginsHint.BorderSizePixel = 0
-PluginsHint.Position = UDim2.new(0, 25, 0, 40)
-PluginsHint.Size = UDim2.new(0, 200, 0, 50)
-PluginsHint.Font = Enum.Font.SourceSansItalic
-PluginsHint.TextSize = 16
-PluginsHint.Text = "Download plugins from the IY Discord (discord.gg/78ZuWSq)"
-PluginsHint.TextColor3 = Color3.new(1, 1, 1)
-PluginsHint.TextStrokeColor3 = Color3.new(1, 1, 1)
-PluginsHint.TextWrapped = true
-PluginsHint.ZIndex = 10
+
+PluginsHint.Name="PluginsHint"
+PluginsHint.Parent=PluginsFrame
+PluginsHint.BackgroundTransparency=1
+PluginsHint.BorderSizePixel=0
+PluginsHint.Position=UDim2.new(0,25,0,40)
+PluginsHint.Size=UDim2.new(0,200,0,50)
+PluginsHint.Font=Enum.Font.SourceSansItalic
+PluginsHint.TextSize=16
+PluginsHint.Text="Download plugins from the IY Discord (discord.gg/78ZuWSq)"
+PluginsHint.TextColor3=Color3.new(1,1,1)
+PluginsHint.TextStrokeColor3=Color3.new(1,1,1)
+PluginsHint.TextWrapped=true
+PluginsHint.ZIndex=10
 table.insert(text1,PluginsHint)
-PositionsHint.Name = "PositionsHint"
-PositionsHint.Parent = PositionsFrame
-PositionsHint.BackgroundTransparency = 1
-PositionsHint.BorderSizePixel = 0
-PositionsHint.Position = UDim2.new(0, 25, 0, 40)
-PositionsHint.Size = UDim2.new(0, 200, 0, 70)
-PositionsHint.Font = Enum.Font.SourceSansItalic
-PositionsHint.TextSize = 16
-PositionsHint.Text = "Use the 'swp' or 'setwaypoint' command to add a position using your character (NOTE: Part teleports will not save)"
-PositionsHint.TextColor3 = Color3.new(1, 1, 1)
-PositionsHint.TextStrokeColor3 = Color3.new(1, 1, 1)
-PositionsHint.TextWrapped = true
-PositionsHint.ZIndex = 10
+
+PositionsHint.Name="PositionsHint"
+PositionsHint.Parent=PositionsFrame
+PositionsHint.BackgroundTransparency=1
+PositionsHint.BorderSizePixel=0
+PositionsHint.Position=UDim2.new(0,25,0,40)
+PositionsHint.Size=UDim2.new(0,200,0,70)
+PositionsHint.Font=Enum.Font.SourceSansItalic
+PositionsHint.TextSize=16
+PositionsHint.Text="Use the 'swp' or 'setwaypoint' command to add a position using your character (NOTE: Part teleports will not save)"
+PositionsHint.TextColor3=Color3.new(1,1,1)
+PositionsHint.TextStrokeColor3=Color3.new(1,1,1)
+PositionsHint.TextWrapped=true
+PositionsHint.ZIndex=10
 table.insert(text1,PositionsHint)
-ToPartFrame.Name = randomString()
-ToPartFrame.Parent = ScaledHolder
-ToPartFrame.Active = true
-ToPartFrame.BackgroundTransparency = 1
-ToPartFrame.Position = UDim2.new(0.5, -180, 0, -500)
-ToPartFrame.Size = UDim2.new(0, 360, 0, 20)
-ToPartFrame.ZIndex = 10
-background_4.Name = "background"
-background_4.Parent = ToPartFrame
-background_4.Active = true
-background_4.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
-background_4.BorderSizePixel = 0
-background_4.Position = UDim2.new(0, 0, 0, 20)
-background_4.Size = UDim2.new(0, 360, 0, 117)
-background_4.ZIndex = 10
+
+ToPartFrame.Name=randomString()
+ToPartFrame.Parent=ScaledHolder
+ToPartFrame.Active=true
+ToPartFrame.BackgroundTransparency=1
+ToPartFrame.Position=UDim2.new(0.5,-180,0,-500)
+ToPartFrame.Size=UDim2.new(0,360,0,20)
+ToPartFrame.ZIndex=10
+
+background_4.Name="background"
+background_4.Parent=ToPartFrame
+background_4.Active=true
+background_4.BackgroundColor3=Color3.fromRGB(36,36,37)
+background_4.BorderSizePixel=0
+background_4.Position=UDim2.new(0,0,0,20)
+background_4.Size=UDim2.new(0,360,0,117)
+background_4.ZIndex=10
 table.insert(shade1,background_4)
-ChoosePart.Name = "ChoosePart"
-ChoosePart.Parent = background_4
-ChoosePart.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-ChoosePart.BorderSizePixel = 0
-ChoosePart.Position = UDim2.new(0, 100, 0, 55)
-ChoosePart.Size = UDim2.new(0, 75, 0, 30)
-ChoosePart.Font = Enum.Font.SourceSans
-ChoosePart.TextSize = 14
-ChoosePart.Text = "Select Part"
-ChoosePart.TextColor3 = Color3.new(1, 1, 1)
-ChoosePart.ZIndex = 10
+
+ChoosePart.Name="ChoosePart"
+ChoosePart.Parent=background_4
+ChoosePart.BackgroundColor3=Color3.fromRGB(46,46,47)
+ChoosePart.BorderSizePixel=0
+ChoosePart.Position=UDim2.new(0,100,0,55)
+ChoosePart.Size=UDim2.new(0,75,0,30)
+ChoosePart.Font=Enum.Font.SourceSans
+ChoosePart.TextSize=14
+ChoosePart.Text="Select Part"
+ChoosePart.TextColor3=Color3.new(1,1,1)
+ChoosePart.ZIndex=10
 table.insert(shade2,ChoosePart)
 table.insert(text1,ChoosePart)
-CopyPath.Name = "CopyPath"
-CopyPath.Parent = background_4
-CopyPath.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-CopyPath.BorderSizePixel = 0
-CopyPath.Position = UDim2.new(0, 185, 0, 55)
-CopyPath.Size = UDim2.new(0, 75, 0, 30)
-CopyPath.Font = Enum.Font.SourceSans
-CopyPath.TextSize = 14
-CopyPath.Text = "Copy Path"
-CopyPath.TextColor3 = Color3.new(1, 1, 1)
-CopyPath.ZIndex = 10
+
+CopyPath.Name="CopyPath"
+CopyPath.Parent=background_4
+CopyPath.BackgroundColor3=Color3.fromRGB(46,46,47)
+CopyPath.BorderSizePixel=0
+CopyPath.Position=UDim2.new(0,185,0,55)
+CopyPath.Size=UDim2.new(0,75,0,30)
+CopyPath.Font=Enum.Font.SourceSans
+CopyPath.TextSize=14
+CopyPath.Text="Copy Path"
+CopyPath.TextColor3=Color3.new(1,1,1)
+CopyPath.ZIndex=10
 table.insert(shade2,CopyPath)
 table.insert(text1,CopyPath)
-Directions_3.Name = "Directions"
-Directions_3.Parent = background_4
-Directions_3.BackgroundTransparency = 1
-Directions_3.BorderSizePixel = 0
-Directions_3.Position = UDim2.new(0, 51, 0, 17)
-Directions_3.Size = UDim2.new(0, 257, 0, 32)
-Directions_3.Font = Enum.Font.SourceSans
-Directions_3.TextSize = 14
-Directions_3.Text = 'Click on a part and then click the "Select Part" button below to set it as a teleport location'
-Directions_3.TextColor3 = Color3.new(1, 1, 1)
-Directions_3.TextWrapped = true
-Directions_3.TextYAlignment = Enum.TextYAlignment.Top
-Directions_3.ZIndex = 10
+
+Directions_3.Name="Directions"
+Directions_3.Parent=background_4
+Directions_3.BackgroundTransparency=1
+Directions_3.BorderSizePixel=0
+Directions_3.Position=UDim2.new(0,51,0,17)
+Directions_3.Size=UDim2.new(0,257,0,32)
+Directions_3.Font=Enum.Font.SourceSans
+Directions_3.TextSize=14
+Directions_3.Text='Click on a part and then click the "Select Part" button below to set it as a teleport location'
+Directions_3.TextColor3=Color3.new(1,1,1)
+Directions_3.TextWrapped=true
+Directions_3.TextYAlignment=Enum.TextYAlignment.Top
+Directions_3.ZIndex=10
 table.insert(text1,Directions_3)
-Path.Name = "Path"
-Path.Parent = background_4
-Path.BackgroundTransparency = 1
-Path.BorderSizePixel = 0
-Path.Position = UDim2.new(0, 0, 0, 94)
-Path.Size = UDim2.new(0, 360, 0, 16)
-Path.Font = Enum.Font.SourceSansItalic
-Path.TextSize = 14
-Path.Text = ""
-Path.TextColor3 = Color3.new(1, 1, 1)
-Path.TextScaled = true
-Path.TextWrapped = true
-Path.TextYAlignment = Enum.TextYAlignment.Top
-Path.ZIndex = 10
+
+Path.Name="Path"
+Path.Parent=background_4
+Path.BackgroundTransparency=1
+Path.BorderSizePixel=0
+Path.Position=UDim2.new(0,0,0,94)
+Path.Size=UDim2.new(0,360,0,16)
+Path.Font=Enum.Font.SourceSansItalic
+Path.TextSize=14
+Path.Text=""
+Path.TextColor3=Color3.new(1,1,1)
+Path.TextScaled=true
+Path.TextWrapped=true
+Path.TextYAlignment=Enum.TextYAlignment.Top
+Path.ZIndex=10
 table.insert(text1,Path)
-shadow_4.Name = "shadow"
-shadow_4.Parent = ToPartFrame
-shadow_4.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-shadow_4.BorderSizePixel = 0
-shadow_4.Size = UDim2.new(0, 360, 0, 20)
-shadow_4.ZIndex = 10
+
+shadow_4.Name="shadow"
+shadow_4.Parent=ToPartFrame
+shadow_4.BackgroundColor3=Color3.fromRGB(46,46,47)
+shadow_4.BorderSizePixel=0
+shadow_4.Size=UDim2.new(0,360,0,20)
+shadow_4.ZIndex=10
 table.insert(shade2,shadow_4)
-PopupText_5.Name = "PopupText"
-PopupText_5.Parent = shadow_4
-PopupText_5.BackgroundTransparency = 1
-PopupText_5.Size = UDim2.new(1, 0, 0.95, 0)
-PopupText_5.ZIndex = 10
-PopupText_5.Font = Enum.Font.SourceSans
-PopupText_5.TextSize = 14
-PopupText_5.Text = "Teleport to Part"
-PopupText_5.TextColor3 = Color3.new(1, 1, 1)
-PopupText_5.TextWrapped = true
+
+PopupText_5.Name="PopupText"
+PopupText_5.Parent=shadow_4
+PopupText_5.BackgroundTransparency=1
+PopupText_5.Size=UDim2.new(1,0,0.95,0)
+PopupText_5.ZIndex=10
+PopupText_5.Font=Enum.Font.SourceSans
+PopupText_5.TextSize=14
+PopupText_5.Text="Teleport to Part"
+PopupText_5.TextColor3=Color3.new(1,1,1)
+PopupText_5.TextWrapped=true
 table.insert(text1,PopupText_5)
-Exit_4.Name = "Exit"
-Exit_4.Parent = shadow_4
-Exit_4.BackgroundTransparency = 1
-Exit_4.Position = UDim2.new(1, -20, 0, 0)
-Exit_4.Size = UDim2.new(0, 20, 0, 20)
-Exit_4.Text = ""
-Exit_4.ZIndex = 10
-ExitImage_5.Parent = Exit_4
-ExitImage_5.BackgroundColor3 = Color3.new(1, 1, 1)
-ExitImage_5.BackgroundTransparency = 1
-ExitImage_5.Position = UDim2.new(0, 5, 0, 5)
-ExitImage_5.Size = UDim2.new(0, 10, 0, 10)
-ExitImage_5.Image = "rbxassetid://5054663650"
-ExitImage_5.ZIndex = 10
-logs.Name = randomString()
-logs.Parent = ScaledHolder
-logs.Active = true
-logs.BackgroundTransparency = 1
-logs.Position = UDim2.new(0, 0, 1, 10)
-logs.Size = UDim2.new(0, 338, 0, 20)
-logs.ZIndex = 10
-shadow.Name = "shadow"
-shadow.Parent = logs
-shadow.BackgroundColor3 = Color3.new(0.180392, 0.180392, 0.184314)
-shadow.BorderSizePixel = 0
-shadow.Position = UDim2.new(0, 0, 0.00999999978, 0)
-shadow.Size = UDim2.new(0, 338, 0, 20)
-shadow.ZIndex = 10
+
+Exit_4.Name="Exit"
+Exit_4.Parent=shadow_4
+Exit_4.BackgroundTransparency=1
+Exit_4.Position=UDim2.new(1,-20,0,0)
+Exit_4.Size=UDim2.new(0,20,0,20)
+Exit_4.Text=""
+Exit_4.ZIndex=10
+
+ExitImage_5.Parent=Exit_4
+ExitImage_5.BackgroundColor3=Color3.new(1,1,1)
+ExitImage_5.BackgroundTransparency=1
+ExitImage_5.Position=UDim2.new(0,5,0,5)
+ExitImage_5.Size=UDim2.new(0,10,0,10)
+ExitImage_5.Image="rbxassetid://5054663650"
+ExitImage_5.ZIndex=10
+
+logs.Name=randomString()
+logs.Parent=ScaledHolder
+logs.Active=true
+logs.BackgroundTransparency=1
+logs.Position=UDim2.new(0,0,1,10)
+logs.Size=UDim2.new(0,338,0,20)
+logs.ZIndex=10
+
+shadow.Name="shadow"
+shadow.Parent=logs
+shadow.BackgroundColor3=Color3.new(0.180392,0.180392,0.184314)
+shadow.BorderSizePixel=0
+shadow.Position=UDim2.new(0,0,0.00999999978,0)
+shadow.Size=UDim2.new(0,338,0,20)
+shadow.ZIndex=10
 table.insert(shade2,shadow)
-Hide.Name = "Hide"
-Hide.Parent = shadow
-Hide.BackgroundTransparency = 1
-Hide.Position = UDim2.new(1, -40, 0, 0)
-Hide.Size = UDim2.new(0, 20, 0, 20)
-Hide.ZIndex = 10
-Hide.Text = ""
-ImageLabel.Parent = Hide
-ImageLabel.BackgroundColor3 = Color3.new(1, 1, 1)
-ImageLabel.BackgroundTransparency = 1
-ImageLabel.Position = UDim2.new(0, 3, 0, 3)
-ImageLabel.Size = UDim2.new(0, 14, 0, 14)
-ImageLabel.Image = "rbxassetid://2406617031"
-ImageLabel.ZIndex = 10
-PopupText.Name = "PopupText"
-PopupText.Parent = shadow
-PopupText.BackgroundTransparency = 1
-PopupText.Size = UDim2.new(1, 0, 0.949999988, 0)
-PopupText.ZIndex = 10
-PopupText.Font = Enum.Font.SourceSans
-PopupText.FontSize = Enum.FontSize.Size14
-PopupText.Text = "Logs"
-PopupText.TextColor3 = Color3.new(1, 1, 1)
-PopupText.TextWrapped = true
+
+Hide.Name="Hide"
+Hide.Parent=shadow
+Hide.BackgroundTransparency=1
+Hide.Position=UDim2.new(1,-40,0,0)
+Hide.Size=UDim2.new(0,20,0,20)
+Hide.ZIndex=10
+Hide.Text=""
+
+ImageLabel.Parent=Hide
+ImageLabel.BackgroundColor3=Color3.new(1,1,1)
+ImageLabel.BackgroundTransparency=1
+ImageLabel.Position=UDim2.new(0,3,0,3)
+ImageLabel.Size=UDim2.new(0,14,0,14)
+ImageLabel.Image="rbxassetid://2406617031"
+ImageLabel.ZIndex=10
+
+PopupText.Name="PopupText"
+PopupText.Parent=shadow
+PopupText.BackgroundTransparency=1
+PopupText.Size=UDim2.new(1,0,0.949999988,0)
+PopupText.ZIndex=10
+PopupText.Font=Enum.Font.SourceSans
+PopupText.FontSize=Enum.FontSize.Size14
+PopupText.Text="Logs"
+PopupText.TextColor3=Color3.new(1,1,1)
+PopupText.TextWrapped=true
 table.insert(text1,PopupText)
-Exit.Name = "Exit"
-Exit.Parent = shadow
-Exit.BackgroundTransparency = 1
-Exit.Position = UDim2.new(1, -20, 0, 0)
-Exit.Size = UDim2.new(0, 20, 0, 20)
-Exit.ZIndex = 10
-Exit.Text = ""
-ImageLabel_2.Parent = Exit
-ImageLabel_2.BackgroundColor3 = Color3.new(1, 1, 1)
-ImageLabel_2.BackgroundTransparency = 1
-ImageLabel_2.Position = UDim2.new(0, 5, 0, 5)
-ImageLabel_2.Size = UDim2.new(0, 10, 0, 10)
-ImageLabel_2.Image = "rbxassetid://5054663650"
-ImageLabel_2.ZIndex = 10
-background.Name = "background"
-background.Parent = logs
-background.Active = true
-background.BackgroundColor3 = Color3.new(0.141176, 0.141176, 0.145098)
-background.BorderSizePixel = 0
-background.ClipsDescendants = true
-background.Position = UDim2.new(0, 0, 1, 0)
-background.Size = UDim2.new(0, 338, 0, 245)
-background.ZIndex = 10
-chat.Name = "chat"
-chat.Parent = background
-chat.Active = true
-chat.BackgroundColor3 = Color3.new(0.141176, 0.141176, 0.145098)
-chat.BorderSizePixel = 0
-chat.ClipsDescendants = true
-chat.Size = UDim2.new(0, 338, 0, 245)
-chat.ZIndex = 10
+
+Exit.Name="Exit"
+Exit.Parent=shadow
+Exit.BackgroundTransparency=1
+Exit.Position=UDim2.new(1,-20,0,0)
+Exit.Size=UDim2.new(0,20,0,20)
+Exit.ZIndex=10
+Exit.Text=""
+
+ImageLabel_2.Parent=Exit
+ImageLabel_2.BackgroundColor3=Color3.new(1,1,1)
+ImageLabel_2.BackgroundTransparency=1
+ImageLabel_2.Position=UDim2.new(0,5,0,5)
+ImageLabel_2.Size=UDim2.new(0,10,0,10)
+ImageLabel_2.Image="rbxassetid://5054663650"
+ImageLabel_2.ZIndex=10
+
+background.Name="background"
+background.Parent=logs
+background.Active=true
+background.BackgroundColor3=Color3.new(0.141176,0.141176,0.145098)
+background.BorderSizePixel=0
+background.ClipsDescendants=true
+background.Position=UDim2.new(0,0,1,0)
+background.Size=UDim2.new(0,338,0,245)
+background.ZIndex=10
+
+chat.Name="chat"
+chat.Parent=background
+chat.Active=true
+chat.BackgroundColor3=Color3.new(0.141176,0.141176,0.145098)
+chat.BorderSizePixel=0
+chat.ClipsDescendants=true
+chat.Size=UDim2.new(0,338,0,245)
+chat.ZIndex=10
 table.insert(shade1,chat)
-Clear.Name = "Clear"
-Clear.Parent = chat
-Clear.BackgroundColor3 = Color3.new(0.180392, 0.180392, 0.184314)
-Clear.BorderSizePixel = 0
-Clear.Position = UDim2.new(0, 5, 0, 220)
-Clear.Size = UDim2.new(0, 50, 0, 20)
-Clear.ZIndex = 10
-Clear.Font = Enum.Font.SourceSans
-Clear.FontSize = Enum.FontSize.Size14
-Clear.Text = "Clear"
-Clear.TextColor3 = Color3.new(1, 1, 1)
+
+Clear.Name="Clear"
+Clear.Parent=chat
+Clear.BackgroundColor3=Color3.new(0.180392,0.180392,0.184314)
+Clear.BorderSizePixel=0
+Clear.Position=UDim2.new(0,5,0,220)
+Clear.Size=UDim2.new(0,50,0,20)
+Clear.ZIndex=10
+Clear.Font=Enum.Font.SourceSans
+Clear.FontSize=Enum.FontSize.Size14
+Clear.Text="Clear"
+Clear.TextColor3=Color3.new(1,1,1)
 table.insert(shade2,Clear)
 table.insert(text1,Clear)
-SaveChatlogs.Name = "SaveChatlogs"
-SaveChatlogs.Parent = chat
-SaveChatlogs.BackgroundColor3 = Color3.new(0.180392, 0.180392, 0.184314)
-SaveChatlogs.BorderSizePixel = 0
-SaveChatlogs.Position = UDim2.new(0, 258, 0, 220)
-SaveChatlogs.Size = UDim2.new(0, 75, 0, 20)
-SaveChatlogs.ZIndex = 10
-SaveChatlogs.Font = Enum.Font.SourceSans
-SaveChatlogs.FontSize = Enum.FontSize.Size14
-SaveChatlogs.Text = "Save To .txt"
-SaveChatlogs.TextColor3 = Color3.new(1, 1, 1)
+
+SaveChatlogs.Name="SaveChatlogs"
+SaveChatlogs.Parent=chat
+SaveChatlogs.BackgroundColor3=Color3.new(0.180392,0.180392,0.184314)
+SaveChatlogs.BorderSizePixel=0
+SaveChatlogs.Position=UDim2.new(0,258,0,220)
+SaveChatlogs.Size=UDim2.new(0,75,0,20)
+SaveChatlogs.ZIndex=10
+SaveChatlogs.Font=Enum.Font.SourceSans
+SaveChatlogs.FontSize=Enum.FontSize.Size14
+SaveChatlogs.Text="Save To .txt"
+SaveChatlogs.TextColor3=Color3.new(1,1,1)
 table.insert(shade2,SaveChatlogs)
 table.insert(text1,SaveChatlogs)
-Toggle.Name = "Toggle"
-Toggle.Parent = chat
-Toggle.BackgroundColor3 = Color3.new(0.180392, 0.180392, 0.184314)
-Toggle.BorderSizePixel = 0
-Toggle.Position = UDim2.new(0, 60, 0, 220)
-Toggle.Size = UDim2.new(0, 66, 0, 20)
-Toggle.ZIndex = 10
-Toggle.Font = Enum.Font.SourceSans
-Toggle.FontSize = Enum.FontSize.Size14
-Toggle.Text = "Disabled"
-Toggle.TextColor3 = Color3.new(1, 1, 1)
+
+Toggle.Name="Toggle"
+Toggle.Parent=chat
+Toggle.BackgroundColor3=Color3.new(0.180392,0.180392,0.184314)
+Toggle.BorderSizePixel=0
+Toggle.Position=UDim2.new(0,60,0,220)
+Toggle.Size=UDim2.new(0,66,0,20)
+Toggle.ZIndex=10
+Toggle.Font=Enum.Font.SourceSans
+Toggle.FontSize=Enum.FontSize.Size14
+Toggle.Text="Disabled"
+Toggle.TextColor3=Color3.new(1,1,1)
 table.insert(shade2,Toggle)
 table.insert(text1,Toggle)
-scroll_2.Name = "scroll"
-scroll_2.Parent = chat
-scroll_2.BackgroundColor3 = Color3.new(0.180392, 0.180392, 0.184314)
-scroll_2.BorderSizePixel = 0
-scroll_2.Position = UDim2.new(0, 5, 0, 25)
-scroll_2.Size = UDim2.new(0, 328, 0, 190)
-scroll_2.ZIndex = 10
-scroll_2.BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-scroll_2.CanvasSize = UDim2.new(0, 0, 0, 10)
-scroll_2.ScrollBarThickness = 8
-scroll_2.TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
+
+scroll_2.Name="scroll"
+scroll_2.Parent=chat
+scroll_2.BackgroundColor3=Color3.new(0.180392,0.180392,0.184314)
+scroll_2.BorderSizePixel=0
+scroll_2.Position=UDim2.new(0,5,0,25)
+scroll_2.Size=UDim2.new(0,328,0,190)
+scroll_2.ZIndex=10
+scroll_2.BottomImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+scroll_2.CanvasSize=UDim2.new(0,0,0,10)
+scroll_2.ScrollBarThickness=8
+scroll_2.TopImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
 table.insert(scroll,scroll_2)
 table.insert(shade2,scroll_2)
-join.Name = "join"
-join.Parent = background
-join.Active = true
-join.BackgroundColor3 = Color3.new(0.141176, 0.141176, 0.145098)
-join.BorderSizePixel = 0
-join.ClipsDescendants = true
-join.Size = UDim2.new(0, 338, 0, 245)
-join.Visible = false
-join.ZIndex = 10
+
+join.Name="join"
+join.Parent=background
+join.Active=true
+join.BackgroundColor3=Color3.new(0.141176,0.141176,0.145098)
+join.BorderSizePixel=0
+join.ClipsDescendants=true
+join.Size=UDim2.new(0,338,0,245)
+join.Visible=false
+join.ZIndex=10
 table.insert(shade1,join)
-Toggle_2.Name = "Toggle"
-Toggle_2.Parent = join
-Toggle_2.BackgroundColor3 = Color3.new(0.180392, 0.180392, 0.184314)
-Toggle_2.BorderSizePixel = 0
-Toggle_2.Position = UDim2.new(0, 60, 0, 220)
-Toggle_2.Size = UDim2.new(0, 66, 0, 20)
-Toggle_2.ZIndex = 10
-Toggle_2.Font = Enum.Font.SourceSans
-Toggle_2.FontSize = Enum.FontSize.Size14
-Toggle_2.Text = "Disabled"
-Toggle_2.TextColor3 = Color3.new(1, 1, 1)
+
+Toggle_2.Name="Toggle"
+Toggle_2.Parent=join
+Toggle_2.BackgroundColor3=Color3.new(0.180392,0.180392,0.184314)
+Toggle_2.BorderSizePixel=0
+Toggle_2.Position=UDim2.new(0,60,0,220)
+Toggle_2.Size=UDim2.new(0,66,0,20)
+Toggle_2.ZIndex=10
+Toggle_2.Font=Enum.Font.SourceSans
+Toggle_2.FontSize=Enum.FontSize.Size14
+Toggle_2.Text="Disabled"
+Toggle_2.TextColor3=Color3.new(1,1,1)
 table.insert(shade2,Toggle_2)
 table.insert(text1,Toggle_2)
-Clear_2.Name = "Clear"
-Clear_2.Parent = join
-Clear_2.BackgroundColor3 = Color3.new(0.180392, 0.180392, 0.184314)
-Clear_2.BorderSizePixel = 0
-Clear_2.Position = UDim2.new(0, 5, 0, 220)
-Clear_2.Size = UDim2.new(0, 50, 0, 20)
-Clear_2.ZIndex = 10
-Clear_2.Font = Enum.Font.SourceSans
-Clear_2.FontSize = Enum.FontSize.Size14
-Clear_2.Text = "Clear"
-Clear_2.TextColor3 = Color3.new(1, 1, 1)
+
+Clear_2.Name="Clear"
+Clear_2.Parent=join
+Clear_2.BackgroundColor3=Color3.new(0.180392,0.180392,0.184314)
+Clear_2.BorderSizePixel=0
+Clear_2.Position=UDim2.new(0,5,0,220)
+Clear_2.Size=UDim2.new(0,50,0,20)
+Clear_2.ZIndex=10
+Clear_2.Font=Enum.Font.SourceSans
+Clear_2.FontSize=Enum.FontSize.Size14
+Clear_2.Text="Clear"
+Clear_2.TextColor3=Color3.new(1,1,1)
 table.insert(shade2,Clear_2)
 table.insert(text1,Clear_2)
-scroll_3.Name = "scroll"
-scroll_3.Parent = join
-scroll_3.BackgroundColor3 = Color3.new(0.180392, 0.180392, 0.184314)
-scroll_3.BorderSizePixel = 0
-scroll_3.Position = UDim2.new(0, 5, 0, 25)
-scroll_3.Size = UDim2.new(0, 328, 0, 190)
-scroll_3.ZIndex = 10
-scroll_3.BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-scroll_3.CanvasSize = UDim2.new(0, 0, 0, 10)
-scroll_3.ScrollBarThickness = 8
-scroll_3.TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
+
+scroll_3.Name="scroll"
+scroll_3.Parent=join
+scroll_3.BackgroundColor3=Color3.new(0.180392,0.180392,0.184314)
+scroll_3.BorderSizePixel=0
+scroll_3.Position=UDim2.new(0,5,0,25)
+scroll_3.Size=UDim2.new(0,328,0,190)
+scroll_3.ZIndex=10
+scroll_3.BottomImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
+scroll_3.CanvasSize=UDim2.new(0,0,0,10)
+scroll_3.ScrollBarThickness=8
+scroll_3.TopImage="rbxasset://textures/ui/Scroll/scroll-middle.png"
 table.insert(scroll,scroll_3)
 table.insert(shade2,scroll_3)
-selectChat.Name = "selectChat"
-selectChat.Parent = background
-selectChat.BackgroundColor3 = Color3.new(0.180392, 0.180392, 0.184314)
-selectChat.BorderSizePixel = 0
-selectChat.Position = UDim2.new(0, 5, 0, 5)
-selectChat.Size = UDim2.new(0, 164, 0, 20)
-selectChat.ZIndex = 10
-selectChat.Font = Enum.Font.SourceSans
-selectChat.FontSize = Enum.FontSize.Size14
-selectChat.Text = "Chat Logs"
-selectChat.TextColor3 = Color3.new(1, 1, 1)
+
+selectChat.Name="selectChat"
+selectChat.Parent=background
+selectChat.BackgroundColor3=Color3.new(0.180392,0.180392,0.184314)
+selectChat.BorderSizePixel=0
+selectChat.Position=UDim2.new(0,5,0,5)
+selectChat.Size=UDim2.new(0,164,0,20)
+selectChat.ZIndex=10
+selectChat.Font=Enum.Font.SourceSans
+selectChat.FontSize=Enum.FontSize.Size14
+selectChat.Text="Chat Logs"
+selectChat.TextColor3=Color3.new(1,1,1)
 table.insert(shade2,selectChat)
 table.insert(text1,selectChat)
-selectJoin.Name = "selectJoin"
-selectJoin.Parent = background
-selectJoin.BackgroundColor3 = Color3.new(0.305882, 0.305882, 0.309804)
-selectJoin.BorderSizePixel = 0
-selectJoin.Position = UDim2.new(0, 169, 0, 5)
-selectJoin.Size = UDim2.new(0, 164, 0, 20)
-selectJoin.ZIndex = 10
-selectJoin.Font = Enum.Font.SourceSans
-selectJoin.FontSize = Enum.FontSize.Size14
-selectJoin.Text = "Join Logs"
-selectJoin.TextColor3 = Color3.new(1, 1, 1)
+
+selectJoin.Name="selectJoin"
+selectJoin.Parent=background
+selectJoin.BackgroundColor3=Color3.new(0.305882,0.305882,0.309804)
+selectJoin.BorderSizePixel=0
+selectJoin.Position=UDim2.new(0,169,0,5)
+selectJoin.Size=UDim2.new(0,164,0,20)
+selectJoin.ZIndex=10
+selectJoin.Font=Enum.Font.SourceSans
+selectJoin.FontSize=Enum.FontSize.Size14
+selectJoin.Text="Join Logs"
+selectJoin.TextColor3=Color3.new(1,1,1)
 table.insert(shade3,selectJoin)
 table.insert(text1,selectJoin)
-function create(data)
-local insts = {}
-for i,v in pairs(data) do insts[v[1]] = Instance.new(v[2]) end
-for _,v in pairs(data) do
-for prop,val in pairs(v[3]) do
-if type(val) == "table" then
-insts[v[1]][prop] = insts[val[1]]
+
+function create(b)
+local c={}
+for d,e in pairs(b)do c[e[1] ]=Instance.new(e[2])end
+
+for d,e in pairs(b)do
+for f,g in pairs(e[3])do
+if type(g)=="table"then
+c[e[1] ][f]=c[g[1] ]
 else
-insts[v[1]][prop] = val
+c[e[1] ][f]=g
 end
 end
 end
-return insts[1]
+
+return c[1]
 end
-TextService = cloneref(game:GetService("TextService"))
-ViewportTextBox = (function()
-local funcs = {}
-funcs.Update = function(self)
-local cursorPos = self.TextBox.CursorPosition
-local text = self.TextBox.Text
-if text == "" then self.TextBox.Position = UDim2.new(0,2,0,0) return end
-if cursorPos == -1 then return end
-local cursorText = text:sub(1,cursorPos-1)
-local pos = nil
-local leftEnd = -self.TextBox.Position.X.Offset
-local rightEnd = leftEnd + self.View.AbsoluteSize.X
-local totalTextSize = TextService:GetTextSize(text,self.TextBox.TextSize,self.TextBox.Font,Vector2.new(999999999,100)).X
-local cursorTextSize = TextService:GetTextSize(cursorText,self.TextBox.TextSize,self.TextBox.Font,Vector2.new(999999999,100)).X
-if cursorTextSize > rightEnd then
-pos = math.max(-2,cursorTextSize - self.View.AbsoluteSize.X + 2)
-elseif cursorTextSize < leftEnd then
-pos = math.max(-2,cursorTextSize-2)
-elseif totalTextSize < rightEnd then
-pos = math.max(-2,totalTextSize - self.View.AbsoluteSize.X + 2)
+
+TextService=a(game:GetService"TextService")
+ViewportTextBox=(function()
+
+local b={}
+b.Update=function(c)
+local d=c.TextBox.CursorPosition
+local e=c.TextBox.Text
+if e==""then c.TextBox.Position=UDim2.new(0,2,0,0)return end
+if d==-1 then return end
+
+local f=e:sub(1,d-1)
+local g
+local h=-c.TextBox.Position.X.Offset
+local i=h+c.View.AbsoluteSize.X
+
+local j=TextService:GetTextSize(e,c.TextBox.TextSize,c.TextBox.Font,Vector2.new(999999999,100)).X
+local k=TextService:GetTextSize(f,c.TextBox.TextSize,c.TextBox.Font,Vector2.new(999999999,100)).X
+
+if k>i then
+g=math.max(-2,k-c.View.AbsoluteSize.X+2)
+elseif k<h then
+g=math.max(-2,k-2)
+elseif j<i then
+g=math.max(-2,j-c.View.AbsoluteSize.X+2)
 end
-if pos then
-self.TextBox.Position = UDim2.new(0,-pos,0,0)
-self.TextBox.Size = UDim2.new(1,pos,1,0)
+
+if g then
+c.TextBox.Position=UDim2.new(0,-g,0,0)
+c.TextBox.Size=UDim2.new(1,g,1,0)
 end
 end
-local mt = {}
-mt.__index = funcs
-local function convert(textbox)
-local obj = setmetatable({OffsetX = 0, TextBox = textbox},mt)
-local view = Instance.new("Frame")
-view.BackgroundTransparency = textbox.BackgroundTransparency
-view.BackgroundColor3 = textbox.BackgroundColor3
-view.BorderSizePixel = textbox.BorderSizePixel
-view.BorderColor3 = textbox.BorderColor3
-view.Position = textbox.Position
-view.Size = textbox.Size
-view.ClipsDescendants = true
-view.Name = textbox.Name
-view.ZIndex = 10
-textbox.BackgroundTransparency = 1
-textbox.Position = UDim2.new(0,4,0,0)
-textbox.Size = UDim2.new(1,-8,1,0)
-textbox.TextXAlignment = Enum.TextXAlignment.Left
-textbox.Name = "Input"
-table.insert(text1,textbox)
-table.insert(shade2,view)
-obj.View = view
-textbox.Changed:Connect(function(prop)
-if prop == "Text" or prop == "CursorPosition" or prop == "AbsoluteSize" then
-obj:Update()
+
+local c={}
+c.__index=b
+
+local function convert(d)
+local e=setmetatable({OffsetX=0,TextBox=d},c)
+
+local f=Instance.new"Frame"
+f.BackgroundTransparency=d.BackgroundTransparency
+f.BackgroundColor3=d.BackgroundColor3
+f.BorderSizePixel=d.BorderSizePixel
+f.BorderColor3=d.BorderColor3
+f.Position=d.Position
+f.Size=d.Size
+f.ClipsDescendants=true
+f.Name=d.Name
+f.ZIndex=10
+d.BackgroundTransparency=1
+d.Position=UDim2.new(0,4,0,0)
+d.Size=UDim2.new(1,-8,1,0)
+d.TextXAlignment=Enum.TextXAlignment.Left
+d.Name="Input"
+table.insert(text1,d)
+table.insert(shade2,f)
+
+e.View=f
+
+d.Changed:Connect(function(g)
+if g=="Text"or g=="CursorPosition"or g=="AbsoluteSize"then
+e:Update()
 end
 end)
-obj:Update()
-view.Parent = textbox.Parent
-textbox.Parent = view
-return obj
+
+e:Update()
+
+f.Parent=d.Parent
+d.Parent=f
+
+return e
 end
-return {convert = convert}
+
+return{convert=convert}
 end)()
-ViewportTextBox.convert(Cmdbar).View.ZIndex = 10
-ViewportTextBox.convert(Cmdbar_2).View.ZIndex = 10
-ViewportTextBox.convert(Cmdbar_3).View.ZIndex = 10
-IYMouse = Players.LocalPlayer:GetMouse()
-PlayerGui = Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui")
-UserInputService = cloneref(game:GetService("UserInputService"))
-TweenService = cloneref(game:GetService("TweenService"))
-HttpService = cloneref(game:GetService("HttpService"))
-MarketplaceService = cloneref(game:GetService("MarketplaceService"))
-RunService = cloneref(game:GetService("RunService"))
-TeleportService = cloneref(game:GetService("TeleportService"))
-StarterGui = cloneref(game:GetService("StarterGui"))
-GuiService = cloneref(game:GetService("GuiService"))
-Lighting = cloneref(game:GetService("Lighting"))
-ContextActionService = cloneref(game:GetService("ContextActionService"))
-ReplicatedStorage = cloneref(game:GetService("ReplicatedStorage"))
-GroupService = cloneref(game:GetService("GroupService"))
-PathService = cloneref(game:GetService("PathfindingService"))
-SoundService = cloneref(game:GetService("SoundService"))
-Teams = cloneref(game:GetService("Teams"))
-StarterPlayer = cloneref(game:GetService("StarterPlayer"))
-InsertService = cloneref(game:GetService("InsertService"))
-ChatService = cloneref(game:GetService("Chat"))
-ProximityPromptService = cloneref(game:GetService("ProximityPromptService"))
-StatsService = cloneref(game:GetService("Stats"))
-MaterialService = cloneref(game:GetService("MaterialService"))
-AvatarEditorService = cloneref(game:GetService("AvatarEditorService"))
-TextChatService = cloneref(game:GetService("TextChatService"))
-CaptureService = cloneref(game:GetService("CaptureService"))
-VoiceChatService = cloneref(game:GetService("VoiceChatService"))
--- validateType
-function vtype(o, t)
-if o == nil then return false end
-if type(o) == "userdata" then return typeof(o) == t end
-return type(o) == t
+
+ViewportTextBox.convert(Cmdbar).View.ZIndex=10
+ViewportTextBox.convert(Cmdbar_2).View.ZIndex=10
+ViewportTextBox.convert(Cmdbar_3).View.ZIndex=10
+
+IYMouse=Players.LocalPlayer:GetMouse()
+PlayerGui=Players.LocalPlayer:FindFirstChildWhichIsA"PlayerGui"
+UserInputService=a(game:GetService"UserInputService")
+TweenService=a(game:GetService"TweenService")
+HttpService=a(game:GetService"HttpService")
+MarketplaceService=a(game:GetService"MarketplaceService")
+RunService=a(game:GetService"RunService")
+TeleportService=a(game:GetService"TeleportService")
+StarterGui=a(game:GetService"StarterGui")
+GuiService=a(game:GetService"GuiService")
+Lighting=a(game:GetService"Lighting")
+ContextActionService=a(game:GetService"ContextActionService")
+ReplicatedStorage=a(game:GetService"ReplicatedStorage")
+GroupService=a(game:GetService"GroupService")
+PathService=a(game:GetService"PathfindingService")
+SoundService=a(game:GetService"SoundService")
+Teams=a(game:GetService"Teams")
+StarterPlayer=a(game:GetService"StarterPlayer")
+InsertService=a(game:GetService"InsertService")
+ChatService=a(game:GetService"Chat")
+ProximityPromptService=a(game:GetService"ProximityPromptService")
+StatsService=a(game:GetService"Stats")
+MaterialService=a(game:GetService"MaterialService")
+AvatarEditorService=a(game:GetService"AvatarEditorService")
+TextChatService=a(game:GetService"TextChatService")
+CaptureService=a(game:GetService"CaptureService")
+VoiceChatService=a(game:GetService"VoiceChatService")
+
+
+function vtype(b,c)
+if b==nil then return false end
+if type(b)=="userdata"then return typeof(b)==c end
+return type(b)==c
 end
-sethidden = sethiddenproperty or set_hidden_property or set_hidden_prop
-gethidden = gethiddenproperty or get_hidden_property or get_hidden_prop
-queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
-httprequest = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
-PlaceId, JobId = game.PlaceId, game.JobId
-local IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, UserInputService:GetPlatform())
-everyClipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
-isLegacyChat = TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService
-local writefile = type(writefile) == "function" and function(file, data, safe)
-if safe == true then return pcall(writefile, file, data) end
-writefile(file, data)
+
+sethidden=sethiddenproperty or set_hidden_property or set_hidden_prop
+gethidden=gethiddenproperty or get_hidden_property or get_hidden_prop
+queueteleport=(syn and syn.queue_on_teleport)or queue_on_teleport or(fluxus and fluxus.queue_on_teleport)
+httprequest=(syn and syn.request)or(http and http.request)or http_request or(fluxus and fluxus.request)or request
+PlaceId,JobId=game.PlaceId,game.JobId
+local b=table.find({Enum.Platform.IOS,Enum.Platform.Android},UserInputService:GetPlatform())
+everyClipboard=setclipboard or toclipboard or set_clipboard or(Clipboard and Clipboard.set)
+isLegacyChat=TextChatService.ChatVersion==Enum.ChatVersion.LegacyChatService
+
+local c=type(writefile)=="function"and function(c,d,e)
+if e==true then return pcall(writefile,c,d)end
+writefile(c,d)
 end
-local readfile = type(readfile) == "function" and function(file, safe)
-if safe == true then return pcall(readfile, file) end
-return readfile(file)
+
+local d=type(readfile)=="function"and function(d,e)
+if e==true then return pcall(readfile,d)end
+return readfile(d)
 end
+
 function writefileExploit()
-if writefile then
+if c then
 return true
 end
 end
+
 function readfileExploit()
-if readfile then
+if d then
 return true
 end
 end
-function isNumber(str)
-if tonumber(str) ~= nil or str == 'inf' then
+
+function isNumber(e)
+if tonumber(e)~=nil or e=='inf'then
 return true
 end
 end
-function getRoot(char)
-local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
-return rootPart
+
+function getRoot(e)
+local f=e:FindFirstChild'HumanoidRootPart'or e:FindFirstChild'Torso'or e:FindFirstChild'UpperTorso'
+return f
 end
-function tools(plr)
-if plr:FindFirstChildOfClass("Backpack"):FindFirstChildOfClass('Tool') or plr.Character:FindFirstChildOfClass('Tool') then
+
+function tools(e)
+if e:FindFirstChildOfClass"Backpack":FindFirstChildOfClass'Tool'or e.Character:FindFirstChildOfClass'Tool'then
 return true
 end
 end
-function r15(plr)
-if plr.Character:FindFirstChildOfClass('Humanoid').RigType == Enum.HumanoidRigType.R15 then
+
+function r15(e)
+if e.Character:FindFirstChildOfClass'Humanoid'.RigType==Enum.HumanoidRigType.R15 then
 return true
 end
 end
-function toClipboard(txt)
+
+function toClipboard(e)
 if everyClipboard then
-everyClipboard(tostring(txt))
-notify("Clipboard", "Copied to clipboard")
+everyClipboard(tostring(e))
+notify("Clipboard","Copied to clipboard")
 else
-notify("Clipboard", "Your exploit doesn't have the ability to use the clipboard")
+notify("Clipboard","Your exploit doesn't have the ability to use the clipboard")
 end
 end
-function chatMessage(str)
-str = tostring(str)
+
+function chatMessage(e)
+e=tostring(e)
 if not isLegacyChat then
-TextChatService.TextChannels.RBXGeneral:SendAsync(str)
+TextChatService.TextChannels.RBXGeneral:SendAsync(e)
 else
-ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(str, "All")
+ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(e,"All")
 end
 end
-function getHierarchy(obj)
-local fullname
-local period
-if string.find(obj.Name,' ') then
-fullname = '["'..obj.Name..'"]'
-period = false
+
+function getHierarchy(e)
+local f
+local g
+
+if string.find(e.Name,' ')then
+f='["'..e.Name..'"]'
+g=false
 else
-fullname = obj.Name
-period = true
+f=e.Name
+g=true
 end
-local getS = obj
-local parent = obj
-local service = ''
-if getS.Parent ~= game then
+
+local h=e
+local i=e
+local j=''
+
+if h.Parent~=game then
 repeat
-getS = getS.Parent
-service = getS.ClassName
-until getS.Parent == game
+h=h.Parent
+j=h.ClassName
+until h.Parent==game
 end
-if parent.Parent ~= getS then
+
+if i.Parent~=h then
 repeat
-parent = parent.Parent
-if string.find(tostring(parent),' ') then
-if period then
-fullname = '["'..parent.Name..'"].'..fullname
+i=i.Parent
+if string.find(tostring(i),' ')then
+if g then
+f='["'..i.Name..'"].'..f
 else
-fullname = '["'..parent.Name..'"]'..fullname
+f='["'..i.Name..'"]'..f
 end
-period = false
+g=false
 else
-if period then
-fullname = parent.Name..'.'..fullname
+if g then
+f=i.Name..'.'..f
 else
-fullname = parent.Name..''..fullname
+f=i.Name..''..f
 end
-period = true
+g=true
 end
-until parent.Parent == getS
-elseif string.find(tostring(parent),' ') then
-fullname = '["'..parent.Name..'"]'
-period = false
+until i.Parent==h
+elseif string.find(tostring(i),' ')then
+f='["'..i.Name..'"]'
+g=false
 end
-if period then
-return 'game:GetService("'..service..'").'..fullname
+
+if g then
+return'game:GetService("'..j..'").'..f
 else
-return 'game:GetService("'..service..'")'..fullname
+return'game:GetService("'..j..'")'..f
 end
 end
-AllWaypoints = {}
-local cooldown = false
-function writefileCooldown(name,data)
+
+AllWaypoints={}
+
+local e=false
+function writefileCooldown(f,g)
 task.spawn(function()
-if not cooldown then
-cooldown = true
-writefile(name, data, true)
+if not e then
+e=true
+c(f,g,true)
 else
-repeat wait() until cooldown == false
-writefileCooldown(name,data)
+repeat wait()until e==false
+writefileCooldown(f,g)
 end
 wait(3)
-cooldown = false
+e=false
 end)
 end
-function dragGUI(gui)
+
+function dragGUI(f)
 task.spawn(function()
-local dragging
-local dragInput
-local dragStart = Vector3.new(0,0,0)
-local startPos
-local function update(input)
-local delta = input.Position - dragStart
-local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-TweenService:Create(gui, TweenInfo.new(.20), {Position = Position}):Play()
+local g
+local h
+local i=Vector3.new(0,0,0)
+local j
+local function update(k)
+local l=k.Position-i
+local m=UDim2.new(j.X.Scale,j.X.Offset+l.X,j.Y.Scale,j.Y.Offset+l.Y)
+TweenService:Create(f,TweenInfo.new(.20),{Position=m}):Play()
 end
-gui.InputBegan:Connect(function(input)
-if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-dragging = true
-dragStart = input.Position
-startPos = gui.Position
-input.Changed:Connect(function()
-if input.UserInputState == Enum.UserInputState.End then
-dragging = false
-end
-end)
-end
-end)
-gui.InputChanged:Connect(function(input)
-if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-dragInput = input
+f.InputBegan:Connect(function(k)
+if k.UserInputType==Enum.UserInputType.MouseButton1 or k.UserInputType==Enum.UserInputType.Touch then
+g=true
+i=k.Position
+j=f.Position
+
+k.Changed:Connect(function()
+if k.UserInputState==Enum.UserInputState.End then
+g=false
 end
 end)
-UserInputService.InputChanged:Connect(function(input)
-if input == dragInput and dragging then
-update(input)
+end
+end)
+f.InputChanged:Connect(function(k)
+if k.UserInputType==Enum.UserInputType.MouseMovement or k.UserInputType==Enum.UserInputType.Touch then
+h=k
+end
+end)
+UserInputService.InputChanged:Connect(function(k)
+if k==h and g then
+update(k)
 end
 end)
 end)
 end
+
 dragGUI(logs)
 dragGUI(KeybindEditor)
 dragGUI(PluginEditor)
 dragGUI(ToPartFrame)
-eventEditor = (function()
-local events = {}
-local function registerEvent(name,sets)
-events[name] = {
-commands = {},
-sets = sets or {}
+
+eventEditor=(function()
+local f={}
+
+local function registerEvent(g,h)
+f[g]={
+commands={},
+sets=h or{}
 }
 end
-local onEdited = nil
-local function fireEvent(name,...)
-local args = {...}
-local event = events[name]
-if event then
-for i,cmd in pairs(event.commands) do
-local metCondition = true
-for idx,set in pairs(event.sets) do
-local argVal = args[idx]
-local cmdSet = cmd[2][idx]
-local condType = set.Type
-if condType == "Player" then
-if cmdSet == 0 then
-metCondition = metCondition and (tostring(Players.LocalPlayer) == argVal)
-elseif cmdSet ~= 1 then
-metCondition = metCondition and table.find(getPlayer(cmdSet,Players.LocalPlayer),argVal)
+
+local g
+
+local function fireEvent(h,...)
+local i={...}
+local j=f[h]
+if j then
+for k,l in pairs(j.commands)do
+local m=true
+for n,o in pairs(j.sets)do
+local p=i[n]
+local q=l[2][n]
+local r=o.Type
+if r=="Player"then
+if q==0 then
+m=m and(tostring(Players.LocalPlayer)==p)
+elseif q~=1 then
+m=m and table.find(getPlayer(q,Players.LocalPlayer),p)
 end
-elseif condType == "String" then
-if cmdSet ~= 0 then
-metCondition = metCondition and string.find(argVal:lower(),cmdSet:lower())
+elseif r=="String"then
+if q~=0 then
+m=m and string.find(p:lower(),q:lower())
 end
-elseif condType == "Number" then
-if cmdSet ~= 0 then
-metCondition = metCondition and tonumber(argVal)<=tonumber(cmdSet)
+elseif r=="Number"then
+if q~=0 then
+m=m and tonumber(p)<=tonumber(q)
 end
 end
-if not metCondition then break end
+if not m then break end
 end
-if metCondition then
+
+if m then
 pcall(task.spawn(function()
-local cmdStr = cmd[1]
-for count,arg in pairs(args) do
-cmdStr = cmdStr:gsub("%$"..count,arg)
+local n=l[1]
+for o,p in pairs(i)do
+n=n:gsub("%$"..o,p)
 end
-wait(cmd[3] or 0)
-execCmd(cmdStr)
+wait(l[3]or 0)
+execCmd(n)
 end))
 end
 end
 end
 end
-local main = create({
+
+local h=create{
 {1,"Frame",{BackgroundColor3=Color3.new(0.14117647707462,0.14117647707462,0.14509804546833),BackgroundTransparency=1,BorderSizePixel=0,Name="EventEditor",Position=UDim2.new(0.5,-175,0,-500),Size=UDim2.new(0,350,0,20),ZIndex=10,}},
 {2,"Frame",{BackgroundColor3=currentShade2,BorderSizePixel=0,Name="TopBar",Parent={1},Size=UDim2.new(1,0,0,20),ZIndex=10,}},
 {3,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="Title",Parent={2},Position=UDim2.new(0,0,0,0),Size=UDim2.new(1,0,0.95,0),Text="Event Editor",TextColor3=Color3.new(1,1,1),TextSize=14,TextXAlignment=Enum.TextXAlignment.Center,ZIndex=10,}},
@@ -2057,353 +2250,419 @@ local main = create({
 {51,"TextButton",{BackgroundColor3=currentShade1,BorderSizePixel=0,Font=3,Name="Delete",Parent={49},Position=UDim2.new(1,-20,0,0),Size=UDim2.new(0,20,0,20),Text="X",TextColor3=Color3.new(1,1,1),TextSize=18,ZIndex=10,}},
 {52,"TextButton",{BackgroundColor3=currentShade1,BorderSizePixel=0,Font=3,Name="Settings",Parent={49},Position=UDim2.new(1,-40,0,0),Size=UDim2.new(0,20,0,20),Text="",TextColor3=Color3.new(1,1,1),TextSize=18,ZIndex=10,}},
 {53,"ImageLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Image="rbxassetid://1204397029",Parent={52},Position=UDim2.new(0,2,0,2),Size=UDim2.new(0,16,0,16),ZIndex=10,}},
-})
-main.Name = randomString()
-local mainFrame = main:WaitForChild("Content")
-local eventList = mainFrame:WaitForChild("List")
-local eventListHolder = eventList:WaitForChild("Holder")
-local cmdTemplate = mainFrame:WaitForChild("CmdTemplate")
-local eventTemplate = mainFrame:WaitForChild("EventTemplate")
-local settingsFrame = mainFrame:WaitForChild("Settings"):WaitForChild("Slider")
-local settingsTemplates = mainFrame.Settings:WaitForChild("Templates")
-local settingsList = settingsFrame:WaitForChild("List"):WaitForChild("Holder")
-table.insert(shade2,main.TopBar) table.insert(shade1,mainFrame) table.insert(shade2,eventTemplate)
-table.insert(text1,eventTemplate.EventName) table.insert(shade1,eventTemplate.Cmds.Add) table.insert(shade1,cmdTemplate)
-table.insert(text1,cmdTemplate.TextBox) table.insert(shade2,cmdTemplate.Delete) table.insert(shade2,cmdTemplate.Settings)
-table.insert(scroll,mainFrame.List) table.insert(shade1,settingsFrame) table.insert(shade2,settingsFrame.Line)
-table.insert(shade2,settingsFrame.Close) table.insert(scroll,settingsFrame.List) table.insert(shade2,settingsTemplates.DelayEditor.Secs)
-table.insert(text1,settingsTemplates.DelayEditor.Secs) table.insert(text1,settingsTemplates.DelayEditor.Secs.Label) table.insert(text1,settingsTemplates.Players.Title)
-table.insert(shade3,settingsTemplates.Players.CustomButton) table.insert(shade2,settingsTemplates.Players.Custom) table.insert(text1,settingsTemplates.Players.Custom)
-table.insert(shade3,settingsTemplates.Players.Any.Button) table.insert(shade3,settingsTemplates.Players.Me.Button) table.insert(text1,settingsTemplates.Players.Any)
-table.insert(text1,settingsTemplates.Players.Me) table.insert(text1,settingsTemplates.Strings.Title) table.insert(text1,settingsTemplates.Strings.Any)
-table.insert(shade3,settingsTemplates.Strings.Any.Button) table.insert(shade3,settingsTemplates.Strings.CustomButton) table.insert(text1,settingsTemplates.Strings.Custom)
-table.insert(shade2,settingsTemplates.Strings.Custom)
-table.insert(text1,settingsTemplates.Players.Me) table.insert(text1,settingsTemplates.Numbers.Title) table.insert(text1,settingsTemplates.Numbers.Any)
-table.insert(shade3,settingsTemplates.Numbers.Any.Button) table.insert(shade3,settingsTemplates.Numbers.CustomButton) table.insert(text1,settingsTemplates.Numbers.Custom)
-table.insert(shade2,settingsTemplates.Numbers.Custom)
-local tweenInf = TweenInfo.new(0.25,Enum.EasingStyle.Quart,Enum.EasingDirection.Out)
-local currentlyEditingCmd = nil
-settingsFrame:WaitForChild("Close").MouseButton1Click:Connect(function()
-settingsFrame:TweenPosition(UDim2.new(0,-150,0,0),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.25,true)
+}
+h.Name=randomString()
+local i=h:WaitForChild"Content"
+local j=i:WaitForChild"List"
+local k=j:WaitForChild"Holder"
+local l=i:WaitForChild"CmdTemplate"
+local m=i:WaitForChild"EventTemplate"
+local n=i:WaitForChild"Settings":WaitForChild"Slider"
+local o=i.Settings:WaitForChild"Templates"
+local p=n:WaitForChild"List":WaitForChild"Holder"
+table.insert(shade2,h.TopBar)table.insert(shade1,i)table.insert(shade2,m)
+table.insert(text1,m.EventName)table.insert(shade1,m.Cmds.Add)table.insert(shade1,l)
+table.insert(text1,l.TextBox)table.insert(shade2,l.Delete)table.insert(shade2,l.Settings)
+table.insert(scroll,i.List)table.insert(shade1,n)table.insert(shade2,n.Line)
+table.insert(shade2,n.Close)table.insert(scroll,n.List)table.insert(shade2,o.DelayEditor.Secs)
+table.insert(text1,o.DelayEditor.Secs)table.insert(text1,o.DelayEditor.Secs.Label)table.insert(text1,o.Players.Title)
+table.insert(shade3,o.Players.CustomButton)table.insert(shade2,o.Players.Custom)table.insert(text1,o.Players.Custom)
+table.insert(shade3,o.Players.Any.Button)table.insert(shade3,o.Players.Me.Button)table.insert(text1,o.Players.Any)
+table.insert(text1,o.Players.Me)table.insert(text1,o.Strings.Title)table.insert(text1,o.Strings.Any)
+table.insert(shade3,o.Strings.Any.Button)table.insert(shade3,o.Strings.CustomButton)table.insert(text1,o.Strings.Custom)
+table.insert(shade2,o.Strings.Custom)
+table.insert(text1,o.Players.Me)table.insert(text1,o.Numbers.Title)table.insert(text1,o.Numbers.Any)
+table.insert(shade3,o.Numbers.Any.Button)table.insert(shade3,o.Numbers.CustomButton)table.insert(text1,o.Numbers.Custom)
+table.insert(shade2,o.Numbers.Custom)
+
+local q=TweenInfo.new(0.25,Enum.EasingStyle.Quart,Enum.EasingDirection.Out)
+
+local r
+
+n:WaitForChild"Close".MouseButton1Click:Connect(function()
+n:TweenPosition(UDim2.new(0,-150,0,0),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.25,true)
 end)
+
 local function resizeList()
-local size = 0
-for i,v in pairs(eventListHolder:GetChildren()) do
-if v.Name == "EventTemplate" then
-size = size + 20
-if v.Expand.Rotation == 90 then
-size = size + 20*(1+(#events[v.EventName:GetAttribute("RawName")].commands or 0))
+local s=0
+
+for t,u in pairs(k:GetChildren())do
+if u.Name=="EventTemplate"then
+s=s+20
+if u.Expand.Rotation==90 then
+s=s+20*(1+(#f[u.EventName:GetAttribute"RawName"].commands or 0))
 end
 end
 end
-TweenService:Create(eventList,tweenInf,{CanvasSize = UDim2.new(0,0,0,size)}):Play()
-if size > eventList.AbsoluteSize.Y then
-eventListHolder.Size = UDim2.new(1,-8,1,0)
+
+TweenService:Create(j,q,{CanvasSize=UDim2.new(0,0,0,s)}):Play()
+
+if s>j.AbsoluteSize.Y then
+k.Size=UDim2.new(1,-8,1,0)
 else
-eventListHolder.Size = UDim2.new(1,0,1,0)
+k.Size=UDim2.new(1,0,1,0)
 end
 end
+
 local function resizeSettingsList()
-local size = 0
-for i,v in pairs(settingsList:GetChildren()) do
-if v:IsA("Frame") then
-size = size + v.AbsoluteSize.Y
+local s=0
+
+for t,u in pairs(p:GetChildren())do
+if u:IsA"Frame"then
+s=s+u.AbsoluteSize.Y
 end
 end
-settingsList.Parent.CanvasSize = UDim2.new(0,0,0,size)
-if size > settingsList.Parent.AbsoluteSize.Y then
-settingsList.Size = UDim2.new(1,-8,1,0)
+
+p.Parent.CanvasSize=UDim2.new(0,0,0,s)
+
+if s>p.Parent.AbsoluteSize.Y then
+p.Size=UDim2.new(1,-8,1,0)
 else
-settingsList.Size = UDim2.new(1,0,1,0)
+p.Size=UDim2.new(1,0,1,0)
 end
 end
-local function setupCheckbox(button,callback)
-local enabled = button.On.BackgroundTransparency == 0
+
+local function setupCheckbox(s,t)
+local u=s.On.BackgroundTransparency==0
+
 local function update()
-button.On.BackgroundTransparency = (enabled and 0 or 1)
+s.On.BackgroundTransparency=(u and 0 or 1)
 end
-button.On.MouseButton1Click:Connect(function()
-enabled = not enabled
+
+s.On.MouseButton1Click:Connect(function()
+u=not u
 update()
-if callback then callback(enabled) end
+if t then t(u)end
 end)
-return {
-Toggle = function(nocall) enabled = not enabled update() if not nocall and callback then callback(enabled) end end,
-Enable = function(nocall) if enabled then return end enabled = true update()if not nocall and callback then callback(enabled) end end,
-Disable = function(nocall) if not enabled then return end enabled = false update()if not nocall and callback then callback(enabled) end end,
-IsEnabled = function() return enabled end
+
+return{
+Toggle=function(v)u=not u update()if not v and t then t(u)end end,
+Enable=function(v)if u then return end u=true update()if not v and t then t(u)end end,
+Disable=function(v)if not u then return end u=false update()if not v and t then t(u)end end,
+IsEnabled=function()return u end
 }
 end
-local function openSettingsEditor(event,cmd)
-currentlyEditingCmd = cmd
-for i,v in pairs(settingsList:GetChildren()) do if v:IsA("Frame") then v:Destroy() end end
-local delayEditor = settingsTemplates.DelayEditor:Clone()
-delayEditor.Secs.FocusLost:Connect(function()
-cmd[3] = tonumber(delayEditor.Secs.Text) or 0
-delayEditor.Secs.Text = cmd[3]
-if onEdited then onEdited() end
+
+local function openSettingsEditor(s,t)
+r=t
+
+for u,v in pairs(p:GetChildren())do if v:IsA"Frame"then v:Destroy()end end
+
+local u=o.DelayEditor:Clone()
+u.Secs.FocusLost:Connect(function()
+t[3]=tonumber(u.Secs.Text)or 0
+u.Secs.Text=t[3]
+if g then g()end
 end)
-delayEditor.Secs.Text = cmd[3]
-delayEditor.Visible = true
-table.insert(shade2,delayEditor.Secs)
-table.insert(text1,delayEditor.Secs)
-table.insert(text1,delayEditor.Secs.Label)
-delayEditor.Parent = settingsList
-for i,v in pairs(event.sets) do
-if v.Type == "Player" then
-local template = settingsTemplates.Players:Clone()
-template.Title.Text = v.Name or "Player"
-local me,any,custom
-me = setupCheckbox(template.Me.Button,function(on)
-if not on then return end
-any.Disable()
-custom.Disable()
-cmd[2][i] = 0
-if onEdited then onEdited() end
+u.Secs.Text=t[3]
+u.Visible=true
+table.insert(shade2,u.Secs)
+table.insert(text1,u.Secs)
+table.insert(text1,u.Secs.Label)
+u.Parent=p
+
+for v,w in pairs(s.sets)do
+if w.Type=="Player"then
+local x=o.Players:Clone()
+x.Title.Text=w.Name or"Player"
+
+local y,z,A
+
+y=setupCheckbox(x.Me.Button,function(B)
+if not B then return end
+z.Disable()
+A.Disable()
+t[2][v]=0
+if g then g()end
 end)
-any = setupCheckbox(template.Any.Button,function(on)
-if not on then return end
-me.Disable()
-custom.Disable()
-cmd[2][i] = 1
-if onEdited then onEdited() end
+
+z=setupCheckbox(x.Any.Button,function(B)
+if not B then return end
+y.Disable()
+A.Disable()
+t[2][v]=1
+if g then g()end
 end)
-local customTextBox = template.Custom
-custom = setupCheckbox(template.CustomButton,function(on)
-if not on then return end
-me.Disable()
-any.Disable()
-cmd[2][i] = customTextBox.Text
-if onEdited then onEdited() end
+
+local B=x.Custom
+A=setupCheckbox(x.CustomButton,function(C)
+if not C then return end
+y.Disable()
+z.Disable()
+t[2][v]=B.Text
+if g then g()end
 end)
-ViewportTextBox.convert(customTextBox)
-customTextBox.FocusLost:Connect(function()
-if custom:IsEnabled() then
-cmd[2][i] = customTextBox.Text
-if onEdited then onEdited() end
+
+ViewportTextBox.convert(B)
+B.FocusLost:Connect(function()
+if A:IsEnabled()then
+t[2][v]=B.Text
+if g then g()end
 end
 end)
-local cVal = cmd[2][i]
-if cVal == 0 then
-me:Enable()
-elseif cVal == 1 then
-any:Enable()
+
+local C=t[2][v]
+if C==0 then
+y:Enable()
+elseif C==1 then
+z:Enable()
 else
-custom:Enable()
-customTextBox.Text = cVal
+A:Enable()
+B.Text=C
 end
-template.Visible = true
-table.insert(text1,template.Title)
-table.insert(shade3,template.CustomButton)
-table.insert(shade3,template.Any.Button)
-table.insert(shade3,template.Me.Button)
-table.insert(text1,template.Any)
-table.insert(text1,template.Me)
-template.Parent = settingsList
-elseif v.Type == "String" then
-local template = settingsTemplates.Strings:Clone()
-template.Title.Text = v.Name or "String"
-local any,custom
-any = setupCheckbox(template.Any.Button,function(on)
-if not on then return end
-custom.Disable()
-cmd[2][i] = 0
-if onEdited then onEdited() end
+
+x.Visible=true
+table.insert(text1,x.Title)
+table.insert(shade3,x.CustomButton)
+table.insert(shade3,x.Any.Button)
+table.insert(shade3,x.Me.Button)
+table.insert(text1,x.Any)
+table.insert(text1,x.Me)
+x.Parent=p
+elseif w.Type=="String"then
+local x=o.Strings:Clone()
+x.Title.Text=w.Name or"String"
+
+local y,z
+
+y=setupCheckbox(x.Any.Button,function(A)
+if not A then return end
+z.Disable()
+t[2][v]=0
+if g then g()end
 end)
-local customTextBox = template.Custom
-custom = setupCheckbox(template.CustomButton,function(on)
-if not on then return end
-any.Disable()
-cmd[2][i] = customTextBox.Text
-if onEdited then onEdited() end
+
+local A=x.Custom
+z=setupCheckbox(x.CustomButton,function(B)
+if not B then return end
+y.Disable()
+t[2][v]=A.Text
+if g then g()end
 end)
-ViewportTextBox.convert(customTextBox)
-customTextBox.FocusLost:Connect(function()
-if custom:IsEnabled() then
-cmd[2][i] = customTextBox.Text
-if onEdited then onEdited() end
+
+ViewportTextBox.convert(A)
+A.FocusLost:Connect(function()
+if z:IsEnabled()then
+t[2][v]=A.Text
+if g then g()end
 end
 end)
-local cVal = cmd[2][i]
-if cVal == 0 then
-any:Enable()
+
+local B=t[2][v]
+if B==0 then
+y:Enable()
 else
-custom:Enable()
-customTextBox.Text = cVal
+z:Enable()
+A.Text=B
 end
-template.Visible = true
-table.insert(text1,template.Title)
-table.insert(text1,template.Any)
-table.insert(shade3,template.Any.Button)
-table.insert(shade3,template.CustomButton)
-template.Parent = settingsList
-elseif v.Type == "Number" then
-local template = settingsTemplates.Numbers:Clone()
-template.Title.Text = v.Name or "Number"
-local any,custom
-any = setupCheckbox(template.Any.Button,function(on)
-if not on then return end
-custom.Disable()
-cmd[2][i] = 0
-if onEdited then onEdited() end
+
+x.Visible=true
+table.insert(text1,x.Title)
+table.insert(text1,x.Any)
+table.insert(shade3,x.Any.Button)
+table.insert(shade3,x.CustomButton)
+x.Parent=p
+elseif w.Type=="Number"then
+local x=o.Numbers:Clone()
+x.Title.Text=w.Name or"Number"
+
+local y,z
+
+y=setupCheckbox(x.Any.Button,function(A)
+if not A then return end
+z.Disable()
+t[2][v]=0
+if g then g()end
 end)
-local customTextBox = template.Custom
-custom = setupCheckbox(template.CustomButton,function(on)
-if not on then return end
-any.Disable()
-cmd[2][i] = customTextBox.Text
-if onEdited then onEdited() end
+
+local A=x.Custom
+z=setupCheckbox(x.CustomButton,function(B)
+if not B then return end
+y.Disable()
+t[2][v]=A.Text
+if g then g()end
 end)
-ViewportTextBox.convert(customTextBox)
-customTextBox.FocusLost:Connect(function()
-cmd[2][i] = tonumber(customTextBox.Text) or 0
-customTextBox.Text = cmd[2][i]
-if custom:IsEnabled() then
-if onEdited then onEdited() end
+
+ViewportTextBox.convert(A)
+A.FocusLost:Connect(function()
+t[2][v]=tonumber(A.Text)or 0
+A.Text=t[2][v]
+if z:IsEnabled()then
+if g then g()end
 end
 end)
-local cVal = cmd[2][i]
-if cVal == 0 then
-any:Enable()
+
+local B=t[2][v]
+if B==0 then
+y:Enable()
 else
-custom:Enable()
-customTextBox.Text = cVal
+z:Enable()
+A.Text=B
 end
-template.Visible = true
-table.insert(text1,template.Title)
-table.insert(text1,template.Any)
-table.insert(shade3,template.Any.Button)
-table.insert(shade3,template.CustomButton)
-template.Parent = settingsList
+
+x.Visible=true
+table.insert(text1,x.Title)
+table.insert(text1,x.Any)
+table.insert(shade3,x.Any.Button)
+table.insert(shade3,x.CustomButton)
+x.Parent=p
 end
 end
 resizeSettingsList()
-settingsFrame:TweenPosition(UDim2.new(0,0,0,0),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.25,true)
+n:TweenPosition(UDim2.new(0,0,0,0),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.25,true)
 end
-local function defaultSettings(ev)
-local res = {}
-for i,v in pairs(ev.sets) do
-if v.Type == "Player" then
-res[#res+1] = v.Default or 0
-elseif v.Type == "String" then
-res[#res+1] = v.Default or 0
-elseif v.Type == "Number" then
-res[#res+1] = v.Default or 0
+
+local function defaultSettings(s)
+local t={}
+
+for u,v in pairs(s.sets)do
+if v.Type=="Player"then
+t[#t+1]=v.Default or 0
+elseif v.Type=="String"then
+t[#t+1]=v.Default or 0
+elseif v.Type=="Number"then
+t[#t+1]=v.Default or 0
 end
 end
-return res
+
+return t
 end
+
 local function refreshList()
-for i,v in pairs(eventListHolder:GetChildren()) do if v:IsA("Frame") then v:Destroy() end end
-for name,event in pairs(events) do
-local eventF = eventTemplate:Clone()
-eventF.EventName.Text = name
-eventF.Visible = true
-eventF.EventName:SetAttribute("RawName", name)
-table.insert(shade2,eventF)
-table.insert(text1,eventF.EventName)
-table.insert(shade1,eventF.Cmds.Add)
-local expanded = false
-eventF.Expand.MouseButton1Down:Connect(function()
-expanded = not expanded
-eventF:TweenSize(UDim2.new(1,0,0,20 + (expanded and 20*#eventF.Cmds.Holder:GetChildren() or 0)),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.25,true)
-eventF.Expand.Rotation = expanded and 90 or 0
+for s,t in pairs(k:GetChildren())do if t:IsA"Frame"then t:Destroy()end end
+
+for s,t in pairs(f)do
+local u=m:Clone()
+u.EventName.Text=s
+u.Visible=true
+u.EventName:SetAttribute("RawName",s)
+table.insert(shade2,u)
+table.insert(text1,u.EventName)
+table.insert(shade1,u.Cmds.Add)
+
+local v=false
+u.Expand.MouseButton1Down:Connect(function()
+v=not v
+u:TweenSize(UDim2.new(1,0,0,20+(v and 20*#u.Cmds.Holder:GetChildren()or 0)),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.25,true)
+u.Expand.Rotation=v and 90 or 0
 resizeList()
 end)
+
 local function refreshCommands()
-for i,v in pairs(eventF.Cmds.Holder:GetChildren()) do
-if v.Name == "CmdTemplate" then
-v:Destroy()
+for w,x in pairs(u.Cmds.Holder:GetChildren())do
+if x.Name=="CmdTemplate"then
+x:Destroy()
 end
 end
-eventF.EventName.Text = name..(#event.commands > 0 and " ("..#event.commands..")" or "")
-for i,cmd in pairs(event.commands) do
-local cmdF = cmdTemplate:Clone()
-local cmdTextBox = cmdF.TextBox
-ViewportTextBox.convert(cmdTextBox)
-cmdTextBox.Text = cmd[1]
-cmdF.Visible = true
-table.insert(shade1,cmdF)
-table.insert(shade2,cmdF.Delete)
-table.insert(shade2,cmdF.Settings)
-cmdTextBox.FocusLost:Connect(function()
-event.commands[i] = {cmdTextBox.Text,cmd[2],cmd[3]}
-if onEdited then onEdited() end
+
+u.EventName.Text=s..(#t.commands>0 and" ("..#t.commands..")"or"")
+
+for w,x in pairs(t.commands)do
+local y=l:Clone()
+local z=y.TextBox
+ViewportTextBox.convert(z)
+z.Text=x[1]
+y.Visible=true
+table.insert(shade1,y)
+table.insert(shade2,y.Delete)
+table.insert(shade2,y.Settings)
+
+z.FocusLost:Connect(function()
+t.commands[w]={z.Text,x[2],x[3]}
+if g then g()end
 end)
-cmdF.Settings.MouseButton1Click:Connect(function()
-openSettingsEditor(event,cmd)
+
+y.Settings.MouseButton1Click:Connect(function()
+openSettingsEditor(t,x)
 end)
-cmdF.Delete.MouseButton1Click:Connect(function()
-table.remove(event.commands,i)
+
+y.Delete.MouseButton1Click:Connect(function()
+table.remove(t.commands,w)
 refreshCommands()
 resizeList()
-if currentlyEditingCmd == cmd then
-settingsFrame:TweenPosition(UDim2.new(0,-150,0,0),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.25,true)
+
+if r==x then
+n:TweenPosition(UDim2.new(0,-150,0,0),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.25,true)
 end
-if onEdited then onEdited() end
+if g then g()end
 end)
-cmdF.Parent = eventF.Cmds.Holder
+
+y.Parent=u.Cmds.Holder
 end
-eventF:TweenSize(UDim2.new(1,0,0,20 + (expanded and 20*#eventF.Cmds.Holder:GetChildren() or 0)),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.25,true)
+
+u:TweenSize(UDim2.new(1,0,0,20+(v and 20*#u.Cmds.Holder:GetChildren()or 0)),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.25,true)
 end
-local newBox = eventF.Cmds.Add.TextBox
-ViewportTextBox.convert(newBox)
-newBox.FocusLost:Connect(function(enter)
-if enter then
-event.commands[#event.commands+1] = {newBox.Text,defaultSettings(event),0}
-newBox.Text = ""
+
+local w=u.Cmds.Add.TextBox
+ViewportTextBox.convert(w)
+w.FocusLost:Connect(function(x)
+if x then
+t.commands[#t.commands+1]={w.Text,defaultSettings(t),0}
+w.Text=""
+
 refreshCommands()
 resizeList()
-if onEdited then onEdited() end
+if g then g()end
 end
 end)
---eventF:GetPropertyChangedSignal("AbsoluteSize"):Connect(resizeList)
-eventF.Parent = eventListHolder
+
+
+
+u.Parent=k
+
 refreshCommands()
 end
+
 resizeList()
 end
+
 local function saveData()
-local result = {}
-for i,v in pairs(events) do
-result[i] = v.commands
+local s={}
+for t,u in pairs(f)do
+s[t]=u.commands
 end
-return HttpService:JSONEncode(result)
+return HttpService:JSONEncode(s)
 end
-local function loadData(str)
-local data = HttpService:JSONDecode(str)
-for i,v in pairs(data) do
-if events[i] then
-events[i].commands = v
-end
-end
-end
-local function addCmd(event,data)
-table.insert(events[event].commands,data)
-end
-local function setOnEdited(f)
-if type(f) == "function" then
-onEdited = f
+
+local function loadData(s)
+local t=HttpService:JSONDecode(s)
+for u,v in pairs(t)do
+if f[u]then
+f[u].commands=v
 end
 end
-main.TopBar.Close.MouseButton1Click:Connect(function()
-main:TweenPosition(UDim2.new(0.5,-175,0,-500), "InOut", "Quart", 0.5, true, nil)
+end
+
+local function addCmd(s,t)
+table.insert(f[s].commands,t)
+end
+
+local function setOnEdited(s)
+if type(s)=="function"then
+g=s
+end
+end
+
+h.TopBar.Close.MouseButton1Click:Connect(function()
+h:TweenPosition(UDim2.new(0.5,-175,0,-500),"InOut","Quart",0.5,true,nil)
 end)
-dragGUI(main)
-main.Parent = ScaledHolder
-return {
-RegisterEvent = registerEvent,
-FireEvent = fireEvent,
-Refresh = refreshList,
-SaveData = saveData,
-LoadData = loadData,
-AddCmd = addCmd,
-Frame = main,
-SetOnEdited = setOnEdited
+dragGUI(h)
+h.Parent=ScaledHolder
+
+return{
+RegisterEvent=registerEvent,
+FireEvent=fireEvent,
+Refresh=refreshList,
+SaveData=saveData,
+LoadData=loadData,
+AddCmd=addCmd,
+Frame=h,
+SetOnEdited=setOnEdited
 }
 end)()
-reference = (function()
-local main = create({
+
+reference=(function()
+local f=create{
 {1,"Frame",{BackgroundColor3=Color3.new(0.14117647707462,0.14117647707462,0.14509804546833),BackgroundTransparency=1,BorderColor3=Color3.new(0.15686275064945,0.15686275064945,0.15686275064945),BorderSizePixel=0,Name="Main",Position=UDim2.new(0.5,-250,0,-500),Size=UDim2.new(0,500,0,20),ZIndex=10,}},
 {2,"Frame",{BackgroundColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),BorderSizePixel=0,Name="TopBar",Parent={1},Size=UDim2.new(1,0,0,20),ZIndex=10,}},
 {3,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="Title",Parent={2},Size=UDim2.new(1,0,0.94999998807907,0),Text="Reference",TextColor3=Color3.new(1,1,1),TextSize=14,ZIndex=10,}},
@@ -2519,853 +2778,962 @@ local main = create({
 {113,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=4,Name="Header",Parent={112},Position=UDim2.new(0,8,0,5),Size=UDim2.new(1,-8,0,20),Text="Get Further Help",TextColor3=Color3.new(1,1,1),TextSize=20,TextXAlignment=0,ZIndex=10,}},
 {114,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="Text",Parent={112},Position=UDim2.new(0,8,0,30),Size=UDim2.new(1,-8,0,32),Text="You can join the Discord server to get support with IY,  and read up on more documentation such as the Plugin API.",TextColor3=Color3.new(1,1,1),TextSize=14,TextWrapped=true,TextXAlignment=0,ZIndex=10,}},
 {115,"Frame",{BackgroundColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),BorderSizePixel=0,Name="Line",Parent={112},Position=UDim2.new(0,10,1,-1),Size=UDim2.new(1,-20,0,1),Visible=false,ZIndex=10,}},
-{116,"TextButton",{BackgroundColor3=Color3.new(0.48627451062202,0.61960786581039,0.85098040103912),BorderColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),Font=4,Name="InviteButton",Parent={112},Position=UDim2.new(0,5,0,75),Size=UDim2.new(1,-10,0,25),Text="Copy Discord Invite Link (https://discord.gg/78ZuWSq)",TextColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),TextSize=16,ZIndex=10,}},
-})
-for i,v in pairs(main.Content.List:GetDescendants()) do
-if v:IsA("TextLabel") then
-table.insert(text1,v)
+{116,"TextButton",{BackgroundColor3=Color3.new(0.48627451062202,0.61960786581039,0.85098040103912),BorderColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),Font=4,Name="InviteButton",Parent={112},Position=UDim2.new(0,5,0,75),Size=UDim2.new(1,-10,0,25),Text="Copy Discord Invite Link (https://dsc.gg/beignet)",TextColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),TextSize=16,ZIndex=10,}},
+}
+for g,h in pairs(f.Content.List:GetDescendants())do
+if h:IsA"TextLabel"then
+table.insert(text1,h)
 end
 end
-table.insert(scroll,main.Content.List)
-table.insert(shade1,main.Content)
-table.insert(shade2,main.TopBar)
-main.Name = randomString()
-main.TopBar.Close.MouseButton1Click:Connect(function()
-main:TweenPosition(UDim2.new(0.5,-250,0,-500), "InOut", "Quart", 0.5, true, nil)
+table.insert(scroll,f.Content.List)
+table.insert(shade1,f.Content)
+table.insert(shade2,f.TopBar)
+f.Name=randomString()
+f.TopBar.Close.MouseButton1Click:Connect(function()
+f:TweenPosition(UDim2.new(0.5,-250,0,-500),"InOut","Quart",0.5,true,nil)
 end)
-local inviteButton = main:FindFirstChild("InviteButton",true)
-local lastPress = nil
-inviteButton.MouseButton1Click:Connect(function()
+local g=f:FindFirstChild("InviteButton",true)
+local h
+g.MouseButton1Click:Connect(function()
 if everyClipboard then
-toClipboard("https://discord.gg/78ZuWSq")
-inviteButton.Text = "Copied"
+toClipboard"https://dsc.gg/beignet"
+g.Text="Copied"
 else
-inviteButton.Text = "No Clipboard Function, type out the link"
+g.Text="No Clipboard Function, type out the link"
 end
-local pressTime = tick()
-lastPress = pressTime
+local i=tick()
+h=i
 wait(2)
-if lastPress ~= pressTime then return end
-inviteButton.Text = "Copy Discord Invite Link (https://discord.gg/78ZuWSq)"
+if h~=i then return end
+g.Text="Copy Discord Invite Link (https://dsc.gg/beignet)"
 end)
-dragGUI(main)
-main.Parent = ScaledHolder
+dragGUI(f)
+f.Parent=ScaledHolder
+
 ReferenceButton.MouseButton1Click:Connect(function()
-main:TweenPosition(UDim2.new(0.5,-250,0.5,-150), "InOut", "Quart", 0.5, true, nil)
+f:TweenPosition(UDim2.new(0.5,-250,0.5,-150),"InOut","Quart",0.5,true,nil)
 end)
 end)()
-currentShade1 = Color3.fromRGB(36, 36, 37)
-currentShade2 = Color3.fromRGB(46, 46, 47)
-currentShade3 = Color3.fromRGB(78, 78, 79)
-currentText1 = Color3.new(1, 1, 1)
-currentText2 = Color3.new(0, 0, 0)
-currentScroll = Color3.fromRGB(78,78,79)
-defaultGuiScale = IsOnMobile and 0.9 or 1
-defaultsettings = {
-prefix = ';';
-StayOpen = false;
-guiScale = defaultGuiScale;
-espTransparency = 0.3;
-keepIY = true;
-logsEnabled = false;
-jLogsEnabled = false;
-aliases = {};
-binds = {};
-WayPoints = {};
-PluginsTable = {};
-currentShade1 = {currentShade1.R,currentShade1.G,currentShade1.B};
-currentShade2 = {currentShade2.R,currentShade2.G,currentShade2.B};
-currentShade3 = {currentShade3.R,currentShade3.G,currentShade3.B};
-currentText1 = {currentText1.R,currentText1.G,currentText1.B};
-currentText2 = {currentText2.R,currentText2.G,currentText2.B};
-currentScroll = {currentScroll.R,currentScroll.G,currentScroll.B};
-eventBinds = eventEditor.SaveData()
+
+currentShade1=Color3.fromRGB(36,36,37)
+currentShade2=Color3.fromRGB(46,46,47)
+currentShade3=Color3.fromRGB(78,78,79)
+currentText1=Color3.new(1,1,1)
+currentText2=Color3.new(0,0,0)
+currentScroll=Color3.fromRGB(78,78,79)
+
+defaultGuiScale=b and 0.9 or 1
+defaultsettings={
+prefix=';';
+StayOpen=false;
+guiScale=defaultGuiScale;
+espTransparency=0.3;
+keepIY=true;
+logsEnabled=false;
+jLogsEnabled=false;
+aliases={};
+binds={};
+WayPoints={};
+PluginsTable={};
+currentShade1={currentShade1.R,currentShade1.G,currentShade1.B};
+currentShade2={currentShade2.R,currentShade2.G,currentShade2.B};
+currentShade3={currentShade3.R,currentShade3.G,currentShade3.B};
+currentText1={currentText1.R,currentText1.G,currentText1.B};
+currentText2={currentText2.R,currentText2.G,currentText2.B};
+currentScroll={currentScroll.R,currentScroll.G,currentScroll.B};
+eventBinds=eventEditor.SaveData()
 }
-defaults = HttpService:JSONEncode(defaultsettings)
-nosaves = false
-useFactorySettings = function()
-prefix = ';'
-StayOpen = false
-guiScale = defaultGuiScale
-KeepInfYield = true
-espTransparency = 0.3
-logsEnabled = false
-jLogsEnabled = false
-logsWebhook = nil
-aliases = {}
-binds = {}
-WayPoints = {}
-PluginsTable = {}
+
+defaults=HttpService:JSONEncode(defaultsettings)
+nosaves=false
+useFactorySettings=function()
+prefix=';'
+StayOpen=false
+guiScale=defaultGuiScale
+KeepInfYield=true
+espTransparency=0.3
+logsEnabled=false
+jLogsEnabled=false
+logsWebhook=nil
+aliases={}
+binds={}
+WayPoints={}
+PluginsTable={}
 end
-createPopup = function(text)
-local FileError = Instance.new("Frame")
-local background = Instance.new("Frame")
-local Directions = Instance.new("TextLabel")
-local shadow = Instance.new("Frame")
-local PopupText = Instance.new("TextLabel")
-local Exit = Instance.new("TextButton")
-local ExitImage = Instance.new("ImageLabel")
-FileError.Name = randomString()
-FileError.Parent = ScaledHolder
-FileError.Active = true
-FileError.BackgroundTransparency = 1
-FileError.Position = UDim2.new(0.5, -180, 0, 290)
-FileError.Size = UDim2.new(0, 360, 0, 20)
-FileError.ZIndex = 10
-background.Name = "background"
-background.Parent = FileError
-background.Active = true
-background.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
-background.BorderSizePixel = 0
-background.Position = UDim2.new(0, 0, 0, 20)
-background.Size = UDim2.new(0, 360, 0, 205)
-background.ZIndex = 10
-Directions.Name = "Directions"
-Directions.Parent = background
-Directions.BackgroundTransparency = 1
-Directions.BorderSizePixel = 0
-Directions.Position = UDim2.new(0, 10, 0, 10)
-Directions.Size = UDim2.new(0, 340, 0, 185)
-Directions.Font = Enum.Font.SourceSans
-Directions.TextSize = 14
-Directions.Text = text
-Directions.TextColor3 = Color3.new(1, 1, 1)
-Directions.TextWrapped = true
-Directions.TextXAlignment = Enum.TextXAlignment.Left
-Directions.TextYAlignment = Enum.TextYAlignment.Top
-Directions.ZIndex = 10
-shadow.Name = "shadow"
-shadow.Parent = FileError
-shadow.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-shadow.BorderSizePixel = 0
-shadow.Size = UDim2.new(0, 360, 0, 20)
-shadow.ZIndex = 10
-PopupText.Name = "PopupText"
-PopupText.Parent = shadow
-PopupText.BackgroundTransparency = 1
-PopupText.Size = UDim2.new(1, 0, 0.95, 0)
-PopupText.ZIndex = 10
-PopupText.Font = Enum.Font.SourceSans
-PopupText.TextSize = 14
-PopupText.Text = "File Error"
-PopupText.TextColor3 = Color3.new(1, 1, 1)
-PopupText.TextWrapped = true
-Exit.Name = "Exit"
-Exit.Parent = shadow
-Exit.BackgroundTransparency = 1
-Exit.Position = UDim2.new(1, -20, 0, 0)
-Exit.Size = UDim2.new(0, 20, 0, 20)
-Exit.Text = ""
-Exit.ZIndex = 10
-ExitImage.Parent = Exit
-ExitImage.BackgroundColor3 = Color3.new(1, 1, 1)
-ExitImage.BackgroundTransparency = 1
-ExitImage.Position = UDim2.new(0, 5, 0, 5)
-ExitImage.Size = UDim2.new(0, 10, 0, 10)
-ExitImage.Image = "rbxassetid://5054663650"
-ExitImage.ZIndex = 10
-Exit.MouseButton1Click:Connect(function()
-FileError:Destroy()
+
+createPopup=function(f)
+local g=Instance.new"Frame"
+local h=Instance.new"Frame"
+local i=Instance.new"TextLabel"
+local j=Instance.new"Frame"
+local k=Instance.new"TextLabel"
+local l=Instance.new"TextButton"
+local m=Instance.new"ImageLabel"
+
+g.Name=randomString()
+g.Parent=ScaledHolder
+g.Active=true
+g.BackgroundTransparency=1
+g.Position=UDim2.new(0.5,-180,0,290)
+g.Size=UDim2.new(0,360,0,20)
+g.ZIndex=10
+
+h.Name="background"
+h.Parent=g
+h.Active=true
+h.BackgroundColor3=Color3.fromRGB(36,36,37)
+h.BorderSizePixel=0
+h.Position=UDim2.new(0,0,0,20)
+h.Size=UDim2.new(0,360,0,205)
+h.ZIndex=10
+
+i.Name="Directions"
+i.Parent=h
+i.BackgroundTransparency=1
+i.BorderSizePixel=0
+i.Position=UDim2.new(0,10,0,10)
+i.Size=UDim2.new(0,340,0,185)
+i.Font=Enum.Font.SourceSans
+i.TextSize=14
+i.Text=f
+i.TextColor3=Color3.new(1,1,1)
+i.TextWrapped=true
+i.TextXAlignment=Enum.TextXAlignment.Left
+i.TextYAlignment=Enum.TextYAlignment.Top
+i.ZIndex=10
+
+j.Name="shadow"
+j.Parent=g
+j.BackgroundColor3=Color3.fromRGB(46,46,47)
+j.BorderSizePixel=0
+j.Size=UDim2.new(0,360,0,20)
+j.ZIndex=10
+
+k.Name="PopupText"
+k.Parent=j
+k.BackgroundTransparency=1
+k.Size=UDim2.new(1,0,0.95,0)
+k.ZIndex=10
+k.Font=Enum.Font.SourceSans
+k.TextSize=14
+k.Text="File Error"
+k.TextColor3=Color3.new(1,1,1)
+k.TextWrapped=true
+
+l.Name="Exit"
+l.Parent=j
+l.BackgroundTransparency=1
+l.Position=UDim2.new(1,-20,0,0)
+l.Size=UDim2.new(0,20,0,20)
+l.Text=""
+l.ZIndex=10
+
+m.Parent=l
+m.BackgroundColor3=Color3.new(1,1,1)
+m.BackgroundTransparency=1
+m.Position=UDim2.new(0,5,0,5)
+m.Size=UDim2.new(0,10,0,10)
+m.Image="rbxassetid://5054663650"
+m.ZIndex=10
+
+l.MouseButton1Click:Connect(function()
+g:Destroy()
 end)
 end
-local loadedEventData = nil
-local jsonAttempts = 0
+
+local f
+local g=0
 function saves()
-if writefileExploit() and readfileExploit() and jsonAttempts < 10 then
-local readSuccess, out = readfile("IY_FE.iy", true)
-if readSuccess then
-if out ~= nil and tostring(out):gsub("%s", "") ~= "" then
-local success, response = pcall(function()
-local json = HttpService:JSONDecode(out)
-if vtype(json.prefix, "string") then prefix = json.prefix else prefix = ';' end
-if vtype(json.StayOpen, "boolean") then StayOpen = json.StayOpen else StayOpen = false end
-if vtype(json.guiScale, "number") then guiScale = json.guiScale else guiScale = defaultGuiScale end
-if vtype(json.keepIY, "boolean") then KeepInfYield = json.keepIY else KeepInfYield = true end
-if vtype(json.espTransparency, "number") then espTransparency = json.espTransparency else espTransparency = 0.3 end
-if vtype(json.logsEnabled, "boolean") then logsEnabled = json.logsEnabled else logsEnabled = false end
-if vtype(json.jLogsEnabled, "boolean") then jLogsEnabled = json.jLogsEnabled else jLogsEnabled = false end
-if vtype(json.logsWebhook, "string") then logsWebhook = json.logsWebhook else logsWebhook = nil end
-if vtype(json.aliases, "table") then aliases = json.aliases else aliases = {} end
-if vtype(json.binds, "table") then binds = json.binds else binds = {} end
-if vtype(json.spawnCmds, "table") then spawnCmds = json.spawnCmds end
-if vtype(json.WayPoints, "table") then AllWaypoints = json.WayPoints else WayPoints = {} AllWaypoints = {} end
-if vtype(json.PluginsTable, "table") then PluginsTable = json.PluginsTable else PluginsTable = {} end
-if vtype(json.currentShade1, "table") then currentShade1 = Color3.new(json.currentShade1[1],json.currentShade1[2],json.currentShade1[3]) end
-if vtype(json.currentShade2, "table") then currentShade2 = Color3.new(json.currentShade2[1],json.currentShade2[2],json.currentShade2[3]) end
-if vtype(json.currentShade3, "table") then currentShade3 = Color3.new(json.currentShade3[1],json.currentShade3[2],json.currentShade3[3]) end
-if vtype(json.currentText1, "table") then currentText1 = Color3.new(json.currentText1[1],json.currentText1[2],json.currentText1[3]) end
-if vtype(json.currentText2, "table") then currentText2 = Color3.new(json.currentText2[1],json.currentText2[2],json.currentText2[3]) end
-if vtype(json.currentScroll, "table") then currentScroll = Color3.new(json.currentScroll[1],json.currentScroll[2],json.currentScroll[3]) end
-if vtype(json.eventBinds, "string") then loadedEventData = json.eventBinds end
+if writefileExploit()and readfileExploit()and g<10 then
+local h,i=d("IY_FE.iy",true)
+if h then
+if i~=nil and tostring(i):gsub("%s","")~=""then
+local j,k=pcall(function()
+local j=HttpService:JSONDecode(i)
+if vtype(j.prefix,"string")then prefix=j.prefix else prefix=';'end
+if vtype(j.StayOpen,"boolean")then StayOpen=j.StayOpen else StayOpen=false end
+if vtype(j.guiScale,"number")then guiScale=j.guiScale else guiScale=defaultGuiScale end
+if vtype(j.keepIY,"boolean")then KeepInfYield=j.keepIY else KeepInfYield=true end
+if vtype(j.espTransparency,"number")then espTransparency=j.espTransparency else espTransparency=0.3 end
+if vtype(j.logsEnabled,"boolean")then logsEnabled=j.logsEnabled else logsEnabled=false end
+if vtype(j.jLogsEnabled,"boolean")then jLogsEnabled=j.jLogsEnabled else jLogsEnabled=false end
+if vtype(j.logsWebhook,"string")then logsWebhook=j.logsWebhook else logsWebhook=nil end
+if vtype(j.aliases,"table")then aliases=j.aliases else aliases={}end
+if vtype(j.binds,"table")then binds=j.binds else binds={}end
+if vtype(j.spawnCmds,"table")then spawnCmds=j.spawnCmds end
+if vtype(j.WayPoints,"table")then AllWaypoints=j.WayPoints else WayPoints={}AllWaypoints={}end
+if vtype(j.PluginsTable,"table")then PluginsTable=j.PluginsTable else PluginsTable={}end
+if vtype(j.currentShade1,"table")then currentShade1=Color3.new(j.currentShade1[1],j.currentShade1[2],j.currentShade1[3])end
+if vtype(j.currentShade2,"table")then currentShade2=Color3.new(j.currentShade2[1],j.currentShade2[2],j.currentShade2[3])end
+if vtype(j.currentShade3,"table")then currentShade3=Color3.new(j.currentShade3[1],j.currentShade3[2],j.currentShade3[3])end
+if vtype(j.currentText1,"table")then currentText1=Color3.new(j.currentText1[1],j.currentText1[2],j.currentText1[3])end
+if vtype(j.currentText2,"table")then currentText2=Color3.new(j.currentText2[1],j.currentText2[2],j.currentText2[3])end
+if vtype(j.currentScroll,"table")then currentScroll=Color3.new(j.currentScroll[1],j.currentScroll[2],j.currentScroll[3])end
+if vtype(j.eventBinds,"string")then f=j.eventBinds end
 end)
-if not success then
-jsonAttempts = jsonAttempts + 1
-warn("Save Json Error:", response)
-warn("Overwriting Save File")
-writefile("IY_FE.iy", defaults, true)
+if not j then
+g=g+1
+warn("Save Json Error:",k)
+warn"Overwriting Save File"
+c("IY_FE.iy",defaults,true)
 wait()
 saves()
 end
 else
-writefile("IY_FE.iy", defaults, true)
+c("IY_FE.iy",defaults,true)
 wait()
-local dReadSuccess, dOut = readfile("IY_FE.iy", true)
-if dReadSuccess and dOut ~= nil and tostring(dOut):gsub("%s", "") ~= "" then
+local j,k=d("IY_FE.iy",true)
+if j and k~=nil and tostring(k):gsub("%s","")~=""then
 saves()
 else
-nosaves = true
+nosaves=true
 useFactorySettings()
-createPopup("There was a problem writing a save file to your PC.\n\nPlease contact the developer/support team for your exploit and tell them writefile/readfile is not working.\n\nYour settings, keybinds, waypoints, and aliases will not save if you continue.\n\nThings to try:\n> Make sure a 'workspace' folder is located in the same folder as your exploit\n> If your exploit is inside of a zip/rar file, extract it.\n> Rejoin the game and try again or restart your PC and try again.")
+createPopup"There was a problem writing a save file to your PC.\n\nPlease contact the developer/support team for your exploit and tell them writefile/readfile is not working.\n\nYour settings, keybinds, waypoints, and aliases will not save if you continue.\n\nThings to try:\n> Make sure a 'workspace' folder is located in the same folder as your exploit\n> If your exploit is inside of a zip/rar file, extract it.\n> Rejoin the game and try again or restart your PC and try again."
 end
 end
 else
-writefile("IY_FE.iy", defaults, true)
+c("IY_FE.iy",defaults,true)
 wait()
-local dReadSuccess, dOut = readfile("IY_FE.iy", true)
-if dReadSuccess and dOut ~= nil and tostring(dOut):gsub("%s", "") ~= "" then
+local j,k=d("IY_FE.iy",true)
+if j and k~=nil and tostring(k):gsub("%s","")~=""then
 saves()
 else
-nosaves = true
+nosaves=true
 useFactorySettings()
-createPopup("There was a problem writing a save file to your PC.\n\nPlease contact the developer/support team for your exploit and tell them writefile/readfile is not working.\n\nYour settings, keybinds, waypoints, and aliases will not save if you continue.\n\nThings to try:\n> Make sure a 'workspace' folder is located in the same folder as your exploit\n> If your exploit is inside of a zip/rar file, extract it.\n> Rejoin the game and try again or restart your PC and try again.")
+createPopup"There was a problem writing a save file to your PC.\n\nPlease contact the developer/support team for your exploit and tell them writefile/readfile is not working.\n\nYour settings, keybinds, waypoints, and aliases will not save if you continue.\n\nThings to try:\n> Make sure a 'workspace' folder is located in the same folder as your exploit\n> If your exploit is inside of a zip/rar file, extract it.\n> Rejoin the game and try again or restart your PC and try again."
 end
 end
 else
-if jsonAttempts >= 10 then
-nosaves = true
+if g>=10 then
+nosaves=true
 useFactorySettings()
-createPopup("Sorry, we have attempted to parse your save file, but it is unreadable!\n\nZero Yield is now using factory settings until your exploit's file system works.\n\nYour save file has not been deleted.")
+createPopup"Sorry, we have attempted to parse your save file, but it is unreadable!\n\nZero Yield is now using factory settings until your exploit's file system works.\n\nYour save file has not been deleted."
 else
-nosaves = true
+nosaves=true
 useFactorySettings()
 end
 end
 end
+
 saves()
+
 function updatesaves()
-if nosaves == false and writefileExploit() then
-local update = {
-prefix = prefix;
-StayOpen = StayOpen;
-guiScale = guiScale;
-keepIY = KeepInfYield;
-espTransparency = espTransparency;
-logsEnabled = logsEnabled;
-jLogsEnabled = jLogsEnabled;
-logsWebhook = logsWebhook;
-aliases = aliases;
-binds = binds or {};
-WayPoints = AllWaypoints;
-PluginsTable = PluginsTable;
-currentShade1 = {currentShade1.R,currentShade1.G,currentShade1.B};
-currentShade2 = {currentShade2.R,currentShade2.G,currentShade2.B};
-currentShade3 = {currentShade3.R,currentShade3.G,currentShade3.B};
-currentText1 = {currentText1.R,currentText1.G,currentText1.B};
-currentText2 = {currentText2.R,currentText2.G,currentText2.B};
-currentScroll = {currentScroll.R,currentScroll.G,currentScroll.B};
-eventBinds = eventEditor.SaveData()
+if nosaves==false and writefileExploit()then
+local h={
+prefix=prefix;
+StayOpen=StayOpen;
+guiScale=guiScale;
+keepIY=KeepInfYield;
+espTransparency=espTransparency;
+logsEnabled=logsEnabled;
+jLogsEnabled=jLogsEnabled;
+logsWebhook=logsWebhook;
+aliases=aliases;
+binds=binds or{};
+WayPoints=AllWaypoints;
+PluginsTable=PluginsTable;
+currentShade1={currentShade1.R,currentShade1.G,currentShade1.B};
+currentShade2={currentShade2.R,currentShade2.G,currentShade2.B};
+currentShade3={currentShade3.R,currentShade3.G,currentShade3.B};
+currentText1={currentText1.R,currentText1.G,currentText1.B};
+currentText2={currentText2.R,currentText2.G,currentText2.B};
+currentScroll={currentScroll.R,currentScroll.G,currentScroll.B};
+eventBinds=eventEditor.SaveData()
 }
-writefileCooldown("IY_FE.iy", HttpService:JSONEncode(update))
+writefileCooldown("IY_FE.iy",HttpService:JSONEncode(h))
 end
 end
+
 eventEditor.SetOnEdited(updatesaves)
-pWayPoints = {}
-WayPoints = {}
-if #AllWaypoints > 0 then
-for i = 1, #AllWaypoints do
-if not AllWaypoints[i].GAME or AllWaypoints[i].GAME == PlaceId then
-WayPoints[#WayPoints + 1] = {NAME = AllWaypoints[i].NAME, COORD = {AllWaypoints[i].COORD[1], AllWaypoints[i].COORD[2], AllWaypoints[i].COORD[3]}, GAME = AllWaypoints[i].GAME}
+
+pWayPoints={}
+WayPoints={}
+
+if#AllWaypoints>0 then
+for h=1,#AllWaypoints do
+if not AllWaypoints[h].GAME or AllWaypoints[h].GAME==PlaceId then
+WayPoints[#WayPoints+1]={NAME=AllWaypoints[h].NAME,COORD={AllWaypoints[h].COORD[1],AllWaypoints[h].COORD[2],AllWaypoints[h].COORD[3]},GAME=AllWaypoints[h].GAME}
 end
 end
 end
-if type(binds) ~= "table" then binds = {} end
+
+if type(binds)~="table"then binds={}end
+
 function Time()
-local HOUR = math.floor((tick() % 86400) / 3600)
-local MINUTE = math.floor((tick() % 3600) / 60)
-local SECOND = math.floor(tick() % 60)
-local AP = HOUR > 11 and 'PM' or 'AM'
-HOUR = (HOUR % 12 == 0 and 12 or HOUR % 12)
-HOUR = HOUR < 10 and '0' .. HOUR or HOUR
-MINUTE = MINUTE < 10 and '0' .. MINUTE or MINUTE
-SECOND = SECOND < 10 and '0' .. SECOND or SECOND
-return HOUR .. ':' .. MINUTE .. ':' .. SECOND .. ' ' .. AP
+local h=math.floor((tick()%86400)/3600)
+local i=math.floor((tick()%3600)/60)
+local j=math.floor(tick()%60)
+local k=h>11 and'PM'or'AM'
+h=(h%12==0 and 12 or h%12)
+h=h<10 and'0'..h or h
+i=i<10 and'0'..i or i
+j=j<10 and'0'..j or j
+return h..':'..i..':'..j..' '..k
 end
-PrefixBox.Text = prefix
-local SettingsOpen = false
-local isHidden = false
-if StayOpen == false then
-On.BackgroundTransparency = 1
+
+PrefixBox.Text=prefix
+local h=false
+local i=false
+
+if StayOpen==false then
+On.BackgroundTransparency=1
 else
-On.BackgroundTransparency = 0
+On.BackgroundTransparency=0
 end
+
 if logsEnabled then
-Toggle.Text = 'Enabled'
+Toggle.Text='Enabled'
 else
-Toggle.Text = 'Disabled'
+Toggle.Text='Disabled'
 end
+
 if jLogsEnabled then
-Toggle_2.Text = 'Enabled'
+Toggle_2.Text='Enabled'
 else
-Toggle_2.Text = 'Disabled'
+Toggle_2.Text='Disabled'
 end
+
 function maximizeHolder()
-if StayOpen == false then
-Holder:TweenPosition(UDim2.new(1, Holder.Position.X.Offset, 1, -220), "InOut", "Quart", 0.2, true, nil)
+if StayOpen==false then
+Holder:TweenPosition(UDim2.new(1,Holder.Position.X.Offset,1,-220),"InOut","Quart",0.2,true,nil)
 end
 end
-minimizeNum = -20
+
+minimizeNum=-20
 function minimizeHolder()
-if StayOpen == false then
-Holder:TweenPosition(UDim2.new(1, Holder.Position.X.Offset, 1, minimizeNum), "InOut", "Quart", 0.5, true, nil)
+if StayOpen==false then
+Holder:TweenPosition(UDim2.new(1,Holder.Position.X.Offset,1,minimizeNum),"InOut","Quart",0.5,true,nil)
 end
 end
+
 function cmdbarHolder()
-if StayOpen == false then
-Holder:TweenPosition(UDim2.new(1, Holder.Position.X.Offset, 1, -45), "InOut", "Quart", 0.5, true, nil)
+if StayOpen==false then
+Holder:TweenPosition(UDim2.new(1,Holder.Position.X.Offset,1,-45),"InOut","Quart",0.5,true,nil)
 end
 end
-pinNotification = nil
-local notifyCount = 0
-function notify(text,text2,length)
+
+pinNotification=nil
+local j=0
+function notify(k,l,m)
 task.spawn(function()
-local LnotifyCount = notifyCount+1
-local notificationPinned = false
-notifyCount = notifyCount+1
-if pinNotification then pinNotification:Disconnect() end
-pinNotification = PinButton.MouseButton1Click:Connect(function()
+local n=j+1
+local o=false
+j=j+1
+if pinNotification then pinNotification:Disconnect()end
+pinNotification=PinButton.MouseButton1Click:Connect(function()
 task.spawn(function()
 pinNotification:Disconnect()
-notificationPinned = true
-Title_2.BackgroundTransparency = 1
+o=true
+Title_2.BackgroundTransparency=1
 wait(0.5)
-Title_2.BackgroundTransparency = 0
+Title_2.BackgroundTransparency=0
 end)
 end)
-Notification:TweenPosition(UDim2.new(1, Notification.Position.X.Offset, 1, 0), "InOut", "Quart", 0.5, true, nil)
+Notification:TweenPosition(UDim2.new(1,Notification.Position.X.Offset,1,0),"InOut","Quart",0.5,true,nil)
 wait(0.6)
-local closepressed = false
-if text2 then
-Title_2.Text = text
-Text_2.Text = text2
+local p=false
+if l then
+Title_2.Text=k
+Text_2.Text=l
 else
-Title_2.Text = 'Notification'
-Text_2.Text = text
+Title_2.Text='Notification'
+Text_2.Text=k
 end
-Notification:TweenPosition(UDim2.new(1, Notification.Position.X.Offset, 1, -100), "InOut", "Quart", 0.5, true, nil)
+Notification:TweenPosition(UDim2.new(1,Notification.Position.X.Offset,1,-100),"InOut","Quart",0.5,true,nil)
 CloseButton.MouseButton1Click:Connect(function()
-Notification:TweenPosition(UDim2.new(1, Notification.Position.X.Offset, 1, 0), "InOut", "Quart", 0.5, true, nil)
-closepressed = true
+Notification:TweenPosition(UDim2.new(1,Notification.Position.X.Offset,1,0),"InOut","Quart",0.5,true,nil)
+p=true
 pinNotification:Disconnect()
 end)
-if length and isNumber(length) then
-wait(length)
+if m and isNumber(m)then
+wait(m)
 else
 wait(10)
 end
-if LnotifyCount == notifyCount then
-if closepressed == false and notificationPinned == false then
+if n==j then
+if p==false and o==false then
 pinNotification:Disconnect()
-Notification:TweenPosition(UDim2.new(1, Notification.Position.X.Offset, 1, 0), "InOut", "Quart", 0.5, true, nil)
+Notification:TweenPosition(UDim2.new(1,Notification.Position.X.Offset,1,0),"InOut","Quart",0.5,true,nil)
 end
-notifyCount = 0
+j=0
 end
 end)
 end
-local lastMessage = nil
-local lastLabel = nil
-local dupeCount = 1
-function CreateLabel(Name, Text)
-if lastMessage == Name..Text then
-dupeCount = dupeCount+1
-lastLabel.Text = Time()..' - ['..Name..']: '..Text..' (x'..dupeCount..')'
+
+local k
+local l
+local m=1
+function CreateLabel(n,o)
+if k==n..o then
+m=m+1
+l.Text=Time()..' - ['..n..']: '..o..' (x'..m..')'
 else
-if dupeCount > 1 then dupeCount = 1 end
-if #scroll_2:GetChildren() >= 2546 then
+if m>1 then m=1 end
+if#scroll_2:GetChildren()>=2546 then
 scroll_2:ClearAllChildren()
 end
-local alls = 0
-for i,v in pairs(scroll_2:GetChildren()) do
-if v then
-alls = v.Size.Y.Offset + alls
+local p=0
+for q,r in pairs(scroll_2:GetChildren())do
+if r then
+p=r.Size.Y.Offset+p
 end
-if not v then
-alls = 0
-end
-end
-local tl = Instance.new('TextLabel')
-lastMessage = Name..Text
-lastLabel = tl
-tl.Name = Name
-tl.Parent = scroll_2
-tl.ZIndex = 10
-tl.Text = Time().." - ["..Name.."]: "..Text
-tl.Size = UDim2.new(0,322,0,84)
-tl.BackgroundTransparency = 1
-tl.BorderSizePixel = 0
-tl.Font = "SourceSans"
-tl.Position = UDim2.new(-1,0,0,alls)
-tl.TextTransparency = 1
-tl.TextScaled = false
-tl.TextSize = 14
-tl.TextWrapped = true
-tl.TextXAlignment = "Left"
-tl.TextYAlignment = "Top"
-tl.TextColor3 = currentText1
-tl.Size = UDim2.new(0,322,0,tl.TextBounds.Y)
-table.insert(text1,tl)
-scroll_2.CanvasSize = UDim2.new(0,0,0,alls+tl.TextBounds.Y)
-scroll_2.CanvasPosition = Vector2.new(0,scroll_2.CanvasPosition.Y+tl.TextBounds.Y)
-tl:TweenPosition(UDim2.new(0,3,0,alls), 'In', 'Quint', 0.5)
-TweenService:Create(tl, TweenInfo.new(1.25, Enum.EasingStyle.Linear), { TextTransparency = 0 }):Play()
+if not r then
+p=0
 end
 end
-function CreateJoinLabel(plr,ID)
-if #scroll_3:GetChildren() >= 2546 then
+local q=Instance.new'TextLabel'
+k=n..o
+l=q
+q.Name=n
+q.Parent=scroll_2
+q.ZIndex=10
+q.Text=Time().." - ["..n.."]: "..o
+q.Size=UDim2.new(0,322,0,84)
+q.BackgroundTransparency=1
+q.BorderSizePixel=0
+q.Font="SourceSans"
+q.Position=UDim2.new(-1,0,0,p)
+q.TextTransparency=1
+q.TextScaled=false
+q.TextSize=14
+q.TextWrapped=true
+q.TextXAlignment="Left"
+q.TextYAlignment="Top"
+q.TextColor3=currentText1
+q.Size=UDim2.new(0,322,0,q.TextBounds.Y)
+table.insert(text1,q)
+scroll_2.CanvasSize=UDim2.new(0,0,0,p+q.TextBounds.Y)
+scroll_2.CanvasPosition=Vector2.new(0,scroll_2.CanvasPosition.Y+q.TextBounds.Y)
+q:TweenPosition(UDim2.new(0,3,0,p),'In','Quint',0.5)
+TweenService:Create(q,TweenInfo.new(1.25,Enum.EasingStyle.Linear),{TextTransparency=0}):Play()
+end
+end
+
+function CreateJoinLabel(n,o)
+if#scroll_3:GetChildren()>=2546 then
 scroll_3:ClearAllChildren()
 end
-local infoFrame = Instance.new("Frame")
-local info1 = Instance.new("TextLabel")
-local info2 = Instance.new("TextLabel")
-local ImageLabel_3 = Instance.new("ImageLabel")
-infoFrame.Name = randomString()
-infoFrame.Parent = scroll_3
-infoFrame.BackgroundColor3 = Color3.new(1, 1, 1)
-infoFrame.BackgroundTransparency = 1
-infoFrame.BorderColor3 = Color3.new(0.105882, 0.164706, 0.207843)
-infoFrame.Size = UDim2.new(1, 0, 0, 50)
-info1.Name = randomString()
-info1.Parent = infoFrame
-info1.BackgroundTransparency = 1
-info1.BorderSizePixel = 0
-info1.Position = UDim2.new(0, 45, 0, 0)
-info1.Size = UDim2.new(0, 135, 1, 0)
-info1.ZIndex = 10
-info1.Font = Enum.Font.SourceSans
-info1.FontSize = Enum.FontSize.Size14
-info1.Text = "Username: "..plr.Name.."\nJoined Server: "..Time()
-info1.TextColor3 = Color3.new(1, 1, 1)
-info1.TextWrapped = true
-info1.TextXAlignment = Enum.TextXAlignment.Left
-info2.Name = randomString()
-info2.Parent = infoFrame
-info2.BackgroundTransparency = 1
-info2.BorderSizePixel = 0
-info2.Position = UDim2.new(0, 185, 0, 0)
-info2.Size = UDim2.new(0, 140, 1, -5)
-info2.ZIndex = 10
-info2.Font = Enum.Font.SourceSans
-info2.FontSize = Enum.FontSize.Size14
-info2.Text = "User ID: "..ID.."\nAccount Age: "..plr.AccountAge.."\nJoined Roblox: Loading..."
-info2.TextColor3 = Color3.new(1, 1, 1)
-info2.TextWrapped = true
-info2.TextXAlignment = Enum.TextXAlignment.Left
-info2.TextYAlignment = Enum.TextYAlignment.Center
-ImageLabel_3.Parent = infoFrame
-ImageLabel_3.BackgroundTransparency = 1
-ImageLabel_3.BorderSizePixel = 0
-ImageLabel_3.Size = UDim2.new(0, 45, 1, 0)
-ImageLabel_3.Image = Players:GetUserThumbnailAsync(ID, Enum.ThumbnailType.AvatarThumbnail, Enum.ThumbnailSize.Size420x420)
-scroll_3.CanvasSize = UDim2.new(0, 0, 0, listlayout.AbsoluteContentSize.Y)
-scroll_3.CanvasPosition = Vector2.new(0,scroll_2.CanvasPosition.Y+infoFrame.AbsoluteSize.Y)
+local p=Instance.new"Frame"
+local q=Instance.new"TextLabel"
+local r=Instance.new"TextLabel"
+local s=Instance.new"ImageLabel"
+p.Name=randomString()
+p.Parent=scroll_3
+p.BackgroundColor3=Color3.new(1,1,1)
+p.BackgroundTransparency=1
+p.BorderColor3=Color3.new(0.105882,0.164706,0.207843)
+p.Size=UDim2.new(1,0,0,50)
+q.Name=randomString()
+q.Parent=p
+q.BackgroundTransparency=1
+q.BorderSizePixel=0
+q.Position=UDim2.new(0,45,0,0)
+q.Size=UDim2.new(0,135,1,0)
+q.ZIndex=10
+q.Font=Enum.Font.SourceSans
+q.FontSize=Enum.FontSize.Size14
+q.Text="Username: "..n.Name.."\nJoined Server: "..Time()
+q.TextColor3=Color3.new(1,1,1)
+q.TextWrapped=true
+q.TextXAlignment=Enum.TextXAlignment.Left
+r.Name=randomString()
+r.Parent=p
+r.BackgroundTransparency=1
+r.BorderSizePixel=0
+r.Position=UDim2.new(0,185,0,0)
+r.Size=UDim2.new(0,140,1,-5)
+r.ZIndex=10
+r.Font=Enum.Font.SourceSans
+r.FontSize=Enum.FontSize.Size14
+r.Text="User ID: "..o.."\nAccount Age: "..n.AccountAge.."\nJoined Roblox: Loading..."
+r.TextColor3=Color3.new(1,1,1)
+r.TextWrapped=true
+r.TextXAlignment=Enum.TextXAlignment.Left
+r.TextYAlignment=Enum.TextYAlignment.Center
+s.Parent=p
+s.BackgroundTransparency=1
+s.BorderSizePixel=0
+s.Size=UDim2.new(0,45,1,0)
+s.Image=Players:GetUserThumbnailAsync(o,Enum.ThumbnailType.AvatarThumbnail,Enum.ThumbnailSize.Size420x420)
+scroll_3.CanvasSize=UDim2.new(0,0,0,listlayout.AbsoluteContentSize.Y)
+scroll_3.CanvasPosition=Vector2.new(0,scroll_2.CanvasPosition.Y+p.AbsoluteSize.Y)
 wait()
-local user = game:HttpGet("https://users.roblox.com/v1/users/"..ID)
-local json = HttpService:JSONDecode(user)
-local date = json["created"]:sub(1,10)
-local splitDates = string.split(date,"-")
-info2.Text = string.gsub(info2.Text, "Loading...",splitDates[2].."/"..splitDates[3].."/"..splitDates[1])
+local t=game:HttpGet("https://users.roblox.com/v1/users/"..o)
+local u=HttpService:JSONDecode(t)
+local v=u.created:sub(1,10)
+local w=string.split(v,"-")
+r.Text=string.gsub(r.Text,"Loading...",w[2].."/"..w[3].."/"..w[1])
 end
-IYMouse.KeyDown:Connect(function(Key)
-if (Key==prefix) then
+
+IYMouse.KeyDown:Connect(function(n)
+if(n==prefix)then
 RunService.RenderStepped:Wait()
 Cmdbar:CaptureFocus()
 maximizeHolder()
 end
 end)
-local lastMinimizeReq = 0
+
+local n=0
 Holder.MouseEnter:Connect(function()
-lastMinimizeReq = 0
+n=0
 maximizeHolder()
 end)
+
 Holder.MouseLeave:Connect(function()
-if not Cmdbar:IsFocused() then
-local reqTime = tick()
-lastMinimizeReq = reqTime
+if not Cmdbar:IsFocused()then
+local o=tick()
+n=o
 wait(1)
-if lastMinimizeReq ~= reqTime then return end
-if not Cmdbar:IsFocused() then
+if n~=o then return end
+if not Cmdbar:IsFocused()then
 minimizeHolder()
 end
 end
 end)
-function updateColors(color,ctype)
-if ctype == shade1 then
-for i,v in pairs(shade1) do
-v.BackgroundColor3 = color
+
+function updateColors(o,p)
+if p==shade1 then
+for q,r in pairs(shade1)do
+r.BackgroundColor3=o
 end
-currentShade1 = color
-elseif ctype == shade2 then
-for i,v in pairs(shade2) do
-v.BackgroundColor3 = color
+currentShade1=o
+elseif p==shade2 then
+for q,r in pairs(shade2)do
+r.BackgroundColor3=o
 end
-currentShade2 = color
-elseif ctype == shade3 then
-for i,v in pairs(shade3) do
-v.BackgroundColor3 = color
+currentShade2=o
+elseif p==shade3 then
+for q,r in pairs(shade3)do
+r.BackgroundColor3=o
 end
-currentShade3 = color
-elseif ctype == text1 then
-for i,v in pairs(text1) do
-v.TextColor3 = color
-if v:IsA("TextBox") then
-v.PlaceholderColor3 = color
-end
-end
-currentText1 = color
-elseif ctype == text2 then
-for i,v in pairs(text2) do
-v.TextColor3 = color
-end
-currentText2 = color
-elseif ctype == scroll then
-for i,v in pairs(scroll) do
-v.ScrollBarImageColor3 = color
-end
-currentScroll = color
+currentShade3=o
+elseif p==text1 then
+for q,r in pairs(text1)do
+r.TextColor3=o
+if r:IsA"TextBox"then
+r.PlaceholderColor3=o
 end
 end
-local colorpickerOpen = false
+currentText1=o
+elseif p==text2 then
+for q,r in pairs(text2)do
+r.TextColor3=o
+end
+currentText2=o
+elseif p==scroll then
+for q,r in pairs(scroll)do
+r.ScrollBarImageColor3=o
+end
+currentScroll=o
+end
+end
+
+local o=false
 ColorsButton.MouseButton1Click:Connect(function()
-cache_currentShade1 = currentShade1
-cache_currentShade2 = currentShade2
-cache_currentShade3 = currentShade3
-cache_currentText1 = currentText1
-cache_currentText2 = currentText2
-cache_currentScroll = currentScroll
-if not colorpickerOpen then
-colorpickerOpen = true
-picker = game:GetObjects("rbxassetid://4908465318")[1]
-picker.Name = randomString()
-picker.Parent = ScaledHolder
-local ColorPicker do
-ColorPicker = {}
-ColorPicker.new = function()
-local newMt = setmetatable({},{})
-local pickerGui = picker.ColorPicker
-local pickerTopBar = pickerGui.TopBar
-local pickerExit = pickerTopBar.Exit
-local pickerFrame = pickerGui.Content
-local colorSpace = pickerFrame.ColorSpaceFrame.ColorSpace
-local colorStrip = pickerFrame.ColorStrip
-local previewFrame = pickerFrame.Preview
-local basicColorsFrame = pickerFrame.BasicColors
-local customColorsFrame = pickerFrame.CustomColors
-local defaultButton = pickerFrame.Default
-local cancelButton = pickerFrame.Cancel
-local shade1Button = pickerFrame.Shade1
-local shade2Button = pickerFrame.Shade2
-local shade3Button = pickerFrame.Shade3
-local text1Button = pickerFrame.Text1
-local text2Button = pickerFrame.Text2
-local scrollButton = pickerFrame.Scroll
-local colorScope = colorSpace.Scope
-local colorArrow = pickerFrame.ArrowFrame.Arrow
-local hueInput = pickerFrame.Hue.Input
-local satInput = pickerFrame.Sat.Input
-local valInput = pickerFrame.Val.Input
-local redInput = pickerFrame.Red.Input
-local greenInput = pickerFrame.Green.Input
-local blueInput = pickerFrame.Blue.Input
-local mouse = IYMouse
-local hue,sat,val = 0,0,1
-local red,green,blue = 1,1,1
-local chosenColor = Color3.new(0,0,0)
-local basicColors = {Color3.new(0,0,0),Color3.new(0.66666668653488,0,0),Color3.new(0,0.33333334326744,0),Color3.new(0.66666668653488,0.33333334326744,0),Color3.new(0,0.66666668653488,0),Color3.new(0.66666668653488,0.66666668653488,0),Color3.new(0,1,0),Color3.new(0.66666668653488,1,0),Color3.new(0,0,0.49803924560547),Color3.new(0.66666668653488,0,0.49803924560547),Color3.new(0,0.33333334326744,0.49803924560547),Color3.new(0.66666668653488,0.33333334326744,0.49803924560547),Color3.new(0,0.66666668653488,0.49803924560547),Color3.new(0.66666668653488,0.66666668653488,0.49803924560547),Color3.new(0,1,0.49803924560547),Color3.new(0.66666668653488,1,0.49803924560547),Color3.new(0,0,1),Color3.new(0.66666668653488,0,1),Color3.new(0,0.33333334326744,1),Color3.new(0.66666668653488,0.33333334326744,1),Color3.new(0,0.66666668653488,1),Color3.new(0.66666668653488,0.66666668653488,1),Color3.new(0,1,1),Color3.new(0.66666668653488,1,1),Color3.new(0.33333334326744,0,0),Color3.new(1,0,0),Color3.new(0.33333334326744,0.33333334326744,0),Color3.new(1,0.33333334326744,0),Color3.new(0.33333334326744,0.66666668653488,0),Color3.new(1,0.66666668653488,0),Color3.new(0.33333334326744,1,0),Color3.new(1,1,0),Color3.new(0.33333334326744,0,0.49803924560547),Color3.new(1,0,0.49803924560547),Color3.new(0.33333334326744,0.33333334326744,0.49803924560547),Color3.new(1,0.33333334326744,0.49803924560547),Color3.new(0.33333334326744,0.66666668653488,0.49803924560547),Color3.new(1,0.66666668653488,0.49803924560547),Color3.new(0.33333334326744,1,0.49803924560547),Color3.new(1,1,0.49803924560547),Color3.new(0.33333334326744,0,1),Color3.new(1,0,1),Color3.new(0.33333334326744,0.33333334326744,1),Color3.new(1,0.33333334326744,1),Color3.new(0.33333334326744,0.66666668653488,1),Color3.new(1,0.66666668653488,1),Color3.new(0.33333334326744,1,1),Color3.new(1,1,1)}
-local customColors = {}
+cache_currentShade1=currentShade1
+cache_currentShade2=currentShade2
+cache_currentShade3=currentShade3
+cache_currentText1=currentText1
+cache_currentText2=currentText2
+cache_currentScroll=currentScroll
+if not o then
+o=true
+picker=game:GetObjects"rbxassetid://4908465318"[1]
+picker.Name=randomString()
+picker.Parent=ScaledHolder
+
+local p do
+p={}
+
+p.new=function()
+local q=setmetatable({},{})
+
+local r=picker.ColorPicker
+local s=r.TopBar
+local t=s.Exit
+local u=r.Content
+local v=u.ColorSpaceFrame.ColorSpace
+local w=u.ColorStrip
+local x=u.Preview
+local y=u.BasicColors
+local z=u.CustomColors
+local A=u.Default
+local B=u.Cancel
+local C=u.Shade1
+local D=u.Shade2
+local E=u.Shade3
+local F=u.Text1
+local G=u.Text2
+local H=u.Scroll
+
+local I=v.Scope
+local J=u.ArrowFrame.Arrow
+
+local K=u.Hue.Input
+local L=u.Sat.Input
+local M=u.Val.Input
+
+local N=u.Red.Input
+local O=u.Green.Input
+local P=u.Blue.Input
+
+local Q=IYMouse
+
+local R,S,T=0,0,1
+local U,V,W=1,1,1
+local X=Color3.new(0,0,0)
+
+local Y={Color3.new(0,0,0),Color3.new(0.66666668653488,0,0),Color3.new(0,0.33333334326744,0),Color3.new(0.66666668653488,0.33333334326744,0),Color3.new(0,0.66666668653488,0),Color3.new(0.66666668653488,0.66666668653488,0),Color3.new(0,1,0),Color3.new(0.66666668653488,1,0),Color3.new(0,0,0.49803924560547),Color3.new(0.66666668653488,0,0.49803924560547),Color3.new(0,0.33333334326744,0.49803924560547),Color3.new(0.66666668653488,0.33333334326744,0.49803924560547),Color3.new(0,0.66666668653488,0.49803924560547),Color3.new(0.66666668653488,0.66666668653488,0.49803924560547),Color3.new(0,1,0.49803924560547),Color3.new(0.66666668653488,1,0.49803924560547),Color3.new(0,0,1),Color3.new(0.66666668653488,0,1),Color3.new(0,0.33333334326744,1),Color3.new(0.66666668653488,0.33333334326744,1),Color3.new(0,0.66666668653488,1),Color3.new(0.66666668653488,0.66666668653488,1),Color3.new(0,1,1),Color3.new(0.66666668653488,1,1),Color3.new(0.33333334326744,0,0),Color3.new(1,0,0),Color3.new(0.33333334326744,0.33333334326744,0),Color3.new(1,0.33333334326744,0),Color3.new(0.33333334326744,0.66666668653488,0),Color3.new(1,0.66666668653488,0),Color3.new(0.33333334326744,1,0),Color3.new(1,1,0),Color3.new(0.33333334326744,0,0.49803924560547),Color3.new(1,0,0.49803924560547),Color3.new(0.33333334326744,0.33333334326744,0.49803924560547),Color3.new(1,0.33333334326744,0.49803924560547),Color3.new(0.33333334326744,0.66666668653488,0.49803924560547),Color3.new(1,0.66666668653488,0.49803924560547),Color3.new(0.33333334326744,1,0.49803924560547),Color3.new(1,1,0.49803924560547),Color3.new(0.33333334326744,0,1),Color3.new(1,0,1),Color3.new(0.33333334326744,0.33333334326744,1),Color3.new(1,0.33333334326744,1),Color3.new(0.33333334326744,0.66666668653488,1),Color3.new(1,0.66666668653488,1),Color3.new(0.33333334326744,1,1),Color3.new(1,1,1)}
+local Z={}
+
 dragGUI(picker)
-local function updateColor(noupdate)
-local relativeX,relativeY,relativeStripY = 219 - hue*219, 199 - sat*199, 199 - val*199
-local hsvColor = Color3.fromHSV(hue,sat,val)
-if noupdate == 2 or not noupdate then
-hueInput.Text = tostring(math.ceil(359*hue))
-satInput.Text = tostring(math.ceil(255*sat))
-valInput.Text = tostring(math.floor(255*val))
+
+local function updateColor(_)
+local aa,ab,ac=219-R*219,199-S*199,199-T*199
+Color3.fromHSV(R,S,T)
+
+if _==2 or not _ then
+K.Text=tostring(math.ceil(359*R))
+L.Text=tostring(math.ceil(255*S))
+M.Text=tostring(math.floor(255*T))
 end
-if noupdate == 1 or not noupdate then
-redInput.Text = tostring(math.floor(255*red))
-greenInput.Text = tostring(math.floor(255*green))
-blueInput.Text = tostring(math.floor(255*blue))
+if _==1 or not _ then
+N.Text=tostring(math.floor(255*U))
+O.Text=tostring(math.floor(255*V))
+P.Text=tostring(math.floor(255*W))
 end
-chosenColor = Color3.new(red,green,blue)
-colorScope.Position = UDim2.new(0,relativeX-9,0,relativeY-9)
-colorStrip.ImageColor3 = Color3.fromHSV(hue,sat,1)
-colorArrow.Position = UDim2.new(0,-2,0,relativeStripY-4)
-previewFrame.BackgroundColor3 = chosenColor
-newMt.Color = chosenColor
-if newMt.Changed then newMt:Changed(chosenColor) end
+
+X=Color3.new(U,V,W)
+
+I.Position=UDim2.new(0,aa-9,0,ab-9)
+w.ImageColor3=Color3.fromHSV(R,S,1)
+J.Position=UDim2.new(0,-2,0,ac-4)
+x.BackgroundColor3=X
+
+q.Color=X
+if q.Changed then q:Changed(X)end
 end
+
 local function colorSpaceInput()
-local relativeX = mouse.X - colorSpace.AbsolutePosition.X
-local relativeY = mouse.Y - colorSpace.AbsolutePosition.Y
-if relativeX < 0 then relativeX = 0 elseif relativeX > 219 then relativeX = 219 end
-if relativeY < 0 then relativeY = 0 elseif relativeY > 199 then relativeY = 199 end
-hue = (219 - relativeX)/219
-sat = (199 - relativeY)/199
-local hsvColor = Color3.fromHSV(hue,sat,val)
-red,green,blue = hsvColor.r,hsvColor.g,hsvColor.b
+local aa=Q.X-v.AbsolutePosition.X
+local ab=Q.Y-v.AbsolutePosition.Y
+
+if aa<0 then aa=0 elseif aa>219 then aa=219 end
+if ab<0 then ab=0 elseif ab>199 then ab=199 end
+
+R=(219-aa)/219
+S=(199-ab)/199
+
+local ac=Color3.fromHSV(R,S,T)
+U,V,W=ac.r,ac.g,ac.b
+
 updateColor()
 end
+
 local function colorStripInput()
-local relativeY = mouse.Y - colorStrip.AbsolutePosition.Y
-if relativeY < 0 then relativeY = 0 elseif relativeY > 199 then relativeY = 199 end
-val = (199 - relativeY)/199
-local hsvColor = Color3.fromHSV(hue,sat,val)
-red,green,blue = hsvColor.r,hsvColor.g,hsvColor.b
+local aa=Q.Y-w.AbsolutePosition.Y
+
+if aa<0 then aa=0 elseif aa>199 then aa=199 end
+
+T=(199-aa)/199
+
+local ab=Color3.fromHSV(R,S,T)
+U,V,W=ab.r,ab.g,ab.b
+
 updateColor()
 end
-local function hookButtons(frame,func)
-frame.ArrowFrame.Up.InputBegan:Connect(function(input)
-if input.UserInputType == Enum.UserInputType.MouseMovement then
-frame.ArrowFrame.Up.BackgroundTransparency = 0.5
-elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
-local releaseEvent,runEvent
-local startTime = tick()
-local pressing = true
-local startNum = tonumber(frame.Text)
-if not startNum then return end
-releaseEvent = UserInputService.InputEnded:Connect(function(input)
-if input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+
+local function hookButtons(aa,ab)
+aa.ArrowFrame.Up.InputBegan:Connect(function(ac)
+if ac.UserInputType==Enum.UserInputType.MouseMovement then
+aa.ArrowFrame.Up.BackgroundTransparency=0.5
+elseif ac.UserInputType==Enum.UserInputType.MouseButton1 then
+
+
+local _=tick()
+local ad=true
+local ae=tonumber(aa.Text)
+
+if not ae then return end
+
+releaseEvent=UserInputService.InputEnded:Connect(function(af)
+if af.UserInputType~=Enum.UserInputType.MouseButton1 then return end
 releaseEvent:Disconnect()
-pressing = false
+ad=false
 end)
-startNum = startNum + 1
-func(startNum)
-while pressing do
-if tick()-startTime > 0.3 then
-startNum = startNum + 1
-func(startNum)
+
+ae=ae+1
+ab(ae)
+while ad do
+if tick()-_>0.3 then
+ae=ae+1
+ab(ae)
 end
 wait(0.1)
 end
 end
 end)
-frame.ArrowFrame.Up.InputEnded:Connect(function(input)
-if input.UserInputType == Enum.UserInputType.MouseMovement then
-frame.ArrowFrame.Up.BackgroundTransparency = 1
+
+aa.ArrowFrame.Up.InputEnded:Connect(function(ac)
+if ac.UserInputType==Enum.UserInputType.MouseMovement then
+aa.ArrowFrame.Up.BackgroundTransparency=1
 end
 end)
-frame.ArrowFrame.Down.InputBegan:Connect(function(input)
-if input.UserInputType == Enum.UserInputType.MouseMovement then
-frame.ArrowFrame.Down.BackgroundTransparency = 0.5
-elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
-local releaseEvent,runEvent
-local startTime = tick()
-local pressing = true
-local startNum = tonumber(frame.Text)
-if not startNum then return end
-releaseEvent = UserInputService.InputEnded:Connect(function(input)
-if input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+
+aa.ArrowFrame.Down.InputBegan:Connect(function(ac)
+if ac.UserInputType==Enum.UserInputType.MouseMovement then
+aa.ArrowFrame.Down.BackgroundTransparency=0.5
+elseif ac.UserInputType==Enum.UserInputType.MouseButton1 then
+
+
+local ad=tick()
+local ae=true
+local af=tonumber(aa.Text)
+
+if not af then return end
+
+releaseEvent=UserInputService.InputEnded:Connect(function(_)
+if _.UserInputType~=Enum.UserInputType.MouseButton1 then return end
 releaseEvent:Disconnect()
-pressing = false
+ae=false
 end)
-startNum = startNum - 1
-func(startNum)
-while pressing do
-if tick()-startTime > 0.3 then
-startNum = startNum - 1
-func(startNum)
+
+af=af-1
+ab(af)
+while ae do
+if tick()-ad>0.3 then
+af=af-1
+ab(af)
 end
 wait(0.1)
 end
 end
 end)
-frame.ArrowFrame.Down.InputEnded:Connect(function(input)
-if input.UserInputType == Enum.UserInputType.MouseMovement then
-frame.ArrowFrame.Down.BackgroundTransparency = 1
+
+aa.ArrowFrame.Down.InputEnded:Connect(function(ac)
+if ac.UserInputType==Enum.UserInputType.MouseMovement then
+aa.ArrowFrame.Down.BackgroundTransparency=1
 end
 end)
 end
-colorSpace.InputBegan:Connect(function(input)
-if input.UserInputType == Enum.UserInputType.MouseButton1 then
-local releaseEvent,mouseEvent
-releaseEvent = UserInputService.InputEnded:Connect(function(input)
-if input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
-releaseEvent:Disconnect()
-mouseEvent:Disconnect()
+
+v.InputBegan:Connect(function(aa)
+if aa.UserInputType==Enum.UserInputType.MouseButton1 then
+local ab,ac
+
+ab=UserInputService.InputEnded:Connect(function(ad)
+if ad.UserInputType~=Enum.UserInputType.MouseButton1 then return end
+ab:Disconnect()
+ac:Disconnect()
 end)
-mouseEvent = UserInputService.InputChanged:Connect(function(input)
-if input.UserInputType == Enum.UserInputType.MouseMovement then
+
+ac=UserInputService.InputChanged:Connect(function(ad)
+if ad.UserInputType==Enum.UserInputType.MouseMovement then
 colorSpaceInput()
 end
 end)
+
 colorSpaceInput()
 end
 end)
-colorStrip.InputBegan:Connect(function(input)
-if input.UserInputType == Enum.UserInputType.MouseButton1 then
-local releaseEvent,mouseEvent
-releaseEvent = UserInputService.InputEnded:Connect(function(input)
-if input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
-releaseEvent:Disconnect()
-mouseEvent:Disconnect()
+
+w.InputBegan:Connect(function(aa)
+if aa.UserInputType==Enum.UserInputType.MouseButton1 then
+local ab,ac
+
+ab=UserInputService.InputEnded:Connect(function(ad)
+if ad.UserInputType~=Enum.UserInputType.MouseButton1 then return end
+ab:Disconnect()
+ac:Disconnect()
 end)
-mouseEvent = UserInputService.InputChanged:Connect(function(input)
-if input.UserInputType == Enum.UserInputType.MouseMovement then
+
+ac=UserInputService.InputChanged:Connect(function(ad)
+if ad.UserInputType==Enum.UserInputType.MouseMovement then
 colorStripInput()
 end
 end)
+
 colorStripInput()
 end
 end)
-local function updateHue(str)
-local num = tonumber(str)
-if num then
-hue = math.clamp(math.floor(num),0,359)/359
-local hsvColor = Color3.fromHSV(hue,sat,val)
-red,green,blue = hsvColor.r,hsvColor.g,hsvColor.b
-hueInput.Text = tostring(hue*359)
+
+local function updateHue(aa)
+local ab=tonumber(aa)
+if ab then
+R=math.clamp(math.floor(ab),0,359)/359
+local ac=Color3.fromHSV(R,S,T)
+U,V,W=ac.r,ac.g,ac.b
+K.Text=tostring(R*359)
 updateColor(1)
 end
 end
-hueInput.FocusLost:Connect(function() updateHue(hueInput.Text) end) hookButtons(hueInput,updateHue)
-local function updateSat(str)
-local num = tonumber(str)
-if num then
-sat = math.clamp(math.floor(num),0,255)/255
-local hsvColor = Color3.fromHSV(hue,sat,val)
-red,green,blue = hsvColor.r,hsvColor.g,hsvColor.b
-satInput.Text = tostring(sat*255)
+K.FocusLost:Connect(function()updateHue(K.Text)end)hookButtons(K,updateHue)
+
+local function updateSat(aa)
+local ab=tonumber(aa)
+if ab then
+S=math.clamp(math.floor(ab),0,255)/255
+local ac=Color3.fromHSV(R,S,T)
+U,V,W=ac.r,ac.g,ac.b
+L.Text=tostring(S*255)
 updateColor(1)
 end
 end
-satInput.FocusLost:Connect(function() updateSat(satInput.Text) end) hookButtons(satInput,updateSat)
-local function updateVal(str)
-local num = tonumber(str)
-if num then
-val = math.clamp(math.floor(num),0,255)/255
-local hsvColor = Color3.fromHSV(hue,sat,val)
-red,green,blue = hsvColor.r,hsvColor.g,hsvColor.b
-valInput.Text = tostring(val*255)
+L.FocusLost:Connect(function()updateSat(L.Text)end)hookButtons(L,updateSat)
+
+local function updateVal(aa)
+local ab=tonumber(aa)
+if ab then
+T=math.clamp(math.floor(ab),0,255)/255
+local ac=Color3.fromHSV(R,S,T)
+U,V,W=ac.r,ac.g,ac.b
+M.Text=tostring(T*255)
 updateColor(1)
 end
 end
-valInput.FocusLost:Connect(function() updateVal(valInput.Text) end) hookButtons(valInput,updateVal)
-local function updateRed(str)
-local num = tonumber(str)
-if num then
-red = math.clamp(math.floor(num),0,255)/255
-local newColor = Color3.new(red,green,blue)
-hue,sat,val = Color3.toHSV(newColor)
-redInput.Text = tostring(red*255)
+M.FocusLost:Connect(function()updateVal(M.Text)end)hookButtons(M,updateVal)
+
+local function updateRed(aa)
+local ab=tonumber(aa)
+if ab then
+U=math.clamp(math.floor(ab),0,255)/255
+local ac=Color3.new(U,V,W)
+R,S,T=Color3.toHSV(ac)
+N.Text=tostring(U*255)
 updateColor(2)
 end
 end
-redInput.FocusLost:Connect(function() updateRed(redInput.Text) end) hookButtons(redInput,updateRed)
-local function updateGreen(str)
-local num = tonumber(str)
-if num then
-green = math.clamp(math.floor(num),0,255)/255
-local newColor = Color3.new(red,green,blue)
-hue,sat,val = Color3.toHSV(newColor)
-greenInput.Text = tostring(green*255)
+N.FocusLost:Connect(function()updateRed(N.Text)end)hookButtons(N,updateRed)
+
+local function updateGreen(aa)
+local ab=tonumber(aa)
+if ab then
+V=math.clamp(math.floor(ab),0,255)/255
+local ac=Color3.new(U,V,W)
+R,S,T=Color3.toHSV(ac)
+O.Text=tostring(V*255)
 updateColor(2)
 end
 end
-greenInput.FocusLost:Connect(function() updateGreen(greenInput.Text) end) hookButtons(greenInput,updateGreen)
-local function updateBlue(str)
-local num = tonumber(str)
-if num then
-blue = math.clamp(math.floor(num),0,255)/255
-local newColor = Color3.new(red,green,blue)
-hue,sat,val = Color3.toHSV(newColor)
-blueInput.Text = tostring(blue*255)
+O.FocusLost:Connect(function()updateGreen(O.Text)end)hookButtons(O,updateGreen)
+
+local function updateBlue(aa)
+local ab=tonumber(aa)
+if ab then
+W=math.clamp(math.floor(ab),0,255)/255
+local ac=Color3.new(U,V,W)
+R,S,T=Color3.toHSV(ac)
+P.Text=tostring(W*255)
 updateColor(2)
 end
 end
-blueInput.FocusLost:Connect(function() updateBlue(blueInput.Text) end) hookButtons(blueInput,updateBlue)
-local colorChoice = Instance.new("TextButton")
-colorChoice.Name = "Choice"
-colorChoice.Size = UDim2.new(0,25,0,18)
-colorChoice.BorderColor3 = Color3.new(96/255,96/255,96/255)
-colorChoice.Text = ""
-colorChoice.AutoButtonColor = false
-colorChoice.ZIndex = 10
-local row = 0
-local column = 0
-for i,v in pairs(basicColors) do
-local newColor = colorChoice:Clone()
-newColor.BackgroundColor3 = v
-newColor.Position = UDim2.new(0,1 + 30*column,0,21 + 23*row)
-newColor.MouseButton1Click:Connect(function()
-red,green,blue = v.r,v.g,v.b
-local newColor = Color3.new(red,green,blue)
-hue,sat,val = Color3.toHSV(newColor)
+P.FocusLost:Connect(function()updateBlue(P.Text)end)hookButtons(P,updateBlue)
+
+local aa=Instance.new"TextButton"
+aa.Name="Choice"
+aa.Size=UDim2.new(0,25,0,18)
+aa.BorderColor3=Color3.new(0.3764705882352941,0.3764705882352941,0.3764705882352941)
+aa.Text=""
+aa.AutoButtonColor=false
+aa.ZIndex=10
+
+local ab=0
+local ac=0
+for ad,ae in pairs(Y)do
+local af=aa:Clone()
+af.BackgroundColor3=ae
+af.Position=UDim2.new(0,1+30*ac,0,21+23*ab)
+
+af.MouseButton1Click:Connect(function()
+U,V,W=ae.r,ae.g,ae.b
+local _=Color3.new(U,V,W)
+R,S,T=Color3.toHSV(_)
 updateColor()
 end)
-newColor.Parent = basicColorsFrame
-column = column + 1
-if column == 6 then row = row + 1 column = 0 end
+
+af.Parent=y
+ac=ac+1
+if ac==6 then ab=ab+1 ac=0 end
 end
-row = 0
-column = 0
-for i = 1,12 do
-local color = customColors[i] or Color3.new(0,0,0)
-local newColor = colorChoice:Clone()
-newColor.BackgroundColor3 = color
-newColor.Position = UDim2.new(0,1 + 30*column,0,20 + 23*row)
-newColor.MouseButton1Click:Connect(function()
-local curColor = customColors[i] or Color3.new(0,0,0)
-red,green,blue = curColor.r,curColor.g,curColor.b
-hue,sat,val = Color3.toHSV(curColor)
+
+ab=0
+ac=0
+for ad=1,12 do
+local ae=Z[ad]or Color3.new(0,0,0)
+local af=aa:Clone()
+af.BackgroundColor3=ae
+af.Position=UDim2.new(0,1+30*ac,0,20+23*ab)
+
+af.MouseButton1Click:Connect(function()
+local _=Z[ad]or Color3.new(0,0,0)
+U,V,W=_.r,_.g,_.b
+R,S,T=Color3.toHSV(_)
 updateColor()
 end)
-newColor.MouseButton2Click:Connect(function()
-customColors[i] = chosenColor
-newColor.BackgroundColor3 = chosenColor
+
+af.MouseButton2Click:Connect(function()
+Z[ad]=X
+af.BackgroundColor3=X
 end)
-newColor.Parent = customColorsFrame
-column = column + 1
-if column == 6 then row = row + 1 column = 0 end
+
+af.Parent=z
+ac=ac+1
+if ac==6 then ab=ab+1 ac=0 end
 end
-shade1Button.MouseButton1Click:Connect(function() if newMt.Confirm then newMt:Confirm(chosenColor,shade1) end end)
-shade1Button.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then shade1Button.BackgroundTransparency = 0.4 end end)
-shade1Button.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then shade1Button.BackgroundTransparency = 0 end end)
-shade2Button.MouseButton1Click:Connect(function() if newMt.Confirm then newMt:Confirm(chosenColor,shade2) end end)
-shade2Button.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then shade2Button.BackgroundTransparency = 0.4 end end)
-shade2Button.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then shade2Button.BackgroundTransparency = 0 end end)
-shade3Button.MouseButton1Click:Connect(function() if newMt.Confirm then newMt:Confirm(chosenColor,shade3) end end)
-shade3Button.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then shade3Button.BackgroundTransparency = 0.4 end end)
-shade3Button.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then shade3Button.BackgroundTransparency = 0 end end)
-text1Button.MouseButton1Click:Connect(function() if newMt.Confirm then newMt:Confirm(chosenColor,text1) end end)
-text1Button.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then text1Button.BackgroundTransparency = 0.4 end end)
-text1Button.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then text1Button.BackgroundTransparency = 0 end end)
-text2Button.MouseButton1Click:Connect(function() if newMt.Confirm then newMt:Confirm(chosenColor,text2) end end)
-text2Button.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then text2Button.BackgroundTransparency = 0.4 end end)
-text2Button.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then text2Button.BackgroundTransparency = 0 end end)
-scrollButton.MouseButton1Click:Connect(function() if newMt.Confirm then newMt:Confirm(chosenColor,scroll) end end)
-scrollButton.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then scrollButton.BackgroundTransparency = 0.4 end end)
-scrollButton.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then scrollButton.BackgroundTransparency = 0 end end)
-cancelButton.MouseButton1Click:Connect(function() if newMt.Cancel then newMt:Cancel() end end)
-cancelButton.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then cancelButton.BackgroundTransparency = 0.4 end end)
-cancelButton.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then cancelButton.BackgroundTransparency = 0 end end)
-defaultButton.MouseButton1Click:Connect(function() if newMt.Default then newMt:Default() end end)
-defaultButton.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then defaultButton.BackgroundTransparency = 0.4 end end)
-defaultButton.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then defaultButton.BackgroundTransparency = 0 end end)
-pickerExit.MouseButton1Click:Connect(function()
-picker:TweenPosition(UDim2.new(0.5, -219, 0, -500), "InOut", "Quart", 0.5, true, nil)
+
+C.MouseButton1Click:Connect(function()if q.Confirm then q:Confirm(X,shade1)end end)
+C.InputBegan:Connect(function(ad)if ad.UserInputType==Enum.UserInputType.MouseMovement then C.BackgroundTransparency=0.4 end end)
+C.InputEnded:Connect(function(ad)if ad.UserInputType==Enum.UserInputType.MouseMovement then C.BackgroundTransparency=0 end end)
+
+D.MouseButton1Click:Connect(function()if q.Confirm then q:Confirm(X,shade2)end end)
+D.InputBegan:Connect(function(ad)if ad.UserInputType==Enum.UserInputType.MouseMovement then D.BackgroundTransparency=0.4 end end)
+D.InputEnded:Connect(function(ad)if ad.UserInputType==Enum.UserInputType.MouseMovement then D.BackgroundTransparency=0 end end)
+
+E.MouseButton1Click:Connect(function()if q.Confirm then q:Confirm(X,shade3)end end)
+E.InputBegan:Connect(function(ad)if ad.UserInputType==Enum.UserInputType.MouseMovement then E.BackgroundTransparency=0.4 end end)
+E.InputEnded:Connect(function(ad)if ad.UserInputType==Enum.UserInputType.MouseMovement then E.BackgroundTransparency=0 end end)
+
+F.MouseButton1Click:Connect(function()if q.Confirm then q:Confirm(X,text1)end end)
+F.InputBegan:Connect(function(ad)if ad.UserInputType==Enum.UserInputType.MouseMovement then F.BackgroundTransparency=0.4 end end)
+F.InputEnded:Connect(function(ad)if ad.UserInputType==Enum.UserInputType.MouseMovement then F.BackgroundTransparency=0 end end)
+
+G.MouseButton1Click:Connect(function()if q.Confirm then q:Confirm(X,text2)end end)
+G.InputBegan:Connect(function(ad)if ad.UserInputType==Enum.UserInputType.MouseMovement then G.BackgroundTransparency=0.4 end end)
+G.InputEnded:Connect(function(ad)if ad.UserInputType==Enum.UserInputType.MouseMovement then G.BackgroundTransparency=0 end end)
+
+H.MouseButton1Click:Connect(function()if q.Confirm then q:Confirm(X,scroll)end end)
+H.InputBegan:Connect(function(ad)if ad.UserInputType==Enum.UserInputType.MouseMovement then H.BackgroundTransparency=0.4 end end)
+H.InputEnded:Connect(function(ad)if ad.UserInputType==Enum.UserInputType.MouseMovement then H.BackgroundTransparency=0 end end)
+
+B.MouseButton1Click:Connect(function()if q.Cancel then q:Cancel()end end)
+B.InputBegan:Connect(function(ad)if ad.UserInputType==Enum.UserInputType.MouseMovement then B.BackgroundTransparency=0.4 end end)
+B.InputEnded:Connect(function(ad)if ad.UserInputType==Enum.UserInputType.MouseMovement then B.BackgroundTransparency=0 end end)
+
+A.MouseButton1Click:Connect(function()if q.Default then q:Default()end end)
+A.InputBegan:Connect(function(ad)if ad.UserInputType==Enum.UserInputType.MouseMovement then A.BackgroundTransparency=0.4 end end)
+A.InputEnded:Connect(function(ad)if ad.UserInputType==Enum.UserInputType.MouseMovement then A.BackgroundTransparency=0 end end)
+
+t.MouseButton1Click:Connect(function()
+picker:TweenPosition(UDim2.new(0.5,-219,0,-500),"InOut","Quart",0.5,true,nil)
 end)
+
 updateColor()
-newMt.SetColor = function(self,color)
-red,green,blue = color.r,color.g,color.b
-hue,sat,val = Color3.toHSV(color)
+
+q.SetColor=function(ad,ae)
+U,V,W=ae.r,ae.g,ae.b
+R,S,T=Color3.toHSV(ae)
 updateColor()
 end
-return newMt
+
+return q
 end
 end
-picker:TweenPosition(UDim2.new(0.5, -219, 0, 100), "InOut", "Quart", 0.5, true, nil)
-local Npicker = ColorPicker.new()
-Npicker.Confirm = function(self,color,ctype) updateColors(color,ctype) wait() updatesaves() end
-Npicker.Cancel = function(self)
+
+picker:TweenPosition(UDim2.new(0.5,-219,0,100),"InOut","Quart",0.5,true,nil)
+
+local aa=p.new()
+aa.Confirm=function(ab,ac,ad)updateColors(ac,ad)wait()updatesaves()end
+aa.Cancel=function(ab)
 updateColors(cache_currentShade1,shade1)
 updateColors(cache_currentShade2,shade2)
 updateColors(cache_currentShade3,shade3)
@@ -3375,149 +3743,165 @@ updateColors(cache_currentScroll,scroll)
 wait()
 updatesaves()
 end
-Npicker.Default = function(self)
-updateColors(Color3.fromRGB(36, 36, 37),shade1)
-updateColors(Color3.fromRGB(46, 46, 47),shade2)
-updateColors(Color3.fromRGB(78, 78, 79),shade3)
-updateColors(Color3.new(1, 1, 1),text1)
-updateColors(Color3.new(0, 0, 0),text2)
+aa.Default=function(ab)
+updateColors(Color3.fromRGB(36,36,37),shade1)
+updateColors(Color3.fromRGB(46,46,47),shade2)
+updateColors(Color3.fromRGB(78,78,79),shade3)
+updateColors(Color3.new(1,1,1),text1)
+updateColors(Color3.new(0,0,0),text2)
 updateColors(Color3.fromRGB(78,78,79),scroll)
 wait()
 updatesaves()
 end
 else
-picker:TweenPosition(UDim2.new(0.5, -219, 0, 100), "InOut", "Quart", 0.5, true, nil)
+picker:TweenPosition(UDim2.new(0.5,-219,0,100),"InOut","Quart",0.5,true,nil)
 end
 end)
+
+
 SettingsButton.MouseButton1Click:Connect(function()
-if SettingsOpen == false then SettingsOpen = true
-Settings:TweenPosition(UDim2.new(0, 0, 0, 45), "InOut", "Quart", 0.5, true, nil)
-CMDsF.Visible = false
-else SettingsOpen = false
-CMDsF.Visible = true
-Settings:TweenPosition(UDim2.new(0, 0, 0, 220), "InOut", "Quart", 0.5, true, nil)
+if h==false then h=true
+Settings:TweenPosition(UDim2.new(0,0,0,45),"InOut","Quart",0.5,true,nil)
+CMDsF.Visible=false
+else h=false
+CMDsF.Visible=true
+Settings:TweenPosition(UDim2.new(0,0,0,220),"InOut","Quart",0.5,true,nil)
 end
 end)
+
 On.MouseButton1Click:Connect(function()
-if isHidden == false then
-if StayOpen == false then
-StayOpen = true
-On.BackgroundTransparency = 0
+if i==false then
+if StayOpen==false then
+StayOpen=true
+On.BackgroundTransparency=0
 else
-StayOpen = false
-On.BackgroundTransparency = 1
+StayOpen=false
+On.BackgroundTransparency=1
 end
 updatesaves()
 end
 end)
+
 Clear.MouseButton1Down:Connect(function()
-for _, child in pairs(scroll_2:GetChildren()) do
-child:Destroy()
+for aa,ab in pairs(scroll_2:GetChildren())do
+ab:Destroy()
 end
-scroll_2.CanvasSize = UDim2.new(0, 0, 0, 10)
+scroll_2.CanvasSize=UDim2.new(0,0,0,10)
 end)
+
 Clear_2.MouseButton1Down:Connect(function()
-for _, child in pairs(scroll_3:GetChildren()) do
-child:Destroy()
+for aa,ab in pairs(scroll_3:GetChildren())do
+ab:Destroy()
 end
-scroll_3.CanvasSize = UDim2.new(0, 0, 0, 10)
+scroll_3.CanvasSize=UDim2.new(0,0,0,10)
 end)
+
 Toggle.MouseButton1Down:Connect(function()
 if logsEnabled then
-logsEnabled = false
-Toggle.Text = 'Disabled'
+logsEnabled=false
+Toggle.Text='Disabled'
 updatesaves()
 else
-logsEnabled = true
-Toggle.Text = 'Enabled'
+logsEnabled=true
+Toggle.Text='Enabled'
 updatesaves()
 end
 end)
+
 Toggle_2.MouseButton1Down:Connect(function()
 if jLogsEnabled then
-jLogsEnabled = false
-Toggle_2.Text = 'Disabled'
+jLogsEnabled=false
+Toggle_2.Text='Disabled'
 updatesaves()
 else
-jLogsEnabled = true
-Toggle_2.Text = 'Enabled'
+jLogsEnabled=true
+Toggle_2.Text='Enabled'
 updatesaves()
 end
 end)
+
 selectChat.MouseButton1Down:Connect(function()
-join.Visible = false
-chat.Visible = true
+join.Visible=false
+chat.Visible=true
 table.remove(shade3,table.find(shade3,selectChat))
 table.remove(shade2,table.find(shade2,selectJoin))
 table.insert(shade2,selectChat)
 table.insert(shade3,selectJoin)
-selectJoin.BackgroundColor3 = currentShade3
-selectChat.BackgroundColor3 = currentShade2
+selectJoin.BackgroundColor3=currentShade3
+selectChat.BackgroundColor3=currentShade2
 end)
+
 selectJoin.MouseButton1Down:Connect(function()
-chat.Visible = false
-join.Visible = true
+chat.Visible=false
+join.Visible=true
 table.remove(shade3,table.find(shade3,selectJoin))
 table.remove(shade2,table.find(shade2,selectChat))
 table.insert(shade2,selectJoin)
 table.insert(shade3,selectChat)
-selectChat.BackgroundColor3 = currentShade3
-selectJoin.BackgroundColor3 = currentShade2
+selectChat.BackgroundColor3=currentShade3
+selectJoin.BackgroundColor3=currentShade2
 end)
-if not writefileExploit() then
-notify("Saves", "Your exploit does not support read/write file. Your settings will not save.")
+
+if not writefileExploit()then
+notify("Saves","Your exploit does not support read/write file. Your settings will not save.")
 end
-function sendChatWebhook(player, message)
-if httprequest and vtype(logsWebhook, "string") then
-local log = HttpService:JSONEncode({
-content = message,
-avatar_url = "https://files.catbox.moe/i968v2.jpg",
-username = formatUsername(player),
-allowed_mentions = {parse = {}}
-})
-httprequest({
-Url = logsWebhook,
-Method = "POST",
-Headers = {["Content-Type"] = "application/json"},
-Body = log
-})
+
+function sendChatWebhook(aa,ab)
+if httprequest and vtype(logsWebhook,"string")then
+local ac=HttpService:JSONEncode{
+content=ab,
+avatar_url="https://files.catbox.moe/i968v2.jpg",
+username=formatUsername(aa),
+allowed_mentions={parse={}}
+}
+
+httprequest{
+Url=logsWebhook,
+Method="POST",
+Headers={["Content-Type"]="application/json"},
+Body=ac
+}
 end
 end
-ChatLog = function(player)
-player.Chatted:Connect(function(message)
-if logsEnabled == true then
-CreateLabel(player.Name, message)
-sendChatWebhook(player, message)
+
+ChatLog=function(aa)
+aa.Chatted:Connect(function(ab)
+if logsEnabled==true then
+CreateLabel(aa.Name,ab)
+sendChatWebhook(aa,ab)
 end
 end)
 end
-JoinLog = function(plr)
-if jLogsEnabled == true then
-CreateJoinLabel(plr,plr.UserId)
+
+JoinLog=function(aa)
+if jLogsEnabled==true then
+CreateJoinLabel(aa,aa.UserId)
 end
 end
-CleanFileName = function(name)
-return tostring(name):gsub("[*\\?:<>|]+", ""):sub(1, 175)
+
+CleanFileName=function(aa)
+return tostring(aa):gsub("[*\\?:<>|]+",""):sub(1,175)
 end
+
 SaveChatlogs.MouseButton1Down:Connect(function()
-if writefileExploit() then
-if #scroll_2:GetChildren() > 0 then
+if writefileExploit()then
+if#scroll_2:GetChildren()>0 then
 notify("Loading",'Hold on a sec')
-local placeName = CleanFileName(MarketplaceService:GetProductInfo(PlaceId).Name)
-local writelogs = '-- Zero Yield Chat logs for "'..placeName..'"\n'
-for _, child in pairs(scroll_2:GetChildren()) do
-writelogs = writelogs..'\n'..child.Text
+local aa=CleanFileName(MarketplaceService:GetProductInfo(PlaceId).Name)
+local ab='-- Zero Yield Chat logs for "'..aa..'"\n'
+for ac,ad in pairs(scroll_2:GetChildren())do
+ab=ab..'\n'..ad.Text
 end
-local writelogsFile = tostring(writelogs)
-local fileext = 0
+local ac=tostring(ab)
+local ad=0
 local function nameFile()
-local file
-pcall(function() file = readfile(placeName..' Chat Logs ('..fileext..').txt') end)
-if file then
-fileext = fileext+1
+local ae
+pcall(function()ae=d(aa..' Chat Logs ('..ad..').txt')end)
+if ae then
+ad=ad+1
 nameFile()
 else
-writefileCooldown(placeName..' Chat Logs ('..fileext..').txt', writelogsFile)
+writefileCooldown(aa..' Chat Logs ('..ad..').txt',ac)
 end
 end
 nameFile()
@@ -3527,154 +3911,175 @@ else
 notify('Chat Logs','Your exploit does not support write file. You cannot save chat logs.')
 end
 end)
+
 if isLegacyChat then
-for _, plr in pairs(Players:GetPlayers()) do
-ChatLog(plr)
+for aa,ab in pairs(Players:GetPlayers())do
+ChatLog(ab)
 end
 end
-Players.PlayerRemoving:Connect(function(player)
-if ESPenabled or CHMSenabled or COREGUI:FindFirstChild(player.Name..'_LC') then
-for i,v in pairs(COREGUI:GetChildren()) do
-if v.Name == player.Name..'_ESP' or v.Name == player.Name..'_LC' or v.Name == player.Name..'_CHMS' then
-v:Destroy()
+
+Players.PlayerRemoving:Connect(function(aa)
+if ESPenabled or CHMSenabled or COREGUI:FindFirstChild(aa.Name..'_LC')then
+for ab,ac in pairs(COREGUI:GetChildren())do
+if ac.Name==aa.Name..'_ESP'or ac.Name==aa.Name..'_LC'or ac.Name==aa.Name..'_CHMS'then
+ac:Destroy()
 end
 end
 end
-if viewing ~= nil and player == viewing then
-workspace.CurrentCamera.CameraSubject = Players.LocalPlayer.Character
-viewing = nil
+if viewing~=nil and aa==viewing then
+workspace.CurrentCamera.CameraSubject=Players.LocalPlayer.Character
+viewing=nil
 if viewDied then
 viewDied:Disconnect()
 viewChanged:Disconnect()
 end
 notify('Spectate','View turned off (player left)')
 end
-eventEditor.FireEvent("OnLeave", player.Name)
+eventEditor.FireEvent("OnLeave",aa.Name)
 end)
+
 Exit.MouseButton1Down:Connect(function()
-logs:TweenPosition(UDim2.new(0, 0, 1, 10), "InOut", "Quart", 0.3, true, nil)
+logs:TweenPosition(UDim2.new(0,0,1,10),"InOut","Quart",0.3,true,nil)
 end)
+
 Hide.MouseButton1Down:Connect(function()
-if logs.Position ~= UDim2.new(0, 0, 1, -20) then
-logs:TweenPosition(UDim2.new(0, 0, 1, -20), "InOut", "Quart", 0.3, true, nil)
+if logs.Position~=UDim2.new(0,0,1,-20)then
+logs:TweenPosition(UDim2.new(0,0,1,-20),"InOut","Quart",0.3,true,nil)
 else
-logs:TweenPosition(UDim2.new(0, 0, 1, -265), "InOut", "Quart", 0.3, true, nil)
+logs:TweenPosition(UDim2.new(0,0,1,-265),"InOut","Quart",0.3,true,nil)
 end
 end)
+
 EventBind.MouseButton1Click:Connect(function()
-eventEditor.Frame:TweenPosition(UDim2.new(0.5,-175,0.5,-101), "InOut", "Quart", 0.5, true, nil)
+eventEditor.Frame:TweenPosition(UDim2.new(0.5,-175,0.5,-101),"InOut","Quart",0.5,true,nil)
 end)
+
 Keybinds.MouseButton1Click:Connect(function()
-KeybindsFrame:TweenPosition(UDim2.new(0, 0, 0, 0), "InOut", "Quart", 0.5, true, nil)
+KeybindsFrame:TweenPosition(UDim2.new(0,0,0,0),"InOut","Quart",0.5,true,nil)
 wait(0.5)
-SettingsHolder.Visible = false
+SettingsHolder.Visible=false
 end)
+
 Close.MouseButton1Click:Connect(function()
-SettingsHolder.Visible = true
-KeybindsFrame:TweenPosition(UDim2.new(0, 0, 0, 175), "InOut", "Quart", 0.5, true, nil)
+SettingsHolder.Visible=true
+KeybindsFrame:TweenPosition(UDim2.new(0,0,0,175),"InOut","Quart",0.5,true,nil)
 end)
+
 Keybinds.MouseButton1Click:Connect(function()
-KeybindsFrame:TweenPosition(UDim2.new(0, 0, 0, 0), "InOut", "Quart", 0.5, true, nil)
+KeybindsFrame:TweenPosition(UDim2.new(0,0,0,0),"InOut","Quart",0.5,true,nil)
 wait(0.5)
-SettingsHolder.Visible = false
+SettingsHolder.Visible=false
 end)
+
 Add.MouseButton1Click:Connect(function()
-KeybindEditor:TweenPosition(UDim2.new(0.5, -180, 0, 260), "InOut", "Quart", 0.5, true, nil)
+KeybindEditor:TweenPosition(UDim2.new(0.5,-180,0,260),"InOut","Quart",0.5,true,nil)
 end)
+
 Delete.MouseButton1Click:Connect(function()
-binds = {}
+binds={}
 refreshbinds()
 updatesaves()
 notify('Keybinds Updated','Removed all keybinds')
 end)
+
 Close_2.MouseButton1Click:Connect(function()
-SettingsHolder.Visible = true
-AliasesFrame:TweenPosition(UDim2.new(0, 0, 0, 175), "InOut", "Quart", 0.5, true, nil)
+SettingsHolder.Visible=true
+AliasesFrame:TweenPosition(UDim2.new(0,0,0,175),"InOut","Quart",0.5,true,nil)
 end)
+
 Aliases.MouseButton1Click:Connect(function()
-AliasesFrame:TweenPosition(UDim2.new(0, 0, 0, 0), "InOut", "Quart", 0.5, true, nil)
+AliasesFrame:TweenPosition(UDim2.new(0,0,0,0),"InOut","Quart",0.5,true,nil)
 wait(0.5)
-SettingsHolder.Visible = false
+SettingsHolder.Visible=false
 end)
+
 Close_3.MouseButton1Click:Connect(function()
-SettingsHolder.Visible = true
-PositionsFrame:TweenPosition(UDim2.new(0, 0, 0, 175), "InOut", "Quart", 0.5, true, nil)
+SettingsHolder.Visible=true
+PositionsFrame:TweenPosition(UDim2.new(0,0,0,175),"InOut","Quart",0.5,true,nil)
 end)
+
 Positions.MouseButton1Click:Connect(function()
-PositionsFrame:TweenPosition(UDim2.new(0, 0, 0, 0), "InOut", "Quart", 0.5, true, nil)
+PositionsFrame:TweenPosition(UDim2.new(0,0,0,0),"InOut","Quart",0.5,true,nil)
 wait(0.5)
-SettingsHolder.Visible = false
+SettingsHolder.Visible=false
 end)
-local selectionBox = Instance.new("SelectionBox")
-selectionBox.Name = randomString()
-selectionBox.Color3 = Color3.new(255,255,255)
-selectionBox.Adornee = nil
-selectionBox.Parent = PARENT
-local selected = Instance.new("SelectionBox")
-selected.Name = randomString()
-selected.Color3 = Color3.new(0,166,0)
-selected.Adornee = nil
-selected.Parent = PARENT
-local ActivateHighlight = nil
-local ClickSelect = nil
+
+local aa=Instance.new"SelectionBox"
+aa.Name=randomString()
+aa.Color3=Color3.new(255,255,255)
+aa.Adornee=nil
+aa.Parent=PARENT
+
+local ab=Instance.new"SelectionBox"
+ab.Name=randomString()
+ab.Color3=Color3.new(0,166,0)
+ab.Adornee=nil
+ab.Parent=PARENT
+
+local ac
+local ad
 function selectPart()
-ToPartFrame:TweenPosition(UDim2.new(0.5, -180, 0, 335), "InOut", "Quart", 0.5, true, nil)
+ToPartFrame:TweenPosition(UDim2.new(0.5,-180,0,335),"InOut","Quart",0.5,true,nil)
 local function HighlightPart()
-if selected.Adornee ~= IYMouse.Target then
-selectionBox.Adornee = IYMouse.Target
+if ab.Adornee~=IYMouse.Target then
+aa.Adornee=IYMouse.Target
 else
-selectionBox.Adornee = nil
+aa.Adornee=nil
 end
 end
-ActivateHighlight = IYMouse.Move:Connect(HighlightPart)
+ac=IYMouse.Move:Connect(HighlightPart)
 local function SelectPart()
-if IYMouse.Target ~= nil then
-selected.Adornee = IYMouse.Target
-Path.Text = getHierarchy(IYMouse.Target)
+if IYMouse.Target~=nil then
+ab.Adornee=IYMouse.Target
+Path.Text=getHierarchy(IYMouse.Target)
 end
 end
-ClickSelect = IYMouse.Button1Down:Connect(SelectPart)
+ad=IYMouse.Button1Down:Connect(SelectPart)
 end
+
 Part.MouseButton1Click:Connect(function()
 selectPart()
 end)
+
 Exit_4.MouseButton1Click:Connect(function()
-ToPartFrame:TweenPosition(UDim2.new(0.5, -180, 0, -500), "InOut", "Quart", 0.5, true, nil)
-if ActivateHighlight then
-ActivateHighlight:Disconnect()
+ToPartFrame:TweenPosition(UDim2.new(0.5,-180,0,-500),"InOut","Quart",0.5,true,nil)
+if ac then
+ac:Disconnect()
 end
-if ClickSelect then
-ClickSelect:Disconnect()
+if ad then
+ad:Disconnect()
 end
-selectionBox.Adornee = nil
-selected.Adornee = nil
-Path.Text = ""
+aa.Adornee=nil
+ab.Adornee=nil
+Path.Text=""
 end)
+
 CopyPath.MouseButton1Click:Connect(function()
-if Path.Text ~= "" then
+if Path.Text~=""then
 toClipboard(Path.Text)
 else
 notify('Copy Path','Select a part to copy its path')
 end
 end)
+
 ChoosePart.MouseButton1Click:Connect(function()
-if Path.Text ~= "" then
-local tpNameExt = ''
+if Path.Text~=""then
+local ae=''
 local function handleWpNames()
-local FoundDupe = false
-for i,v in pairs(pWayPoints) do
-if v.NAME:lower() == selected.Adornee.Name:lower()..tpNameExt then
-FoundDupe = true
+local af=false
+for p,q in pairs(pWayPoints)do
+if q.NAME:lower()==ab.Adornee.Name:lower()..ae then
+af=true
 end
 end
-if not FoundDupe then
-notify('Modified Waypoints',"Created waypoint: "..selected.Adornee.Name..tpNameExt)
-pWayPoints[#pWayPoints + 1] = {NAME = selected.Adornee.Name..tpNameExt, COORD = {selected.Adornee}}
+if not af then
+notify('Modified Waypoints',"Created waypoint: "..ab.Adornee.Name..ae)
+pWayPoints[#pWayPoints+1]={NAME=ab.Adornee.Name..ae,COORD={ab.Adornee}}
 else
-if isNumber(tpNameExt) then
-tpNameExt = tpNameExt+1
+if isNumber(ae)then
+ae=ae+1
 else
-tpNameExt = 1
+ae=1
 end
 handleWpNames()
 end
@@ -3685,146 +4090,156 @@ else
 notify('Part Selection','Select a part first')
 end
 end)
+
 cmds={}
-customAlias = {}
+customAlias={}
 Delete_3.MouseButton1Click:Connect(function()
-customAlias = {}
-aliases = {}
+customAlias={}
+aliases={}
 notify('Aliases Modified','Removed all aliases')
 updatesaves()
 refreshaliases()
 end)
-PrefixBox:GetPropertyChangedSignal("Text"):Connect(function()
-prefix = PrefixBox.Text
-Cmdbar.PlaceholderText = "Command Bar ("..prefix..")"
+
+PrefixBox:GetPropertyChangedSignal"Text":Connect(function()
+prefix=PrefixBox.Text
+Cmdbar.PlaceholderText="Command Bar ("..prefix..")"
 updatesaves()
 end)
+
 function CamViewport()
 if workspace.CurrentCamera then
 return workspace.CurrentCamera.ViewportSize.X
 end
 end
+
 function UpdateToViewport()
-if Holder.Position.X.Offset < -CamViewport() then
-Holder:TweenPosition(UDim2.new(1, -CamViewport(), Holder.Position.Y.Scale, Holder.Position.Y.Offset), "InOut", "Quart", 0.04, true, nil)
-Notification:TweenPosition(UDim2.new(1, -CamViewport() + 250, Notification.Position.Y.Scale, Notification.Position.Y.Offset), "InOut", "Quart", 0.04, true, nil)
+if Holder.Position.X.Offset<-CamViewport()then
+Holder:TweenPosition(UDim2.new(1,-CamViewport(),Holder.Position.Y.Scale,Holder.Position.Y.Offset),"InOut","Quart",0.04,true,nil)
+Notification:TweenPosition(UDim2.new(1,-CamViewport()+250,Notification.Position.Y.Scale,Notification.Position.Y.Offset),"InOut","Quart",0.04,true,nil)
 end
 end
-CameraChanged = workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(UpdateToViewport)
-function updateCamera(child, parent)
-if parent ~= workspace then
+CameraChanged=workspace.CurrentCamera:GetPropertyChangedSignal"ViewportSize":Connect(UpdateToViewport)
+
+function updateCamera(ae,af)
+if af~=workspace then
 CamMoved:Disconnect()
 CameraChanged:Disconnect()
-repeat wait() until workspace.CurrentCamera
-CameraChanged = workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(UpdateToViewport)
-CamMoved = workspace.CurrentCamera.AncestryChanged:Connect(updateCamera)
+repeat wait()until workspace.CurrentCamera
+CameraChanged=workspace.CurrentCamera:GetPropertyChangedSignal"ViewportSize":Connect(UpdateToViewport)
+CamMoved=workspace.CurrentCamera.AncestryChanged:Connect(updateCamera)
 end
 end
-CamMoved = workspace.CurrentCamera.AncestryChanged:Connect(updateCamera)
-function dragMain(dragpoint,gui)
+CamMoved=workspace.CurrentCamera.AncestryChanged:Connect(updateCamera)
+
+function dragMain(ae,af)
 task.spawn(function()
-local dragging
-local dragInput
-local dragStart = Vector3.new(0,0,0)
-local startPos
-local function update(input)
-local pos = -250
-local delta = input.Position - dragStart
-if startPos.X.Offset + delta.X <= -500 then
-local Position = UDim2.new(1, -250, Notification.Position.Y.Scale, Notification.Position.Y.Offset)
-TweenService:Create(Notification, TweenInfo.new(.20), {Position = Position}):Play()
-pos = 250
+local p
+local q
+local r=Vector3.new(0,0,0)
+local s
+local function update(t)
+local u=-250
+local v=t.Position-r
+if s.X.Offset+v.X<=-500 then
+local w=UDim2.new(1,-250,Notification.Position.Y.Scale,Notification.Position.Y.Offset)
+TweenService:Create(Notification,TweenInfo.new(.20),{Position=w}):Play()
+u=250
 else
-local Position = UDim2.new(1, -500, Notification.Position.Y.Scale, Notification.Position.Y.Offset)
-TweenService:Create(Notification, TweenInfo.new(.20), {Position = Position}):Play()
-pos = -250
+local w=UDim2.new(1,-500,Notification.Position.Y.Scale,Notification.Position.Y.Offset)
+TweenService:Create(Notification,TweenInfo.new(.20),{Position=w}):Play()
+u=-250
 end
-if startPos.X.Offset + delta.X <= -250 and -CamViewport() <= startPos.X.Offset + delta.X then
-local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, gui.Position.Y.Scale, gui.Position.Y.Offset)
-TweenService:Create(gui, TweenInfo.new(.20), {Position = Position}):Play()
-local Position2 = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X + pos, Notification.Position.Y.Scale, Notification.Position.Y.Offset)
-TweenService:Create(Notification, TweenInfo.new(.20), {Position = Position2}):Play()
-elseif startPos.X.Offset + delta.X > -500 then
-local Position = UDim2.new(1, -250, gui.Position.Y.Scale, gui.Position.Y.Offset)
-TweenService:Create(gui, TweenInfo.new(.20), {Position = Position}):Play()
-elseif -CamViewport() > startPos.X.Offset + delta.X then
-gui:TweenPosition(UDim2.new(1, -CamViewport(), gui.Position.Y.Scale, gui.Position.Y.Offset), "InOut", "Quart", 0.04, true, nil)
-local Position = UDim2.new(1, -CamViewport(), gui.Position.Y.Scale, gui.Position.Y.Offset)
-TweenService:Create(gui, TweenInfo.new(.20), {Position = Position}):Play()
-local Position2 = UDim2.new(1, -CamViewport() + 250, Notification.Position.Y.Scale, Notification.Position.Y.Offset)
-TweenService:Create(Notification, TweenInfo.new(.20), {Position = Position2}):Play()
+if s.X.Offset+v.X<=-250 and-CamViewport()<=s.X.Offset+v.X then
+local w=UDim2.new(s.X.Scale,s.X.Offset+v.X,af.Position.Y.Scale,af.Position.Y.Offset)
+TweenService:Create(af,TweenInfo.new(.20),{Position=w}):Play()
+local x=UDim2.new(s.X.Scale,s.X.Offset+v.X+u,Notification.Position.Y.Scale,Notification.Position.Y.Offset)
+TweenService:Create(Notification,TweenInfo.new(.20),{Position=x}):Play()
+elseif s.X.Offset+v.X>-500 then
+local w=UDim2.new(1,-250,af.Position.Y.Scale,af.Position.Y.Offset)
+TweenService:Create(af,TweenInfo.new(.20),{Position=w}):Play()
+elseif-CamViewport()>s.X.Offset+v.X then
+af:TweenPosition(UDim2.new(1,-CamViewport(),af.Position.Y.Scale,af.Position.Y.Offset),"InOut","Quart",0.04,true,nil)
+local w=UDim2.new(1,-CamViewport(),af.Position.Y.Scale,af.Position.Y.Offset)
+TweenService:Create(af,TweenInfo.new(.20),{Position=w}):Play()
+local x=UDim2.new(1,-CamViewport()+250,Notification.Position.Y.Scale,Notification.Position.Y.Offset)
+TweenService:Create(Notification,TweenInfo.new(.20),{Position=x}):Play()
 end
 end
-dragpoint.InputBegan:Connect(function(input)
-if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-dragging = true
-dragStart = input.Position
-startPos = gui.Position
-input.Changed:Connect(function()
-if input.UserInputState == Enum.UserInputState.End then
-dragging = false
-end
-end)
-end
-end)
-dragpoint.InputChanged:Connect(function(input)
-if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-dragInput = input
+ae.InputBegan:Connect(function(t)
+if t.UserInputType==Enum.UserInputType.MouseButton1 or t.UserInputType==Enum.UserInputType.Touch then
+p=true
+r=t.Position
+s=af.Position
+
+t.Changed:Connect(function()
+if t.UserInputState==Enum.UserInputState.End then
+p=false
 end
 end)
-UserInputService.InputChanged:Connect(function(input)
-if input == dragInput and dragging then
-update(input)
+end
+end)
+ae.InputChanged:Connect(function(t)
+if t.UserInputType==Enum.UserInputType.MouseMovement or t.UserInputType==Enum.UserInputType.Touch then
+q=t
+end
+end)
+UserInputService.InputChanged:Connect(function(t)
+if t==q and p then
+update(t)
 end
 end)
 end)
 end
+
 dragMain(Title,Holder)
-Match = function(name,str)
-str = str:gsub("%W", "%%%1")
-return name:lower():find(str:lower()) and true
+
+Match=function(ae,af)
+af=af:gsub("%W","%%%1")
+return ae:lower():find(af:lower())and true
 end
-local canvasPos = Vector2.new(0,0)
-local topCommand = nil
-IndexContents = function(str,bool,cmdbar,Ianim)
-CMDsF.CanvasPosition = Vector2.new(0,0)
-local SizeY = 0
-local indexnum = 0
-local frame = CMDsF
-topCommand = nil
-local chunks = {}
-if str:sub(#str,#str) == "\\" then str = "" end
-for w in string.gmatch(str,"[^\\]+") do
-table.insert(chunks,w)
+
+local ae=Vector2.new(0,0)
+local af
+IndexContents=function(p,q,r,s)
+CMDsF.CanvasPosition=Vector2.new(0,0)
+
+local t=0
+local u=CMDsF
+af=nil
+local v={}
+if p:sub(#p,#p)=="\\"then p=""end
+for w in string.gmatch(p,"[^\\]+")do
+table.insert(v,w)
 end
-if #chunks > 0 then str = chunks[#chunks] end
-if str:sub(1,1) == "!" then str = str:sub(2) end
-for i,v in next, frame:GetChildren() do
-if v:IsA("TextButton") then
-if bool then
-if Match(v.Text,str) then
-indexnum = indexnum + 1
-v.Visible = true
-if topCommand == nil then
-topCommand = v.Text
+if#v>0 then p=v[#v]end
+if p:sub(1,1)=="!"then p=p:sub(2)end
+for w,x in next,u:GetChildren()do
+if x:IsA"TextButton"then
+if q then
+if Match(x.Text,p)then
+t=t+1
+x.Visible=true
+if af==nil then
+af=x.Text
 end
 else
-v.Visible = false
+x.Visible=false
 end
 else
-v.Visible = true
-if topCommand == nil then
-topCommand = v.Text
+x.Visible=true
+if af==nil then
+af=x.Text
 end
 end
 end
 end
-frame.CanvasSize = UDim2.new(0,0,0,cmdListLayout.AbsoluteContentSize.Y)
-if not Ianim then
-if indexnum == 0 or string.find(str, " ") then
-if not cmdbar then
+u.CanvasSize=UDim2.new(0,0,0,cmdListLayout.AbsoluteContentSize.Y)
+if not s then
+if t==0 or string.find(p," ")then
+if not r then
 minimizeHolder()
-elseif cmdbar then
+elseif r then
 cmdbarHolder()
 end
 else
@@ -3834,617 +4249,635 @@ else
 minimizeHolder()
 end
 end
+
 task.spawn(function()
 if not isLegacyChat then return end
-local chatbox
-local success, result = pcall(function() chatbox = PlayerGui:WaitForChild("Chat").Frame.ChatBarParentFrame.Frame.BoxFrame.Frame.ChatBar end)
-if success then
+local p local
+q, r=pcall(function()p=PlayerGui:WaitForChild"Chat".Frame.ChatBarParentFrame.Frame.BoxFrame.Frame.ChatBar end)
+if q then
 local function chatboxFocused()
-canvasPos = CMDsF.CanvasPosition
+ae=CMDsF.CanvasPosition
 end
-local chatboxFocusedC = chatbox.Focused:Connect(chatboxFocused)
+local s=p.Focused:Connect(chatboxFocused)
+
 local function Index()
-if chatbox.Text:lower():sub(1,1) == prefix then
-if SettingsOpen == true then
+if p.Text:lower():sub(1,1)==prefix then
+if h==true then
 wait(0.2)
-CMDsF.Visible = true
-Settings:TweenPosition(UDim2.new(0, 0, 0, 220), "InOut", "Quart", 0.2, true, nil)
+CMDsF.Visible=true
+Settings:TweenPosition(UDim2.new(0,0,0,220),"InOut","Quart",0.2,true,nil)
 end
 IndexContents(PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.Frame.ChatBar.Text:lower():sub(2),true)
 else
 minimizeHolder()
-if SettingsOpen == true then
+if h==true then
 wait(0.2)
-Settings:TweenPosition(UDim2.new(0, 0, 0, 45), "InOut", "Quart", 0.2, true, nil)
-CMDsF.Visible = false
+Settings:TweenPosition(UDim2.new(0,0,0,45),"InOut","Quart",0.2,true,nil)
+CMDsF.Visible=false
 end
 end
 end
-local chatboxFunc = chatbox:GetPropertyChangedSignal("Text"):Connect(Index)
-local function chatboxFocusLost(enterpressed)
-if not enterpressed or chatbox.Text:lower():sub(1,1) ~= prefix then
+local t=p:GetPropertyChangedSignal"Text":Connect(Index)
+
+local function chatboxFocusLost(u)
+if not u or p.Text:lower():sub(1,1)~=prefix then
 IndexContents('',true)
 end
-CMDsF.CanvasPosition = canvasPos
+CMDsF.CanvasPosition=ae
 minimizeHolder()
 end
-local chatboxFocusLostC = chatbox.FocusLost:Connect(chatboxFocusLost)
-PlayerGui:WaitForChild("Chat").Frame.ChatBarParentFrame.ChildAdded:Connect(function(newbar)
+local u=p.FocusLost:Connect(chatboxFocusLost)
+
+PlayerGui:WaitForChild"Chat".Frame.ChatBarParentFrame.ChildAdded:Connect(function(v)
 wait()
-if newbar:FindFirstChild('BoxFrame') then
-chatbox = PlayerGui:WaitForChild("Chat").Frame.ChatBarParentFrame.Frame.BoxFrame.Frame.ChatBar
-if chatboxFocusedC then chatboxFocusedC:Disconnect() end
-chatboxFocusedC = chatbox.Focused:Connect(chatboxFocused)
-if chatboxFunc then chatboxFunc:Disconnect() end
-chatboxFunc = chatbox:GetPropertyChangedSignal("Text"):Connect(Index)
-if chatboxFocusLostC then chatboxFocusLostC:Disconnect() end
-chatboxFocusLostC = chatbox.FocusLost:Connect(chatboxFocusLost)
+if v:FindFirstChild'BoxFrame'then
+p=PlayerGui:WaitForChild"Chat".Frame.ChatBarParentFrame.Frame.BoxFrame.Frame.ChatBar
+if s then s:Disconnect()end
+s=p.Focused:Connect(chatboxFocused)
+if t then t:Disconnect()end
+t=p:GetPropertyChangedSignal"Text":Connect(Index)
+if u then u:Disconnect()end
+u=p.FocusLost:Connect(chatboxFocusLost)
 end
 end)
---else
---print('Custom chat detected. Will not provide suggestions for commands typed in the chat.')
+
+
 end
 end)
-function autoComplete(str,curText)
-local endingChar = {"[", "/", "(", " "}
-local stop = 0
-for i=1,#str do
-local c = str:sub(i,i)
-if table.find(endingChar, c) then
-stop = i
+
+function autoComplete(p,q)
+local r={"[","/","("," "}
+local s=0
+for t=1,#p do
+local u=p:sub(t,t)
+if table.find(r,u)then
+s=t
 break
 end
 end
-curText = curText or Cmdbar.Text
-local subPos = 0
-local pos = 1
-local findRes = string.find(curText,"\\",pos)
-while findRes do
-subPos = findRes
-pos = findRes+1
-findRes = string.find(curText,"\\",pos)
+q=q or Cmdbar.Text
+local t=0
+local u=1
+local v=string.find(q,"\\",u)
+while v do
+t=v
+u=v+1
+v=string.find(q,"\\",u)
 end
-if curText:sub(subPos+1,subPos+1) == "!" then subPos = subPos + 1 end
-Cmdbar.Text = curText:sub(1,subPos) .. str:sub(1, stop - 1)..' '
+if q:sub(t+1,t+1)=="!"then t=t+1 end
+Cmdbar.Text=q:sub(1,t)..p:sub(1,s-1)..' '
 RunService.RenderStepped:Wait()
-Cmdbar.Text = Cmdbar.Text:gsub( '\t', '' )
-Cmdbar.CursorPosition = #Cmdbar.Text+1--1020
+Cmdbar.Text=Cmdbar.Text:gsub('\t','')
+Cmdbar.CursorPosition=#Cmdbar.Text+1
 end
-CMDs = {}
-CMDs[#CMDs + 1] = {NAME = 'discord / support / help', DESC = 'Invite to the Zero Yield support server.'}
-CMDs[#CMDs + 1] = {NAME = 'guiscale [number]', DESC = 'Changes the size of the gui. [number] accepts both decimals and whole numbers. Min is 0.4 and Max is 2'}
-CMDs[#CMDs + 1] = {NAME = 'console', DESC = 'Loads Roblox console'}
-CMDs[#CMDs + 1] = {NAME = 'oldconsole', DESC = 'Loads old Roblox console'}
-CMDs[#CMDs + 1] = {NAME = 'explorer / dex', DESC = 'Opens DEX by Moon'}
-CMDs[#CMDs + 1] = {NAME = 'olddex / odex', DESC = 'Opens Old DEX by Moon'}
-CMDs[#CMDs + 1] = {NAME = 'remotespy / rspy', DESC = 'Opens Simple Spy V3'}
-CMDs[#CMDs + 1] = {NAME = 'audiologger / alogger', DESC = 'Opens Edges audio logger'}
-CMDs[#CMDs + 1] = {NAME = 'serverinfo / info', DESC = 'Gives you info about the server'}
-CMDs[#CMDs + 1] = {NAME = 'jobid', DESC = 'Copies the games JobId to your clipboard'}
-CMDs[#CMDs + 1] = {NAME = 'notifyjobid', DESC = 'Notifies you the games JobId'}
-CMDs[#CMDs + 1] = {NAME = 'rejoin / rj', DESC = 'Makes you rejoin the game'}
-CMDs[#CMDs + 1] = {NAME = 'autorejoin / autorj', DESC = 'Automatically rejoins the server if you get kicked/disconnected'}
-CMDs[#CMDs + 1] = {NAME = 'serverhop / shop', DESC = 'Teleports you to a different server'}
-CMDs[#CMDs + 1] = {NAME = 'gameteleport / gametp [place ID]', DESC = 'Joins a game by ID'}
-CMDs[#CMDs + 1] = {NAME = 'antiidle / antiafk', DESC = 'Prevents the game from kicking you for being idle/afk'}
-CMDs[#CMDs + 1] = {NAME = 'datalimit [num]', DESC = 'Set outgoing KBPS limit'}
-CMDs[#CMDs + 1] = {NAME = 'replicationlag / backtrack [num]', DESC = 'Set IncomingReplicationLag'}
-CMDs[#CMDs + 1] = {NAME = 'creatorid / creator', DESC = 'Notifies you the creators ID'}
-CMDs[#CMDs + 1] = {NAME = 'copycreatorid / copycreator', DESC = 'Copies the creators ID to your clipboard'}
-CMDs[#CMDs + 1] = {NAME = 'setcreatorid / setcreator', DESC = 'Sets your userid to the creators ID'}
-CMDs[#CMDs + 1] = {NAME = 'noprompts', DESC = 'Prevents the game from showing you purchase/premium prompts'}
-CMDs[#CMDs + 1] = {NAME = 'showprompts', DESC = 'Allows the game to show purchase/premium prompts again'}
-CMDs[#CMDs + 1] = {NAME = 'enable [inventory/playerlist/chat/reset/emotes/all]', DESC = 'Toggles visibility of coregui items'}
-CMDs[#CMDs + 1] = {NAME = 'disable [inventory/playerlist/chat/reset/emotes/all]', DESC = 'Toggles visibility of coregui items'}
-CMDs[#CMDs + 1] = {NAME = 'showguis', DESC = 'Shows any invisible GUIs'}
-CMDs[#CMDs + 1] = {NAME = 'unshowguis', DESC = 'Undoes showguis'}
-CMDs[#CMDs + 1] = {NAME = 'hideguis', DESC = 'Hides any GUIs in PlayerGui'}
-CMDs[#CMDs + 1] = {NAME = 'unhideguis', DESC = 'Undoes hideguis'}
-CMDs[#CMDs + 1] = {NAME = 'guidelete', DESC = 'Enables backspace to delete GUI'}
-CMDs[#CMDs + 1] = {NAME = 'unguidelete / noguidelete', DESC = 'Disables guidelete'}
-CMDs[#CMDs + 1] = {NAME = 'hideiy', DESC = 'Hides the main IY GUI'}
-CMDs[#CMDs + 1] = {NAME = 'showiy / unhideiy', DESC = 'Shows IY again'}
-CMDs[#CMDs + 1] = {NAME = 'keepiy', DESC = 'Auto execute IY when you teleport through servers'}
-CMDs[#CMDs + 1] = {NAME = 'unkeepiy', DESC = 'Disable keepiy'}
-CMDs[#CMDs + 1] = {NAME = 'togglekeepiy', DESC = 'Toggle keepiy'}
-CMDs[#CMDs + 1] = {NAME = 'savegame / saveplace', DESC = 'Uses saveinstance to save the game'}
-CMDs[#CMDs + 1] = {NAME = 'clearerror', DESC = 'Clears the annoying box and blur when a game kicks you'}
-CMDs[#CMDs + 1] = {NAME = 'clientantikick / antikick (CLIENT)', DESC = 'Prevents localscripts from kicking you'}
-CMDs[#CMDs + 1] = {NAME = 'clientantiteleport / antiteleport (CLIENT)', DESC = 'Prevents localscripts from teleporting you'}
-CMDs[#CMDs + 1] = {NAME = 'allowrejoin / allowrj [true/false] (CLIENT)', DESC = 'Changes if antiteleport allows you to rejoin or not'}
-CMDs[#CMDs + 1] = {NAME = 'cancelteleport / canceltp', DESC = 'Cancels teleports in progress'}
-CMDs[#CMDs + 1] = {NAME = 'volume / vol [0-10]', DESC = 'Adjusts your game volume on a scale of 0 to 10'}
-CMDs[#CMDs + 1] = {NAME = 'antilag / boostfps / lowgraphics', DESC = 'Lowers game quality to boost FPS'}
-CMDs[#CMDs + 1] = {NAME = 'record / rec', DESC = 'Starts roblox recorder'}
-CMDs[#CMDs + 1] = {NAME = 'screenshot / scrnshot', DESC = 'Takes a screenshot'}
-CMDs[#CMDs + 1] = {NAME = 'togglefullscreen / togglefs', DESC = 'Toggles fullscreen'}
-CMDs[#CMDs + 1] = {NAME = 'notify [text]', DESC = 'Sends you a notification with the provided text'}
-CMDs[#CMDs + 1] = {NAME = 'lastcommand / lastcmd', DESC = 'Executes the previous command used'}
-CMDs[#CMDs + 1] = {NAME = 'exit', DESC = 'Kills roblox process'}
-CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'noclip', DESC = 'Go through objects'}
-CMDs[#CMDs + 1] = {NAME = 'unnoclip / clip', DESC = 'Disables noclip'}
-CMDs[#CMDs + 1] = {NAME = 'fly [speed]', DESC = 'Makes you fly'}
-CMDs[#CMDs + 1] = {NAME = 'unfly', DESC = 'Disables fly'}
-CMDs[#CMDs + 1] = {NAME = 'flyspeed [num]', DESC = 'Set fly speed (default is 20)'}
-CMDs[#CMDs + 1] = {NAME = 'vehiclefly / vfly [speed]', DESC = 'Makes you fly in a vehicle'}
-CMDs[#CMDs + 1] = {NAME = 'unvehiclefly / unvfly', DESC = 'Disables vehicle fly'}
-CMDs[#CMDs + 1] = {NAME = 'vehicleflyspeed  / vflyspeed [num]', DESC = 'Set vehicle fly speed'}
-CMDs[#CMDs + 1] = {NAME = 'cframefly / cfly [speed]', DESC = 'Makes you fly, bypassing some anti cheats (works on mobile)'}
-CMDs[#CMDs + 1] = {NAME = 'uncframefly / uncfly', DESC = 'Disables cfly'}
-CMDs[#CMDs + 1] = {NAME = 'cframeflyspeed  / cflyspeed [num]', DESC = 'Sets cfly speed'}
-CMDs[#CMDs + 1] = {NAME = 'qefly [true / false]', DESC = 'enables or disables the Q and E hotkeys for fly'}
-CMDs[#CMDs + 1] = {NAME = 'vehiclenoclip / vnoclip', DESC = 'Turns off vehicle collision'}
-CMDs[#CMDs + 1] = {NAME = 'vehicleclip / vclip / unvnoclip', DESC = 'Enables vehicle collision'}
-CMDs[#CMDs + 1] = {NAME = 'float /  platform', DESC = 'Spawns a platform beneath you causing you to float'}
-CMDs[#CMDs + 1] = {NAME = 'unfloat / noplatform', DESC = 'Removes the platform'}
-CMDs[#CMDs + 1] = {NAME = 'swim', DESC = 'Allows you to swim in the air'}
-CMDs[#CMDs + 1] = {NAME = 'unswim / noswim', DESC = 'Stops you from swimming everywhere'}
-CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'setwaypoint / swp [name]', DESC = 'Sets a waypoint at your position'}
-CMDs[#CMDs + 1] = {NAME = 'waypointpos / wpp [name] [X Y Z]', DESC = 'Sets a waypoint with specified coordinates'}
-CMDs[#CMDs + 1] = {NAME = 'waypoints', DESC = 'Shows a list of currently active waypoints'}
-CMDs[#CMDs + 1] = {NAME = 'showwaypoints / showwp', DESC = 'Shows all currently set waypoints'}
-CMDs[#CMDs + 1] = {NAME = 'hidewaypoints / hidewp', DESC = 'Hides shown waypoints'}
-CMDs[#CMDs + 1] = {NAME = 'waypoint / wp [name]', DESC = 'Teleports player to a waypoint'}
-CMDs[#CMDs + 1] = {NAME = 'tweenwaypoint / twp [name]', DESC = 'Tweens player to a waypoint'}
-CMDs[#CMDs + 1] = {NAME = 'walktowaypoint / wtwp [name]', DESC = 'Walks player to a waypoint'}
-CMDs[#CMDs + 1] = {NAME = 'deletewaypoint / dwp [name]', DESC = 'Deletes a waypoint'}
-CMDs[#CMDs + 1] = {NAME = 'clearwaypoints / cwp', DESC = 'Clears all waypoints'}
-CMDs[#CMDs + 1] = {NAME = 'cleargamewaypoints / cgamewp', DESC = 'Clears all waypoints for the game you are in'}
-CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'goto [player]', DESC = 'Go to a player'}
-CMDs[#CMDs + 1] = {NAME = 'tweengoto / tgoto [player]', DESC = 'Tween to a player (bypasses some anti cheats)'}
-CMDs[#CMDs + 1] = {NAME = 'tweenspeed / tspeed [num]', DESC = 'Sets how fast all tween commands go (default is 1)'}
-CMDs[#CMDs + 1] = {NAME = 'vehiclegoto / vgoto [player]', DESC = 'Go to a player while in a vehicle'}
-CMDs[#CMDs + 1] = {NAME = 'loopgoto [player] [distance] [delay]', DESC = 'Loop teleport to a player'}
-CMDs[#CMDs + 1] = {NAME = 'unloopgoto', DESC = 'Stops teleporting you to a player'}
-CMDs[#CMDs + 1] = {NAME = 'pulsetp / ptp [player] [seconds]', DESC = 'Teleports you to a player for a specified ammount of time'}
-CMDs[#CMDs + 1] = {NAME = 'clientbring / cbring [player] (CLIENT)', DESC = 'Bring a player'}
-CMDs[#CMDs + 1] = {NAME = 'loopbring [player] [distance] [delay] (CLIENT)', DESC = 'Loop brings a player to you (useful for killing)'}
-CMDs[#CMDs + 1] = {NAME = 'unloopbring [player]', DESC = 'Undoes loopbring'}
-CMDs[#CMDs + 1] = {NAME = 'freeze / fr [player] (CLIENT)', DESC = 'Freezes a player'}
-CMDs[#CMDs + 1] = {NAME = 'freezeanims', DESC = 'Freezes your animations / pauses your animations - Does not work on default animations'}
-CMDs[#CMDs + 1] = {NAME = 'unfreezeanims', DESC = 'Unfreezes your animations / plays your animations'}
-CMDs[#CMDs + 1] = {NAME = 'thaw / unfr [player] (CLIENT)', DESC = 'Unfreezes a player'}
-CMDs[#CMDs + 1] = {NAME = 'tpposition / tppos [X Y Z]', DESC = 'Teleports you to certain coordinates'}
-CMDs[#CMDs + 1] = {NAME = 'tweentpposition / ttppos [X Y Z]', DESC = 'Tween to coordinates (bypasses some anti cheats)'}
-CMDs[#CMDs + 1] = {NAME = 'offset [X Y Z]', DESC = 'Offsets you by certain coordinates'}
-CMDs[#CMDs + 1] = {NAME = 'tweenoffset / toffset [X Y Z]', DESC = 'Tween offset (bypasses some anti cheats)'}
-CMDs[#CMDs + 1] = {NAME = 'notifyposition / notifypos [player]', DESC = 'Notifies you the coordinates of a character'}
-CMDs[#CMDs + 1] = {NAME = 'copyposition / copypos [player]', DESC = 'Copies the coordinates of a character to your clipboard'}
-CMDs[#CMDs + 1] = {NAME = 'walktoposition / walktopos [X Y Z]', DESC = 'Makes you walk to a coordinate'}
-CMDs[#CMDs + 1] = {NAME = 'spawnpoint / spawn [delay]', DESC = 'Sets a position where you will spawn'}
-CMDs[#CMDs + 1] = {NAME = 'nospawnpoint / nospawn', DESC = 'Removes your custom spawn point'}
-CMDs[#CMDs + 1] = {NAME = 'flashback / diedtp', DESC = 'Teleports you to where you last died'}
-CMDs[#CMDs + 1] = {NAME = 'walltp', DESC = 'Teleports you above/over any wall you run into'}
-CMDs[#CMDs + 1] = {NAME = 'nowalltp / unwalltp', DESC = 'Disables walltp'}
-CMDs[#CMDs + 1] = {NAME = 'teleporttool / tptool', DESC = 'Gives you a teleport tool'}
-CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'logs', DESC = 'Opens the logs GUI'}
-CMDs[#CMDs + 1] = {NAME = 'chatlogs / clogs', DESC = 'Log what people say or whisper'}
-CMDs[#CMDs + 1] = {NAME = 'joinlogs / jlogs', DESC = 'Log when people join'}
-CMDs[#CMDs + 1] = {NAME = 'chatlogswebhook / logswebhook [url]', DESC = 'Set a discord webhook for chatlogs to go to (provide no url to disable this)'}
-CMDs[#CMDs + 1] = {NAME = 'antichatlogs / antichatlogger', DESC = 'Prevents Roblox from banning you for your silly chat messages (game needs the legacy chat)'}
-CMDs[#CMDs + 1] = {NAME = 'chat / say [text]', DESC = 'Makes you chat a string (possible mute bypass)'}
-CMDs[#CMDs + 1] = {NAME = 'spam [text]', DESC = 'Makes you spam the chat'}
-CMDs[#CMDs + 1] = {NAME = 'unspam', DESC = 'Turns off spam'}
-CMDs[#CMDs + 1] = {NAME = 'whisper / pm [player] [text]', DESC = 'Makes you whisper a string to someone (possible mute bypass)'}
-CMDs[#CMDs + 1] = {NAME = 'pmspam [player] [text]', DESC = 'Makes you spam a players whispers'}
-CMDs[#CMDs + 1] = {NAME = 'unpmspam [player]', DESC = 'Turns off pm spam'}
-CMDs[#CMDs + 1] = {NAME = 'spamspeed [num]', DESC = 'How quickly you spam (default is 1)'}
-CMDs[#CMDs + 1] = {NAME = 'bubblechat (CLIENT)', DESC = 'Enables bubble chat for your client'}
-CMDs[#CMDs + 1] = {NAME = 'unbubblechat / nobubblechat', DESC = 'Disables the bubblechat command'}
-CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'esp', DESC = 'View all players and their status'}
-CMDs[#CMDs + 1] = {NAME = 'noesp / unesp', DESC = 'Removes esp'}
-CMDs[#CMDs + 1] = {NAME = 'esptransparency [number]', DESC = 'Changes the transparency of esp related commands'}
-CMDs[#CMDs + 1] = {NAME = 'partesp [part name]', DESC = 'Highlights a part'}
-CMDs[#CMDs + 1] = {NAME = 'unpartesp / nopartesp [part name]', DESC = 'removes partesp'}
-CMDs[#CMDs + 1] = {NAME = 'chams', DESC = 'ESP but without text in the way'}
-CMDs[#CMDs + 1] = {NAME = 'nochams / unchams', DESC = 'Removes chams'}
-CMDs[#CMDs + 1] = {NAME = 'locate [player]', DESC = 'View a single player and their status'}
-CMDs[#CMDs + 1] = {NAME = 'unlocate / nolocate [player]', DESC = 'Removes locate'}
-CMDs[#CMDs + 1] = {NAME = 'xray', DESC = 'Makes all parts in workspace transparent'}
-CMDs[#CMDs + 1] = {NAME = 'unxray / noxray', DESC = 'Restores transparency'}
-CMDs[#CMDs + 1] = {NAME = 'loopxray', DESC = 'Makes all parts in workspace transparent but looped'}
-CMDs[#CMDs + 1] = {NAME = 'unloopunxray', DESC = 'Unloops xray'}
-CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'spectate / view [player]', DESC = 'View a player'}
-CMDs[#CMDs + 1] = {NAME = 'viewpart / viewp [part name]', DESC = 'View a part'}
-CMDs[#CMDs + 1] = {NAME = 'unspectate / unview', DESC = 'Stops viewing player'}
-CMDs[#CMDs + 1] = {NAME = 'freecam / fc', DESC = 'Allows you to freely move camera around the game'}
-CMDs[#CMDs + 1] = {NAME = 'freecampos / fcpos [X Y Z]', DESC = 'Moves / opens freecam in a certain position'}
-CMDs[#CMDs + 1] = {NAME = 'freecamwaypoint / fcwp [name]', DESC = 'Moves / opens freecam to a waypoint'}
-CMDs[#CMDs + 1] = {NAME = 'freecamgoto / fcgoto / fctp [player]', DESC = 'Moves / opens freecam to a player'}
-CMDs[#CMDs + 1] = {NAME = 'unfreecam / unfc', DESC = 'Disables freecam'}
-CMDs[#CMDs + 1] = {NAME = 'freecamspeed / fcspeed [num]', DESC = 'Adjusts freecam speed (default is 1)'}
-CMDs[#CMDs + 1] = {NAME = 'notifyfreecamposition / notifyfcpos', DESC = 'Noitifies you your freecam coordinates'}
-CMDs[#CMDs + 1] = {NAME = 'copyfreecamposition / copyfcpos', DESC = 'Copies your freecam coordinates to your clipboard'}
-CMDs[#CMDs + 1] = {NAME = 'gotocamera / gotocam', DESC = 'Teleports you to the location of your camera'}
-CMDs[#CMDs + 1] = {NAME = 'tweengotocam / tgotocam', DESC = 'Tweens you to the location of your camera'}
-CMDs[#CMDs + 1] = {NAME = 'firstp', DESC = 'Forces camera to go into first person'}
-CMDs[#CMDs + 1] = {NAME = 'thirdp', DESC = 'Allows camera to go into third person'}
-CMDs[#CMDs + 1] = {NAME = 'noclipcam / nccam', DESC = 'Allows camera to go through objects like walls'}
-CMDs[#CMDs + 1] = {NAME = 'maxzoom [num]', DESC = 'Maximum camera zoom'}
-CMDs[#CMDs + 1] = {NAME = 'minzoom [num]', DESC = 'Minimum camera zoom'}
-CMDs[#CMDs + 1] = {NAME = 'camdistance [num]', DESC = 'Changes camera distance from your player'}
-CMDs[#CMDs + 1] = {NAME = 'fov [num]', DESC = 'Adjusts field of view (default is 70)'}
-CMDs[#CMDs + 1] = {NAME = 'fixcam / restorecam', DESC = 'Fixes camera'}
-CMDs[#CMDs + 1] = {NAME = 'enableshiftlock / enablesl', DESC = 'Enables the shift lock option'}
-CMDs[#CMDs + 1] = {NAME = 'lookat [player]', DESC = 'Moves your camera view to a player'}
-CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'btools (CLIENT)', DESC = 'Gives you building tools (DOES NOT REPLICATE)'}
-CMDs[#CMDs + 1] = {NAME = 'f3x (CLIENT)', DESC = 'Gives you F3X building tools (DOES NOT REPLICATE)'}
-CMDs[#CMDs + 1] = {NAME = 'partname / partpath', DESC = 'Allows you to click a part to see its path & name'}
-CMDs[#CMDs + 1] = {NAME = 'delete [instance name] (CLIENT)', DESC = 'Removes any part with a certain name from the workspace (DOES NOT REPLICATE)'}
-CMDs[#CMDs + 1] = {NAME = 'deleteclass / dc [class name] (CLIENT)', DESC = 'Removes any part with a certain classname from the workspace (DOES NOT REPLICATE)'}
-CMDs[#CMDs + 1] = {NAME = 'lockworkspace / lockws', DESC = 'Locks the whole workspace'}
-CMDs[#CMDs + 1] = {NAME = 'unlockworkspace / unlockws', DESC = 'Unlocks the whole workspace'}
-CMDs[#CMDs + 1] = {NAME = 'invisibleparts / invisparts (CLIENT)', DESC = 'Shows invisible parts'}
-CMDs[#CMDs + 1] = {NAME = 'uninvisibleparts / uninvisparts (CLIENT)', DESC = 'Makes parts affected by invisparts return to normal'}
-CMDs[#CMDs + 1] = {NAME = 'deleteinvisparts / dip (CLIENT)', DESC = 'Deletes invisible parts'}
-CMDs[#CMDs + 1] = {NAME = 'gotopart [part name]', DESC = 'Moves your character to a part or multiple parts'}
-CMDs[#CMDs + 1] = {NAME = 'tweengotopart / tgotopart [part name]', DESC = 'Tweens your character to a part or multiple parts'}
-CMDs[#CMDs + 1] = {NAME = 'gotopartclass / gpc [class name]', DESC = 'Moves your character to a part or multiple parts based on classname'}
-CMDs[#CMDs + 1] = {NAME = 'tweengotopartclass / tgpc [class name]', DESC = 'Tweens your character to a part or multiple parts based on classname'}
-CMDs[#CMDs + 1] = {NAME = 'gotomodel [part name]', DESC = 'Moves your character to a model or multiple models'}
-CMDs[#CMDs + 1] = {NAME = 'tweengotomodel / tgotomodel [part name]', DESC = 'Tweens your character to a model or multiple models'}
-CMDs[#CMDs + 1] = {NAME = 'gotopartdelay / gotomodeldelay [num]', DESC = 'Adjusts how quickly you teleport to each part (default is 0.1)'}
-CMDs[#CMDs + 1] = {NAME = 'bringpart [part name] (CLIENT)', DESC = 'Moves a part or multiple parts to your character'}
-CMDs[#CMDs + 1] = {NAME = 'bringpartclass / bpc [class name] (CLIENT)', DESC = 'Moves a part or multiple parts to your character based on classname'}
-CMDs[#CMDs + 1] = {NAME = 'noclickdetectorlimits / nocdlimits', DESC = 'Sets all click detectors MaxActivationDistance to math.huge'}
-CMDs[#CMDs + 1] = {NAME = 'fireclickdetectors / firecd [name]', DESC = 'Uses all click detectors in a game or uses the optional name'}
-CMDs[#CMDs + 1] = {NAME = 'firetouchinterests / touchinterests [name]', DESC = 'Uses all touchinterests in a game or uses the optional name'}
-CMDs[#CMDs + 1] = {NAME = 'noproximitypromptlimits / nopplimits', DESC = 'Sets all proximity prompts MaxActivationDistance to math.huge'}
-CMDs[#CMDs + 1] = {NAME = 'fireproximityprompts / firepp [name]', DESC = 'Uses all proximity prompts in a game or uses the optional name'}
-CMDs[#CMDs + 1] = {NAME = 'instantproximityprompts / instantpp', DESC = 'Disable the cooldown for proximity prompts'}
-CMDs[#CMDs + 1] = {NAME = 'uninstantproximityprompts / uninstantpp', DESC = 'Undo the cooldown removal'}
-CMDs[#CMDs + 1] = {NAME = 'tpunanchored / tpua [player]', DESC = 'Teleports unanchored parts to a player'}
-CMDs[#CMDs + 1] = {NAME = 'animsunanchored / freezeua', DESC = 'Freezes unanchored parts'}
-CMDs[#CMDs + 1] = {NAME = 'thawunanchored / thawua / unfreezeua', DESC = 'Thaws unanchored parts'}
-CMDs[#CMDs + 1] = {NAME = 'removeterrain / rterrain / noterrain', DESC = 'Removes all terrain'}
-CMDs[#CMDs + 1] = {NAME = 'clearnilinstances / nonilinstances / cni', DESC = 'Removes nil instances'}
-CMDs[#CMDs + 1] = {NAME = 'destroyheight / dh [num]', DESC = 'Sets FallenPartsDestroyHeight'}
-CMDs[#CMDs + 1] = {NAME = 'fakeout', DESC = 'Tp to the void and then back (useful to kill people attached to you)'}
-CMDs[#CMDs + 1] = {NAME = 'antivoid', DESC = 'Prevents you from falling into the void by launching you upwards'}
-CMDs[#CMDs + 1] = {NAME = 'unantivoid / noantivoid', DESC = 'Disables antivoid'}
-CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'fullbright / fb (CLIENT)', DESC = 'Makes the map brighter / more visible'}
-CMDs[#CMDs + 1] = {NAME = 'loopfullbright / loopfb (CLIENT)', DESC = 'Makes the map brighter / more visible but looped'}
-CMDs[#CMDs + 1] = {NAME = 'unloopfullbright / unloopfb', DESC = 'Unloops fullbright'}
-CMDs[#CMDs + 1] = {NAME = 'ambient [num] [num] [num] (CLIENT)', DESC = 'Changes ambient'}
-CMDs[#CMDs + 1] = {NAME = 'day (CLIENT)', DESC = 'Changes the time to day for the client'}
-CMDs[#CMDs + 1] = {NAME = 'night (CLIENT)', DESC = 'Changes the time to night for the client'}
-CMDs[#CMDs + 1] = {NAME = 'nofog (CLIENT)', DESC = 'Removes fog'}
-CMDs[#CMDs + 1] = {NAME = 'brightness [num] (CLIENT)', DESC = 'Changes the brightness lighting property'}
-CMDs[#CMDs + 1] = {NAME = 'globalshadows / gshadows (CLIENT)', DESC = 'Enables global shadows'}
-CMDs[#CMDs + 1] = {NAME = 'noglobalshadows / nogshadows (CLIENT)', DESC = 'Disables global shadows'}
-CMDs[#CMDs + 1] = {NAME = 'restorelighting / rlighting', DESC = 'Restores Lighting properties'}
-CMDs[#CMDs + 1] = {NAME = 'light [radius] [brightness] (CLIENT)', DESC = 'Gives your player dynamic light'}
-CMDs[#CMDs + 1] = {NAME = 'nolight / unlight', DESC = 'Removes dynamic light from your player'}
-CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'inspect / examine [player]', DESC = 'Opens InspectMenu for a certain player'}
-CMDs[#CMDs + 1] = {NAME = 'age [player]', DESC = 'Tells you the age of a player'}
-CMDs[#CMDs + 1] = {NAME = 'chatage [player]', DESC = 'Chats the age of a player'}
-CMDs[#CMDs + 1] = {NAME = 'joindate / jd [player]', DESC = 'Tells you the date the player joined Roblox'}
-CMDs[#CMDs + 1] = {NAME = 'chatjoindate / cjd [player]', DESC = 'Chats the date the player joined Roblox'}
-CMDs[#CMDs + 1] = {NAME = 'copyname / copyuser [player]', DESC = 'Copies a players full username to your clipboard'}
-CMDs[#CMDs + 1] = {NAME = 'userid / id [player]', DESC = 'Notifies a players user ID'}
-CMDs[#CMDs + 1] = {NAME = 'copyuserid / copyid [player]', DESC = 'Copies a players user ID to your clipboard'}
-CMDs[#CMDs + 1] = {NAME = 'appearanceid / aid [player]', DESC = 'Notifies a players appearance ID'}
-CMDs[#CMDs + 1] = {NAME = 'copyappearanceid / caid [player]', DESC = 'Copies a players appearance ID to your clipboard'}
-CMDs[#CMDs + 1] = {NAME = 'bang [player] [speed]', DESC = 'owo'}
-CMDs[#CMDs + 1] = {NAME = 'unbang', DESC = 'uwu'}
-CMDs[#CMDs + 1] = {NAME = 'carpet [player]', DESC = 'Be someones carpet'}
-CMDs[#CMDs + 1] = {NAME = 'uncarpet', DESC = 'Undoes carpet'}
-CMDs[#CMDs + 1] = {NAME = 'friend [player]', DESC = 'Sends a friend request to certain players'}
-CMDs[#CMDs + 1] = {NAME = 'unfriend [player]', DESC = 'Unfriends certain players'}
-CMDs[#CMDs + 1] = {NAME = 'headsit [player]', DESC = 'Sit on a players head'}
-CMDs[#CMDs + 1] = {NAME = 'walkto / follow [player]', DESC = 'Follow a player'}
-CMDs[#CMDs + 1] = {NAME = 'pathfindwalkto / pathfindfollow [player]', DESC = 'Follow a player using pathfinding'}
-CMDs[#CMDs + 1] = {NAME = 'pathfindwalktowaypoint / pathfindwalktowp [waypoint]', DESC = 'Walk to a waypoint using pathfinding'}
-CMDs[#CMDs + 1] = {NAME = 'unwalkto / unfollow', DESC = 'Stops following a player'}
-CMDs[#CMDs + 1] = {NAME = 'orbit [player] [speed] [distance]', DESC = 'Makes your character orbit around a player with an optional speed and an optional distance'}
-CMDs[#CMDs + 1] = {NAME = 'unorbit', DESC = 'Disables orbit'}
-CMDs[#CMDs + 1] = {NAME = 'stareat / stare [player]', DESC = 'Stare / look at a player'}
-CMDs[#CMDs + 1] = {NAME = 'unstareat / unstare [player]', DESC = 'Disables stareat'}
-CMDs[#CMDs + 1] = {NAME = 'rolewatch [group id] [role name]', DESC = 'Notify if someone from a watched group joins the server'}
-CMDs[#CMDs + 1] = {NAME = 'rolewatchstop / unrolewatch', DESC = 'Disable Rolewatch'}
-CMDs[#CMDs + 1] = {NAME = 'rolewatchleave', DESC = 'Toggle if you should leave the game if someone from a watched group joins the server'}
-CMDs[#CMDs + 1] = {NAME = 'staffwatch', DESC = 'Notify if a staff member of the game joins the server'}
-CMDs[#CMDs + 1] = {NAME = 'unstaffwatch', DESC = 'Disable Staffwatch'}
-CMDs[#CMDs + 1] = {NAME = 'attach [player] (TOOL)', DESC = 'Attaches you to a player (YOU NEED A TOOL)'}
-CMDs[#CMDs + 1] = {NAME = 'kill [player] (TOOL)', DESC = 'Kills a player (YOU NEED A TOOL)'}
-CMDs[#CMDs + 1] = {NAME = 'fastkill [player] (TOOL)', DESC = 'Kills a player (less reliable) (YOU NEED A TOOL)'}
-CMDs[#CMDs + 1] = {NAME = 'handlekill / hkill [player] (TOOL)', DESC = 'Kills a player using tool damage (YOU NEED A TOOL)'}
-CMDs[#CMDs + 1] = {NAME = 'bring [player] (TOOL)', DESC = 'Brings a player (YOU NEED A TOOL)'}
-CMDs[#CMDs + 1] = {NAME = 'fastbring [player] (TOOL)', DESC = 'Brings a player (less reliable) (YOU NEED A TOOL)'}
-CMDs[#CMDs + 1] = {NAME = 'teleport / tp [player] [player] (TOOL)', DESC = 'Teleports a player to another player (YOU NEED A TOOL)'}
-CMDs[#CMDs + 1] = {NAME = 'fastteleport / fasttp [player] [player] (TOOL)', DESC = 'Teleports a player to another player (less reliable) (YOU NEED A TOOL)'}
-CMDs[#CMDs + 1] = {NAME = 'fling', DESC = 'Flings anyone you touch'}
-CMDs[#CMDs + 1] = {NAME = 'unfling', DESC = 'Disables the fling command'}
-CMDs[#CMDs + 1] = {NAME = 'flyfling [speed]', DESC = 'Basically the invisfling command but not invisible'}
-CMDs[#CMDs + 1] = {NAME = 'unflyfling', DESC = 'Disables the flyfling command'}
-CMDs[#CMDs + 1] = {NAME = 'walkfling', DESC = 'Basically fling but no spinning'}
-CMDs[#CMDs + 1] = {NAME = 'unwalkfling / nowalkfling', DESC = 'Disables walkfling'}
-CMDs[#CMDs + 1] = {NAME = 'invisfling', DESC = 'Enables invisible fling'}
-CMDs[#CMDs + 1] = {NAME = 'antifling', DESC = 'Disables player collisions to prevent you from being flung'}
-CMDs[#CMDs + 1] = {NAME = 'unantifling', DESC = 'Disables antifling'}
-CMDs[#CMDs + 1] = {NAME = 'loopoof', DESC = 'Loops everyones character sounds (everyone can hear)'}
-CMDs[#CMDs + 1] = {NAME = 'unloopoof', DESC = 'Stops the oof chaos'}
-CMDs[#CMDs + 1] = {NAME = 'muteboombox [player]', DESC = 'Mutes someones boombox'}
-CMDs[#CMDs + 1] = {NAME = 'unmuteboombox [player]', DESC = 'Unmutes someones boombox'}
-CMDs[#CMDs + 1] = {NAME = 'hitbox [player] [size] [transparency]', DESC = 'Expands the hitbox for players HumanoidRootPart (default is 1)'}
-CMDs[#CMDs + 1] = {NAME = 'headsize [player] [size]', DESC = 'Expands the head size for players Head (default is 1)'}
-CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'reset', DESC = 'Resets your character normally'}
-CMDs[#CMDs + 1] = {NAME = 'respawn', DESC = 'Respawns you'}
-CMDs[#CMDs + 1] = {NAME = 'refresh / re', DESC = 'Respawns and brings you back to the same position'}
-CMDs[#CMDs + 1] = {NAME = 'god', DESC = 'Makes your character difficult to kill in most games'}
-CMDs[#CMDs + 1] = {NAME = 'permadeath', DESC = 'Makes you unable to die'}
-CMDs[#CMDs + 1] = {NAME = 'invisible / invis', DESC = 'Makes you invisible to other players'}
-CMDs[#CMDs + 1] = {NAME = 'visible / vis', DESC = 'Makes you visible to other players'}
-CMDs[#CMDs + 1] = {NAME = 'toolinvisible / toolinvis / tinvis', DESC = 'Makes you invisible to other players and able to use tools'}
-CMDs[#CMDs + 1] = {NAME = 'speed / ws / walkspeed [num]', DESC = 'Change your walkspeed'}
-CMDs[#CMDs + 1] = {NAME = 'spoofspeed / spoofws [num]', DESC = 'Spoofs your WalkSpeed on the Client'}
-CMDs[#CMDs + 1] = {NAME = 'loopspeed / loopws [num]', DESC = 'Loops your walkspeed'}
-CMDs[#CMDs + 1] = {NAME = 'unloopspeed / unloopws', DESC = 'Turns off loopspeed'}
-CMDs[#CMDs + 1] = {NAME = 'hipheight / hheight [num]', DESC = 'Adjusts hip height'}
-CMDs[#CMDs + 1] = {NAME = 'jumppower / jpower / jp [num]', DESC = 'Change a players jump height'}
-CMDs[#CMDs + 1] = {NAME = 'spoofjumppower / spoofjp [num]', DESC = 'Spoofs your JumpPower on the Client'}
-CMDs[#CMDs + 1] = {NAME = 'loopjumppower / loopjp [num]', DESC = 'Loops your jump height'}
-CMDs[#CMDs + 1] = {NAME = 'unloopjumppower / unloopjp', DESC = 'Turns off loopjumppower'}
-CMDs[#CMDs + 1] = {NAME = 'maxslopeangle / msa [num]', DESC = 'Adjusts MaxSlopeAngle'}
-CMDs[#CMDs + 1] = {NAME = 'gravity / grav [num] (CLIENT)', DESC = 'Change your gravity'}
-CMDs[#CMDs + 1] = {NAME = 'sit', DESC = 'Makes your character sit'}
-CMDs[#CMDs + 1] = {NAME = 'lay / laydown', DESC = 'Makes your character lay down'}
-CMDs[#CMDs + 1] = {NAME = 'sitwalk', DESC = 'Makes your character sit while still being able to walk'}
-CMDs[#CMDs + 1] = {NAME = 'nosit', DESC = 'Prevents your character from sitting'}
-CMDs[#CMDs + 1] = {NAME = 'unnosit', DESC = 'Disables nosit'}
-CMDs[#CMDs + 1] = {NAME = 'jump', DESC = 'Makes your character jump'}
-CMDs[#CMDs + 1] = {NAME = 'infinitejump / infjump', DESC = 'Allows you to jump before hitting the ground'}
-CMDs[#CMDs + 1] = {NAME = 'uninfinitejump / uninfjump', DESC = 'Disables infjump'}
-CMDs[#CMDs + 1] = {NAME = 'flyjump', DESC = 'Allows you to hold space to fly up'}
-CMDs[#CMDs + 1] = {NAME = 'unflyjump', DESC = 'Disables flyjump'}
-CMDs[#CMDs + 1] = {NAME = 'autojump / ajump', DESC = 'Automatically jumps when you run into an object'}
-CMDs[#CMDs + 1] = {NAME = 'unautojump / unajump', DESC = 'Disables autojump'}
-CMDs[#CMDs + 1] = {NAME = 'edgejump / ejump', DESC = 'Automatically jumps when you get to the edge of an object'}
-CMDs[#CMDs + 1] = {NAME = 'unedgejump / unejump', DESC = 'Disables edgejump'}
-CMDs[#CMDs + 1] = {NAME = 'platformstand / stun', DESC = 'Enables PlatformStand'}
-CMDs[#CMDs + 1] = {NAME = 'unplatformstand / unstun', DESC = 'Disables PlatformStand'}
-CMDs[#CMDs + 1] = {NAME = 'norotate / noautorotate', DESC = 'Disables AutoRotate'}
-CMDs[#CMDs + 1] = {NAME = 'unnorotate / autorotate', DESC = 'Enables AutoRotate'}
-CMDs[#CMDs + 1] = {NAME = 'enablestate [StateType]', DESC = 'Enables a humanoid state type'}
-CMDs[#CMDs + 1] = {NAME = 'disablestate [StateType]', DESC = 'Disables a humanoid state type'}
-CMDs[#CMDs + 1] = {NAME = 'team [team name] (CLIENT)', DESC = 'Changes your team. Sometimes fools localscripts.'}
-CMDs[#CMDs + 1] = {NAME = 'nobillboardgui / nobgui / noname', DESC = 'Removes billboard and surface guis from your players (i.e. name guis at cafes)'}
-CMDs[#CMDs + 1] = {NAME = 'loopnobgui / loopnoname', DESC = 'Loop removes billboard and surface guis from your players (i.e. name guis at cafes)'}
-CMDs[#CMDs + 1] = {NAME = 'unloopnobgui / unloopnoname', DESC = 'Disables loopnobgui'}
-CMDs[#CMDs + 1] = {NAME = 'noarms', DESC = 'Removes your arms'}
-CMDs[#CMDs + 1] = {NAME = 'nolegs', DESC = 'Removes your legs'}
-CMDs[#CMDs + 1] = {NAME = 'nolimbs', DESC = 'Removes your limbs'}
-CMDs[#CMDs + 1] = {NAME = 'naked (CLIENT)', DESC = 'Removes your clothing'}
-CMDs[#CMDs + 1] = {NAME = 'noface / removeface', DESC = 'Removes your face'}
-CMDs[#CMDs + 1] = {NAME = 'blockhead', DESC = 'Turns your head into a block'}
-CMDs[#CMDs + 1] = {NAME = 'blockhats', DESC = 'Turns your hats into blocks'}
-CMDs[#CMDs + 1] = {NAME = 'blocktool', DESC = 'Turns the currently selected tool into a block'}
-CMDs[#CMDs + 1] = {NAME = 'creeper', DESC = 'Makes you look like a creeper'}
-CMDs[#CMDs + 1] = {NAME = 'drophats', DESC = 'Drops your hats'}
-CMDs[#CMDs + 1] = {NAME = 'nohats / deletehats / rhats', DESC = 'Deletes your hats'}
-CMDs[#CMDs + 1] = {NAME = 'hatspin / spinhats', DESC = 'Spins your characters accessories'}
-CMDs[#CMDs + 1] = {NAME = 'unhatspin / unspinhats', DESC = 'Undoes spinhats'}
-CMDs[#CMDs + 1] = {NAME = 'clearhats / cleanhats', DESC = 'Clears hats in the workspace'}
-CMDs[#CMDs + 1] = {NAME = 'chardelete / cd [instance name]', DESC = 'Removes any part with a certain name from your character'}
-CMDs[#CMDs + 1] = {NAME = 'chardeleteclass / cdc [class name]', DESC = 'Removes any part with a certain classname from your character'}
-CMDs[#CMDs + 1] = {NAME = 'deletevelocity / dv / removeforces', DESC = 'Removes any velocity / force instances in your character'}
-CMDs[#CMDs + 1] = {NAME = 'weaken [num]', DESC = 'Makes your character less dense'}
-CMDs[#CMDs + 1] = {NAME = 'unweaken', DESC = 'Sets your characters CustomPhysicalProperties to default'}
-CMDs[#CMDs + 1] = {NAME = 'strengthen [num]', DESC = 'Makes your character more dense (CustomPhysicalProperties)'}
-CMDs[#CMDs + 1] = {NAME = 'unstrengthen', DESC = 'Sets your characters CustomPhysicalProperties to default'}
-CMDs[#CMDs + 1] = {NAME = 'breakvelocity', DESC = 'Sets your characters velocity to 0'}
-CMDs[#CMDs + 1] = {NAME = 'spin [speed]', DESC = 'Spins your character'}
-CMDs[#CMDs + 1] = {NAME = 'unspin', DESC = 'Disables spin'}
-CMDs[#CMDs + 1] = {NAME = 'split', DESC = 'Splits your character in half'}
-CMDs[#CMDs + 1] = {NAME = 'nilchar', DESC = 'Sets your characters parent to nil'}
-CMDs[#CMDs + 1] = {NAME = 'unnilchar / nonilchar', DESC = 'Sets your characters parent to workspace'}
-CMDs[#CMDs + 1] = {NAME = 'noroot / removeroot / rroot', DESC = 'Removes your characters HumanoidRootPart'}
-CMDs[#CMDs + 1] = {NAME = 'replaceroot', DESC = 'Replaces your characters HumanoidRootPart'}
-CMDs[#CMDs + 1] = {NAME = 'clearcharappearance / clearchar / clrchar', DESC = 'Removes all accessory, shirt, pants, charactermesh, and bodycolors'}
-CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'animation / anim [ID] [speed]', DESC = 'Makes your character perform an animation (must be by roblox to replicate)'}
-CMDs[#CMDs + 1] = {NAME = 'dance', DESC = 'Makes you  d a n c e'}
-CMDs[#CMDs + 1] = {NAME = 'undance', DESC = 'Stops dance animations'}
-CMDs[#CMDs + 1] = {NAME = 'spasm', DESC = 'Makes you  c r a z y'}
-CMDs[#CMDs + 1] = {NAME = 'unspasm', DESC = 'Stops spasm'}
-CMDs[#CMDs + 1] = {NAME = 'headthrow', DESC = 'Simply makes you throw your head'}
-CMDs[#CMDs + 1] = {NAME = 'noanim', DESC = 'Disables your animations'}
-CMDs[#CMDs + 1] = {NAME = 'reanim', DESC = 'Restores your animations'}
-CMDs[#CMDs + 1] = {NAME = 'animspeed [num]', DESC = 'Changes the speed of your current animation'}
-CMDs[#CMDs + 1] = {NAME = 'copyanimation / copyanim / copyemote [player]', DESC = 'Copies someone elses animation'}
-CMDs[#CMDs + 1] = {NAME = 'copyanimationid / copyanimid / copyemoteid [player]', DESC = 'Copies your animation id or someone elses to your clipboard'}
-CMDs[#CMDs + 1] = {NAME = 'loopanimation / loopanim', DESC = 'Loops your current animation'}
-CMDs[#CMDs + 1] = {NAME = 'stopanimations / stopanims', DESC = 'Stops running animations'}
-CMDs[#CMDs + 1] = {NAME = 'refreshanimations / refreshanims', DESC = 'Refreshes animations'}
-CMDs[#CMDs + 1] = {NAME = 'allowcustomanim / allowcustomanimations', DESC = 'Lets you use custom animation packs instead'}
-CMDs[#CMDs + 1] = {NAME = 'unallowcustomanim / unallowcustomanimations', DESC = 'Doesn\'t let you use custom animation packs instead'}
-CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'autoclick [click delay] [release delay]', DESC = 'Automatically clicks your mouse with a set delay'}
-CMDs[#CMDs + 1] = {NAME = 'unautoclick / noautoclick', DESC = 'Turns off autoclick'}
-CMDs[#CMDs + 1] = {NAME = 'autokeypress [key] [down delay] [up delay]', DESC = 'Automatically presses a key with a set delay'}
-CMDs[#CMDs + 1] = {NAME = 'unautokeypress', DESC = 'Stops autokeypress'}
-CMDs[#CMDs + 1] = {NAME = 'hovername', DESC = 'Shows a players username when your mouse is hovered over them'}
-CMDs[#CMDs + 1] = {NAME = 'unhovername / nohovername', DESC = 'Turns off hovername'}
-CMDs[#CMDs + 1] = {NAME = 'mousesensitivity / ms [0-10]', DESC = 'Sets your mouse sensitivity (affects first person and right click drag) (default is 1)'}
-CMDs[#CMDs + 1] = {NAME = 'clickdelete', DESC = 'Go to settings>Keybinds>Add for clicktp'}
-CMDs[#CMDs + 1] = {NAME = 'clickteleport', DESC = 'Go to settings>Keybinds>Add for click tp'}
-CMDs[#CMDs + 1] = {NAME = 'mouseteleport / mousetp', DESC = 'Teleports your character to your mouse. This is recommended as a keybind'}
-CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'tools', DESC = 'Copies tools from ReplicatedStorage and Lighting'}
-CMDs[#CMDs + 1] = {NAME = 'notools / removetools / deletetools', DESC = 'Removes tools from character and backpack'}
-CMDs[#CMDs + 1] = {NAME = 'deleteselectedtool / dst', DESC = 'Removes any currently selected tools'}
-CMDs[#CMDs + 1] = {NAME = 'grabtools', DESC = 'Automatically get tools that are dropped'}
-CMDs[#CMDs + 1] = {NAME = 'ungrabtools / nograbtools', DESC = 'Disables grabtools'}
-CMDs[#CMDs + 1] = {NAME = 'copytools [player] (CLIENT)', DESC = 'Copies a players tools'}
-CMDs[#CMDs + 1] = {NAME = 'dupetools / clonetools [num]', DESC = 'Duplicates your inventory tools a set ammount of times'}
-CMDs[#CMDs + 1] = {NAME = 'givetool / givetools', DESC = 'Gives all the tools you\'re holding to [player] using the attach method.'}
-CMDs[#CMDs + 1] = {NAME = 'droptools', DESC = 'Drops your tools'}
-CMDs[#CMDs + 1] = {NAME = 'droppabletools', DESC = 'Makes your tools droppable'}
-CMDs[#CMDs + 1] = {NAME = 'equiptools', DESC = 'Equips every tool in your inventory at once'}
-CMDs[#CMDs + 1] = {NAME = 'unequiptools', DESC = 'Unequips every tool you are currently holding at once'}
-CMDs[#CMDs + 1] = {NAME = 'removespecifictool [name]', DESC = 'Automatically remove a specific tool from your inventory'}
-CMDs[#CMDs + 1] = {NAME = 'unremovespecifictool [name]', DESC = 'Stops removing a specific tool from your inventory'}
-CMDs[#CMDs + 1] = {NAME = 'clearremovespecifictool', DESC = 'Stop removing all specific tools from your inventory'}
-CMDs[#CMDs + 1] = {NAME = 'reach [num]', DESC = 'Increases the hitbox of your held tool'}
-CMDs[#CMDs + 1] = {NAME = 'boxreach [num]', DESC = 'Increases the hitbox of your held tool in a box shape'}
-CMDs[#CMDs + 1] = {NAME = 'unreach / noreach', DESC = 'Turns off reach'}
-CMDs[#CMDs + 1] = {NAME = 'grippos [X Y Z]', DESC = 'Changes your current tools grip position'}
-CMDs[#CMDs + 1] = {NAME = 'usetools [ammount] [delay]', DESC = 'Activates all tools in your backpack at the same time'}
-CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'addalias [cmd] [alias]', DESC = 'Adds an alias to a command'}
-CMDs[#CMDs + 1] = {NAME = 'removealias [alias]', DESC = 'Removes a custom alias'}
-CMDs[#CMDs + 1] = {NAME = 'clraliases', DESC = 'Removes all custom aliases'}
-CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'addplugin / plugin [name]', DESC = 'Add a plugin via command'}
-CMDs[#CMDs + 1] = {NAME = 'removeplugin / deleteplugin [name]', DESC = 'Remove a plugin via command'}
-CMDs[#CMDs + 1] = {NAME = 'reloadplugin [name]', DESC = 'Reloads a plugin'}
-CMDs[#CMDs + 1] = {NAME = 'addallplugins / loadallplugins', DESC = 'Adds all available plugins from the workspace folder'}
-CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'breakloops / break (cmd loops)', DESC = 'Stops any cmd loops (;100^1^cmd)'}
-CMDs[#CMDs + 1] = {NAME = 'removecmd / deletecmd', DESC = 'Removes a command until the admin is reloaded'}
-CMDs[#CMDs + 1] = {NAME = 'tpwalk / teleportwalk [num]', DESC = 'Teleports you to your move direction'}
-CMDs[#CMDs + 1] = {NAME = 'untpwalk / unteleportwalk', DESC = 'Undoes tpwalk / teleportwalk'}
-CMDs[#CMDs + 1] = {NAME = 'notifyping / ping', DESC = 'Notify yourself your ping'}
-CMDs[#CMDs + 1] = {NAME = 'trip', DESC = 'Makes your character fall over'}
-CMDs[#CMDs + 1] = {NAME = 'norender', DESC = 'Disable 3d Rendering to decrease the amount of CPU the client uses'}
-CMDs[#CMDs + 1] = {NAME = 'render', DESC = 'Enable 3d Rendering'}
-CMDs[#CMDs + 1] = {NAME = 'use2022materials / 2022materials', DESC = 'Enables 2022 material textures'}
-CMDs[#CMDs + 1] = {NAME = 'unuse2022materials / un2022materials', DESC = 'Disables 2022 material textures'}
-CMDs[#CMDs + 1] = {NAME = 'promptr6', DESC = 'Prompts the game to switch your rig type to R6'}
-CMDs[#CMDs + 1] = {NAME = 'promptr15', DESC = 'Prompts the game to switch your rig type to R15'}
-CMDs[#CMDs + 1] = {NAME = 'wallwalk / walkonwalls', DESC = 'Walk on walls'}
-CMDs[#CMDs + 1] = {NAME = 'removeads / adblock', DESC = 'Automatically removes ad billboards'}
-CMDs[#CMDs + 1] = {NAME = 'scare / spook [player]', DESC = 'Teleports in front of a player for half a second'}
-CMDs[#CMDs + 1] = {NAME = 'alignmentkeys', DESC = 'Enables the left and right alignment keys (comma and period)'}
-CMDs[#CMDs + 1] = {NAME = 'unalignmentkeys / noalignmentkeys', DESC = 'Disables the alignment keys'}
-CMDs[#CMDs + 1] = {NAME = 'ctrllock', DESC = 'Binds Shiftlock to LeftControl'}
-CMDs[#CMDs + 1] = {NAME = 'unctrllock', DESC = 'Re-binds Shiftlock to LeftShift'}
-CMDs[#CMDs + 1] = {NAME = 'listento [player]', DESC = 'Listens to the area around a player. Can also eavesdrop with vc'}
-CMDs[#CMDs + 1] = {NAME = 'unlistento', DESC = 'Disables listento'}
-CMDs[#CMDs + 1] = {NAME = 'jerk', DESC = 'Makes you jork it'}
-CMDs[#CMDs + 1] = {NAME = 'unsuspendvc', DESC = 'Unsuspends you from voice chat'}
+
+CMDs={}
+CMDs[#CMDs+1]={NAME='discord / support / help',DESC='Invite to the Zero Yield support server.'}
+CMDs[#CMDs+1]={NAME='guiscale [number]',DESC='Changes the size of the gui. [number] accepts both decimals and whole numbers. Min is 0.4 and Max is 2'}
+CMDs[#CMDs+1]={NAME='console',DESC='Loads Roblox console'}
+CMDs[#CMDs+1]={NAME='oldconsole',DESC='Loads old Roblox console'}
+CMDs[#CMDs+1]={NAME='explorer / dex',DESC='Opens DEX by Moon'}
+CMDs[#CMDs+1]={NAME='olddex / odex',DESC='Opens Old DEX by Moon'}
+CMDs[#CMDs+1]={NAME='remotespy / rspy',DESC='Opens Simple Spy V3'}
+CMDs[#CMDs+1]={NAME='audiologger / alogger',DESC='Opens Edges audio logger'}
+CMDs[#CMDs+1]={NAME='serverinfo / info',DESC='Gives you info about the server'}
+CMDs[#CMDs+1]={NAME='jobid',DESC='Copies the games JobId to your clipboard'}
+CMDs[#CMDs+1]={NAME='notifyjobid',DESC='Notifies you the games JobId'}
+CMDs[#CMDs+1]={NAME='rejoin / rj',DESC='Makes you rejoin the game'}
+CMDs[#CMDs+1]={NAME='autorejoin / autorj',DESC='Automatically rejoins the server if you get kicked/disconnected'}
+CMDs[#CMDs+1]={NAME='serverhop / shop',DESC='Teleports you to a different server'}
+CMDs[#CMDs+1]={NAME='gameteleport / gametp [place ID]',DESC='Joins a game by ID'}
+CMDs[#CMDs+1]={NAME='antiidle / antiafk',DESC='Prevents the game from kicking you for being idle/afk'}
+CMDs[#CMDs+1]={NAME='datalimit [num]',DESC='Set outgoing KBPS limit'}
+CMDs[#CMDs+1]={NAME='replicationlag / backtrack [num]',DESC='Set IncomingReplicationLag'}
+CMDs[#CMDs+1]={NAME='creatorid / creator',DESC='Notifies you the creators ID'}
+CMDs[#CMDs+1]={NAME='copycreatorid / copycreator',DESC='Copies the creators ID to your clipboard'}
+CMDs[#CMDs+1]={NAME='setcreatorid / setcreator',DESC='Sets your userid to the creators ID'}
+CMDs[#CMDs+1]={NAME='noprompts',DESC='Prevents the game from showing you purchase/premium prompts'}
+CMDs[#CMDs+1]={NAME='showprompts',DESC='Allows the game to show purchase/premium prompts again'}
+CMDs[#CMDs+1]={NAME='enable [inventory/playerlist/chat/reset/emotes/all]',DESC='Toggles visibility of coregui items'}
+CMDs[#CMDs+1]={NAME='disable [inventory/playerlist/chat/reset/emotes/all]',DESC='Toggles visibility of coregui items'}
+CMDs[#CMDs+1]={NAME='showguis',DESC='Shows any invisible GUIs'}
+CMDs[#CMDs+1]={NAME='unshowguis',DESC='Undoes showguis'}
+CMDs[#CMDs+1]={NAME='hideguis',DESC='Hides any GUIs in PlayerGui'}
+CMDs[#CMDs+1]={NAME='unhideguis',DESC='Undoes hideguis'}
+CMDs[#CMDs+1]={NAME='guidelete',DESC='Enables backspace to delete GUI'}
+CMDs[#CMDs+1]={NAME='unguidelete / noguidelete',DESC='Disables guidelete'}
+CMDs[#CMDs+1]={NAME='hideiy',DESC='Hides the main IY GUI'}
+CMDs[#CMDs+1]={NAME='showiy / unhideiy',DESC='Shows IY again'}
+CMDs[#CMDs+1]={NAME='keepiy',DESC='Auto execute IY when you teleport through servers'}
+CMDs[#CMDs+1]={NAME='unkeepiy',DESC='Disable keepiy'}
+CMDs[#CMDs+1]={NAME='togglekeepiy',DESC='Toggle keepiy'}
+CMDs[#CMDs+1]={NAME='savegame / saveplace',DESC='Uses saveinstance to save the game'}
+CMDs[#CMDs+1]={NAME='clearerror',DESC='Clears the annoying box and blur when a game kicks you'}
+CMDs[#CMDs+1]={NAME='clientantikick / antikick (CLIENT)',DESC='Prevents localscripts from kicking you'}
+CMDs[#CMDs+1]={NAME='clientantiteleport / antiteleport (CLIENT)',DESC='Prevents localscripts from teleporting you'}
+CMDs[#CMDs+1]={NAME='allowrejoin / allowrj [true/false] (CLIENT)',DESC='Changes if antiteleport allows you to rejoin or not'}
+CMDs[#CMDs+1]={NAME='cancelteleport / canceltp',DESC='Cancels teleports in progress'}
+CMDs[#CMDs+1]={NAME='volume / vol [0-10]',DESC='Adjusts your game volume on a scale of 0 to 10'}
+CMDs[#CMDs+1]={NAME='antilag / boostfps / lowgraphics',DESC='Lowers game quality to boost FPS'}
+CMDs[#CMDs+1]={NAME='record / rec',DESC='Starts roblox recorder'}
+CMDs[#CMDs+1]={NAME='screenshot / scrnshot',DESC='Takes a screenshot'}
+CMDs[#CMDs+1]={NAME='togglefullscreen / togglefs',DESC='Toggles fullscreen'}
+CMDs[#CMDs+1]={NAME='notify [text]',DESC='Sends you a notification with the provided text'}
+CMDs[#CMDs+1]={NAME='lastcommand / lastcmd',DESC='Executes the previous command used'}
+CMDs[#CMDs+1]={NAME='exit',DESC='Kills roblox process'}
+CMDs[#CMDs+1]={NAME='',DESC=''}
+CMDs[#CMDs+1]={NAME='noclip',DESC='Go through objects'}
+CMDs[#CMDs+1]={NAME='unnoclip / clip',DESC='Disables noclip'}
+CMDs[#CMDs+1]={NAME='fly [speed]',DESC='Makes you fly'}
+CMDs[#CMDs+1]={NAME='unfly',DESC='Disables fly'}
+CMDs[#CMDs+1]={NAME='flyspeed [num]',DESC='Set fly speed (default is 20)'}
+CMDs[#CMDs+1]={NAME='vehiclefly / vfly [speed]',DESC='Makes you fly in a vehicle'}
+CMDs[#CMDs+1]={NAME='unvehiclefly / unvfly',DESC='Disables vehicle fly'}
+CMDs[#CMDs+1]={NAME='vehicleflyspeed  / vflyspeed [num]',DESC='Set vehicle fly speed'}
+CMDs[#CMDs+1]={NAME='cframefly / cfly [speed]',DESC='Makes you fly, bypassing some anti cheats (works on mobile)'}
+CMDs[#CMDs+1]={NAME='uncframefly / uncfly',DESC='Disables cfly'}
+CMDs[#CMDs+1]={NAME='cframeflyspeed  / cflyspeed [num]',DESC='Sets cfly speed'}
+CMDs[#CMDs+1]={NAME='qefly [true / false]',DESC='enables or disables the Q and E hotkeys for fly'}
+CMDs[#CMDs+1]={NAME='vehiclenoclip / vnoclip',DESC='Turns off vehicle collision'}
+CMDs[#CMDs+1]={NAME='vehicleclip / vclip / unvnoclip',DESC='Enables vehicle collision'}
+CMDs[#CMDs+1]={NAME='float /  platform',DESC='Spawns a platform beneath you causing you to float'}
+CMDs[#CMDs+1]={NAME='unfloat / noplatform',DESC='Removes the platform'}
+CMDs[#CMDs+1]={NAME='swim',DESC='Allows you to swim in the air'}
+CMDs[#CMDs+1]={NAME='unswim / noswim',DESC='Stops you from swimming everywhere'}
+CMDs[#CMDs+1]={NAME='',DESC=''}
+CMDs[#CMDs+1]={NAME='setwaypoint / swp [name]',DESC='Sets a waypoint at your position'}
+CMDs[#CMDs+1]={NAME='waypointpos / wpp [name] [X Y Z]',DESC='Sets a waypoint with specified coordinates'}
+CMDs[#CMDs+1]={NAME='waypoints',DESC='Shows a list of currently active waypoints'}
+CMDs[#CMDs+1]={NAME='showwaypoints / showwp',DESC='Shows all currently set waypoints'}
+CMDs[#CMDs+1]={NAME='hidewaypoints / hidewp',DESC='Hides shown waypoints'}
+CMDs[#CMDs+1]={NAME='waypoint / wp [name]',DESC='Teleports player to a waypoint'}
+CMDs[#CMDs+1]={NAME='tweenwaypoint / twp [name]',DESC='Tweens player to a waypoint'}
+CMDs[#CMDs+1]={NAME='walktowaypoint / wtwp [name]',DESC='Walks player to a waypoint'}
+CMDs[#CMDs+1]={NAME='deletewaypoint / dwp [name]',DESC='Deletes a waypoint'}
+CMDs[#CMDs+1]={NAME='clearwaypoints / cwp',DESC='Clears all waypoints'}
+CMDs[#CMDs+1]={NAME='cleargamewaypoints / cgamewp',DESC='Clears all waypoints for the game you are in'}
+CMDs[#CMDs+1]={NAME='',DESC=''}
+CMDs[#CMDs+1]={NAME='goto [player]',DESC='Go to a player'}
+CMDs[#CMDs+1]={NAME='tweengoto / tgoto [player]',DESC='Tween to a player (bypasses some anti cheats)'}
+CMDs[#CMDs+1]={NAME='tweenspeed / tspeed [num]',DESC='Sets how fast all tween commands go (default is 1)'}
+CMDs[#CMDs+1]={NAME='vehiclegoto / vgoto [player]',DESC='Go to a player while in a vehicle'}
+CMDs[#CMDs+1]={NAME='loopgoto [player] [distance] [delay]',DESC='Loop teleport to a player'}
+CMDs[#CMDs+1]={NAME='unloopgoto',DESC='Stops teleporting you to a player'}
+CMDs[#CMDs+1]={NAME='pulsetp / ptp [player] [seconds]',DESC='Teleports you to a player for a specified ammount of time'}
+CMDs[#CMDs+1]={NAME='clientbring / cbring [player] (CLIENT)',DESC='Bring a player'}
+CMDs[#CMDs+1]={NAME='loopbring [player] [distance] [delay] (CLIENT)',DESC='Loop brings a player to you (useful for killing)'}
+CMDs[#CMDs+1]={NAME='unloopbring [player]',DESC='Undoes loopbring'}
+CMDs[#CMDs+1]={NAME='freeze / fr [player] (CLIENT)',DESC='Freezes a player'}
+CMDs[#CMDs+1]={NAME='freezeanims',DESC='Freezes your animations / pauses your animations - Does not work on default animations'}
+CMDs[#CMDs+1]={NAME='unfreezeanims',DESC='Unfreezes your animations / plays your animations'}
+CMDs[#CMDs+1]={NAME='thaw / unfr [player] (CLIENT)',DESC='Unfreezes a player'}
+CMDs[#CMDs+1]={NAME='tpposition / tppos [X Y Z]',DESC='Teleports you to certain coordinates'}
+CMDs[#CMDs+1]={NAME='tweentpposition / ttppos [X Y Z]',DESC='Tween to coordinates (bypasses some anti cheats)'}
+CMDs[#CMDs+1]={NAME='offset [X Y Z]',DESC='Offsets you by certain coordinates'}
+CMDs[#CMDs+1]={NAME='tweenoffset / toffset [X Y Z]',DESC='Tween offset (bypasses some anti cheats)'}
+CMDs[#CMDs+1]={NAME='notifyposition / notifypos [player]',DESC='Notifies you the coordinates of a character'}
+CMDs[#CMDs+1]={NAME='copyposition / copypos [player]',DESC='Copies the coordinates of a character to your clipboard'}
+CMDs[#CMDs+1]={NAME='walktoposition / walktopos [X Y Z]',DESC='Makes you walk to a coordinate'}
+CMDs[#CMDs+1]={NAME='spawnpoint / spawn [delay]',DESC='Sets a position where you will spawn'}
+CMDs[#CMDs+1]={NAME='nospawnpoint / nospawn',DESC='Removes your custom spawn point'}
+CMDs[#CMDs+1]={NAME='flashback / diedtp',DESC='Teleports you to where you last died'}
+CMDs[#CMDs+1]={NAME='walltp',DESC='Teleports you above/over any wall you run into'}
+CMDs[#CMDs+1]={NAME='nowalltp / unwalltp',DESC='Disables walltp'}
+CMDs[#CMDs+1]={NAME='teleporttool / tptool',DESC='Gives you a teleport tool'}
+CMDs[#CMDs+1]={NAME='',DESC=''}
+CMDs[#CMDs+1]={NAME='logs',DESC='Opens the logs GUI'}
+CMDs[#CMDs+1]={NAME='chatlogs / clogs',DESC='Log what people say or whisper'}
+CMDs[#CMDs+1]={NAME='joinlogs / jlogs',DESC='Log when people join'}
+CMDs[#CMDs+1]={NAME='chatlogswebhook / logswebhook [url]',DESC='Set a discord webhook for chatlogs to go to (provide no url to disable this)'}
+CMDs[#CMDs+1]={NAME='antichatlogs / antichatlogger',DESC='Prevents Roblox from banning you for your silly chat messages (game needs the legacy chat)'}
+CMDs[#CMDs+1]={NAME='chat / say [text]',DESC='Makes you chat a string (possible mute bypass)'}
+CMDs[#CMDs+1]={NAME='spam [text]',DESC='Makes you spam the chat'}
+CMDs[#CMDs+1]={NAME='unspam',DESC='Turns off spam'}
+CMDs[#CMDs+1]={NAME='whisper / pm [player] [text]',DESC='Makes you whisper a string to someone (possible mute bypass)'}
+CMDs[#CMDs+1]={NAME='pmspam [player] [text]',DESC='Makes you spam a players whispers'}
+CMDs[#CMDs+1]={NAME='unpmspam [player]',DESC='Turns off pm spam'}
+CMDs[#CMDs+1]={NAME='spamspeed [num]',DESC='How quickly you spam (default is 1)'}
+CMDs[#CMDs+1]={NAME='bubblechat (CLIENT)',DESC='Enables bubble chat for your client'}
+CMDs[#CMDs+1]={NAME='unbubblechat / nobubblechat',DESC='Disables the bubblechat command'}
+CMDs[#CMDs+1]={NAME='',DESC=''}
+CMDs[#CMDs+1]={NAME='esp',DESC='View all players and their status'}
+CMDs[#CMDs+1]={NAME='noesp / unesp',DESC='Removes esp'}
+CMDs[#CMDs+1]={NAME='esptransparency [number]',DESC='Changes the transparency of esp related commands'}
+CMDs[#CMDs+1]={NAME='partesp [part name]',DESC='Highlights a part'}
+CMDs[#CMDs+1]={NAME='unpartesp / nopartesp [part name]',DESC='removes partesp'}
+CMDs[#CMDs+1]={NAME='chams',DESC='ESP but without text in the way'}
+CMDs[#CMDs+1]={NAME='nochams / unchams',DESC='Removes chams'}
+CMDs[#CMDs+1]={NAME='locate [player]',DESC='View a single player and their status'}
+CMDs[#CMDs+1]={NAME='unlocate / nolocate [player]',DESC='Removes locate'}
+CMDs[#CMDs+1]={NAME='xray',DESC='Makes all parts in workspace transparent'}
+CMDs[#CMDs+1]={NAME='unxray / noxray',DESC='Restores transparency'}
+CMDs[#CMDs+1]={NAME='loopxray',DESC='Makes all parts in workspace transparent but looped'}
+CMDs[#CMDs+1]={NAME='unloopunxray',DESC='Unloops xray'}
+CMDs[#CMDs+1]={NAME='',DESC=''}
+CMDs[#CMDs+1]={NAME='spectate / view [player]',DESC='View a player'}
+CMDs[#CMDs+1]={NAME='viewpart / viewp [part name]',DESC='View a part'}
+CMDs[#CMDs+1]={NAME='unspectate / unview',DESC='Stops viewing player'}
+CMDs[#CMDs+1]={NAME='freecam / fc',DESC='Allows you to freely move camera around the game'}
+CMDs[#CMDs+1]={NAME='freecampos / fcpos [X Y Z]',DESC='Moves / opens freecam in a certain position'}
+CMDs[#CMDs+1]={NAME='freecamwaypoint / fcwp [name]',DESC='Moves / opens freecam to a waypoint'}
+CMDs[#CMDs+1]={NAME='freecamgoto / fcgoto / fctp [player]',DESC='Moves / opens freecam to a player'}
+CMDs[#CMDs+1]={NAME='unfreecam / unfc',DESC='Disables freecam'}
+CMDs[#CMDs+1]={NAME='freecamspeed / fcspeed [num]',DESC='Adjusts freecam speed (default is 1)'}
+CMDs[#CMDs+1]={NAME='notifyfreecamposition / notifyfcpos',DESC='Noitifies you your freecam coordinates'}
+CMDs[#CMDs+1]={NAME='copyfreecamposition / copyfcpos',DESC='Copies your freecam coordinates to your clipboard'}
+CMDs[#CMDs+1]={NAME='gotocamera / gotocam',DESC='Teleports you to the location of your camera'}
+CMDs[#CMDs+1]={NAME='tweengotocam / tgotocam',DESC='Tweens you to the location of your camera'}
+CMDs[#CMDs+1]={NAME='firstp',DESC='Forces camera to go into first person'}
+CMDs[#CMDs+1]={NAME='thirdp',DESC='Allows camera to go into third person'}
+CMDs[#CMDs+1]={NAME='noclipcam / nccam',DESC='Allows camera to go through objects like walls'}
+CMDs[#CMDs+1]={NAME='maxzoom [num]',DESC='Maximum camera zoom'}
+CMDs[#CMDs+1]={NAME='minzoom [num]',DESC='Minimum camera zoom'}
+CMDs[#CMDs+1]={NAME='camdistance [num]',DESC='Changes camera distance from your player'}
+CMDs[#CMDs+1]={NAME='fov [num]',DESC='Adjusts field of view (default is 70)'}
+CMDs[#CMDs+1]={NAME='fixcam / restorecam',DESC='Fixes camera'}
+CMDs[#CMDs+1]={NAME='enableshiftlock / enablesl',DESC='Enables the shift lock option'}
+CMDs[#CMDs+1]={NAME='lookat [player]',DESC='Moves your camera view to a player'}
+CMDs[#CMDs+1]={NAME='',DESC=''}
+CMDs[#CMDs+1]={NAME='btools (CLIENT)',DESC='Gives you building tools (DOES NOT REPLICATE)'}
+CMDs[#CMDs+1]={NAME='f3x (CLIENT)',DESC='Gives you F3X building tools (DOES NOT REPLICATE)'}
+CMDs[#CMDs+1]={NAME='partname / partpath',DESC='Allows you to click a part to see its path & name'}
+CMDs[#CMDs+1]={NAME='delete [instance name] (CLIENT)',DESC='Removes any part with a certain name from the workspace (DOES NOT REPLICATE)'}
+CMDs[#CMDs+1]={NAME='deleteclass / dc [class name] (CLIENT)',DESC='Removes any part with a certain classname from the workspace (DOES NOT REPLICATE)'}
+CMDs[#CMDs+1]={NAME='lockworkspace / lockws',DESC='Locks the whole workspace'}
+CMDs[#CMDs+1]={NAME='unlockworkspace / unlockws',DESC='Unlocks the whole workspace'}
+CMDs[#CMDs+1]={NAME='invisibleparts / invisparts (CLIENT)',DESC='Shows invisible parts'}
+CMDs[#CMDs+1]={NAME='uninvisibleparts / uninvisparts (CLIENT)',DESC='Makes parts affected by invisparts return to normal'}
+CMDs[#CMDs+1]={NAME='deleteinvisparts / dip (CLIENT)',DESC='Deletes invisible parts'}
+CMDs[#CMDs+1]={NAME='gotopart [part name]',DESC='Moves your character to a part or multiple parts'}
+CMDs[#CMDs+1]={NAME='tweengotopart / tgotopart [part name]',DESC='Tweens your character to a part or multiple parts'}
+CMDs[#CMDs+1]={NAME='gotopartclass / gpc [class name]',DESC='Moves your character to a part or multiple parts based on classname'}
+CMDs[#CMDs+1]={NAME='tweengotopartclass / tgpc [class name]',DESC='Tweens your character to a part or multiple parts based on classname'}
+CMDs[#CMDs+1]={NAME='gotomodel [part name]',DESC='Moves your character to a model or multiple models'}
+CMDs[#CMDs+1]={NAME='tweengotomodel / tgotomodel [part name]',DESC='Tweens your character to a model or multiple models'}
+CMDs[#CMDs+1]={NAME='gotopartdelay / gotomodeldelay [num]',DESC='Adjusts how quickly you teleport to each part (default is 0.1)'}
+CMDs[#CMDs+1]={NAME='bringpart [part name] (CLIENT)',DESC='Moves a part or multiple parts to your character'}
+CMDs[#CMDs+1]={NAME='bringpartclass / bpc [class name] (CLIENT)',DESC='Moves a part or multiple parts to your character based on classname'}
+CMDs[#CMDs+1]={NAME='noclickdetectorlimits / nocdlimits',DESC='Sets all click detectors MaxActivationDistance to math.huge'}
+CMDs[#CMDs+1]={NAME='fireclickdetectors / firecd [name]',DESC='Uses all click detectors in a game or uses the optional name'}
+CMDs[#CMDs+1]={NAME='firetouchinterests / touchinterests [name]',DESC='Uses all touchinterests in a game or uses the optional name'}
+CMDs[#CMDs+1]={NAME='noproximitypromptlimits / nopplimits',DESC='Sets all proximity prompts MaxActivationDistance to math.huge'}
+CMDs[#CMDs+1]={NAME='fireproximityprompts / firepp [name]',DESC='Uses all proximity prompts in a game or uses the optional name'}
+CMDs[#CMDs+1]={NAME='instantproximityprompts / instantpp',DESC='Disable the cooldown for proximity prompts'}
+CMDs[#CMDs+1]={NAME='uninstantproximityprompts / uninstantpp',DESC='Undo the cooldown removal'}
+CMDs[#CMDs+1]={NAME='tpunanchored / tpua [player]',DESC='Teleports unanchored parts to a player'}
+CMDs[#CMDs+1]={NAME='animsunanchored / freezeua',DESC='Freezes unanchored parts'}
+CMDs[#CMDs+1]={NAME='thawunanchored / thawua / unfreezeua',DESC='Thaws unanchored parts'}
+CMDs[#CMDs+1]={NAME='removeterrain / rterrain / noterrain',DESC='Removes all terrain'}
+CMDs[#CMDs+1]={NAME='clearnilinstances / nonilinstances / cni',DESC='Removes nil instances'}
+CMDs[#CMDs+1]={NAME='destroyheight / dh [num]',DESC='Sets FallenPartsDestroyHeight'}
+CMDs[#CMDs+1]={NAME='fakeout',DESC='Tp to the void and then back (useful to kill people attached to you)'}
+CMDs[#CMDs+1]={NAME='antivoid',DESC='Prevents you from falling into the void by launching you upwards'}
+CMDs[#CMDs+1]={NAME='unantivoid / noantivoid',DESC='Disables antivoid'}
+CMDs[#CMDs+1]={NAME='',DESC=''}
+CMDs[#CMDs+1]={NAME='fullbright / fb (CLIENT)',DESC='Makes the map brighter / more visible'}
+CMDs[#CMDs+1]={NAME='loopfullbright / loopfb (CLIENT)',DESC='Makes the map brighter / more visible but looped'}
+CMDs[#CMDs+1]={NAME='unloopfullbright / unloopfb',DESC='Unloops fullbright'}
+CMDs[#CMDs+1]={NAME='ambient [num] [num] [num] (CLIENT)',DESC='Changes ambient'}
+CMDs[#CMDs+1]={NAME='day (CLIENT)',DESC='Changes the time to day for the client'}
+CMDs[#CMDs+1]={NAME='night (CLIENT)',DESC='Changes the time to night for the client'}
+CMDs[#CMDs+1]={NAME='nofog (CLIENT)',DESC='Removes fog'}
+CMDs[#CMDs+1]={NAME='brightness [num] (CLIENT)',DESC='Changes the brightness lighting property'}
+CMDs[#CMDs+1]={NAME='globalshadows / gshadows (CLIENT)',DESC='Enables global shadows'}
+CMDs[#CMDs+1]={NAME='noglobalshadows / nogshadows (CLIENT)',DESC='Disables global shadows'}
+CMDs[#CMDs+1]={NAME='restorelighting / rlighting',DESC='Restores Lighting properties'}
+CMDs[#CMDs+1]={NAME='light [radius] [brightness] (CLIENT)',DESC='Gives your player dynamic light'}
+CMDs[#CMDs+1]={NAME='nolight / unlight',DESC='Removes dynamic light from your player'}
+CMDs[#CMDs+1]={NAME='',DESC=''}
+CMDs[#CMDs+1]={NAME='inspect / examine [player]',DESC='Opens InspectMenu for a certain player'}
+CMDs[#CMDs+1]={NAME='age [player]',DESC='Tells you the age of a player'}
+CMDs[#CMDs+1]={NAME='chatage [player]',DESC='Chats the age of a player'}
+CMDs[#CMDs+1]={NAME='joindate / jd [player]',DESC='Tells you the date the player joined Roblox'}
+CMDs[#CMDs+1]={NAME='chatjoindate / cjd [player]',DESC='Chats the date the player joined Roblox'}
+CMDs[#CMDs+1]={NAME='copyname / copyuser [player]',DESC='Copies a players full username to your clipboard'}
+CMDs[#CMDs+1]={NAME='userid / id [player]',DESC='Notifies a players user ID'}
+CMDs[#CMDs+1]={NAME='copyuserid / copyid [player]',DESC='Copies a players user ID to your clipboard'}
+CMDs[#CMDs+1]={NAME='appearanceid / aid [player]',DESC='Notifies a players appearance ID'}
+CMDs[#CMDs+1]={NAME='copyappearanceid / caid [player]',DESC='Copies a players appearance ID to your clipboard'}
+CMDs[#CMDs+1]={NAME='bang [player] [speed]',DESC='owo'}
+CMDs[#CMDs+1]={NAME='unbang',DESC='uwu'}
+CMDs[#CMDs+1]={NAME='carpet [player]',DESC='Be someones carpet'}
+CMDs[#CMDs+1]={NAME='uncarpet',DESC='Undoes carpet'}
+CMDs[#CMDs+1]={NAME='friend [player]',DESC='Sends a friend request to certain players'}
+CMDs[#CMDs+1]={NAME='unfriend [player]',DESC='Unfriends certain players'}
+CMDs[#CMDs+1]={NAME='headsit [player]',DESC='Sit on a players head'}
+CMDs[#CMDs+1]={NAME='walkto / follow [player]',DESC='Follow a player'}
+CMDs[#CMDs+1]={NAME='pathfindwalkto / pathfindfollow [player]',DESC='Follow a player using pathfinding'}
+CMDs[#CMDs+1]={NAME='pathfindwalktowaypoint / pathfindwalktowp [waypoint]',DESC='Walk to a waypoint using pathfinding'}
+CMDs[#CMDs+1]={NAME='unwalkto / unfollow',DESC='Stops following a player'}
+CMDs[#CMDs+1]={NAME='orbit [player] [speed] [distance]',DESC='Makes your character orbit around a player with an optional speed and an optional distance'}
+CMDs[#CMDs+1]={NAME='unorbit',DESC='Disables orbit'}
+CMDs[#CMDs+1]={NAME='stareat / stare [player]',DESC='Stare / look at a player'}
+CMDs[#CMDs+1]={NAME='unstareat / unstare [player]',DESC='Disables stareat'}
+CMDs[#CMDs+1]={NAME='rolewatch [group id] [role name]',DESC='Notify if someone from a watched group joins the server'}
+CMDs[#CMDs+1]={NAME='rolewatchstop / unrolewatch',DESC='Disable Rolewatch'}
+CMDs[#CMDs+1]={NAME='rolewatchleave',DESC='Toggle if you should leave the game if someone from a watched group joins the server'}
+CMDs[#CMDs+1]={NAME='staffwatch',DESC='Notify if a staff member of the game joins the server'}
+CMDs[#CMDs+1]={NAME='unstaffwatch',DESC='Disable Staffwatch'}
+CMDs[#CMDs+1]={NAME='attach [player] (TOOL)',DESC='Attaches you to a player (YOU NEED A TOOL)'}
+CMDs[#CMDs+1]={NAME='kill [player] (TOOL)',DESC='Kills a player (YOU NEED A TOOL)'}
+CMDs[#CMDs+1]={NAME='fastkill [player] (TOOL)',DESC='Kills a player (less reliable) (YOU NEED A TOOL)'}
+CMDs[#CMDs+1]={NAME='handlekill / hkill [player] (TOOL)',DESC='Kills a player using tool damage (YOU NEED A TOOL)'}
+CMDs[#CMDs+1]={NAME='bring [player] (TOOL)',DESC='Brings a player (YOU NEED A TOOL)'}
+CMDs[#CMDs+1]={NAME='fastbring [player] (TOOL)',DESC='Brings a player (less reliable) (YOU NEED A TOOL)'}
+CMDs[#CMDs+1]={NAME='teleport / tp [player] [player] (TOOL)',DESC='Teleports a player to another player (YOU NEED A TOOL)'}
+CMDs[#CMDs+1]={NAME='fastteleport / fasttp [player] [player] (TOOL)',DESC='Teleports a player to another player (less reliable) (YOU NEED A TOOL)'}
+CMDs[#CMDs+1]={NAME='fling',DESC='Flings anyone you touch'}
+CMDs[#CMDs+1]={NAME='unfling',DESC='Disables the fling command'}
+CMDs[#CMDs+1]={NAME='flyfling [speed]',DESC='Basically the invisfling command but not invisible'}
+CMDs[#CMDs+1]={NAME='unflyfling',DESC='Disables the flyfling command'}
+CMDs[#CMDs+1]={NAME='walkfling',DESC='Basically fling but no spinning'}
+CMDs[#CMDs+1]={NAME='unwalkfling / nowalkfling',DESC='Disables walkfling'}
+CMDs[#CMDs+1]={NAME='invisfling',DESC='Enables invisible fling'}
+CMDs[#CMDs+1]={NAME='antifling',DESC='Disables player collisions to prevent you from being flung'}
+CMDs[#CMDs+1]={NAME='unantifling',DESC='Disables antifling'}
+CMDs[#CMDs+1]={NAME='loopoof',DESC='Loops everyones character sounds (everyone can hear)'}
+CMDs[#CMDs+1]={NAME='unloopoof',DESC='Stops the oof chaos'}
+CMDs[#CMDs+1]={NAME='muteboombox [player]',DESC='Mutes someones boombox'}
+CMDs[#CMDs+1]={NAME='unmuteboombox [player]',DESC='Unmutes someones boombox'}
+CMDs[#CMDs+1]={NAME='hitbox [player] [size] [transparency]',DESC='Expands the hitbox for players HumanoidRootPart (default is 1)'}
+CMDs[#CMDs+1]={NAME='headsize [player] [size]',DESC='Expands the head size for players Head (default is 1)'}
+CMDs[#CMDs+1]={NAME='',DESC=''}
+CMDs[#CMDs+1]={NAME='reset',DESC='Resets your character normally'}
+CMDs[#CMDs+1]={NAME='respawn',DESC='Respawns you'}
+CMDs[#CMDs+1]={NAME='refresh / re',DESC='Respawns and brings you back to the same position'}
+CMDs[#CMDs+1]={NAME='god',DESC='Makes your character difficult to kill in most games'}
+CMDs[#CMDs+1]={NAME='permadeath',DESC='Makes you unable to die'}
+CMDs[#CMDs+1]={NAME='invisible / invis',DESC='Makes you invisible to other players'}
+CMDs[#CMDs+1]={NAME='visible / vis',DESC='Makes you visible to other players'}
+CMDs[#CMDs+1]={NAME='toolinvisible / toolinvis / tinvis',DESC='Makes you invisible to other players and able to use tools'}
+CMDs[#CMDs+1]={NAME='speed / ws / walkspeed [num]',DESC='Change your walkspeed'}
+CMDs[#CMDs+1]={NAME='spoofspeed / spoofws [num]',DESC='Spoofs your WalkSpeed on the Client'}
+CMDs[#CMDs+1]={NAME='loopspeed / loopws [num]',DESC='Loops your walkspeed'}
+CMDs[#CMDs+1]={NAME='unloopspeed / unloopws',DESC='Turns off loopspeed'}
+CMDs[#CMDs+1]={NAME='hipheight / hheight [num]',DESC='Adjusts hip height'}
+CMDs[#CMDs+1]={NAME='jumppower / jpower / jp [num]',DESC='Change a players jump height'}
+CMDs[#CMDs+1]={NAME='spoofjumppower / spoofjp [num]',DESC='Spoofs your JumpPower on the Client'}
+CMDs[#CMDs+1]={NAME='loopjumppower / loopjp [num]',DESC='Loops your jump height'}
+CMDs[#CMDs+1]={NAME='unloopjumppower / unloopjp',DESC='Turns off loopjumppower'}
+CMDs[#CMDs+1]={NAME='maxslopeangle / msa [num]',DESC='Adjusts MaxSlopeAngle'}
+CMDs[#CMDs+1]={NAME='gravity / grav [num] (CLIENT)',DESC='Change your gravity'}
+CMDs[#CMDs+1]={NAME='sit',DESC='Makes your character sit'}
+CMDs[#CMDs+1]={NAME='lay / laydown',DESC='Makes your character lay down'}
+CMDs[#CMDs+1]={NAME='sitwalk',DESC='Makes your character sit while still being able to walk'}
+CMDs[#CMDs+1]={NAME='nosit',DESC='Prevents your character from sitting'}
+CMDs[#CMDs+1]={NAME='unnosit',DESC='Disables nosit'}
+CMDs[#CMDs+1]={NAME='jump',DESC='Makes your character jump'}
+CMDs[#CMDs+1]={NAME='infinitejump / infjump',DESC='Allows you to jump before hitting the ground'}
+CMDs[#CMDs+1]={NAME='uninfinitejump / uninfjump',DESC='Disables infjump'}
+CMDs[#CMDs+1]={NAME='flyjump',DESC='Allows you to hold space to fly up'}
+CMDs[#CMDs+1]={NAME='unflyjump',DESC='Disables flyjump'}
+CMDs[#CMDs+1]={NAME='autojump / ajump',DESC='Automatically jumps when you run into an object'}
+CMDs[#CMDs+1]={NAME='unautojump / unajump',DESC='Disables autojump'}
+CMDs[#CMDs+1]={NAME='edgejump / ejump',DESC='Automatically jumps when you get to the edge of an object'}
+CMDs[#CMDs+1]={NAME='unedgejump / unejump',DESC='Disables edgejump'}
+CMDs[#CMDs+1]={NAME='platformstand / stun',DESC='Enables PlatformStand'}
+CMDs[#CMDs+1]={NAME='unplatformstand / unstun',DESC='Disables PlatformStand'}
+CMDs[#CMDs+1]={NAME='norotate / noautorotate',DESC='Disables AutoRotate'}
+CMDs[#CMDs+1]={NAME='unnorotate / autorotate',DESC='Enables AutoRotate'}
+CMDs[#CMDs+1]={NAME='enablestate [StateType]',DESC='Enables a humanoid state type'}
+CMDs[#CMDs+1]={NAME='disablestate [StateType]',DESC='Disables a humanoid state type'}
+CMDs[#CMDs+1]={NAME='team [team name] (CLIENT)',DESC='Changes your team. Sometimes fools localscripts.'}
+CMDs[#CMDs+1]={NAME='nobillboardgui / nobgui / noname',DESC='Removes billboard and surface guis from your players (i.e. name guis at cafes)'}
+CMDs[#CMDs+1]={NAME='loopnobgui / loopnoname',DESC='Loop removes billboard and surface guis from your players (i.e. name guis at cafes)'}
+CMDs[#CMDs+1]={NAME='unloopnobgui / unloopnoname',DESC='Disables loopnobgui'}
+CMDs[#CMDs+1]={NAME='noarms',DESC='Removes your arms'}
+CMDs[#CMDs+1]={NAME='nolegs',DESC='Removes your legs'}
+CMDs[#CMDs+1]={NAME='nolimbs',DESC='Removes your limbs'}
+CMDs[#CMDs+1]={NAME='naked (CLIENT)',DESC='Removes your clothing'}
+CMDs[#CMDs+1]={NAME='noface / removeface',DESC='Removes your face'}
+CMDs[#CMDs+1]={NAME='blockhead',DESC='Turns your head into a block'}
+CMDs[#CMDs+1]={NAME='blockhats',DESC='Turns your hats into blocks'}
+CMDs[#CMDs+1]={NAME='blocktool',DESC='Turns the currently selected tool into a block'}
+CMDs[#CMDs+1]={NAME='creeper',DESC='Makes you look like a creeper'}
+CMDs[#CMDs+1]={NAME='drophats',DESC='Drops your hats'}
+CMDs[#CMDs+1]={NAME='nohats / deletehats / rhats',DESC='Deletes your hats'}
+CMDs[#CMDs+1]={NAME='hatspin / spinhats',DESC='Spins your characters accessories'}
+CMDs[#CMDs+1]={NAME='unhatspin / unspinhats',DESC='Undoes spinhats'}
+CMDs[#CMDs+1]={NAME='clearhats / cleanhats',DESC='Clears hats in the workspace'}
+CMDs[#CMDs+1]={NAME='chardelete / cd [instance name]',DESC='Removes any part with a certain name from your character'}
+CMDs[#CMDs+1]={NAME='chardeleteclass / cdc [class name]',DESC='Removes any part with a certain classname from your character'}
+CMDs[#CMDs+1]={NAME='deletevelocity / dv / removeforces',DESC='Removes any velocity / force instances in your character'}
+CMDs[#CMDs+1]={NAME='weaken [num]',DESC='Makes your character less dense'}
+CMDs[#CMDs+1]={NAME='unweaken',DESC='Sets your characters CustomPhysicalProperties to default'}
+CMDs[#CMDs+1]={NAME='strengthen [num]',DESC='Makes your character more dense (CustomPhysicalProperties)'}
+CMDs[#CMDs+1]={NAME='unstrengthen',DESC='Sets your characters CustomPhysicalProperties to default'}
+CMDs[#CMDs+1]={NAME='breakvelocity',DESC='Sets your characters velocity to 0'}
+CMDs[#CMDs+1]={NAME='spin [speed]',DESC='Spins your character'}
+CMDs[#CMDs+1]={NAME='unspin',DESC='Disables spin'}
+CMDs[#CMDs+1]={NAME='split',DESC='Splits your character in half'}
+CMDs[#CMDs+1]={NAME='nilchar',DESC='Sets your characters parent to nil'}
+CMDs[#CMDs+1]={NAME='unnilchar / nonilchar',DESC='Sets your characters parent to workspace'}
+CMDs[#CMDs+1]={NAME='noroot / removeroot / rroot',DESC='Removes your characters HumanoidRootPart'}
+CMDs[#CMDs+1]={NAME='replaceroot',DESC='Replaces your characters HumanoidRootPart'}
+CMDs[#CMDs+1]={NAME='clearcharappearance / clearchar / clrchar',DESC='Removes all accessory, shirt, pants, charactermesh, and bodycolors'}
+CMDs[#CMDs+1]={NAME='',DESC=''}
+CMDs[#CMDs+1]={NAME='animation / anim [ID] [speed]',DESC='Makes your character perform an animation (must be by roblox to replicate)'}
+CMDs[#CMDs+1]={NAME='dance',DESC='Makes you  d a n c e'}
+CMDs[#CMDs+1]={NAME='undance',DESC='Stops dance animations'}
+CMDs[#CMDs+1]={NAME='spasm',DESC='Makes you  c r a z y'}
+CMDs[#CMDs+1]={NAME='unspasm',DESC='Stops spasm'}
+CMDs[#CMDs+1]={NAME='headthrow',DESC='Simply makes you throw your head'}
+CMDs[#CMDs+1]={NAME='noanim',DESC='Disables your animations'}
+CMDs[#CMDs+1]={NAME='reanim',DESC='Restores your animations'}
+CMDs[#CMDs+1]={NAME='animspeed [num]',DESC='Changes the speed of your current animation'}
+CMDs[#CMDs+1]={NAME='copyanimation / copyanim / copyemote [player]',DESC='Copies someone elses animation'}
+CMDs[#CMDs+1]={NAME='copyanimationid / copyanimid / copyemoteid [player]',DESC='Copies your animation id or someone elses to your clipboard'}
+CMDs[#CMDs+1]={NAME='loopanimation / loopanim',DESC='Loops your current animation'}
+CMDs[#CMDs+1]={NAME='stopanimations / stopanims',DESC='Stops running animations'}
+CMDs[#CMDs+1]={NAME='refreshanimations / refreshanims',DESC='Refreshes animations'}
+CMDs[#CMDs+1]={NAME='allowcustomanim / allowcustomanimations',DESC='Lets you use custom animation packs instead'}
+CMDs[#CMDs+1]={NAME='unallowcustomanim / unallowcustomanimations',DESC='Doesn\'t let you use custom animation packs instead'}
+CMDs[#CMDs+1]={NAME='',DESC=''}
+CMDs[#CMDs+1]={NAME='autoclick [click delay] [release delay]',DESC='Automatically clicks your mouse with a set delay'}
+CMDs[#CMDs+1]={NAME='unautoclick / noautoclick',DESC='Turns off autoclick'}
+CMDs[#CMDs+1]={NAME='autokeypress [key] [down delay] [up delay]',DESC='Automatically presses a key with a set delay'}
+CMDs[#CMDs+1]={NAME='unautokeypress',DESC='Stops autokeypress'}
+CMDs[#CMDs+1]={NAME='hovername',DESC='Shows a players username when your mouse is hovered over them'}
+CMDs[#CMDs+1]={NAME='unhovername / nohovername',DESC='Turns off hovername'}
+CMDs[#CMDs+1]={NAME='mousesensitivity / ms [0-10]',DESC='Sets your mouse sensitivity (affects first person and right click drag) (default is 1)'}
+CMDs[#CMDs+1]={NAME='clickdelete',DESC='Go to settings>Keybinds>Add for clicktp'}
+CMDs[#CMDs+1]={NAME='clickteleport',DESC='Go to settings>Keybinds>Add for click tp'}
+CMDs[#CMDs+1]={NAME='mouseteleport / mousetp',DESC='Teleports your character to your mouse. This is recommended as a keybind'}
+CMDs[#CMDs+1]={NAME='',DESC=''}
+CMDs[#CMDs+1]={NAME='tools',DESC='Copies tools from ReplicatedStorage and Lighting'}
+CMDs[#CMDs+1]={NAME='notools / removetools / deletetools',DESC='Removes tools from character and backpack'}
+CMDs[#CMDs+1]={NAME='deleteselectedtool / dst',DESC='Removes any currently selected tools'}
+CMDs[#CMDs+1]={NAME='grabtools',DESC='Automatically get tools that are dropped'}
+CMDs[#CMDs+1]={NAME='ungrabtools / nograbtools',DESC='Disables grabtools'}
+CMDs[#CMDs+1]={NAME='copytools [player] (CLIENT)',DESC='Copies a players tools'}
+CMDs[#CMDs+1]={NAME='dupetools / clonetools [num]',DESC='Duplicates your inventory tools a set ammount of times'}
+CMDs[#CMDs+1]={NAME='givetool / givetools',DESC='Gives all the tools you\'re holding to [player] using the attach method.'}
+CMDs[#CMDs+1]={NAME='droptools',DESC='Drops your tools'}
+CMDs[#CMDs+1]={NAME='droppabletools',DESC='Makes your tools droppable'}
+CMDs[#CMDs+1]={NAME='equiptools',DESC='Equips every tool in your inventory at once'}
+CMDs[#CMDs+1]={NAME='unequiptools',DESC='Unequips every tool you are currently holding at once'}
+CMDs[#CMDs+1]={NAME='removespecifictool [name]',DESC='Automatically remove a specific tool from your inventory'}
+CMDs[#CMDs+1]={NAME='unremovespecifictool [name]',DESC='Stops removing a specific tool from your inventory'}
+CMDs[#CMDs+1]={NAME='clearremovespecifictool',DESC='Stop removing all specific tools from your inventory'}
+CMDs[#CMDs+1]={NAME='reach [num]',DESC='Increases the hitbox of your held tool'}
+CMDs[#CMDs+1]={NAME='boxreach [num]',DESC='Increases the hitbox of your held tool in a box shape'}
+CMDs[#CMDs+1]={NAME='unreach / noreach',DESC='Turns off reach'}
+CMDs[#CMDs+1]={NAME='grippos [X Y Z]',DESC='Changes your current tools grip position'}
+CMDs[#CMDs+1]={NAME='usetools [ammount] [delay]',DESC='Activates all tools in your backpack at the same time'}
+CMDs[#CMDs+1]={NAME='',DESC=''}
+CMDs[#CMDs+1]={NAME='addalias [cmd] [alias]',DESC='Adds an alias to a command'}
+CMDs[#CMDs+1]={NAME='removealias [alias]',DESC='Removes a custom alias'}
+CMDs[#CMDs+1]={NAME='clraliases',DESC='Removes all custom aliases'}
+CMDs[#CMDs+1]={NAME='',DESC=''}
+CMDs[#CMDs+1]={NAME='addplugin / plugin [name]',DESC='Add a plugin via command'}
+CMDs[#CMDs+1]={NAME='removeplugin / deleteplugin [name]',DESC='Remove a plugin via command'}
+CMDs[#CMDs+1]={NAME='reloadplugin [name]',DESC='Reloads a plugin'}
+CMDs[#CMDs+1]={NAME='addallplugins / loadallplugins',DESC='Adds all available plugins from the workspace folder'}
+CMDs[#CMDs+1]={NAME='',DESC=''}
+CMDs[#CMDs+1]={NAME='breakloops / break (cmd loops)',DESC='Stops any cmd loops (;100^1^cmd)'}
+CMDs[#CMDs+1]={NAME='removecmd / deletecmd',DESC='Removes a command until the admin is reloaded'}
+CMDs[#CMDs+1]={NAME='tpwalk / teleportwalk [num]',DESC='Teleports you to your move direction'}
+CMDs[#CMDs+1]={NAME='untpwalk / unteleportwalk',DESC='Undoes tpwalk / teleportwalk'}
+CMDs[#CMDs+1]={NAME='notifyping / ping',DESC='Notify yourself your ping'}
+CMDs[#CMDs+1]={NAME='trip',DESC='Makes your character fall over'}
+CMDs[#CMDs+1]={NAME='norender',DESC='Disable 3d Rendering to decrease the amount of CPU the client uses'}
+CMDs[#CMDs+1]={NAME='render',DESC='Enable 3d Rendering'}
+CMDs[#CMDs+1]={NAME='use2022materials / 2022materials',DESC='Enables 2022 material textures'}
+CMDs[#CMDs+1]={NAME='unuse2022materials / un2022materials',DESC='Disables 2022 material textures'}
+CMDs[#CMDs+1]={NAME='promptr6',DESC='Prompts the game to switch your rig type to R6'}
+CMDs[#CMDs+1]={NAME='promptr15',DESC='Prompts the game to switch your rig type to R15'}
+CMDs[#CMDs+1]={NAME='wallwalk / walkonwalls',DESC='Walk on walls'}
+CMDs[#CMDs+1]={NAME='removeads / adblock',DESC='Automatically removes ad billboards'}
+CMDs[#CMDs+1]={NAME='scare / spook [player]',DESC='Teleports in front of a player for half a second'}
+CMDs[#CMDs+1]={NAME='alignmentkeys',DESC='Enables the left and right alignment keys (comma and period)'}
+CMDs[#CMDs+1]={NAME='unalignmentkeys / noalignmentkeys',DESC='Disables the alignment keys'}
+CMDs[#CMDs+1]={NAME='ctrllock',DESC='Binds Shiftlock to LeftControl'}
+CMDs[#CMDs+1]={NAME='unctrllock',DESC='Re-binds Shiftlock to LeftShift'}
+CMDs[#CMDs+1]={NAME='listento [player]',DESC='Listens to the area around a player. Can also eavesdrop with vc'}
+CMDs[#CMDs+1]={NAME='unlistento',DESC='Disables listento'}
+CMDs[#CMDs+1]={NAME='jerk',DESC='Makes you jork it'}
+CMDs[#CMDs+1]={NAME='unsuspendvc',DESC='Unsuspends you from voice chat'}
 wait()
-for i = 1, #CMDs do
-local newcmd = Example:Clone()
-newcmd.Parent = CMDsF
-newcmd.Visible = false
-newcmd.Text = CMDs[i].NAME
-newcmd.Name = "CMD"
-table.insert(text1, newcmd)
-if CMDs[i].DESC ~= "" then
-newcmd:SetAttribute("Title", CMDs[i].NAME)
-newcmd:SetAttribute("Desc", CMDs[i].DESC)
-newcmd.MouseButton1Down:Connect(function()
-if not IsOnMobile and newcmd.Visible and newcmd.TextTransparency == 0 then
-local currentText = Cmdbar.Text
+
+for p=1,#CMDs do
+local q=Example:Clone()
+q.Parent=CMDsF
+q.Visible=false
+q.Text=CMDs[p].NAME
+q.Name="CMD"
+table.insert(text1,q)
+if CMDs[p].DESC~=""then
+q:SetAttribute("Title",CMDs[p].NAME)
+q:SetAttribute("Desc",CMDs[p].DESC)
+q.MouseButton1Down:Connect(function()
+if not b and q.Visible and q.TextTransparency==0 then
+local r=Cmdbar.Text
 Cmdbar:CaptureFocus()
-autoComplete(newcmd.Text, currentText)
+autoComplete(q.Text,r)
 maximizeHolder()
 end
 end)
 end
 end
-IndexContents("", true)
+
+IndexContents("",true)
+
 function checkTT()
+local p
+local q=COREGUI:GetGuiObjectsAtPosition(IYMouse.X,IYMouse.Y)
+
+for r,s in pairs(q)do
+if s.Parent==CMDsF then
+p=s
+end
+end
+
+if p~=nil and p:GetAttribute"Title"~=nil then
+local r=IYMouse.X
+local s=IYMouse.Y
 local t
-local guisAtPosition = COREGUI:GetGuiObjectsAtPosition(IYMouse.X, IYMouse.Y)
-for _, gui in pairs(guisAtPosition) do
-if gui.Parent == CMDsF then
-t = gui
-end
-end
-if t ~= nil and t:GetAttribute("Title") ~= nil then
-local x = IYMouse.X
-local y = IYMouse.Y
-local xP
-local yP
-if IYMouse.X > 200 then
-xP = x - 201
+local u
+if IYMouse.X>200 then
+t=r-201
 else
-xP = x + 21
+t=r+21
 end
-if IYMouse.Y > (IYMouse.ViewSizeY-96) then
-yP = y - 97
+if IYMouse.Y>(IYMouse.ViewSizeY-96)then
+u=s-97
 else
-yP = y
+u=s
 end
-Tooltip.Position = UDim2.new(0, xP, 0, yP)
-Description.Text = t:GetAttribute("Desc")
-if t:GetAttribute("Title") ~= nil then
-Title_3.Text = t:GetAttribute("Title")
+Tooltip.Position=UDim2.new(0,t,0,u)
+Description.Text=p:GetAttribute"Desc"
+if p:GetAttribute"Title"~=nil then
+Title_3.Text=p:GetAttribute"Title"
 else
-Title_3.Text = ''
+Title_3.Text=''
 end
-Tooltip.Visible = true
+Tooltip.Visible=true
 else
-Tooltip.Visible = false
+Tooltip.Visible=false
 end
 end
-function FindInTable(tbl,val)
-if tbl == nil then return false end
-for _,v in pairs(tbl) do
-if v == val then return true end
+
+function FindInTable(p,q)
+if p==nil then return false end
+for r,s in pairs(p)do
+if s==q then return true end
 end
 return false
 end
-function GetInTable(Table, Name)
-for i = 1, #Table do
-if Table[i] == Name then
-return i
+
+function GetInTable(p,q)
+for r=1,#p do
+if p[r]==q then
+return r
 end
 end
 return false
 end
-function permadeath(plr)
+
+function permadeath(p)
 if replicatesignal then
-replicatesignal(plr.ConnectDiedSignalBackend)
-task.wait(Players.RespawnTime - 0.165)
+replicatesignal(p.ConnectDiedSignalBackend)
+task.wait(Players.RespawnTime-0.165)
 end
 end
-function respawn(plr)
-if invisRunning then TurnVisible() end
-permadeath(plr)
-local char = plr.Character
-local hum = char:FindFirstChildWhichIsA("Humanoid")
-if hum then hum:ChangeState(Enum.HumanoidStateType.Dead) end
-if not replicatesignal then wait() end
-char:ClearAllChildren()
-local newChar = Instance.new("Model")
-newChar.Parent = workspace
-plr.Character = newChar
+
+function respawn(p)
+if invisRunning then TurnVisible()end
+permadeath(p)
+local q=p.Character
+local r=q:FindFirstChildWhichIsA"Humanoid"
+if r then r:ChangeState(Enum.HumanoidStateType.Dead)end
+if not replicatesignal then wait()end
+q:ClearAllChildren()
+local s=Instance.new"Model"
+s.Parent=workspace
+p.Character=s
 wait()
-plr.Character = char
-newChar:Destroy()
+p.Character=q
+s:Destroy()
 end
-local refreshCmd = false
-function refresh(plr)
-refreshCmd = true
-local Human = plr.Character and plr.Character:FindFirstChildOfClass("Humanoid", true)
-local pos = Human and Human.RootPart and Human.RootPart.CFrame
-local pos1 = workspace.CurrentCamera.CFrame
-respawn(plr)
+
+local p=false
+function refresh(q)
+p=true
+local r=q.Character and q.Character:FindFirstChildOfClass("Humanoid",true)
+local s=r and r.RootPart and r.RootPart.CFrame
+local t=workspace.CurrentCamera.CFrame
+respawn(q)
 task.spawn(function()
-plr.CharacterAdded:Wait():WaitForChild("Humanoid").RootPart.CFrame, workspace.CurrentCamera.CFrame = pos, wait() and pos1
-refreshCmd = false
+q.CharacterAdded:Wait():WaitForChild"Humanoid".RootPart.CFrame,workspace.CurrentCamera.CFrame=s,wait()and t
+p=false
 end)
 end
-local lastDeath
+
+local q
+
 function onDied()
 task.spawn(function()
-if pcall(function() Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') end) and Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') then
-Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').Died:Connect(function()
-if getRoot(Players.LocalPlayer.Character) then
-lastDeath = getRoot(Players.LocalPlayer.Character).CFrame
+if pcall(function()Players.LocalPlayer.Character:FindFirstChildOfClass'Humanoid'end)and Players.LocalPlayer.Character:FindFirstChildOfClass'Humanoid'then
+Players.LocalPlayer.Character:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
+if getRoot(Players.LocalPlayer.Character)then
+q=getRoot(Players.LocalPlayer.Character).CFrame
 end
 end)
 else
@@ -4453,156 +4886,171 @@ onDied()
 end
 end)
 end
-Clip = true
-spDelay = 0.1
+
+Clip=true
+spDelay=0.1
 Players.LocalPlayer.CharacterAdded:Connect(function()
 NOFLY()
-Floating = false
+Floating=false
+
 if not Clip then
-execCmd('clip')
+execCmd'clip'
 end
-repeat wait() until getRoot(Players.LocalPlayer.Character)
+
+repeat wait()until getRoot(Players.LocalPlayer.Character)
+
 pcall(function()
-if spawnpoint and not refreshCmd and spawnpos ~= nil then
+if spawnpoint and not p and spawnpos~=nil then
 wait(spDelay)
-getRoot(Players.LocalPlayer.Character).CFrame = spawnpos
+getRoot(Players.LocalPlayer.Character).CFrame=spawnpos
 end
 end)
+
 onDied()
 end)
+
 onDied()
-function getstring(begin)
-local start = begin-1
-local AA = '' for i,v in pairs(cargs) do
-if i > start then
-if AA ~= '' then
-AA = AA .. ' ' .. v
+
+function getstring(r)
+local s=r-1
+local t=''for u,v in pairs(cargs)do
+if u>s then
+if t~=''then
+t=t..' '..v
 else
-AA = AA .. v
+t=t..v
 end
 end
 end
-return AA
+return t
 end
-findCmd=function(cmd_name)
-for i,v in pairs(cmds)do
-if v.NAME:lower()==cmd_name:lower() or FindInTable(v.ALIAS,cmd_name:lower()) then
-return v
+
+findCmd=function(r)
+for s,t in pairs(cmds)do
+if t.NAME:lower()==r:lower()or FindInTable(t.ALIAS,r:lower())then
+return t
 end
 end
-return customAlias[cmd_name:lower()]
+return customAlias[r:lower()]
 end
-function splitString(str,delim)
-local broken = {}
-if delim == nil then delim = "," end
-for w in string.gmatch(str,"[^"..delim.."]+") do
-table.insert(broken,w)
+
+function splitString(r,s)
+local t={}
+if s==nil then s=","end
+for u in string.gmatch(r,"[^"..s.."]+")do
+table.insert(t,u)
 end
-return broken
+return t
 end
-cmdHistory = {}
-local lastCmds = {}
-local historyCount = 0
-local split=" "
-local lastBreakTime = 0
-function execCmd(cmdStr,speaker,store)
-cmdStr = cmdStr:gsub("%s+$","")
+
+cmdHistory={}
+local r={}
+local s=0
+local t=" "
+local u=0
+function execCmd(v,w,x)
+v=v:gsub("%s+$","")
 task.spawn(function()
-local rawCmdStr = cmdStr
-cmdStr = string.gsub(cmdStr,"\\\\","%%BackSlash%%")
-local commandsToRun = splitString(cmdStr,"\\")
-for i,v in pairs(commandsToRun) do
-v = string.gsub(v,"%%BackSlash%%","\\")
-local x,y,num = v:find("^(%d+)%^")
-local cmdDelay = 0
-local infTimes = false
-if num then
-v = v:sub(y+1)
-local x,y,del = v:find("^([%d%.]+)%^")
-if del then
-v = v:sub(y+1)
-cmdDelay = tonumber(del) or 0
+local y=v
+v=string.gsub(v,"\\\\","%%BackSlash%%")
+local z=splitString(v,"\\")
+for A,B in pairs(z)do
+B=string.gsub(B,"%%BackSlash%%","\\")local
+C, D, E=B:find"^(%d+)%^"
+local F=0
+local G=false
+if E then
+B=B:sub(D+1)local
+H, I, J=B:find"^([%d%.]+)%^"
+if J then
+B=B:sub(I+1)
+F=tonumber(J)or 0
 end
 else
-local x,y = v:find("^inf%^")
+local H,I=B:find"^inf%^"
+if H then
+G=true
+B=B:sub(I+1)local
+J, K, L=B:find"^([%d%.]+)%^"
+if L then
+B=B:sub(K+1)
+L=tonumber(L)or 1
+F=(L>0 and L or 1)
+else
+F=1
+end
+end
+end
+E=tonumber(E or 1)
+
+if B:sub(1,1)=="!"then
+local H=splitString(B:sub(2),t)
+if H[1]and r[H[1] ]then B=r[H[1] ]end
+end
+
+local H=splitString(B,t)
+local I=H[1]
+local J=findCmd(I)
+if J then
+table.remove(H,1)
+cargs=H
+if not w then w=Players.LocalPlayer end
 if x then
-infTimes = true
-v = v:sub(y+1)
-local x,y,del = v:find("^([%d%.]+)%^")
-if del then
-v = v:sub(y+1)
-del = tonumber(del) or 1
-cmdDelay = (del > 0 and del or 1)
-else
-cmdDelay = 1
+if w==Players.LocalPlayer then
+if cmdHistory[1]~=y and y:sub(1,11)~='lastcommand'and y:sub(1,7)~='lastcmd'then
+table.insert(cmdHistory,1,y)
 end
 end
+if#cmdHistory>30 then table.remove(cmdHistory)end
+
+r[I]=B
 end
-num = tonumber(num or 1)
-if v:sub(1,1) == "!" then
-local chunks = splitString(v:sub(2),split)
-if chunks[1] and lastCmds[chunks[1]] then v = lastCmds[chunks[1]] end
+local K=tick()
+if G then
+while u<K do
+local L,M=pcall(J.FUNC,H,w)
+if not L and _G.IY_DEBUG then
+warn("Command Error:",I,M)
 end
-local args = splitString(v,split)
-local cmdName = args[1]
-local cmd = findCmd(cmdName)
-if cmd then
-table.remove(args,1)
-cargs = args
-if not speaker then speaker = Players.LocalPlayer end
-if store then
-if speaker == Players.LocalPlayer then
-if cmdHistory[1] ~= rawCmdStr and rawCmdStr:sub(1,11) ~= 'lastcommand' and rawCmdStr:sub(1,7) ~= 'lastcmd' then
-table.insert(cmdHistory,1,rawCmdStr)
-end
-end
-if #cmdHistory > 30 then table.remove(cmdHistory) end
-lastCmds[cmdName] = v
-end
-local cmdStartTime = tick()
-if infTimes then
-while lastBreakTime < cmdStartTime do
-local success,err = pcall(cmd.FUNC,args, speaker)
-if not success and _G.IY_DEBUG then
-warn("Command Error:", cmdName, err)
-end
-wait(cmdDelay)
+wait(F)
 end
 else
-for rep = 1,num do
-if lastBreakTime > cmdStartTime then break end
-local success,err = pcall(function()
-cmd.FUNC(args, speaker)
+for L=1,E do
+if u>K then break end
+local M,N=pcall(function()
+J.FUNC(H,w)
 end)
-if not success and _G.IY_DEBUG then
-warn("Command Error:", cmdName, err)
+if not M and _G.IY_DEBUG then
+warn("Command Error:",I,N)
 end
-if cmdDelay ~= 0 then wait(cmdDelay) end
+if F~=0 then wait(F)end
 end
 end
 end
 end
 end)
 end
-function addcmd(name,alias,func,plgn)
+
+function addcmd(v,w,x,y)
 cmds[#cmds+1]=
 {
-NAME=name;
-ALIAS=alias or {};
-FUNC=func;
-PLUGIN=plgn;
+NAME=v;
+ALIAS=w or{};
+FUNC=x;
+PLUGIN=y;
 }
 end
-function removecmd(cmd)
-if cmd ~= " " then
-for i = #cmds,1,-1 do
-if cmds[i].NAME == cmd or FindInTable(cmds[i].ALIAS,cmd) then
-table.remove(cmds, i)
-for a,c in pairs(CMDsF:GetChildren()) do
-if string.find(c.Text, "^"..cmd.."$") or string.find(c.Text, "^"..cmd.." ") or string.find(c.Text, " "..cmd.."$") or string.find(c.Text, " "..cmd.." ") then
-c.TextTransparency = 0.7
-c.MouseButton1Click:Connect(function()
-notify(c.Text, "Command has been disabled by you or a plugin")
+
+function removecmd(v)
+if v~=" "then
+for w=#cmds,1,-1 do
+if cmds[w].NAME==v or FindInTable(cmds[w].ALIAS,v)then
+table.remove(cmds,w)
+for x,y in pairs(CMDsF:GetChildren())do
+if string.find(y.Text,"^"..v.."$")or string.find(y.Text,"^"..v.." ")or string.find(y.Text," "..v.."$")or string.find(y.Text," "..v.." ")then
+y.TextTransparency=0.7
+y.MouseButton1Click:Connect(function()
+notify(y.Text,"Command has been disabled by you or a plugin")
 end)
 end
 end
@@ -4610,1993 +5058,2141 @@ end
 end
 end
 end
-function overridecmd(name, func)
-local cmd = findCmd(name)
-if cmd and cmd.FUNC then cmd.FUNC = func end
+
+function overridecmd(v,w)
+local x=findCmd(v)
+if x and x.FUNC then x.FUNC=w end
 end
-function addbind(cmd,key,iskeyup,toggle)
-if toggle then
+
+function addbind(v,w,x,y)
+if y then
 binds[#binds+1]=
 {
-COMMAND=cmd;
-KEY=key;
-ISKEYUP=iskeyup;
-TOGGLE = toggle;
+COMMAND=v;
+KEY=w;
+ISKEYUP=x;
+TOGGLE=y;
 }
 else
 binds[#binds+1]=
 {
-COMMAND=cmd;
-KEY=key;
-ISKEYUP=iskeyup;
+COMMAND=v;
+KEY=w;
+ISKEYUP=x;
 }
 end
 end
-function addcmdtext(text,name,desc)
-local newcmd = Example:Clone()
-local tooltipText = tostring(text)
-local tooltipDesc = tostring(desc)
-newcmd.Parent = CMDsF
-newcmd.Visible = false
-newcmd.Text = text
-newcmd.Name = 'PLUGIN_'..name
-table.insert(text1,newcmd)
-if desc and desc ~= '' then
-newcmd:SetAttribute("Title", tooltipText)
-newcmd:SetAttribute("Desc", tooltipDesc)
-newcmd.MouseButton1Down:Connect(function()
-if newcmd.Visible and newcmd.TextTransparency == 0 then
+
+function addcmdtext(v,w,x)
+local y=Example:Clone()
+local z=tostring(v)
+local A=tostring(x)
+y.Parent=CMDsF
+y.Visible=false
+y.Text=v
+y.Name='PLUGIN_'..w
+table.insert(text1,y)
+if x and x~=''then
+y:SetAttribute("Title",z)
+y:SetAttribute("Desc",A)
+y.MouseButton1Down:Connect(function()
+if y.Visible and y.TextTransparency==0 then
 Cmdbar:CaptureFocus()
-autoComplete(newcmd.Text)
+autoComplete(y.Text)
 maximizeHolder()
 end
 end)
 end
 end
-local WorldToScreen = function(Object)
-local ObjectVector = workspace.CurrentCamera:WorldToScreenPoint(Object.Position)
-return Vector2.new(ObjectVector.X, ObjectVector.Y)
+
+local v=function(v)
+local w=workspace.CurrentCamera:WorldToScreenPoint(v.Position)
+return Vector2.new(w.X,w.Y)
 end
-local MousePositionToVector2 = function()
-return Vector2.new(IYMouse.X, IYMouse.Y)
+
+local w=function()
+return Vector2.new(IYMouse.X,IYMouse.Y)
 end
-local GetClosestPlayerFromCursor = function()
-local found = nil
-local ClosestDistance = math.huge
-for i, v in pairs(Players:GetPlayers()) do
-if v ~= Players.LocalPlayer and v.Character and v.Character:FindFirstChildOfClass("Humanoid") then
-for k, x in pairs(v.Character:GetChildren()) do
-if string.find(x.Name, "Torso") then
-local Distance = (WorldToScreen(x) - MousePositionToVector2()).Magnitude
-if Distance < ClosestDistance then
-ClosestDistance = Distance
-found = v
-end
-end
-end
-end
-end
-return found
-end
-SpecialPlayerCases = {
-["all"] = function(speaker) return Players:GetPlayers() end,
-["others"] = function(speaker)
-local plrs = {}
-for i,v in pairs(Players:GetPlayers()) do
-if v ~= speaker then
-table.insert(plrs,v)
+
+local x=function()
+local x
+local y=math.huge
+for z,A in pairs(Players:GetPlayers())do
+if A~=Players.LocalPlayer and A.Character and A.Character:FindFirstChildOfClass"Humanoid"then
+for B,C in pairs(A.Character:GetChildren())do
+if string.find(C.Name,"Torso")then
+local D=(v(C)-w()).Magnitude
+if D<y then
+y=D
+x=A
 end
 end
-return plrs
+end
+end
+end
+return x
+end
+
+SpecialPlayerCases={all=
+function(y)return Players:GetPlayers()end,others=
+function(y)
+local z={}
+for A,B in pairs(Players:GetPlayers())do
+if B~=y then
+table.insert(z,B)
+end
+end
+return z
+end,me=
+function(y)return{y}end,
+["#(%d+)"]=function(y,z,A)
+local B={}
+local C=tonumber(z[1])
+local D={unpack(A)}
+for E=1,C do
+if#D==0 then break end
+local F=math.random(1,#D)
+table.insert(B,D[F])
+table.remove(D,F)
+end
+return B
+end,random=
+function(y,z,A)
+local B=Players:GetPlayers()
+local C=Players.LocalPlayer
+table.remove(B,table.find(B,C))
+return{B[math.random(1,#B)]}
 end,
-["me"] = function(speaker)return {speaker} end,
-["#(%d+)"] = function(speaker,args,currentList)
-local returns = {}
-local randAmount = tonumber(args[1])
-local players = {unpack(currentList)}
-for i = 1,randAmount do
-if #players == 0 then break end
-local randIndex = math.random(1,#players)
-table.insert(returns,players[randIndex])
-table.remove(players,randIndex)
+["%%(.+)"]=function(y,z)
+local A={}
+local B=z[1]
+for C,D in pairs(Players:GetPlayers())do
+if D.Team and string.sub(string.lower(D.Team.Name),1,#B)==string.lower(B)then
+table.insert(A,D)
 end
-return returns
+end
+return A
+end,allies=
+function(y)
+local z={}
+local A=y.Team
+for B,C in pairs(Players:GetPlayers())do
+if C.Team==A then
+table.insert(z,C)
+end
+end
+return z
+end,enemies=
+function(y)
+local z={}
+local A=y.Team
+for B,C in pairs(Players:GetPlayers())do
+if C.Team~=A then
+table.insert(z,C)
+end
+end
+return z
+end,team=
+function(y)
+local z={}
+local A=y.Team
+for B,C in pairs(Players:GetPlayers())do
+if C.Team==A then
+table.insert(z,C)
+end
+end
+return z
+end,nonteam=
+function(y)
+local z={}
+local A=y.Team
+for B,C in pairs(Players:GetPlayers())do
+if C.Team~=A then
+table.insert(z,C)
+end
+end
+return z
+end,friends=
+function(y,z)
+local A={}
+for B,C in pairs(Players:GetPlayers())do
+if C:IsFriendsWith(y.UserId)and C~=y then
+table.insert(A,C)
+end
+end
+return A
+end,nonfriends=
+function(y,z)
+local A={}
+for B,C in pairs(Players:GetPlayers())do
+if not C:IsFriendsWith(y.UserId)and C~=y then
+table.insert(A,C)
+end
+end
+return A
+end,guests=
+function(y,z)
+local A={}
+for B,C in pairs(Players:GetPlayers())do
+if C.Guest then
+table.insert(A,C)
+end
+end
+return A
+end,bacons=
+function(y,z)
+local A={}
+for B,C in pairs(Players:GetPlayers())do
+if C.Character:FindFirstChild'Pal Hair'or C.Character:FindFirstChild'Kate Hair'then
+table.insert(A,C)
+end
+end
+return A
 end,
-["random"] = function(speaker,args,currentList)
-local players = Players:GetPlayers()
-local localplayer = Players.LocalPlayer
-table.remove(players, table.find(players, localplayer))
-return {players[math.random(1,#players)]}
+["age(%d+)"]=function(y,z)
+local A={}
+local B=tonumber(z[1])
+if not B==nil then return end
+for C,D in pairs(Players:GetPlayers())do
+if D.AccountAge<=B then
+table.insert(A,D)
+end
+end
+return A
+end,nearest=
+function(y,z,A)
+local B=y.Character
+if not B or not getRoot(B)then return end
+local C=math.huge
+local D
+for E,F in pairs(A)do
+if F~=y and F.Character then
+local G=F:DistanceFromCharacter(getRoot(B).Position)
+if G<C then
+C=G
+D={F}
+end
+end
+end
+return D
+end,farthest=
+function(y,z,A)
+local B=y.Character
+if not B or not getRoot(B)then return end
+local C=0
+local D
+for E,F in pairs(A)do
+if F~=y and F.Character then
+local G=F:DistanceFromCharacter(getRoot(B).Position)
+if G>C then
+C=G
+D={F}
+end
+end
+end
+return D
 end,
-["%%(.+)"] = function(speaker,args)
-local returns = {}
-local team = args[1]
-for _,plr in pairs(Players:GetPlayers()) do
-if plr.Team and string.sub(string.lower(plr.Team.Name),1,#team) == string.lower(team) then
-table.insert(returns,plr)
+["group(%d+)"]=function(y,z)
+local A={}
+local B=tonumber(z[1])
+for C,D in pairs(Players:GetPlayers())do
+if D:IsInGroup(B)then
+table.insert(A,D)
 end
 end
-return returns
+return A
+end,alive=
+function(y,z)
+local A={}
+for B,C in pairs(Players:GetPlayers())do
+if C.Character and C.Character:FindFirstChildOfClass"Humanoid"and C.Character:FindFirstChildOfClass"Humanoid".Health>0 then
+table.insert(A,C)
+end
+end
+return A
+end,dead=
+function(y,z)
+local A={}
+for B,C in pairs(Players:GetPlayers())do
+if(not C.Character or not C.Character:FindFirstChildOfClass"Humanoid")or C.Character:FindFirstChildOfClass"Humanoid".Health<=0 then
+table.insert(A,C)
+end
+end
+return A
 end,
-["allies"] = function(speaker)
-local returns = {}
-local team = speaker.Team
-for _,plr in pairs(Players:GetPlayers()) do
-if plr.Team == team then
-table.insert(returns,plr)
+["rad(%d+)"]=function(y,z)
+local A={}
+local B=tonumber(z[1])
+local C=y.Character
+if not C or not getRoot(C)then return end
+for D,E in pairs(Players:GetPlayers())do
+if E.Character and getRoot(E.Character)then
+local F=(getRoot(E.Character).Position-getRoot(C).Position).magnitude
+if F<=B then table.insert(A,E)end
 end
 end
-return returns
-end,
-["enemies"] = function(speaker)
-local returns = {}
-local team = speaker.Team
-for _,plr in pairs(Players:GetPlayers()) do
-if plr.Team ~= team then
-table.insert(returns,plr)
+return A
+end,cursor=
+function(y)
+local z={}
+local A=x()
+if A~=nil then table.insert(z,A)end
+return z
+end,npcs=
+function(y,z)
+local A={}
+for B,C in pairs(workspace:GetDescendants())do
+if C:IsA"Model"and getRoot(C)and C:FindFirstChildWhichIsA"Humanoid"and Players:GetPlayerFromCharacter(C)==nil then
+local D=Instance.new"Player"
+D.Name=C.Name.." - "..C:FindFirstChildWhichIsA"Humanoid".DisplayName
+D.Character=C
+table.insert(A,D)
 end
 end
-return returns
-end,
-["team"] = function(speaker)
-local returns = {}
-local team = speaker.Team
-for _,plr in pairs(Players:GetPlayers()) do
-if plr.Team == team then
-table.insert(returns,plr)
-end
-end
-return returns
-end,
-["nonteam"] = function(speaker)
-local returns = {}
-local team = speaker.Team
-for _,plr in pairs(Players:GetPlayers()) do
-if plr.Team ~= team then
-table.insert(returns,plr)
-end
-end
-return returns
-end,
-["friends"] = function(speaker,args)
-local returns = {}
-for _,plr in pairs(Players:GetPlayers()) do
-if plr:IsFriendsWith(speaker.UserId) and plr ~= speaker then
-table.insert(returns,plr)
-end
-end
-return returns
-end,
-["nonfriends"] = function(speaker,args)
-local returns = {}
-for _,plr in pairs(Players:GetPlayers()) do
-if not plr:IsFriendsWith(speaker.UserId) and plr ~= speaker then
-table.insert(returns,plr)
-end
-end
-return returns
-end,
-["guests"] = function(speaker,args)
-local returns = {}
-for _,plr in pairs(Players:GetPlayers()) do
-if plr.Guest then
-table.insert(returns,plr)
-end
-end
-return returns
-end,
-["bacons"] = function(speaker,args)
-local returns = {}
-for _,plr in pairs(Players:GetPlayers()) do
-if plr.Character:FindFirstChild('Pal Hair') or plr.Character:FindFirstChild('Kate Hair') then
-table.insert(returns,plr)
-end
-end
-return returns
-end,
-["age(%d+)"] = function(speaker,args)
-local returns = {}
-local age = tonumber(args[1])
-if not age == nil then return end
-for _,plr in pairs(Players:GetPlayers()) do
-if plr.AccountAge <= age then
-table.insert(returns,plr)
-end
-end
-return returns
-end,
-["nearest"] = function(speaker,args,currentList)
-local speakerChar = speaker.Character
-if not speakerChar or not getRoot(speakerChar) then return end
-local lowest = math.huge
-local NearestPlayer = nil
-for _,plr in pairs(currentList) do
-if plr ~= speaker and plr.Character then
-local distance = plr:DistanceFromCharacter(getRoot(speakerChar).Position)
-if distance < lowest then
-lowest = distance
-NearestPlayer = {plr}
-end
-end
-end
-return NearestPlayer
-end,
-["farthest"] = function(speaker,args,currentList)
-local speakerChar = speaker.Character
-if not speakerChar or not getRoot(speakerChar) then return end
-local highest = 0
-local Farthest = nil
-for _,plr in pairs(currentList) do
-if plr ~= speaker and plr.Character then
-local distance = plr:DistanceFromCharacter(getRoot(speakerChar).Position)
-if distance > highest then
-highest = distance
-Farthest = {plr}
-end
-end
-end
-return Farthest
-end,
-["group(%d+)"] = function(speaker,args)
-local returns = {}
-local groupID = tonumber(args[1])
-for _,plr in pairs(Players:GetPlayers()) do
-if plr:IsInGroup(groupID) then
-table.insert(returns,plr)
-end
-end
-return returns
-end,
-["alive"] = function(speaker,args)
-local returns = {}
-for _,plr in pairs(Players:GetPlayers()) do
-if plr.Character and plr.Character:FindFirstChildOfClass("Humanoid") and plr.Character:FindFirstChildOfClass("Humanoid").Health > 0 then
-table.insert(returns,plr)
-end
-end
-return returns
-end,
-["dead"] = function(speaker,args)
-local returns = {}
-for _,plr in pairs(Players:GetPlayers()) do
-if (not plr.Character or not plr.Character:FindFirstChildOfClass("Humanoid")) or plr.Character:FindFirstChildOfClass("Humanoid").Health <= 0 then
-table.insert(returns,plr)
-end
-end
-return returns
-end,
-["rad(%d+)"] = function(speaker,args)
-local returns = {}
-local radius = tonumber(args[1])
-local speakerChar = speaker.Character
-if not speakerChar or not getRoot(speakerChar) then return end
-for _,plr in pairs(Players:GetPlayers()) do
-if plr.Character and getRoot(plr.Character) then
-local magnitude = (getRoot(plr.Character).Position-getRoot(speakerChar).Position).magnitude
-if magnitude <= radius then table.insert(returns,plr) end
-end
-end
-return returns
-end,
-["cursor"] = function(speaker)
-local plrs = {}
-local v = GetClosestPlayerFromCursor()
-if v ~= nil then table.insert(plrs, v) end
-return plrs
-end,
-["npcs"] = function(speaker,args)
-local returns = {}
-for _, v in pairs(workspace:GetDescendants()) do
-if v:IsA("Model") and getRoot(v) and v:FindFirstChildWhichIsA("Humanoid") and Players:GetPlayerFromCharacter(v) == nil then
-local clone = Instance.new("Player")
-clone.Name = v.Name .. " - " .. v:FindFirstChildWhichIsA("Humanoid").DisplayName
-clone.Character = v
-table.insert(returns, clone)
-end
-end
-return returns
+return A
 end,
 }
-function toTokens(str)
-local tokens = {}
-for op,name in string.gmatch(str,"([+-])([^+-]+)") do
-table.insert(tokens,{Operator = op,Name = name})
+
+function toTokens(y)
+local z={}
+for A,B in string.gmatch(y,"([+-])([^+-]+)")do
+table.insert(z,{Operator=A,Name=B})
 end
-return tokens
+return z
 end
-function onlyIncludeInTable(tab,matches)
-local matchTable = {}
-local resultTable = {}
-for i,v in pairs(matches) do matchTable[v.Name] = true end
-for i,v in pairs(tab) do if matchTable[v.Name] then table.insert(resultTable,v) end end
-return resultTable
+
+function onlyIncludeInTable(y,z)
+local A={}
+local B={}
+for C,D in pairs(z)do A[D.Name]=true end
+for C,D in pairs(y)do if A[D.Name]then table.insert(B,D)end end
+return B
 end
-function removeTableMatches(tab,matches)
-local matchTable = {}
-local resultTable = {}
-for i,v in pairs(matches) do matchTable[v.Name] = true end
-for i,v in pairs(tab) do if not matchTable[v.Name] then table.insert(resultTable,v) end end
-return resultTable
+
+function removeTableMatches(y,z)
+local A={}
+local B={}
+for C,D in pairs(z)do A[D.Name]=true end
+for C,D in pairs(y)do if not A[D.Name]then table.insert(B,D)end end
+return B
 end
-function getPlayersByName(Name)
-local Name,Len,Found = string.lower(Name),#Name,{}
-for _,v in pairs(Players:GetPlayers()) do
-if Name:sub(0,1) == '@' then
-if string.sub(string.lower(v.Name),1,Len-1) == Name:sub(2) then
-table.insert(Found,v)
-end
-else
-if string.sub(string.lower(v.Name),1,Len) == Name or string.sub(string.lower(v.DisplayName),1,Len) == Name then
-table.insert(Found,v)
-end
-end
-end
-return Found
-end
-function getPlayer(list,speaker)
-if list == nil then return {speaker.Name} end
-local nameList = splitString(list,",")
-local foundList = {}
-for _,name in pairs(nameList) do
-if string.sub(name,1,1) ~= "+" and string.sub(name,1,1) ~= "-" then name = "+"..name end
-local tokens = toTokens(name)
-local initialPlayers = Players:GetPlayers()
-for i,v in pairs(tokens) do
-if v.Operator == "+" then
-local tokenContent = v.Name
-local foundCase = false
-for regex,case in pairs(SpecialPlayerCases) do
-local matches = {string.match(tokenContent,"^"..regex.."$")}
-if #matches > 0 then
-foundCase = true
-initialPlayers = onlyIncludeInTable(initialPlayers,case(speaker,matches,initialPlayers))
-end
-end
-if not foundCase then
-initialPlayers = onlyIncludeInTable(initialPlayers,getPlayersByName(tokenContent))
+
+function getPlayersByName(y)
+local z,A,B=string.lower(y),#y,{}
+for C,D in pairs(Players:GetPlayers())do
+if z:sub(0,1)=='@'then
+if string.sub(string.lower(D.Name),1,A-1)==z:sub(2)then
+table.insert(B,D)
 end
 else
-local tokenContent = v.Name
-local foundCase = false
-for regex,case in pairs(SpecialPlayerCases) do
-local matches = {string.match(tokenContent,"^"..regex.."$")}
-if #matches > 0 then
-foundCase = true
-initialPlayers = removeTableMatches(initialPlayers,case(speaker,matches,initialPlayers))
-end
-end
-if not foundCase then
-initialPlayers = removeTableMatches(initialPlayers,getPlayersByName(tokenContent))
+if string.sub(string.lower(D.Name),1,A)==z or string.sub(string.lower(D.DisplayName),1,A)==z then
+table.insert(B,D)
 end
 end
 end
-for i,v in pairs(initialPlayers) do table.insert(foundList,v) end
+return B
 end
-local foundNames = {}
-for i,v in pairs(foundList) do table.insert(foundNames,v.Name) end
-return foundNames
+
+function getPlayer(y,z)
+if y==nil then return{z.Name}end
+local A=splitString(y,",")
+
+local B={}
+
+for C,D in pairs(A)do
+if string.sub(D,1,1)~="+"and string.sub(D,1,1)~="-"then D="+"..D end
+local E=toTokens(D)
+local F=Players:GetPlayers()
+
+for G,H in pairs(E)do
+if H.Operator=="+"then
+local I=H.Name
+local J=false
+for K,L in pairs(SpecialPlayerCases)do
+local M={string.match(I,"^"..K.."$")}
+if#M>0 then
+J=true
+F=onlyIncludeInTable(F,L(z,M,F))
 end
-formatUsername = function(player)
-if player.DisplayName ~= player.Name then
-return string.format("%s (%s)", player.Name, player.DisplayName)
 end
-return player.Name
+if not J then
+F=onlyIncludeInTable(F,getPlayersByName(I))
 end
-getprfx=function(strn)
-if strn:sub(1,string.len(prefix))==prefix then return{'cmd',string.len(prefix)+1}
+else
+local I=H.Name
+local J=false
+for K,L in pairs(SpecialPlayerCases)do
+local M={string.match(I,"^"..K.."$")}
+if#M>0 then
+J=true
+F=removeTableMatches(F,L(z,M,F))
+end
+end
+if not J then
+F=removeTableMatches(F,getPlayersByName(I))
+end
+end
+end
+
+for G,H in pairs(F)do table.insert(B,H)end
+end
+
+local C={}
+for D,E in pairs(B)do table.insert(C,E.Name)end
+
+return C
+end
+
+formatUsername=function(y)
+if y.DisplayName~=y.Name then
+return string.format("%s (%s)",y.Name,y.DisplayName)
+end
+return y.Name
+end
+
+getprfx=function(y)
+if y:sub(1,string.len(prefix))==prefix then return{'cmd',string.len(prefix)+1}
 end return
 end
-function do_exec(str, plr)
-str = str:gsub('/e ', '')
-local t = getprfx(str)
-if not t then return end
-str = str:sub(t[2])
-if t[1]=='cmd' then
-execCmd(str, plr, true)
+
+function do_exec(y,z)
+y=y:gsub('/e ','')
+local A=getprfx(y)
+if not A then return end
+y=y:sub(A[2])
+if A[1]=='cmd'then
+execCmd(y,z,true)
 IndexContents('',true,false,true)
-CMDsF.CanvasPosition = canvasPos
+CMDsF.CanvasPosition=ae
 end
 end
-lastTextBoxString,lastTextBoxCon,lastEnteredString = nil,nil,nil
-UserInputService.TextBoxFocused:Connect(function(obj)
-if lastTextBoxCon then lastTextBoxCon:Disconnect() end
-if obj == Cmdbar then lastTextBoxString = nil return end
-lastTextBoxString = obj.Text
-lastTextBoxCon = obj:GetPropertyChangedSignal("Text"):Connect(function()
-if not (UserInputService:IsKeyDown(Enum.KeyCode.Return) or UserInputService:IsKeyDown(Enum.KeyCode.KeypadEnter)) then
-lastTextBoxString = obj.Text
-end
-end)
-end)
-UserInputService.InputBegan:Connect(function(input,gameProcessed)
-if gameProcessed then
-if Cmdbar and Cmdbar:IsFocused() then
-if input.KeyCode == Enum.KeyCode.Up then
-historyCount = historyCount + 1
-if historyCount > #cmdHistory then historyCount = #cmdHistory end
-Cmdbar.Text = cmdHistory[historyCount] or ""
-Cmdbar.CursorPosition = 1020
-elseif input.KeyCode == Enum.KeyCode.Down then
-historyCount = historyCount - 1
-if historyCount < 0 then historyCount = 0 end
-Cmdbar.Text = cmdHistory[historyCount] or ""
-Cmdbar.CursorPosition = 1020
-end
-elseif input.KeyCode == Enum.KeyCode.Return or input.KeyCode == Enum.KeyCode.KeypadEnter then
-lastEnteredString = lastTextBoxString
-end
+
+lastTextBoxString,lastTextBoxCon,lastEnteredString=nil,nil,nil
+
+UserInputService.TextBoxFocused:Connect(function(y)
+if lastTextBoxCon then lastTextBoxCon:Disconnect()end
+if y==Cmdbar then lastTextBoxString=nil return end
+lastTextBoxString=y.Text
+lastTextBoxCon=y:GetPropertyChangedSignal"Text":Connect(function()
+if not(UserInputService:IsKeyDown(Enum.KeyCode.Return)or UserInputService:IsKeyDown(Enum.KeyCode.KeypadEnter))then
+lastTextBoxString=y.Text
 end
 end)
+end)
+
+UserInputService.InputBegan:Connect(function(y,z)
+if z then
+if Cmdbar and Cmdbar:IsFocused()then
+if y.KeyCode==Enum.KeyCode.Up then
+s=s+1
+if s>#cmdHistory then s=#cmdHistory end
+Cmdbar.Text=cmdHistory[s]or""
+Cmdbar.CursorPosition=1020
+elseif y.KeyCode==Enum.KeyCode.Down then
+s=s-1
+if s<0 then s=0 end
+Cmdbar.Text=cmdHistory[s]or""
+Cmdbar.CursorPosition=1020
+end
+elseif y.KeyCode==Enum.KeyCode.Return or y.KeyCode==Enum.KeyCode.KeypadEnter then
+lastEnteredString=lastTextBoxString
+end
+end
+end)
+
 Players.LocalPlayer.Chatted:Connect(function()
 wait()
 if lastEnteredString then
-local message = lastEnteredString
-lastEnteredString = nil
-do_exec(message, Players.LocalPlayer)
+local y=lastEnteredString
+lastEnteredString=nil
+do_exec(y,Players.LocalPlayer)
 end
 end)
-Cmdbar.PlaceholderText = "Command Bar ("..prefix..")"
-Cmdbar:GetPropertyChangedSignal("Text"):Connect(function()
-if Cmdbar:IsFocused() then
+
+Cmdbar.PlaceholderText="Command Bar ("..prefix..")"
+Cmdbar:GetPropertyChangedSignal"Text":Connect(function()
+if Cmdbar:IsFocused()then
 IndexContents(Cmdbar.Text,true,true)
 end
 end)
-local tabComplete = nil
-tabAllowed = true
-Cmdbar.FocusLost:Connect(function(enterpressed)
-if enterpressed then
-local cmdbarText = Cmdbar.Text:gsub("^"..prefix,"")
-execCmd(cmdbarText,Players.LocalPlayer,true)
+
+local y
+tabAllowed=true
+Cmdbar.FocusLost:Connect(function(z)
+if z then
+local A=Cmdbar.Text:gsub("^"..prefix,"")
+execCmd(A,Players.LocalPlayer,true)
 end
-if tabComplete then tabComplete:Disconnect() end
+if y then y:Disconnect()end
 wait()
-if not Cmdbar:IsFocused() then
-Cmdbar.Text = ""
+if not Cmdbar:IsFocused()then
+Cmdbar.Text=""
 IndexContents('',true,false,true)
-if SettingsOpen == true then
+if h==true then
 wait(0.2)
-Settings:TweenPosition(UDim2.new(0, 0, 0, 45), "InOut", "Quart", 0.2, true, nil)
-CMDsF.Visible = false
+Settings:TweenPosition(UDim2.new(0,0,0,45),"InOut","Quart",0.2,true,nil)
+CMDsF.Visible=false
 end
 end
-CMDsF.CanvasPosition = canvasPos
+CMDsF.CanvasPosition=ae
 end)
+
 Cmdbar.Focused:Connect(function()
-historyCount = 0
-canvasPos = CMDsF.CanvasPosition
-if SettingsOpen == true then
+s=0
+ae=CMDsF.CanvasPosition
+if h==true then
 wait(0.2)
-CMDsF.Visible = true
-Settings:TweenPosition(UDim2.new(0, 0, 0, 220), "InOut", "Quart", 0.2, true, nil)
+CMDsF.Visible=true
+Settings:TweenPosition(UDim2.new(0,0,0,220),"InOut","Quart",0.2,true,nil)
 end
-tabComplete = UserInputService.InputBegan:Connect(function(input,gameProcessed)
-if Cmdbar:IsFocused() then
-if tabAllowed == true and input.KeyCode == Enum.KeyCode.Tab and topCommand ~= nil then
-autoComplete(topCommand)
+y=UserInputService.InputBegan:Connect(function(z,A)
+if Cmdbar:IsFocused()then
+if tabAllowed==true and z.KeyCode==Enum.KeyCode.Tab and af~=nil then
+autoComplete(af)
 end
 else
-tabComplete:Disconnect()
+y:Disconnect()
 end
 end)
 end)
-ESPenabled = false
-CHMSenabled = false
-function round(num, numDecimalPlaces)
-local mult = 10^(numDecimalPlaces or 0)
-return math.floor(num * mult + 0.5) / mult
+
+ESPenabled=false
+CHMSenabled=false
+
+function round(z,A)
+local B=10^(A or 0)
+return math.floor(z*B+0.5)/B
 end
-function ESP(plr)
+
+function ESP(z)
 task.spawn(function()
-for i,v in pairs(COREGUI:GetChildren()) do
-if v.Name == plr.Name..'_ESP' then
-v:Destroy()
+for A,B in pairs(COREGUI:GetChildren())do
+if B.Name==z.Name..'_ESP'then
+B:Destroy()
 end
 end
 wait()
-if plr.Character and plr.Name ~= Players.LocalPlayer.Name and not COREGUI:FindFirstChild(plr.Name..'_ESP') then
-local ESPholder = Instance.new("Folder")
-ESPholder.Name = plr.Name..'_ESP'
-ESPholder.Parent = COREGUI
-repeat wait(1) until plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid")
-for b,n in pairs (plr.Character:GetChildren()) do
-if (n:IsA("BasePart")) then
-local a = Instance.new("BoxHandleAdornment")
-a.Name = plr.Name
-a.Parent = ESPholder
-a.Adornee = n
-a.AlwaysOnTop = true
-a.ZIndex = 10
-a.Size = n.Size
-a.Transparency = espTransparency
-a.Color = plr.TeamColor
+if z.Character and z.Name~=Players.LocalPlayer.Name and not COREGUI:FindFirstChild(z.Name..'_ESP')then
+local A=Instance.new"Folder"
+A.Name=z.Name..'_ESP'
+A.Parent=COREGUI
+repeat wait(1)until z.Character and getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
+for B,C in pairs(z.Character:GetChildren())do
+if(C:IsA"BasePart")then
+local D=Instance.new"BoxHandleAdornment"
+D.Name=z.Name
+D.Parent=A
+D.Adornee=C
+D.AlwaysOnTop=true
+D.ZIndex=10
+D.Size=C.Size
+D.Transparency=espTransparency
+D.Color=z.TeamColor
 end
 end
-if plr.Character and plr.Character:FindFirstChild('Head') then
-local BillboardGui = Instance.new("BillboardGui")
-local TextLabel = Instance.new("TextLabel")
-BillboardGui.Adornee = plr.Character.Head
-BillboardGui.Name = plr.Name
-BillboardGui.Parent = ESPholder
-BillboardGui.Size = UDim2.new(0, 100, 0, 150)
-BillboardGui.StudsOffset = Vector3.new(0, 1, 0)
-BillboardGui.AlwaysOnTop = true
-TextLabel.Parent = BillboardGui
-TextLabel.BackgroundTransparency = 1
-TextLabel.Position = UDim2.new(0, 0, 0, -50)
-TextLabel.Size = UDim2.new(0, 100, 0, 100)
-TextLabel.Font = Enum.Font.SourceSansSemibold
-TextLabel.TextSize = 20
-TextLabel.TextColor3 = Color3.new(1, 1, 1)
-TextLabel.TextStrokeTransparency = 0
-TextLabel.TextYAlignment = Enum.TextYAlignment.Bottom
-TextLabel.Text = 'Name: '..plr.Name
-TextLabel.ZIndex = 10
-local espLoopFunc
-local teamChange
-local addedFunc
-addedFunc = plr.CharacterAdded:Connect(function()
+if z.Character and z.Character:FindFirstChild'Head'then
+local B=Instance.new"BillboardGui"
+local C=Instance.new"TextLabel"
+B.Adornee=z.Character.Head
+B.Name=z.Name
+B.Parent=A
+B.Size=UDim2.new(0,100,0,150)
+B.StudsOffset=Vector3.new(0,1,0)
+B.AlwaysOnTop=true
+C.Parent=B
+C.BackgroundTransparency=1
+C.Position=UDim2.new(0,0,0,-50)
+C.Size=UDim2.new(0,100,0,100)
+C.Font=Enum.Font.SourceSansSemibold
+C.TextSize=20
+C.TextColor3=Color3.new(1,1,1)
+C.TextStrokeTransparency=0
+C.TextYAlignment=Enum.TextYAlignment.Bottom
+C.Text='Name: '..z.Name
+C.ZIndex=10
+local D
+local E
+local F
+F=z.CharacterAdded:Connect(function()
 if ESPenabled then
-espLoopFunc:Disconnect()
-teamChange:Disconnect()
-ESPholder:Destroy()
-repeat wait(1) until getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid")
-ESP(plr)
-addedFunc:Disconnect()
+D:Disconnect()
+E:Disconnect()
+A:Destroy()
+repeat wait(1)until getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
+ESP(z)
+F:Disconnect()
 else
-teamChange:Disconnect()
-addedFunc:Disconnect()
+E:Disconnect()
+F:Disconnect()
 end
 end)
-teamChange = plr:GetPropertyChangedSignal("TeamColor"):Connect(function()
+E=z:GetPropertyChangedSignal"TeamColor":Connect(function()
 if ESPenabled then
-espLoopFunc:Disconnect()
-addedFunc:Disconnect()
-ESPholder:Destroy()
-repeat wait(1) until getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid")
-ESP(plr)
-teamChange:Disconnect()
+D:Disconnect()
+F:Disconnect()
+A:Destroy()
+repeat wait(1)until getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
+ESP(z)
+E:Disconnect()
 else
-teamChange:Disconnect()
+E:Disconnect()
 end
 end)
 local function espLoop()
-if COREGUI:FindFirstChild(plr.Name..'_ESP') then
-if plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid") and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
-local pos = math.floor((getRoot(Players.LocalPlayer.Character).Position - getRoot(plr.Character).Position).magnitude)
-TextLabel.Text = 'Name: '..plr.Name..' | Health: '..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' | Studs: '..pos
+if COREGUI:FindFirstChild(z.Name..'_ESP')then
+if z.Character and getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character)and Players.LocalPlayer.Character:FindFirstChildOfClass"Humanoid"then
+local G=math.floor((getRoot(Players.LocalPlayer.Character).Position-getRoot(z.Character).Position).magnitude)
+C.Text='Name: '..z.Name..' | Health: '..round(z.Character:FindFirstChildOfClass'Humanoid'.Health,1)..' | Studs: '..G
 end
 else
-teamChange:Disconnect()
-addedFunc:Disconnect()
-espLoopFunc:Disconnect()
+E:Disconnect()
+F:Disconnect()
+D:Disconnect()
 end
 end
-espLoopFunc = RunService.RenderStepped:Connect(espLoop)
+D=RunService.RenderStepped:Connect(espLoop)
 end
 end
 end)
 end
-function CHMS(plr)
+
+function CHMS(z)
 task.spawn(function()
-for i,v in pairs(COREGUI:GetChildren()) do
-if v.Name == plr.Name..'_CHMS' then
-v:Destroy()
+for A,B in pairs(COREGUI:GetChildren())do
+if B.Name==z.Name..'_CHMS'then
+B:Destroy()
 end
 end
 wait()
-if plr.Character and plr.Name ~= Players.LocalPlayer.Name and not COREGUI:FindFirstChild(plr.Name..'_CHMS') then
-local ESPholder = Instance.new("Folder")
-ESPholder.Name = plr.Name..'_CHMS'
-ESPholder.Parent = COREGUI
-repeat wait(1) until plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid")
-for b,n in pairs (plr.Character:GetChildren()) do
-if (n:IsA("BasePart")) then
-local a = Instance.new("BoxHandleAdornment")
-a.Name = plr.Name
-a.Parent = ESPholder
-a.Adornee = n
-a.AlwaysOnTop = true
-a.ZIndex = 10
-a.Size = n.Size
-a.Transparency = espTransparency
-a.Color = plr.TeamColor
+if z.Character and z.Name~=Players.LocalPlayer.Name and not COREGUI:FindFirstChild(z.Name..'_CHMS')then
+local A=Instance.new"Folder"
+A.Name=z.Name..'_CHMS'
+A.Parent=COREGUI
+repeat wait(1)until z.Character and getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
+for B,C in pairs(z.Character:GetChildren())do
+if(C:IsA"BasePart")then
+local D=Instance.new"BoxHandleAdornment"
+D.Name=z.Name
+D.Parent=A
+D.Adornee=C
+D.AlwaysOnTop=true
+D.ZIndex=10
+D.Size=C.Size
+D.Transparency=espTransparency
+D.Color=z.TeamColor
 end
 end
-local addedFunc
-local teamChange
-local CHMSremoved
-addedFunc = plr.CharacterAdded:Connect(function()
+local B
+local C
+local D
+B=z.CharacterAdded:Connect(function()
 if CHMSenabled then
-ESPholder:Destroy()
-teamChange:Disconnect()
-repeat wait(1) until getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid")
-CHMS(plr)
-addedFunc:Disconnect()
+A:Destroy()
+C:Disconnect()
+repeat wait(1)until getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
+CHMS(z)
+B:Disconnect()
 else
-teamChange:Disconnect()
-addedFunc:Disconnect()
+C:Disconnect()
+B:Disconnect()
 end
 end)
-teamChange = plr:GetPropertyChangedSignal("TeamColor"):Connect(function()
+C=z:GetPropertyChangedSignal"TeamColor":Connect(function()
 if CHMSenabled then
-ESPholder:Destroy()
-addedFunc:Disconnect()
-repeat wait(1) until getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid")
-CHMS(plr)
-teamChange:Disconnect()
+A:Destroy()
+B:Disconnect()
+repeat wait(1)until getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
+CHMS(z)
+C:Disconnect()
 else
-teamChange:Disconnect()
+C:Disconnect()
 end
 end)
-CHMSremoved = ESPholder.AncestryChanged:Connect(function()
-teamChange:Disconnect()
-addedFunc:Disconnect()
-CHMSremoved:Disconnect()
+D=A.AncestryChanged:Connect(function()
+C:Disconnect()
+B:Disconnect()
+D:Disconnect()
 end)
 end
 end)
 end
-function Locate(plr)
+
+function Locate(z)
 task.spawn(function()
-for i,v in pairs(COREGUI:GetChildren()) do
-if v.Name == plr.Name..'_LC' then
-v:Destroy()
+for A,B in pairs(COREGUI:GetChildren())do
+if B.Name==z.Name..'_LC'then
+B:Destroy()
 end
 end
 wait()
-if plr.Character and plr.Name ~= Players.LocalPlayer.Name and not COREGUI:FindFirstChild(plr.Name..'_LC') then
-local ESPholder = Instance.new("Folder")
-ESPholder.Name = plr.Name..'_LC'
-ESPholder.Parent = COREGUI
-repeat wait(1) until plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid")
-for b,n in pairs (plr.Character:GetChildren()) do
-if (n:IsA("BasePart")) then
-local a = Instance.new("BoxHandleAdornment")
-a.Name = plr.Name
-a.Parent = ESPholder
-a.Adornee = n
-a.AlwaysOnTop = true
-a.ZIndex = 10
-a.Size = n.Size
-a.Transparency = espTransparency
-a.Color = plr.TeamColor
+if z.Character and z.Name~=Players.LocalPlayer.Name and not COREGUI:FindFirstChild(z.Name..'_LC')then
+local A=Instance.new"Folder"
+A.Name=z.Name..'_LC'
+A.Parent=COREGUI
+repeat wait(1)until z.Character and getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
+for B,C in pairs(z.Character:GetChildren())do
+if(C:IsA"BasePart")then
+local D=Instance.new"BoxHandleAdornment"
+D.Name=z.Name
+D.Parent=A
+D.Adornee=C
+D.AlwaysOnTop=true
+D.ZIndex=10
+D.Size=C.Size
+D.Transparency=espTransparency
+D.Color=z.TeamColor
 end
 end
-if plr.Character and plr.Character:FindFirstChild('Head') then
-local BillboardGui = Instance.new("BillboardGui")
-local TextLabel = Instance.new("TextLabel")
-BillboardGui.Adornee = plr.Character.Head
-BillboardGui.Name = plr.Name
-BillboardGui.Parent = ESPholder
-BillboardGui.Size = UDim2.new(0, 100, 0, 150)
-BillboardGui.StudsOffset = Vector3.new(0, 1, 0)
-BillboardGui.AlwaysOnTop = true
-TextLabel.Parent = BillboardGui
-TextLabel.BackgroundTransparency = 1
-TextLabel.Position = UDim2.new(0, 0, 0, -50)
-TextLabel.Size = UDim2.new(0, 100, 0, 100)
-TextLabel.Font = Enum.Font.SourceSansSemibold
-TextLabel.TextSize = 20
-TextLabel.TextColor3 = Color3.new(1, 1, 1)
-TextLabel.TextStrokeTransparency = 0
-TextLabel.TextYAlignment = Enum.TextYAlignment.Bottom
-TextLabel.Text = 'Name: '..plr.Name
-TextLabel.ZIndex = 10
-local lcLoopFunc
-local addedFunc
-local teamChange
-addedFunc = plr.CharacterAdded:Connect(function()
-if ESPholder ~= nil and ESPholder.Parent ~= nil then
-lcLoopFunc:Disconnect()
-teamChange:Disconnect()
-ESPholder:Destroy()
-repeat wait(1) until getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid")
-Locate(plr)
-addedFunc:Disconnect()
+if z.Character and z.Character:FindFirstChild'Head'then
+local B=Instance.new"BillboardGui"
+local C=Instance.new"TextLabel"
+B.Adornee=z.Character.Head
+B.Name=z.Name
+B.Parent=A
+B.Size=UDim2.new(0,100,0,150)
+B.StudsOffset=Vector3.new(0,1,0)
+B.AlwaysOnTop=true
+C.Parent=B
+C.BackgroundTransparency=1
+C.Position=UDim2.new(0,0,0,-50)
+C.Size=UDim2.new(0,100,0,100)
+C.Font=Enum.Font.SourceSansSemibold
+C.TextSize=20
+C.TextColor3=Color3.new(1,1,1)
+C.TextStrokeTransparency=0
+C.TextYAlignment=Enum.TextYAlignment.Bottom
+C.Text='Name: '..z.Name
+C.ZIndex=10
+local D
+local E
+local F
+E=z.CharacterAdded:Connect(function()
+if A~=nil and A.Parent~=nil then
+D:Disconnect()
+F:Disconnect()
+A:Destroy()
+repeat wait(1)until getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
+Locate(z)
+E:Disconnect()
 else
-teamChange:Disconnect()
-addedFunc:Disconnect()
+F:Disconnect()
+E:Disconnect()
 end
 end)
-teamChange = plr:GetPropertyChangedSignal("TeamColor"):Connect(function()
-if ESPholder ~= nil and ESPholder.Parent ~= nil then
-lcLoopFunc:Disconnect()
-addedFunc:Disconnect()
-ESPholder:Destroy()
-repeat wait(1) until getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid")
-Locate(plr)
-teamChange:Disconnect()
+F=z:GetPropertyChangedSignal"TeamColor":Connect(function()
+if A~=nil and A.Parent~=nil then
+D:Disconnect()
+E:Disconnect()
+A:Destroy()
+repeat wait(1)until getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
+Locate(z)
+F:Disconnect()
 else
-teamChange:Disconnect()
+F:Disconnect()
 end
 end)
 local function lcLoop()
-if COREGUI:FindFirstChild(plr.Name..'_LC') then
-if plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid") and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
-local pos = math.floor((getRoot(Players.LocalPlayer.Character).Position - getRoot(plr.Character).Position).magnitude)
-TextLabel.Text = 'Name: '..plr.Name..' | Health: '..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' | Studs: '..pos
+if COREGUI:FindFirstChild(z.Name..'_LC')then
+if z.Character and getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character)and Players.LocalPlayer.Character:FindFirstChildOfClass"Humanoid"then
+local G=math.floor((getRoot(Players.LocalPlayer.Character).Position-getRoot(z.Character).Position).magnitude)
+C.Text='Name: '..z.Name..' | Health: '..round(z.Character:FindFirstChildOfClass'Humanoid'.Health,1)..' | Studs: '..G
 end
 else
-teamChange:Disconnect()
-addedFunc:Disconnect()
-lcLoopFunc:Disconnect()
+F:Disconnect()
+E:Disconnect()
+D:Disconnect()
 end
 end
-lcLoopFunc = RunService.RenderStepped:Connect(lcLoop)
+D=RunService.RenderStepped:Connect(lcLoop)
 end
 end
 end)
 end
-local bindsGUI = KeybindEditor
-local awaitingInput = false
-local keySelected = false
+
+
+local z=false
+local A=false
+
 function refreshbinds()
 if Holder_2 then
 Holder_2:ClearAllChildren()
-Holder_2.CanvasSize = UDim2.new(0, 0, 0, 10)
-for i = 1, #binds do
-local YSize = 25
-local Position = ((i * YSize) - YSize)
-local newbind = Example_2:Clone()
-newbind.Parent = Holder_2
-newbind.Visible = true
-newbind.Position = UDim2.new(0,0,0, Position + 5)
-table.insert(shade2,newbind)
-table.insert(shade2,newbind.Text)
-table.insert(text1,newbind.Text)
-table.insert(shade3,newbind.Text.Delete)
-table.insert(text2,newbind.Text.Delete)
-local input = tostring(binds[i].KEY)
-local key
-if input == 'RightClick' or input == 'LeftClick' then
-key = input
+Holder_2.CanvasSize=UDim2.new(0,0,0,10)
+for B=1,#binds do
+local C=25
+local D=((B*C)-C)
+local E=Example_2:Clone()
+E.Parent=Holder_2
+E.Visible=true
+E.Position=UDim2.new(0,0,0,D+5)
+table.insert(shade2,E)
+table.insert(shade2,E.Text)
+table.insert(text1,E.Text)
+table.insert(shade3,E.Text.Delete)
+table.insert(text2,E.Text.Delete)
+local F=tostring(binds[B].KEY)
+local G
+if F=='RightClick'or F=='LeftClick'then
+G=F
 else
-key = input:sub(14)
+G=F:sub(14)
 end
-if binds[i].TOGGLE then
-newbind.Text.Text = key.." > "..binds[i].COMMAND.." / "..binds[i].TOGGLE
+if binds[B].TOGGLE then
+E.Text.Text=G.." > "..binds[B].COMMAND.." / "..binds[B].TOGGLE
 else
-newbind.Text.Text = key.." > "..binds[i].COMMAND.."  "..(binds[i].ISKEYUP and "(keyup)" or "(keydown)")
+E.Text.Text=G.." > "..binds[B].COMMAND.."  "..(binds[B].ISKEYUP and"(keyup)"or"(keydown)")
 end
-Holder_2.CanvasSize = UDim2.new(0,0,0, Position + 30)
-newbind.Text.Delete.MouseButton1Click:Connect(function()
-unkeybind(binds[i].COMMAND,binds[i].KEY)
+Holder_2.CanvasSize=UDim2.new(0,0,0,D+30)
+E.Text.Delete.MouseButton1Click:Connect(function()
+unkeybind(binds[B].COMMAND,binds[B].KEY)
 end)
 end
 end
 end
+
 refreshbinds()
-toggleOn = {}
-function unkeybind(cmd,key)
-for i = #binds,1,-1 do
-if binds[i].COMMAND == cmd and binds[i].KEY == key then
-toggleOn[binds[i]] = nil
-table.remove(binds, i)
+
+toggleOn={}
+
+function unkeybind(B,C)
+for D=#binds,1,-1 do
+if binds[D].COMMAND==B and binds[D].KEY==C then
+toggleOn[binds[D] ]=nil
+table.remove(binds,D)
 end
 end
 refreshbinds()
 updatesaves()
-if key == 'RightClick' or key == 'LeftClick' then
-notify('Keybinds Updated','Unbinded '..key..' from '..cmd)
+if C=='RightClick'or C=='LeftClick'then
+notify('Keybinds Updated','Unbinded '..C..' from '..B)
 else
-notify('Keybinds Updated','Unbinded '..key:sub(14)..' from '..cmd)
+notify('Keybinds Updated','Unbinded '..C:sub(14)..' from '..B)
 end
 end
+
 PositionsFrame.Delete.MouseButton1Click:Connect(function()
-execCmd('cpos')
+execCmd'cpos'
 end)
+
 function refreshwaypoints()
-if #WayPoints > 0 or #pWayPoints > 0 then
+if#WayPoints>0 or#pWayPoints>0 then
 PositionsHint:Destroy()
 end
 if Holder_4 then
 Holder_4:ClearAllChildren()
-Holder_4.CanvasSize = UDim2.new(0, 0, 0, 10)
-local YSize = 25
-local num = 1
-for i = 1, #WayPoints do
-local Position = ((num * YSize) - YSize)
-local newpoint = Example_4:Clone()
-newpoint.Parent = Holder_4
-newpoint.Visible = true
-newpoint.Position = UDim2.new(0,0,0, Position + 5)
-newpoint.Text.Text = WayPoints[i].NAME
-table.insert(shade2,newpoint)
-table.insert(shade2,newpoint.Text)
-table.insert(text1,newpoint.Text)
-table.insert(shade3,newpoint.Text.Delete)
-table.insert(text2,newpoint.Text.Delete)
-table.insert(shade3,newpoint.Text.TP)
-table.insert(text2,newpoint.Text.TP)
-Holder_4.CanvasSize = UDim2.new(0,0,0, Position + 30)
-newpoint.Text.Delete.MouseButton1Click:Connect(function()
-execCmd('dpos '..WayPoints[i].NAME)
+Holder_4.CanvasSize=UDim2.new(0,0,0,10)
+local B=25
+local C=1
+for D=1,#WayPoints do
+local E=((C*B)-B)
+local F=Example_4:Clone()
+F.Parent=Holder_4
+F.Visible=true
+F.Position=UDim2.new(0,0,0,E+5)
+F.Text.Text=WayPoints[D].NAME
+table.insert(shade2,F)
+table.insert(shade2,F.Text)
+table.insert(text1,F.Text)
+table.insert(shade3,F.Text.Delete)
+table.insert(text2,F.Text.Delete)
+table.insert(shade3,F.Text.TP)
+table.insert(text2,F.Text.TP)
+Holder_4.CanvasSize=UDim2.new(0,0,0,E+30)
+F.Text.Delete.MouseButton1Click:Connect(function()
+execCmd('dpos '..WayPoints[D].NAME)
 end)
-newpoint.Text.TP.MouseButton1Click:Connect(function()
-execCmd("loadpos "..WayPoints[i].NAME)
+F.Text.TP.MouseButton1Click:Connect(function()
+execCmd("loadpos "..WayPoints[D].NAME)
 end)
-num = num+1
+C=C+1
 end
-for i = 1, #pWayPoints do
-local Position = ((num * YSize) - YSize)
-local newpoint = Example_4:Clone()
-newpoint.Parent = Holder_4
-newpoint.Visible = true
-newpoint.Position = UDim2.new(0,0,0, Position + 5)
-newpoint.Text.Text = pWayPoints[i].NAME
-table.insert(shade2,newpoint)
-table.insert(shade2,newpoint.Text)
-table.insert(text1,newpoint.Text)
-table.insert(shade3,newpoint.Text.Delete)
-table.insert(text2,newpoint.Text.Delete)
-table.insert(shade3,newpoint.Text.TP)
-table.insert(text2,newpoint.Text.TP)
-Holder_4.CanvasSize = UDim2.new(0,0,0, Position + 30)
-newpoint.Text.Delete.MouseButton1Click:Connect(function()
-execCmd('dpos '..pWayPoints[i].NAME)
+for D=1,#pWayPoints do
+local E=((C*B)-B)
+local F=Example_4:Clone()
+F.Parent=Holder_4
+F.Visible=true
+F.Position=UDim2.new(0,0,0,E+5)
+F.Text.Text=pWayPoints[D].NAME
+table.insert(shade2,F)
+table.insert(shade2,F.Text)
+table.insert(text1,F.Text)
+table.insert(shade3,F.Text.Delete)
+table.insert(text2,F.Text.Delete)
+table.insert(shade3,F.Text.TP)
+table.insert(text2,F.Text.TP)
+Holder_4.CanvasSize=UDim2.new(0,0,0,E+30)
+F.Text.Delete.MouseButton1Click:Connect(function()
+execCmd('dpos '..pWayPoints[D].NAME)
 end)
-newpoint.Text.TP.MouseButton1Click:Connect(function()
-execCmd("loadpos "..pWayPoints[i].NAME)
+F.Text.TP.MouseButton1Click:Connect(function()
+execCmd("loadpos "..pWayPoints[D].NAME)
 end)
-num = num+1
+C=C+1
 end
 end
 end
+
 refreshwaypoints()
+
 function refreshaliases()
-if #aliases > 0 then
+if#aliases>0 then
 AliasHint:Destroy()
 end
 if Holder_3 then
 Holder_3:ClearAllChildren()
-Holder_3.CanvasSize = UDim2.new(0, 0, 0, 10)
-for i = 1, #aliases do
-local YSize = 25
-local Position = ((i * YSize) - YSize)
-local newalias = Example_3:Clone()
-newalias.Parent = Holder_3
-newalias.Visible = true
-newalias.Position = UDim2.new(0,0,0, Position + 5)
-newalias.Text.Text = aliases[i].CMD.." > "..aliases[i].ALIAS
-table.insert(shade2,newalias)
-table.insert(shade2,newalias.Text)
-table.insert(text1,newalias.Text)
-table.insert(shade3,newalias.Text.Delete)
-table.insert(text2,newalias.Text.Delete)
-Holder_3.CanvasSize = UDim2.new(0,0,0, Position + 30)
-newalias.Text.Delete.MouseButton1Click:Connect(function()
-execCmd('removealias '..aliases[i].ALIAS)
+Holder_3.CanvasSize=UDim2.new(0,0,0,10)
+for B=1,#aliases do
+local C=25
+local D=((B*C)-C)
+local E=Example_3:Clone()
+E.Parent=Holder_3
+E.Visible=true
+E.Position=UDim2.new(0,0,0,D+5)
+E.Text.Text=aliases[B].CMD.." > "..aliases[B].ALIAS
+table.insert(shade2,E)
+table.insert(shade2,E.Text)
+table.insert(text1,E.Text)
+table.insert(shade3,E.Text.Delete)
+table.insert(text2,E.Text.Delete)
+Holder_3.CanvasSize=UDim2.new(0,0,0,D+30)
+E.Text.Delete.MouseButton1Click:Connect(function()
+execCmd('removealias '..aliases[B].ALIAS)
 end)
 end
 end
 end
-local bindChosenKeyUp = false
+
+local B=false
+
 BindTo.MouseButton1Click:Connect(function()
-awaitingInput = true
-BindTo.Text = 'Press something'
+z=true
+BindTo.Text='Press something'
 end)
+
 BindTriggerSelect.MouseButton1Click:Connect(function()
-bindChosenKeyUp = not bindChosenKeyUp
-BindTriggerSelect.Text = bindChosenKeyUp and "KeyUp" or "KeyDown"
+B=not B
+BindTriggerSelect.Text=B and"KeyUp"or"KeyDown"
 end)
-newToggle = false
-Cmdbar_3.Parent.Visible = false
+
+newToggle=false
+Cmdbar_3.Parent.Visible=false
 On_2.MouseButton1Click:Connect(function()
-if newToggle == false then newToggle = true
-On_2.BackgroundTransparency = 0
-Cmdbar_3.Parent.Visible = true
-BindTriggerSelect.Visible = false
-else newToggle = false
-On_2.BackgroundTransparency = 1
-Cmdbar_3.Parent.Visible = false
-BindTriggerSelect.Visible = true
+if newToggle==false then newToggle=true
+On_2.BackgroundTransparency=0
+Cmdbar_3.Parent.Visible=true
+BindTriggerSelect.Visible=false
+else newToggle=false
+On_2.BackgroundTransparency=1
+Cmdbar_3.Parent.Visible=false
+BindTriggerSelect.Visible=true
 end
 end)
+
 Add_2.MouseButton1Click:Connect(function()
-if keySelected then
-if string.find(Cmdbar_2.Text, "\\\\") or string.find(Cmdbar_3.Text, "\\\\") then
+if A then
+if string.find(Cmdbar_2.Text,"\\\\")or string.find(Cmdbar_3.Text,"\\\\")then
 notify('Keybind Error','Only use one backslash to keybind multiple commands into one keybind or command')
 else
-if newToggle and Cmdbar_3.Text ~= '' and Cmdbar_2.text ~= '' then
+if newToggle and Cmdbar_3.Text~=''and Cmdbar_2.text~=''then
 addbind(Cmdbar_2.Text,keyPressed,false,Cmdbar_3.Text)
-elseif not newToggle and Cmdbar_2.text ~= '' then
-addbind(Cmdbar_2.Text,keyPressed,bindChosenKeyUp)
+elseif not newToggle and Cmdbar_2.text~=''then
+addbind(Cmdbar_2.Text,keyPressed,B)
 else
 return
 end
 refreshbinds()
 updatesaves()
-if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
-notify('Keybinds Updated','Binded '..keyPressed..' to '..Cmdbar_2.Text..(newToggle and " / "..Cmdbar_3.Text or ""))
+if keyPressed=='RightClick'or keyPressed=='LeftClick'then
+notify('Keybinds Updated','Binded '..keyPressed..' to '..Cmdbar_2.Text..(newToggle and" / "..Cmdbar_3.Text or""))
 else
-notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to '..Cmdbar_2.Text..(newToggle and " / "..Cmdbar_3.Text or ""))
+notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to '..Cmdbar_2.Text..(newToggle and" / "..Cmdbar_3.Text or""))
 end
 end
 end
 end)
+
 Exit_2.MouseButton1Click:Connect(function()
-Cmdbar_2.Text = 'Command'
-Cmdbar_3.Text = 'Command 2'
-BindTo.Text = 'Click to bind'
-bindChosenKeyUp = false
-BindTriggerSelect.Text = "KeyDown"
-keySelected = false
-KeybindEditor:TweenPosition(UDim2.new(0.5, -180, 0, -500), "InOut", "Quart", 0.5, true, nil)
+Cmdbar_2.Text='Command'
+Cmdbar_3.Text='Command 2'
+BindTo.Text='Click to bind'
+B=false
+BindTriggerSelect.Text="KeyDown"
+A=false
+KeybindEditor:TweenPosition(UDim2.new(0.5,-180,0,-500),"InOut","Quart",0.5,true,nil)
 end)
-function onInputBegan(input,gameProcessed)
-if awaitingInput then
-if input.UserInputType == Enum.UserInputType.Keyboard then
-keyPressed = tostring(input.KeyCode)
-BindTo.Text = keyPressed:sub(14)
-elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
-keyPressed = 'LeftClick'
-BindTo.Text = 'LeftClick'
-elseif input.UserInputType == Enum.UserInputType.MouseButton2 then
-keyPressed = 'RightClick'
-BindTo.Text = 'RightClick'
+
+function onInputBegan(C,D)
+if z then
+if C.UserInputType==Enum.UserInputType.Keyboard then
+keyPressed=tostring(C.KeyCode)
+BindTo.Text=keyPressed:sub(14)
+elseif C.UserInputType==Enum.UserInputType.MouseButton1 then
+keyPressed='LeftClick'
+BindTo.Text='LeftClick'
+elseif C.UserInputType==Enum.UserInputType.MouseButton2 then
+keyPressed='RightClick'
+BindTo.Text='RightClick'
 end
-awaitingInput = false
-keySelected = true
+z=false
+A=true
 end
-if not gameProcessed and #binds > 0 then
-for i,v in pairs(binds) do
-if not v.ISKEYUP then
-if (input.UserInputType == Enum.UserInputType.Keyboard and v.KEY:lower()==tostring(input.KeyCode):lower()) or (input.UserInputType == Enum.UserInputType.MouseButton1 and v.KEY:lower()=='leftclick') or (input.UserInputType == Enum.UserInputType.MouseButton2 and v.KEY:lower()=='rightclick') then
-if v.TOGGLE then
-local isOn = toggleOn[v] == true
-toggleOn[v] = not isOn
-if isOn then
-execCmd(v.TOGGLE,Players.LocalPlayer)
+if not D and#binds>0 then
+for E,F in pairs(binds)do
+if not F.ISKEYUP then
+if(C.UserInputType==Enum.UserInputType.Keyboard and F.KEY:lower()==tostring(C.KeyCode):lower())or(C.UserInputType==Enum.UserInputType.MouseButton1 and F.KEY:lower()=='leftclick')or(C.UserInputType==Enum.UserInputType.MouseButton2 and F.KEY:lower()=='rightclick')then
+if F.TOGGLE then
+local G=toggleOn[F]==true
+toggleOn[F]=not G
+if G then
+execCmd(F.TOGGLE,Players.LocalPlayer)
 else
-execCmd(v.COMMAND,Players.LocalPlayer)
+execCmd(F.COMMAND,Players.LocalPlayer)
 end
 else
-execCmd(v.COMMAND,Players.LocalPlayer)
+execCmd(F.COMMAND,Players.LocalPlayer)
 end
 end
 end
 end
 end
 end
-function onInputEnded(input,gameProcessed)
-if not gameProcessed and #binds > 0 then
-for i,v in pairs(binds) do
-if v.ISKEYUP then
-if (input.UserInputType == Enum.UserInputType.Keyboard and v.KEY:lower()==tostring(input.KeyCode):lower()) or (input.UserInputType == Enum.UserInputType.MouseButton1 and v.KEY:lower()=='leftclick') or (input.UserInputType == Enum.UserInputType.MouseButton2 and v.KEY:lower()=='rightclick') then
-execCmd(v.COMMAND,Players.LocalPlayer)
+
+function onInputEnded(C,D)
+if not D and#binds>0 then
+for E,F in pairs(binds)do
+if F.ISKEYUP then
+if(C.UserInputType==Enum.UserInputType.Keyboard and F.KEY:lower()==tostring(C.KeyCode):lower())or(C.UserInputType==Enum.UserInputType.MouseButton1 and F.KEY:lower()=='leftclick')or(C.UserInputType==Enum.UserInputType.MouseButton2 and F.KEY:lower()=='rightclick')then
+execCmd(F.COMMAND,Players.LocalPlayer)
 end
 end
 end
 end
 end
+
 UserInputService.InputBegan:Connect(onInputBegan)
 UserInputService.InputEnded:Connect(onInputEnded)
+
 ClickTP.Select.MouseButton1Click:Connect(function()
-if keySelected then
-addbind('clicktp',keyPressed,bindChosenKeyUp)
+if A then
+addbind('clicktp',keyPressed,B)
 refreshbinds()
 updatesaves()
-if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
+if keyPressed=='RightClick'or keyPressed=='LeftClick'then
 notify('Keybinds Updated','Binded '..keyPressed..' to click tp')
 else
 notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to click tp')
 end
 end
 end)
+
 ClickDelete.Select.MouseButton1Click:Connect(function()
-if keySelected then
-addbind('clickdel',keyPressed,bindChosenKeyUp)
+if A then
+addbind('clickdel',keyPressed,B)
 refreshbinds()
 updatesaves()
-if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
+if keyPressed=='RightClick'or keyPressed=='LeftClick'then
 notify('Keybinds Updated','Binded '..keyPressed..' to click delete')
 else
 notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to click delete')
 end
 end
 end)
+
 local function clicktpFunc()
 pcall(function()
-local character = Players.LocalPlayer.Character
-local humanoid = character:FindFirstChildOfClass("Humanoid")
-if humanoid and humanoid.SeatPart then
-humanoid.Sit = false
+local C=Players.LocalPlayer.Character
+local D=C:FindFirstChildOfClass"Humanoid"
+if D and D.SeatPart then
+D.Sit=false
 wait(0.1)
 end
-local hipHeight = humanoid and humanoid.HipHeight > 0 and (humanoid.HipHeight + 1)
-local rootPart = getRoot(character)
-local rootPartPosition = rootPart.Position
-local hitPosition = IYMouse.Hit.Position
-local newCFrame = CFrame.new(
-hitPosition,
-Vector3.new(rootPartPosition.X, hitPosition.Y, rootPartPosition.Z)
-) * CFrame.Angles(0, math.pi, 0)
-rootPart.CFrame = newCFrame + Vector3.new(0, hipHeight or 4, 0)
+
+local E=D and D.HipHeight>0 and(D.HipHeight+1)
+local F=getRoot(C)
+local G=F.Position
+local H=IYMouse.Hit.Position
+local I=CFrame.new(
+H,
+Vector3.new(G.X,H.Y,G.Z)
+)*CFrame.Angles(0,math.pi,0)
+
+F.CFrame=I+Vector3.new(0,E or 4,0)
 end)
 end
+
 IYMouse.Button1Down:Connect(function()
-for i,v in pairs(binds) do
-if v.COMMAND == 'clicktp' then
-local input = v.KEY
-if input == 'RightClick' and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2) and Players.LocalPlayer.Character then
+for C,D in pairs(binds)do
+if D.COMMAND=='clicktp'then
+local E=D.KEY
+if E=='RightClick'and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2)and Players.LocalPlayer.Character then
 clicktpFunc()
-elseif input == 'LeftClick' and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and Players.LocalPlayer.Character then
+elseif E=='LeftClick'and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1)and Players.LocalPlayer.Character then
 clicktpFunc()
-elseif UserInputService:IsKeyDown(Enum.KeyCode[input:sub(14)]) and Players.LocalPlayer.Character then
+elseif UserInputService:IsKeyDown(Enum.KeyCode[E:sub(14)])and Players.LocalPlayer.Character then
 clicktpFunc()
 end
-elseif v.COMMAND == 'clickdel' then
-local input = v.KEY
-if input == 'RightClick' and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2) then
-pcall(function() IYMouse.Target:Destroy() end)
-elseif input == 'LeftClick' and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
-pcall(function() IYMouse.Target:Destroy() end)
-elseif UserInputService:IsKeyDown(Enum.KeyCode[input:sub(14)]) then
-pcall(function() IYMouse.Target:Destroy() end)
+elseif D.COMMAND=='clickdel'then
+local E=D.KEY
+if E=='RightClick'and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2)then
+pcall(function()IYMouse.Target:Destroy()end)
+elseif E=='LeftClick'and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1)then
+pcall(function()IYMouse.Target:Destroy()end)
+elseif UserInputService:IsKeyDown(Enum.KeyCode[E:sub(14)])then
+pcall(function()IYMouse.Target:Destroy()end)
 end
 end
 end
 end)
-PluginsGUI = PluginEditor.background
-function addPlugin(name)
-if name:lower() == 'plugin file name' or name:lower() == 'iy_fe.iy' or name == 'iy_fe' then
+
+PluginsGUI=PluginEditor.background
+
+function addPlugin(C)
+if C:lower()=='plugin file name'or C:lower()=='iy_fe.iy'or C=='iy_fe'then
 notify('Plugin Error','Please enter a valid plugin')
 else
-local file
-local fileName
-if name:sub(-3) == '.iy' then
-pcall(function() file = readfile(name) end)
-fileName = name
+local D
+local E
+if C:sub(-3)=='.iy'then
+pcall(function()D=d(C)end)
+E=C
 else
-pcall(function() file = readfile(name..'.iy') end)
-fileName = name..'.iy'
+pcall(function()D=d(C..'.iy')end)
+E=C..'.iy'
 end
-if file then
-if not FindInTable(PluginsTable, fileName) then
-table.insert(PluginsTable, fileName)
-LoadPlugin(fileName)
+if D then
+if not FindInTable(PluginsTable,E)then
+table.insert(PluginsTable,E)
+LoadPlugin(E)
 refreshplugins()
 pcall(eventEditor.Refresh)
 else
 notify('Plugin Error','This plugin is already added')
 end
 else
-notify('Plugin Error','Cannot locate file "'..fileName..'". Is the file in the correct folder?')
+notify('Plugin Error','Cannot locate file "'..E..'". Is the file in the correct folder?')
 end
 end
 end
-function deletePlugin(name)
-local pName = name..'.iy'
-if name:sub(-3) == '.iy' then
-pName = name
+
+function deletePlugin(C)
+local D=C..'.iy'
+if C:sub(-3)=='.iy'then
+D=C
 end
-for i = #cmds,1,-1 do
-if cmds[i].PLUGIN == pName then
-table.remove(cmds, i)
-end
-end
-for i,v in pairs(CMDsF:GetChildren()) do
-if v.Name == 'PLUGIN_'..pName then
-v:Destroy()
+for E=#cmds,1,-1 do
+if cmds[E].PLUGIN==D then
+table.remove(cmds,E)
 end
 end
-for i,v in pairs(PluginsTable) do
-if v == pName then
-table.remove(PluginsTable, i)
-notify('Removed Plugin',pName..' was removed')
+for E,F in pairs(CMDsF:GetChildren())do
+if F.Name=='PLUGIN_'..D then
+F:Destroy()
+end
+end
+for E,F in pairs(PluginsTable)do
+if F==D then
+table.remove(PluginsTable,E)
+notify('Removed Plugin',D..' was removed')
 end
 end
 IndexContents('',true)
 refreshplugins()
 end
-function refreshplugins(dontSave)
-if #PluginsTable > 0 then
+
+function refreshplugins(C)
+if#PluginsTable>0 then
 PluginsHint:Destroy()
 end
 if Holder_5 then
 Holder_5:ClearAllChildren()
-Holder_5.CanvasSize = UDim2.new(0, 0, 0, 10)
-for i,v in pairs(PluginsTable) do
-local pName = v
-local YSize = 25
-local Position = ((i * YSize) - YSize)
-local newplugin = Example_5:Clone()
-newplugin.Parent = Holder_5
-newplugin.Visible = true
-newplugin.Position = UDim2.new(0,0,0, Position + 5)
-newplugin.Text.Text = pName
-table.insert(shade2,newplugin)
-table.insert(shade2,newplugin.Text)
-table.insert(text1,newplugin.Text)
-table.insert(shade3,newplugin.Text.Delete)
-table.insert(text2,newplugin.Text.Delete)
-Holder_5.CanvasSize = UDim2.new(0,0,0, Position + 30)
-newplugin.Text.Delete.MouseButton1Click:Connect(function()
-deletePlugin(pName)
+Holder_5.CanvasSize=UDim2.new(0,0,0,10)
+for D,E in pairs(PluginsTable)do
+local F=E
+local G=25
+local H=((D*G)-G)
+local I=Example_5:Clone()
+I.Parent=Holder_5
+I.Visible=true
+I.Position=UDim2.new(0,0,0,H+5)
+I.Text.Text=F
+table.insert(shade2,I)
+table.insert(shade2,I.Text)
+table.insert(text1,I.Text)
+table.insert(shade3,I.Text.Delete)
+table.insert(text2,I.Text.Delete)
+Holder_5.CanvasSize=UDim2.new(0,0,0,H+30)
+I.Text.Delete.MouseButton1Click:Connect(function()
+deletePlugin(F)
 end)
 end
-if not dontSave then
+if not C then
 updatesaves()
 end
 end
 end
-local PluginCache
-function LoadPlugin(val,startup)
-local plugin
+
+
+function LoadPlugin(C,D)
+local E
+
 function CatchedPluginLoad()
-plugin = loadfile(val)()
+E=loadfile(C)()
 end
-function handlePluginError(plerror)
-notify('Plugin Error','An error occurred with the plugin, "'..val..'" and it could not be loaded')
-if FindInTable(PluginsTable,val) then
-for i,v in pairs(PluginsTable) do
-if v == val then
-table.remove(PluginsTable,i)
+
+function handlePluginError(F)
+notify('Plugin Error','An error occurred with the plugin, "'..C..'" and it could not be loaded')
+if FindInTable(PluginsTable,C)then
+for G,H in pairs(PluginsTable)do
+if H==C then
+table.remove(PluginsTable,G)
 end
 end
 end
 updatesaves()
-print("Original Error: "..tostring(plerror))
+
+print("Original Error: "..tostring(F))
 print("Plugin Error, stack traceback: "..tostring(debug.traceback()))
-plugin = nil
+
+E=nil
+
 return false
 end
-xpcall(CatchedPluginLoad, handlePluginError)
-if plugin ~= nil then
-if not startup then
-notify('Loaded Plugin',"Name: "..plugin["PluginName"].."\n".."Description: "..plugin["PluginDescription"])
+
+xpcall(CatchedPluginLoad,handlePluginError)
+
+if E~=nil then
+if not D then
+notify('Loaded Plugin',"Name: "..E.PluginName.."\n".."Description: "..E.PluginDescription)
 end
-addcmdtext('',val)
-addcmdtext(string.upper('--'..plugin["PluginName"]),val,plugin["PluginDescription"])
-if plugin["Commands"] then
-for i,v in pairs(plugin["Commands"]) do
-local cmdExt = ''
-local cmdName = i
+addcmdtext('',C)
+addcmdtext(string.upper('--'..E.PluginName),C,E.PluginDescription)
+if E.Commands then
+for F,G in pairs(E.Commands)do
+local H=''
+local I=F
 local function handleNames()
-cmdName = i
-if findCmd(cmdName..cmdExt) then
-if isNumber(cmdExt) then
-cmdExt = cmdExt+1
+I=F
+if findCmd(I..H)then
+if isNumber(H)then
+H=H+1
 else
-cmdExt = 1
+H=1
 end
 handleNames()
 else
-cmdName = cmdName..cmdExt
+I=I..H
 end
 end
 handleNames()
-addcmd(cmdName, v["Aliases"], v["Function"], val)
-if v["ListName"] then
-local newName = v.ListName
-local cmdNames = {i,unpack(v.Aliases)}
-for i,v in pairs(cmdNames) do
-newName = newName:gsub(v,v..cmdExt)
+addcmd(I,G.Aliases,G.Function,C)
+if G.ListName then
+local J=G.ListName
+local K={F,unpack(G.Aliases)}
+for L,M in pairs(K)do
+J=J:gsub(M,M..H)
 end
-addcmdtext(newName,val,v["Description"])
+addcmdtext(J,C,G.Description)
 else
-addcmdtext(cmdName,val,v["Description"])
+addcmdtext(I,C,G.Description)
 end
 end
 end
 IndexContents('',true)
-elseif plugin == nil then
-plugin = nil
+elseif E==nil then
+E=nil
 end
 end
+
 function FindPlugins()
-if PluginsTable ~= nil and type(PluginsTable) == "table" then
-for i,v in pairs(PluginsTable) do
-LoadPlugin(v,true)
+if PluginsTable~=nil and type(PluginsTable)=="table"then
+for C,D in pairs(PluginsTable)do
+LoadPlugin(D,true)
 end
 refreshplugins(true)
 end
 end
+
 AddPlugin.MouseButton1Click:Connect(function()
 addPlugin(PluginsGUI.FileName.Text)
 end)
+
 Exit_3.MouseButton1Click:Connect(function()
-PluginEditor:TweenPosition(UDim2.new(0.5, -180, 0, -500), "InOut", "Quart", 0.5, true, nil)
-FileName.Text = 'Plugin File Name'
+PluginEditor:TweenPosition(UDim2.new(0.5,-180,0,-500),"InOut","Quart",0.5,true,nil)
+FileName.Text='Plugin File Name'
 end)
+
 Add_3.MouseButton1Click:Connect(function()
-PluginEditor:TweenPosition(UDim2.new(0.5, -180, 0, 310), "InOut", "Quart", 0.5, true, nil)
+PluginEditor:TweenPosition(UDim2.new(0.5,-180,0,310),"InOut","Quart",0.5,true,nil)
 end)
+
 Plugins.MouseButton1Click:Connect(function()
-if writefileExploit() then
-PluginsFrame:TweenPosition(UDim2.new(0, 0, 0, 0), "InOut", "Quart", 0.5, true, nil)
+if writefileExploit()then
+PluginsFrame:TweenPosition(UDim2.new(0,0,0,0),"InOut","Quart",0.5,true,nil)
 wait(0.5)
-SettingsHolder.Visible = false
+SettingsHolder.Visible=false
 else
 notify('Incompatible Exploit','Your exploit is unable to use plugins (missing read/writefile)')
 end
 end)
+
 Close_4.MouseButton1Click:Connect(function()
-SettingsHolder.Visible = true
-PluginsFrame:TweenPosition(UDim2.new(0, 0, 0, 175), "InOut", "Quart", 0.5, true, nil)
+SettingsHolder.Visible=true
+PluginsFrame:TweenPosition(UDim2.new(0,0,0,175),"InOut","Quart",0.5,true,nil)
 end)
-local TeleportCheck = false
-Players.LocalPlayer.OnTeleport:Connect(function(State)
-if KeepInfYield and (not TeleportCheck) and queueteleport then
-TeleportCheck = true
-queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()")
+
+local C=false
+Players.LocalPlayer.OnTeleport:Connect(function(D)
+if KeepInfYield and(not C)and queueteleport then
+C=true
+queueteleport"loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()"
 end
 end)
-addcmd('addalias',{},function(args, speaker)
-if #args < 2 then return end
-local cmd = string.lower(args[1])
-local alias = string.lower(args[2])
-for i,v in pairs(cmds) do
-if v.NAME:lower()==cmd or FindInTable(v.ALIAS,cmd) then
-customAlias[alias] = v
-aliases[#aliases + 1] = {CMD = cmd, ALIAS = alias}
-notify('Aliases Modified',"Added "..alias.." as an alias to "..cmd)
+
+addcmd('addalias',{},function(D,E)
+if#D<2 then return end
+local F=string.lower(D[1])
+local G=string.lower(D[2])
+for H,I in pairs(cmds)do
+if I.NAME:lower()==F or FindInTable(I.ALIAS,F)then
+customAlias[G]=I
+aliases[#aliases+1]={CMD=F,ALIAS=G}
+notify('Aliases Modified',"Added "..G.." as an alias to "..F)
 updatesaves()
 refreshaliases()
 break
 end
 end
 end)
-addcmd('removealias',{},function(args, speaker)
-if #args < 1 then return end
-local alias = string.lower(args[1])
-if customAlias[alias] then
-local cmd = customAlias[alias].NAME
-customAlias[alias] = nil
-for i = #aliases,1,-1 do
-if aliases[i].ALIAS == tostring(alias) then
-table.remove(aliases, i)
+
+addcmd('removealias',{},function(D,E)
+if#D<1 then return end
+local F=string.lower(D[1])
+if customAlias[F]then
+local G=customAlias[F].NAME
+customAlias[F]=nil
+for H=#aliases,1,-1 do
+if aliases[H].ALIAS==tostring(F)then
+table.remove(aliases,H)
 end
 end
-notify('Aliases Modified',"Removed the alias "..alias.." from "..cmd)
+notify('Aliases Modified',"Removed the alias "..F.." from "..G)
 updatesaves()
 refreshaliases()
 end
 end)
-addcmd('clraliases',{},function(args, speaker)
-customAlias = {}
-aliases = {}
+
+addcmd('clraliases',{},function(D,E)
+customAlias={}
+aliases={}
 notify('Aliases Modified','Removed all aliases')
 updatesaves()
 refreshaliases()
 end)
-addcmd('discord', {'support', 'help'}, function(args, speaker)
+
+addcmd('discord',{'support','help'},function(D,E)
 if everyClipboard then
-toClipboard('https://discord.com/invite/dYHag43eeU')
-notify('Discord Invite', 'Copied to clipboard!\ndiscord.gg/dYHag43eeU')
+toClipboard'https://discord.com/invite/dYHag43eeU'
+notify('Discord Invite','Copied to clipboard!\ndiscord.gg/dYHag43eeU')
 else
-notify('Discord Invite', 'discord.gg/dYHag43eeU')
+notify('Discord Invite','discord.gg/dYHag43eeU')
 end
 if httprequest then
-httprequest({
-Url = 'http://127.0.0.1:6463/rpc?v=1',
-Method = 'POST',
-Headers = {
-['Content-Type'] = 'application/json',
-Origin = 'https://discord.com'
+httprequest{
+Url='http://127.0.0.1:6463/rpc?v=1',
+Method='POST',
+Headers={
+['Content-Type']='application/json',
+Origin='https://discord.com'
 },
-Body = HttpService:JSONEncode({
-cmd = 'INVITE_BROWSER',
-nonce = HttpService:GenerateGUID(false),
-args = {code = 'dYHag43eeU'}
-})
-})
+Body=HttpService:JSONEncode{
+cmd='INVITE_BROWSER',
+nonce=HttpService:GenerateGUID(false),
+args={code='dYHag43eeU'}
+}
+}
 end
 end)
-addcmd('keepiy', {}, function(args, speaker)
+
+addcmd('keepiy',{},function(D,E)
 if queueteleport then
-KeepInfYield = true
+KeepInfYield=true
 updatesaves()
 else
 notify('Incompatible Exploit','Your exploit does not support this command (missing queue_on_teleport)')
 end
 end)
-addcmd('unkeepiy', {}, function(args, speaker)
+
+addcmd('unkeepiy',{},function(D,E)
 if queueteleport then
-KeepInfYield = false
+KeepInfYield=false
 updatesaves()
 else
 notify('Incompatible Exploit','Your exploit does not support this command (missing queue_on_teleport)')
 end
 end)
-addcmd('togglekeepiy', {}, function(args, speaker)
+
+addcmd('togglekeepiy',{},function(D,E)
 if queueteleport then
-KeepInfYield = not KeepInfYield
+KeepInfYield=not KeepInfYield
 updatesaves()
 else
 notify('Incompatible Exploit','Your exploit does not support this command (missing queue_on_teleport)')
 end
 end)
-local canOpenServerinfo = true
-addcmd('serverinfo',{'info','sinfo'},function(args, speaker)
-if not canOpenServerinfo then return end
-canOpenServerinfo = false
+
+local D=true
+addcmd('serverinfo',{'info','sinfo'},function(E,F)
+if not D then return end
+D=false
 task.spawn(function()
-local FRAME = Instance.new("Frame")
-local shadow = Instance.new("Frame")
-local PopupText = Instance.new("TextLabel")
-local Exit = Instance.new("TextButton")
-local ExitImage = Instance.new("ImageLabel")
-local background = Instance.new("Frame")
-local TextLabel = Instance.new("TextLabel")
-local TextLabel2 = Instance.new("TextLabel")
-local TextLabel3 = Instance.new("TextLabel")
-local Time = Instance.new("TextLabel")
-local appearance = Instance.new("TextLabel")
-local maxplayers = Instance.new("TextLabel")
-local name = Instance.new("TextLabel")
-local placeid = Instance.new("TextLabel")
-local playerid = Instance.new("TextLabel")
-local players = Instance.new("TextLabel")
-local CopyApp = Instance.new("TextButton")
-local CopyPlrID = Instance.new("TextButton")
-local CopyPlcID = Instance.new("TextButton")
-local CopyPlcName = Instance.new("TextButton")
-FRAME.Name = randomString()
-FRAME.Parent = ScaledHolder
-FRAME.Active = true
-FRAME.BackgroundTransparency = 1
-FRAME.Position = UDim2.new(0.5, -130, 0, -500)
-FRAME.Size = UDim2.new(0, 250, 0, 20)
-FRAME.ZIndex = 10
-dragGUI(FRAME)
-shadow.Name = "shadow"
-shadow.Parent = FRAME
-shadow.BackgroundColor3 = currentShade2
-shadow.BorderSizePixel = 0
-shadow.Size = UDim2.new(0, 250, 0, 20)
-shadow.ZIndex = 10
-table.insert(shade2,shadow)
-PopupText.Name = "PopupText"
-PopupText.Parent = shadow
-PopupText.BackgroundTransparency = 1
-PopupText.Size = UDim2.new(1, 0, 0.95, 0)
-PopupText.ZIndex = 10
-PopupText.Font = Enum.Font.SourceSans
-PopupText.TextSize = 14
-PopupText.Text = "Server"
-PopupText.TextColor3 = currentText1
-PopupText.TextWrapped = true
-table.insert(text1,PopupText)
-Exit.Name = "Exit"
-Exit.Parent = shadow
-Exit.BackgroundTransparency = 1
-Exit.Position = UDim2.new(1, -20, 0, 0)
-Exit.Size = UDim2.new(0, 20, 0, 20)
-Exit.Text = ""
-Exit.ZIndex = 10
-ExitImage.Parent = Exit
-ExitImage.BackgroundColor3 = Color3.new(1, 1, 1)
-ExitImage.BackgroundTransparency = 1
-ExitImage.Position = UDim2.new(0, 5, 0, 5)
-ExitImage.Size = UDim2.new(0, 10, 0, 10)
-ExitImage.Image = "rbxassetid://5054663650"
-ExitImage.ZIndex = 10
-background.Name = "background"
-background.Parent = FRAME
-background.Active = true
-background.BackgroundColor3 = currentShade1
-background.BorderSizePixel = 0
-background.Position = UDim2.new(0, 0, 1, 0)
-background.Size = UDim2.new(0, 250, 0, 250)
-background.ZIndex = 10
-table.insert(shade1,background)
-TextLabel.Name = "Text Label"
-TextLabel.Parent = background
-TextLabel.BackgroundTransparency = 1
-TextLabel.BorderSizePixel = 0
-TextLabel.Position = UDim2.new(0, 5, 0, 80)
-TextLabel.Size = UDim2.new(0, 100, 0, 20)
-TextLabel.ZIndex = 10
-TextLabel.Font = Enum.Font.SourceSansLight
-TextLabel.TextSize = 20
-TextLabel.Text = "Run Time:"
-TextLabel.TextColor3 = currentText1
-TextLabel.TextXAlignment = Enum.TextXAlignment.Left
-table.insert(text1,TextLabel)
-TextLabel2.Name = "Text Label2"
-TextLabel2.Parent = background
-TextLabel2.BackgroundTransparency = 1
-TextLabel2.BorderSizePixel = 0
-TextLabel2.Position = UDim2.new(0, 5, 0, 130)
-TextLabel2.Size = UDim2.new(0, 100, 0, 20)
-TextLabel2.ZIndex = 10
-TextLabel2.Font = Enum.Font.SourceSansLight
-TextLabel2.TextSize = 20
-TextLabel2.Text = "Statistics:"
-TextLabel2.TextColor3 = currentText1
-TextLabel2.TextXAlignment = Enum.TextXAlignment.Left
-table.insert(text1,TextLabel2)
-TextLabel3.Name = "Text Label3"
-TextLabel3.Parent = background
-TextLabel3.BackgroundTransparency = 1
-TextLabel3.BorderSizePixel = 0
-TextLabel3.Position = UDim2.new(0, 5, 0, 10)
-TextLabel3.Size = UDim2.new(0, 100, 0, 20)
-TextLabel3.ZIndex = 10
-TextLabel3.Font = Enum.Font.SourceSansLight
-TextLabel3.TextSize = 20
-TextLabel3.Text = "Local Player:"
-TextLabel3.TextColor3 = currentText1
-TextLabel3.TextXAlignment = Enum.TextXAlignment.Left
-table.insert(text1,TextLabel3)
-Time.Name = "Time"
-Time.Parent = background
-Time.BackgroundTransparency = 1
-Time.BorderSizePixel = 0
-Time.Position = UDim2.new(0, 5, 0, 105)
-Time.Size = UDim2.new(0, 100, 0, 20)
-Time.ZIndex = 10
-Time.Font = Enum.Font.SourceSans
-Time.FontSize = Enum.FontSize.Size14
-Time.Text = "LOADING"
-Time.TextColor3 = currentText1
-Time.TextXAlignment = Enum.TextXAlignment.Left
-table.insert(text1,Time)
-appearance.Name = "appearance"
-appearance.Parent = background
-appearance.BackgroundTransparency = 1
-appearance.BorderSizePixel = 0
-appearance.Position = UDim2.new(0, 5, 0, 55)
-appearance.Size = UDim2.new(0, 100, 0, 20)
-appearance.ZIndex = 10
-appearance.Font = Enum.Font.SourceSans
-appearance.FontSize = Enum.FontSize.Size14
-appearance.Text = "Appearance: LOADING"
-appearance.TextColor3 = currentText1
-appearance.TextXAlignment = Enum.TextXAlignment.Left
-table.insert(text1,appearance)
-maxplayers.Name = "maxplayers"
-maxplayers.Parent = background
-maxplayers.BackgroundTransparency = 1
-maxplayers.BorderSizePixel = 0
-maxplayers.Position = UDim2.new(0, 5, 0, 175)
-maxplayers.Size = UDim2.new(0, 100, 0, 20)
-maxplayers.ZIndex = 10
-maxplayers.Font = Enum.Font.SourceSans
-maxplayers.FontSize = Enum.FontSize.Size14
-maxplayers.Text = "LOADING"
-maxplayers.TextColor3 = currentText1
-maxplayers.TextXAlignment = Enum.TextXAlignment.Left
-table.insert(text1,maxplayers)
-name.Name = "name"
-name.Parent = background
-name.BackgroundTransparency = 1
-name.BorderSizePixel = 0
-name.Position = UDim2.new(0, 5, 0, 215)
-name.Size = UDim2.new(0, 240, 0, 30)
-name.ZIndex = 10
-name.Font = Enum.Font.SourceSans
-name.FontSize = Enum.FontSize.Size14
-name.Text = "Place Name: LOADING"
-name.TextColor3 = currentText1
-name.TextWrapped = true
-name.TextXAlignment = Enum.TextXAlignment.Left
-name.TextYAlignment = Enum.TextYAlignment.Top
-table.insert(text1,name)
-placeid.Name = "placeid"
-placeid.Parent = background
-placeid.BackgroundTransparency = 1
-placeid.BorderSizePixel = 0
-placeid.Position = UDim2.new(0, 5, 0, 195)
-placeid.Size = UDim2.new(0, 100, 0, 20)
-placeid.ZIndex = 10
-placeid.Font = Enum.Font.SourceSans
-placeid.FontSize = Enum.FontSize.Size14
-placeid.Text = "Place ID: LOADING"
-placeid.TextColor3 = currentText1
-placeid.TextXAlignment = Enum.TextXAlignment.Left
-table.insert(text1,placeid)
-playerid.Name = "playerid"
-playerid.Parent = background
-playerid.BackgroundTransparency = 1
-playerid.BorderSizePixel = 0
-playerid.Position = UDim2.new(0, 5, 0, 35)
-playerid.Size = UDim2.new(0, 100, 0, 20)
-playerid.ZIndex = 10
-playerid.Font = Enum.Font.SourceSans
-playerid.FontSize = Enum.FontSize.Size14
-playerid.Text = "Player ID: LOADING"
-playerid.TextColor3 = currentText1
-playerid.TextXAlignment = Enum.TextXAlignment.Left
-table.insert(text1,playerid)
-players.Name = "players"
-players.Parent = background
-players.BackgroundTransparency = 1
-players.BorderSizePixel = 0
-players.Position = UDim2.new(0, 5, 0, 155)
-players.Size = UDim2.new(0, 100, 0, 20)
-players.ZIndex = 10
-players.Font = Enum.Font.SourceSans
-players.FontSize = Enum.FontSize.Size14
-players.Text = "LOADING"
-players.TextColor3 = currentText1
-players.TextXAlignment = Enum.TextXAlignment.Left
-table.insert(text1,players)
-CopyApp.Name = "CopyApp"
-CopyApp.Parent = background
-CopyApp.BackgroundColor3 = currentShade2
-CopyApp.BorderSizePixel = 0
-CopyApp.Position = UDim2.new(0, 210, 0, 55)
-CopyApp.Size = UDim2.new(0, 35, 0, 20)
-CopyApp.Font = Enum.Font.SourceSans
-CopyApp.TextSize = 14
-CopyApp.Text = "Copy"
-CopyApp.TextColor3 = currentText1
-CopyApp.ZIndex = 10
-table.insert(shade2,CopyApp)
-table.insert(text1,CopyApp)
-CopyPlrID.Name = "CopyPlrID"
-CopyPlrID.Parent = background
-CopyPlrID.BackgroundColor3 = currentShade2
-CopyPlrID.BorderSizePixel = 0
-CopyPlrID.Position = UDim2.new(0, 210, 0, 35)
-CopyPlrID.Size = UDim2.new(0, 35, 0, 20)
-CopyPlrID.Font = Enum.Font.SourceSans
-CopyPlrID.TextSize = 14
-CopyPlrID.Text = "Copy"
-CopyPlrID.TextColor3 = currentText1
-CopyPlrID.ZIndex = 10
-table.insert(shade2,CopyPlrID)
-table.insert(text1,CopyPlrID)
-CopyPlcID.Name = "CopyPlcID"
-CopyPlcID.Parent = background
-CopyPlcID.BackgroundColor3 = currentShade2
-CopyPlcID.BorderSizePixel = 0
-CopyPlcID.Position = UDim2.new(0, 210, 0, 195)
-CopyPlcID.Size = UDim2.new(0, 35, 0, 20)
-CopyPlcID.Font = Enum.Font.SourceSans
-CopyPlcID.TextSize = 14
-CopyPlcID.Text = "Copy"
-CopyPlcID.TextColor3 = currentText1
-CopyPlcID.ZIndex = 10
-table.insert(shade2,CopyPlcID)
-table.insert(text1,CopyPlcID)
-CopyPlcName.Name = "CopyPlcName"
-CopyPlcName.Parent = background
-CopyPlcName.BackgroundColor3 = currentShade2
-CopyPlcName.BorderSizePixel = 0
-CopyPlcName.Position = UDim2.new(0, 210, 0, 215)
-CopyPlcName.Size = UDim2.new(0, 35, 0, 20)
-CopyPlcName.Font = Enum.Font.SourceSans
-CopyPlcName.TextSize = 14
-CopyPlcName.Text = "Copy"
-CopyPlcName.TextColor3 = currentText1
-CopyPlcName.ZIndex = 10
-table.insert(shade2,CopyPlcName)
-table.insert(text1,CopyPlcName)
-local SINFOGUI = background
-FRAME:TweenPosition(UDim2.new(0.5, -130, 0, 100), "InOut", "Quart", 0.5, true, nil)
+local G=Instance.new"Frame"
+local H=Instance.new"Frame"
+local I=Instance.new"TextLabel"
+local J=Instance.new"TextButton"
+local K=Instance.new"ImageLabel"
+local L=Instance.new"Frame"
+local M=Instance.new"TextLabel"
+local N=Instance.new"TextLabel"
+local O=Instance.new"TextLabel"
+local P=Instance.new"TextLabel"
+local Q=Instance.new"TextLabel"
+local R=Instance.new"TextLabel"
+local S=Instance.new"TextLabel"
+local T=Instance.new"TextLabel"
+local U=Instance.new"TextLabel"
+local V=Instance.new"TextLabel"
+local W=Instance.new"TextButton"
+local X=Instance.new"TextButton"
+local Y=Instance.new"TextButton"
+local Z=Instance.new"TextButton"
+
+G.Name=randomString()
+G.Parent=ScaledHolder
+G.Active=true
+G.BackgroundTransparency=1
+G.Position=UDim2.new(0.5,-130,0,-500)
+G.Size=UDim2.new(0,250,0,20)
+G.ZIndex=10
+dragGUI(G)
+
+H.Name="shadow"
+H.Parent=G
+H.BackgroundColor3=currentShade2
+H.BorderSizePixel=0
+H.Size=UDim2.new(0,250,0,20)
+H.ZIndex=10
+table.insert(shade2,H)
+
+I.Name="PopupText"
+I.Parent=H
+I.BackgroundTransparency=1
+I.Size=UDim2.new(1,0,0.95,0)
+I.ZIndex=10
+I.Font=Enum.Font.SourceSans
+I.TextSize=14
+I.Text="Server"
+I.TextColor3=currentText1
+I.TextWrapped=true
+table.insert(text1,I)
+
+J.Name="Exit"
+J.Parent=H
+J.BackgroundTransparency=1
+J.Position=UDim2.new(1,-20,0,0)
+J.Size=UDim2.new(0,20,0,20)
+J.Text=""
+J.ZIndex=10
+
+K.Parent=J
+K.BackgroundColor3=Color3.new(1,1,1)
+K.BackgroundTransparency=1
+K.Position=UDim2.new(0,5,0,5)
+K.Size=UDim2.new(0,10,0,10)
+K.Image="rbxassetid://5054663650"
+K.ZIndex=10
+
+L.Name="background"
+L.Parent=G
+L.Active=true
+L.BackgroundColor3=currentShade1
+L.BorderSizePixel=0
+L.Position=UDim2.new(0,0,1,0)
+L.Size=UDim2.new(0,250,0,250)
+L.ZIndex=10
+table.insert(shade1,L)
+
+M.Name="Text Label"
+M.Parent=L
+M.BackgroundTransparency=1
+M.BorderSizePixel=0
+M.Position=UDim2.new(0,5,0,80)
+M.Size=UDim2.new(0,100,0,20)
+M.ZIndex=10
+M.Font=Enum.Font.SourceSansLight
+M.TextSize=20
+M.Text="Run Time:"
+M.TextColor3=currentText1
+M.TextXAlignment=Enum.TextXAlignment.Left
+table.insert(text1,M)
+
+N.Name="Text Label2"
+N.Parent=L
+N.BackgroundTransparency=1
+N.BorderSizePixel=0
+N.Position=UDim2.new(0,5,0,130)
+N.Size=UDim2.new(0,100,0,20)
+N.ZIndex=10
+N.Font=Enum.Font.SourceSansLight
+N.TextSize=20
+N.Text="Statistics:"
+N.TextColor3=currentText1
+N.TextXAlignment=Enum.TextXAlignment.Left
+table.insert(text1,N)
+
+O.Name="Text Label3"
+O.Parent=L
+O.BackgroundTransparency=1
+O.BorderSizePixel=0
+O.Position=UDim2.new(0,5,0,10)
+O.Size=UDim2.new(0,100,0,20)
+O.ZIndex=10
+O.Font=Enum.Font.SourceSansLight
+O.TextSize=20
+O.Text="Local Player:"
+O.TextColor3=currentText1
+O.TextXAlignment=Enum.TextXAlignment.Left
+table.insert(text1,O)
+
+P.Name="Time"
+P.Parent=L
+P.BackgroundTransparency=1
+P.BorderSizePixel=0
+P.Position=UDim2.new(0,5,0,105)
+P.Size=UDim2.new(0,100,0,20)
+P.ZIndex=10
+P.Font=Enum.Font.SourceSans
+P.FontSize=Enum.FontSize.Size14
+P.Text="LOADING"
+P.TextColor3=currentText1
+P.TextXAlignment=Enum.TextXAlignment.Left
+table.insert(text1,P)
+
+Q.Name="appearance"
+Q.Parent=L
+Q.BackgroundTransparency=1
+Q.BorderSizePixel=0
+Q.Position=UDim2.new(0,5,0,55)
+Q.Size=UDim2.new(0,100,0,20)
+Q.ZIndex=10
+Q.Font=Enum.Font.SourceSans
+Q.FontSize=Enum.FontSize.Size14
+Q.Text="Appearance: LOADING"
+Q.TextColor3=currentText1
+Q.TextXAlignment=Enum.TextXAlignment.Left
+table.insert(text1,Q)
+
+R.Name="maxplayers"
+R.Parent=L
+R.BackgroundTransparency=1
+R.BorderSizePixel=0
+R.Position=UDim2.new(0,5,0,175)
+R.Size=UDim2.new(0,100,0,20)
+R.ZIndex=10
+R.Font=Enum.Font.SourceSans
+R.FontSize=Enum.FontSize.Size14
+R.Text="LOADING"
+R.TextColor3=currentText1
+R.TextXAlignment=Enum.TextXAlignment.Left
+table.insert(text1,R)
+
+S.Name="name"
+S.Parent=L
+S.BackgroundTransparency=1
+S.BorderSizePixel=0
+S.Position=UDim2.new(0,5,0,215)
+S.Size=UDim2.new(0,240,0,30)
+S.ZIndex=10
+S.Font=Enum.Font.SourceSans
+S.FontSize=Enum.FontSize.Size14
+S.Text="Place Name: LOADING"
+S.TextColor3=currentText1
+S.TextWrapped=true
+S.TextXAlignment=Enum.TextXAlignment.Left
+S.TextYAlignment=Enum.TextYAlignment.Top
+table.insert(text1,S)
+
+T.Name="placeid"
+T.Parent=L
+T.BackgroundTransparency=1
+T.BorderSizePixel=0
+T.Position=UDim2.new(0,5,0,195)
+T.Size=UDim2.new(0,100,0,20)
+T.ZIndex=10
+T.Font=Enum.Font.SourceSans
+T.FontSize=Enum.FontSize.Size14
+T.Text="Place ID: LOADING"
+T.TextColor3=currentText1
+T.TextXAlignment=Enum.TextXAlignment.Left
+table.insert(text1,T)
+
+U.Name="playerid"
+U.Parent=L
+U.BackgroundTransparency=1
+U.BorderSizePixel=0
+U.Position=UDim2.new(0,5,0,35)
+U.Size=UDim2.new(0,100,0,20)
+U.ZIndex=10
+U.Font=Enum.Font.SourceSans
+U.FontSize=Enum.FontSize.Size14
+U.Text="Player ID: LOADING"
+U.TextColor3=currentText1
+U.TextXAlignment=Enum.TextXAlignment.Left
+table.insert(text1,U)
+
+V.Name="players"
+V.Parent=L
+V.BackgroundTransparency=1
+V.BorderSizePixel=0
+V.Position=UDim2.new(0,5,0,155)
+V.Size=UDim2.new(0,100,0,20)
+V.ZIndex=10
+V.Font=Enum.Font.SourceSans
+V.FontSize=Enum.FontSize.Size14
+V.Text="LOADING"
+V.TextColor3=currentText1
+V.TextXAlignment=Enum.TextXAlignment.Left
+table.insert(text1,V)
+
+W.Name="CopyApp"
+W.Parent=L
+W.BackgroundColor3=currentShade2
+W.BorderSizePixel=0
+W.Position=UDim2.new(0,210,0,55)
+W.Size=UDim2.new(0,35,0,20)
+W.Font=Enum.Font.SourceSans
+W.TextSize=14
+W.Text="Copy"
+W.TextColor3=currentText1
+W.ZIndex=10
+table.insert(shade2,W)
+table.insert(text1,W)
+
+X.Name="CopyPlrID"
+X.Parent=L
+X.BackgroundColor3=currentShade2
+X.BorderSizePixel=0
+X.Position=UDim2.new(0,210,0,35)
+X.Size=UDim2.new(0,35,0,20)
+X.Font=Enum.Font.SourceSans
+X.TextSize=14
+X.Text="Copy"
+X.TextColor3=currentText1
+X.ZIndex=10
+table.insert(shade2,X)
+table.insert(text1,X)
+
+Y.Name="CopyPlcID"
+Y.Parent=L
+Y.BackgroundColor3=currentShade2
+Y.BorderSizePixel=0
+Y.Position=UDim2.new(0,210,0,195)
+Y.Size=UDim2.new(0,35,0,20)
+Y.Font=Enum.Font.SourceSans
+Y.TextSize=14
+Y.Text="Copy"
+Y.TextColor3=currentText1
+Y.ZIndex=10
+table.insert(shade2,Y)
+table.insert(text1,Y)
+
+Z.Name="CopyPlcName"
+Z.Parent=L
+Z.BackgroundColor3=currentShade2
+Z.BorderSizePixel=0
+Z.Position=UDim2.new(0,210,0,215)
+Z.Size=UDim2.new(0,35,0,20)
+Z.Font=Enum.Font.SourceSans
+Z.TextSize=14
+Z.Text="Copy"
+Z.TextColor3=currentText1
+Z.ZIndex=10
+table.insert(shade2,Z)
+table.insert(text1,Z)
+
+local _=L
+G:TweenPosition(UDim2.new(0.5,-130,0,100),"InOut","Quart",0.5,true,nil)
 wait(0.5)
-Exit.MouseButton1Click:Connect(function()
-FRAME:TweenPosition(UDim2.new(0.5, -130, 0, -500), "InOut", "Quart", 0.5, true, nil)
+J.MouseButton1Click:Connect(function()
+G:TweenPosition(UDim2.new(0.5,-130,0,-500),"InOut","Quart",0.5,true,nil)
 wait(0.6)
-FRAME:Destroy()
-canOpenServerinfo = true
+G:Destroy()
+D=true
 end)
-local Asset = MarketplaceService:GetProductInfo(PlaceId)
-SINFOGUI.name.Text = "Place Name: " .. Asset.Name
-SINFOGUI.playerid.Text = "Player ID: " ..speaker.UserId
-SINFOGUI.maxplayers.Text = Players.MaxPlayers.. " Players Max"
-SINFOGUI.placeid.Text = "Place ID: " ..PlaceId
-CopyApp.MouseButton1Click:Connect(function()
-toClipboard(speaker.CharacterAppearanceId)
+local ag=MarketplaceService:GetProductInfo(PlaceId)
+_.name.Text="Place Name: "..ag.Name
+_.playerid.Text="Player ID: "..F.UserId
+_.maxplayers.Text=Players.MaxPlayers.." Players Max"
+_.placeid.Text="Place ID: "..PlaceId
+
+W.MouseButton1Click:Connect(function()
+toClipboard(F.CharacterAppearanceId)
 end)
-CopyPlrID.MouseButton1Click:Connect(function()
-toClipboard(speaker.UserId)
+X.MouseButton1Click:Connect(function()
+toClipboard(F.UserId)
 end)
-CopyPlcID.MouseButton1Click:Connect(function()
+Y.MouseButton1Click:Connect(function()
 toClipboard(PlaceId)
 end)
-CopyPlcName.MouseButton1Click:Connect(function()
-toClipboard(Asset.Name)
+Z.MouseButton1Click:Connect(function()
+toClipboard(ag.Name)
 end)
+
 repeat
-players = Players:GetPlayers()
-SINFOGUI.players.Text = #players.. " Player(s)"
-SINFOGUI.appearance.Text = "Appearance: " ..speaker.CharacterAppearanceId
-local seconds = math.floor(workspace.DistributedGameTime)
-local minutes = math.floor(workspace.DistributedGameTime / 60)
-local hours = math.floor(workspace.DistributedGameTime / 60 / 60)
-local seconds = seconds - (minutes * 60)
-local minutes = minutes - (hours * 60)
-if hours < 1 then if minutes < 1 then
-SINFOGUI.Time.Text = seconds .. " Second(s)" else
-SINFOGUI.Time.Text = minutes .. " Minute(s), " .. seconds .. " Second(s)"
+V=Players:GetPlayers()
+_.players.Text=#V.." Player(s)"
+_.appearance.Text="Appearance: "..F.CharacterAppearanceId
+local ah=math.floor(workspace.DistributedGameTime)
+local ai=math.floor(workspace.DistributedGameTime/60)
+local aj=math.floor(workspace.DistributedGameTime/60/60)
+local ak=ah-(ai*60)
+local al=ai-(aj*60)
+if aj<1 then if al<1 then
+_.Time.Text=ak.." Second(s)"else
+_.Time.Text=al.." Minute(s), "..ak.." Second(s)"
 end
 else
-SINFOGUI.Time.Text = hours .. " Hour(s), " .. minutes .. " Minute(s), " .. seconds .. " Second(s)"
+_.Time.Text=aj.." Hour(s), "..al.." Minute(s), "..ak.." Second(s)"
 end
 wait(1)
-until SINFOGUI.Parent == nil
+until _.Parent==nil
 end)
 end)
-addcmd('jobid',{},function(args, speaker)
-local jobId = 'Roblox.GameLauncher.joinGameInstance('..PlaceId..', "'..JobId..'")'
-toClipboard(jobId)
+
+addcmd('jobid',{},function(ag,aj)
+local ak='Roblox.GameLauncher.joinGameInstance('..PlaceId..', "'..JobId..'")'
+toClipboard(ak)
 end)
-addcmd('notifyjobid',{},function(args, speaker)
+
+addcmd('notifyjobid',{},function(ag,aj)
 notify('JobId / PlaceId',JobId..' / '..PlaceId)
 end)
-addcmd('breakloops',{'break'},function(args, speaker)
-lastBreakTime = tick()
+
+addcmd('breakloops',{'break'},function(ag,aj)
+u=tick()
 end)
-addcmd('gametp',{'gameteleport'},function(args, speaker)
-TeleportService:Teleport(args[1])
+
+addcmd('gametp',{'gameteleport'},function(ag,aj)
+TeleportService:Teleport(ag[1])
 end)
-addcmd("rejoin", {"rj"}, function(args, speaker)
-if #Players:GetPlayers() <= 1 then
-Players.LocalPlayer:Kick("\nRejoining...")
+
+addcmd("rejoin",{"rj"},function(ag,aj)
+if#Players:GetPlayers()<=1 then
+Players.LocalPlayer:Kick"\nRejoining..."
 wait()
-TeleportService:Teleport(PlaceId, Players.LocalPlayer)
+TeleportService:Teleport(PlaceId,Players.LocalPlayer)
 else
-TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
+TeleportService:TeleportToPlaceInstance(PlaceId,JobId,Players.LocalPlayer)
 end
 end)
-addcmd("autorejoin", {"autorj"}, function(args, speaker)
+
+addcmd("autorejoin",{"autorj"},function(ag,aj)
 GuiService.ErrorMessageChanged:Connect(function()
-execCmd("rejoin")
+execCmd"rejoin"
 end)
-notify("Auto Rejoin", "Auto rejoin enabled")
+notify("Auto Rejoin","Auto rejoin enabled")
 end)
-addcmd("serverhop", {"shop"}, function(args, speaker)
--- thanks to NoobSploit for fixing
+
+addcmd("serverhop",{"shop"},function(ag,aj)
+
 if httprequest then
-local servers = {}
-local req = httprequest({Url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true", PlaceId)})
-local body = HttpService:JSONDecode(req.Body)
-if body and body.data then
-for i, v in next, body.data do
-if type(v) == "table" and tonumber(v.playing) and tonumber(v.maxPlayers) and v.playing < v.maxPlayers and v.id ~= JobId then
-table.insert(servers, 1, v.id)
+local ak={}
+local al=httprequest{Url=string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true",PlaceId)}
+local E=HttpService:JSONDecode(al.Body)
+
+if E and E.data then
+for F,G in next,E.data do
+if type(G)=="table"and tonumber(G.playing)and tonumber(G.maxPlayers)and G.playing<G.maxPlayers and G.id~=JobId then
+table.insert(ak,1,G.id)
 end
 end
 end
-if #servers > 0 then
-TeleportService:TeleportToPlaceInstance(PlaceId, servers[math.random(1, #servers)], Players.LocalPlayer)
+
+if#ak>0 then
+TeleportService:TeleportToPlaceInstance(PlaceId,ak[math.random(1,#ak)],Players.LocalPlayer)
 else
-return notify("Serverhop", "Couldn't find a server.")
+return notify("Serverhop","Couldn't find a server.")
 end
 else
-notify("Incompatible Exploit", "Your exploit does not support this command (missing request)")
+notify("Incompatible Exploit","Your exploit does not support this command (missing request)")
 end
 end)
-addcmd("exit", {}, function(args, speaker)
+
+addcmd("exit",{},function(ag,aj)
 game:Shutdown()
 end)
-local Noclipping = nil
-addcmd('noclip',{},function(args, speaker)
-Clip = false
+
+local ag
+addcmd('noclip',{},function(aj,ak)
+Clip=false
 wait(0.1)
 local function NoclipLoop()
-if Clip == false and speaker.Character ~= nil then
-for _, child in pairs(speaker.Character:GetDescendants()) do
-if child:IsA("BasePart") and child.CanCollide == true and child.Name ~= floatName then
-child.CanCollide = false
+if Clip==false and ak.Character~=nil then
+for al,E in pairs(ak.Character:GetDescendants())do
+if E:IsA"BasePart"and E.CanCollide==true and E.Name~=floatName then
+E.CanCollide=false
 end
 end
 end
 end
-Noclipping = RunService.Stepped:Connect(NoclipLoop)
-if args[1] and args[1] == 'nonotify' then return end
+ag=RunService.Stepped:Connect(NoclipLoop)
+if aj[1]and aj[1]=='nonotify'then return end
 notify('Noclip','Noclip Enabled')
 end)
-addcmd('clip',{'unnoclip'},function(args, speaker)
-if Noclipping then
-Noclipping:Disconnect()
+
+addcmd('clip',{'unnoclip'},function(aj,ak)
+if ag then
+ag:Disconnect()
 end
-Clip = true
-if args[1] and args[1] == 'nonotify' then return end
+Clip=true
+if aj[1]and aj[1]=='nonotify'then return end
 notify('Noclip','Noclip Disabled')
 end)
-addcmd('togglenoclip',{},function(args, speaker)
+
+addcmd('togglenoclip',{},function(aj,ak)
 if Clip then
-execCmd('noclip')
+execCmd'noclip'
 else
-execCmd('clip')
+execCmd'clip'
 end
 end)
-FLYING = false
-QEfly = true
-iyflyspeed = 1
-vehicleflyspeed = 1
-function sFLY(vfly)
-repeat wait() until Players.LocalPlayer and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-repeat wait() until IYMouse
-if flyKeyDown or flyKeyUp then flyKeyDown:Disconnect() flyKeyUp:Disconnect() end
-local T = getRoot(Players.LocalPlayer.Character)
-local CONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
-local lCONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
-local SPEED = 0
+
+FLYING=false
+QEfly=true
+iyflyspeed=1
+vehicleflyspeed=1
+function sFLY(aj)
+repeat wait()until Players.LocalPlayer and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character)and Players.LocalPlayer.Character:FindFirstChildOfClass"Humanoid"
+repeat wait()until IYMouse
+if flyKeyDown or flyKeyUp then flyKeyDown:Disconnect()flyKeyUp:Disconnect()end
+
+local ak=getRoot(Players.LocalPlayer.Character)
+local al={F=0,B=0,L=0,R=0,Q=0,E=0}
+local E={F=0,B=0,L=0,R=0,Q=0,E=0}
+local F=0
+
 local function FLY()
-FLYING = true
-local BG = Instance.new('BodyGyro')
-local BV = Instance.new('BodyVelocity')
-BG.P = 9e4
-BG.Parent = T
-BV.Parent = T
-BG.maxTorque = Vector3.new(9e9, 9e9, 9e9)
-BG.cframe = T.CFrame
-BV.velocity = Vector3.new(0, 0, 0)
-BV.maxForce = Vector3.new(9e9, 9e9, 9e9)
+FLYING=true
+local G=Instance.new'BodyGyro'
+local H=Instance.new'BodyVelocity'
+G.P=9e4
+G.Parent=ak
+H.Parent=ak
+G.maxTorque=Vector3.new(9e9,9e9,9e9)
+G.cframe=ak.CFrame
+H.velocity=Vector3.new(0,0,0)
+H.maxForce=Vector3.new(9e9,9e9,9e9)
 task.spawn(function()
 repeat wait()
-if not vfly and Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') then
-Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = true
+if not aj and Players.LocalPlayer.Character:FindFirstChildOfClass'Humanoid'then
+Players.LocalPlayer.Character:FindFirstChildOfClass'Humanoid'.PlatformStand=true
 end
-if CONTROL.L + CONTROL.R ~= 0 or CONTROL.F + CONTROL.B ~= 0 or CONTROL.Q + CONTROL.E ~= 0 then
-SPEED = 50
-elseif not (CONTROL.L + CONTROL.R ~= 0 or CONTROL.F + CONTROL.B ~= 0 or CONTROL.Q + CONTROL.E ~= 0) and SPEED ~= 0 then
-SPEED = 0
+if al.L+al.R~=0 or al.F+al.B~=0 or al.Q+al.E~=0 then
+F=50
+elseif not(al.L+al.R~=0 or al.F+al.B~=0 or al.Q+al.E~=0)and F~=0 then
+F=0
 end
-if (CONTROL.L + CONTROL.R) ~= 0 or (CONTROL.F + CONTROL.B) ~= 0 or (CONTROL.Q + CONTROL.E) ~= 0 then
-BV.velocity = ((workspace.CurrentCamera.CoordinateFrame.lookVector * (CONTROL.F + CONTROL.B)) + ((workspace.CurrentCamera.CoordinateFrame * CFrame.new(CONTROL.L + CONTROL.R, (CONTROL.F + CONTROL.B + CONTROL.Q + CONTROL.E) * 0.2, 0).p) - workspace.CurrentCamera.CoordinateFrame.p)) * SPEED
-lCONTROL = {F = CONTROL.F, B = CONTROL.B, L = CONTROL.L, R = CONTROL.R}
-elseif (CONTROL.L + CONTROL.R) == 0 and (CONTROL.F + CONTROL.B) == 0 and (CONTROL.Q + CONTROL.E) == 0 and SPEED ~= 0 then
-BV.velocity = ((workspace.CurrentCamera.CoordinateFrame.lookVector * (lCONTROL.F + lCONTROL.B)) + ((workspace.CurrentCamera.CoordinateFrame * CFrame.new(lCONTROL.L + lCONTROL.R, (lCONTROL.F + lCONTROL.B + CONTROL.Q + CONTROL.E) * 0.2, 0).p) - workspace.CurrentCamera.CoordinateFrame.p)) * SPEED
+if(al.L+al.R)~=0 or(al.F+al.B)~=0 or(al.Q+al.E)~=0 then
+H.velocity=((workspace.CurrentCamera.CoordinateFrame.lookVector*(al.F+al.B))+((workspace.CurrentCamera.CoordinateFrame*CFrame.new(al.L+al.R,(al.F+al.B+al.Q+al.E)*0.2,0).p)-workspace.CurrentCamera.CoordinateFrame.p))*F
+E={F=al.F,B=al.B,L=al.L,R=al.R}
+elseif(al.L+al.R)==0 and(al.F+al.B)==0 and(al.Q+al.E)==0 and F~=0 then
+H.velocity=((workspace.CurrentCamera.CoordinateFrame.lookVector*(E.F+E.B))+((workspace.CurrentCamera.CoordinateFrame*CFrame.new(E.L+E.R,(E.F+E.B+al.Q+al.E)*0.2,0).p)-workspace.CurrentCamera.CoordinateFrame.p))*F
 else
-BV.velocity = Vector3.new(0, 0, 0)
+H.velocity=Vector3.new(0,0,0)
 end
-BG.cframe = workspace.CurrentCamera.CoordinateFrame
+G.cframe=workspace.CurrentCamera.CoordinateFrame
 until not FLYING
-CONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
-lCONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
-SPEED = 0
-BG:Destroy()
-BV:Destroy()
-if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') then
-Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = false
+al={F=0,B=0,L=0,R=0,Q=0,E=0}
+E={F=0,B=0,L=0,R=0,Q=0,E=0}
+F=0
+G:Destroy()
+H:Destroy()
+if Players.LocalPlayer.Character:FindFirstChildOfClass'Humanoid'then
+Players.LocalPlayer.Character:FindFirstChildOfClass'Humanoid'.PlatformStand=false
 end
 end)
 end
-flyKeyDown = IYMouse.KeyDown:Connect(function(KEY)
-if KEY:lower() == 'w' then
-CONTROL.F = (vfly and vehicleflyspeed or iyflyspeed)
-elseif KEY:lower() == 's' then
-CONTROL.B = - (vfly and vehicleflyspeed or iyflyspeed)
-elseif KEY:lower() == 'a' then
-CONTROL.L = - (vfly and vehicleflyspeed or iyflyspeed)
-elseif KEY:lower() == 'd' then
-CONTROL.R = (vfly and vehicleflyspeed or iyflyspeed)
-elseif QEfly and KEY:lower() == 'e' then
-CONTROL.Q = (vfly and vehicleflyspeed or iyflyspeed)*2
-elseif QEfly and KEY:lower() == 'q' then
-CONTROL.E = -(vfly and vehicleflyspeed or iyflyspeed)*2
+flyKeyDown=IYMouse.KeyDown:Connect(function(G)
+if G:lower()=='w'then
+al.F=(aj and vehicleflyspeed or iyflyspeed)
+elseif G:lower()=='s'then
+al.B=-(aj and vehicleflyspeed or iyflyspeed)
+elseif G:lower()=='a'then
+al.L=-(aj and vehicleflyspeed or iyflyspeed)
+elseif G:lower()=='d'then
+al.R=(aj and vehicleflyspeed or iyflyspeed)
+elseif QEfly and G:lower()=='e'then
+al.Q=(aj and vehicleflyspeed or iyflyspeed)*2
+elseif QEfly and G:lower()=='q'then
+al.E=-(aj and vehicleflyspeed or iyflyspeed)*2
 end
-pcall(function() workspace.CurrentCamera.CameraType = Enum.CameraType.Track end)
+pcall(function()workspace.CurrentCamera.CameraType=Enum.CameraType.Track end)
 end)
-flyKeyUp = IYMouse.KeyUp:Connect(function(KEY)
-if KEY:lower() == 'w' then
-CONTROL.F = 0
-elseif KEY:lower() == 's' then
-CONTROL.B = 0
-elseif KEY:lower() == 'a' then
-CONTROL.L = 0
-elseif KEY:lower() == 'd' then
-CONTROL.R = 0
-elseif KEY:lower() == 'e' then
-CONTROL.Q = 0
-elseif KEY:lower() == 'q' then
-CONTROL.E = 0
+flyKeyUp=IYMouse.KeyUp:Connect(function(G)
+if G:lower()=='w'then
+al.F=0
+elseif G:lower()=='s'then
+al.B=0
+elseif G:lower()=='a'then
+al.L=0
+elseif G:lower()=='d'then
+al.R=0
+elseif G:lower()=='e'then
+al.Q=0
+elseif G:lower()=='q'then
+al.E=0
 end
 end)
 FLY()
 end
+
 function NOFLY()
-FLYING = false
-if flyKeyDown or flyKeyUp then flyKeyDown:Disconnect() flyKeyUp:Disconnect() end
-if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') then
-Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = false
+FLYING=false
+if flyKeyDown or flyKeyUp then flyKeyDown:Disconnect()flyKeyUp:Disconnect()end
+if Players.LocalPlayer.Character:FindFirstChildOfClass'Humanoid'then
+Players.LocalPlayer.Character:FindFirstChildOfClass'Humanoid'.PlatformStand=false
 end
-pcall(function() workspace.CurrentCamera.CameraType = Enum.CameraType.Custom end)
+pcall(function()workspace.CurrentCamera.CameraType=Enum.CameraType.Custom end)
 end
-local velocityHandlerName = randomString()
-local gyroHandlerName = randomString()
-local mfly1
-local mfly2
-local unmobilefly = function(speaker)
+
+local aj=randomString()
+local ak=randomString()
+local al
+local E
+
+local F=function(F)
 pcall(function()
-FLYING = false
-local root = getRoot(speaker.Character)
-root:FindFirstChild(velocityHandlerName):Destroy()
-root:FindFirstChild(gyroHandlerName):Destroy()
-speaker.Character:FindFirstChildWhichIsA("Humanoid").PlatformStand = false
-mfly1:Disconnect()
-mfly2:Disconnect()
+FLYING=false
+local G=getRoot(F.Character)
+G:FindFirstChild(aj):Destroy()
+G:FindFirstChild(ak):Destroy()
+F.Character:FindFirstChildWhichIsA"Humanoid".PlatformStand=false
+al:Disconnect()
+E:Disconnect()
 end)
 end
-local mobilefly = function(speaker, vfly)
-unmobilefly(speaker)
-FLYING = true
-local root = getRoot(speaker.Character)
-local camera = workspace.CurrentCamera
-local v3none = Vector3.new()
-local v3zero = Vector3.new(0, 0, 0)
-local v3inf = Vector3.new(9e9, 9e9, 9e9)
-local controlModule = require(speaker.PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("ControlModule"))
-local bv = Instance.new("BodyVelocity")
-bv.Name = velocityHandlerName
-bv.Parent = root
-bv.MaxForce = v3zero
-bv.Velocity = v3zero
-local bg = Instance.new("BodyGyro")
-bg.Name = gyroHandlerName
-bg.Parent = root
-bg.MaxTorque = v3inf
-bg.P = 1000
-bg.D = 50
-mfly1 = speaker.CharacterAdded:Connect(function()
-local bv = Instance.new("BodyVelocity")
-bv.Name = velocityHandlerName
-bv.Parent = root
-bv.MaxForce = v3zero
-bv.Velocity = v3zero
-local bg = Instance.new("BodyGyro")
-bg.Name = gyroHandlerName
-bg.Parent = root
-bg.MaxTorque = v3inf
-bg.P = 1000
-bg.D = 50
+
+local G=function(G,H)
+F(G)
+FLYING=true
+
+local I=getRoot(G.Character)
+local J=workspace.CurrentCamera
+local K=Vector3.new()
+local L=Vector3.new(0,0,0)
+local M=Vector3.new(9e9,9e9,9e9)
+
+local N=require(G.PlayerScripts:WaitForChild"PlayerModule":WaitForChild"ControlModule")
+local O=Instance.new"BodyVelocity"
+O.Name=aj
+O.Parent=I
+O.MaxForce=L
+O.Velocity=L
+
+local P=Instance.new"BodyGyro"
+P.Name=ak
+P.Parent=I
+P.MaxTorque=M
+P.P=1000
+P.D=50
+
+al=G.CharacterAdded:Connect(function()
+local Q=Instance.new"BodyVelocity"
+Q.Name=aj
+Q.Parent=I
+Q.MaxForce=L
+Q.Velocity=L
+
+local R=Instance.new"BodyGyro"
+R.Name=ak
+R.Parent=I
+R.MaxTorque=M
+R.P=1000
+R.D=50
 end)
-mfly2 = RunService.RenderStepped:Connect(function()
-root = getRoot(speaker.Character)
-camera = workspace.CurrentCamera
-if speaker.Character:FindFirstChildWhichIsA("Humanoid") and root and root:FindFirstChild(velocityHandlerName) and root:FindFirstChild(gyroHandlerName) then
-local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-local VelocityHandler = root:FindFirstChild(velocityHandlerName)
-local GyroHandler = root:FindFirstChild(gyroHandlerName)
-VelocityHandler.MaxForce = v3inf
-GyroHandler.MaxTorque = v3inf
-if not vfly then humanoid.PlatformStand = true end
-GyroHandler.CFrame = camera.CoordinateFrame
-VelocityHandler.Velocity = v3none
-local direction = controlModule:GetMoveVector()
-if direction.X > 0 then
-VelocityHandler.Velocity = VelocityHandler.Velocity + camera.CFrame.RightVector * (direction.X * ((vfly and vehicleflyspeed or iyflyspeed) * 50))
+
+E=RunService.RenderStepped:Connect(function()
+I=getRoot(G.Character)
+J=workspace.CurrentCamera
+if G.Character:FindFirstChildWhichIsA"Humanoid"and I and I:FindFirstChild(aj)and I:FindFirstChild(ak)then
+local Q=G.Character:FindFirstChildWhichIsA"Humanoid"
+local R=I:FindFirstChild(aj)
+local S=I:FindFirstChild(ak)
+
+R.MaxForce=M
+S.MaxTorque=M
+if not H then Q.PlatformStand=true end
+S.CFrame=J.CoordinateFrame
+R.Velocity=K
+
+local T=N:GetMoveVector()
+if T.X>0 then
+R.Velocity=R.Velocity+J.CFrame.RightVector*(T.X*((H and vehicleflyspeed or iyflyspeed)*50))
 end
-if direction.X < 0 then
-VelocityHandler.Velocity = VelocityHandler.Velocity + camera.CFrame.RightVector * (direction.X * ((vfly and vehicleflyspeed or iyflyspeed) * 50))
+if T.X<0 then
+R.Velocity=R.Velocity+J.CFrame.RightVector*(T.X*((H and vehicleflyspeed or iyflyspeed)*50))
 end
-if direction.Z > 0 then
-VelocityHandler.Velocity = VelocityHandler.Velocity - camera.CFrame.LookVector * (direction.Z * ((vfly and vehicleflyspeed or iyflyspeed) * 50))
+if T.Z>0 then
+R.Velocity=R.Velocity-J.CFrame.LookVector*(T.Z*((H and vehicleflyspeed or iyflyspeed)*50))
 end
-if direction.Z < 0 then
-VelocityHandler.Velocity = VelocityHandler.Velocity - camera.CFrame.LookVector * (direction.Z * ((vfly and vehicleflyspeed or iyflyspeed) * 50))
+if T.Z<0 then
+R.Velocity=R.Velocity-J.CFrame.LookVector*(T.Z*((H and vehicleflyspeed or iyflyspeed)*50))
 end
 end
 end)
 end
-addcmd('fly',{},function(args, speaker)
-if not IsOnMobile then
+
+addcmd('fly',{},function(H,I)
+if not b then
 NOFLY()
 wait()
 sFLY()
 else
-mobilefly(speaker)
+G(I)
 end
-if args[1] and isNumber(args[1]) then
-iyflyspeed = args[1]
-end
-end)
-addcmd('flyspeed',{'flysp'},function(args, speaker)
-local speed = args[1] or 1
-if isNumber(speed) then
-iyflyspeed = speed
+if H[1]and isNumber(H[1])then
+iyflyspeed=H[1]
 end
 end)
-addcmd('unfly',{'nofly','novfly','unvehiclefly','novehiclefly','unvfly'},function(args, speaker)
-if not IsOnMobile then NOFLY() else unmobilefly(speaker) end
+
+addcmd('flyspeed',{'flysp'},function(H,I)
+local J=H[1]or 1
+if isNumber(J)then
+iyflyspeed=J
+end
 end)
-addcmd('vfly',{'vehiclefly'},function(args, speaker)
-if not IsOnMobile then
+
+addcmd('unfly',{'nofly','novfly','unvehiclefly','novehiclefly','unvfly'},function(H,I)
+if not b then NOFLY()else F(I)end
+end)
+
+addcmd('vfly',{'vehiclefly'},function(H,I)
+if not b then
 NOFLY()
 wait()
 sFLY(true)
 else
-mobilefly(speaker, true)
+G(I,true)
 end
-if args[1] and isNumber(args[1]) then
-vehicleflyspeed = args[1]
+if H[1]and isNumber(H[1])then
+vehicleflyspeed=H[1]
 end
 end)
-addcmd('togglevfly',{},function(args, speaker)
+
+addcmd('togglevfly',{},function(H,I)
 if FLYING then
-if not IsOnMobile then NOFLY() else unmobilefly(speaker) end
+if not b then NOFLY()else F(I)end
 else
-if not IsOnMobile then sFLY(true) else mobilefly(speaker, true) end
+if not b then sFLY(true)else G(I,true)end
 end
 end)
-addcmd('vflyspeed',{'vflysp','vehicleflyspeed','vehicleflysp'},function(args, speaker)
-local speed = args[1] or 1
-if isNumber(speed) then
-vehicleflyspeed = speed
+
+addcmd('vflyspeed',{'vflysp','vehicleflyspeed','vehicleflysp'},function(H,I)
+local J=H[1]or 1
+if isNumber(J)then
+vehicleflyspeed=J
 end
 end)
-addcmd('qefly',{'flyqe'},function(args, speaker)
-if args[1] == 'false' then
-QEfly = false
+
+addcmd('qefly',{'flyqe'},function(H,I)
+if H[1]=='false'then
+QEfly=false
 else
-QEfly = true
+QEfly=true
 end
 end)
-addcmd('togglefly',{},function(args, speaker)
+
+addcmd('togglefly',{},function(H,I)
 if FLYING then
-if not IsOnMobile then NOFLY() else unmobilefly(speaker) end
+if not b then NOFLY()else F(I)end
 else
-if not IsOnMobile then sFLY() else mobilefly(speaker) end
+if not b then sFLY()else G(I)end
 end
 end)
-CFspeed = 50
-addcmd('cframefly', {'cfly'}, function(args, speaker)
--- Full credit to peyton#9148 (apeyton)
-speaker.Character:FindFirstChildOfClass('Humanoid').PlatformStand = true
-local Head = speaker.Character:WaitForChild("Head")
-Head.Anchored = true
-if CFloop then CFloop:Disconnect() end
-CFloop = RunService.Heartbeat:Connect(function(deltaTime)
-local moveDirection = speaker.Character:FindFirstChildOfClass('Humanoid').MoveDirection * (CFspeed * deltaTime)
-local headCFrame = Head.CFrame
-local cameraCFrame = workspace.CurrentCamera.CFrame
-local cameraOffset = headCFrame:ToObjectSpace(cameraCFrame).Position
-cameraCFrame = cameraCFrame * CFrame.new(-cameraOffset.X, -cameraOffset.Y, -cameraOffset.Z + 1)
-local cameraPosition = cameraCFrame.Position
-local headPosition = headCFrame.Position
-local objectSpaceVelocity = CFrame.new(cameraPosition, Vector3.new(headPosition.X, cameraPosition.Y, headPosition.Z)):VectorToObjectSpace(moveDirection)
-Head.CFrame = CFrame.new(headPosition) * (cameraCFrame - cameraPosition) * CFrame.new(objectSpaceVelocity)
+
+CFspeed=50
+addcmd('cframefly',{'cfly'},function(H,I)
+
+I.Character:FindFirstChildOfClass'Humanoid'.PlatformStand=true
+local J=I.Character:WaitForChild"Head"
+J.Anchored=true
+if CFloop then CFloop:Disconnect()end
+CFloop=RunService.Heartbeat:Connect(function(K)
+local L=I.Character:FindFirstChildOfClass'Humanoid'.MoveDirection*(CFspeed*K)
+local M=J.CFrame
+local N=workspace.CurrentCamera.CFrame
+local O=M:ToObjectSpace(N).Position
+N=N*CFrame.new(-O.X,-O.Y,-O.Z+1)
+local P=N.Position
+local Q=M.Position
+
+local R=CFrame.new(P,Vector3.new(Q.X,P.Y,Q.Z)):VectorToObjectSpace(L)
+J.CFrame=CFrame.new(Q)*(N-P)*CFrame.new(R)
 end)
 end)
-addcmd('uncframefly',{'uncfly'},function(args, speaker)
+
+addcmd('uncframefly',{'uncfly'},function(H,I)
 if CFloop then
 CFloop:Disconnect()
-speaker.Character:FindFirstChildOfClass('Humanoid').PlatformStand = false
-local Head = speaker.Character:WaitForChild("Head")
-Head.Anchored = false
+I.Character:FindFirstChildOfClass'Humanoid'.PlatformStand=false
+local J=I.Character:WaitForChild"Head"
+J.Anchored=false
 end
 end)
-addcmd('cframeflyspeed',{'cflyspeed'},function(args, speaker)
-if isNumber(args[1]) then
-CFspeed = args[1]
+
+addcmd('cframeflyspeed',{'cflyspeed'},function(H,I)
+if isNumber(H[1])then
+CFspeed=H[1]
 end
 end)
-Floating = false
-floatName = randomString()
-addcmd('float', {'platform'},function(args, speaker)
-Floating = true
-local pchar = speaker.Character
-if pchar and not pchar:FindFirstChild(floatName) then
+
+Floating=false
+floatName=randomString()
+addcmd('float',{'platform'},function(H,I)
+Floating=true
+local J=I.Character
+if J and not J:FindFirstChild(floatName)then
 task.spawn(function()
-local Float = Instance.new('Part')
-Float.Name = floatName
-Float.Parent = pchar
-Float.Transparency = 1
-Float.Size = Vector3.new(2,0.2,1.5)
-Float.Anchored = true
-local FloatValue = -3.1
-Float.CFrame = getRoot(pchar).CFrame * CFrame.new(0,FloatValue,0)
+local K=Instance.new'Part'
+K.Name=floatName
+K.Parent=J
+K.Transparency=1
+K.Size=Vector3.new(2,0.2,1.5)
+K.Anchored=true
+local L=-3.1
+K.CFrame=getRoot(J).CFrame*CFrame.new(0,L,0)
 notify('Float','Float Enabled (Q = down & E = up)')
-qUp = IYMouse.KeyUp:Connect(function(KEY)
-if KEY == 'q' then
-FloatValue = FloatValue + 0.5
+qUp=IYMouse.KeyUp:Connect(function(M)
+if M=='q'then
+L=L+0.5
 end
 end)
-eUp = IYMouse.KeyUp:Connect(function(KEY)
-if KEY == 'e' then
-FloatValue = FloatValue - 1.5
+eUp=IYMouse.KeyUp:Connect(function(M)
+if M=='e'then
+L=L-1.5
 end
 end)
-qDown = IYMouse.KeyDown:Connect(function(KEY)
-if KEY == 'q' then
-FloatValue = FloatValue - 0.5
+qDown=IYMouse.KeyDown:Connect(function(M)
+if M=='q'then
+L=L-0.5
 end
 end)
-eDown = IYMouse.KeyDown:Connect(function(KEY)
-if KEY == 'e' then
-FloatValue = FloatValue + 1.5
+eDown=IYMouse.KeyDown:Connect(function(M)
+if M=='e'then
+L=L+1.5
 end
 end)
-floatDied = speaker.Character:FindFirstChildOfClass('Humanoid').Died:Connect(function()
+floatDied=I.Character:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
 FloatingFunc:Disconnect()
-Float:Destroy()
+K:Destroy()
 qUp:Disconnect()
 eUp:Disconnect()
 qDown:Disconnect()
@@ -6604,11 +7200,11 @@ eDown:Disconnect()
 floatDied:Disconnect()
 end)
 local function FloatPadLoop()
-if pchar:FindFirstChild(floatName) and getRoot(pchar) then
-Float.CFrame = getRoot(pchar).CFrame * CFrame.new(0,FloatValue,0)
+if J:FindFirstChild(floatName)and getRoot(J)then
+K.CFrame=getRoot(J).CFrame*CFrame.new(0,L,0)
 else
 FloatingFunc:Disconnect()
-Float:Destroy()
+K:Destroy()
 qUp:Disconnect()
 eUp:Disconnect()
 qDown:Disconnect()
@@ -6616,16 +7212,17 @@ eDown:Disconnect()
 floatDied:Disconnect()
 end
 end
-FloatingFunc = RunService.Heartbeat:Connect(FloatPadLoop)
+FloatingFunc=RunService.Heartbeat:Connect(FloatPadLoop)
 end)
 end
 end)
-addcmd('unfloat',{'nofloat','unplatform','noplatform'},function(args, speaker)
-Floating = false
-local pchar = speaker.Character
+
+addcmd('unfloat',{'nofloat','unplatform','noplatform'},function(H,I)
+Floating=false
+local J=I.Character
 notify('Float','Float Disabled')
-if pchar:FindFirstChild(floatName) then
-pchar:FindFirstChild(floatName):Destroy()
+if J:FindFirstChild(floatName)then
+J:FindFirstChild(floatName):Destroy()
 end
 if floatDied then
 FloatingFunc:Disconnect()
@@ -6636,824 +7233,914 @@ eDown:Disconnect()
 floatDied:Disconnect()
 end
 end)
-addcmd('togglefloat',{},function(args, speaker)
+
+addcmd('togglefloat',{},function(H,I)
 if Floating then
-execCmd('unfloat')
+execCmd'unfloat'
 else
-execCmd('float')
+execCmd'float'
 end
 end)
-swimming = false
-local oldgrav = workspace.Gravity
-local swimbeat = nil
-addcmd('swim',{},function(args, speaker)
-if not swimming and speaker and speaker.Character and speaker.Character:FindFirstChildWhichIsA("Humanoid") then
-oldgrav = workspace.Gravity
-workspace.Gravity = 0
-local swimDied = function()
-workspace.Gravity = oldgrav
-swimming = false
+
+swimming=false
+local H=workspace.Gravity
+local I
+addcmd('swim',{},function(J,K)
+if not swimming and K and K.Character and K.Character:FindFirstChildWhichIsA"Humanoid"then
+H=workspace.Gravity
+workspace.Gravity=0
+local L=function()
+workspace.Gravity=H
+swimming=false
 end
-local Humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-gravReset = Humanoid.Died:Connect(swimDied)
-local enums = Enum.HumanoidStateType:GetEnumItems()
-table.remove(enums, table.find(enums, Enum.HumanoidStateType.None))
-for i, v in pairs(enums) do
-Humanoid:SetStateEnabled(v, false)
+local M=K.Character:FindFirstChildWhichIsA"Humanoid"
+gravReset=M.Died:Connect(L)
+local N=Enum.HumanoidStateType:GetEnumItems()
+table.remove(N,table.find(N,Enum.HumanoidStateType.None))
+for O,P in pairs(N)do
+M:SetStateEnabled(P,false)
 end
-Humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
-swimbeat = RunService.Heartbeat:Connect(function()
+M:ChangeState(Enum.HumanoidStateType.Swimming)
+I=RunService.Heartbeat:Connect(function()
 pcall(function()
-speaker.Character.HumanoidRootPart.Velocity = ((Humanoid.MoveDirection ~= Vector3.new() or UserInputService:IsKeyDown(Enum.KeyCode.Space)) and speaker.Character.HumanoidRootPart.Velocity or Vector3.new())
+K.Character.HumanoidRootPart.Velocity=((M.MoveDirection~=Vector3.new()or UserInputService:IsKeyDown(Enum.KeyCode.Space))and K.Character.HumanoidRootPart.Velocity or Vector3.new())
 end)
 end)
-swimming = true
+swimming=true
 end
 end)
-addcmd('unswim',{'noswim'},function(args, speaker)
-if speaker and speaker.Character and speaker.Character:FindFirstChildWhichIsA("Humanoid") then
-workspace.Gravity = oldgrav
-swimming = false
+
+addcmd('unswim',{'noswim'},function(J,K)
+if K and K.Character and K.Character:FindFirstChildWhichIsA"Humanoid"then
+workspace.Gravity=H
+swimming=false
 if gravReset then
 gravReset:Disconnect()
 end
-if swimbeat ~= nil then
-swimbeat:Disconnect()
-swimbeat = nil
+if I~=nil then
+I:Disconnect()
+I=nil
 end
-local Humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-local enums = Enum.HumanoidStateType:GetEnumItems()
-table.remove(enums, table.find(enums, Enum.HumanoidStateType.None))
-for i, v in pairs(enums) do
-Humanoid:SetStateEnabled(v, true)
+local L=K.Character:FindFirstChildWhichIsA"Humanoid"
+local M=Enum.HumanoidStateType:GetEnumItems()
+table.remove(M,table.find(M,Enum.HumanoidStateType.None))
+for N,O in pairs(M)do
+L:SetStateEnabled(O,true)
 end
 end
 end)
-addcmd('toggleswim',{},function(args, speaker)
+
+addcmd('toggleswim',{},function(J,K)
 if swimming then
-execCmd('unswim')
+execCmd'unswim'
 else
-execCmd('swim')
+execCmd'swim'
 end
 end)
-addcmd('setwaypoint',{'swp','setwp','spos','saveposition','savepos'},function(args, speaker)
-local WPName = tostring(getstring(1))
-if getRoot(speaker.Character) then
+
+addcmd('setwaypoint',{'swp','setwp','spos','saveposition','savepos'},function(J,K)
+local L=tostring(getstring(1))
+if getRoot(K.Character)then
 notify('Modified Waypoints',"Created waypoint: "..getstring(1))
-local torso = getRoot(speaker.Character)
-WayPoints[#WayPoints + 1] = {NAME = WPName, COORD = {math.floor(torso.Position.X), math.floor(torso.Position.Y), math.floor(torso.Position.Z)}, GAME = PlaceId}
-if AllWaypoints ~= nil then
-AllWaypoints[#AllWaypoints + 1] = {NAME = WPName, COORD = {math.floor(torso.Position.X), math.floor(torso.Position.Y), math.floor(torso.Position.Z)}, GAME = PlaceId}
+local M=getRoot(K.Character)
+WayPoints[#WayPoints+1]={NAME=L,COORD={math.floor(M.Position.X),math.floor(M.Position.Y),math.floor(M.Position.Z)},GAME=PlaceId}
+if AllWaypoints~=nil then
+AllWaypoints[#AllWaypoints+1]={NAME=L,COORD={math.floor(M.Position.X),math.floor(M.Position.Y),math.floor(M.Position.Z)},GAME=PlaceId}
 end
 end
 refreshwaypoints()
 updatesaves()
 end)
-addcmd('waypointpos',{'wpp','setwaypointposition','setpos','setwaypoint','setwaypointpos'},function(args, speaker)
-local WPName = tostring(getstring(1))
-if getRoot(speaker.Character) then
+
+addcmd('waypointpos',{'wpp','setwaypointposition','setpos','setwaypoint','setwaypointpos'},function(J,K)
+local L=tostring(getstring(1))
+if getRoot(K.Character)then
 notify('Modified Waypoints',"Created waypoint: "..getstring(1))
-WayPoints[#WayPoints + 1] = {NAME = WPName, COORD = {args[2], args[3], args[4]}, GAME = PlaceId}
-if AllWaypoints ~= nil then
-AllWaypoints[#AllWaypoints + 1] = {NAME = WPName, COORD = {args[2], args[3], args[4]}, GAME = PlaceId}
+WayPoints[#WayPoints+1]={NAME=L,COORD={J[2],J[3],J[4]},GAME=PlaceId}
+if AllWaypoints~=nil then
+AllWaypoints[#AllWaypoints+1]={NAME=L,COORD={J[2],J[3],J[4]},GAME=PlaceId}
 end
 end
 refreshwaypoints()
 updatesaves()
 end)
-addcmd('waypoints',{'positions'},function(args, speaker)
-if SettingsOpen == false then SettingsOpen = true
-Settings:TweenPosition(UDim2.new(0, 0, 0, 45), "InOut", "Quart", 0.5, true, nil)
-CMDsF.Visible = false
+
+addcmd('waypoints',{'positions'},function(J,K)
+if h==false then h=true
+Settings:TweenPosition(UDim2.new(0,0,0,45),"InOut","Quart",0.5,true,nil)
+CMDsF.Visible=false
 end
-KeybindsFrame:TweenPosition(UDim2.new(0, 0, 0, 175), "InOut", "Quart", 0.5, true, nil)
-AliasesFrame:TweenPosition(UDim2.new(0, 0, 0, 175), "InOut", "Quart", 0.5, true, nil)
-PluginsFrame:TweenPosition(UDim2.new(0, 0, 0, 175), "InOut", "Quart", 0.5, true, nil)
-PositionsFrame:TweenPosition(UDim2.new(0, 0, 0, 0), "InOut", "Quart", 0.5, true, nil)
+KeybindsFrame:TweenPosition(UDim2.new(0,0,0,175),"InOut","Quart",0.5,true,nil)
+AliasesFrame:TweenPosition(UDim2.new(0,0,0,175),"InOut","Quart",0.5,true,nil)
+PluginsFrame:TweenPosition(UDim2.new(0,0,0,175),"InOut","Quart",0.5,true,nil)
+PositionsFrame:TweenPosition(UDim2.new(0,0,0,0),"InOut","Quart",0.5,true,nil)
 wait(0.5)
-SettingsHolder.Visible = false
+SettingsHolder.Visible=false
 maximizeHolder()
 end)
-waypointParts = {}
-addcmd('showwaypoints',{'showwp','showwps'},function(args, speaker)
-execCmd('hidewaypoints')
+
+waypointParts={}
+addcmd('showwaypoints',{'showwp','showwps'},function(J,K)
+execCmd'hidewaypoints'
 wait()
-for i,_ in pairs(WayPoints) do
-local x = WayPoints[i].COORD[1]
-local y = WayPoints[i].COORD[2]
-local z = WayPoints[i].COORD[3]
-local part = Instance.new("Part")
-part.Size = Vector3.new(5,5,5)
-part.CFrame = CFrame.new(x,y,z)
-part.Parent = workspace
-part.Anchored = true
-part.CanCollide = false
-table.insert(waypointParts,part)
-local view = Instance.new("BoxHandleAdornment")
-view.Adornee = part
-view.AlwaysOnTop = true
-view.ZIndex = 10
-view.Size = part.Size
-view.Parent = part
+for L,M in pairs(WayPoints)do
+local N=WayPoints[L].COORD[1]
+local O=WayPoints[L].COORD[2]
+local P=WayPoints[L].COORD[3]
+local Q=Instance.new"Part"
+Q.Size=Vector3.new(5,5,5)
+Q.CFrame=CFrame.new(N,O,P)
+Q.Parent=workspace
+Q.Anchored=true
+Q.CanCollide=false
+table.insert(waypointParts,Q)
+local R=Instance.new"BoxHandleAdornment"
+R.Adornee=Q
+R.AlwaysOnTop=true
+R.ZIndex=10
+R.Size=Q.Size
+R.Parent=Q
 end
-for i,v in pairs(pWayPoints) do
-local view = Instance.new("BoxHandleAdornment")
-view.Adornee = pWayPoints[i].COORD[1]
-view.AlwaysOnTop = true
-view.ZIndex = 10
-view.Size = pWayPoints[i].COORD[1].Size
-view.Parent = pWayPoints[i].COORD[1]
-table.insert(waypointParts,view)
-end
-end)
-addcmd('hidewaypoints',{'hidewp','hidewps'},function(args, speaker)
-for i,v in pairs(waypointParts) do
-v:Destroy()
-end
-waypointParts = {}
-end)
-addcmd('waypoint',{'wp','lpos','loadposition','loadpos'},function(args, speaker)
-local WPName = tostring(getstring(1))
-if speaker.Character then
-for i,_ in pairs(WayPoints) do
-if tostring(WayPoints[i].NAME):lower() == tostring(WPName):lower() then
-local x = WayPoints[i].COORD[1]
-local y = WayPoints[i].COORD[2]
-local z = WayPoints[i].COORD[3]
-getRoot(speaker.Character).CFrame = CFrame.new(x,y,z)
-end
-end
-for i,_ in pairs(pWayPoints) do
-if tostring(pWayPoints[i].NAME):lower() == tostring(WPName):lower() then
-getRoot(speaker.Character).CFrame = CFrame.new(pWayPoints[i].COORD[1].Position)
-end
-end
+for L,M in pairs(pWayPoints)do
+local N=Instance.new"BoxHandleAdornment"
+N.Adornee=pWayPoints[L].COORD[1]
+N.AlwaysOnTop=true
+N.ZIndex=10
+N.Size=pWayPoints[L].COORD[1].Size
+N.Parent=pWayPoints[L].COORD[1]
+table.insert(waypointParts,N)
 end
 end)
-tweenSpeed = 1
-addcmd('tweenspeed',{'tspeed'},function(args, speaker)
-local newSpeed = args[1] or 1
-if tonumber(newSpeed) then
-tweenSpeed = tonumber(newSpeed)
+
+addcmd('hidewaypoints',{'hidewp','hidewps'},function(J,K)
+for L,M in pairs(waypointParts)do
+M:Destroy()
 end
+waypointParts={}
 end)
-addcmd('tweenwaypoint',{'twp'},function(args, speaker)
-local WPName = tostring(getstring(1))
-if speaker.Character then
-for i,_ in pairs(WayPoints) do
-local x = WayPoints[i].COORD[1]
-local y = WayPoints[i].COORD[2]
-local z = WayPoints[i].COORD[3]
-if tostring(WayPoints[i].NAME):lower() == tostring(WPName):lower() then
-TweenService:Create(getRoot(speaker.Character), TweenInfo.new(tweenSpeed, Enum.EasingStyle.Linear), {CFrame = CFrame.new(x,y,z)}):Play()
+
+addcmd('waypoint',{'wp','lpos','loadposition','loadpos'},function(J,K)
+local L=tostring(getstring(1))
+if K.Character then
+for M,N in pairs(WayPoints)do
+if tostring(WayPoints[M].NAME):lower()==tostring(L):lower()then
+local O=WayPoints[M].COORD[1]
+local P=WayPoints[M].COORD[2]
+local Q=WayPoints[M].COORD[3]
+getRoot(K.Character).CFrame=CFrame.new(O,P,Q)
 end
 end
-for i,_ in pairs(pWayPoints) do
-if tostring(pWayPoints[i].NAME):lower() == tostring(WPName):lower() then
-TweenService:Create(getRoot(speaker.Character), TweenInfo.new(tweenSpeed, Enum.EasingStyle.Linear), {CFrame = CFrame.new(pWayPoints[i].COORD[1].Position)}):Play()
+for M,N in pairs(pWayPoints)do
+if tostring(pWayPoints[M].NAME):lower()==tostring(L):lower()then
+getRoot(K.Character).CFrame=CFrame.new(pWayPoints[M].COORD[1].Position)
 end
 end
 end
 end)
-addcmd('walktowaypoint',{'wtwp'},function(args, speaker)
-local WPName = tostring(getstring(1))
-if speaker.Character then
-for i,_ in pairs(WayPoints) do
-local x = WayPoints[i].COORD[1]
-local y = WayPoints[i].COORD[2]
-local z = WayPoints[i].COORD[3]
-if tostring(WayPoints[i].NAME):lower() == tostring(WPName):lower() then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+tweenSpeed=1
+addcmd('tweenspeed',{'tspeed'},function(J,K)
+local L=J[1]or 1
+if tonumber(L)then
+tweenSpeed=tonumber(L)
+end
+end)
+
+addcmd('tweenwaypoint',{'twp'},function(J,K)
+local L=tostring(getstring(1))
+if K.Character then
+for M,N in pairs(WayPoints)do
+local O=WayPoints[M].COORD[1]
+local P=WayPoints[M].COORD[2]
+local Q=WayPoints[M].COORD[3]
+if tostring(WayPoints[M].NAME):lower()==tostring(L):lower()then
+TweenService:Create(getRoot(K.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=CFrame.new(O,P,Q)}):Play()
+end
+end
+for M,N in pairs(pWayPoints)do
+if tostring(pWayPoints[M].NAME):lower()==tostring(L):lower()then
+TweenService:Create(getRoot(K.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=CFrame.new(pWayPoints[M].COORD[1].Position)}):Play()
+end
+end
+end
+end)
+
+addcmd('walktowaypoint',{'wtwp'},function(J,K)
+local L=tostring(getstring(1))
+if K.Character then
+for M,N in pairs(WayPoints)do
+local O=WayPoints[M].COORD[1]
+local P=WayPoints[M].COORD[2]
+local Q=WayPoints[M].COORD[3]
+if tostring(WayPoints[M].NAME):lower()==tostring(L):lower()then
+if K.Character:FindFirstChildOfClass'Humanoid'and K.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+K.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-speaker.Character:FindFirstChildOfClass('Humanoid').WalkToPoint = Vector3.new(x,y,z)
+K.Character:FindFirstChildOfClass'Humanoid'.WalkToPoint=Vector3.new(O,P,Q)
 end
 end
-for i,_ in pairs(pWayPoints) do
-if tostring(pWayPoints[i].NAME):lower() == tostring(WPName):lower() then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+for M,N in pairs(pWayPoints)do
+if tostring(pWayPoints[M].NAME):lower()==tostring(L):lower()then
+if K.Character:FindFirstChildOfClass'Humanoid'and K.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+K.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-speaker.Character:FindFirstChildOfClass('Humanoid').WalkToPoint = Vector3.new(pWayPoints[i].COORD[1].Position)
+K.Character:FindFirstChildOfClass'Humanoid'.WalkToPoint=Vector3.new(pWayPoints[M].COORD[1].Position)
 end
 end
 end
 end)
-addcmd('deletewaypoint',{'dwp','dpos','deleteposition','deletepos'},function(args, speaker)
-for i,v in pairs(WayPoints) do
-if v.NAME:lower() == tostring(getstring(1)):lower() then
-notify('Modified Waypoints',"Deleted waypoint: " .. v.NAME)
-table.remove(WayPoints, i)
+
+addcmd('deletewaypoint',{'dwp','dpos','deleteposition','deletepos'},function(J,K)
+for L,M in pairs(WayPoints)do
+if M.NAME:lower()==tostring(getstring(1)):lower()then
+notify('Modified Waypoints',"Deleted waypoint: "..M.NAME)
+table.remove(WayPoints,L)
 end
 end
-if AllWaypoints ~= nil and #AllWaypoints > 0 then
-for i,v in pairs(AllWaypoints) do
-if v.NAME:lower() == tostring(getstring(1)):lower() then
-if not v.GAME or v.GAME == PlaceId then
-table.remove(AllWaypoints, i)
+if AllWaypoints~=nil and#AllWaypoints>0 then
+for L,M in pairs(AllWaypoints)do
+if M.NAME:lower()==tostring(getstring(1)):lower()then
+if not M.GAME or M.GAME==PlaceId then
+table.remove(AllWaypoints,L)
 end
 end
 end
 end
-for i,v in pairs(pWayPoints) do
-if v.NAME:lower() == tostring(getstring(1)):lower() then
-notify('Modified Waypoints',"Deleted waypoint: " .. v.NAME)
-table.remove(pWayPoints, i)
+for L,M in pairs(pWayPoints)do
+if M.NAME:lower()==tostring(getstring(1)):lower()then
+notify('Modified Waypoints',"Deleted waypoint: "..M.NAME)
+table.remove(pWayPoints,L)
 end
 end
 refreshwaypoints()
 updatesaves()
 end)
-addcmd('clearwaypoints',{'cwp','clearpositions','cpos','clearpos'},function(args, speaker)
-WayPoints = {}
-pWayPoints = {}
+
+addcmd('clearwaypoints',{'cwp','clearpositions','cpos','clearpos'},function(J,K)
+WayPoints={}
+pWayPoints={}
 refreshwaypoints()
 updatesaves()
-AllWaypoints = {}
+AllWaypoints={}
 notify('Modified Waypoints','Removed all waypoints')
 end)
-addcmd('cleargamewaypoints',{'cgamewp'},function(args, speaker)
-for i,v in pairs(WayPoints) do
-if v.GAME == PlaceId then
-table.remove(WayPoints, i)
+
+addcmd('cleargamewaypoints',{'cgamewp'},function(J,K)
+for L,M in pairs(WayPoints)do
+if M.GAME==PlaceId then
+table.remove(WayPoints,L)
 end
 end
-if AllWaypoints ~= nil and #AllWaypoints > 0 then
-for i,v in pairs(AllWaypoints) do
-if v.GAME == PlaceId then
-table.remove(AllWaypoints, i)
+if AllWaypoints~=nil and#AllWaypoints>0 then
+for L,M in pairs(AllWaypoints)do
+if M.GAME==PlaceId then
+table.remove(AllWaypoints,L)
 end
 end
 end
-for i,v in pairs(pWayPoints) do
-if v.GAME == PlaceId then
-table.remove(pWayPoints, i)
+for L,M in pairs(pWayPoints)do
+if M.GAME==PlaceId then
+table.remove(pWayPoints,L)
 end
 end
 refreshwaypoints()
 updatesaves()
 notify('Modified Waypoints','Deleted game waypoints')
 end)
-local coreGuiTypeNames = {
--- predefined aliases
-["inventory"] = Enum.CoreGuiType.Backpack,
-["leaderboard"] = Enum.CoreGuiType.PlayerList,
-["emotes"] = Enum.CoreGuiType.EmotesMenu
+
+
+local J={inventory=
+
+Enum.CoreGuiType.Backpack,leaderboard=
+Enum.CoreGuiType.PlayerList,emotes=
+Enum.CoreGuiType.EmotesMenu
 }
--- Load the full list of enums
-for _, enumItem in ipairs(Enum.CoreGuiType:GetEnumItems()) do
-coreGuiTypeNames[enumItem.Name:lower()] = enumItem
+
+
+for K,L in ipairs(Enum.CoreGuiType:GetEnumItems())do
+J[L.Name:lower()]=L
 end
-addcmd('enable',{},function(args, speaker)
-local input = args[1] and args[1]:lower()
-if input then
-if input == "reset" then
-StarterGui:SetCore("ResetButtonCallback", true)
+
+addcmd('enable',{},function(K,L)
+local M=K[1]and K[1]:lower()
+if M then
+if M=="reset"then
+StarterGui:SetCore("ResetButtonCallback",true)
 else
-local coreGuiType = coreGuiTypeNames[input]
-if coreGuiType then
-StarterGui:SetCoreGuiEnabled(coreGuiType, true)
+local N=J[M]
+if N then
+StarterGui:SetCoreGuiEnabled(N,true)
 end
 end
 end
 end)
-addcmd('disable',{},function(args, speaker)
-local input = args[1] and args[1]:lower()
-if input then
-if input == "reset" then
-StarterGui:SetCore("ResetButtonCallback", false)
+
+addcmd('disable',{},function(K,L)
+local M=K[1]and K[1]:lower()
+if M then
+if M=="reset"then
+StarterGui:SetCore("ResetButtonCallback",false)
 else
-local coreGuiType = coreGuiTypeNames[input]
-if coreGuiType then
-StarterGui:SetCoreGuiEnabled(coreGuiType, false)
+local N=J[M]
+if N then
+StarterGui:SetCoreGuiEnabled(N,false)
 end
 end
 end
 end)
-local invisGUIS = {}
-addcmd('showguis',{},function(args, speaker)
-for i,v in pairs(speaker:FindFirstChildWhichIsA("PlayerGui"):GetDescendants()) do
-if (v:IsA("Frame") or v:IsA("ImageLabel") or v:IsA("ScrollingFrame")) and not v.Visible then
-v.Visible = true
-if not FindInTable(invisGUIS,v) then
-table.insert(invisGUIS,v)
+
+
+local K={}
+addcmd('showguis',{},function(L,M)
+for N,O in pairs(M:FindFirstChildWhichIsA"PlayerGui":GetDescendants())do
+if(O:IsA"Frame"or O:IsA"ImageLabel"or O:IsA"ScrollingFrame")and not O.Visible then
+O.Visible=true
+if not FindInTable(K,O)then
+table.insert(K,O)
 end
 end
 end
 end)
-addcmd('unshowguis',{},function(args, speaker)
-for i,v in pairs(invisGUIS) do
-v.Visible = false
+
+addcmd('unshowguis',{},function(L,M)
+for N,O in pairs(K)do
+O.Visible=false
 end
-invisGUIS = {}
+K={}
 end)
-local hiddenGUIS = {}
-addcmd('hideguis',{},function(args, speaker)
-for i,v in pairs(speaker:FindFirstChildWhichIsA("PlayerGui"):GetDescendants()) do
-if (v:IsA("Frame") or v:IsA("ImageLabel") or v:IsA("ScrollingFrame")) and v.Visible then
-v.Visible = false
-if not FindInTable(hiddenGUIS,v) then
-table.insert(hiddenGUIS,v)
+
+local L={}
+addcmd('hideguis',{},function(M,N)
+for O,P in pairs(N:FindFirstChildWhichIsA"PlayerGui":GetDescendants())do
+if(P:IsA"Frame"or P:IsA"ImageLabel"or P:IsA"ScrollingFrame")and P.Visible then
+P.Visible=false
+if not FindInTable(L,P)then
+table.insert(L,P)
 end
 end
 end
 end)
-addcmd('unhideguis',{},function(args, speaker)
-for i,v in pairs(hiddenGUIS) do
-v.Visible = true
+
+addcmd('unhideguis',{},function(M,N)
+for O,P in pairs(L)do
+P.Visible=true
 end
-hiddenGUIS = {}
+L={}
 end)
+
 function deleteGuisAtPos()
 pcall(function()
-local guisAtPosition = Players.LocalPlayer.PlayerGui:GetGuiObjectsAtPosition(IYMouse.X, IYMouse.Y)
-for _, gui in pairs(guisAtPosition) do
-if gui.Visible == true then
-gui:Destroy()
+local M=Players.LocalPlayer.PlayerGui:GetGuiObjectsAtPosition(IYMouse.X,IYMouse.Y)
+for N,O in pairs(M)do
+if O.Visible==true then
+O:Destroy()
 end
 end
 end)
 end
-local deleteGuiInput
-addcmd('guidelete',{},function(args, speaker)
-deleteGuiInput = UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
-if not gameProcessedEvent then
-if input.KeyCode == Enum.KeyCode.Backspace then
+
+local M
+addcmd('guidelete',{},function(N,O)
+M=UserInputService.InputBegan:Connect(function(P,Q)
+if not Q then
+if P.KeyCode==Enum.KeyCode.Backspace then
 deleteGuisAtPos()
 end
 end
 end)
 notify('GUI Delete Enabled','Hover over a GUI and press backspace to delete it')
 end)
-addcmd('unguidelete',{'noguidelete'},function(args, speaker)
-if deleteGuiInput then deleteGuiInput:Disconnect() end
+
+addcmd('unguidelete',{'noguidelete'},function(N,O)
+if M then M:Disconnect()end
 notify('GUI Delete Disabled','GUI backspace delete has been disabled')
 end)
-local wasStayOpen = StayOpen
-addcmd('hideiy',{},function(args, speaker)
-isHidden = true
-wasStayOpen = StayOpen
-if StayOpen == true then
-StayOpen = false
-On.BackgroundTransparency = 1
+
+local N=StayOpen
+addcmd('hideiy',{},function(O,P)
+i=true
+N=StayOpen
+if StayOpen==true then
+StayOpen=false
+On.BackgroundTransparency=1
 end
-minimizeNum = 0
+minimizeNum=0
 minimizeHolder()
-if not (args[1] and tostring(args[1]) == 'nonotify') then notify('IY Hidden','You can press the prefix key to access the command bar') end
+if not(O[1]and tostring(O[1])=='nonotify')then notify('IY Hidden','You can press the prefix key to access the command bar')end
 end)
-addcmd('showiy',{'unhideiy'},function(args, speaker)
-isHidden = false
-minimizeNum = -20
-if wasStayOpen then
+
+addcmd('showiy',{'unhideiy'},function(O,P)
+i=false
+minimizeNum=-20
+if N then
 maximizeHolder()
-StayOpen = true
-On.BackgroundTransparency = 0
+StayOpen=true
+On.BackgroundTransparency=0
 else
 minimizeHolder()
 end
 end)
-addcmd('rec', {'record'}, function(args, speaker)
+
+addcmd('rec',{'record'},function(O,P)
 return COREGUI:ToggleRecording()
 end)
-addcmd('screenshot', {'scrnshot'}, function(args, speaker)
+
+addcmd('screenshot',{'scrnshot'},function(O,P)
 return COREGUI:TakeScreenshot()
 end)
-addcmd('togglefs', {'togglefullscreen'}, function(args, speaker)
+
+addcmd('togglefs',{'togglefullscreen'},function(O,P)
 return GuiService:ToggleFullscreen()
 end)
-addcmd('inspect', {'examine'}, function(args, speaker)
-for _, v in ipairs(getPlayer(args[1], speaker)) do
+
+addcmd('inspect',{'examine'},function(O,P)
+for Q,R in ipairs(getPlayer(O[1],P))do
 GuiService:CloseInspectMenu()
-GuiService:InspectPlayerFromUserId(Players[v].UserId)
+GuiService:InspectPlayerFromUserId(Players[R].UserId)
 end
 end)
-addcmd("savegame", {"saveplace"}, function(args, speaker)
+
+addcmd("savegame",{"saveplace"},function(O,P)
 if saveinstance then
-notify("Loading", "Downloading game. This will take a while")
+notify("Loading","Downloading game. This will take a while")
 saveinstance()
-notify("Game Saved", "Saved place to the workspace folder within your exploit folder.")
+notify("Game Saved","Saved place to the workspace folder within your exploit folder.")
 else
-notify("Incompatible Exploit", "Your exploit does not support this command (missing saveinstance)")
+notify("Incompatible Exploit","Your exploit does not support this command (missing saveinstance)")
 end
 end)
-addcmd('clearerror',{'clearerrors'},function(args, speaker)
+
+addcmd('clearerror',{'clearerrors'},function(O,P)
 GuiService:ClearError()
 end)
-addcmd('clientantikick',{'antikick'},function(args, speaker)
+
+addcmd('clientantikick',{'antikick'},function(O,P)
 if not hookmetamethod then
 return notify('Incompatible Exploit','Your exploit does not support this command (missing hookmetamethod)')
 end
-local LocalPlayer = Players.LocalPlayer
-local oldhmmi
-local oldhmmnc
-oldhmmi = hookmetamethod(game, "__index", function(self, method)
-if self == LocalPlayer and method:lower() == "kick" then
-return error("Expected ':' not '.' calling member function Kick", 2)
+local Q=Players.LocalPlayer
+local R
+local S
+R=hookmetamethod(game,"__index",function(T,U)
+if T==Q and U:lower()=="kick"then
+return error("Expected ':' not '.' calling member function Kick",2)
 end
-return oldhmmi(self, method)
+return R(T,U)
 end)
-oldhmmnc = hookmetamethod(game, "__namecall", function(self, ...)
-if self == LocalPlayer and getnamecallmethod():lower() == "kick" then
+S=hookmetamethod(game,"__namecall",function(T,...)
+if T==Q and getnamecallmethod():lower()=="kick"then
 return
 end
-return oldhmmnc(self, ...)
+return S(T,...)
 end)
+
 notify('Client Antikick','Client anti kick is now active (only effective on localscript kick)')
 end)
-allow_rj = true
-addcmd('clientantiteleport',{'antiteleport'},function(args, speaker)
+
+allow_rj=true
+addcmd('clientantiteleport',{'antiteleport'},function(O,P)
 if not hookmetamethod then
 return notify('Incompatible Exploit','Your exploit does not support this command (missing hookmetamethod)')
 end
-local TeleportService = TeleportService
-local oldhmmi
-local oldhmmnc
-oldhmmi = hookmetamethod(game, "__index", function(self, method)
-if self == TeleportService then
-if method:lower() == "teleport" then
-return error("Expected ':' not '.' calling member function Kick", 2)
-elseif method == "TeleportToPlaceInstance" then
-return error("Expected ':' not '.' calling member function TeleportToPlaceInstance", 2)
+local Q=TeleportService
+local R
+local S
+R=hookmetamethod(game,"__index",function(T,U)
+if T==Q then
+if U:lower()=="teleport"then
+return error("Expected ':' not '.' calling member function Kick",2)
+elseif U=="TeleportToPlaceInstance"then
+return error("Expected ':' not '.' calling member function TeleportToPlaceInstance",2)
 end
 end
-return oldhmmi(self, method)
+return R(T,U)
 end)
-oldhmmnc = hookmetamethod(game, "__namecall", function(self, ...)
-if self == TeleportService and getnamecallmethod():lower() == "teleport" or getnamecallmethod() == "TeleportToPlaceInstance" then
+S=hookmetamethod(game,"__namecall",function(T,...)
+if T==Q and getnamecallmethod():lower()=="teleport"or getnamecallmethod()=="TeleportToPlaceInstance"then
 return
 end
-return oldhmmnc(self, ...)
+return S(T,...)
 end)
+
 notify('Client AntiTP','Client anti teleport is now active (only effective on localscript teleport)')
 end)
-addcmd('allowrejoin',{'allowrj'},function(args, speaker)
-if args[1] and args[1] == 'false' then
-allow_rj = false
+
+addcmd('allowrejoin',{'allowrj'},function(O,P)
+if O[1]and O[1]=='false'then
+allow_rj=false
 notify('Client AntiTP','Allow rejoin set to false')
 else
-allow_rj = true
+allow_rj=true
 notify('Client AntiTP','Allow rejoin set to true')
 end
 end)
-addcmd('cancelteleport',{'canceltp'},function(args, speaker)
+
+addcmd('cancelteleport',{'canceltp'},function(O,P)
 TeleportService:TeleportCancel()
 end)
-addcmd('volume',{'vol'},function(args, speaker)
-local level = args[1]/10
-UserSettings():GetService("UserGameSettings").MasterVolume = level
+
+addcmd('volume',{'vol'},function(O,P)
+local Q=O[1]/10
+UserSettings():GetService"UserGameSettings".MasterVolume=Q
 end)
-addcmd('antilag',{'boostfps','lowgraphics'},function(args, speaker)
-local Terrain = workspace:FindFirstChildOfClass('Terrain')
-Terrain.WaterWaveSize = 0
-Terrain.WaterWaveSpeed = 0
-Terrain.WaterReflectance = 0
-Terrain.WaterTransparency = 0
-Lighting.GlobalShadows = false
-Lighting.FogEnd = 9e9
-settings().Rendering.QualityLevel = 1
-for i,v in pairs(game:GetDescendants()) do
-if v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("MeshPart") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
-v.Material = "Plastic"
-v.Reflectance = 0
-elseif v:IsA("Decal") then
-v.Transparency = 1
-elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
-v.Lifetime = NumberRange.new(0)
-elseif v:IsA("Explosion") then
-v.BlastPressure = 1
-v.BlastRadius = 1
+
+addcmd('antilag',{'boostfps','lowgraphics'},function(O,P)
+local Q=workspace:FindFirstChildOfClass'Terrain'
+Q.WaterWaveSize=0
+Q.WaterWaveSpeed=0
+Q.WaterReflectance=0
+Q.WaterTransparency=0
+Lighting.GlobalShadows=false
+Lighting.FogEnd=9e9
+settings().Rendering.QualityLevel=1
+for R,S in pairs(game:GetDescendants())do
+if S:IsA"Part"or S:IsA"UnionOperation"or S:IsA"MeshPart"or S:IsA"CornerWedgePart"or S:IsA"TrussPart"then
+S.Material="Plastic"
+S.Reflectance=0
+elseif S:IsA"Decal"then
+S.Transparency=1
+elseif S:IsA"ParticleEmitter"or S:IsA"Trail"then
+S.Lifetime=NumberRange.new(0)
+elseif S:IsA"Explosion"then
+S.BlastPressure=1
+S.BlastRadius=1
 end
 end
-for i,v in pairs(Lighting:GetDescendants()) do
-if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then
-v.Enabled = false
+for R,S in pairs(Lighting:GetDescendants())do
+if S:IsA"BlurEffect"or S:IsA"SunRaysEffect"or S:IsA"ColorCorrectionEffect"or S:IsA"BloomEffect"or S:IsA"DepthOfFieldEffect"then
+S.Enabled=false
 end
 end
-workspace.DescendantAdded:Connect(function(child)
+workspace.DescendantAdded:Connect(function(R)
 task.spawn(function()
-if child:IsA('ForceField') then
+if R:IsA'ForceField'then
 RunService.Heartbeat:Wait()
-child:Destroy()
-elseif child:IsA('Sparkles') then
+R:Destroy()
+elseif R:IsA'Sparkles'then
 RunService.Heartbeat:Wait()
-child:Destroy()
-elseif child:IsA('Smoke') or child:IsA('Fire') then
+R:Destroy()
+elseif R:IsA'Smoke'or R:IsA'Fire'then
 RunService.Heartbeat:Wait()
-child:Destroy()
+R:Destroy()
 end
 end)
 end)
 end)
-addcmd("setfpscap", {"fpscap", "maxfps"}, function(args, speaker)
+
+addcmd("setfpscap",{"fpscap","maxfps"},function(O,P)
 if fpscaploop then
 task.cancel(fpscaploop)
-fpscaploop = nil
+fpscaploop=nil
 end
-local fpsCap = 60
-local num = tonumber(args[1]) or 1e6
-if num == "none" then
+
+local Q=60
+local R=tonumber(O[1])or 1e6
+if R=="none"then
 return
-elseif num > 0 then
-fpsCap = num
+elseif R>0 then
+Q=R
 else
-return notify("Invalid argument", "Please provide a number above 0 or 'none'.")
+return notify("Invalid argument","Please provide a number above 0 or 'none'.")
 end
-if setfpscap and type(setfpscap) == "function" then
-setfpscap(fpsCap)
+
+if setfpscap and type(setfpscap)=="function"then
+setfpscap(Q)
 else
-fpscaploop = task.spawn(function()
-local timer = os.clock()
+fpscaploop=task.spawn(function()
+local S=os.clock()
 while true do
-if os.clock() >= timer + 1 / fpsCap then
-timer = os.clock()
+if os.clock()>=S+1/Q then
+S=os.clock()
 task.wait()
 end
 end
 end)
 end
 end)
-addcmd('notify',{},function(args, speaker)
+
+addcmd('notify',{},function(O,P)
 notify(getstring(1))
 end)
-addcmd('lastcommand',{'lastcmd'},function(args, speaker)
-if cmdHistory[1]:sub(1,11) ~= 'lastcommand' and cmdHistory[1]:sub(1,7) ~= 'lastcmd' then
+
+addcmd('lastcommand',{'lastcmd'},function(O,P)
+if cmdHistory[1]:sub(1,11)~='lastcommand'and cmdHistory[1]:sub(1,7)~='lastcmd'then
 execCmd(cmdHistory[1])
 end
 end)
-addcmd('esp',{},function(args, speaker)
+
+addcmd('esp',{},function(O,P)
 if not CHMSenabled then
-ESPenabled = true
-for i,v in pairs(Players:GetPlayers()) do
-if v.Name ~= speaker.Name then
-ESP(v)
+ESPenabled=true
+for Q,R in pairs(Players:GetPlayers())do
+if R.Name~=P.Name then
+ESP(R)
 end
 end
 else
 notify('ESP','Disable chams (nochams) before using esp')
 end
 end)
-addcmd('noesp',{'unesp'},function(args, speaker)
-ESPenabled = false
-for i,c in pairs(COREGUI:GetChildren()) do
-if string.sub(c.Name, -4) == '_ESP' then
-c:Destroy()
+
+addcmd('noesp',{'unesp'},function(O,P)
+ESPenabled=false
+for Q,R in pairs(COREGUI:GetChildren())do
+if string.sub(R.Name,-4)=='_ESP'then
+R:Destroy()
 end
 end
 end)
-addcmd('esptransparency',{},function(args, speaker)
-espTransparency = (args[1] and isNumber(args[1]) and args[1]) or 0.3
+
+addcmd('esptransparency',{},function(O,P)
+espTransparency=(O[1]and isNumber(O[1])and O[1])or 0.3
 updatesaves()
 end)
-local espParts = {}
-local partEspTrigger = nil
-function partAdded(part)
-if #espParts > 0 then
-if FindInTable(espParts,part.Name:lower()) then
-local a = Instance.new("BoxHandleAdornment")
-a.Name = part.Name:lower().."_PESP"
-a.Parent = part
-a.Adornee = part
-a.AlwaysOnTop = true
-a.ZIndex = 0
-a.Size = part.Size
-a.Transparency = espTransparency
-a.Color = BrickColor.new("Lime green")
+
+local O={}
+local P
+function partAdded(Q)
+if#O>0 then
+if FindInTable(O,Q.Name:lower())then
+local R=Instance.new"BoxHandleAdornment"
+R.Name=Q.Name:lower().."_PESP"
+R.Parent=Q
+R.Adornee=Q
+R.AlwaysOnTop=true
+R.ZIndex=0
+R.Size=Q.Size
+R.Transparency=espTransparency
+R.Color=BrickColor.new"Lime green"
 end
 else
-partEspTrigger:Disconnect()
-partEspTrigger = nil
+P:Disconnect()
+P=nil
 end
 end
-addcmd('partesp',{},function(args, speaker)
-local partEspName = getstring(1):lower()
-if not FindInTable(espParts,partEspName) then
-table.insert(espParts,partEspName)
-for i,v in pairs(workspace:GetDescendants()) do
-if v:IsA("BasePart") and v.Name:lower() == partEspName then
-local a = Instance.new("BoxHandleAdornment")
-a.Name = partEspName.."_PESP"
-a.Parent = v
-a.Adornee = v
-a.AlwaysOnTop = true
-a.ZIndex = 0
-a.Size = v.Size
-a.Transparency = espTransparency
-a.Color = BrickColor.new("Lime green")
+
+addcmd('partesp',{},function(Q,R)
+local S=getstring(1):lower()
+if not FindInTable(O,S)then
+table.insert(O,S)
+for T,U in pairs(workspace:GetDescendants())do
+if U:IsA"BasePart"and U.Name:lower()==S then
+local V=Instance.new"BoxHandleAdornment"
+V.Name=S.."_PESP"
+V.Parent=U
+V.Adornee=U
+V.AlwaysOnTop=true
+V.ZIndex=0
+V.Size=U.Size
+V.Transparency=espTransparency
+V.Color=BrickColor.new"Lime green"
 end
 end
 end
-if partEspTrigger == nil then
-partEspTrigger = workspace.DescendantAdded:Connect(partAdded)
+if P==nil then
+P=workspace.DescendantAdded:Connect(partAdded)
 end
 end)
-addcmd('unpartesp',{'nopartesp'},function(args, speaker)
-if args[1] then
-local partEspName = getstring(1):lower()
-if FindInTable(espParts,partEspName) then
-table.remove(espParts, GetInTable(espParts, partEspName))
+
+addcmd('unpartesp',{'nopartesp'},function(Q,R)
+if Q[1]then
+local S=getstring(1):lower()
+if FindInTable(O,S)then
+table.remove(O,GetInTable(O,S))
 end
-for i,v in pairs(workspace:GetDescendants()) do
-if v:IsA("BoxHandleAdornment") and v.Name == partEspName..'_PESP' then
-v:Destroy()
+for T,U in pairs(workspace:GetDescendants())do
+if U:IsA"BoxHandleAdornment"and U.Name==S..'_PESP'then
+U:Destroy()
 end
 end
 else
-partEspTrigger:Disconnect()
-partEspTrigger = nil
-espParts = {}
-for i,v in pairs(workspace:GetDescendants()) do
-if v:IsA("BoxHandleAdornment") and v.Name:sub(-5) == '_PESP' then
-v:Destroy()
+P:Disconnect()
+P=nil
+O={}
+for S,T in pairs(workspace:GetDescendants())do
+if T:IsA"BoxHandleAdornment"and T.Name:sub(-5)=='_PESP'then
+T:Destroy()
 end
 end
 end
 end)
-addcmd('chams',{},function(args, speaker)
+
+addcmd('chams',{},function(Q,R)
 if not ESPenabled then
-CHMSenabled = true
-for i,v in pairs(Players:GetPlayers()) do
-if v.Name ~= speaker.Name then
-CHMS(v)
+CHMSenabled=true
+for S,T in pairs(Players:GetPlayers())do
+if T.Name~=R.Name then
+CHMS(T)
 end
 end
 else
 notify('Chams','Disable ESP (noesp) before using chams')
 end
 end)
-addcmd('nochams',{'unchams'},function(args, speaker)
-CHMSenabled = false
-for i,v in pairs(Players:GetPlayers()) do
-local chmsplr = v
-for i,c in pairs(COREGUI:GetChildren()) do
-if c.Name == chmsplr.Name..'_CHMS' then
-c:Destroy()
+
+addcmd('nochams',{'unchams'},function(Q,R)
+CHMSenabled=false
+for S,T in pairs(Players:GetPlayers())do
+local U=T
+for V,W in pairs(COREGUI:GetChildren())do
+if W.Name==U.Name..'_CHMS'then
+W:Destroy()
 end
 end
 end
 end)
-addcmd('locate',{},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
-Locate(Players[v])
+
+addcmd('locate',{},function(Q,R)
+local S=getPlayer(Q[1],R)
+for T,U in pairs(S)do
+Locate(Players[U])
 end
 end)
-addcmd('nolocate',{'unlocate'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-if args[1] then
-for i,v in pairs(players) do
-for i,c in pairs(COREGUI:GetChildren()) do
-if c.Name == Players[v].Name..'_LC' then
-c:Destroy()
+
+addcmd('nolocate',{'unlocate'},function(Q,R)
+local S=getPlayer(Q[1],R)
+if Q[1]then
+for T,U in pairs(S)do
+for V,W in pairs(COREGUI:GetChildren())do
+if W.Name==Players[U].Name..'_LC'then
+W:Destroy()
 end
 end
 end
 else
-for i,c in pairs(COREGUI:GetChildren()) do
-if string.sub(c.Name, -3) == '_LC' then
-c:Destroy()
+for T,U in pairs(COREGUI:GetChildren())do
+if string.sub(U.Name,-3)=='_LC'then
+U:Destroy()
 end
 end
 end
 end)
-viewing = nil
-addcmd('view',{'spectate'},function(args, speaker)
+
+viewing=nil
+addcmd('view',{'spectate'},function(Q,R)
 StopFreecam()
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
+local S=getPlayer(Q[1],R)
+for T,U in pairs(S)do
 if viewDied then
 viewDied:Disconnect()
 viewChanged:Disconnect()
 end
-viewing = Players[v]
-workspace.CurrentCamera.CameraSubject = viewing.Character
-notify('Spectate','Viewing ' .. Players[v].Name)
+viewing=Players[U]
+workspace.CurrentCamera.CameraSubject=viewing.Character
+notify('Spectate','Viewing '..Players[U].Name)
 local function viewDiedFunc()
-repeat wait() until Players[v].Character ~= nil and getRoot(Players[v].Character)
-workspace.CurrentCamera.CameraSubject = viewing.Character
+repeat wait()until Players[U].Character~=nil and getRoot(Players[U].Character)
+workspace.CurrentCamera.CameraSubject=viewing.Character
 end
-viewDied = Players[v].CharacterAdded:Connect(viewDiedFunc)
+viewDied=Players[U].CharacterAdded:Connect(viewDiedFunc)
 local function viewChangedFunc()
-workspace.CurrentCamera.CameraSubject = viewing.Character
+workspace.CurrentCamera.CameraSubject=viewing.Character
 end
-viewChanged = workspace.CurrentCamera:GetPropertyChangedSignal("CameraSubject"):Connect(viewChangedFunc)
+viewChanged=workspace.CurrentCamera:GetPropertyChangedSignal"CameraSubject":Connect(viewChangedFunc)
 end
 end)
-addcmd('viewpart',{'viewp'},function(args, speaker)
+
+addcmd('viewpart',{'viewp'},function(Q,R)
 StopFreecam()
-if args[1] then
-for i,v in pairs(workspace:GetDescendants()) do
-if v.Name:lower() == getstring(1):lower() and v:IsA("BasePart") then
+if Q[1]then
+for S,T in pairs(workspace:GetDescendants())do
+if T.Name:lower()==getstring(1):lower()and T:IsA"BasePart"then
 wait(0.1)
-workspace.CurrentCamera.CameraSubject = v
+workspace.CurrentCamera.CameraSubject=T
 end
 end
 end
 end)
-addcmd('unview',{'unspectate'},function(args, speaker)
+
+addcmd('unview',{'unspectate'},function(Q,R)
 StopFreecam()
-if viewing ~= nil then
-viewing = nil
+if viewing~=nil then
+viewing=nil
 notify('Spectate','View turned off')
 end
 if viewDied then
 viewDied:Disconnect()
 viewChanged:Disconnect()
 end
-workspace.CurrentCamera.CameraSubject = speaker.Character
+workspace.CurrentCamera.CameraSubject=R.Character
 end)
-fcRunning = false
-local Camera = workspace.CurrentCamera
-workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
-local newCamera = workspace.CurrentCamera
-if newCamera then
-Camera = newCamera
+
+
+fcRunning=false
+local Q=workspace.CurrentCamera
+workspace:GetPropertyChangedSignal"CurrentCamera":Connect(function()
+local R=workspace.CurrentCamera
+if R then
+Q=R
 end
 end)
-local INPUT_PRIORITY = Enum.ContextActionPriority.High.Value
-Spring = {} do
-Spring.__index = Spring
-function Spring.new(freq, pos)
-local self = setmetatable({}, Spring)
-self.f = freq
-self.p = pos
-self.v = pos*0
-return self
+
+local R=Enum.ContextActionPriority.High.Value
+
+Spring={}do
+Spring.__index=Spring
+
+function Spring.new(S,T)
+local U=setmetatable({},Spring)
+U.f=S
+U.p=T
+U.v=T*0
+return U
 end
-function Spring:Update(dt, goal)
-local f = self.f*2*math.pi
-local p0 = self.p
-local v0 = self.v
-local offset = goal - p0
-local decay = math.exp(-f*dt)
-local p1 = goal + (v0*dt - offset*(f*dt + 1))*decay
-local v1 = (f*dt*(offset*f - v0) + v0)*decay
-self.p = p1
-self.v = v1
-return p1
+
+function Spring.Update(S,T,U)
+local V=S.f*2*math.pi
+local W=S.p
+local X=S.v
+
+local Y=U-W
+local Z=math.exp(-V*T)
+
+local _=U+(X*T-Y*(V*T+1))*Z
+local am=(V*T*(Y*V-X)+X)*Z
+
+S.p=_
+S.v=am
+
+return _
 end
-function Spring:Reset(pos)
-self.p = pos
-self.v = pos*0
+
+function Spring.Reset(am,S)
+am.p=S
+am.v=S*0
 end
 end
-local cameraPos = Vector3.new()
-local cameraRot = Vector2.new()
-local velSpring = Spring.new(5, Vector3.new())
-local panSpring = Spring.new(5, Vector2.new())
-Input = {} do
-keyboard = {
-W = 0,
-A = 0,
-S = 0,
-D = 0,
-E = 0,
-Q = 0,
-Up = 0,
-Down = 0,
-LeftShift = 0,
+
+local am=Vector3.new()
+local S=Vector2.new()
+
+local T=Spring.new(5,Vector3.new())
+local U=Spring.new(5,Vector2.new())
+
+Input={}do
+
+keyboard={
+W=0,
+A=0,
+S=0,
+D=0,
+E=0,
+Q=0,
+Up=0,
+Down=0,
+LeftShift=0,
 }
-mouse = {
-Delta = Vector2.new(),
+
+mouse={
+Delta=Vector2.new(),
 }
-NAV_KEYBOARD_SPEED = Vector3.new(1, 1, 1)
-PAN_MOUSE_SPEED = Vector2.new(1, 1)*(math.pi/64)
-NAV_ADJ_SPEED = 0.75
-NAV_SHIFT_MUL = 0.25
-navSpeed = 1
-function Input.Vel(dt)
-navSpeed = math.clamp(navSpeed + dt*(keyboard.Up - keyboard.Down)*NAV_ADJ_SPEED, 0.01, 4)
-local kKeyboard = Vector3.new(
-keyboard.D - keyboard.A,
-keyboard.E - keyboard.Q,
-keyboard.S - keyboard.W
+
+NAV_KEYBOARD_SPEED=Vector3.new(1,1,1)
+PAN_MOUSE_SPEED=Vector2.new(1,1)*(math.pi/64)
+NAV_ADJ_SPEED=0.75
+NAV_SHIFT_MUL=0.25
+
+navSpeed=1
+
+function Input.Vel(V)
+navSpeed=math.clamp(navSpeed+V*(keyboard.Up-keyboard.Down)*NAV_ADJ_SPEED,0.01,4)
+
+local W=Vector3.new(
+keyboard.D-keyboard.A,
+keyboard.E-keyboard.Q,
+keyboard.S-keyboard.W
 )*NAV_KEYBOARD_SPEED
-local shift = UserInputService:IsKeyDown(Enum.KeyCode.LeftShift)
-return (kKeyboard)*(navSpeed*(shift and NAV_SHIFT_MUL or 1))
+
+local X=UserInputService:IsKeyDown(Enum.KeyCode.LeftShift)
+
+return(W)*(navSpeed*(X and NAV_SHIFT_MUL or 1))
 end
-function Input.Pan(dt)
-local kMouse = mouse.Delta*PAN_MOUSE_SPEED
-mouse.Delta = Vector2.new()
-return kMouse
+
+function Input.Pan(V)
+local W=mouse.Delta*PAN_MOUSE_SPEED
+mouse.Delta=Vector2.new()
+return W
 end
+
 do
-function Keypress(action, state, input)
-keyboard[input.KeyCode.Name] = state == Enum.UserInputState.Begin and 1 or 0
+function Keypress(V,W,X)
+keyboard[X.KeyCode.Name]=W==Enum.UserInputState.Begin and 1 or 0
 return Enum.ContextActionResult.Sink
 end
-function MousePan(action, state, input)
-local delta = input.Delta
-mouse.Delta = Vector2.new(-delta.y, -delta.x)
+
+function MousePan(V,W,X)
+local Y=X.Delta
+mouse.Delta=Vector2.new(-Y.y,-Y.x)
 return Enum.ContextActionResult.Sink
 end
-function Zero(t)
-for k, v in pairs(t) do
-t[k] = v*0
+
+function Zero(V)
+for W,X in pairs(V)do
+V[W]=X*0
 end
 end
+
 function Input.StartCapture()
-ContextActionService:BindActionAtPriority("FreecamKeyboard",Keypress,false,INPUT_PRIORITY,
+ContextActionService:BindActionAtPriority("FreecamKeyboard",Keypress,false,R,
 Enum.KeyCode.W,
 Enum.KeyCode.A,
 Enum.KeyCode.S,
@@ -7463,2130 +8150,2365 @@ Enum.KeyCode.Q,
 Enum.KeyCode.Up,
 Enum.KeyCode.Down
 )
-ContextActionService:BindActionAtPriority("FreecamMousePan",MousePan,false,INPUT_PRIORITY,Enum.UserInputType.MouseMovement)
+ContextActionService:BindActionAtPriority("FreecamMousePan",MousePan,false,R,Enum.UserInputType.MouseMovement)
 end
+
 function Input.StopCapture()
-navSpeed = 1
+navSpeed=1
 Zero(keyboard)
 Zero(mouse)
-ContextActionService:UnbindAction("FreecamKeyboard")
-ContextActionService:UnbindAction("FreecamMousePan")
+ContextActionService:UnbindAction"FreecamKeyboard"
+ContextActionService:UnbindAction"FreecamMousePan"
 end
 end
 end
-function GetFocusDistance(cameraFrame)
-local znear = 0.1
-local viewport = Camera.ViewportSize
-local projy = 2*math.tan(cameraFov/2)
-local projx = viewport.x/viewport.y*projy
-local fx = cameraFrame.rightVector
-local fy = cameraFrame.upVector
-local fz = cameraFrame.lookVector
-local minVect = Vector3.new()
-local minDist = 512
-for x = 0, 1, 0.5 do
-for y = 0, 1, 0.5 do
-local cx = (x - 0.5)*projx
-local cy = (y - 0.5)*projy
-local offset = fx*cx - fy*cy + fz
-local origin = cameraFrame.p + offset*znear
-local _, hit = workspace:FindPartOnRay(Ray.new(origin, offset.unit*minDist))
-local dist = (hit - origin).magnitude
-if minDist > dist then
-minDist = dist
-minVect = offset.unit
+
+function GetFocusDistance(V)
+local W=0.1
+local X=Q.ViewportSize
+local Y=2*math.tan(cameraFov/2)
+local Z=X.x/X.y*Y
+local _=V.rightVector
+local an=V.upVector
+local ao=V.lookVector
+
+local ap=Vector3.new()
+local aq=512
+
+for ar=0,1,0.5 do
+for as=0,1,0.5 do
+local at=(ar-0.5)*Z
+local au=(as-0.5)*Y
+local av=_*at-an*au+ao
+local aw=V.p+av*W local
+ax, ay=workspace:FindPartOnRay(Ray.new(aw,av.unit*aq))
+local az=(ay-aw).magnitude
+if aq>az then
+aq=az
+ap=av.unit
 end
 end
 end
-return fz:Dot(minVect)*minDist
+
+return ao:Dot(ap)*aq
 end
-local function StepFreecam(dt)
-local vel = velSpring:Update(dt, Input.Vel(dt))
-local pan = panSpring:Update(dt, Input.Pan(dt))
-local zoomFactor = math.sqrt(math.tan(math.rad(70/2))/math.tan(math.rad(cameraFov/2)))
-cameraRot = cameraRot + pan*Vector2.new(0.75, 1)*8*(dt/zoomFactor)
-cameraRot = Vector2.new(math.clamp(cameraRot.x, -math.rad(90), math.rad(90)), cameraRot.y%(2*math.pi))
-local cameraCFrame = CFrame.new(cameraPos)*CFrame.fromOrientation(cameraRot.x, cameraRot.y, 0)*CFrame.new(vel*Vector3.new(1, 1, 1)*64*dt)
-cameraPos = cameraCFrame.p
-Camera.CFrame = cameraCFrame
-Camera.Focus = cameraCFrame*CFrame.new(0, 0, -GetFocusDistance(cameraCFrame))
-Camera.FieldOfView = cameraFov
+
+local function StepFreecam(an)
+local ao=T:Update(an,Input.Vel(an))
+local ap=U:Update(an,Input.Pan(an))
+
+local aq=math.sqrt(math.tan(math.rad(35))/math.tan(math.rad(cameraFov/2)))
+
+S=S+ap*Vector2.new(0.75,1)*8*(an/aq)
+S=Vector2.new(math.clamp(S.x,-math.rad(90),math.rad(90)),S.y%(2*math.pi))
+
+local ar=CFrame.new(am)*CFrame.fromOrientation(S.x,S.y,0)*CFrame.new(ao*Vector3.new(1,1,1)*64*an)
+am=ar.p
+
+Q.CFrame=ar
+Q.Focus=ar*CFrame.new(0,0,-GetFocusDistance(ar))
+Q.FieldOfView=cameraFov
 end
-local PlayerState = {} do
-mouseBehavior = ""
-mouseIconEnabled = ""
-cameraType = ""
-cameraFocus = ""
-cameraCFrame = ""
-cameraFieldOfView = ""
-function PlayerState.Push()
-cameraFieldOfView = Camera.FieldOfView
-Camera.FieldOfView = 70
-cameraType = Camera.CameraType
-Camera.CameraType = Enum.CameraType.Custom
-cameraCFrame = Camera.CFrame
-cameraFocus = Camera.Focus
-mouseIconEnabled = UserInputService.MouseIconEnabled
-UserInputService.MouseIconEnabled = true
-mouseBehavior = UserInputService.MouseBehavior
-UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+
+local an={}do
+mouseBehavior=""
+mouseIconEnabled=""
+cameraType=""
+cameraFocus=""
+cameraCFrame=""
+cameraFieldOfView=""
+
+function an.Push()
+cameraFieldOfView=Q.FieldOfView
+Q.FieldOfView=70
+
+cameraType=Q.CameraType
+Q.CameraType=Enum.CameraType.Custom
+
+cameraCFrame=Q.CFrame
+cameraFocus=Q.Focus
+
+mouseIconEnabled=UserInputService.MouseIconEnabled
+UserInputService.MouseIconEnabled=true
+
+mouseBehavior=UserInputService.MouseBehavior
+UserInputService.MouseBehavior=Enum.MouseBehavior.Default
 end
-function PlayerState.Pop()
-Camera.FieldOfView = 70
-Camera.CameraType = cameraType
-cameraType = nil
-Camera.CFrame = cameraCFrame
-cameraCFrame = nil
-Camera.Focus = cameraFocus
-cameraFocus = nil
-UserInputService.MouseIconEnabled = mouseIconEnabled
-mouseIconEnabled = nil
-UserInputService.MouseBehavior = mouseBehavior
-mouseBehavior = nil
+
+function an.Pop()
+Q.FieldOfView=70
+
+Q.CameraType=cameraType
+cameraType=nil
+
+Q.CFrame=cameraCFrame
+cameraCFrame=nil
+
+Q.Focus=cameraFocus
+cameraFocus=nil
+
+UserInputService.MouseIconEnabled=mouseIconEnabled
+mouseIconEnabled=nil
+
+UserInputService.MouseBehavior=mouseBehavior
+mouseBehavior=nil
 end
 end
-function StartFreecam(pos)
+
+function StartFreecam(ao)
 if fcRunning then
 StopFreecam()
 end
-local cameraCFrame = Camera.CFrame
-if pos then
-cameraCFrame = pos
+local ap=Q.CFrame
+if ao then
+ap=ao
 end
-cameraRot = Vector2.new()
-cameraPos = cameraCFrame.p
-cameraFov = Camera.FieldOfView
-velSpring:Reset(Vector3.new())
-panSpring:Reset(Vector2.new())
-PlayerState.Push()
-RunService:BindToRenderStep("Freecam", Enum.RenderPriority.Camera.Value, StepFreecam)
+S=Vector2.new()
+am=ap.p
+cameraFov=Q.FieldOfView
+
+T:Reset(Vector3.new())
+U:Reset(Vector2.new())
+
+an.Push()
+RunService:BindToRenderStep("Freecam",Enum.RenderPriority.Camera.Value,StepFreecam)
 Input.StartCapture()
-fcRunning = true
+fcRunning=true
 end
+
 function StopFreecam()
 if not fcRunning then return end
 Input.StopCapture()
-RunService:UnbindFromRenderStep("Freecam")
-PlayerState.Pop()
-workspace.Camera.FieldOfView = 70
-fcRunning = false
+RunService:UnbindFromRenderStep"Freecam"
+an.Pop()
+workspace.Camera.FieldOfView=70
+fcRunning=false
 end
-addcmd('freecam',{'fc'},function(args, speaker)
+
+addcmd('freecam',{'fc'},function(ao,ap)
 StartFreecam()
 end)
-addcmd('freecampos',{'fcpos','fcp','freecamposition','fcposition'},function(args, speaker)
-if not args[1] then return end
-local freecamPos = CFrame.new(args[1],args[2],args[3])
-StartFreecam(freecamPos)
+
+addcmd('freecampos',{'fcpos','fcp','freecamposition','fcposition'},function(ao,ap)
+if not ao[1]then return end
+local aq=CFrame.new(ao[1],ao[2],ao[3])
+StartFreecam(aq)
 end)
-addcmd('freecamwaypoint',{'fcwp'},function(args, speaker)
-local WPName = tostring(getstring(1))
-if speaker.Character then
-for i,_ in pairs(WayPoints) do
-local x = WayPoints[i].COORD[1]
-local y = WayPoints[i].COORD[2]
-local z = WayPoints[i].COORD[3]
-if tostring(WayPoints[i].NAME):lower() == tostring(WPName):lower() then
-StartFreecam(CFrame.new(x,y,z))
+
+addcmd('freecamwaypoint',{'fcwp'},function(ao,ap)
+local aq=tostring(getstring(1))
+if ap.Character then
+for ar,as in pairs(WayPoints)do
+local at=WayPoints[ar].COORD[1]
+local au=WayPoints[ar].COORD[2]
+local av=WayPoints[ar].COORD[3]
+if tostring(WayPoints[ar].NAME):lower()==tostring(aq):lower()then
+StartFreecam(CFrame.new(at,au,av))
 end
 end
-for i,_ in pairs(pWayPoints) do
-if tostring(pWayPoints[i].NAME):lower() == tostring(WPName):lower() then
-StartFreecam(CFrame.new(pWayPoints[i].COORD[1].Position))
+for ar,as in pairs(pWayPoints)do
+if tostring(pWayPoints[ar].NAME):lower()==tostring(aq):lower()then
+StartFreecam(CFrame.new(pWayPoints[ar].COORD[1].Position))
 end
 end
-end
-end)
-addcmd('freecamgoto',{'fcgoto','freecamtp','fctp'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
-StartFreecam(getRoot(Players[v].Character).CFrame)
 end
 end)
-addcmd('unfreecam',{'nofreecam','unfc','nofc'},function(args, speaker)
+
+addcmd('freecamgoto',{'fcgoto','freecamtp','fctp'},function(ao,ap)
+local aq=getPlayer(ao[1],ap)
+for ar,as in pairs(aq)do
+StartFreecam(getRoot(Players[as].Character).CFrame)
+end
+end)
+
+addcmd('unfreecam',{'nofreecam','unfc','nofc'},function(ao,ap)
 StopFreecam()
 end)
-addcmd('freecamspeed',{'fcspeed'},function(args, speaker)
-local FCspeed = args[1] or 1
-if isNumber(FCspeed) then
-NAV_KEYBOARD_SPEED = Vector3.new(FCspeed, FCspeed, FCspeed)
+
+addcmd('freecamspeed',{'fcspeed'},function(ao,ap)
+local aq=ao[1]or 1
+if isNumber(aq)then
+NAV_KEYBOARD_SPEED=Vector3.new(aq,aq,aq)
 end
 end)
-addcmd('notifyfreecamposition',{'notifyfcpos'},function(args, speaker)
+
+addcmd('notifyfreecamposition',{'notifyfcpos'},function(ao,ap)
 if fcRunning then
-local X,Y,Z = workspace.CurrentCamera.CFrame.Position.X,workspace.CurrentCamera.CFrame.Position.Y,workspace.CurrentCamera.CFrame.Position.Z
-local Format, Round = string.format, math.round
-notify("Current Position", Format("%s, %s, %s", Round(X), Round(Y), Round(Z)))
+local aq,ar,as=workspace.CurrentCamera.CFrame.Position.X,workspace.CurrentCamera.CFrame.Position.Y,workspace.CurrentCamera.CFrame.Position.Z
+local at,au=string.format,math.round
+notify("Current Position",at("%s, %s, %s",au(aq),au(ar),au(as)))
 end
 end)
-addcmd('copyfreecamposition',{'copyfcpos'},function(args, speaker)
+
+addcmd('copyfreecamposition',{'copyfcpos'},function(ao,ap)
 if fcRunning then
-local X,Y,Z = workspace.CurrentCamera.CFrame.Position.X,workspace.CurrentCamera.CFrame.Position.Y,workspace.CurrentCamera.CFrame.Position.Z
-local Format, Round = string.format, math.round
-toClipboard(Format("%s, %s, %s", Round(X), Round(Y), Round(Z)))
+local aq,ar,as=workspace.CurrentCamera.CFrame.Position.X,workspace.CurrentCamera.CFrame.Position.Y,workspace.CurrentCamera.CFrame.Position.Z
+local at,au=string.format,math.round
+toClipboard(at("%s, %s, %s",au(aq),au(ar),au(as)))
 end
 end)
-addcmd('gotocamera',{'gotocam','tocam'},function(args, speaker)
-getRoot(speaker.Character).CFrame = workspace.Camera.CFrame
+
+addcmd('gotocamera',{'gotocam','tocam'},function(ao,ap)
+getRoot(ap.Character).CFrame=workspace.Camera.CFrame
 end)
-addcmd('tweengotocamera',{'tweengotocam','tgotocam','ttocam'},function(args, speaker)
-TweenService:Create(getRoot(speaker.Character), TweenInfo.new(tweenSpeed, Enum.EasingStyle.Linear), {CFrame = workspace.Camera.CFrame}):Play()
+
+addcmd('tweengotocamera',{'tweengotocam','tgotocam','ttocam'},function(ao,ap)
+TweenService:Create(getRoot(ap.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=workspace.Camera.CFrame}):Play()
 end)
-addcmd('fov',{},function(args, speaker)
-local fov = args[1] or 70
-if isNumber(fov) then
-workspace.CurrentCamera.FieldOfView = fov
+
+addcmd('fov',{},function(ao,ap)
+local aq=ao[1]or 70
+if isNumber(aq)then
+workspace.CurrentCamera.FieldOfView=aq
 end
 end)
-local preMaxZoom = Players.LocalPlayer.CameraMaxZoomDistance
-local preMinZoom = Players.LocalPlayer.CameraMinZoomDistance
-addcmd('lookat',{},function(args, speaker)
-if speaker.CameraMaxZoomDistance ~= 0.5 then
-preMaxZoom = speaker.CameraMaxZoomDistance
-preMinZoom = speaker.CameraMinZoomDistance
+
+local ao=Players.LocalPlayer.CameraMaxZoomDistance
+local ap=Players.LocalPlayer.CameraMinZoomDistance
+addcmd('lookat',{},function(aq,ar)
+if ar.CameraMaxZoomDistance~=0.5 then
+ao=ar.CameraMaxZoomDistance
+ap=ar.CameraMinZoomDistance
 end
-speaker.CameraMaxZoomDistance = 0.5
-speaker.CameraMinZoomDistance = 0.5
+ar.CameraMaxZoomDistance=0.5
+ar.CameraMinZoomDistance=0.5
 wait()
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
-local target = Players[v].Character
-if target and target:FindFirstChild('Head') then
-workspace.CurrentCamera.CFrame = CFrame.new(workspace.CurrentCamera.CFrame.p, target.Head.CFrame.p)
+local as=getPlayer(aq[1],ar)
+for at,au in pairs(as)do
+local av=Players[au].Character
+if av and av:FindFirstChild'Head'then
+workspace.CurrentCamera.CFrame=CFrame.new(workspace.CurrentCamera.CFrame.p,av.Head.CFrame.p)
 wait(0.1)
 end
 end
-speaker.CameraMaxZoomDistance = preMaxZoom
-speaker.CameraMinZoomDistance = preMinZoom
+ar.CameraMaxZoomDistance=ao
+ar.CameraMinZoomDistance=ap
 end)
-addcmd('fixcam',{'restorecam'},function(args, speaker)
+
+addcmd('fixcam',{'restorecam'},function(aq,ar)
 StopFreecam()
-execCmd('unview')
+execCmd'unview'
 workspace.CurrentCamera:remove()
 wait(.1)
-repeat wait() until speaker.Character ~= nil
-workspace.CurrentCamera.CameraSubject = speaker.Character:FindFirstChildWhichIsA('Humanoid')
-workspace.CurrentCamera.CameraType = "Custom"
-speaker.CameraMinZoomDistance = 0.5
-speaker.CameraMaxZoomDistance = 400
-speaker.CameraMode = "Classic"
-speaker.Character.Head.Anchored = false
+repeat wait()until ar.Character~=nil
+workspace.CurrentCamera.CameraSubject=ar.Character:FindFirstChildWhichIsA'Humanoid'
+workspace.CurrentCamera.CameraType="Custom"
+ar.CameraMinZoomDistance=0.5
+ar.CameraMaxZoomDistance=400
+ar.CameraMode="Classic"
+ar.Character.Head.Anchored=false
 end)
-addcmd('enableshiftlock',{'enablesl','shiftlock'},function(args, speaker)
-speaker.DevEnableMouseLock = true
+
+addcmd('enableshiftlock',{'enablesl','shiftlock'},function(aq,ar)
+ar.DevEnableMouseLock=true
 notify('Shiftlock','Shift lock is now available')
 end)
-addcmd('firstp',{},function(args, speaker)
-speaker.CameraMode = "LockFirstPerson"
+
+addcmd('firstp',{},function(aq,ar)
+ar.CameraMode="LockFirstPerson"
 end)
-addcmd('thirdp',{},function(args, speaker)
-speaker.CameraMode = "Classic"
+
+addcmd('thirdp',{},function(aq,ar)
+ar.CameraMode="Classic"
 end)
-addcmd('noclipcam', {'nccam'}, function(args, speaker)
-local sc = (debug and debug.setconstant) or setconstant
-local gc = (debug and debug.getconstants) or getconstants
-if not sc or not getgc or not gc then
-return notify('Incompatible Exploit', 'Your exploit does not support this command (missing setconstant or getconstants or getgc)')
+
+addcmd('noclipcam',{'nccam'},function(aq,ar)
+local as=(debug and debug.setconstant)or setconstant
+local at=(debug and debug.getconstants)or getconstants
+if not as or not getgc or not at then
+return notify('Incompatible Exploit','Your exploit does not support this command (missing setconstant or getconstants or getgc)')
 end
-local pop = speaker.PlayerScripts.PlayerModule.CameraModule.ZoomController.Popper
-for _, v in pairs(getgc()) do
-if type(v) == 'function' and getfenv(v).script == pop then
-for i, v1 in pairs(gc(v)) do
-if tonumber(v1) == .25 then
-sc(v, i, 0)
-elseif tonumber(v1) == 0 then
-sc(v, i, .25)
+local au=ar.PlayerScripts.PlayerModule.CameraModule.ZoomController.Popper
+for av,aw in pairs(getgc())do
+if type(aw)=='function'and getfenv(aw).script==au then
+for ax,ay in pairs(at(aw))do
+if tonumber(ay)==.25 then
+as(aw,ax,0)
+elseif tonumber(ay)==0 then
+as(aw,ax,.25)
 end
 end
 end
 end
 end)
-addcmd('maxzoom',{},function(args, speaker)
-speaker.CameraMaxZoomDistance = args[1]
+
+addcmd('maxzoom',{},function(aq,ar)
+ar.CameraMaxZoomDistance=aq[1]
 end)
-addcmd('minzoom',{},function(args, speaker)
-speaker.CameraMinZoomDistance = args[1]
+
+addcmd('minzoom',{},function(aq,ar)
+ar.CameraMinZoomDistance=aq[1]
 end)
-addcmd('camdistance',{},function(args, speaker)
-local camMax = speaker.CameraMaxZoomDistance
-local camMin = speaker.CameraMinZoomDistance
-if camMax < tonumber(args[1]) then
-camMax = args[1]
+
+addcmd('camdistance',{},function(aq,ar)
+local as=ar.CameraMaxZoomDistance
+local at=ar.CameraMinZoomDistance
+if as<tonumber(aq[1])then
+as=aq[1]
 end
-speaker.CameraMaxZoomDistance = args[1]
-speaker.CameraMinZoomDistance = args[1]
+ar.CameraMaxZoomDistance=aq[1]
+ar.CameraMinZoomDistance=aq[1]
 wait()
-speaker.CameraMaxZoomDistance = camMax
-speaker.CameraMinZoomDistance = camMin
+ar.CameraMaxZoomDistance=as
+ar.CameraMinZoomDistance=at
 end)
-addcmd('unlockws',{'unlockworkspace'},function(args, speaker)
-for i,v in pairs(workspace:GetDescendants()) do
-if v:IsA("BasePart") then
-v.Locked = false
-end
-end
-end)
-addcmd('lockws',{'lockworkspace'},function(args, speaker)
-for i,v in pairs(workspace:GetDescendants()) do
-if v:IsA("BasePart") then
-v.Locked = true
+
+addcmd('unlockws',{'unlockworkspace'},function(aq,ar)
+for as,at in pairs(workspace:GetDescendants())do
+if at:IsA"BasePart"then
+at.Locked=false
 end
 end
 end)
-addcmd('delete',{'remove'},function(args, speaker)
-for i,v in pairs(workspace:GetDescendants()) do
-if v.Name:lower() == getstring(1):lower() then
-v:Destroy()
-end
-end
-notify('Item(s) Deleted','Deleted ' ..getstring(1))
-end)
-addcmd('deleteclass',{'removeclass','deleteclassname','removeclassname','dc'},function(args, speaker)
-for i,v in pairs(workspace:GetDescendants()) do
-if v.ClassName:lower() == getstring(1):lower() then
-v:Destroy()
-end
-end
-notify('Item(s) Deleted','Deleted items with ClassName ' ..getstring(1))
-end)
-addcmd('chardelete',{'charremove','cd'},function(args, speaker)
-for i,v in pairs(speaker.Character:GetDescendants()) do
-if v.Name:lower() == getstring(1):lower() then
-v:Destroy()
-end
-end
-notify('Item(s) Deleted','Deleted ' ..getstring(1))
-end)
-addcmd('chardeleteclass',{'charremoveclass','chardeleteclassname','charremoveclassname','cdc'},function(args, speaker)
-for i,v in pairs(speaker.Character:GetDescendants()) do
-if v.ClassName:lower() == getstring(1):lower() then
-v:Destroy()
-end
-end
-notify('Item(s) Deleted','Deleted items with ClassName ' ..getstring(1))
-end)
-addcmd('deletevelocity',{'dv','removevelocity','removeforces'},function(args, speaker)
-for i,v in pairs(speaker.Character:GetDescendants()) do
-if v:IsA("BodyVelocity") or v:IsA("BodyGyro") or v:IsA("RocketPropulsion") or v:IsA("BodyThrust") or v:IsA("BodyAngularVelocity") or v:IsA("AngularVelocity") or v:IsA("BodyForce") or v:IsA("VectorForce") or v:IsA("LineForce") then
-v:Destroy()
+
+addcmd('lockws',{'lockworkspace'},function(aq,ar)
+for as,at in pairs(workspace:GetDescendants())do
+if at:IsA"BasePart"then
+at.Locked=true
 end
 end
 end)
-addcmd('deleteinvisparts',{'deleteinvisibleparts','dip'},function(args, speaker)
-for i,v in pairs(workspace:GetDescendants()) do
-if v:IsA("BasePart") and v.Transparency == 1 and v.CanCollide then
-v:Destroy()
+
+addcmd('delete',{'remove'},function(aq,ar)
+for as,at in pairs(workspace:GetDescendants())do
+if at.Name:lower()==getstring(1):lower()then
+at:Destroy()
+end
+end
+notify('Item(s) Deleted','Deleted '..getstring(1))
+end)
+
+addcmd('deleteclass',{'removeclass','deleteclassname','removeclassname','dc'},function(aq,ar)
+for as,at in pairs(workspace:GetDescendants())do
+if at.ClassName:lower()==getstring(1):lower()then
+at:Destroy()
+end
+end
+notify('Item(s) Deleted','Deleted items with ClassName '..getstring(1))
+end)
+
+addcmd('chardelete',{'charremove','cd'},function(aq,ar)
+for as,at in pairs(ar.Character:GetDescendants())do
+if at.Name:lower()==getstring(1):lower()then
+at:Destroy()
+end
+end
+notify('Item(s) Deleted','Deleted '..getstring(1))
+end)
+
+addcmd('chardeleteclass',{'charremoveclass','chardeleteclassname','charremoveclassname','cdc'},function(aq,ar)
+for as,at in pairs(ar.Character:GetDescendants())do
+if at.ClassName:lower()==getstring(1):lower()then
+at:Destroy()
+end
+end
+notify('Item(s) Deleted','Deleted items with ClassName '..getstring(1))
+end)
+
+addcmd('deletevelocity',{'dv','removevelocity','removeforces'},function(aq,ar)
+for as,at in pairs(ar.Character:GetDescendants())do
+if at:IsA"BodyVelocity"or at:IsA"BodyGyro"or at:IsA"RocketPropulsion"or at:IsA"BodyThrust"or at:IsA"BodyAngularVelocity"or at:IsA"AngularVelocity"or at:IsA"BodyForce"or at:IsA"VectorForce"or at:IsA"LineForce"then
+at:Destroy()
 end
 end
 end)
-local shownParts = {}
-addcmd('invisibleparts',{'invisparts'},function(args, speaker)
-for i,v in pairs(workspace:GetDescendants()) do
-if v:IsA("BasePart") and v.Transparency == 1 then
-if not table.find(shownParts,v) then
-table.insert(shownParts,v)
-end
-v.Transparency = 0
+
+addcmd('deleteinvisparts',{'deleteinvisibleparts','dip'},function(aq,ar)
+for as,at in pairs(workspace:GetDescendants())do
+if at:IsA"BasePart"and at.Transparency==1 and at.CanCollide then
+at:Destroy()
 end
 end
 end)
-addcmd('uninvisibleparts',{'uninvisparts'},function(args, speaker)
-for i,v in pairs(shownParts) do
-v.Transparency = 1
+
+local aq={}
+addcmd('invisibleparts',{'invisparts'},function(ar,as)
+for at,au in pairs(workspace:GetDescendants())do
+if au:IsA"BasePart"and au.Transparency==1 then
+if not table.find(aq,au)then
+table.insert(aq,au)
 end
-shownParts = {}
-end)
-addcmd('btools',{},function(args, speaker)
-for i = 1, 4 do
-local Tool = Instance.new("HopperBin")
-Tool.BinType = i
-Tool.Name = randomString()
-Tool.Parent = speaker:FindFirstChildOfClass("Backpack")
+au.Transparency=0
+end
 end
 end)
-addcmd('f3x',{'fex'},function(args, speaker)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/refs/heads/main/f3x.lua"))()
+
+addcmd('uninvisibleparts',{'uninvisparts'},function(ar,as)
+for at,au in pairs(aq)do
+au.Transparency=1
+end
+aq={}
 end)
-addcmd('partpath',{'partname'},function(args, speaker)
+
+addcmd('btools',{},function(ar,as)
+for at=1,4 do
+local au=Instance.new"HopperBin"
+au.BinType=at
+au.Name=randomString()
+au.Parent=as:FindFirstChildOfClass"Backpack"
+end
+end)
+
+addcmd('f3x',{'fex'},function(ar,as)
+loadstring(game:HttpGet"https://raw.githubusercontent.com/infyiff/backup/refs/heads/main/f3x.lua")()
+end)
+
+addcmd('partpath',{'partname'},function(ar,as)
 selectPart()
 end)
-addcmd('antiafk',{'antiidle'},function(args, speaker)
-local GC = getconnections or get_signal_cons
-if GC then
-for i,v in pairs(GC(Players.LocalPlayer.Idled)) do
-if v["Disable"] then
-v["Disable"](v)
-elseif v["Disconnect"] then
-v["Disconnect"](v)
+
+addcmd('antiafk',{'antiidle'},function(ar,as)
+local at=getconnections or get_signal_cons
+if at then
+for au,av in pairs(at(Players.LocalPlayer.Idled))do
+if av.Disable then
+av.Disable(av)
+elseif av.Disconnect then
+av.Disconnect(av)
 end
 end
 else
-local VirtualUser = cloneref(game:GetService("VirtualUser"))
+local au=a(game:GetService"VirtualUser")
 Players.LocalPlayer.Idled:Connect(function()
-VirtualUser:CaptureController()
-VirtualUser:ClickButton2(Vector2.new())
+au:CaptureController()
+au:ClickButton2(Vector2.new())
 end)
 end
-if not (args[1] and tostring(args[1]) == 'nonotify') then notify('Anti Idle','Anti idle is enabled') end
+if not(ar[1]and tostring(ar[1])=='nonotify')then notify('Anti Idle','Anti idle is enabled')end
 end)
-addcmd("datalimit", {}, function(args, speaker)
-local kbps = tonumber(args[1])
-if kbps then
-local NetworkClient = cloneref(game:GetService("NetworkClient"))
-NetworkClient:SetOutgoingKBPSLimit(kbps)
+
+addcmd("datalimit",{},function(ar,as)
+local at=tonumber(ar[1])
+if at then
+local au=a(game:GetService"NetworkClient")
+au:SetOutgoingKBPSLimit(at)
 end
 end)
-addcmd("replicationlag", {"backtrack"}, function(args, speaker)
-if tonumber(args[1]) then
-settings():GetService("NetworkSettings").IncomingReplicationLag = args[1]
+
+addcmd("replicationlag",{"backtrack"},function(ar,as)
+if tonumber(ar[1])then
+settings():GetService"NetworkSettings".IncomingReplicationLag=ar[1]
 end
 end)
-addcmd("noprompts", {"nopurchaseprompts"}, function(args, speaker)
-COREGUI.PurchasePrompt.Enabled = false
+
+addcmd("noprompts",{"nopurchaseprompts"},function(ar,as)
+COREGUI.PurchasePrompt.Enabled=false
 end)
-addcmd("showprompts", {"showpurchaseprompts"}, function(args, speaker)
-COREGUI.PurchasePrompt.Enabled = true
+
+addcmd("showprompts",{"showpurchaseprompts"},function(ar,as)
+COREGUI.PurchasePrompt.Enabled=true
 end)
-promptNewRig = function(speaker, rig)
-local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-if humanoid then
-AvatarEditorService:PromptSaveAvatar(humanoid.HumanoidDescription, Enum.HumanoidRigType[rig])
-local result = AvatarEditorService.PromptSaveAvatarCompleted:Wait()
-if result == Enum.AvatarPromptResult.Success then
-execCmd("reset")
+
+promptNewRig=function(ar,as)
+local at=ar.Character:FindFirstChildWhichIsA"Humanoid"
+if at then
+AvatarEditorService:PromptSaveAvatar(at.HumanoidDescription,Enum.HumanoidRigType[as])
+local au=AvatarEditorService.PromptSaveAvatarCompleted:Wait()
+if au==Enum.AvatarPromptResult.Success then
+execCmd"reset"
 end
 end
 end
-addcmd("promptr6", {}, function(args, speaker)
-promptNewRig(speaker, "R6")
+
+addcmd("promptr6",{},function(ar,as)
+promptNewRig(as,"R6")
 end)
-addcmd("promptr15", {}, function(args, speaker)
-promptNewRig(speaker, "R15")
+
+addcmd("promptr15",{},function(ar,as)
+promptNewRig(as,"R15")
 end)
-addcmd("wallwalk", {"walkonwalls"}, function(args, speaker)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/wallwalker.lua"))()
+
+addcmd("wallwalk",{"walkonwalls"},function(ar,as)
+loadstring(game:HttpGet"https://raw.githubusercontent.com/infyiff/backup/main/wallwalker.lua")()
 end)
-addcmd('age',{},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-local ages = {}
-for i,v in pairs(players) do
-local p = Players[v]
-table.insert(ages, p.Name.."'s age is: "..p.AccountAge)
+
+addcmd('age',{},function(ar,as)
+local at=getPlayer(ar[1],as)
+local au={}
+for av,aw in pairs(at)do
+local ax=Players[aw]
+table.insert(au,ax.Name.."'s age is: "..ax.AccountAge)
 end
-notify('Account Age',table.concat(ages, ',\n'))
+notify('Account Age',table.concat(au,',\n'))
 end)
-addcmd('chatage',{},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-local ages = {}
-for i,v in pairs(players) do
-local p = Players[v]
-table.insert(ages, p.Name.."'s age is: "..p.AccountAge)
+
+addcmd('chatage',{},function(ar,as)
+local at=getPlayer(ar[1],as)
+local au={}
+for av,aw in pairs(at)do
+local ax=Players[aw]
+table.insert(au,ax.Name.."'s age is: "..ax.AccountAge)
 end
-local chatString = table.concat(ages, ', ')
-chatMessage(chatString)
+local av=table.concat(au,', ')
+chatMessage(av)
 end)
-addcmd('joindate',{'jd'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-local dates = {}
+
+addcmd('joindate',{'jd'},function(ar,as)
+local at=getPlayer(ar[1],as)
+local au={}
 notify("Loading",'Hold on a sec')
-for i,v in pairs(players) do
-local user = game:HttpGet("https://users.roblox.com/v1/users/"..Players[v].UserId)
-local json = HttpService:JSONDecode(user)
-local date = json["created"]:sub(1,10)
-local splitDates = string.split(date,"-")
-table.insert(dates,Players[v].Name.." joined: "..splitDates[2].."/"..splitDates[3].."/"..splitDates[1])
+for av,aw in pairs(at)do
+local ax=game:HttpGet("https://users.roblox.com/v1/users/"..Players[aw].UserId)
+local ay=HttpService:JSONDecode(ax)
+local az=ay.created:sub(1,10)
+local V=string.split(az,"-")
+table.insert(au,Players[aw].Name.." joined: "..V[2].."/"..V[3].."/"..V[1])
 end
-notify('Join Date (Month/Day/Year)',table.concat(dates, ',\n'))
+notify('Join Date (Month/Day/Year)',table.concat(au,',\n'))
 end)
-addcmd('chatjoindate',{'cjd'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-local dates = {}
+
+addcmd('chatjoindate',{'cjd'},function(ar,as)
+local at=getPlayer(ar[1],as)
+local au={}
 notify("Loading",'Hold on a sec')
-for i,v in pairs(players) do
-local user = game:HttpGet("https://users.roblox.com/v1/users/"..Players[v].UserId)
-local json = HttpService:JSONDecode(user)
-local date = json["created"]:sub(1,10)
-local splitDates = string.split(date,"-")
-table.insert(dates,Players[v].Name.." joined: "..splitDates[2].."/"..splitDates[3].."/"..splitDates[1])
+for av,aw in pairs(at)do
+local ax=game:HttpGet("https://users.roblox.com/v1/users/"..Players[aw].UserId)
+local ay=HttpService:JSONDecode(ax)
+local az=ay.created:sub(1,10)
+local V=string.split(az,"-")
+table.insert(au,Players[aw].Name.." joined: "..V[2].."/"..V[3].."/"..V[1])
 end
-local chatString = table.concat(dates, ', ')
-chatMessage(chatString)
+local av=table.concat(au,', ')
+chatMessage(av)
 end)
-addcmd('copyname',{'copyuser'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
-local name = tostring(Players[v].Name)
-toClipboard(name)
-end
-end)
-addcmd('userid',{'id'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
-local id = tostring(Players[v].UserId)
-notify('User ID',id)
+
+addcmd('copyname',{'copyuser'},function(ar,as)
+local at=getPlayer(ar[1],as)
+for au,av in pairs(at)do
+local aw=tostring(Players[av].Name)
+toClipboard(aw)
 end
 end)
-addcmd('copyid',{'copyuserid'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
-local id = tostring(Players[v].UserId)
-toClipboard(id)
+
+addcmd('userid',{'id'},function(ar,as)
+local at=getPlayer(ar[1],as)
+for au,av in pairs(at)do
+local aw=tostring(Players[av].UserId)
+notify('User ID',aw)
 end
 end)
-addcmd('creatorid',{'creator'},function(args, speaker)
-if game.CreatorType == Enum.CreatorType.User then
+
+addcmd('copyid',{'copyuserid'},function(ar,as)
+local at=getPlayer(ar[1],as)
+for au,av in pairs(at)do
+local aw=tostring(Players[av].UserId)
+toClipboard(aw)
+end
+end)
+
+addcmd('creatorid',{'creator'},function(ar,as)
+if game.CreatorType==Enum.CreatorType.User then
 notify('Creator ID',game.CreatorId)
-elseif game.CreatorType == Enum.CreatorType.Group then
-local OwnerID = GroupService:GetGroupInfoAsync(game.CreatorId).Owner.Id
-speaker.UserId = OwnerID
-notify('Creator ID',OwnerID)
+elseif game.CreatorType==Enum.CreatorType.Group then
+local at=GroupService:GetGroupInfoAsync(game.CreatorId).Owner.Id
+as.UserId=at
+notify('Creator ID',at)
 end
 end)
-addcmd('copycreatorid',{'copycreator'},function(args, speaker)
-if game.CreatorType == Enum.CreatorType.User then
+
+addcmd('copycreatorid',{'copycreator'},function(ar,as)
+if game.CreatorType==Enum.CreatorType.User then
 toClipboard(game.CreatorId)
 notify('Copied ID','Copied creator ID to clipboard')
-elseif game.CreatorType == Enum.CreatorType.Group then
-local OwnerID = GroupService:GetGroupInfoAsync(game.CreatorId).Owner.Id
-toClipboard(OwnerID)
+elseif game.CreatorType==Enum.CreatorType.Group then
+local at=GroupService:GetGroupInfoAsync(game.CreatorId).Owner.Id
+toClipboard(at)
 notify('Copied ID','Copied creator ID to clipboard')
 end
 end)
-addcmd('setcreatorid',{'setcreator'},function(args, speaker)
-if game.CreatorType == Enum.CreatorType.User then
-speaker.UserId = game.CreatorId
+
+addcmd('setcreatorid',{'setcreator'},function(ar,as)
+if game.CreatorType==Enum.CreatorType.User then
+as.UserId=game.CreatorId
 notify('Set ID','Set UserId to '..game.CreatorId)
-elseif game.CreatorType == Enum.CreatorType.Group then
-local OwnerID = GroupService:GetGroupInfoAsync(game.CreatorId).Owner.Id
-speaker.UserId = OwnerID
-notify('Set ID','Set UserId to '..OwnerID)
+elseif game.CreatorType==Enum.CreatorType.Group then
+local at=GroupService:GetGroupInfoAsync(game.CreatorId).Owner.Id
+as.UserId=at
+notify('Set ID','Set UserId to '..at)
 end
 end)
-addcmd('appearanceid',{'aid'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
-local aid = tostring(Players[v].CharacterAppearanceId)
-notify('Appearance ID',aid)
+
+addcmd('appearanceid',{'aid'},function(ar,as)
+local at=getPlayer(ar[1],as)
+for au,av in pairs(at)do
+local aw=tostring(Players[av].CharacterAppearanceId)
+notify('Appearance ID',aw)
 end
 end)
-addcmd('copyappearanceid',{'caid'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
-local aid = tostring(Players[v].CharacterAppearanceId)
-toClipboard(aid)
+
+addcmd('copyappearanceid',{'caid'},function(ar,as)
+local at=getPlayer(ar[1],as)
+for au,av in pairs(at)do
+local aw=tostring(Players[av].CharacterAppearanceId)
+toClipboard(aw)
 end
 end)
-addcmd('norender',{},function(args, speaker)
+
+addcmd('norender',{},function(ar,as)
 RunService:Set3dRenderingEnabled(false)
 end)
-addcmd('render',{},function(args, speaker)
+
+addcmd('render',{},function(ar,as)
 RunService:Set3dRenderingEnabled(true)
 end)
-addcmd('2022materials',{'use2022materials'},function(args, speaker)
+
+addcmd('2022materials',{'use2022materials'},function(ar,as)
 if sethidden then
-sethidden(MaterialService, "Use2022Materials", true)
+sethidden(MaterialService,"Use2022Materials",true)
 else
 notify('Incompatible Exploit','Your exploit does not support this command (missing sethiddenproperty)')
 end
 end)
-addcmd('un2022materials',{'unuse2022materials'},function(args, speaker)
+
+addcmd('un2022materials',{'unuse2022materials'},function(ar,as)
 if sethidden then
-sethidden(MaterialService, "Use2022Materials", false)
+sethidden(MaterialService,"Use2022Materials",false)
 else
 notify('Incompatible Exploit','Your exploit does not support this command (missing sethiddenproperty)')
 end
 end)
-addcmd('goto',{'to'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
-if Players[v].Character ~= nil then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+addcmd('goto',{'to'},function(ar,as)
+local at=getPlayer(ar[1],as)
+for au,av in pairs(at)do
+if Players[av].Character~=nil then
+if as.Character:FindFirstChildOfClass'Humanoid'and as.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+as.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-getRoot(speaker.Character).CFrame = getRoot(Players[v].Character).CFrame + Vector3.new(3,1,0)
+getRoot(as.Character).CFrame=getRoot(Players[av].Character).CFrame+Vector3.new(3,1,0)
 end
 end
-execCmd('breakvelocity')
+execCmd'breakvelocity'
 end)
-addcmd('tweengoto',{'tgoto','tto','tweento'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
-if Players[v].Character ~= nil then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+addcmd('tweengoto',{'tgoto','tto','tweento'},function(ar,as)
+local at=getPlayer(ar[1],as)
+for au,av in pairs(at)do
+if Players[av].Character~=nil then
+if as.Character:FindFirstChildOfClass'Humanoid'and as.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+as.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-TweenService:Create(getRoot(speaker.Character), TweenInfo.new(tweenSpeed, Enum.EasingStyle.Linear), {CFrame = getRoot(Players[v].Character).CFrame + Vector3.new(3,1,0)}):Play()
+TweenService:Create(getRoot(as.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=getRoot(Players[av].Character).CFrame+Vector3.new(3,1,0)}):Play()
 end
 end
-execCmd('breakvelocity')
+execCmd'breakvelocity'
 end)
-addcmd('vehiclegoto',{'vgoto','vtp','vehicletp'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
-if Players[v].Character ~= nil then
-local seat = speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart
-local vehicleModel = seat:FindFirstAncestorWhichIsA("Model")
-vehicleModel:MoveTo(getRoot(Players[v].Character).Position)
+
+addcmd('vehiclegoto',{'vgoto','vtp','vehicletp'},function(ar,as)
+local at=getPlayer(ar[1],as)
+for au,av in pairs(at)do
+if Players[av].Character~=nil then
+local aw=as.Character:FindFirstChildOfClass'Humanoid'.SeatPart
+local ax=aw:FindFirstAncestorWhichIsA"Model"
+ax:MoveTo(getRoot(Players[av].Character).Position)
 end
 end
 end)
-addcmd('pulsetp',{'ptp'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
-if Players[v].Character ~= nil then
-local startPos = getRoot(speaker.Character).CFrame
-local seconds = args[2] or 1
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+addcmd('pulsetp',{'ptp'},function(ar,as)
+local at=getPlayer(ar[1],as)
+for au,av in pairs(at)do
+if Players[av].Character~=nil then
+local aw=getRoot(as.Character).CFrame
+local ax=ar[2]or 1
+if as.Character:FindFirstChildOfClass'Humanoid'and as.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+as.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-getRoot(speaker.Character).CFrame = getRoot(Players[v].Character).CFrame + Vector3.new(3,1,0)
-wait(seconds)
-getRoot(speaker.Character).CFrame = startPos
+getRoot(as.Character).CFrame=getRoot(Players[av].Character).CFrame+Vector3.new(3,1,0)
+wait(ax)
+getRoot(as.Character).CFrame=aw
 end
 end
-execCmd('breakvelocity')
+execCmd'breakvelocity'
 end)
-local vnoclipParts = {}
-addcmd('vehiclenoclip',{'vnoclip'},function(args, speaker)
-vnoclipParts = {}
-local seat = speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart
-local vehicleModel = seat.Parent
+
+local ar={}
+addcmd('vehiclenoclip',{'vnoclip'},function(as,at)
+ar={}
+local au=at.Character:FindFirstChildOfClass'Humanoid'.SeatPart
+local av=au.Parent
 repeat
-if vehicleModel.ClassName ~= "Model" then
-vehicleModel = vehicleModel.Parent
+if av.ClassName~="Model"then
+av=av.Parent
 end
-until vehicleModel.ClassName == "Model"
+until av.ClassName=="Model"
 wait(0.1)
-execCmd('noclip')
-for i,v in pairs(vehicleModel:GetDescendants()) do
-if v:IsA("BasePart") and v.CanCollide then
-table.insert(vnoclipParts,v)
-v.CanCollide = false
+execCmd'noclip'
+for aw,ax in pairs(av:GetDescendants())do
+if ax:IsA"BasePart"and ax.CanCollide then
+table.insert(ar,ax)
+ax.CanCollide=false
 end
 end
 end)
-addcmd("vehicleclip", {"vclip", "unvnoclip", "unvehiclenoclip"}, function(args, speaker)
-execCmd("clip")
-for i, v in pairs(vnoclipParts) do
-v.CanCollide = true
+
+addcmd("vehicleclip",{"vclip","unvnoclip","unvehiclenoclip"},function(as,at)
+execCmd"clip"
+for au,av in pairs(ar)do
+av.CanCollide=true
 end
-vnoclipParts = {}
+ar={}
 end)
-addcmd("togglevnoclip", {}, function(args, speaker)
-execCmd(Clip and "vnoclip" or "vclip")
+
+addcmd("togglevnoclip",{},function(as,at)
+execCmd(Clip and"vnoclip"or"vclip")
 end)
-addcmd('clientbring',{'cbring'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
-if Players[v].Character ~= nil then
-if Players[v].Character:FindFirstChildOfClass('Humanoid') then
-Players[v].Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+addcmd('clientbring',{'cbring'},function(as,at)
+local au=getPlayer(as[1],at)
+for av,aw in pairs(au)do
+if Players[aw].Character~=nil then
+if Players[aw].Character:FindFirstChildOfClass'Humanoid'then
+Players[aw].Character:FindFirstChildOfClass'Humanoid'.Sit=false
 end
 wait()
-getRoot(Players[v].Character).CFrame = getRoot(speaker.Character).CFrame + Vector3.new(3,1,0)
+getRoot(Players[aw].Character).CFrame=getRoot(at.Character).CFrame+Vector3.new(3,1,0)
 end
 end
 end)
-local bringT = {}
-addcmd('loopbring',{},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
+
+local as={}
+addcmd('loopbring',{},function(at,au)
+local av=getPlayer(at[1],au)
+for aw,ax in pairs(av)do
 task.spawn(function()
-if Players[v].Name ~= speaker.Name and not FindInTable(bringT, Players[v].Name) then
-table.insert(bringT, Players[v].Name)
-local plrName = Players[v].Name
-local pchar=Players[v].Character
-local distance = 3
-if args[2] and isNumber(args[2]) then
-distance = args[2]
+if Players[ax].Name~=au.Name and not FindInTable(as,Players[ax].Name)then
+table.insert(as,Players[ax].Name)
+local ay=Players[ax].Name
+local az=Players[ax].Character
+local V=3
+if at[2]and isNumber(at[2])then
+V=at[2]
 end
-local lDelay = 0
-if args[3] and isNumber(args[3]) then
-lDelay = args[3]
+local W=0
+if at[3]and isNumber(at[3])then
+W=at[3]
 end
 repeat
-for i,c in pairs(players) do
-if Players:FindFirstChild(v) then
-pchar = Players[v].Character
-if pchar~= nil and Players[v].Character ~= nil and getRoot(pchar) and speaker.Character ~= nil and getRoot(speaker.Character) then
-getRoot(pchar).CFrame = getRoot(speaker.Character).CFrame + Vector3.new(distance,1,0)
+for X,Y in pairs(av)do
+if Players:FindFirstChild(ax)then
+az=Players[ax].Character
+if az~=nil and Players[ax].Character~=nil and getRoot(az)and au.Character~=nil and getRoot(au.Character)then
+getRoot(az).CFrame=getRoot(au.Character).CFrame+Vector3.new(V,1,0)
 end
-wait(lDelay)
+wait(W)
 else
-for a,b in pairs(bringT) do if b == plrName then table.remove(bringT, a) end end
+for Z,_ in pairs(as)do if _==ay then table.remove(as,Z)end end
 end
 end
-until not FindInTable(bringT, plrName)
-end
-end)
+until not FindInTable(as,ay)
 end
 end)
-addcmd('unloopbring',{'noloopbring'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
+end
+end)
+
+addcmd('unloopbring',{'noloopbring'},function(at,au)
+local av=getPlayer(at[1],au)
+for aw,ax in pairs(av)do
 task.spawn(function()
-for a,b in pairs(bringT) do if b == Players[v].Name then table.remove(bringT, a) end end
+for ay,az in pairs(as)do if az==Players[ax].Name then table.remove(as,ay)end end
 end)
 end
 end)
-local walkto = false
-local waypointwalkto = false
-addcmd('walkto',{'follow'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
-if Players[v].Character ~= nil then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+local at=false
+local au=false
+addcmd('walkto',{'follow'},function(av,aw)
+local ax=getPlayer(av[1],aw)
+for ay,az in pairs(ax)do
+if Players[az].Character~=nil then
+if aw.Character:FindFirstChildOfClass'Humanoid'and aw.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aw.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-walkto = true
+at=true
 repeat wait()
-speaker.Character:FindFirstChildOfClass('Humanoid'):MoveTo(getRoot(Players[v].Character).Position)
-until Players[v].Character == nil or not getRoot(Players[v].Character) or walkto == false
+aw.Character:FindFirstChildOfClass'Humanoid':MoveTo(getRoot(Players[az].Character).Position)
+until Players[az].Character==nil or not getRoot(Players[az].Character)or at==false
 end
 end
 end)
-addcmd('pathfindwalkto',{'pathfindfollow'},function(args, speaker)
-walkto = false
+
+addcmd('pathfindwalkto',{'pathfindfollow'},function(av,aw)
+at=false
 wait()
-local players = getPlayer(args[1], speaker)
-local hum = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-local path = PathService:CreatePath()
-for i,v in pairs(players)do
-if Players[v].Character ~= nil then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+local ax=getPlayer(av[1],aw)
+local ay=Players.LocalPlayer.Character:FindFirstChildOfClass"Humanoid"
+local az=PathService:CreatePath()
+for V,W in pairs(ax)do
+if Players[W].Character~=nil then
+if aw.Character:FindFirstChildOfClass'Humanoid'and aw.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aw.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-walkto = true
-repeat wait()
-local success, response = pcall(function()
-path:ComputeAsync(getRoot(speaker.Character).Position, getRoot(Players[v].Character).Position)
-local waypoints = path:GetWaypoints()
-local distance
-for waypointIndex, waypoint in pairs(waypoints) do
-local waypointPosition = waypoint.Position
-hum:MoveTo(waypointPosition)
+at=true
+repeat wait()local
+aA, X=pcall(function()
+az:ComputeAsync(getRoot(aw.Character).Position,getRoot(Players[W].Character).Position)
+local X=az:GetWaypoints()
+local Y
+for Z,_ in pairs(X)do
+local aA=_.Position
+ay:MoveTo(aA)
 repeat
-distance = (waypointPosition - hum.Parent.PrimaryPart.Position).magnitude
+Y=(aA-ay.Parent.PrimaryPart.Position).magnitude
 wait()
 until
-distance <= 5
+Y<=5
 end
 end)
-if not success then
-speaker.Character:FindFirstChildOfClass('Humanoid'):MoveTo(getRoot(Players[v].Character).Position)
+if not aA then
+aw.Character:FindFirstChildOfClass'Humanoid':MoveTo(getRoot(Players[W].Character).Position)
 end
-until Players[v].Character == nil or not getRoot(Players[v].Character) or walkto == false
+until Players[W].Character==nil or not getRoot(Players[W].Character)or at==false
 end
 end
 end)
-addcmd('pathfindwalktowaypoint',{'pathfindwalktowp'},function(args, speaker)
-waypointwalkto = false
+
+addcmd('pathfindwalktowaypoint',{'pathfindwalktowp'},function(av,aw)
+au=false
 wait()
-local WPName = tostring(getstring(1))
-local hum = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-local path = PathService:CreatePath()
-if speaker.Character then
-for i,_ in pairs(WayPoints) do
-if tostring(WayPoints[i].NAME):lower() == tostring(WPName):lower() then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+local ax=tostring(getstring(1))
+local ay=Players.LocalPlayer.Character:FindFirstChildOfClass"Humanoid"
+local az=PathService:CreatePath()
+if aw.Character then
+for aA,V in pairs(WayPoints)do
+if tostring(WayPoints[aA].NAME):lower()==tostring(ax):lower()then
+if aw.Character:FindFirstChildOfClass'Humanoid'and aw.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aw.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-local TrueCoords = Vector3.new(WayPoints[i].COORD[1], WayPoints[i].COORD[2], WayPoints[i].COORD[3])
-waypointwalkto = true
-repeat wait()
-local success, response = pcall(function()
-path:ComputeAsync(getRoot(speaker.Character).Position, TrueCoords)
-local waypoints = path:GetWaypoints()
-local distance
-for waypointIndex, waypoint in pairs(waypoints) do
-local waypointPosition = waypoint.Position
-hum:MoveTo(waypointPosition)
+local W=Vector3.new(WayPoints[aA].COORD[1],WayPoints[aA].COORD[2],WayPoints[aA].COORD[3])
+au=true
+repeat wait()local
+aB, X=pcall(function()
+az:ComputeAsync(getRoot(aw.Character).Position,W)
+local X=az:GetWaypoints()
+local Y
+for Z,_ in pairs(X)do
+local aB=_.Position
+ay:MoveTo(aB)
 repeat
-distance = (waypointPosition - hum.Parent.PrimaryPart.Position).magnitude
+Y=(aB-ay.Parent.PrimaryPart.Position).magnitude
 wait()
 until
-distance <= 5
+Y<=5
 end
 end)
-if not success then
-speaker.Character:FindFirstChildOfClass('Humanoid'):MoveTo(TrueCoords)
+if not aB then
+aw.Character:FindFirstChildOfClass'Humanoid':MoveTo(W)
 end
-until not speaker.Character or waypointwalkto == false
+until not aw.Character or au==false
 end
 end
-for i,_ in pairs(pWayPoints) do
-if tostring(pWayPoints[i].NAME):lower() == tostring(WPName):lower() then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+for aA,aB in pairs(pWayPoints)do
+if tostring(pWayPoints[aA].NAME):lower()==tostring(ax):lower()then
+if aw.Character:FindFirstChildOfClass'Humanoid'and aw.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aw.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-local TrueCoords = pWayPoints[i].COORD[1].Position
-waypointwalkto = true
-repeat wait()
-local success, response = pcall(function()
-path:ComputeAsync(getRoot(speaker.Character).Position, TrueCoords)
-local waypoints = path:GetWaypoints()
-local distance
-for waypointIndex, waypoint in pairs(waypoints) do
-local waypointPosition = waypoint.Position
-hum:MoveTo(waypointPosition)
+local V=pWayPoints[aA].COORD[1].Position
+au=true
+repeat wait()local
+W, X=pcall(function()
+az:ComputeAsync(getRoot(aw.Character).Position,V)
+local W=az:GetWaypoints()
+local X
+for Y,Z in pairs(W)do
+local _=Z.Position
+ay:MoveTo(_)
 repeat
-distance = (waypointPosition - hum.Parent.PrimaryPart.Position).magnitude
+X=(_-ay.Parent.PrimaryPart.Position).magnitude
 wait()
 until
-distance <= 5
+X<=5
 end
 end)
-if not success then
-speaker.Character:FindFirstChildOfClass('Humanoid'):MoveTo(TrueCoords)
+if not W then
+aw.Character:FindFirstChildOfClass'Humanoid':MoveTo(V)
 end
-until not speaker.Character or waypointwalkto == false
+until not aw.Character or au==false
 end
 end
 end
 end)
-addcmd('unwalkto',{'nowalkto','unfollow','nofollow'},function(args, speaker)
-walkto = false
-waypointwalkto = false
+
+addcmd('unwalkto',{'nowalkto','unfollow','nofollow'},function(av,aw)
+at=false
+au=false
 end)
-addcmd("orbit", {}, function(args, speaker)
-execCmd("unorbit nonotify")
-local target = Players:FindFirstChild(getPlayer(args[1], speaker)[1])
-local root = getRoot(speaker.Character)
-local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-if target and target.Character and getRoot(target.Character) and root and humanoid then
-local rotation = 0
-local speed = tonumber(args[2]) or 0.2
-local distance = tonumber(args[3]) or 6
-orbit1 = RunService.Heartbeat:Connect(function()
+
+addcmd("orbit",{},function(av,aw)
+execCmd"unorbit nonotify"
+local ax=Players:FindFirstChild(getPlayer(av[1],aw)[1])
+local ay=getRoot(aw.Character)
+local az=aw.Character:FindFirstChildWhichIsA"Humanoid"
+if ax and ax.Character and getRoot(ax.Character)and ay and az then
+local aA=0
+local aB=tonumber(av[2])or 0.2
+local V=tonumber(av[3])or 6
+orbit1=RunService.Heartbeat:Connect(function()
 pcall(function()
-rotation = rotation + speed
-root.CFrame = CFrame.new(getRoot(target.Character).Position) * CFrame.Angles(0, math.rad(rotation), 0) * CFrame.new(distance, 0, 0)
+aA=aA+aB
+ay.CFrame=CFrame.new(getRoot(ax.Character).Position)*CFrame.Angles(0,math.rad(aA),0)*CFrame.new(V,0,0)
 end)
 end)
-orbit2 = RunService.RenderStepped:Connect(function()
+orbit2=RunService.RenderStepped:Connect(function()
 pcall(function()
-root.CFrame = CFrame.new(root.Position, getRoot(target.Character).Position)
+ay.CFrame=CFrame.new(ay.Position,getRoot(ax.Character).Position)
 end)
 end)
-orbit3 = humanoid.Died:Connect(function() execCmd("unorbit") end)
-orbit4 = humanoid.Seated:Connect(function(value) if value then execCmd("unorbit") end end)
-notify("Orbit", "Started orbiting " .. formatUsername(target))
+orbit3=az.Died:Connect(function()execCmd"unorbit"end)
+orbit4=az.Seated:Connect(function(W)if W then execCmd"unorbit"end end)
+notify("Orbit","Started orbiting "..formatUsername(ax))
 end
 end)
-addcmd("unorbit", {}, function(args, speaker)
-if orbit1 then orbit1:Disconnect() end
-if orbit2 then orbit2:Disconnect() end
-if orbit3 then orbit3:Disconnect() end
-if orbit4 then orbit4:Disconnect() end
-if args[1] ~= "nonotify" then notify("Orbit", "Stopped orbiting player") end
+
+addcmd("unorbit",{},function(av,aw)
+if orbit1 then orbit1:Disconnect()end
+if orbit2 then orbit2:Disconnect()end
+if orbit3 then orbit3:Disconnect()end
+if orbit4 then orbit4:Disconnect()end
+if av[1]~="nonotify"then notify("Orbit","Stopped orbiting player")end
 end)
-addcmd('freeze',{'fr'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-if players ~= nil then
-for i,v in pairs(players) do
+
+addcmd('freeze',{'fr'},function(av,aw)
+local ax=getPlayer(av[1],aw)
+if ax~=nil then
+for ay,az in pairs(ax)do
 task.spawn(function()
-for i, x in next, Players[v].Character:GetDescendants() do
-if x:IsA("BasePart") and not x.Anchored then
-x.Anchored = true
+for aA,aB in next,Players[az].Character:GetDescendants()do
+if aB:IsA"BasePart"and not aB.Anchored then
+aB.Anchored=true
 end
 end
 end)
 end
 end
 end)
-addcmd('thaw',{'unfreeze','unfr'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-if players ~= nil then
-for i,v in pairs(players) do
+
+
+addcmd('thaw',{'unfreeze','unfr'},function(av,aw)
+local ax=getPlayer(av[1],aw)
+if ax~=nil then
+for ay,az in pairs(ax)do
 task.spawn(function()
-for i, x in next, Players[v].Character:GetDescendants() do
-if x.Name ~= floatName and x:IsA("BasePart") and x.Anchored then
-x.Anchored = false
+for aA,aB in next,Players[az].Character:GetDescendants()do
+if aB.Name~=floatName and aB:IsA"BasePart"and aB.Anchored then
+aB.Anchored=false
 end
 end
 end)
 end
 end
 end)
-oofing = false
-addcmd('loopoof',{},function(args, speaker)
-oofing = true
+
+oofing=false
+addcmd('loopoof',{},function(av,aw)
+oofing=true
 repeat wait(0.1)
-for i,v in pairs(Players:GetPlayers()) do
-if v.Character ~= nil and v.Character:FindFirstChild'Head' then
-for _,x in pairs(v.Character.Head:GetChildren()) do
-if x:IsA'Sound' then x.Playing = true end
+for ax,ay in pairs(Players:GetPlayers())do
+if ay.Character~=nil and ay.Character:FindFirstChild'Head'then
+for az,aA in pairs(ay.Character.Head:GetChildren())do
+if aA:IsA'Sound'then aA.Playing=true end
 end
 end
 end
-until oofing == false
+until oofing==false
 end)
-addcmd('unloopoof',{},function(args, speaker)
-oofing = false
+
+addcmd('unloopoof',{},function(av,aw)
+oofing=false
 end)
-local notifiedRespectFiltering = false
-addcmd('muteboombox',{},function(args, speaker)
-if not notifiedRespectFiltering and SoundService.RespectFilteringEnabled then notifiedRespectFiltering = true notify('RespectFilteringEnabled','RespectFilteringEnabled is set to true (the command will still work but may only be clientsided)') end
-local players = getPlayer(args[1], speaker)
-if players ~= nil then
-for i,v in pairs(players) do
+
+local av=false
+addcmd('muteboombox',{},function(aw,ax)
+if not av and SoundService.RespectFilteringEnabled then av=true notify('RespectFilteringEnabled','RespectFilteringEnabled is set to true (the command will still work but may only be clientsided)')end
+local ay=getPlayer(aw[1],ax)
+if ay~=nil then
+for az,aA in pairs(ay)do
 task.spawn(function()
-for i, x in next, Players[v].Character:GetDescendants() do
-if x:IsA("Sound") and x.Playing == true then
-x.Playing = false
+for aB,V in next,Players[aA].Character:GetDescendants()do
+if V:IsA"Sound"and V.Playing==true then
+V.Playing=false
 end
 end
-for i, x in next, Players[v]:FindFirstChildOfClass("Backpack"):GetDescendants() do
-if x:IsA("Sound") and x.Playing == true then
-x.Playing = false
-end
-end
-end)
+for aB,V in next,Players[aA]:FindFirstChildOfClass"Backpack":GetDescendants()do
+if V:IsA"Sound"and V.Playing==true then
+V.Playing=false
 end
 end
 end)
-addcmd('unmuteboombox',{},function(args, speaker)
-if not notifiedRespectFiltering and SoundService.RespectFilteringEnabled then notifiedRespectFiltering = true notify('RespectFilteringEnabled','RespectFilteringEnabled is set to true (the command will still work but may only be clientsided)') end
-local players = getPlayer(args[1], speaker)
-if players ~= nil then
-for i,v in pairs(players) do
+end
+end
+end)
+
+addcmd('unmuteboombox',{},function(aw,ax)
+if not av and SoundService.RespectFilteringEnabled then av=true notify('RespectFilteringEnabled','RespectFilteringEnabled is set to true (the command will still work but may only be clientsided)')end
+local ay=getPlayer(aw[1],ax)
+if ay~=nil then
+for az,aA in pairs(ay)do
 task.spawn(function()
-for i, x in next, Players[v].Character:GetDescendants() do
-if x:IsA("Sound") and x.Playing == false then
-x.Playing = true
+for aB,V in next,Players[aA].Character:GetDescendants()do
+if V:IsA"Sound"and V.Playing==false then
+V.Playing=true
 end
 end
 end)
 end
 end
 end)
-addcmd('reset',{},function(args, speaker)
-speaker.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Dead)
+
+addcmd('reset',{},function(aw,ax)
+ax.Character:FindFirstChildOfClass"Humanoid":ChangeState(Enum.HumanoidStateType.Dead)
 end)
-addcmd('freezeanims',{},function(args, speaker)
-local Humanoid = speaker.Character:FindFirstChildOfClass("Humanoid") or speaker.Character:FindFirstChildOfClass("AnimationController")
-local ActiveTracks = Humanoid:GetPlayingAnimationTracks()
-for _, v in pairs(ActiveTracks) do
-v:AdjustSpeed(0)
+
+addcmd('freezeanims',{},function(aw,ax)
+local ay=ax.Character:FindFirstChildOfClass"Humanoid"or ax.Character:FindFirstChildOfClass"AnimationController"
+local az=ay:GetPlayingAnimationTracks()
+for aA,aB in pairs(az)do
+aB:AdjustSpeed(0)
 end
 end)
-addcmd('unfreezeanims',{},function(args, speaker)
-local Humanoid = speaker.Character:FindFirstChildOfClass("Humanoid") or speaker.Character:FindFirstChildOfClass("AnimationController")
-local ActiveTracks = Humanoid:GetPlayingAnimationTracks()
-for _, v in pairs(ActiveTracks) do
-v:AdjustSpeed(1)
+
+addcmd('unfreezeanims',{},function(aw,ax)
+local ay=ax.Character:FindFirstChildOfClass"Humanoid"or ax.Character:FindFirstChildOfClass"AnimationController"
+local az=ay:GetPlayingAnimationTracks()
+for aA,aB in pairs(az)do
+aB:AdjustSpeed(1)
 end
 end)
-addcmd('respawn',{},function(args, speaker)
-respawn(speaker)
+
+
+
+
+addcmd('respawn',{},function(aw,ax)
+respawn(ax)
 end)
-addcmd('refresh',{'re'},function(args, speaker)
-refresh(speaker)
+
+addcmd('refresh',{'re'},function(aw,ax)
+refresh(ax)
 end)
-addcmd('god',{},function(args, speaker)
-permadeath(speaker)
-local Cam = workspace.CurrentCamera
-local Pos, Char = Cam.CFrame, speaker.Character
-local Human = Char and Char.FindFirstChildWhichIsA(Char, "Humanoid")
-local nHuman = Human.Clone(Human)
-nHuman.Parent, speaker.Character = Char, nil
-nHuman.SetStateEnabled(nHuman, 15, false)
-nHuman.SetStateEnabled(nHuman, 1, false)
-nHuman.SetStateEnabled(nHuman, 0, false)
-nHuman.BreakJointsOnDeath, Human = true, Human.Destroy(Human)
-speaker.Character, Cam.CameraSubject, Cam.CFrame = Char, nHuman, wait() and Pos
-nHuman.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
-local Script = Char.FindFirstChild(Char, "Animate")
-if Script then
-Script.Disabled = true
+
+addcmd('god',{},function(aw,ax)
+permadeath(ax)
+local ay=workspace.CurrentCamera
+local az,aA=ay.CFrame,ax.Character
+local aB=aA and aA.FindFirstChildWhichIsA(aA,"Humanoid")
+local V=aB.Clone(aB)
+V.Parent,ax.Character=aA,nil
+V.SetStateEnabled(V,15,false)
+V.SetStateEnabled(V,1,false)
+V.SetStateEnabled(V,0,false)
+V.BreakJointsOnDeath,aB=true,aB.Destroy(aB)
+ax.Character,ay.CameraSubject,ay.CFrame=aA,V,wait()and az
+V.DisplayDistanceType=Enum.HumanoidDisplayDistanceType.None
+local W=aA.FindFirstChild(aA,"Animate")
+if W then
+W.Disabled=true
 wait()
-Script.Disabled = false
+W.Disabled=false
 end
-nHuman.Health = nHuman.MaxHealth
+V.Health=V.MaxHealth
 end)
-invisRunning = false
-addcmd('invisible',{'invis'},function(args, speaker)
+
+invisRunning=false
+addcmd('invisible',{'invis'},function(aw,ax)
 if invisRunning then return end
-invisRunning = true
-permadeath(speaker)
--- Full credit to AmokahFox @V3rmillion
-local Player = speaker
-repeat wait(.1) until Player.Character
-local Character = Player.Character
-Character.Archivable = true
-local IsInvis = false
-local IsRunning = true
-local InvisibleCharacter = Character:Clone()
-InvisibleCharacter.Parent = Lighting
-local Void = workspace.FallenPartsDestroyHeight
-InvisibleCharacter.Name = ""
-local CF
-local invisFix = RunService.Stepped:Connect(function()
+invisRunning=true
+permadeath(ax)
+
+local ay=ax
+repeat wait(.1)until ay.Character
+local az=ay.Character
+az.Archivable=true
+local aA=false
+local aB=true
+local V=az:Clone()
+V.Parent=Lighting
+local W=workspace.FallenPartsDestroyHeight
+V.Name=""
+local X
+
+local aC=RunService.Stepped:Connect(function()
 pcall(function()
-local IsInteger
-if tostring(Void):find'-' then
-IsInteger = true
+local Y
+if tostring(W):find'-'then
+Y=true
 else
-IsInteger = false
+Y=false
 end
-local Pos = Player.Character.HumanoidRootPart.Position
-local Pos_String = tostring(Pos)
-local Pos_Seperate = Pos_String:split(', ')
-local X = tonumber(Pos_Seperate[1])
-local Y = tonumber(Pos_Seperate[2])
-local Z = tonumber(Pos_Seperate[3])
-if IsInteger == true then
-if Y <= Void then
+local Z=ay.Character.HumanoidRootPart.Position
+local _=tostring(Z)
+local aC=_:split', '
+tonumber(aC[1])
+local aD=tonumber(aC[2])
+tonumber(aC[3])
+if Y==true then
+if aD<=W then
 Respawn()
 end
-elseif IsInteger == false then
-if Y >= Void then
+elseif Y==false then
+if aD>=W then
 Respawn()
 end
 end
 end)
 end)
-for i,v in pairs(InvisibleCharacter:GetDescendants())do
-if v:IsA("BasePart") then
-if v.Name == "HumanoidRootPart" then
-v.Transparency = 1
+
+for aD,Y in pairs(V:GetDescendants())do
+if Y:IsA"BasePart"then
+if Y.Name=="HumanoidRootPart"then
+Y.Transparency=1
 else
-v.Transparency = .5
+Y.Transparency=.5
 end
 end
 end
+
 function Respawn()
-IsRunning = false
-if IsInvis == true then
+aB=false
+if aA==true then
 pcall(function()
-Player.Character = Character
+ay.Character=az
 wait()
-Character.Parent = workspace
-Character:FindFirstChildWhichIsA'Humanoid':Destroy()
-IsInvis = false
-InvisibleCharacter.Parent = nil
-invisRunning = false
+az.Parent=workspace
+az:FindFirstChildWhichIsA'Humanoid':Destroy()
+aA=false
+V.Parent=nil
+invisRunning=false
 end)
-elseif IsInvis == false then
+elseif aA==false then
 pcall(function()
-Player.Character = Character
+ay.Character=az
 wait()
-Character.Parent = workspace
-Character:FindFirstChildWhichIsA'Humanoid':Destroy()
+az.Parent=workspace
+az:FindFirstChildWhichIsA'Humanoid':Destroy()
 TurnVisible()
 end)
 end
 end
-local invisDied
-invisDied = InvisibleCharacter:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
+
+local aD
+aD=V:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
 Respawn()
-invisDied:Disconnect()
+aD:Disconnect()
 end)
-if IsInvis == true then return end
-IsInvis = true
-CF = workspace.CurrentCamera.CFrame
-local CF_1 = Player.Character.HumanoidRootPart.CFrame
-Character:MoveTo(Vector3.new(0,math.pi*1000000,0))
-workspace.CurrentCamera.CameraType = Enum.CameraType.Scriptable
+
+if aA==true then return end
+aA=true
+X=workspace.CurrentCamera.CFrame
+local Y=ay.Character.HumanoidRootPart.CFrame
+az:MoveTo(Vector3.new(0,math.pi*1000000,0))
+workspace.CurrentCamera.CameraType=Enum.CameraType.Scriptable
 wait(.2)
-workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
-InvisibleCharacter = InvisibleCharacter
-Character.Parent = Lighting
-InvisibleCharacter.Parent = workspace
-InvisibleCharacter.HumanoidRootPart.CFrame = CF_1
-Player.Character = InvisibleCharacter
-execCmd('fixcam')
-Player.Character.Animate.Disabled = true
-Player.Character.Animate.Disabled = false
+workspace.CurrentCamera.CameraType=Enum.CameraType.Custom
+V=V
+az.Parent=Lighting
+V.Parent=workspace
+V.HumanoidRootPart.CFrame=Y
+ay.Character=V
+execCmd'fixcam'
+ay.Character.Animate.Disabled=true
+ay.Character.Animate.Disabled=false
+
 function TurnVisible()
-if IsInvis == false then return end
-invisFix:Disconnect()
-invisDied:Disconnect()
-CF = workspace.CurrentCamera.CFrame
-Character = Character
-local CF_1 = Player.Character.HumanoidRootPart.CFrame
-Character.HumanoidRootPart.CFrame = CF_1
-InvisibleCharacter:Destroy()
-Player.Character = Character
-Character.Parent = workspace
-IsInvis = false
-Player.Character.Animate.Disabled = true
-Player.Character.Animate.Disabled = false
-invisDied = Character:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
+if aA==false then return end
+aC:Disconnect()
+aD:Disconnect()
+X=workspace.CurrentCamera.CFrame
+az=az
+local Z=ay.Character.HumanoidRootPart.CFrame
+az.HumanoidRootPart.CFrame=Z
+V:Destroy()
+ay.Character=az
+az.Parent=workspace
+aA=false
+ay.Character.Animate.Disabled=true
+ay.Character.Animate.Disabled=false
+aD=az:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
 Respawn()
-invisDied:Disconnect()
+aD:Disconnect()
 end)
-invisRunning = false
+invisRunning=false
 end
 notify('Invisible','You now appear invisible to other players')
 end)
-addcmd("visible", {"vis"}, function(args, speaker)
+
+addcmd("visible",{"vis"},function(aw,ax)
 TurnVisible()
 end)
-addcmd("toggleinvis", {}, function(args, speaker)
-execCmd(invisRunning and "visible" or "invisible")
+
+addcmd("toggleinvis",{},function(aw,ax)
+execCmd(invisRunning and"visible"or"invisible")
 end)
-addcmd('toolinvisible',{'toolinvis','tinvis'},function(args, speaker)
-local Char  = Players.LocalPlayer.Character
-local touched = false
-local tpdback = false
-local box = Instance.new('Part')
-box.Anchored = true
-box.CanCollide = true
-box.Size = Vector3.new(10,1,10)
-box.Position = Vector3.new(0,10000,0)
-box.Parent = workspace
-local boxTouched = box.Touched:connect(function(part)
-if (part.Parent.Name == Players.LocalPlayer.Name) then
-if touched == false then
-touched = true
+
+addcmd('toolinvisible',{'toolinvis','tinvis'},function(aw,ax)
+local ay=Players.LocalPlayer.Character
+local az=false
+
+local aA=Instance.new'Part'
+aA.Anchored=true
+aA.CanCollide=true
+aA.Size=Vector3.new(10,1,10)
+aA.Position=Vector3.new(0,10000,0)
+aA.Parent=workspace
+local aB=aA.Touched:connect(function(aB)
+if(aB.Parent.Name==Players.LocalPlayer.Name)then
+if az==false then
+az=true
 local function apply()
-local no = Char.HumanoidRootPart:Clone()
+local aC=ay.HumanoidRootPart:Clone()
 wait(.25)
-Char.HumanoidRootPart:Destroy()
-no.Parent = Char
-Char:MoveTo(loc)
-touched = false
+ay.HumanoidRootPart:Destroy()
+aC.Parent=ay
+ay:MoveTo(loc)
+az=false
 end
-if Char then
+if ay then
 apply()
 end
 end
 end
 end)
-repeat wait() until Char
-local cleanUp
-cleanUp = Players.LocalPlayer.CharacterAdded:connect(function(char)
-boxTouched:Disconnect()
-box:Destroy()
-cleanUp:Disconnect()
+repeat wait()until ay
+local aC
+aC=Players.LocalPlayer.CharacterAdded:connect(function(aD)
+aB:Disconnect()
+aA:Destroy()
+aC:Disconnect()
 end)
-loc = Char.HumanoidRootPart.Position
-Char:MoveTo(box.Position + Vector3.new(0,.5,0))
+loc=ay.HumanoidRootPart.Position
+ay:MoveTo(aA.Position+Vector3.new(0,.5,0))
 end)
-addcmd("strengthen", {}, function(args, speaker)
-for _, child in pairs(speaker.Character:GetDescendants()) do
-if child.ClassName == "Part" then
-if args[1] then
-child.CustomPhysicalProperties = PhysicalProperties.new(args[1], 0.3, 0.5)
+
+addcmd("strengthen",{},function(aw,ax)
+for ay,az in pairs(ax.Character:GetDescendants())do
+if az.ClassName=="Part"then
+if aw[1]then
+az.CustomPhysicalProperties=PhysicalProperties.new(aw[1],0.3,0.5)
 else
-child.CustomPhysicalProperties = PhysicalProperties.new(100, 0.3, 0.5)
+az.CustomPhysicalProperties=PhysicalProperties.new(100,0.3,0.5)
 end
 end
 end
 end)
-addcmd("weaken", {}, function(args, speaker)
-for _, child in pairs(speaker.Character:GetDescendants()) do
-if child.ClassName == "Part" then
-if args[1] then
-child.CustomPhysicalProperties = PhysicalProperties.new(-args[1], 0.3, 0.5)
+
+addcmd("weaken",{},function(aw,ax)
+for ay,az in pairs(ax.Character:GetDescendants())do
+if az.ClassName=="Part"then
+if aw[1]then
+az.CustomPhysicalProperties=PhysicalProperties.new(-aw[1],0.3,0.5)
 else
-child.CustomPhysicalProperties = PhysicalProperties.new(0, 0.3, 0.5)
+az.CustomPhysicalProperties=PhysicalProperties.new(0,0.3,0.5)
 end
 end
 end
 end)
-addcmd("unweaken", {"unstrengthen"}, function(args, speaker)
-for _, child in pairs(speaker.Character:GetDescendants()) do
-if child.ClassName == "Part" then
-child.CustomPhysicalProperties = PhysicalProperties.new(0.7, 0.3, 0.5)
+
+addcmd("unweaken",{"unstrengthen"},function(aw,ax)
+for ay,az in pairs(ax.Character:GetDescendants())do
+if az.ClassName=="Part"then
+az.CustomPhysicalProperties=PhysicalProperties.new(0.7,0.3,0.5)
 end
 end
 end)
-addcmd("breakvelocity", {}, function(args, speaker)
-local BeenASecond, V3 = false, Vector3.new(0, 0, 0)
-delay(1, function()
-BeenASecond = true
+
+addcmd("breakvelocity",{},function(aw,ax)
+local ay,az=false,Vector3.new(0,0,0)
+delay(1,function()
+ay=true
 end)
-while not BeenASecond do
-for _, v in ipairs(speaker.Character:GetDescendants()) do
-if v:IsA("BasePart") then
-v.Velocity, v.RotVelocity = V3, V3
+while not ay do
+for aA,aB in ipairs(ax.Character:GetDescendants())do
+if aB:IsA"BasePart"then
+aB.Velocity,aB.RotVelocity=az,az
 end
 end
 wait()
 end
 end)
-addcmd('jpower',{'jumppower','jp'},function(args, speaker)
-local jpower = args[1] or 50
-if isNumber(jpower) then
-if speaker.Character:FindFirstChildOfClass('Humanoid').UseJumpPower then
-speaker.Character:FindFirstChildOfClass('Humanoid').JumpPower = jpower
+
+addcmd('jpower',{'jumppower','jp'},function(aw,ax)
+local ay=aw[1]or 50
+if isNumber(ay)then
+if ax.Character:FindFirstChildOfClass'Humanoid'.UseJumpPower then
+ax.Character:FindFirstChildOfClass'Humanoid'.JumpPower=ay
 else
-speaker.Character:FindFirstChildOfClass('Humanoid').JumpHeight  = jpower
+ax.Character:FindFirstChildOfClass'Humanoid'.JumpHeight=ay
 end
 end
 end)
-addcmd("maxslopeangle", {"msa"}, function(args, speaker)
-local sangle = args[1] or 89
-if isNumber(sangle) then
-speaker.Character:FindFirstChildWhichIsA("Humanoid").MaxSlopeAngle = sangle
+
+addcmd("maxslopeangle",{"msa"},function(aw,ax)
+local ay=aw[1]or 89
+if isNumber(ay)then
+ax.Character:FindFirstChildWhichIsA"Humanoid".MaxSlopeAngle=ay
 end
 end)
-addcmd("gravity", {"grav"}, function(args, speaker)
-local grav = args[1] or 196.2
-if isNumber(grav) then
-workspace.Gravity = grav
+
+addcmd("gravity",{"grav"},function(aw,ax)
+local ay=aw[1]or 196.2
+if isNumber(ay)then
+workspace.Gravity=ay
 end
 end)
-addcmd("hipheight", {"hheight"}, function(args, speaker)
-speaker.Character:FindFirstChildWhichIsA("Humanoid").HipHeight = args[1] or (r15(speaker) and 2.1 or 0)
+
+addcmd("hipheight",{"hheight"},function(aw,ax)
+ax.Character:FindFirstChildWhichIsA"Humanoid".HipHeight=aw[1]or(r15(ax)and 2.1 or 0)
 end)
-addcmd("dance", {}, function(args, speaker)
-pcall(execCmd, "undance")
-local dances = {"27789359", "30196114", "248263260", "45834924", "33796059", "28488254", "52155728"}
-if r15(speaker) then
-dances = {"3333432454", "4555808220", "4049037604", "4555782893", "10214311282", "10714010337", "10713981723", "10714372526", "10714076981", "10714392151", "11444443576"}
+
+addcmd("dance",{},function(aw,ax)
+pcall(execCmd,"undance")
+local ay={"27789359","30196114","248263260","45834924","33796059","28488254","52155728"}
+if r15(ax)then
+ay={"3333432454","4555808220","4049037604","4555782893","10214311282","10714010337","10713981723","10714372526","10714076981","10714392151","11444443576"}
 end
-local animation = Instance.new("Animation")
-animation.AnimationId = "rbxassetid://" .. dances[math.random(1, #dances)]
-danceTrack = speaker.Character:FindFirstChildWhichIsA("Humanoid"):LoadAnimation(animation)
-danceTrack.Looped = true
+local az=Instance.new"Animation"
+az.AnimationId="rbxassetid://"..ay[math.random(1,#ay)]
+danceTrack=ax.Character:FindFirstChildWhichIsA"Humanoid":LoadAnimation(az)
+danceTrack.Looped=true
 danceTrack:Play()
 end)
-addcmd("undance", {"nodance"}, function(args, speaker)
+
+addcmd("undance",{"nodance"},function(aw,ax)
 danceTrack:Stop()
 danceTrack:Destroy()
 end)
-addcmd('nolimbs',{'rlimbs'},function(args, speaker)
-if r15(speaker) then
-for i,v in pairs(speaker.Character:GetChildren()) do
-if v:IsA("BasePart") and
-v.Name == "RightUpperLeg" or
-v.Name == "LeftUpperLeg" or
-v.Name == "RightUpperArm" or
-v.Name == "LeftUpperArm" then
-v:Destroy()
+
+addcmd('nolimbs',{'rlimbs'},function(aw,ax)
+if r15(ax)then
+for ay,az in pairs(ax.Character:GetChildren())do
+if az:IsA"BasePart"and
+az.Name=="RightUpperLeg"or
+az.Name=="LeftUpperLeg"or
+az.Name=="RightUpperArm"or
+az.Name=="LeftUpperArm"then
+az:Destroy()
 end
 end
 else
-for i,v in pairs(speaker.Character:GetChildren()) do
-if v:IsA("BasePart") and
-v.Name == "Right Leg" or
-v.Name == "Left Leg" or
-v.Name == "Right Arm" or
-v.Name == "Left Arm" then
-v:Destroy()
+for ay,az in pairs(ax.Character:GetChildren())do
+if az:IsA"BasePart"and
+az.Name=="Right Leg"or
+az.Name=="Left Leg"or
+az.Name=="Right Arm"or
+az.Name=="Left Arm"then
+az:Destroy()
 end
 end
 end
 end)
-addcmd('noarms',{'rarms'},function(args, speaker)
-if r15(speaker) then
-for i,v in pairs(speaker.Character:GetChildren()) do
-if v:IsA("BasePart") and
-v.Name == "RightUpperArm" or
-v.Name == "LeftUpperArm" then
-v:Destroy()
+
+addcmd('noarms',{'rarms'},function(aw,ax)
+if r15(ax)then
+for ay,az in pairs(ax.Character:GetChildren())do
+if az:IsA"BasePart"and
+az.Name=="RightUpperArm"or
+az.Name=="LeftUpperArm"then
+az:Destroy()
 end
 end
 else
-for i,v in pairs(speaker.Character:GetChildren()) do
-if v:IsA("BasePart") and
-v.Name == "Right Arm" or
-v.Name == "Left Arm" then
-v:Destroy()
+for ay,az in pairs(ax.Character:GetChildren())do
+if az:IsA"BasePart"and
+az.Name=="Right Arm"or
+az.Name=="Left Arm"then
+az:Destroy()
 end
 end
 end
 end)
-addcmd('nolegs',{'rlegs'},function(args, speaker)
-if r15(speaker) then
-for i,v in pairs(speaker.Character:GetChildren()) do
-if v:IsA("BasePart") and
-v.Name == "RightUpperLeg" or
-v.Name == "LeftUpperLeg" then
-v:Destroy()
+
+addcmd('nolegs',{'rlegs'},function(aw,ax)
+if r15(ax)then
+for ay,az in pairs(ax.Character:GetChildren())do
+if az:IsA"BasePart"and
+az.Name=="RightUpperLeg"or
+az.Name=="LeftUpperLeg"then
+az:Destroy()
 end
 end
 else
-for i,v in pairs(speaker.Character:GetChildren()) do
-if v:IsA("BasePart") and
-v.Name == "Right Leg" or
-v.Name == "Left Leg" then
-v:Destroy()
+for ay,az in pairs(ax.Character:GetChildren())do
+if az:IsA"BasePart"and
+az.Name=="Right Leg"or
+az.Name=="Left Leg"then
+az:Destroy()
 end
 end
 end
 end)
-addcmd("sit", {}, function(args, speaker)
-speaker.Character:FindFirstChildWhichIsA("Humanoid").Sit = true
+
+addcmd("sit",{},function(aw,ax)
+ax.Character:FindFirstChildWhichIsA"Humanoid".Sit=true
 end)
-addcmd("lay", {"laydown"}, function(args, speaker)
-local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-humanoid.Sit = true
+
+addcmd("lay",{"laydown"},function(aw,ax)
+local ay=ax.Character:FindFirstChildWhichIsA"Humanoid"
+ay.Sit=true
 task.wait(0.1)
-humanoid.RootPart.CFrame = humanoid.RootPart.CFrame * CFrame.Angles(math.pi * 0.5, 0, 0)
-for _, v in ipairs(humanoid:GetPlayingAnimationTracks()) do
-v:Stop()
+ay.RootPart.CFrame=ay.RootPart.CFrame*CFrame.Angles(math.pi*0.5,0,0)
+for az,aA in ipairs(ay:GetPlayingAnimationTracks())do
+aA:Stop()
 end
 end)
-addcmd("sitwalk", {}, function(args, speaker)
-local anims = speaker.Character.Animate
-local sit = anims.sit:FindFirstChildWhichIsA("Animation").AnimationId
-anims.idle:FindFirstChildWhichIsA("Animation").AnimationId = sit
-anims.walk:FindFirstChildWhichIsA("Animation").AnimationId = sit
-anims.run:FindFirstChildWhichIsA("Animation").AnimationId = sit
-anims.jump:FindFirstChildWhichIsA("Animation").AnimationId = sit
-speaker.Character:FindFirstChildWhichIsA("Humanoid").HipHeight = not r15(speaker) and -1.5 or 0.5
+
+addcmd("sitwalk",{},function(aw,ax)
+local ay=ax.Character.Animate
+local az=ay.sit:FindFirstChildWhichIsA"Animation".AnimationId
+ay.idle:FindFirstChildWhichIsA"Animation".AnimationId=az
+ay.walk:FindFirstChildWhichIsA"Animation".AnimationId=az
+ay.run:FindFirstChildWhichIsA"Animation".AnimationId=az
+ay.jump:FindFirstChildWhichIsA"Animation".AnimationId=az
+ax.Character:FindFirstChildWhichIsA"Humanoid".HipHeight=not r15(ax)and-1.5 or 0.5
 end)
-addcmd("nosit", {}, function(args, speaker)
-speaker.Character:FindFirstChildWhichIsA("Humanoid"):SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+
+addcmd("nosit",{},function(aw,ax)
+ax.Character:FindFirstChildWhichIsA"Humanoid":SetStateEnabled(Enum.HumanoidStateType.Seated,false)
 end)
-addcmd("unnosit", {}, function(args, speaker)
-speaker.Character:FindFirstChildWhichIsA("Humanoid"):SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+
+addcmd("unnosit",{},function(aw,ax)
+ax.Character:FindFirstChildWhichIsA"Humanoid":SetStateEnabled(Enum.HumanoidStateType.Seated,true)
 end)
-addcmd("jump", {}, function(args, speaker)
-speaker.Character:FindFirstChildWhichIsA("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
+
+addcmd("jump",{},function(aw,ax)
+ax.Character:FindFirstChildWhichIsA"Humanoid":ChangeState(Enum.HumanoidStateType.Jumping)
 end)
-local infJump
-infJumpDebounce = false
-addcmd("infjump", {"infinitejump"}, function(args, speaker)
-if infJump then infJump:Disconnect() end
-infJumpDebounce = false
-infJump = UserInputService.JumpRequest:Connect(function()
+
+local aw
+infJumpDebounce=false
+addcmd("infjump",{"infinitejump"},function(ax,ay)
+if aw then aw:Disconnect()end
+infJumpDebounce=false
+aw=UserInputService.JumpRequest:Connect(function()
 if not infJumpDebounce then
-infJumpDebounce = true
-speaker.Character:FindFirstChildWhichIsA("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
+infJumpDebounce=true
+ay.Character:FindFirstChildWhichIsA"Humanoid":ChangeState(Enum.HumanoidStateType.Jumping)
 wait()
-infJumpDebounce = false
+infJumpDebounce=false
 end
 end)
 end)
-addcmd("uninfjump", {"uninfinitejump", "noinfjump", "noinfinitejump"}, function(args, speaker)
-if infJump then infJump:Disconnect() end
-infJumpDebounce = false
+
+addcmd("uninfjump",{"uninfinitejump","noinfjump","noinfinitejump"},function(ax,ay)
+if aw then aw:Disconnect()end
+infJumpDebounce=false
 end)
-local flyjump
-addcmd("flyjump", {}, function(args, speaker)
-if flyjump then flyjump:Disconnect() end
-flyjump = UserInputService.JumpRequest:Connect(function()
-speaker.Character:FindFirstChildWhichIsA("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
+
+local ax
+addcmd("flyjump",{},function(ay,az)
+if ax then ax:Disconnect()end
+ax=UserInputService.JumpRequest:Connect(function()
+az.Character:FindFirstChildWhichIsA"Humanoid":ChangeState(Enum.HumanoidStateType.Jumping)
 end)
 end)
-addcmd("unflyjump", {"noflyjump"}, function(args, speaker)
-if flyjump then flyjump:Disconnect() end
+
+addcmd("unflyjump",{"noflyjump"},function(ay,az)
+if ax then ax:Disconnect()end
 end)
-local HumanModCons = {}
-addcmd('autojump',{'ajump'},function(args, speaker)
-local Char = speaker.Character
-local Human = Char and Char:FindFirstChildWhichIsA("Humanoid")
+
+local ay={}
+addcmd('autojump',{'ajump'},function(az,aA)
+local aB=aA.Character
+local aC=aB and aB:FindFirstChildWhichIsA"Humanoid"
 local function autoJump()
-if Char and Human then
-local check1 = workspace:FindPartOnRay(Ray.new(Human.RootPart.Position-Vector3.new(0,1.5,0), Human.RootPart.CFrame.lookVector*3), Human.Parent)
-local check2 = workspace:FindPartOnRay(Ray.new(Human.RootPart.Position+Vector3.new(0,1.5,0), Human.RootPart.CFrame.lookVector*3), Human.Parent)
-if check1 or check2 then
-Human.Jump = true
+if aB and aC then
+local aD=workspace:FindPartOnRay(Ray.new(aC.RootPart.Position-Vector3.new(0,1.5,0),aC.RootPart.CFrame.lookVector*3),aC.Parent)
+local V=workspace:FindPartOnRay(Ray.new(aC.RootPart.Position+Vector3.new(0,1.5,0),aC.RootPart.CFrame.lookVector*3),aC.Parent)
+if aD or V then
+aC.Jump=true
 end
 end
 end
 autoJump()
-HumanModCons.ajLoop = (HumanModCons.ajLoop and HumanModCons.ajLoop:Disconnect() and false) or RunService.RenderStepped:Connect(autoJump)
-HumanModCons.ajCA = (HumanModCons.ajCA and HumanModCons.ajCA:Disconnect() and false) or speaker.CharacterAdded:Connect(function(nChar)
-Char, Human = nChar, nChar:WaitForChild("Humanoid")
+ay.ajLoop=(ay.ajLoop and ay.ajLoop:Disconnect()and false)or RunService.RenderStepped:Connect(autoJump)
+ay.ajCA=(ay.ajCA and ay.ajCA:Disconnect()and false)or aA.CharacterAdded:Connect(function(aD)
+aB,aC=aD,aD:WaitForChild"Humanoid"
 autoJump()
-HumanModCons.ajLoop = (HumanModCons.ajLoop and HumanModCons.ajLoop:Disconnect() and false) or RunService.RenderStepped:Connect(autoJump)
+ay.ajLoop=(ay.ajLoop and ay.ajLoop:Disconnect()and false)or RunService.RenderStepped:Connect(autoJump)
 end)
 end)
-addcmd('unautojump',{'noautojump', 'noajump', 'unajump'},function(args, speaker)
-HumanModCons.ajLoop = (HumanModCons.ajLoop and HumanModCons.ajLoop:Disconnect() and false) or nil
-HumanModCons.ajCA = (HumanModCons.ajCA and HumanModCons.ajCA:Disconnect() and false) or nil
+
+addcmd('unautojump',{'noautojump','noajump','unajump'},function(az,aA)
+ay.ajLoop=(ay.ajLoop and ay.ajLoop:Disconnect()and false)or nil
+ay.ajCA=(ay.ajCA and ay.ajCA:Disconnect()and false)or nil
 end)
-addcmd('edgejump',{'ejump'},function(args, speaker)
-local Char = speaker.Character
-local Human = Char and Char:FindFirstChildWhichIsA("Humanoid")
--- Full credit to NoelGamer06 @V3rmillion
-local state
-local laststate
-local lastcf
+
+addcmd('edgejump',{'ejump'},function(az,aA)
+local aB=aA.Character
+local aC=aB and aB:FindFirstChildWhichIsA"Humanoid"
+
+local aD
+local V
+local W
 local function edgejump()
-if Char and Human then
-laststate = state
-state = Human:GetState()
-if laststate ~= state and state == Enum.HumanoidStateType.Freefall and laststate ~= Enum.HumanoidStateType.Jumping then
-Char.HumanoidRootPart.CFrame = lastcf
-Char.HumanoidRootPart.Velocity = Vector3.new(Char.HumanoidRootPart.Velocity.X, Human.JumpPower or Human.JumpHeight, Char.HumanoidRootPart.Velocity.Z)
+if aB and aC then
+V=aD
+aD=aC:GetState()
+if V~=aD and aD==Enum.HumanoidStateType.Freefall and V~=Enum.HumanoidStateType.Jumping then
+aB.HumanoidRootPart.CFrame=W
+aB.HumanoidRootPart.Velocity=Vector3.new(aB.HumanoidRootPart.Velocity.X,aC.JumpPower or aC.JumpHeight,aB.HumanoidRootPart.Velocity.Z)
 end
-lastcf = Char.HumanoidRootPart.CFrame
+W=aB.HumanoidRootPart.CFrame
 end
 end
 edgejump()
-HumanModCons.ejLoop = (HumanModCons.ejLoop and HumanModCons.ejLoop:Disconnect() and false) or RunService.RenderStepped:Connect(edgejump)
-HumanModCons.ejCA = (HumanModCons.ejCA and HumanModCons.ejCA:Disconnect() and false) or speaker.CharacterAdded:Connect(function(nChar)
-Char, Human = nChar, nChar:WaitForChild("Humanoid")
+ay.ejLoop=(ay.ejLoop and ay.ejLoop:Disconnect()and false)or RunService.RenderStepped:Connect(edgejump)
+ay.ejCA=(ay.ejCA and ay.ejCA:Disconnect()and false)or aA.CharacterAdded:Connect(function(X)
+aB,aC=X,X:WaitForChild"Humanoid"
 edgejump()
-HumanModCons.ejLoop = (HumanModCons.ejLoop and HumanModCons.ejLoop:Disconnect() and false) or RunService.RenderStepped:Connect(edgejump)
+ay.ejLoop=(ay.ejLoop and ay.ejLoop:Disconnect()and false)or RunService.RenderStepped:Connect(edgejump)
 end)
 end)
-addcmd('unedgejump',{'noedgejump', 'noejump', 'unejump'},function(args, speaker)
-HumanModCons.ejLoop = (HumanModCons.ejLoop and HumanModCons.ejLoop:Disconnect() and false) or nil
-HumanModCons.ejCA = (HumanModCons.ejCA and HumanModCons.ejCA:Disconnect() and false) or nil
+
+addcmd('unedgejump',{'noedgejump','noejump','unejump'},function(az,aA)
+ay.ejLoop=(ay.ejLoop and ay.ejLoop:Disconnect()and false)or nil
+ay.ejCA=(ay.ejCA and ay.ejCA:Disconnect()and false)or nil
 end)
-addcmd("team", {}, function(args, speaker)
-local teamName = getstring(1)
-local team = nil
-local root = speaker.Character and getRoot(speaker.Character)
-for _, v in ipairs(Teams:GetChildren()) do
-if v.Name:lower():match(teamName:lower()) then
-team = v
+
+addcmd("team",{},function(az,aA)
+local aB=getstring(1)
+local aC
+local aD=aA.Character and getRoot(aA.Character)
+for V,W in ipairs(Teams:GetChildren())do
+if W.Name:lower():match(aB:lower())then
+aC=W
 break
 end
 end
-if not team then
-return notify("Invalid Team", teamName .. " is not a valid team")
+if not aC then
+return notify("Invalid Team",aB.." is not a valid team")
 end
-if root and firetouchinterest then
-for _, v in ipairs(workspace:GetDescendants()) do
-if v:IsA("SpawnLocation") and v.BrickColor == team.TeamColor and v.AllowTeamChangeOnTouch == true then
-firetouchinterest(v, root, 0)
-firetouchinterest(v, root, 1)
+if aD and firetouchinterest then
+for V,W in ipairs(workspace:GetDescendants())do
+if W:IsA"SpawnLocation"and W.BrickColor==aC.TeamColor and W.AllowTeamChangeOnTouch==true then
+firetouchinterest(W,aD,0)
+firetouchinterest(W,aD,1)
 break
 end
 end
 else
-speaker.Team = team
+aA.Team=aC
 end
 end)
-addcmd('nobgui',{'unbgui','nobillboardgui','unbillboardgui','noname','rohg'},function(args, speaker)
-for i,v in pairs(speaker.Character:GetDescendants())do
-if v:IsA("BillboardGui") or v:IsA("SurfaceGui") then
-v:Destroy()
+
+addcmd('nobgui',{'unbgui','nobillboardgui','unbillboardgui','noname','rohg'},function(az,aA)
+for aB,aC in pairs(aA.Character:GetDescendants())do
+if aC:IsA"BillboardGui"or aC:IsA"SurfaceGui"then
+aC:Destroy()
 end
 end
 end)
-addcmd('loopnobgui',{'loopunbgui','loopnobillboardgui','loopunbillboardgui','loopnoname','looprohg'},function(args, speaker)
-for i,v in pairs(speaker.Character:GetDescendants())do
-if v:IsA("BillboardGui") or v:IsA("SurfaceGui") then
-v:Destroy()
+
+addcmd('loopnobgui',{'loopunbgui','loopnobillboardgui','loopunbillboardgui','loopnoname','looprohg'},function(az,aA)
+for aB,aC in pairs(aA.Character:GetDescendants())do
+if aC:IsA"BillboardGui"or aC:IsA"SurfaceGui"then
+aC:Destroy()
 end
 end
-local function charPartAdded(part)
-if part:IsA("BillboardGui") or part:IsA("SurfaceGui") then
+local function charPartAdded(aB)
+if aB:IsA"BillboardGui"or aB:IsA"SurfaceGui"then
 wait()
-part:Destroy()
+aB:Destroy()
 end
 end
-charPartTrigger = speaker.Character.DescendantAdded:Connect(charPartAdded)
+charPartTrigger=aA.Character.DescendantAdded:Connect(charPartAdded)
 end)
-addcmd('unloopnobgui',{'unloopunbgui','unloopnobillboardgui','unloopunbillboardgui','unloopnoname','unlooprohg'},function(args, speaker)
+
+addcmd('unloopnobgui',{'unloopunbgui','unloopnobillboardgui','unloopunbillboardgui','unloopnoname','unlooprohg'},function(az,aA)
 if charPartTrigger then
 charPartTrigger:Disconnect()
 end
 end)
-addcmd('spasm',{},function(args, speaker)
-if not r15(speaker) then
-local pchar=speaker.Character
-local AnimationId = "33796059"
-SpasmAnim = Instance.new("Animation")
-SpasmAnim.AnimationId = "rbxassetid://"..AnimationId
-Spasm = pchar:FindFirstChildOfClass('Humanoid'):LoadAnimation(SpasmAnim)
+
+addcmd('spasm',{},function(az,aA)
+if not r15(aA)then
+local aB=aA.Character
+local aC="33796059"
+SpasmAnim=Instance.new"Animation"
+SpasmAnim.AnimationId="rbxassetid://"..aC
+Spasm=aB:FindFirstChildOfClass'Humanoid':LoadAnimation(SpasmAnim)
 Spasm:Play()
 Spasm:AdjustSpeed(99)
 else
 notify('R6 Required','This command requires the r6 rig type')
 end
 end)
-addcmd('unspasm',{'nospasm'},function(args, speaker)
+
+addcmd('unspasm',{'nospasm'},function(az,aA)
 Spasm:Stop()
 SpasmAnim:Destroy()
 end)
-addcmd('headthrow',{},function(args, speaker)
-if not r15(speaker) then
-local AnimationId = "35154961"
-local Anim = Instance.new("Animation")
-Anim.AnimationId = "rbxassetid://"..AnimationId
-local k = speaker.Character:FindFirstChildOfClass('Humanoid'):LoadAnimation(Anim)
-k:Play(0)
-k:AdjustSpeed(1)
+
+addcmd('headthrow',{},function(az,aA)
+if not r15(aA)then
+local aB="35154961"
+local aC=Instance.new"Animation"
+aC.AnimationId="rbxassetid://"..aB
+local aD=aA.Character:FindFirstChildOfClass'Humanoid':LoadAnimation(aC)
+aD:Play(0)
+aD:AdjustSpeed(1)
 else
 notify('R6 Required','This command requires the r6 rig type')
 end
 end)
-addcmd('animation',{'anim'},function(args, speaker)
-if not r15(speaker) then
-local pchar=speaker.Character
-local AnimationId = tostring(args[1])
-local Anim = Instance.new("Animation")
-Anim.AnimationId = "rbxassetid://"..AnimationId
-local k = pchar:FindFirstChildOfClass('Humanoid'):LoadAnimation(Anim)
-k:Play()
-if args[2] then
-k:AdjustSpeed(tostring(args[2]))
+
+addcmd('animation',{'anim'},function(az,aA)
+if not r15(aA)then
+local aB=aA.Character
+local aC=tostring(az[1])
+local aD=Instance.new"Animation"
+aD.AnimationId="rbxassetid://"..aC
+local V=aB:FindFirstChildOfClass'Humanoid':LoadAnimation(aD)
+V:Play()
+if az[2]then
+V:AdjustSpeed(tostring(az[2]))
 end
 else
 notify('R6 Required','This command requires the r6 rig type')
 end
 end)
-addcmd('noanim',{},function(args, speaker)
-speaker.Character.Animate.Disabled = true
+
+addcmd('noanim',{},function(az,aA)
+aA.Character.Animate.Disabled=true
 end)
-addcmd('reanim',{},function(args, speaker)
-speaker.Character.Animate.Disabled = false
+
+addcmd('reanim',{},function(az,aA)
+aA.Character.Animate.Disabled=false
 end)
-addcmd('animspeed',{},function(args, speaker)
-local Char = speaker.Character
-local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
-for i,v in next, Hum:GetPlayingAnimationTracks() do
-v:AdjustSpeed(tonumber(args[1] or 1))
+
+addcmd('animspeed',{},function(az,aA)
+local aB=aA.Character
+local aC=aB:FindFirstChildOfClass"Humanoid"or aB:FindFirstChildOfClass"AnimationController"
+
+for aD,V in next,aC:GetPlayingAnimationTracks()do
+V:AdjustSpeed(tonumber(az[1]or 1))
 end
 end)
-addcmd('copyanimation',{'copyanim','copyemote'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for _,v in ipairs(players)do
-local char = Players[v].Character
-for _, v1 in pairs(speaker.Character:FindFirstChildOfClass('Humanoid'):GetPlayingAnimationTracks()) do
-v1:Stop()
+
+addcmd('copyanimation',{'copyanim','copyemote'},function(az,aA)
+local aB=getPlayer(az[1],aA)
+for aC,aD in ipairs(aB)do local V=
+Players[aD].Character
+for W,X in pairs(aA.Character:FindFirstChildOfClass'Humanoid':GetPlayingAnimationTracks())do
+X:Stop()
 end
-for _, v1 in pairs(Players[v].Character:FindFirstChildOfClass('Humanoid'):GetPlayingAnimationTracks()) do
-if not string.find(v1.Animation.AnimationId, "507768375") then
-local ANIM = speaker.Character:FindFirstChildOfClass('Humanoid'):LoadAnimation(v1.Animation)
-ANIM:Play(.1, 1, v1.Speed)
-ANIM.TimePosition = v1.TimePosition
+for W,X in pairs(Players[aD].Character:FindFirstChildOfClass'Humanoid':GetPlayingAnimationTracks())do
+if not string.find(X.Animation.AnimationId,"507768375")then
+local Y=aA.Character:FindFirstChildOfClass'Humanoid':LoadAnimation(X.Animation)
+Y:Play(.1,1,X.Speed)
+Y.TimePosition=X.TimePosition
 task.spawn(function()
-v1.Stopped:Wait()
-ANIM:Stop()
-ANIM:Destroy()
+X.Stopped:Wait()
+Y:Stop()
+Y:Destroy()
 end)
 end
 end
 end
 end)
-addcmd("copyanimationid", {"copyanimid", "copyemoteid"}, function(args, speaker)
-local copyAnimId = function(player)
-local found = "Animations Copied"
-for _, v in pairs(player.Character:FindFirstChildWhichIsA("Humanoid"):GetPlayingAnimationTracks()) do
-local animationId = v.Animation.AnimationId
-local assetId = animationId:find("rbxassetid://") and animationId:match("%d+")
-if not string.find(animationId, "507768375") and not string.find(animationId, "180435571") then
-if assetId then
-local success, result = pcall(function()
-return MarketplaceService:GetProductInfo(tonumber(assetId)).Name
+
+addcmd("copyanimationid",{"copyanimid","copyemoteid"},function(az,aA)
+local aB=function(aB)
+local aC="Animations Copied"
+
+for aD,V in pairs(aB.Character:FindFirstChildWhichIsA"Humanoid":GetPlayingAnimationTracks())do
+local W=V.Animation.AnimationId
+local X=W:find"rbxassetid://"and W:match"%d+"
+
+if not string.find(W,"507768375")and not string.find(W,"180435571")then
+if X then
+local Y,Z=pcall(function()
+return MarketplaceService:GetProductInfo(tonumber(X)).Name
 end)
-local name = success and result or "Failed to get name"
-found = found .. "\n\nName: " .. name .. "\nAnimation Id: " .. animationId
+local _=Y and Z or"Failed to get name"
+aC=aC.."\n\nName: ".._.."\nAnimation Id: "..W
 else
-found = found .. "\n\nAnimation Id: " .. animationId
+aC=aC.."\n\nAnimation Id: "..W
 end
 end
 end
-if found ~= "Animations Copied" then
-toClipboard(found)
+
+if aC~="Animations Copied"then
+toClipboard(aC)
 else
-notify("Animations", "No animations to copy")
+notify("Animations","No animations to copy")
 end
 end
-if args[1] then
-copyAnimId(Players[getPlayer(args[1], speaker)[1]])
+
+if az[1]then
+aB(Players[getPlayer(az[1],aA)[1] ])
 else
-copyAnimId(speaker)
+aB(aA)
 end
 end)
-addcmd('stopanimations',{'stopanims','stopanim'},function(args, speaker)
-local Char = speaker.Character
-local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
-for i,v in next, Hum:GetPlayingAnimationTracks() do
-v:Stop()
+
+addcmd('stopanimations',{'stopanims','stopanim'},function(az,aA)
+local aB=aA.Character
+local aC=aB:FindFirstChildOfClass"Humanoid"or aB:FindFirstChildOfClass"AnimationController"
+
+for aD,V in next,aC:GetPlayingAnimationTracks()do
+V:Stop()
 end
 end)
-addcmd('refreshanimations', {'refreshanimation', 'refreshanims', 'refreshanim'}, function(args, speaker)
-local Char = speaker.Character or speaker.CharacterAdded:Wait()
-local Human = Char and Char:WaitForChild('Humanoid', 15)
-local Animate = Char and Char:WaitForChild('Animate', 15)
-if not Human or not Animate then
-return notify('Refresh Animations', 'Failed to get Animate/Humanoid')
+
+addcmd('refreshanimations',{'refreshanimation','refreshanims','refreshanim'},function(az,aA)
+local aB=aA.Character or aA.CharacterAdded:Wait()
+local aC=aB and aB:WaitForChild('Humanoid',15)
+local aD=aB and aB:WaitForChild('Animate',15)
+if not aC or not aD then
+return notify('Refresh Animations','Failed to get Animate/Humanoid')
 end
-Animate.Disabled = true
-for _, v in ipairs(Human:GetPlayingAnimationTracks()) do
-v:Stop()
+aD.Disabled=true
+for V,W in ipairs(aC:GetPlayingAnimationTracks())do
+W:Stop()
 end
-Animate.Disabled = false
+aD.Disabled=false
 end)
-addcmd('allowcustomanim', {'allowcustomanimations'}, function(args, speaker)
-StarterPlayer.AllowCustomAnimations = true
-execCmd('refreshanimations')
+
+addcmd('allowcustomanim',{'allowcustomanimations'},function(az,aA)
+StarterPlayer.AllowCustomAnimations=true
+execCmd'refreshanimations'
 end)
-addcmd('unallowcustomanim', {'unallowcustomanimations'}, function(args, speaker)
-StarterPlayer.AllowCustomAnimations = false
-execCmd('refreshanimations')
+
+addcmd('unallowcustomanim',{'unallowcustomanimations'},function(az,aA)
+StarterPlayer.AllowCustomAnimations=false
+execCmd'refreshanimations'
 end)
-addcmd('loopanimation', {'loopanim'},function(args, speaker)
-local Char = speaker.Character
-local Human = Char and Char.FindFirstChildWhichIsA(Char, "Humanoid")
-for _, v in ipairs(Human.GetPlayingAnimationTracks(Human)) do
-v.Looped = true
-end
-end)
-addcmd('tpposition',{'tppos'},function(args, speaker)
-if #args < 3 then return end
-local tpX,tpY,tpZ = tonumber((args[1]:gsub(",", ""))),tonumber((args[2]:gsub(",", ""))),tonumber((args[3]:gsub(",", "")))
-local char = speaker.Character
-if char and getRoot(char) then
-getRoot(char).CFrame = CFrame.new(tpX,tpY,tpZ)
+
+addcmd('loopanimation',{'loopanim'},function(az,aA)
+local aB=aA.Character
+local aC=aB and aB.FindFirstChildWhichIsA(aB,"Humanoid")
+for aD,V in ipairs(aC.GetPlayingAnimationTracks(aC))do
+V.Looped=true
 end
 end)
-addcmd('tweentpposition',{'ttppos'},function(args, speaker)
-if #args < 3 then return end
-local tpX,tpY,tpZ = tonumber((args[1]:gsub(",", ""))),tonumber((args[2]:gsub(",", ""))),tonumber((args[3]:gsub(",", "")))
-local char = speaker.Character
-if char and getRoot(char) then
-TweenService:Create(getRoot(speaker.Character), TweenInfo.new(tweenSpeed, Enum.EasingStyle.Linear), {CFrame = CFrame.new(tpX,tpY,tpZ)}):Play()
+
+addcmd('tpposition',{'tppos'},function(az,aA)
+if#az<3 then return end
+local aB,aC,aD=tonumber((az[1]:gsub(",",""))),tonumber((az[2]:gsub(",",""))),tonumber((az[3]:gsub(",","")))
+local V=aA.Character
+if V and getRoot(V)then
+getRoot(V).CFrame=CFrame.new(aB,aC,aD)
 end
 end)
-addcmd('offset',{},function(args, speaker)
-if #args < 3 then
+
+addcmd('tweentpposition',{'ttppos'},function(az,aA)
+if#az<3 then return end
+local aB,aC,aD=tonumber((az[1]:gsub(",",""))),tonumber((az[2]:gsub(",",""))),tonumber((az[3]:gsub(",","")))
+local V=aA.Character
+if V and getRoot(V)then
+TweenService:Create(getRoot(aA.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=CFrame.new(aB,aC,aD)}):Play()
+end
+end)
+
+addcmd('offset',{},function(az,aA)
+if#az<3 then
 return
 end
-if speaker.Character then
-speaker.Character:TranslateBy(Vector3.new(tonumber(args[1]) or 0, tonumber(args[2]) or 0, tonumber(args[3]) or 0))
+if aA.Character then
+aA.Character:TranslateBy(Vector3.new(tonumber(az[1])or 0,tonumber(az[2])or 0,tonumber(az[3])or 0))
 end
 end)
-addcmd('tweenoffset',{'toffset'},function(args, speaker)
-if #args < 3 then return end
-local tpX,tpY,tpZ = tonumber(args[1]),tonumber(args[2]),tonumber(args[3])
-local char = speaker.Character
-if char and getRoot(char) then
-TweenService:Create(getRoot(speaker.Character), TweenInfo.new(tweenSpeed, Enum.EasingStyle.Linear), {CFrame = CFrame.new(tpX,tpY,tpZ)}):Play()
+
+addcmd('tweenoffset',{'toffset'},function(az,aA)
+if#az<3 then return end
+local aB,aC,aD=tonumber(az[1]),tonumber(az[2]),tonumber(az[3])
+local V=aA.Character
+if V and getRoot(V)then
+TweenService:Create(getRoot(aA.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=CFrame.new(aB,aC,aD)}):Play()
 end
 end)
-addcmd('clickteleport',{},function(args, speaker)
-if speaker == Players.LocalPlayer then
+
+addcmd('clickteleport',{},function(az,aA)
+if aA==Players.LocalPlayer then
 notify('Click TP','Go to Settings>Keybinds>Add to set up click tp')
 end
 end)
-addcmd("mouseteleport", {"mousetp"}, function(args, speaker)
-local root = getRoot(speaker.Character)
-local pos = IYMouse.Hit
-if root and pos then
-root.CFrame = CFrame.new(pos.X, pos.Y + 3, pos.Z, select(4, root.CFrame:components()))
+
+addcmd("mouseteleport",{"mousetp"},function(az,aA)
+local aB=getRoot(aA.Character)
+local aC=IYMouse.Hit
+if aB and aC then
+aB.CFrame=CFrame.new(aC.X,aC.Y+3,aC.Z,select(4,aB.CFrame:components()))
 end
 end)
-addcmd('tptool', {'teleporttool'}, function(args, speaker)
-local TpTool = Instance.new("Tool")
-TpTool.Name = "Teleport Tool"
-TpTool.RequiresHandle = false
-TpTool.Parent = speaker.Backpack
-TpTool.Activated:Connect(function()
-local Char = speaker.Character or workspace:FindFirstChild(speaker.Name)
-local HRP = Char and Char:FindFirstChild("HumanoidRootPart")
-if not Char or not HRP then
-return warn("Failed to find HumanoidRootPart")
+
+addcmd('tptool',{'teleporttool'},function(az,aA)
+local aB=Instance.new"Tool"
+aB.Name="Teleport Tool"
+aB.RequiresHandle=false
+aB.Parent=aA.Backpack
+aB.Activated:Connect(function()
+local aC=aA.Character or workspace:FindFirstChild(aA.Name)
+local aD=aC and aC:FindFirstChild"HumanoidRootPart"
+if not aC or not aD then
+return warn"Failed to find HumanoidRootPart"
 end
-HRP.CFrame = CFrame.new(IYMouse.Hit.X, IYMouse.Hit.Y + 3, IYMouse.Hit.Z, select(4, HRP.CFrame:components()))
+aD.CFrame=CFrame.new(IYMouse.Hit.X,IYMouse.Hit.Y+3,IYMouse.Hit.Z,select(4,aD.CFrame:components()))
 end)
 end)
-addcmd('clickdelete',{},function(args, speaker)
-if speaker == Players.LocalPlayer then
+
+addcmd('clickdelete',{},function(az,aA)
+if aA==Players.LocalPlayer then
 notify('Click Delete','Go to Settings>Keybinds>Add to set up click delete')
 end
 end)
-addcmd('getposition',{'getpos','notifypos','notifyposition'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
-local char = Players[v].Character
-local pos = char and (getRoot(char) or char:FindFirstChildWhichIsA("BasePart"))
-pos = pos and pos.Position
-if not pos then
+
+addcmd('getposition',{'getpos','notifypos','notifyposition'},function(az,aA)
+local aB=getPlayer(az[1],aA)
+for aC,aD in pairs(aB)do
+local V=Players[aD].Character
+local W=V and(getRoot(V)or V:FindFirstChildWhichIsA"BasePart")
+W=W and W.Position
+if not W then
 return notify('Getposition Error','Missing character')
 end
-local roundedPos = math.round(pos.X) .. ", " .. math.round(pos.Y) .. ", " .. math.round(pos.Z)
-notify('Current Position',roundedPos)
+local X=math.round(W.X)..", "..math.round(W.Y)..", "..math.round(W.Z)
+notify('Current Position',X)
 end
 end)
-addcmd('copyposition',{'copypos'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
-local char = Players[v].Character
-local pos = char and (getRoot(char) or char:FindFirstChildWhichIsA("BasePart"))
-pos = pos and pos.Position
-if not pos then
+
+addcmd('copyposition',{'copypos'},function(az,aA)
+local aB=getPlayer(az[1],aA)
+for aC,aD in pairs(aB)do
+local V=Players[aD].Character
+local W=V and(getRoot(V)or V:FindFirstChildWhichIsA"BasePart")
+W=W and W.Position
+if not W then
 return notify('Getposition Error','Missing character')
 end
-local roundedPos = math.round(pos.X) .. ", " .. math.round(pos.Y) .. ", " .. math.round(pos.Z)
-toClipboard(roundedPos)
+local X=math.round(W.X)..", "..math.round(W.Y)..", "..math.round(W.Z)
+toClipboard(X)
 end
 end)
-addcmd('walktopos',{'walktoposition'},function(args, speaker)
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+addcmd('walktopos',{'walktoposition'},function(az,aA)
+if aA.Character:FindFirstChildOfClass'Humanoid'and aA.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aA.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-speaker.Character:FindFirstChildOfClass('Humanoid').WalkToPoint = Vector3.new(args[1],args[2],args[3])
+aA.Character:FindFirstChildOfClass'Humanoid'.WalkToPoint=Vector3.new(az[1],az[2],az[3])
 end)
-addcmd('speed',{'ws','walkspeed'},function(args, speaker)
-if args[2] then
-local speed = args[2] or 16
-if isNumber(speed) then
-speaker.Character:FindFirstChildOfClass('Humanoid').WalkSpeed = speed
+
+addcmd('speed',{'ws','walkspeed'},function(az,aA)
+if az[2]then
+local aB=az[2]or 16
+if isNumber(aB)then
+aA.Character:FindFirstChildOfClass'Humanoid'.WalkSpeed=aB
 end
 else
-local speed = args[1] or 16
-if isNumber(speed) then
-speaker.Character:FindFirstChildOfClass('Humanoid').WalkSpeed = speed
+local aB=az[1]or 16
+if isNumber(aB)then
+aA.Character:FindFirstChildOfClass'Humanoid'.WalkSpeed=aB
 end
 end
 end)
-addcmd('spoofspeed',{'spoofws','spoofwalkspeed'},function(args, speaker)
-if args[1] and isNumber(args[1]) then
+
+addcmd('spoofspeed',{'spoofws','spoofwalkspeed'},function(az,aA)
+if az[1]and isNumber(az[1])then
 if hookmetamethod then
-local char = speaker.Character
-local setspeed;
-local index; index = hookmetamethod(game, "__index", function(self, key)
-local keyclean = key:gsub("\0", "")
-if (keyclean == "WalkSpeed" or keyclean == "walkSpeed") and self:IsA("Humanoid") and self:IsDescendantOf(char) and not checkcaller() then
-return setspeed or args[1]
+local aB=aA.Character
+local aC;
+local aD;aD=hookmetamethod(game,"__index",function(V,W)
+local X=W:gsub("\0","")
+if(X=="WalkSpeed"or X=="walkSpeed")and V:IsA"Humanoid"and V:IsDescendantOf(aB)and not checkcaller()then
+return aC or az[1]
 end
-return index(self, key)
+return aD(V,W)
 end)
-local newindex; newindex = hookmetamethod(game, "__newindex", function(self, key, value)
-local keyclean = string.gsub(key, "\0", "")
-if (keyclean == "WalkSpeed" or keyclean == "walkSpeed") and self:IsA("Humanoid") and self:IsDescendantOf(char) and not checkcaller() then
-setspeed = tonumber(value)
-return setspeed
+local V;V=hookmetamethod(game,"__newindex",function(W,X,Y)
+local Z=string.gsub(X,"\0","")
+if(Z=="WalkSpeed"or Z=="walkSpeed")and W:IsA"Humanoid"and W:IsDescendantOf(aB)and not checkcaller()then
+aC=tonumber(Y)
+return aC
 end
-return newindex(self, key, value)
+return V(W,X,Y)
 end)
 else
 notify('Incompatible Exploit','Your exploit does not support this command (missing hookmetamethod)')
 end
 end
 end)
-addcmd('loopspeed',{'loopws'},function(args, speaker)
-local speed = args[1] or 16
-if args[2] then
-speed = args[2] or 16
+
+addcmd('loopspeed',{'loopws'},function(az,aA)
+local aB=az[1]or 16
+if az[2]then
+aB=az[2]or 16
 end
-if isNumber(speed) then
-local Char = speaker.Character or workspace:FindFirstChild(speaker.Name)
-local Human = Char and Char:FindFirstChildWhichIsA("Humanoid")
+if isNumber(aB)then
+local aC=aA.Character or workspace:FindFirstChild(aA.Name)
+local aD=aC and aC:FindFirstChildWhichIsA"Humanoid"
 local function WalkSpeedChange()
-if Char and Human then
-Human.WalkSpeed = speed
+if aC and aD then
+aD.WalkSpeed=aB
 end
 end
 WalkSpeedChange()
-HumanModCons.wsLoop = (HumanModCons.wsLoop and HumanModCons.wsLoop:Disconnect() and false) or Human:GetPropertyChangedSignal("WalkSpeed"):Connect(WalkSpeedChange)
-HumanModCons.wsCA = (HumanModCons.wsCA and HumanModCons.wsCA:Disconnect() and false) or speaker.CharacterAdded:Connect(function(nChar)
-Char, Human = nChar, nChar:WaitForChild("Humanoid")
+ay.wsLoop=(ay.wsLoop and ay.wsLoop:Disconnect()and false)or aD:GetPropertyChangedSignal"WalkSpeed":Connect(WalkSpeedChange)
+ay.wsCA=(ay.wsCA and ay.wsCA:Disconnect()and false)or aA.CharacterAdded:Connect(function(V)
+aC,aD=V,V:WaitForChild"Humanoid"
 WalkSpeedChange()
-HumanModCons.wsLoop = (HumanModCons.wsLoop and HumanModCons.wsLoop:Disconnect() and false) or Human:GetPropertyChangedSignal("WalkSpeed"):Connect(WalkSpeedChange)
+ay.wsLoop=(ay.wsLoop and ay.wsLoop:Disconnect()and false)or aD:GetPropertyChangedSignal"WalkSpeed":Connect(WalkSpeedChange)
 end)
 end
 end)
-addcmd('unloopspeed',{'unloopws'},function(args, speaker)
-HumanModCons.wsLoop = (HumanModCons.wsLoop and HumanModCons.wsLoop:Disconnect() and false) or nil
-HumanModCons.wsCA = (HumanModCons.wsCA and HumanModCons.wsCA:Disconnect() and false) or nil
+
+addcmd('unloopspeed',{'unloopws'},function(az,aA)
+ay.wsLoop=(ay.wsLoop and ay.wsLoop:Disconnect()and false)or nil
+ay.wsCA=(ay.wsCA and ay.wsCA:Disconnect()and false)or nil
 end)
-addcmd('spoofjumppower',{'spoofjp'},function(args, speaker)
-if args[1] and isNumber(args[1]) then
+
+addcmd('spoofjumppower',{'spoofjp'},function(az,aA)
+if az[1]and isNumber(az[1])then
 if hookmetamethod then
-local char = speaker.Character
-local setpower;
-local index; index = hookmetamethod(game, "__index", function(self, key)
-local keyclean = key:gsub("\0", "")
-if (keyclean == "JumpPower" or keyclean == "jumpPower") and self:IsA("Humanoid") and self:IsDescendantOf(char) and not checkcaller() then
-return setpower or args[1]
+local aB=aA.Character
+local aC;
+local aD;aD=hookmetamethod(game,"__index",function(V,W)
+local X=W:gsub("\0","")
+if(X=="JumpPower"or X=="jumpPower")and V:IsA"Humanoid"and V:IsDescendantOf(aB)and not checkcaller()then
+return aC or az[1]
 end
-return index(self, key)
+return aD(V,W)
 end)
-local newindex; newindex = hookmetamethod(game, "__newindex", function(self, key, value)
-local keyclean = string.gsub(key, "\0", "")
-if (keyclean == "JumpPower" or keyclean == "jumpPower") and self:IsA("Humanoid") and self:IsDescendantOf(char) and not checkcaller() then
-setpower = tonumber(value)
-return setpower
+local V;V=hookmetamethod(game,"__newindex",function(W,X,Y)
+local Z=string.gsub(X,"\0","")
+if(Z=="JumpPower"or Z=="jumpPower")and W:IsA"Humanoid"and W:IsDescendantOf(aB)and not checkcaller()then
+aC=tonumber(Y)
+return aC
 end
-return newindex(self, key, value)
+return V(W,X,Y)
 end)
 else
 notify('Incompatible Exploit','Your exploit does not support this command (missing hookmetamethod)')
 end
 end
 end)
-addcmd('loopjumppower',{'loopjp','loopjpower'},function(args, speaker)
-local jpower = args[1] or 50
-if isNumber(jpower) then
-local Char = speaker.Character or workspace:FindFirstChild(speaker.Name)
-local Human = Char and Char:FindFirstChildWhichIsA("Humanoid")
+
+addcmd('loopjumppower',{'loopjp','loopjpower'},function(az,aA)
+local aB=az[1]or 50
+if isNumber(aB)then
+local aC=aA.Character or workspace:FindFirstChild(aA.Name)
+local aD=aC and aC:FindFirstChildWhichIsA"Humanoid"
 local function JumpPowerChange()
-if Char and Human then
-if speaker.Character:FindFirstChildOfClass('Humanoid').UseJumpPower then
-speaker.Character:FindFirstChildOfClass('Humanoid').JumpPower = jpower
+if aC and aD then
+if aA.Character:FindFirstChildOfClass'Humanoid'.UseJumpPower then
+aA.Character:FindFirstChildOfClass'Humanoid'.JumpPower=aB
 else
-speaker.Character:FindFirstChildOfClass('Humanoid').JumpHeight  = jpower
+aA.Character:FindFirstChildOfClass'Humanoid'.JumpHeight=aB
 end
 end
 end
 JumpPowerChange()
-HumanModCons.jpLoop = (HumanModCons.jpLoop and HumanModCons.jpLoop:Disconnect() and false) or Human:GetPropertyChangedSignal("JumpPower"):Connect(JumpPowerChange)
-HumanModCons.jpCA = (HumanModCons.jpCA and HumanModCons.jpCA:Disconnect() and false) or speaker.CharacterAdded:Connect(function(nChar)
-Char, Human = nChar, nChar:WaitForChild("Humanoid")
+ay.jpLoop=(ay.jpLoop and ay.jpLoop:Disconnect()and false)or aD:GetPropertyChangedSignal"JumpPower":Connect(JumpPowerChange)
+ay.jpCA=(ay.jpCA and ay.jpCA:Disconnect()and false)or aA.CharacterAdded:Connect(function(V)
+aC,aD=V,V:WaitForChild"Humanoid"
 JumpPowerChange()
-HumanModCons.jpLoop = (HumanModCons.jpLoop and HumanModCons.jpLoop:Disconnect() and false) or Human:GetPropertyChangedSignal("JumpPower"):Connect(JumpPowerChange)
+ay.jpLoop=(ay.jpLoop and ay.jpLoop:Disconnect()and false)or aD:GetPropertyChangedSignal"JumpPower":Connect(JumpPowerChange)
 end)
 end
 end)
-addcmd('unloopjumppower',{'unloopjp','unloopjpower'},function(args, speaker)
-local Char = speaker.Character or workspace:FindFirstChild(speaker.Name)
-local Human = Char and Char:FindFirstChildWhichIsA("Humanoid")
-HumanModCons.jpLoop = (HumanModCons.jpLoop and HumanModCons.jpLoop:Disconnect() and false) or nil
-HumanModCons.jpCA = (HumanModCons.jpCA and HumanModCons.jpCA:Disconnect() and false) or nil
-if Char and Human then
-if speaker.Character:FindFirstChildOfClass('Humanoid').UseJumpPower then
-speaker.Character:FindFirstChildOfClass('Humanoid').JumpPower = 50
+
+addcmd('unloopjumppower',{'unloopjp','unloopjpower'},function(az,aA)
+local aB=aA.Character or workspace:FindFirstChild(aA.Name)
+local aC=aB and aB:FindFirstChildWhichIsA"Humanoid"
+ay.jpLoop=(ay.jpLoop and ay.jpLoop:Disconnect()and false)or nil
+ay.jpCA=(ay.jpCA and ay.jpCA:Disconnect()and false)or nil
+if aB and aC then
+if aA.Character:FindFirstChildOfClass'Humanoid'.UseJumpPower then
+aA.Character:FindFirstChildOfClass'Humanoid'.JumpPower=50
 else
-speaker.Character:FindFirstChildOfClass('Humanoid').JumpHeight  = 50
+aA.Character:FindFirstChildOfClass'Humanoid'.JumpHeight=50
 end
 end
 end)
-addcmd('tools',{'gears'},function(args, speaker)
-local function copy(instance)
-for i,c in pairs(instance:GetChildren())do
-if c:IsA('Tool') or c:IsA('HopperBin') then
-c:Clone().Parent = speaker:FindFirstChildOfClass("Backpack")
+
+addcmd('tools',{'gears'},function(az,aA)
+local function copy(aB)
+for aC,aD in pairs(aB:GetChildren())do
+if aD:IsA'Tool'or aD:IsA'HopperBin'then
+aD:Clone().Parent=aA:FindFirstChildOfClass"Backpack"
 end
-copy(c)
+copy(aD)
 end
 end
 copy(Lighting)
-local function copy(instance)
-for i,c in pairs(instance:GetChildren())do
-if c:IsA('Tool') or c:IsA('HopperBin') then
-c:Clone().Parent = speaker:FindFirstChildOfClass("Backpack")
+local function copy(aB)
+for aC,aD in pairs(aB:GetChildren())do
+if aD:IsA'Tool'or aD:IsA'HopperBin'then
+aD:Clone().Parent=aA:FindFirstChildOfClass"Backpack"
 end
-copy(c)
+copy(aD)
 end
 end
 copy(ReplicatedStorage)
 notify('Tools','Copied tools from ReplicatedStorage and Lighting')
 end)
-addcmd('notools',{'rtools','clrtools','removetools','deletetools','dtools'},function(args, speaker)
-for i,v in pairs(speaker:FindFirstChildOfClass("Backpack"):GetDescendants()) do
-if v:IsA('Tool') or v:IsA('HopperBin') then
-v:Destroy()
+
+addcmd('notools',{'rtools','clrtools','removetools','deletetools','dtools'},function(az,aA)
+for aB,aC in pairs(aA:FindFirstChildOfClass"Backpack":GetDescendants())do
+if aC:IsA'Tool'or aC:IsA'HopperBin'then
+aC:Destroy()
 end
 end
-for i,v in pairs(speaker.Character:GetDescendants()) do
-if v:IsA('Tool') or v:IsA('HopperBin') then
-v:Destroy()
-end
-end
-end)
-addcmd('deleteselectedtool',{'dst'},function(args, speaker)
-for i,v in pairs(speaker.Character:GetDescendants()) do
-if v:IsA('Tool') or v:IsA('HopperBin') then
-v:Destroy()
+for aB,aC in pairs(aA.Character:GetDescendants())do
+if aC:IsA'Tool'or aC:IsA'HopperBin'then
+aC:Destroy()
 end
 end
 end)
-addcmd("console", {}, function(args, speaker)
-StarterGui:SetCore("DevConsoleVisible", true)
+
+addcmd('deleteselectedtool',{'dst'},function(az,aA)
+for aB,aC in pairs(aA.Character:GetDescendants())do
+if aC:IsA'Tool'or aC:IsA'HopperBin'then
+aC:Destroy()
+end
+end
 end)
-addcmd('oldconsole',{},function(args, speaker)
--- Thanks wally!!
-notify("Loading",'Hold on a sec')
-local _, str = pcall(function()
-return game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/console.lua", true)
+
+addcmd("console",{},function(az,aA)
+StarterGui:SetCore("DevConsoleVisible",true)
 end)
-local s, e = loadstring(str)
-if typeof(s) ~= "function" then
+
+addcmd('oldconsole',{},function(az,aA)
+
+notify("Loading",'Hold on a sec')local
+aB, aC=pcall(function()
+return game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/console.lua",true)
+end)local
+
+aD, V=loadstring(aC)
+if typeof(aD)~="function"then
 return
 end
-local success, message = pcall(s)
-if (not success) then
+
+local W,X=pcall(aD)
+if(not W)then
 if printconsole then
-printconsole(message)
+printconsole(X)
 elseif printoutput then
-printoutput(message)
+printoutput(X)
 end
 end
 wait(1)
 notify('Console','Press F9 to open the console')
 end)
-addcmd('explorer', {'dex'}, function(args, speaker)
-notify('Loading', 'Hold on a sec')
-loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
+
+addcmd('explorer',{'dex'},function(az,aA)
+notify('Loading','Hold on a sec')
+loadstring(game:HttpGet"https://raw.githubusercontent.com/infyiff/backup/main/dex.lua")()
 end)
-addcmd('olddex', {'odex'}, function(args, speaker)
-notify('Loading old explorer', 'Hold on a sec')
-local getobjects = function(a)
-local Objects = {}
-if a then
-local b = InsertService:LoadLocalAsset(a)
-if b then
-table.insert(Objects, b)
+
+addcmd('olddex',{'odex'},function(az,aA)
+notify('Loading old explorer','Hold on a sec')
+
+local aB=function(aB)
+local aC={}
+if aB then
+local aD=InsertService:LoadLocalAsset(aB)
+if aD then
+table.insert(aC,aD)
 end
 end
-return Objects
+return aC
 end
-local Dex = getobjects("rbxassetid://10055842438")[1]
-Dex.Parent = PARENT
-local function Load(Obj, Url)
-local function GiveOwnGlobals(Func, Script)
--- Fix for this edit of dex being poorly made
--- I (Alex) would like to commemorate whoever added this dex in somehow finding the worst dex to ever exist
-local Fenv, RealFenv, FenvMt = {}, {
-script = Script,
-getupvalue = function(a, b)
-return nil -- force it to use globals
+
+local aC=aB"rbxassetid://10055842438"[1]
+aC.Parent=PARENT
+
+local function Load(aD,V)
+local function GiveOwnGlobals(W,X)
+
+
+local aE,aF,aG={},{
+script=X,
+getupvalue=function(Y,Z)
+return nil
 end,
-getreg = function() -- It loops registry for some idiotic reason so stop it from doing that and just use a global
-return {} -- force it to use globals
+getreg=function()
+return{}
 end,
-getprops = getprops or function(inst)
+getprops=getprops or function(Y)
 if getproperties then
-local props = getproperties(inst)
-if props[1] and gethiddenproperty then
-local results = {}
-for _,name in pairs(props) do
-local success, res = pcall(gethiddenproperty, inst, name)
-if success then
-results[name] = res
+local Z=getproperties(Y)
+if Z[1]and gethiddenproperty then
+local _={}
+for aE,aF in pairs(Z)do
+local aG,aH=pcall(gethiddenproperty,Y,aF)
+if aG then
+_[aF]=aH
 end
 end
-return results
+
+return _
 end
-return props
+
+return Z
 end
-return {}
+
+return{}
 end
-}, {}
-FenvMt.__index = function(a,b)
-return RealFenv[b] == nil and getgenv()[b] or RealFenv[b]
+},{}
+aG.__index=function(aH,Y)
+return aF[Y]==nil and getgenv()[Y]or aF[Y]
 end
-FenvMt.__newindex = function(a, b, c)
-if RealFenv[b] == nil then
-getgenv()[b] = c
+aG.__newindex=function(aH,Y,Z)
+if aF[Y]==nil then
+getgenv()[Y]=Z
 else
-RealFenv[b] = c
+aF[Y]=Z
 end
 end
-setmetatable(Fenv, FenvMt)
-pcall(setfenv, Func, Fenv)
-return Func
+setmetatable(aE,aG)
+pcall(setfenv,W,aE)
+return W
 end
-local function LoadScripts(_, Script)
-if Script:IsA("LocalScript") then
+
+local function LoadScripts(aE,aF)
+if aF:IsA"LocalScript"then
 task.spawn(function()
-GiveOwnGlobals(loadstring(Script.Source,"="..Script:GetFullName()), Script)()
+GiveOwnGlobals(loadstring(aF.Source,"="..aF:GetFullName()),aF)()
 end)
 end
-table.foreach(Script:GetChildren(), LoadScripts)
+table.foreach(aF:GetChildren(),LoadScripts)
 end
-LoadScripts(nil, Obj)
+
+LoadScripts(nil,aD)
 end
-Load(Dex)
+
+Load(aC)
 end)
-addcmd('remotespy',{'rspy'},function(args, speaker)
+
+addcmd('remotespy',{'rspy'},function(az,aA)
 notify("Loading",'Hold on a sec')
--- Full credit to exx, creator of SimpleSpy
--- also thanks to NoobSploit for fixing
-loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/SimpleSpyV3/main.lua"))()
+
+
+loadstring(game:HttpGet"https://raw.githubusercontent.com/infyiff/backup/main/SimpleSpyV3/main.lua")()
 end)
-addcmd('audiologger',{'alogger'},function(args, speaker)
+
+addcmd('audiologger',{'alogger'},function(az,aA)
 notify("Loading",'Hold on a sec')
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/infyiff/backup/main/audiologger.lua'),true))()
 end)
-local loopgoto = nil
-addcmd('loopgoto',{},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
-loopgoto = nil
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+local az
+addcmd('loopgoto',{},function(aA,aB)
+local aC=getPlayer(aA[1],aB)
+for aD,aE in pairs(aC)do
+az=nil
+if aB.Character:FindFirstChildOfClass'Humanoid'and aB.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aB.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-loopgoto = Players[v]
-local distance = 3
-if args[2] and isNumber(args[2]) then
-distance = args[2]
+az=Players[aE]
+local aF=3
+if aA[2]and isNumber(aA[2])then
+aF=aA[2]
 end
-local lDelay = 0
-if args[3] and isNumber(args[3]) then
-lDelay = args[3]
+local aG=0
+if aA[3]and isNumber(aA[3])then
+aG=aA[3]
 end
 repeat
-if Players:FindFirstChild(v) then
-if Players[v].Character ~= nil then
-getRoot(speaker.Character).CFrame = getRoot(Players[v].Character).CFrame + Vector3.new(distance,1,0)
+if Players:FindFirstChild(aE)then
+if Players[aE].Character~=nil then
+getRoot(aB.Character).CFrame=getRoot(Players[aE].Character).CFrame+Vector3.new(aF,1,0)
 end
-wait(lDelay)
+wait(aG)
 else
-loopgoto = nil
+az=nil
 end
-until loopgoto ~= Players[v]
+until az~=Players[aE]
 end
 end)
-addcmd('unloopgoto',{'noloopgoto'},function(args, speaker)
-loopgoto = nil
+
+addcmd('unloopgoto',{'noloopgoto'},function(aA,aB)
+az=nil
 end)
-addcmd('headsit',{},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-if headSit then headSit:Disconnect() end
-for i,v in pairs(players)do
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = true
-headSit = RunService.Heartbeat:Connect(function()
-if Players:FindFirstChild(Players[v].Name) and Players[v].Character ~= nil and getRoot(Players[v].Character) and getRoot(speaker.Character) and speaker.Character:FindFirstChildOfClass('Humanoid').Sit == true then
-getRoot(speaker.Character).CFrame = getRoot(Players[v].Character).CFrame * CFrame.Angles(0,math.rad(0),0)* CFrame.new(0,1.6,0.4)
+
+addcmd('headsit',{},function(aA,aB)
+local aC=getPlayer(aA[1],aB)
+if headSit then headSit:Disconnect()end
+for aD,aE in pairs(aC)do
+aB.Character:FindFirstChildOfClass'Humanoid'.Sit=true
+headSit=RunService.Heartbeat:Connect(function()
+if Players:FindFirstChild(Players[aE].Name)and Players[aE].Character~=nil and getRoot(Players[aE].Character)and getRoot(aB.Character)and aB.Character:FindFirstChildOfClass'Humanoid'.Sit==true then
+getRoot(aB.Character).CFrame=getRoot(Players[aE].Character).CFrame*CFrame.Angles(0,math.rad(0),0)*CFrame.new(0,1.6,0.4)
 else
 headSit:Disconnect()
 end
 end)
 end
 end)
-addcmd('chat',{'say'},function(args, speaker)
-local cString = getstring(1)
-chatMessage(cString)
+
+addcmd('chat',{'say'},function(aA,aB)
+local aC=getstring(1)
+chatMessage(aC)
 end)
-spamming = false
-spamspeed = 1
-addcmd('spam',{},function(args, speaker)
-spamming = true
-local spamstring = getstring(1)
+
+
+spamming=false
+spamspeed=1
+addcmd('spam',{},function(aA,aB)
+spamming=true
+local aC=getstring(1)
 repeat wait(spamspeed)
-chatMessage(spamstring)
-until spamming == false
+chatMessage(aC)
+until spamming==false
 end)
-addcmd('nospam',{'unspam'},function(args, speaker)
-spamming = false
+
+addcmd('nospam',{'unspam'},function(aA,aB)
+spamming=false
 end)
-addcmd('whisper',{'pm'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
+
+addcmd('whisper',{'pm'},function(aA,aB)
+local aC=getPlayer(aA[1],aB)
+for aD,aE in pairs(aC)do
 task.spawn(function()
-local plrName = Players[v].Name
-local pmstring = getstring(2)
-chatMessage("/w "..plrName.." "..pmstring)
+local aF=Players[aE].Name
+local aG=getstring(2)
+chatMessage("/w "..aF.." "..aG)
 end)
 end
 end)
-pmspamming = {}
-addcmd('pmspam',{},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
+
+pmspamming={}
+addcmd('pmspam',{},function(aA,aB)
+local aC=getPlayer(aA[1],aB)
+for aD,aE in pairs(aC)do
 task.spawn(function()
-local plrName = Players[v].Name
-if FindInTable(pmspamming, plrName) then return end
-table.insert(pmspamming, plrName)
-local pmspamstring = getstring(2)
+local aF=Players[aE].Name
+if FindInTable(pmspamming,aF)then return end
+table.insert(pmspamming,aF)
+local aG=getstring(2)
 repeat
-if Players:FindFirstChild(v) then
+if Players:FindFirstChild(aE)then
 wait(spamspeed)
-chatMessage("/w "..plrName.." "..pmspamstring)
+chatMessage("/w "..aF.." "..aG)
 else
-for a,b in pairs(pmspamming) do if b == plrName then table.remove(pmspamming, a) end end
+for aH,V in pairs(pmspamming)do if V==aF then table.remove(pmspamming,aH)end end
 end
-until not FindInTable(pmspamming, plrName)
+until not FindInTable(pmspamming,aF)
 end)
 end
 end)
-addcmd('nopmspam',{'unpmspam'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
+
+addcmd('nopmspam',{'unpmspam'},function(aA,aB)
+local aC=getPlayer(aA[1],aB)
+for aD,aE in pairs(aC)do
 task.spawn(function()
-for a,b in pairs(pmspamming) do
-if b == Players[v].Name then
-table.remove(pmspamming, a)
+for aF,aG in pairs(pmspamming)do
+if aG==Players[aE].Name then
+table.remove(pmspamming,aF)
 end
 end
 end)
 end
 end)
-addcmd('spamspeed',{},function(args, speaker)
-local speed = args[1] or 1
-if isNumber(speed) then
-spamspeed = speed
+
+addcmd('spamspeed',{},function(aA,aB)
+local aC=aA[1]or 1
+if isNumber(aC)then
+spamspeed=aC
 end
 end)
-addcmd('bubblechat',{},function(args, speaker)
+
+addcmd('bubblechat',{},function(aA,aB)
 if isLegacyChat then
-ChatService.BubbleChatEnabled = true
+ChatService.BubbleChatEnabled=true
 else
-TextChatService.BubbleChatConfiguration.Enabled = true
+TextChatService.BubbleChatConfiguration.Enabled=true
 end
 end)
-addcmd('unbubblechat',{'nobubblechat'},function(args, speaker)
+
+addcmd('unbubblechat',{'nobubblechat'},function(aA,aB)
 if isLegacyChat then
-ChatService.BubbleChatEnabled = false
+ChatService.BubbleChatEnabled=false
 else
-TextChatService.BubbleChatConfiguration.Enabled = false
+TextChatService.BubbleChatConfiguration.Enabled=false
 end
 end)
-addcmd('blockhead',{},function(args, speaker)
-speaker.Character.Head:FindFirstChildOfClass("SpecialMesh"):Destroy()
+
+addcmd('blockhead',{},function(aA,aB)
+aB.Character.Head:FindFirstChildOfClass"SpecialMesh":Destroy()
 end)
-addcmd('blockhats',{},function(args, speaker)
-for _,v in pairs(speaker.Character:FindFirstChildOfClass('Humanoid'):GetAccessories()) do
-for i,c in pairs(v:GetDescendants()) do
-if c:IsA("SpecialMesh") then
-c:Destroy()
-end
-end
-end
-end)
-addcmd('blocktool',{},function(args, speaker)
-for _,v in pairs(speaker.Character:GetChildren()) do
-if v:IsA("Tool") or v:IsA("HopperBin") then
-for i,c in pairs(v:GetDescendants()) do
-if c:IsA("SpecialMesh") then
-c:Destroy()
-end
+
+addcmd('blockhats',{},function(aA,aB)
+for aC,aD in pairs(aB.Character:FindFirstChildOfClass'Humanoid':GetAccessories())do
+for aE,aF in pairs(aD:GetDescendants())do
+if aF:IsA"SpecialMesh"then
+aF:Destroy()
 end
 end
 end
 end)
-addcmd('creeper',{},function(args, speaker)
-if r15(speaker) then
-speaker.Character.Head:FindFirstChildOfClass("SpecialMesh"):Destroy()
-speaker.Character.LeftUpperArm:Destroy()
-speaker.Character.RightUpperArm:Destroy()
-speaker.Character:FindFirstChildOfClass("Humanoid"):RemoveAccessories()
+
+addcmd('blocktool',{},function(aA,aB)
+for aC,aD in pairs(aB.Character:GetChildren())do
+if aD:IsA"Tool"or aD:IsA"HopperBin"then
+for aE,aF in pairs(aD:GetDescendants())do
+if aF:IsA"SpecialMesh"then
+aF:Destroy()
+end
+end
+end
+end
+end)
+
+addcmd('creeper',{},function(aA,aB)
+if r15(aB)then
+aB.Character.Head:FindFirstChildOfClass"SpecialMesh":Destroy()
+aB.Character.LeftUpperArm:Destroy()
+aB.Character.RightUpperArm:Destroy()
+aB.Character:FindFirstChildOfClass"Humanoid":RemoveAccessories()
 else
-speaker.Character.Head:FindFirstChildOfClass("SpecialMesh"):Destroy()
-speaker.Character["Left Arm"]:Destroy()
-speaker.Character["Right Arm"]:Destroy()
-speaker.Character:FindFirstChildOfClass("Humanoid"):RemoveAccessories()
+aB.Character.Head:FindFirstChildOfClass"SpecialMesh":Destroy()
+aB.Character["Left Arm"]:Destroy()
+aB.Character["Right Arm"]:Destroy()
+aB.Character:FindFirstChildOfClass"Humanoid":RemoveAccessories()
 end
 end)
-function getTorso(x)
-x = x or Players.LocalPlayer.Character
-return x:FindFirstChild("Torso") or x:FindFirstChild("UpperTorso") or x:FindFirstChild("LowerTorso") or x:FindFirstChild("HumanoidRootPart")
+
+function getTorso(aA)
+aA=aA or Players.LocalPlayer.Character
+return aA:FindFirstChild"Torso"or aA:FindFirstChild"UpperTorso"or aA:FindFirstChild"LowerTorso"or aA:FindFirstChild"HumanoidRootPart"
 end
-addcmd("bang", {"rape"}, function(args, speaker)
-execCmd("unbang")
+
+addcmd("bang",{"rape"},function(aA,aB)
+execCmd"unbang"
 wait()
-local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-bangAnim = Instance.new("Animation")
-bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
-bang = humanoid:LoadAnimation(bangAnim)
-bang:Play(0.1, 1, 1)
-bang:AdjustSpeed(args[2] or 3)
-bangDied = humanoid.Died:Connect(function()
+local aC=aB.Character:FindFirstChildWhichIsA"Humanoid"
+bangAnim=Instance.new"Animation"
+bangAnim.AnimationId=not r15(aB)and"rbxassetid://148840371"or"rbxassetid://5918726674"
+bang=aC:LoadAnimation(bangAnim)
+bang:Play(0.1,1,1)
+bang:AdjustSpeed(aA[2]or 3)
+bangDied=aC.Died:Connect(function()
 bang:Stop()
 bangAnim:Destroy()
 bangDied:Disconnect()
 bangLoop:Disconnect()
 end)
-if args[1] then
-local players = getPlayer(args[1], speaker)
-for _, v in pairs(players) do
-local bangplr = Players[v].Name
-local bangOffet = CFrame.new(0, 0, 1.1)
-bangLoop = RunService.Stepped:Connect(function()
+if aA[1]then
+local aD=getPlayer(aA[1],aB)
+for aE,aF in pairs(aD)do
+local aG=Players[aF].Name
+local aH=CFrame.new(0,0,1.1)
+bangLoop=RunService.Stepped:Connect(function()
 pcall(function()
-local otherRoot = getTorso(Players[bangplr].Character)
-getRoot(speaker.Character).CFrame = otherRoot.CFrame * bangOffet
+local V=getTorso(Players[aG].Character)
+getRoot(aB.Character).CFrame=V.CFrame*aH
 end)
 end)
 end
 end
 end)
-addcmd("unbang", {"unrape"}, function(args, speaker)
+
+addcmd("unbang",{"unrape"},function(aA,aB)
 if bangDied then
 bangDied:Disconnect()
 bang:Stop()
@@ -9594,26 +10516,27 @@ bangAnim:Destroy()
 bangLoop:Disconnect()
 end
 end)
-addcmd('carpet',{},function(args, speaker)
-if not r15(speaker) then
-execCmd('uncarpet')
+
+addcmd('carpet',{},function(aA,aB)
+if not r15(aB)then
+execCmd'uncarpet'
 wait()
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
-carpetAnim = Instance.new("Animation")
-carpetAnim.AnimationId = "rbxassetid://282574440"
-carpet = speaker.Character:FindFirstChildOfClass('Humanoid'):LoadAnimation(carpetAnim)
-carpet:Play(.1, 1, 1)
-local carpetplr = Players[v].Name
-carpetDied = speaker.Character:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
+local aC=getPlayer(aA[1],aB)
+for aD,aE in pairs(aC)do
+carpetAnim=Instance.new"Animation"
+carpetAnim.AnimationId="rbxassetid://282574440"
+carpet=aB.Character:FindFirstChildOfClass'Humanoid':LoadAnimation(carpetAnim)
+carpet:Play(.1,1,1)
+local aF=Players[aE].Name
+carpetDied=aB.Character:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
 carpetLoop:Disconnect()
 carpet:Stop()
 carpetAnim:Destroy()
 carpetDied:Disconnect()
 end)
-carpetLoop = RunService.Heartbeat:Connect(function()
+carpetLoop=RunService.Heartbeat:Connect(function()
 pcall(function()
-getRoot(Players.LocalPlayer.Character).CFrame = getRoot(Players[carpetplr].Character).CFrame
+getRoot(Players.LocalPlayer.Character).CFrame=getRoot(Players[aF].Character).CFrame
 end)
 end)
 end
@@ -9621,7 +10544,8 @@ else
 notify('R6 Required','This command requires the r6 rig type')
 end
 end)
-addcmd('uncarpet',{'nocarpet'},function(args, speaker)
+
+addcmd('uncarpet',{'nocarpet'},function(aA,aB)
 if carpetLoop then
 carpetLoop:Disconnect()
 carpetDied:Disconnect()
@@ -9629,1764 +10553,1952 @@ carpet:Stop()
 carpetAnim:Destroy()
 end
 end)
-addcmd('friend',{},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
-speaker:RequestFriendship(Players[v])
+
+addcmd('friend',{},function(aA,aB)
+local aC=getPlayer(aA[1],aB)
+for aD,aE in pairs(aC)do
+aB:RequestFriendship(Players[aE])
 end
 end)
-addcmd('unfriend',{},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
-speaker:RevokeFriendship(Players[v])
+
+addcmd('unfriend',{},function(aA,aB)
+local aC=getPlayer(aA[1],aB)
+for aD,aE in pairs(aC)do
+aB:RevokeFriendship(Players[aE])
 end
 end)
-addcmd('bringpart',{},function(args, speaker)
-for i,v in pairs(workspace:GetDescendants()) do
-if v.Name:lower() == getstring(1):lower() and v:IsA("BasePart") then
-v.CFrame = getRoot(speaker.Character).CFrame
-end
-end
-end)
-addcmd('bringpartclass',{'bpc'},function(args, speaker)
-for i,v in pairs(workspace:GetDescendants()) do
-if v.ClassName:lower() == getstring(1):lower() and v:IsA("BasePart") then
-v.CFrame = getRoot(speaker.Character).CFrame
+
+addcmd('bringpart',{},function(aA,aB)
+for aC,aD in pairs(workspace:GetDescendants())do
+if aD.Name:lower()==getstring(1):lower()and aD:IsA"BasePart"then
+aD.CFrame=getRoot(aB.Character).CFrame
 end
 end
 end)
-gotopartDelay = 0.1
-addcmd('gotopart',{'topart'},function(args, speaker)
-for i,v in pairs(workspace:GetDescendants()) do
-if v.Name:lower() == getstring(1):lower() and v:IsA("BasePart") then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+addcmd('bringpartclass',{'bpc'},function(aA,aB)
+for aC,aD in pairs(workspace:GetDescendants())do
+if aD.ClassName:lower()==getstring(1):lower()and aD:IsA"BasePart"then
+aD.CFrame=getRoot(aB.Character).CFrame
+end
+end
+end)
+
+gotopartDelay=0.1
+addcmd('gotopart',{'topart'},function(aA,aB)
+for aC,aD in pairs(workspace:GetDescendants())do
+if aD.Name:lower()==getstring(1):lower()and aD:IsA"BasePart"then
+if aB.Character:FindFirstChildOfClass'Humanoid'and aB.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aB.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
 wait(gotopartDelay)
-getRoot(speaker.Character).CFrame = v.CFrame
+getRoot(aB.Character).CFrame=aD.CFrame
 end
 end
 end)
-addcmd('tweengotopart',{'tgotopart','ttopart'},function(args, speaker)
-for i,v in pairs(workspace:GetDescendants()) do
-if v.Name:lower() == getstring(1):lower() and v:IsA("BasePart") then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+addcmd('tweengotopart',{'tgotopart','ttopart'},function(aA,aB)
+for aC,aD in pairs(workspace:GetDescendants())do
+if aD.Name:lower()==getstring(1):lower()and aD:IsA"BasePart"then
+if aB.Character:FindFirstChildOfClass'Humanoid'and aB.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aB.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
 wait(gotopartDelay)
-TweenService:Create(getRoot(speaker.Character), TweenInfo.new(tweenSpeed, Enum.EasingStyle.Linear), {CFrame = v.CFrame}):Play()
+TweenService:Create(getRoot(aB.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=aD.CFrame}):Play()
 end
 end
 end)
-addcmd('gotopartclass',{'gpc'},function(args, speaker)
-for i,v in pairs(workspace:GetDescendants()) do
-if v.ClassName:lower() == getstring(1):lower() and v:IsA("BasePart") then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+addcmd('gotopartclass',{'gpc'},function(aA,aB)
+for aC,aD in pairs(workspace:GetDescendants())do
+if aD.ClassName:lower()==getstring(1):lower()and aD:IsA"BasePart"then
+if aB.Character:FindFirstChildOfClass'Humanoid'and aB.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aB.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
 wait(gotopartDelay)
-getRoot(speaker.Character).CFrame = v.CFrame
+getRoot(aB.Character).CFrame=aD.CFrame
 end
 end
 end)
-addcmd('tweengotopartclass',{'tgpc'},function(args, speaker)
-for i,v in pairs(workspace:GetDescendants()) do
-if v.ClassName:lower() == getstring(1):lower() and v:IsA("BasePart") then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+addcmd('tweengotopartclass',{'tgpc'},function(aA,aB)
+for aC,aD in pairs(workspace:GetDescendants())do
+if aD.ClassName:lower()==getstring(1):lower()and aD:IsA"BasePart"then
+if aB.Character:FindFirstChildOfClass'Humanoid'and aB.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aB.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
 wait(gotopartDelay)
-TweenService:Create(getRoot(speaker.Character), TweenInfo.new(tweenSpeed, Enum.EasingStyle.Linear), {CFrame = v.CFrame}):Play()
+TweenService:Create(getRoot(aB.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=aD.CFrame}):Play()
 end
 end
 end)
-addcmd('gotomodel',{'tomodel'},function(args, speaker)
-for i,v in pairs(workspace:GetDescendants()) do
-if v.Name:lower() == getstring(1):lower() and v:IsA("Model") then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+addcmd('gotomodel',{'tomodel'},function(aA,aB)
+for aC,aD in pairs(workspace:GetDescendants())do
+if aD.Name:lower()==getstring(1):lower()and aD:IsA"Model"then
+if aB.Character:FindFirstChildOfClass'Humanoid'and aB.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aB.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
 wait(gotopartDelay)
-getRoot(speaker.Character).CFrame = v:GetModelCFrame()
+getRoot(aB.Character).CFrame=aD:GetModelCFrame()
 end
 end
 end)
-addcmd('tweengotomodel',{'tgotomodel','ttomodel'},function(args, speaker)
-for i,v in pairs(workspace:GetDescendants()) do
-if v.Name:lower() == getstring(1):lower() and v:IsA("Model") then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+addcmd('tweengotomodel',{'tgotomodel','ttomodel'},function(aA,aB)
+for aC,aD in pairs(workspace:GetDescendants())do
+if aD.Name:lower()==getstring(1):lower()and aD:IsA"Model"then
+if aB.Character:FindFirstChildOfClass'Humanoid'and aB.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aB.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
 wait(gotopartDelay)
-TweenService:Create(getRoot(speaker.Character), TweenInfo.new(tweenSpeed, Enum.EasingStyle.Linear), {CFrame = v:GetModelCFrame()}):Play()
+TweenService:Create(getRoot(aB.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=aD:GetModelCFrame()}):Play()
 end
 end
 end)
-addcmd('gotopartdelay',{},function(args, speaker)
-local gtpDelay = args[1] or 0.1
-if isNumber(gtpDelay) then
-gotopartDelay = gtpDelay
+
+addcmd('gotopartdelay',{},function(aA,aB)
+local aC=aA[1]or 0.1
+if isNumber(aC)then
+gotopartDelay=aC
 end
 end)
-addcmd('noclickdetectorlimits',{'nocdlimits','removecdlimits'},function(args, speaker)
-for i,v in ipairs(workspace:GetDescendants()) do
-if v:IsA("ClickDetector") then
-v.MaxActivationDistance = math.huge
+
+addcmd('noclickdetectorlimits',{'nocdlimits','removecdlimits'},function(aA,aB)
+for aC,aD in ipairs(workspace:GetDescendants())do
+if aD:IsA"ClickDetector"then
+aD.MaxActivationDistance=math.huge
 end
 end
 end)
-addcmd('fireclickdetectors',{'firecd','firecds'}, function(args, speaker)
+
+addcmd('fireclickdetectors',{'firecd','firecds'},function(aA,aB)
 if fireclickdetector then
-if args[1] then
-local name = getstring(1)
-for _, descendant in ipairs(workspace:GetDescendants()) do
-if descendant:IsA("ClickDetector") and descendant.Name == name or descendant.Parent.Name == name then
-fireclickdetector(descendant)
+if aA[1]then
+local aC=getstring(1)
+for aD,aE in ipairs(workspace:GetDescendants())do
+if aE:IsA"ClickDetector"and aE.Name==aC or aE.Parent.Name==aC then
+fireclickdetector(aE)
 end
 end
 else
-for _, descendant in ipairs(workspace:GetDescendants()) do
-if descendant:IsA("ClickDetector") then
-fireclickdetector(descendant)
+for aC,aD in ipairs(workspace:GetDescendants())do
+if aD:IsA"ClickDetector"then
+fireclickdetector(aD)
 end
 end
 end
 else
-notify("Incompatible Exploit", "Your exploit does not support this command (missing fireclickdetector)")
+notify("Incompatible Exploit","Your exploit does not support this command (missing fireclickdetector)")
 end
 end)
-addcmd('noproximitypromptlimits',{'nopplimits','removepplimits'},function(args, speaker)
-for i,v in pairs(workspace:GetDescendants()) do
-if v:IsA("ProximityPrompt") then
-v.MaxActivationDistance = math.huge
+
+addcmd('noproximitypromptlimits',{'nopplimits','removepplimits'},function(aA,aB)
+for aC,aD in pairs(workspace:GetDescendants())do
+if aD:IsA"ProximityPrompt"then
+aD.MaxActivationDistance=math.huge
 end
 end
 end)
-addcmd('fireproximityprompts',{'firepp'},function(args, speaker)
+
+addcmd('fireproximityprompts',{'firepp'},function(aA,aB)
 if fireproximityprompt then
-if args[1] then
-local name = getstring(1)
-for _, descendant in ipairs(workspace:GetDescendants()) do
-if descendant:IsA("ProximityPrompt") and descendant.Name == name or descendant.Parent.Name == name then
-fireproximityprompt(descendant)
+if aA[1]then
+local aC=getstring(1)
+for aD,aE in ipairs(workspace:GetDescendants())do
+if aE:IsA"ProximityPrompt"and aE.Name==aC or aE.Parent.Name==aC then
+fireproximityprompt(aE)
 end
 end
 else
-for _, descendant in ipairs(workspace:GetDescendants()) do
-if descendant:IsA("ProximityPrompt") then
-fireproximityprompt(descendant)
+for aC,aD in ipairs(workspace:GetDescendants())do
+if aD:IsA"ProximityPrompt"then
+fireproximityprompt(aD)
 end
 end
 end
 else
-notify("Incompatible Exploit", "Your exploit does not support this command (missing fireproximityprompt)")
+notify("Incompatible Exploit","Your exploit does not support this command (missing fireproximityprompt)")
 end
 end)
-local PromptButtonHoldBegan = nil
-addcmd('instantproximityprompts',{'instantpp'},function(args, speaker)
+
+local aA
+addcmd('instantproximityprompts',{'instantpp'},function(aB,aC)
 if fireproximityprompt then
-execCmd("uninstantproximityprompts")
+execCmd"uninstantproximityprompts"
 wait(0.1)
-PromptButtonHoldBegan = ProximityPromptService.PromptButtonHoldBegan:Connect(function(prompt)
-fireproximityprompt(prompt)
+aA=ProximityPromptService.PromptButtonHoldBegan:Connect(function(aD)
+fireproximityprompt(aD)
 end)
 else
 notify('Incompatible Exploit','Your exploit does not support this command (missing fireproximityprompt)')
 end
 end)
-addcmd('uninstantproximityprompts',{'uninstantpp'},function(args, speaker)
-if PromptButtonHoldBegan ~= nil then
-PromptButtonHoldBegan:Disconnect()
-PromptButtonHoldBegan = nil
+
+addcmd('uninstantproximityprompts',{'uninstantpp'},function(aB,aC)
+if aA~=nil then
+aA:Disconnect()
+aA=nil
 end
 end)
-addcmd('notifyping',{'ping'},function(args, speaker)
-notify("Ping", math.round(speaker:GetNetworkPing() * 1000) .. "ms")
+
+addcmd('notifyping',{'ping'},function(aB,aC)
+notify("Ping",math.round(aC:GetNetworkPing()*1000).."ms")
 end)
-addcmd('grabtools', {}, function(args, speaker)
-local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-for _, child in ipairs(workspace:GetChildren()) do
-if speaker.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
-humanoid:EquipTool(child)
+
+addcmd('grabtools',{},function(aB,aC)
+local aD=aC.Character:FindFirstChildWhichIsA"Humanoid"
+for aE,aF in ipairs(workspace:GetChildren())do
+if aC.Character and aF:IsA"BackpackItem"and aF:FindFirstChild"Handle"then
+aD:EquipTool(aF)
 end
 end
+
 if grabtoolsFunc then
 grabtoolsFunc:Disconnect()
 end
-grabtoolsFunc = workspace.ChildAdded:Connect(function(child)
-if speaker.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
-humanoid:EquipTool(child)
+
+grabtoolsFunc=workspace.ChildAdded:Connect(function(aE)
+if aC.Character and aE:IsA"BackpackItem"and aE:FindFirstChild"Handle"then
+aD:EquipTool(aE)
 end
 end)
-notify("Grabtools", "Picking up any dropped tools")
+
+notify("Grabtools","Picking up any dropped tools")
 end)
-addcmd('nograbtools',{'ungrabtools'},function(args, speaker)
+
+addcmd('nograbtools',{'ungrabtools'},function(aB,aC)
 if grabtoolsFunc then
 grabtoolsFunc:Disconnect()
 end
-notify("Grabtools", "Grabtools has been disabled")
+
+notify("Grabtools","Grabtools has been disabled")
 end)
-local specifictoolremoval = {}
-addcmd('removespecifictool',{},function(args, speaker)
-if args[1] and speaker:FindFirstChildOfClass("Backpack") then
-local tool = string.lower(getstring(1))
-local RST = RunService.RenderStepped:Connect(function()
-if speaker:FindFirstChildOfClass("Backpack") then
-for i,v in pairs(speaker:FindFirstChildOfClass("Backpack"):GetChildren()) do
-if v.Name:lower() == tool then
-v:Remove()
+
+local aB={}
+addcmd('removespecifictool',{},function(aC,aD)
+if aC[1]and aD:FindFirstChildOfClass"Backpack"then
+local aE=string.lower(getstring(1))
+local aF=RunService.RenderStepped:Connect(function()
+if aD:FindFirstChildOfClass"Backpack"then
+for aF,aG in pairs(aD:FindFirstChildOfClass"Backpack":GetChildren())do
+if aG.Name:lower()==aE then
+aG:Remove()
 end
-end
-end
-end)
-specifictoolremoval[tool] = RST
-end
-end)
-addcmd('unremovespecifictool',{},function(args, speaker)
-if args[1] then
-local tool = string.lower(getstring(1))
-if specifictoolremoval[tool] ~= nil then
-specifictoolremoval[tool]:Disconnect()
-specifictoolremoval[tool] = nil
 end
 end
 end)
-addcmd('clearremovespecifictool',{},function(args, speaker)
-for obj in pairs(specifictoolremoval) do
-specifictoolremoval[obj]:Disconnect()
-specifictoolremoval[obj] = nil
+aB[aE]=aF
 end
 end)
-addcmd('light',{},function(args, speaker)
-local light = Instance.new("PointLight")
-light.Parent = getRoot(speaker.Character)
-light.Range = 30
-if args[1] then
-light.Brightness = args[2]
-light.Range = args[1]
+
+addcmd('unremovespecifictool',{},function(aC,aD)
+if aC[1]then
+local aE=string.lower(getstring(1))
+if aB[aE]~=nil then
+aB[aE]:Disconnect()
+aB[aE]=nil
+end
+end
+end)
+
+addcmd('clearremovespecifictool',{},function(aC,aD)
+for aE in pairs(aB)do
+aB[aE]:Disconnect()
+aB[aE]=nil
+end
+end)
+
+addcmd('light',{},function(aC,aD)
+local aE=Instance.new"PointLight"
+aE.Parent=getRoot(aD.Character)
+aE.Range=30
+if aC[1]then
+aE.Brightness=aC[2]
+aE.Range=aC[1]
 else
-light.Brightness = 5
+aE.Brightness=5
 end
 end)
-addcmd('unlight',{'nolight'},function(args, speaker)
-for i,v in pairs(speaker.Character:GetDescendants()) do
-if v.ClassName == "PointLight" then
-v:Destroy()
+
+addcmd('unlight',{'nolight'},function(aC,aD)
+for aE,aF in pairs(aD.Character:GetDescendants())do
+if aF.ClassName=="PointLight"then
+aF:Destroy()
 end
 end
 end)
-addcmd('copytools',{},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players)do
+
+addcmd('copytools',{},function(aC,aD)
+local aE=getPlayer(aC[1],aD)
+for aF,aG in pairs(aE)do
 task.spawn(function()
-for i,v in pairs(Players[v]:FindFirstChildOfClass("Backpack"):GetChildren()) do
-if v:IsA('Tool') or v:IsA('HopperBin') then
-v:Clone().Parent = speaker:FindFirstChildOfClass("Backpack")
+for aH,V in pairs(Players[aG]:FindFirstChildOfClass"Backpack":GetChildren())do
+if V:IsA'Tool'or V:IsA'HopperBin'then
+V:Clone().Parent=aD:FindFirstChildOfClass"Backpack"
 end
 end
 end)
 end
 end)
-addcmd('naked',{},function(args, speaker)
-for i,v in pairs(speaker.Character:GetDescendants()) do
-if v:IsA("Clothing") or v:IsA("ShirtGraphic") then
-v:Destroy()
+
+addcmd('naked',{},function(aC,aD)
+for aE,aF in pairs(aD.Character:GetDescendants())do
+if aF:IsA"Clothing"or aF:IsA"ShirtGraphic"then
+aF:Destroy()
 end
 end
 end)
-addcmd('noface',{'removeface'},function(args, speaker)
-for i,v in pairs(speaker.Character:GetDescendants()) do
-if v:IsA("Decal") and v.Name == 'face' then
-v:Destroy()
+
+addcmd('noface',{'removeface'},function(aC,aD)
+for aE,aF in pairs(aD.Character:GetDescendants())do
+if aF:IsA"Decal"and aF.Name=='face'then
+aF:Destroy()
 end
 end
 end)
-addcmd('spawnpoint',{'spawn'},function(args, speaker)
-spawnpos = getRoot(speaker.Character).CFrame
-spawnpoint = true
-spDelay = tonumber(args[1]) or 0.1
+
+addcmd('spawnpoint',{'spawn'},function(aC,aD)
+spawnpos=getRoot(aD.Character).CFrame
+spawnpoint=true
+spDelay=tonumber(aC[1])or 0.1
 notify('Spawn Point','Spawn point created at '..tostring(spawnpos))
 end)
-addcmd('nospawnpoint',{'nospawn','removespawnpoint'},function(args, speaker)
-spawnpoint = false
+
+addcmd('nospawnpoint',{'nospawn','removespawnpoint'},function(aC,aD)
+spawnpoint=false
 notify('Spawn Point','Removed spawn point')
 end)
-addcmd('flashback',{'diedtp'},function(args, speaker)
-if lastDeath ~= nil then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+addcmd('flashback',{'diedtp'},function(aC,aD)
+if q~=nil then
+if aD.Character:FindFirstChildOfClass'Humanoid'and aD.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aD.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-getRoot(speaker.Character).CFrame = lastDeath
+getRoot(aD.Character).CFrame=q
 end
 end)
-addcmd('hatspin',{'spinhats'},function(args, speaker)
-execCmd('unhatspin')
+
+addcmd('hatspin',{'spinhats'},function(aC,aD)
+execCmd'unhatspin'
 wait(.5)
-for _,v in pairs(speaker.Character:FindFirstChildOfClass('Humanoid'):GetAccessories()) do
-local keep = Instance.new("BodyPosition") keep.Name = randomString() keep.Parent = v.Handle
-local spin = Instance.new("BodyAngularVelocity") spin.Name = randomString() spin.Parent = v.Handle
-v.Handle:FindFirstChildOfClass("Weld"):Destroy()
-if args[1] then
-spin.AngularVelocity = Vector3.new(0, args[1], 0)
-spin.MaxTorque = Vector3.new(0, args[1] * 2, 0)
+for aE,aF in pairs(aD.Character:FindFirstChildOfClass'Humanoid':GetAccessories())do
+local aG=Instance.new"BodyPosition"aG.Name=randomString()aG.Parent=aF.Handle
+local aH=Instance.new"BodyAngularVelocity"aH.Name=randomString()aH.Parent=aF.Handle
+aF.Handle:FindFirstChildOfClass"Weld":Destroy()
+if aC[1]then
+aH.AngularVelocity=Vector3.new(0,aC[1],0)
+aH.MaxTorque=Vector3.new(0,aC[1]*2,0)
 else
-spin.AngularVelocity = Vector3.new(0, 100, 0)
-spin.MaxTorque = Vector3.new(0, 200, 0)
+aH.AngularVelocity=Vector3.new(0,100,0)
+aH.MaxTorque=Vector3.new(0,200,0)
 end
-keep.P = 30000
-keep.D = 50
-spinhats = RunService.Stepped:Connect(function()
+aG.P=30000
+aG.D=50
+spinhats=RunService.Stepped:Connect(function()
 pcall(function()
-keep.Position = Players.LocalPlayer.Character.Head.Position
+aG.Position=Players.LocalPlayer.Character.Head.Position
 end)
 end)
 end
 end)
-addcmd('unhatspin',{'unspinhats'},function(args, speaker)
+
+addcmd('unhatspin',{'unspinhats'},function(aC,aD)
 if spinhats then
 spinhats:Disconnect()
 end
-for _,v in pairs(speaker.Character:FindFirstChildOfClass('Humanoid'):GetAccessories()) do
-v.Parent = workspace
-for i,c in pairs(v.Handle) do
-if c:IsA("BodyPosition") or c:IsA("BodyAngularVelocity") then
-c:Destroy()
+for aE,aF in pairs(aD.Character:FindFirstChildOfClass'Humanoid':GetAccessories())do
+aF.Parent=workspace
+for aG,aH in pairs(aF.Handle)do
+if aH:IsA"BodyPosition"or aH:IsA"BodyAngularVelocity"then
+aH:Destroy()
 end
 end
 wait()
-v.Parent = speaker.Character
+aF.Parent=aD.Character
 end
 end)
-addcmd('clearhats',{'cleanhats'},function(args, speaker)
+
+addcmd('clearhats',{'cleanhats'},function(aC,aD)
 if firetouchinterest then
-local Player = Players.LocalPlayer
-local Character = Player.Character
-local Old = Character:FindFirstChild("HumanoidRootPart").CFrame
-local Hats = {}
-for _, child in ipairs(workspace:GetChildren()) do
-if child:IsA("Accessory") then
-table.insert(Hats, child)
+local aE=Players.LocalPlayer
+local aF=aE.Character
+local aG=aF:FindFirstChild"HumanoidRootPart".CFrame
+local aH={}
+
+for V,W in ipairs(workspace:GetChildren())do
+if W:IsA"Accessory"then
+table.insert(aH,W)
 end
 end
-for _, accessory in ipairs(Character:FindFirstChildOfClass("Humanoid"):GetAccessories()) do
-accessory:Destroy()
+
+for V,W in ipairs(aF:FindFirstChildOfClass"Humanoid":GetAccessories())do
+W:Destroy()
 end
-for i = 1, #Hats do
-repeat RunService.Heartbeat:wait() until Hats[i]
-firetouchinterest(Hats[i].Handle,Character:FindFirstChild("HumanoidRootPart"),0)
-repeat RunService.Heartbeat:wait() until Character:FindFirstChildOfClass("Accessory")
-Character:FindFirstChildOfClass("Accessory"):Destroy()
-repeat RunService.Heartbeat:wait() until not Character:FindFirstChildOfClass("Accessory")
+
+for V=1,#aH do
+repeat RunService.Heartbeat:wait()until aH[V]
+firetouchinterest(aH[V].Handle,aF:FindFirstChild"HumanoidRootPart",0)
+repeat RunService.Heartbeat:wait()until aF:FindFirstChildOfClass"Accessory"
+aF:FindFirstChildOfClass"Accessory":Destroy()
+repeat RunService.Heartbeat:wait()until not aF:FindFirstChildOfClass"Accessory"
 end
-execCmd("reset")
-Player.CharacterAdded:Wait()
-for i = 1,20 do
+
+execCmd"reset"
+
+aE.CharacterAdded:Wait()
+
+for V=1,20 do
 RunService.Heartbeat:Wait()
-if Player.Character:FindFirstChild("HumanoidRootPart") then
-Player.Character:FindFirstChild("HumanoidRootPart").CFrame = Old
+if aE.Character:FindFirstChild"HumanoidRootPart"then
+aE.Character:FindFirstChild"HumanoidRootPart".CFrame=aG
 end
 end
 else
 notify("Incompatible Exploit","Your exploit does not support this command (missing firetouchinterest)")
 end
 end)
-addcmd('split',{},function(args, speaker)
-if r15(speaker) then
-speaker.Character.UpperTorso.Waist:Destroy()
+
+addcmd('split',{},function(aC,aD)
+if r15(aD)then
+aD.Character.UpperTorso.Waist:Destroy()
 else
 notify('R15 Required','This command requires the r15 rig type')
 end
 end)
-addcmd('nilchar',{},function(args, speaker)
-if speaker.Character ~= nil then
-speaker.Character.Parent = nil
+
+addcmd('nilchar',{},function(aC,aD)
+if aD.Character~=nil then
+aD.Character.Parent=nil
 end
 end)
-addcmd('unnilchar',{'nonilchar'},function(args, speaker)
-if speaker.Character ~= nil then
-speaker.Character.Parent = workspace
+
+addcmd('unnilchar',{'nonilchar'},function(aC,aD)
+if aD.Character~=nil then
+aD.Character.Parent=workspace
 end
 end)
-addcmd('noroot',{'removeroot','rroot'},function(args, speaker)
-if speaker.Character ~= nil then
-local char = Players.LocalPlayer.Character
-char.Parent = nil
-char.HumanoidRootPart:Destroy()
-char.Parent = workspace
+
+addcmd('noroot',{'removeroot','rroot'},function(aC,aD)
+if aD.Character~=nil then
+local aE=Players.LocalPlayer.Character
+aE.Parent=nil
+aE.HumanoidRootPart:Destroy()
+aE.Parent=workspace
 end
 end)
-addcmd('replaceroot',{'replacerootpart'},function(args, speaker)
-if speaker.Character ~= nil and speaker.Character:FindFirstChild("HumanoidRootPart") then
-local Char = speaker.Character
-local OldParent = Char.Parent
-local HRP = Char and Char:FindFirstChild("HumanoidRootPart")
-local OldPos = HRP.CFrame
-Char.Parent = game
-local HRP1 = HRP:Clone()
-HRP1.Parent = Char
-HRP = HRP:Destroy()
-HRP1.CFrame = OldPos
-Char.Parent = OldParent
+
+addcmd('replaceroot',{'replacerootpart'},function(aC,aD)
+if aD.Character~=nil and aD.Character:FindFirstChild"HumanoidRootPart"then
+local aE=aD.Character
+local aF=aE.Parent
+local aG=aE and aE:FindFirstChild"HumanoidRootPart"
+local aH=aG.CFrame
+aE.Parent=game
+local V=aG:Clone()
+V.Parent=aE
+aG=aG:Destroy()
+V.CFrame=aH
+aE.Parent=aF
 end
 end)
-addcmd('clearcharappearance',{'clearchar','clrchar'},function(args, speaker)
-speaker:ClearCharacterAppearance()
+
+addcmd('clearcharappearance',{'clearchar','clrchar'},function(aC,aD)
+aD:ClearCharacterAppearance()
 end)
-addcmd('equiptools',{},function(args, speaker)
-for i,v in pairs(speaker:FindFirstChildOfClass("Backpack"):GetChildren()) do
-if v:IsA("Tool") or v:IsA("HopperBin") then
-v.Parent = speaker.Character
+
+addcmd('equiptools',{},function(aC,aD)
+for aE,aF in pairs(aD:FindFirstChildOfClass"Backpack":GetChildren())do
+if aF:IsA"Tool"or aF:IsA"HopperBin"then
+aF.Parent=aD.Character
 end
 end
 end)
-addcmd('unequiptools',{},function(args, speaker)
-speaker.Character:FindFirstChildOfClass('Humanoid'):UnequipTools()
+
+addcmd('unequiptools',{},function(aC,aD)
+aD.Character:FindFirstChildOfClass'Humanoid':UnequipTools()
 end)
-local function GetHandleTools(p)
-p = p or Players.LocalPlayer
-local r = {}
-for _, v in ipairs(p.Character and p.Character:GetChildren() or {}) do
-if v.IsA(v, "BackpackItem") and v.FindFirstChild(v, "Handle") then
-r[#r + 1] = v
+
+local function GetHandleTools(aC)
+aC=aC or Players.LocalPlayer
+local aD={}
+for aE,aF in ipairs(aC.Character and aC.Character:GetChildren()or{})do
+if aF.IsA(aF,"BackpackItem")and aF.FindFirstChild(aF,"Handle")then
+aD[#aD+1]=aF
 end
 end
-for _, v in ipairs(p.Backpack:GetChildren()) do
-if v.IsA(v, "BackpackItem") and v.FindFirstChild(v, "Handle") then
-r[#r + 1] = v
+for aE,aF in ipairs(aC.Backpack:GetChildren())do
+if aF.IsA(aF,"BackpackItem")and aF.FindFirstChild(aF,"Handle")then
+aD[#aD+1]=aF
 end
 end
-return r
+return aD
 end
-addcmd('dupetools', {'clonetools'}, function(args, speaker)
-local LOOP_NUM = tonumber(args[1]) or 1
-local OrigPos = speaker.Character.HumanoidRootPart.Position
-local Tools, TempPos = {}, Vector3.new(math.random(-2e5, 2e5), 2e5, math.random(-2e5, 2e5))
-for i = 1, LOOP_NUM do
-local Human = speaker.Character:WaitForChild("Humanoid")
-wait(.1, Human.Parent:MoveTo(TempPos))
-Human.RootPart.Anchored = speaker:ClearCharacterAppearance(wait(.1)) or true
-local t = GetHandleTools(speaker)
-while #t > 0 do
-for _, v in ipairs(t) do
+addcmd('dupetools',{'clonetools'},function(aC,aD)
+local aE=tonumber(aC[1])or 1
+local aF=aD.Character.HumanoidRootPart.Position
+local aG,aH={},Vector3.new(math.random(-2E5,2e5),2e5,math.random(-2E5,2e5))
+for V=1,aE do
+local W=aD.Character:WaitForChild"Humanoid"
+wait(.1,W.Parent:MoveTo(aH))
+W.RootPart.Anchored=aD:ClearCharacterAppearance(wait(.1))or true
+local X=GetHandleTools(aD)
+while#X>0 do
+for Y,Z in ipairs(X)do
 task.spawn(function()
-for _ = 1, 25 do
-v.Parent = speaker.Character
-v.Handle.Anchored = true
+for _=1,25 do
+Z.Parent=aD.Character
+Z.Handle.Anchored=true
 end
-for _ = 1, 5 do
-v.Parent = workspace
+for _=1,5 do
+Z.Parent=workspace
 end
-table.insert(Tools, v.Handle)
+table.insert(aG,Z.Handle)
 end)
 end
-t = GetHandleTools(speaker)
+X=GetHandleTools(aD)
 end
 wait(.1)
-speaker.Character = speaker.Character:Destroy()
-speaker.CharacterAdded:Wait():WaitForChild("Humanoid").Parent:MoveTo(LOOP_NUM == i and OrigPos or TempPos, wait(.1))
-if i == LOOP_NUM or i % 5 == 0 then
-local HRP = speaker.Character.HumanoidRootPart
-if type(firetouchinterest) == "function" then
-for _, v in ipairs(Tools) do
-v.Anchored = not firetouchinterest(v, HRP, 1, firetouchinterest(v, HRP, 0)) and false or false
+aD.Character=aD.Character:Destroy()
+aD.CharacterAdded:Wait():WaitForChild"Humanoid".Parent:MoveTo(aE==V and aF or aH,wait(.1))
+if V==aE or V%5==0 then
+local Y=aD.Character.HumanoidRootPart
+if type(firetouchinterest)=="function"then
+for Z,_ in ipairs(aG)do
+_.Anchored=not firetouchinterest(_,Y,1,firetouchinterest(_,Y,0))and false or false
 end
 else
-for _, v in ipairs(Tools) do
+for Z,_ in ipairs(aG)do
 task.spawn(function()
-local x = v.CanCollide
-v.CanCollide = false
-v.Anchored = false
-for _ = 1, 10 do
-v.CFrame = HRP.CFrame
+local aI=_.CanCollide
+_.CanCollide=false
+_.Anchored=false
+for aJ=1,10 do
+_.CFrame=Y.CFrame
 wait()
 end
-v.CanCollide = x
+_.CanCollide=aI
 end)
 end
 end
 wait(.1)
-Tools = {}
+aG={}
 end
-TempPos = TempPos + Vector3.new(10, math.random(-5, 5), 0)
+aH=aH+Vector3.new(10,math.random(-5,5),0)
 end
 end)
-local RS = RunService.RenderStepped
-addcmd('givetool', {'givetools'}, function(args, speaker)
-local v = Players[getPlayer(args[1], speaker)[1]].Character
-workspace.CurrentCamera.CameraSubject = v
-local Char = speaker.Character or workspace:FindFirstChild(speaker.Name)
-local hum = Char and Char:FindFirstChildWhichIsA('Humanoid')
-local hrp = hum and hum.RootPart
-local hrppos = hrp.CFrame
-hum = hum:Destroy() or hum:Clone()
-hum.Parent = Char
-hum:ClearAllChildren()
-speaker:ClearCharacterAppearance()
+
+local aC=RunService.RenderStepped
+addcmd('givetool',{'givetools'},function(aD,aE)
+local aF=Players[getPlayer(aD[1],aE)[1] ].Character
+workspace.CurrentCamera.CameraSubject=aF
+local aG=aE.Character or workspace:FindFirstChild(aE.Name)
+local aH=aG and aG:FindFirstChildWhichIsA'Humanoid'
+local aI=aH and aH.RootPart
+local aJ=aI.CFrame
+aH=aH:Destroy()or aH:Clone()
+aH.Parent=aG
+aH:ClearAllChildren()
+aE:ClearCharacterAppearance()
 task.spawn(function()
-speaker.CharacterAdded:Wait():WaitForChild('Humanoid').RootPart.CFrame = wait() and hrppos
+aE.CharacterAdded:Wait():WaitForChild'Humanoid'.RootPart.CFrame=wait()and aJ
 end)
-local vHRP = getRoot(v)
-while Char and Char.Parent and vHRP and vHRP.Parent do
-local Tools = false
-for _, v in ipairs(Char:GetChildren()) do
-if v:IsA('BackpackItem') and v:FindFirstChild('Handle') then
-Tools = true
-firetouchinterest(v.Handle, vHRP, 0)
-firetouchinterest(v.Handle, vHRP, 1)
+local V=getRoot(aF)
+while aG and aG.Parent and V and V.Parent do
+local W=false
+for X,Y in ipairs(aG:GetChildren())do
+if Y:IsA'BackpackItem'and Y:FindFirstChild'Handle'then
+W=true
+firetouchinterest(Y.Handle,V,0)
+firetouchinterest(Y.Handle,V,1)
 end
 end
-if not Tools then
+if not W then
 break
 end
-hrp.CFrame = vHRP.CFrame
-RS:Wait()
+aI.CFrame=V.CFrame
+aC:Wait()
 end
-execCmd('re')
+execCmd're'
 end)
-addcmd('touchinterests', {'touchinterest', 'firetouchinterests', 'firetouchinterest'}, function(args, speaker)
+
+addcmd('touchinterests',{'touchinterest','firetouchinterests','firetouchinterest'},function(aD,aE)
 if not firetouchinterest then
-notify("Incompatible Exploit", "Your exploit does not support this command (missing firetouchinterest)")
+notify("Incompatible Exploit","Your exploit does not support this command (missing firetouchinterest)")
 return
 end
-local root = getRoot(speaker.Character) or speaker.Character:FindFirstChildWhichIsA("BasePart")
-local function touch(x)
-x = x:FindFirstAncestorWhichIsA("Part")
-if x then
+
+local aF=getRoot(aE.Character)or aE.Character:FindFirstChildWhichIsA"BasePart"
+
+local function touch(aG)
+aG=aG:FindFirstAncestorWhichIsA"Part"
+if aG then
 if firetouchinterest then
 task.spawn(function()
-firetouchinterest(x, root, 1)
+firetouchinterest(aG,aF,1)
 wait()
-firetouchinterest(x, root, 0)
+firetouchinterest(aG,aF,0)
 end)
 end
-x.CFrame = root.CFrame
+aG.CFrame=aF.CFrame
 end
 end
-if args[1] then
-local name = getstring(1)
-for _, descendant in ipairs(workspace:GetDescendants()) do
-if descendant:IsA("TouchTransmitter") and descendant.Name == name or descendant.Parent.Name == name then
-touch(descendant)
+
+if aD[1]then
+local aG=getstring(1)
+for aH,aI in ipairs(workspace:GetDescendants())do
+if aI:IsA"TouchTransmitter"and aI.Name==aG or aI.Parent.Name==aG then
+touch(aI)
 end
 end
 else
-for _, descendant in ipairs(workspace:GetDescendants()) do
-if descendant:IsA("TouchTransmitter") then
-touch(descendant)
+for aG,aH in ipairs(workspace:GetDescendants())do
+if aH:IsA"TouchTransmitter"then
+touch(aH)
 end
 end
 end
 end)
-addcmd('fullbright',{'fb','fullbrightness'},function(args, speaker)
-Lighting.Brightness = 2
-Lighting.ClockTime = 14
-Lighting.FogEnd = 100000
-Lighting.GlobalShadows = false
-Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+
+addcmd('fullbright',{'fb','fullbrightness'},function(aD,aE)
+Lighting.Brightness=2
+Lighting.ClockTime=14
+Lighting.FogEnd=100000
+Lighting.GlobalShadows=false
+Lighting.OutdoorAmbient=Color3.fromRGB(128,128,128)
 end)
-addcmd('loopfullbright',{'loopfb'},function(args, speaker)
+
+addcmd('loopfullbright',{'loopfb'},function(aD,aE)
 if brightLoop then
 brightLoop:Disconnect()
 end
 local function brightFunc()
-Lighting.Brightness = 2
-Lighting.ClockTime = 14
-Lighting.FogEnd = 100000
-Lighting.GlobalShadows = false
-Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+Lighting.Brightness=2
+Lighting.ClockTime=14
+Lighting.FogEnd=100000
+Lighting.GlobalShadows=false
+Lighting.OutdoorAmbient=Color3.fromRGB(128,128,128)
 end
-brightLoop = RunService.RenderStepped:Connect(brightFunc)
+
+brightLoop=RunService.RenderStepped:Connect(brightFunc)
 end)
-addcmd('unloopfullbright',{'unloopfb'},function(args, speaker)
+
+addcmd('unloopfullbright',{'unloopfb'},function(aD,aE)
 if brightLoop then
 brightLoop:Disconnect()
 end
 end)
-addcmd('ambient',{},function(args, speaker)
-Lighting.Ambient = Color3.new(args[1],args[2],args[3])
-Lighting.OutdoorAmbient = Color3.new(args[1],args[2],args[3])
+
+addcmd('ambient',{},function(aD,aE)
+Lighting.Ambient=Color3.new(aD[1],aD[2],aD[3])
+Lighting.OutdoorAmbient=Color3.new(aD[1],aD[2],aD[3])
 end)
-addcmd('day',{},function(args, speaker)
-Lighting.ClockTime = 14
+
+addcmd('day',{},function(aD,aE)
+Lighting.ClockTime=14
 end)
-addcmd('night',{},function(args, speaker)
-Lighting.ClockTime = 0
+
+addcmd('night',{},function(aD,aE)
+Lighting.ClockTime=0
 end)
-addcmd('nofog',{},function(args, speaker)
-Lighting.FogEnd = 100000
-for i,v in pairs(Lighting:GetDescendants()) do
-if v:IsA("Atmosphere") then
-v:Destroy()
+
+addcmd('nofog',{},function(aD,aE)
+Lighting.FogEnd=100000
+for aF,aG in pairs(Lighting:GetDescendants())do
+if aG:IsA"Atmosphere"then
+aG:Destroy()
 end
 end
 end)
-addcmd('brightness',{},function(args, speaker)
-Lighting.Brightness = args[1]
+
+addcmd('brightness',{},function(aD,aE)
+Lighting.Brightness=aD[1]
 end)
-addcmd('globalshadows',{'gshadows'},function(args, speaker)
-Lighting.GlobalShadows = true
+
+addcmd('globalshadows',{'gshadows'},function(aD,aE)
+Lighting.GlobalShadows=true
 end)
-addcmd('unglobalshadows',{'nogshadows','ungshadows','noglobalshadows'},function(args, speaker)
-Lighting.GlobalShadows = false
+
+addcmd('unglobalshadows',{'nogshadows','ungshadows','noglobalshadows'},function(aD,aE)
+Lighting.GlobalShadows=false
 end)
-origsettings = {abt = Lighting.Ambient, oabt = Lighting.OutdoorAmbient, brt = Lighting.Brightness, time = Lighting.ClockTime, fe = Lighting.FogEnd, fs = Lighting.FogStart, gs = Lighting.GlobalShadows}
-addcmd('restorelighting',{'rlighting'},function(args, speaker)
-Lighting.Ambient = origsettings.abt
-Lighting.OutdoorAmbient = origsettings.oabt
-Lighting.Brightness = origsettings.brt
-Lighting.ClockTime = origsettings.time
-Lighting.FogEnd = origsettings.fe
-Lighting.FogStart = origsettings.fs
-Lighting.GlobalShadows = origsettings.gs
+
+origsettings={abt=Lighting.Ambient,oabt=Lighting.OutdoorAmbient,brt=Lighting.Brightness,time=Lighting.ClockTime,fe=Lighting.FogEnd,fs=Lighting.FogStart,gs=Lighting.GlobalShadows}
+
+addcmd('restorelighting',{'rlighting'},function(aD,aE)
+Lighting.Ambient=origsettings.abt
+Lighting.OutdoorAmbient=origsettings.oabt
+Lighting.Brightness=origsettings.brt
+Lighting.ClockTime=origsettings.time
+Lighting.FogEnd=origsettings.fe
+Lighting.FogStart=origsettings.fs
+Lighting.GlobalShadows=origsettings.gs
 end)
-addcmd('stun',{'platformstand'},function(args, speaker)
-speaker.Character:FindFirstChildOfClass('Humanoid').PlatformStand = true
+
+addcmd('stun',{'platformstand'},function(aD,aE)
+aE.Character:FindFirstChildOfClass'Humanoid'.PlatformStand=true
 end)
-addcmd('unstun',{'nostun','unplatformstand','noplatformstand'},function(args, speaker)
-speaker.Character:FindFirstChildOfClass('Humanoid').PlatformStand = false
+
+addcmd('unstun',{'nostun','unplatformstand','noplatformstand'},function(aD,aE)
+aE.Character:FindFirstChildOfClass'Humanoid'.PlatformStand=false
 end)
-addcmd('norotate',{'noautorotate'},function(args, speaker)
-speaker.Character:FindFirstChildOfClass('Humanoid').AutoRotate  = false
+
+addcmd('norotate',{'noautorotate'},function(aD,aE)
+aE.Character:FindFirstChildOfClass'Humanoid'.AutoRotate=false
 end)
-addcmd('unnorotate',{'autorotate'},function(args, speaker)
-speaker.Character:FindFirstChildOfClass('Humanoid').AutoRotate  = true
+
+addcmd('unnorotate',{'autorotate'},function(aD,aE)
+aE.Character:FindFirstChildOfClass'Humanoid'.AutoRotate=true
 end)
-addcmd('enablestate',{},function(args, speaker)
-local x = args[1]
-if not tonumber(x) then
-local x = Enum.HumanoidStateType[args[1]]
+
+addcmd('enablestate',{},function(aD,aE)
+local aF=aD[1]
+if not tonumber(aF)then local aG=
+Enum.HumanoidStateType[aD[1] ]
 end
-speaker.Character:FindFirstChildOfClass("Humanoid"):SetStateEnabled(x, true)
+aE.Character:FindFirstChildOfClass"Humanoid":SetStateEnabled(aF,true)
 end)
-addcmd('disablestate',{},function(args, speaker)
-local x = args[1]
-if not tonumber(x) then
-local x = Enum.HumanoidStateType[args[1]]
+
+addcmd('disablestate',{},function(aD,aE)
+local aF=aD[1]
+if not tonumber(aF)then local aG=
+Enum.HumanoidStateType[aD[1] ]
 end
-speaker.Character:FindFirstChildOfClass("Humanoid"):SetStateEnabled(x, false)
+aE.Character:FindFirstChildOfClass"Humanoid":SetStateEnabled(aF,false)
 end)
-addcmd('drophats',{'drophat'},function(args, speaker)
-if speaker.Character then
-for _,v in pairs(speaker.Character:FindFirstChildOfClass('Humanoid'):GetAccessories()) do
-v.Parent = workspace
-end
-end
-end)
-addcmd('deletehats',{'nohats','rhats'},function(args, speaker)
-for i,v in next, speaker.Character:GetDescendants() do
-if v:IsA("Accessory") then
-for i,p in next, v:GetDescendants() do
-if p:IsA("Weld") then
-p:Destroy()
-end
-end
+
+addcmd('drophats',{'drophat'},function(aD,aE)
+if aE.Character then
+for aF,aG in pairs(aE.Character:FindFirstChildOfClass'Humanoid':GetAccessories())do
+aG.Parent=workspace
 end
 end
 end)
-addcmd('droptools',{'droptool'},function(args, speaker)
-for i,v in pairs(Players.LocalPlayer.Backpack:GetChildren()) do
-if v:IsA("Tool") then
-v.Parent = Players.LocalPlayer.Character
+
+addcmd('deletehats',{'nohats','rhats'},function(aD,aE)
+for aF,aG in next,aE.Character:GetDescendants()do
+if aG:IsA"Accessory"then
+for aH,aI in next,aG:GetDescendants()do
+if aI:IsA"Weld"then
+aI:Destroy()
+end
+end
+end
+end
+end)
+
+addcmd('droptools',{'droptool'},function(aD,aE)
+for aF,aG in pairs(Players.LocalPlayer.Backpack:GetChildren())do
+if aG:IsA"Tool"then
+aG.Parent=Players.LocalPlayer.Character
 end
 end
 wait()
-for i,v in pairs(Players.LocalPlayer.Character:GetChildren()) do
-if v:IsA("Tool") then
-v.Parent = workspace
+for aF,aG in pairs(Players.LocalPlayer.Character:GetChildren())do
+if aG:IsA"Tool"then
+aG.Parent=workspace
 end
 end
 end)
-addcmd('droppabletools',{},function(args, speaker)
-if speaker.Character then
-for _,obj in pairs(speaker.Character:GetChildren()) do
-if obj:IsA("Tool") then
-obj.CanBeDropped = true
+
+addcmd('droppabletools',{},function(aD,aE)
+if aE.Character then
+for aF,aG in pairs(aE.Character:GetChildren())do
+if aG:IsA"Tool"then
+aG.CanBeDropped=true
 end
 end
 end
-if speaker:FindFirstChildOfClass("Backpack") then
-for _,obj in pairs(speaker:FindFirstChildOfClass("Backpack"):GetChildren()) do
-if obj:IsA("Tool") then
-obj.CanBeDropped = true
+if aE:FindFirstChildOfClass"Backpack"then
+for aF,aG in pairs(aE:FindFirstChildOfClass"Backpack":GetChildren())do
+if aG:IsA"Tool"then
+aG.CanBeDropped=true
 end
 end
 end
 end)
-local currentToolSize = ""
-local currentGripPos = ""
-addcmd('reach',{},function(args, speaker)
-execCmd('unreach')
+
+local aD=""
+local aE=""
+addcmd('reach',{},function(aF,aG)
+execCmd'unreach'
 wait()
-for i,v in pairs(speaker.Character:GetDescendants()) do
-if v:IsA("Tool") then
-if args[1] then
-currentToolSize = v.Handle.Size
-currentGripPos = v.GripPos
-local a = Instance.new("SelectionBox")
-a.Name = "SelectionBoxCreated"
-a.Parent = v.Handle
-a.Adornee = v.Handle
-v.Handle.Massless = true
-v.Handle.Size = Vector3.new(0.5,0.5,args[1])
-v.GripPos = Vector3.new(0,0,0)
-speaker.Character:FindFirstChildOfClass('Humanoid'):UnequipTools()
+for aH,aI in pairs(aG.Character:GetDescendants())do
+if aI:IsA"Tool"then
+if aF[1]then
+aD=aI.Handle.Size
+aE=aI.GripPos
+local aJ=Instance.new"SelectionBox"
+aJ.Name="SelectionBoxCreated"
+aJ.Parent=aI.Handle
+aJ.Adornee=aI.Handle
+aI.Handle.Massless=true
+aI.Handle.Size=Vector3.new(0.5,0.5,aF[1])
+aI.GripPos=Vector3.new(0,0,0)
+aG.Character:FindFirstChildOfClass'Humanoid':UnequipTools()
 else
-currentToolSize = v.Handle.Size
-currentGripPos = v.GripPos
-local a = Instance.new("SelectionBox")
-a.Name = "SelectionBoxCreated"
-a.Parent = v.Handle
-a.Adornee = v.Handle
-v.Handle.Massless = true
-v.Handle.Size = Vector3.new(0.5,0.5,60)
-v.GripPos = Vector3.new(0,0,0)
-speaker.Character:FindFirstChildOfClass('Humanoid'):UnequipTools()
+aD=aI.Handle.Size
+aE=aI.GripPos
+local aJ=Instance.new"SelectionBox"
+aJ.Name="SelectionBoxCreated"
+aJ.Parent=aI.Handle
+aJ.Adornee=aI.Handle
+aI.Handle.Massless=true
+aI.Handle.Size=Vector3.new(0.5,0.5,60)
+aI.GripPos=Vector3.new(0,0,0)
+aG.Character:FindFirstChildOfClass'Humanoid':UnequipTools()
 end
 end
 end
 end)
-addcmd("boxreach", {}, function(args, speaker)
-execCmd("unreach")
+
+addcmd("boxreach",{},function(aF,aG)
+execCmd"unreach"
 wait()
-for i, v in pairs(speaker.Character:GetDescendants()) do
-if v:IsA("Tool") then
-local size = tonumber(args[1]) or 60
-currentToolSize = v.Handle.Size
-currentGripPos = v.GripPos
-local a = Instance.new("SelectionBox")
-a.Name = "SelectionBoxCreated"
-a.Parent = v.Handle
-a.Adornee = v.Handle
-v.Handle.Massless = true
-v.Handle.Size = Vector3.new(size, size, size)
-v.GripPos = Vector3.new(0, 0, 0)
-speaker.Character:FindFirstChildOfClass("Humanoid"):UnequipTools()
+for aH,aI in pairs(aG.Character:GetDescendants())do
+if aI:IsA"Tool"then
+local aJ=tonumber(aF[1])or 60
+aD=aI.Handle.Size
+aE=aI.GripPos
+local V=Instance.new"SelectionBox"
+V.Name="SelectionBoxCreated"
+V.Parent=aI.Handle
+V.Adornee=aI.Handle
+aI.Handle.Massless=true
+aI.Handle.Size=Vector3.new(aJ,aJ,aJ)
+aI.GripPos=Vector3.new(0,0,0)
+aG.Character:FindFirstChildOfClass"Humanoid":UnequipTools()
 end
 end
 end)
-addcmd('unreach',{'noreach','unboxreach'},function(args, speaker)
-for i,v in pairs(speaker.Character:GetDescendants()) do
-if v:IsA("Tool") then
-v.Handle.Size = currentToolSize
-v.GripPos = currentGripPos
-v.Handle.SelectionBoxCreated:Destroy()
+
+addcmd('unreach',{'noreach','unboxreach'},function(aF,aG)
+for aH,aI in pairs(aG.Character:GetDescendants())do
+if aI:IsA"Tool"then
+aI.Handle.Size=aD
+aI.GripPos=aE
+aI.Handle.SelectionBoxCreated:Destroy()
 end
 end
 end)
-addcmd('grippos',{},function(args, speaker)
-for i,v in pairs(speaker.Character:GetDescendants()) do
-if v:IsA("Tool") then
-v.Parent = speaker:FindFirstChildOfClass("Backpack")
-v.GripPos = Vector3.new(args[1],args[2],args[3])
-v.Parent = speaker.Character
+
+addcmd('grippos',{},function(aF,aG)
+for aH,aI in pairs(aG.Character:GetDescendants())do
+if aI:IsA"Tool"then
+aI.Parent=aG:FindFirstChildOfClass"Backpack"
+aI.GripPos=Vector3.new(aF[1],aF[2],aF[3])
+aI.Parent=aG.Character
 end
 end
 end)
-addcmd('usetools', {}, function(args, speaker)
-local Backpack = speaker:FindFirstChildOfClass("Backpack")
-local ammount = tonumber(args[1]) or 1
-local delay_ = tonumber(args[2]) or false
-for _, v in ipairs(Backpack:GetChildren()) do
-v.Parent = speaker.Character
+
+addcmd('usetools',{},function(aF,aG)
+local aH=aG:FindFirstChildOfClass"Backpack"
+local aI=tonumber(aF[1])or 1
+local aJ=tonumber(aF[2])or false
+for V,W in ipairs(aH:GetChildren())do
+W.Parent=aG.Character
 task.spawn(function()
-for _ = 1, ammount do
-v:Activate()
-if delay_ then
-wait(delay_)
+for X=1,aI do
+W:Activate()
+if aJ then
+wait(aJ)
 end
 end
-v.Parent = Backpack
+W.Parent=aH
 end)
 end
 end)
-addcmd('logs',{},function(args, speaker)
-logs:TweenPosition(UDim2.new(0, 0, 1, -265), "InOut", "Quart", 0.3, true, nil)
+
+addcmd('logs',{},function(aF,aG)
+logs:TweenPosition(UDim2.new(0,0,1,-265),"InOut","Quart",0.3,true,nil)
 end)
-addcmd('chatlogs',{'clogs'},function(args, speaker)
-join.Visible = false
-chat.Visible = true
+
+addcmd('chatlogs',{'clogs'},function(aF,aG)
+join.Visible=false
+chat.Visible=true
 table.remove(shade3,table.find(shade3,selectChat))
 table.remove(shade2,table.find(shade2,selectJoin))
 table.insert(shade2,selectChat)
 table.insert(shade3,selectJoin)
-selectJoin.BackgroundColor3 = currentShade3
-selectChat.BackgroundColor3 = currentShade2
-logs:TweenPosition(UDim2.new(0, 0, 1, -265), "InOut", "Quart", 0.3, true, nil)
+selectJoin.BackgroundColor3=currentShade3
+selectChat.BackgroundColor3=currentShade2
+logs:TweenPosition(UDim2.new(0,0,1,-265),"InOut","Quart",0.3,true,nil)
 end)
-addcmd('joinlogs',{'jlogs'},function(args, speaker)
-chat.Visible = false
-join.Visible = true
+
+addcmd('joinlogs',{'jlogs'},function(aF,aG)
+chat.Visible=false
+join.Visible=true
 table.remove(shade3,table.find(shade3,selectJoin))
 table.remove(shade2,table.find(shade2,selectChat))
 table.insert(shade2,selectJoin)
 table.insert(shade3,selectChat)
-selectChat.BackgroundColor3 = currentShade3
-selectJoin.BackgroundColor3 = currentShade2
-logs:TweenPosition(UDim2.new(0, 0, 1, -265), "InOut", "Quart", 0.3, true, nil)
+selectChat.BackgroundColor3=currentShade3
+selectJoin.BackgroundColor3=currentShade2
+logs:TweenPosition(UDim2.new(0,0,1,-265),"InOut","Quart",0.3,true,nil)
 end)
-addcmd("chatlogswebhook", {"logswebhook"}, function(args, speaker)
+
+addcmd("chatlogswebhook",{"logswebhook"},function(aF,aG)
 if httprequest then
-logsWebhook = args[1] or nil
+logsWebhook=aF[1]or nil
 updatesaves()
 else
-notify("Incompatible Exploit", "Your exploit does not support this command (missing request)")
+notify("Incompatible Exploit","Your exploit does not support this command (missing request)")
 end
 end)
-addcmd("antichatlogs", {"antichatlogger"}, function(args, speaker)
+
+addcmd("antichatlogs",{"antichatlogger"},function(aF,aG)
 if not isLegacyChat then
-return notify("antichatlogs", "Game needs the legacy chat")
-end
-local MessagePosted, _ = pcall(function()
-rawset(require(speaker:FindFirstChild("PlayerScripts"):FindFirstChild("ChatScript").ChatMain), "MessagePosted", {
-["fire"] = function(msg)
-return msg
-end,
-["wait"] = function()
+return notify("antichatlogs","Game needs the legacy chat")
+end local
+aH, aI=pcall(function()
+rawset(require(aG:FindFirstChild"PlayerScripts":FindFirstChild"ChatScript".ChatMain),"MessagePosted",{fire=
+function(aH)
+return aH
+end,wait=
+function()
 return
-end,
-["connect"] = function()
+end,connect=
+function()
 return
 end
 })
 end)
-notify("antichatlogs", MessagePosted and "Enabled" or "Failed to enable antichatlogs")
+notify("antichatlogs",aH and"Enabled"or"Failed to enable antichatlogs")
 end)
-flinging = false
-addcmd('fling',{},function(args, speaker)
-flinging = false
-for _, child in pairs(speaker.Character:GetDescendants()) do
-if child:IsA("BasePart") then
-child.CustomPhysicalProperties = PhysicalProperties.new(math.huge, 0.3, 0.5)
+
+flinging=false
+addcmd('fling',{},function(aF,aG)
+flinging=false
+for aH,aI in pairs(aG.Character:GetDescendants())do
+if aI:IsA"BasePart"then
+aI.CustomPhysicalProperties=PhysicalProperties.new(math.huge,0.3,0.5)
 end
 end
-execCmd('noclip')
+execCmd'noclip'
 wait(.1)
-local bambam = Instance.new("BodyAngularVelocity")
-bambam.Name = randomString()
-bambam.Parent = getRoot(speaker.Character)
-bambam.AngularVelocity = Vector3.new(0,99999,0)
-bambam.MaxTorque = Vector3.new(0,math.huge,0)
-bambam.P = math.huge
-local Char = speaker.Character:GetChildren()
-for i, v in next, Char do
-if v:IsA("BasePart") then
-v.CanCollide = false
-v.Massless = true
-v.Velocity = Vector3.new(0, 0, 0)
+local aH=Instance.new"BodyAngularVelocity"
+aH.Name=randomString()
+aH.Parent=getRoot(aG.Character)
+aH.AngularVelocity=Vector3.new(0,99999,0)
+aH.MaxTorque=Vector3.new(0,math.huge,0)
+aH.P=math.huge
+local aI=aG.Character:GetChildren()
+for aJ,V in next,aI do
+if V:IsA"BasePart"then
+V.CanCollide=false
+V.Massless=true
+V.Velocity=Vector3.new(0,0,0)
 end
 end
-flinging = true
+flinging=true
 local function flingDiedF()
-execCmd('unfling')
+execCmd'unfling'
 end
-flingDied = speaker.Character:FindFirstChildOfClass('Humanoid').Died:Connect(flingDiedF)
+flingDied=aG.Character:FindFirstChildOfClass'Humanoid'.Died:Connect(flingDiedF)
 repeat
-bambam.AngularVelocity = Vector3.new(0,99999,0)
+aH.AngularVelocity=Vector3.new(0,99999,0)
 wait(.2)
-bambam.AngularVelocity = Vector3.new(0,0,0)
+aH.AngularVelocity=Vector3.new(0,0,0)
 wait(.1)
-until flinging == false
+until flinging==false
 end)
-addcmd('unfling',{'nofling'},function(args, speaker)
-execCmd('clip')
+
+addcmd('unfling',{'nofling'},function(aF,aG)
+execCmd'clip'
 if flingDied then
 flingDied:Disconnect()
 end
-flinging = false
+flinging=false
 wait(.1)
-local speakerChar = speaker.Character
-if not speakerChar or not getRoot(speakerChar) then return end
-for i,v in pairs(getRoot(speakerChar):GetChildren()) do
-if v.ClassName == 'BodyAngularVelocity' then
-v:Destroy()
+local aH=aG.Character
+if not aH or not getRoot(aH)then return end
+for aI,aJ in pairs(getRoot(aH):GetChildren())do
+if aJ.ClassName=='BodyAngularVelocity'then
+aJ:Destroy()
 end
 end
-for _, child in pairs(speakerChar:GetDescendants()) do
-if child.ClassName == "Part" or child.ClassName == "MeshPart" then
-child.CustomPhysicalProperties = PhysicalProperties.new(0.7, 0.3, 0.5)
+for aI,aJ in pairs(aH:GetDescendants())do
+if aJ.ClassName=="Part"or aJ.ClassName=="MeshPart"then
+aJ.CustomPhysicalProperties=PhysicalProperties.new(0.7,0.3,0.5)
 end
 end
 end)
-addcmd('togglefling',{},function(args, speaker)
+
+addcmd('togglefling',{},function(aF,aG)
 if flinging then
-execCmd('unfling')
+execCmd'unfling'
 else
-execCmd('fling')
+execCmd'fling'
 end
 end)
-addcmd("flyfling", {}, function(args, speaker)
-execCmd("unvehiclefly\\unwalkfling")
+
+addcmd("flyfling",{},function(aF,aG)
+execCmd"unvehiclefly\\unwalkfling"
 wait()
-if args[1] and isNumber(args[1]) then
-vehicleflyspeed = args[1]
+if aF[1]and isNumber(aF[1])then
+vehicleflyspeed=aF[1]
 end
-execCmd("vehiclefly\\walkfling")
+execCmd"vehiclefly\\walkfling"
 end)
-addcmd("unflyfling", {}, function(args, speaker)
-execCmd("unvehiclefly\\unwalkfling\\breakvelocity")
+
+addcmd("unflyfling",{},function(aF,aG)
+execCmd"unvehiclefly\\unwalkfling\\breakvelocity"
 end)
-addcmd("toggleflyfling", {}, function(args, speaker)
-execCmd(flinging and "unflyfling" or "flyfling")
+
+addcmd("toggleflyfling",{},function(aF,aG)
+execCmd(flinging and"unflyfling"or"flyfling")
 end)
-walkflinging = false
-addcmd("walkfling", {}, function(args, speaker)
-execCmd("unwalkfling")
-local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-if humanoid then
-humanoid.Died:Connect(function()
-execCmd("unwalkfling")
+
+walkflinging=false
+addcmd("walkfling",{},function(aF,aG)
+execCmd"unwalkfling"
+local aH=aG.Character:FindFirstChildWhichIsA"Humanoid"
+if aH then
+aH.Died:Connect(function()
+execCmd"unwalkfling"
 end)
 end
-execCmd("noclip nonotify")
-walkflinging = true
+
+execCmd"noclip nonotify"
+walkflinging=true
 repeat RunService.Heartbeat:Wait()
-local character = speaker.Character
-local root = getRoot(character)
-local vel, movel = nil, 0.1
-while not (character and character.Parent and root and root.Parent) do
+local aI=aG.Character
+local aJ=getRoot(aI)
+local V,W=0.1
+
+while not(aI and aI.Parent and aJ and aJ.Parent)do
 RunService.Heartbeat:Wait()
-character = speaker.Character
-root = getRoot(character)
+aI=aG.Character
+aJ=getRoot(aI)
 end
-vel = root.Velocity
-root.Velocity = vel * 10000 + Vector3.new(0, 10000, 0)
+
+W=aJ.Velocity
+aJ.Velocity=W*10000+Vector3.new(0,10000,0)
+
 RunService.RenderStepped:Wait()
-if character and character.Parent and root and root.Parent then
-root.Velocity = vel
+if aI and aI.Parent and aJ and aJ.Parent then
+aJ.Velocity=W
 end
+
 RunService.Stepped:Wait()
-if character and character.Parent and root and root.Parent then
-root.Velocity = vel + Vector3.new(0, movel, 0)
-movel = movel * -1
+if aI and aI.Parent and aJ and aJ.Parent then
+aJ.Velocity=W+Vector3.new(0,V,0)
+V=V*-1
 end
-until walkflinging == false
+until walkflinging==false
 end)
-addcmd("unwalkfling", {"nowalkfling"}, function(args, speaker)
-walkflinging = false
-execCmd("unnoclip nonotify")
+
+addcmd("unwalkfling",{"nowalkfling"},function(aF,aG)
+walkflinging=false
+execCmd"unnoclip nonotify"
 end)
-addcmd("togglewalkfling", {}, function(args, speaker)
-execCmd(walkflinging and "unwalkfling" or "walkfling")
+
+addcmd("togglewalkfling",{},function(aF,aG)
+execCmd(walkflinging and"unwalkfling"or"walkfling")
 end)
-addcmd('invisfling',{},function(args, speaker)
-permadeath(speaker)
-local ch = speaker.Character
-local prt=Instance.new("Model")
-prt.Parent = speaker.Character
-local z1 = Instance.new("Part")
-z1.Name="Torso"
-z1.CanCollide = false
-z1.Anchored = true
-local z2 = Instance.new("Part")
-z2.Name="Head"
-z2.Parent = prt
-z2.Anchored = true
-z2.CanCollide = false
-local z3 =Instance.new("Humanoid")
-z3.Name="Humanoid"
-z3.Parent = prt
-z1.Position = Vector3.new(0,9999,0)
-speaker.Character=prt
+
+addcmd('invisfling',{},function(aF,aG)
+permadeath(aG)
+local aH=aG.Character
+local aI=Instance.new"Model"
+aI.Parent=aG.Character
+local aJ=Instance.new"Part"
+aJ.Name="Torso"
+aJ.CanCollide=false
+aJ.Anchored=true
+local V=Instance.new"Part"
+V.Name="Head"
+V.Parent=aI
+V.Anchored=true
+V.CanCollide=false
+local W=Instance.new"Humanoid"
+W.Name="Humanoid"
+W.Parent=aI
+aJ.Position=Vector3.new(0,9999,0)
+aG.Character=aI
 wait(3)
-speaker.Character=ch
+aG.Character=aH
 wait(3)
-local Hum = Instance.new("Humanoid")
-z2:Clone()
-Hum.Parent = speaker.Character
-local root =  getRoot(speaker.Character)
-for i,v in pairs(speaker.Character:GetChildren()) do
-if v ~= root and  v.Name ~= "Humanoid" then
-v:Destroy()
+local X=Instance.new"Humanoid"
+V:Clone()
+X.Parent=aG.Character
+local Y=getRoot(aG.Character)
+for Z,_ in pairs(aG.Character:GetChildren())do
+if _~=Y and _.Name~="Humanoid"then
+_:Destroy()
 end
 end
-root.Transparency = 0
-root.Color = Color3.new(1, 1, 1)
-local invisflingStepped
-invisflingStepped = RunService.Stepped:Connect(function()
-if speaker.Character and getRoot(speaker.Character) then
-getRoot(speaker.Character).CanCollide = false
+Y.Transparency=0
+Y.Color=Color3.new(1,1,1)
+local Z
+Z=RunService.Stepped:Connect(function()
+if aG.Character and getRoot(aG.Character)then
+getRoot(aG.Character).CanCollide=false
 else
-invisflingStepped:Disconnect()
+Z:Disconnect()
 end
 end)
 sFLY()
-workspace.CurrentCamera.CameraSubject = root
-local bambam = Instance.new("BodyThrust")
-bambam.Parent = getRoot(speaker.Character)
-bambam.Force = Vector3.new(99999,99999*10,99999)
-bambam.Location = getRoot(speaker.Character).Position
+workspace.CurrentCamera.CameraSubject=Y
+local _=Instance.new"BodyThrust"
+_.Parent=getRoot(aG.Character)
+_.Force=Vector3.new(99999,999990,99999)
+_.Location=getRoot(aG.Character).Position
 end)
-addcmd("antifling", {}, function(args, speaker)
+
+addcmd("antifling",{},function(aF,aG)
 if antifling then
 antifling:Disconnect()
-antifling = nil
+antifling=nil
 end
-antifling = RunService.Stepped:Connect(function()
-for _, player in pairs(Players:GetPlayers()) do
-if player ~= speaker and player.Character then
-for _, v in pairs(player.Character:GetDescendants()) do
-if v:IsA("BasePart") then
-v.CanCollide = false
+antifling=RunService.Stepped:Connect(function()
+for aH,aI in pairs(Players:GetPlayers())do
+if aI~=aG and aI.Character then
+for aJ,V in pairs(aI.Character:GetDescendants())do
+if V:IsA"BasePart"then
+V.CanCollide=false
 end
 end
 end
 end
 end)
 end)
-addcmd("unantifling", {}, function(args, speaker)
+
+addcmd("unantifling",{},function(aF,aG)
 if antifling then
 antifling:Disconnect()
-antifling = nil
+antifling=nil
 end
 end)
-addcmd("toggleantifling", {}, function(args, speaker)
-execCmd(antifling and "unantifling" or "antifling")
+
+addcmd("toggleantifling",{},function(aF,aG)
+execCmd(antifling and"unantifling"or"antifling")
 end)
-function attach(speaker,target)
-if tools(speaker) then
-local char = speaker.Character
-local tchar = target.Character
-local hum = speaker.Character:FindFirstChildOfClass("Humanoid")
-local hrp = getRoot(speaker.Character)
-local hrp2 = getRoot(target.Character)
-hum.Name = "1"
-local newHum = hum:Clone()
-newHum.Parent = char
-newHum.Name = "Humanoid"
+
+function attach(aF,aG)
+if tools(aF)then
+local aH=aF.Character local aI=
+aG.Character
+local aJ=aF.Character:FindFirstChildOfClass"Humanoid"
+local V=getRoot(aF.Character)
+local W=getRoot(aG.Character)
+aJ.Name="1"
+local X=aJ:Clone()
+X.Parent=aH
+X.Name="Humanoid"
 wait()
-hum:Destroy()
-workspace.CurrentCamera.CameraSubject = char
-newHum.DisplayDistanceType = "None"
-local tool = speaker:FindFirstChildOfClass("Backpack"):FindFirstChildOfClass("Tool") or speaker.Character:FindFirstChildOfClass("Tool")
-tool.Parent = char
-hrp.CFrame = hrp2.CFrame * CFrame.new(0, 0, 0) * CFrame.new(math.random(-100, 100)/200,math.random(-100, 100)/200,math.random(-100, 100)/200)
-local n = 0
+aJ:Destroy()
+workspace.CurrentCamera.CameraSubject=aH
+X.DisplayDistanceType="None"
+local Y=aF:FindFirstChildOfClass"Backpack":FindFirstChildOfClass"Tool"or aF.Character:FindFirstChildOfClass"Tool"
+Y.Parent=aH
+V.CFrame=W.CFrame*CFrame.new(0,0,0)*CFrame.new(math.random(-100,100)/200,math.random(-100,100)/200,math.random(-100,100)/200)
+local Z=0
 repeat
 wait(.1)
-n = n + 1
-hrp.CFrame = hrp2.CFrame
-until (tool.Parent ~= char or not hrp or not hrp2 or not hrp.Parent or not hrp2.Parent or n > 250) and n > 2
+Z=Z+1
+V.CFrame=W.CFrame
+until(Y.Parent~=aH or not V or not W or not V.Parent or not W.Parent or Z>250)and Z>2
 else
 notify('Tool Required','You need to have an item in your inventory to use this command')
 end
 end
-addcmd('attach',{},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
-attach(speaker,Players[v])
+
+addcmd('attach',{},function(aF,aG)
+local aH=getPlayer(aF[1],aG)
+for aI,aJ in pairs(aH)do
+attach(aG,Players[aJ])
 end
 end)
-function kill(speaker,target,fast)
-if tools(speaker) then
-if target ~= nil then
-local NormPos = getRoot(speaker.Character).CFrame
-if not fast then
-refresh(speaker)
+
+function kill(aF,aG,aH)
+if tools(aF)then
+if aG~=nil then
+local aI=getRoot(aF.Character).CFrame
+if not aH then
+refresh(aF)
 wait()
-repeat wait() until speaker.Character ~= nil and getRoot(speaker.Character)
+repeat wait()until aF.Character~=nil and getRoot(aF.Character)
 wait(0.3)
 end
-local hrp = getRoot(speaker.Character)
-attach(speaker,target)
+local aJ=getRoot(aF.Character)
+attach(aF,aG)
 repeat
 wait()
-hrp.CFrame = CFrame.new(999999, workspace.FallenPartsDestroyHeight + 5,999999)
-until not getRoot(target.Character) or not getRoot(speaker.Character)
-speaker.CharacterAdded:Wait():WaitForChild("HumanoidRootPart").CFrame = NormPos
+aJ.CFrame=CFrame.new(999999,workspace.FallenPartsDestroyHeight+5,999999)
+until not getRoot(aG.Character)or not getRoot(aF.Character)
+aF.CharacterAdded:Wait():WaitForChild"HumanoidRootPart".CFrame=aI
 end
 else
 notify('Tool Required','You need to have an item in your inventory to use this command')
 end
 end
-addcmd('kill',{'fekill'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
-kill(speaker,Players[v])
+
+addcmd('kill',{'fekill'},function(aF,aG)
+local aH=getPlayer(aF[1],aG)
+for aI,aJ in pairs(aH)do
+kill(aG,Players[aJ])
 end
 end)
-addcmd('handlekill', {'hkill'}, function(args, speaker)
+
+addcmd('handlekill',{'hkill'},function(aF,aG)
 if not firetouchinterest then
-return notify('Incompatible Exploit', 'Your exploit does not support this command (missing firetouchinterest)')
+return notify('Incompatible Exploit','Your exploit does not support this command (missing firetouchinterest)')
 end
-local RS = RunService.RenderStepped
-local Tool = speaker.Character.FindFirstChildWhichIsA(speaker.Character, "Tool")
-local Handle = Tool and Tool.FindFirstChild(Tool, "Handle")
-if not Tool or not Handle then
-return notify("Handle Kill", "You need to hold a \"Tool\" that does damage on touch. For example the default \"Sword\" tool.")
+local aH=RunService.RenderStepped
+local aI=aG.Character.FindFirstChildWhichIsA(aG.Character,"Tool")
+local aJ=aI and aI.FindFirstChild(aI,"Handle")
+if not aI or not aJ then
+return notify("Handle Kill","You need to hold a \"Tool\" that does damage on touch. For example the default \"Sword\" tool.")
 end
-for _, v in ipairs(getPlayer(args[1], speaker)) do
-v = Players[v]
+for V,W in ipairs(getPlayer(aF[1],aG))do
+W=Players[W]
 task.spawn(function()
-while Tool and speaker.Character and v.Character and Tool.Parent == speaker.Character do
-local Human = v.Character.FindFirstChildWhichIsA(v.Character, "Humanoid")
-if not Human or Human.Health <= 0 then
+while aI and aG.Character and W.Character and aI.Parent==aG.Character do
+local X=W.Character.FindFirstChildWhichIsA(W.Character,"Humanoid")
+if not X or X.Health<=0 then
 break
 end
-for _, v1 in ipairs(v.Character.GetChildren(v.Character)) do
-v1 = ((v1.IsA(v1, "BasePart") and firetouchinterest(Handle, v1, 1, (RS.Wait(RS) and nil) or firetouchinterest(Handle, v1, 0)) and nil) or v1) or v1
+for Y,Z in ipairs(W.Character.GetChildren(W.Character))do
+Z=((Z.IsA(Z,"BasePart")and firetouchinterest(aJ,Z,1,(aH.Wait(aH)and nil)or firetouchinterest(aJ,Z,0))and nil)or Z)or Z
 end
 end
-notify("Handle Kill Stopped!", v.Name .. " died/left or you unequipped the tool!")
+notify("Handle Kill Stopped!",W.Name.." died/left or you unequipped the tool!")
 end)
 end
 end)
-local hb = RunService.Heartbeat
-addcmd('tpwalk', {'teleportwalk'}, function(args, speaker)
-tpwalking = true
-local chr = speaker.Character
-local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-while tpwalking and chr and hum and hum.Parent do
-local delta = hb:Wait()
-if hum.MoveDirection.Magnitude > 0 then
-if args[1] and isNumber(args[1]) then
-chr:TranslateBy(hum.MoveDirection * tonumber(args[1]) * delta * 10)
+
+local aF=RunService.Heartbeat
+addcmd('tpwalk',{'teleportwalk'},function(aG,aH)
+tpwalking=true
+local aI=aH.Character
+local aJ=aI and aI:FindFirstChildWhichIsA"Humanoid"
+while tpwalking and aI and aJ and aJ.Parent do
+local V=aF:Wait()
+if aJ.MoveDirection.Magnitude>0 then
+if aG[1]and isNumber(aG[1])then
+aI:TranslateBy(aJ.MoveDirection*tonumber(aG[1])*V*10)
 else
-chr:TranslateBy(hum.MoveDirection * delta * 10)
+aI:TranslateBy(aJ.MoveDirection*V*10)
 end
 end
 end
 end)
-addcmd('untpwalk', {'unteleportwalk'}, function(args, speaker)
-tpwalking = false
+addcmd('untpwalk',{'unteleportwalk'},function(aG,aH)
+tpwalking=false
 end)
-addcmd('fastkill',{'fastfekill'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
-kill(speaker,Players[v],true)
+
+addcmd('fastkill',{'fastfekill'},function(aG,aH)
+local aI=getPlayer(aG[1],aH)
+for aJ,V in pairs(aI)do
+kill(aH,Players[V],true)
 end
 end)
-function bring(speaker,target,fast)
-if tools(speaker) then
-if target ~= nil then
-local NormPos = getRoot(speaker.Character).CFrame
-if not fast then
-refresh(speaker)
+
+function bring(aG,aH,aI)
+if tools(aG)then
+if aH~=nil then
+local aJ=getRoot(aG.Character).CFrame
+if not aI then
+refresh(aG)
 wait()
-repeat wait() until speaker.Character ~= nil and getRoot(speaker.Character)
+repeat wait()until aG.Character~=nil and getRoot(aG.Character)
 wait(0.3)
 end
-local hrp = getRoot(speaker.Character)
-attach(speaker,target)
+local V=getRoot(aG.Character)
+attach(aG,aH)
 repeat
 wait()
-hrp.CFrame = NormPos
-until not getRoot(target.Character) or not getRoot(speaker.Character)
-speaker.CharacterAdded:Wait():WaitForChild("HumanoidRootPart").CFrame = NormPos
+V.CFrame=aJ
+until not getRoot(aH.Character)or not getRoot(aG.Character)
+aG.CharacterAdded:Wait():WaitForChild"HumanoidRootPart".CFrame=aJ
 end
 else
 notify('Tool Required','You need to have an item in your inventory to use this command')
 end
 end
-addcmd('bring',{'febring'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
-bring(speaker,Players[v])
+
+addcmd('bring',{'febring'},function(aG,aH)
+local aI=getPlayer(aG[1],aH)
+for aJ,V in pairs(aI)do
+bring(aH,Players[V])
 end
 end)
-addcmd('fastbring',{'fastfebring'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
-bring(speaker,Players[v],true)
+
+addcmd('fastbring',{'fastfebring'},function(aG,aH)
+local aI=getPlayer(aG[1],aH)
+for aJ,V in pairs(aI)do
+bring(aH,Players[V],true)
 end
 end)
-function teleport(speaker,target,target2,fast)
-if tools(speaker) then
-if target ~= nil then
-local NormPos = getRoot(speaker.Character).CFrame
-if not fast then
-refresh(speaker)
+
+function teleport(aG,aH,aI,aJ)
+if tools(aG)then
+if aH~=nil then
+local V=getRoot(aG.Character).CFrame
+if not aJ then
+refresh(aG)
 wait()
-repeat wait() until speaker.Character ~= nil and getRoot(speaker.Character)
+repeat wait()until aG.Character~=nil and getRoot(aG.Character)
 wait(0.3)
 end
-local hrp = getRoot(speaker.Character)
-local hrp2 = getRoot(target2.Character)
-attach(speaker,target)
+local W=getRoot(aG.Character)
+local X=getRoot(aI.Character)
+attach(aG,aH)
 repeat
 wait()
-hrp.CFrame = hrp2.CFrame
-until not getRoot(target.Character) or not getRoot(speaker.Character)
+W.CFrame=X.CFrame
+until not getRoot(aH.Character)or not getRoot(aG.Character)
 wait(1)
-speaker.CharacterAdded:Wait():WaitForChild("HumanoidRootPart").CFrame = NormPos
+aG.CharacterAdded:Wait():WaitForChild"HumanoidRootPart".CFrame=V
 end
 else
 notify('Tool Required','You need to have an item in your inventory to use this command')
 end
 end
-addcmd('tp',{'teleport'},function(args, speaker)
-local players1=getPlayer(args[1], speaker)
-local players2=getPlayer(args[2], speaker)
-for i,v in pairs(players1)do
-if getRoot(Players[v].Character) and getRoot(Players[players2[1]].Character) then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+addcmd('tp',{'teleport'},function(aG,aH)
+local aI=getPlayer(aG[1],aH)
+local aJ=getPlayer(aG[2],aH)
+for V,W in pairs(aI)do
+if getRoot(Players[W].Character)and getRoot(Players[aJ[1] ].Character)then
+if aH.Character:FindFirstChildOfClass'Humanoid'and aH.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aH.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-teleport(speaker,Players[v],Players[players2[1]])
+teleport(aH,Players[W],Players[aJ[1] ])
 end
 end
 end)
-addcmd('fasttp',{'fastteleport'},function(args, speaker)
-local players1=getPlayer(args[1], speaker)
-local players2=getPlayer(args[2], speaker)
-for i,v in pairs(players1)do
-if getRoot(Players[v].Character) and getRoot(Players[players2[1]].Character) then
-if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+
+addcmd('fasttp',{'fastteleport'},function(aG,aH)
+local aI=getPlayer(aG[1],aH)
+local aJ=getPlayer(aG[2],aH)
+for V,W in pairs(aI)do
+if getRoot(Players[W].Character)and getRoot(Players[aJ[1] ].Character)then
+if aH.Character:FindFirstChildOfClass'Humanoid'and aH.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aH.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-teleport(speaker,Players[v],Players[players2[1]],true)
+teleport(aH,Players[W],Players[aJ[1] ],true)
 end
 end
 end)
-addcmd('spin',{},function(args, speaker)
-local spinSpeed = 20
-if args[1] and isNumber(args[1]) then
-spinSpeed = args[1]
+
+addcmd('spin',{},function(aG,aH)
+local aI=20
+if aG[1]and isNumber(aG[1])then
+aI=aG[1]
 end
-for i,v in pairs(getRoot(speaker.Character):GetChildren()) do
-if v.Name == "Spinning" then
-v:Destroy()
+for aJ,V in pairs(getRoot(aH.Character):GetChildren())do
+if V.Name=="Spinning"then
+V:Destroy()
 end
 end
-local Spin = Instance.new("BodyAngularVelocity")
-Spin.Name = "Spinning"
-Spin.Parent = getRoot(speaker.Character)
-Spin.MaxTorque = Vector3.new(0, math.huge, 0)
-Spin.AngularVelocity = Vector3.new(0,spinSpeed,0)
+local aJ=Instance.new"BodyAngularVelocity"
+aJ.Name="Spinning"
+aJ.Parent=getRoot(aH.Character)
+aJ.MaxTorque=Vector3.new(0,math.huge,0)
+aJ.AngularVelocity=Vector3.new(0,aI,0)
 end)
-addcmd('unspin',{},function(args, speaker)
-for i,v in pairs(getRoot(speaker.Character):GetChildren()) do
-if v.Name == "Spinning" then
-v:Destroy()
+
+addcmd('unspin',{},function(aG,aH)
+for aI,aJ in pairs(getRoot(aH.Character):GetChildren())do
+if aJ.Name=="Spinning"then
+aJ:Destroy()
 end
 end
 end)
-xrayEnabled = false
-xray = function()
-for _, v in pairs(workspace:GetDescendants()) do
-if v:IsA("BasePart") and not v.Parent:FindFirstChildWhichIsA("Humanoid") and not v.Parent.Parent:FindFirstChildWhichIsA("Humanoid") then
-v.LocalTransparencyModifier = xrayEnabled and 0.5 or 0
+
+xrayEnabled=false
+xray=function()
+for aG,aH in pairs(workspace:GetDescendants())do
+if aH:IsA"BasePart"and not aH.Parent:FindFirstChildWhichIsA"Humanoid"and not aH.Parent.Parent:FindFirstChildWhichIsA"Humanoid"then
+aH.LocalTransparencyModifier=xrayEnabled and 0.5 or 0
 end
 end
 end
-addcmd("xray", {}, function(args, speaker)
-xrayEnabled = true
+
+addcmd("xray",{},function(aG,aH)
+xrayEnabled=true
 xray()
 end)
-addcmd("unxray", {"noxray"}, function(args, speaker)
-xrayEnabled = false
+
+addcmd("unxray",{"noxray"},function(aG,aH)
+xrayEnabled=false
 xray()
 end)
-addcmd("togglexray", {}, function(args, speaker)
-xrayEnabled = not xrayEnabled
+
+addcmd("togglexray",{},function(aG,aH)
+xrayEnabled=not xrayEnabled
 xray()
 end)
-addcmd("loopxray", {}, function(args, speaker)
+
+addcmd("loopxray",{},function(aG,aH)
 if xrayLoop then
 xrayLoop:Disconnect()
 end
-xrayLoop = RunService.RenderStepped:Connect(function()
-xrayEnabled = true
+xrayLoop=RunService.RenderStepped:Connect(function()
+xrayEnabled=true
 xray()
 end)
 end)
-addcmd("unloopxray", {}, function(args, speaker)
+
+addcmd("unloopxray",{},function(aG,aH)
 if xrayLoop then
 xrayLoop:Disconnect()
 end
 end)
-local walltpTouch = nil
-addcmd('walltp',{},function(args, speaker)
-local torso
-if r15(speaker) then
-torso = speaker.Character.UpperTorso
+
+local aG
+addcmd('walltp',{},function(aH,aI)
+local aJ
+if r15(aI)then
+aJ=aI.Character.UpperTorso
 else
-torso = speaker.Character.Torso
+aJ=aI.Character.Torso
 end
-local function touchedFunc(hit)
-local Root = getRoot(speaker.Character)
-if hit:IsA("BasePart") and hit.Position.Y > Root.Position.Y - speaker.Character:FindFirstChildOfClass('Humanoid').HipHeight then
-local hitP = getRoot(hit.Parent)
-if hitP ~= nil then
-Root.CFrame = hit.CFrame * CFrame.new(Root.CFrame.lookVector.X,hitP.Size.Z/2 + speaker.Character:FindFirstChildOfClass('Humanoid').HipHeight,Root.CFrame.lookVector.Z)
-elseif hitP == nil then
-Root.CFrame = hit.CFrame * CFrame.new(Root.CFrame.lookVector.X,hit.Size.Y/2 + speaker.Character:FindFirstChildOfClass('Humanoid').HipHeight,Root.CFrame.lookVector.Z)
+local function touchedFunc(V)
+local W=getRoot(aI.Character)
+if V:IsA"BasePart"and V.Position.Y>W.Position.Y-aI.Character:FindFirstChildOfClass'Humanoid'.HipHeight then
+local X=getRoot(V.Parent)
+if X~=nil then
+W.CFrame=V.CFrame*CFrame.new(W.CFrame.lookVector.X,X.Size.Z/2+aI.Character:FindFirstChildOfClass'Humanoid'.HipHeight,W.CFrame.lookVector.Z)
+elseif X==nil then
+W.CFrame=V.CFrame*CFrame.new(W.CFrame.lookVector.X,V.Size.Y/2+aI.Character:FindFirstChildOfClass'Humanoid'.HipHeight,W.CFrame.lookVector.Z)
 end
 end
 end
-walltpTouch = torso.Touched:Connect(touchedFunc)
+aG=aJ.Touched:Connect(touchedFunc)
 end)
-addcmd('unwalltp',{'nowalltp'},function(args, speaker)
-if walltpTouch then
-walltpTouch:Disconnect()
+
+addcmd('unwalltp',{'nowalltp'},function(aH,aI)
+if aG then
+aG:Disconnect()
 end
 end)
-autoclicking = false
-addcmd('autoclick',{},function(args, speaker)
+
+autoclicking=false
+addcmd('autoclick',{},function(aH,aI)
 if mouse1press and mouse1release then
-execCmd('unautoclick')
+execCmd'unautoclick'
 wait()
-local clickDelay = 0.1
-local releaseDelay = 0.1
-if args[1] and isNumber(args[1]) then clickDelay = args[1] end
-if args[2] and isNumber(args[2]) then releaseDelay = args[2] end
-autoclicking = true
-cancelAutoClick = UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
-if not gameProcessedEvent then
-if (input.KeyCode == Enum.KeyCode.Backspace and UserInputService:IsKeyDown(Enum.KeyCode.Equals)) or (input.KeyCode == Enum.KeyCode.Equals and UserInputService:IsKeyDown(Enum.KeyCode.Backspace)) then
-autoclicking = false
+local aJ=0.1
+local V=0.1
+if aH[1]and isNumber(aH[1])then aJ=aH[1]end
+if aH[2]and isNumber(aH[2])then V=aH[2]end
+autoclicking=true
+cancelAutoClick=UserInputService.InputBegan:Connect(function(W,X)
+if not X then
+if(W.KeyCode==Enum.KeyCode.Backspace and UserInputService:IsKeyDown(Enum.KeyCode.Equals))or(W.KeyCode==Enum.KeyCode.Equals and UserInputService:IsKeyDown(Enum.KeyCode.Backspace))then
+autoclicking=false
 cancelAutoClick:Disconnect()
 end
 end
 end)
 notify('Auto Clicker',"Press [backspace] and [=] at the same time to stop")
-repeat wait(clickDelay)
+repeat wait(aJ)
 mouse1press()
-wait(releaseDelay)
+wait(V)
 mouse1release()
-until autoclicking == false
+until autoclicking==false
 else
 notify('Auto Clicker',"Your exploit doesn't have the ability to use the autoclick")
 end
 end)
-addcmd('unautoclick',{'noautoclick'},function(args, speaker)
-autoclicking = false
-if cancelAutoClick then cancelAutoClick:Disconnect() end
+
+addcmd('unautoclick',{'noautoclick'},function(aH,aI)
+autoclicking=false
+if cancelAutoClick then cancelAutoClick:Disconnect()end
 end)
-addcmd('mousesensitivity',{'ms'},function(args, speaker)
-UserInputService.MouseDeltaSensitivity = args[1]
+
+addcmd('mousesensitivity',{'ms'},function(aH,aI)
+UserInputService.MouseDeltaSensitivity=aH[1]
 end)
-local nameBox = nil
-local nbSelection = nil
-addcmd('hovername',{},function(args, speaker)
-execCmd('unhovername')
+
+local aH
+local aI
+addcmd('hovername',{},function(aJ,V)
+execCmd'unhovername'
 wait()
-nameBox = Instance.new("TextLabel")
-nameBox.Name = randomString()
-nameBox.Parent = ScaledHolder
-nameBox.BackgroundTransparency = 1
-nameBox.Size = UDim2.new(0,200,0,30)
-nameBox.Font = Enum.Font.Code
-nameBox.TextSize = 16
-nameBox.Text = ""
-nameBox.TextColor3 = Color3.new(1, 1, 1)
-nameBox.TextStrokeTransparency = 0
-nameBox.TextXAlignment = Enum.TextXAlignment.Left
-nameBox.ZIndex = 10
-nbSelection = Instance.new('SelectionBox')
-nbSelection.Name = randomString()
-nbSelection.LineThickness = 0.03
-nbSelection.Color3 = Color3.new(1, 1, 1)
+aH=Instance.new"TextLabel"
+aH.Name=randomString()
+aH.Parent=ScaledHolder
+aH.BackgroundTransparency=1
+aH.Size=UDim2.new(0,200,0,30)
+aH.Font=Enum.Font.Code
+aH.TextSize=16
+aH.Text=""
+aH.TextColor3=Color3.new(1,1,1)
+aH.TextStrokeTransparency=0
+aH.TextXAlignment=Enum.TextXAlignment.Left
+aH.ZIndex=10
+aI=Instance.new'SelectionBox'
+aI.Name=randomString()
+aI.LineThickness=0.03
+aI.Color3=Color3.new(1,1,1)
 local function updateNameBox()
-local t
-local target = IYMouse.Target
-if target then
-local humanoid = target.Parent:FindFirstChildOfClass("Humanoid") or target.Parent.Parent:FindFirstChildOfClass("Humanoid")
-if humanoid then
-t = humanoid.Parent
+local W
+local X=IYMouse.Target
+
+if X then
+local Y=X.Parent:FindFirstChildOfClass"Humanoid"or X.Parent.Parent:FindFirstChildOfClass"Humanoid"
+if Y then
+W=Y.Parent
 end
 end
-if t ~= nil then
-local x = IYMouse.X
-local y = IYMouse.Y
-local xP
-local yP
-if IYMouse.X > 200 then
-xP = x - 205
-nameBox.TextXAlignment = Enum.TextXAlignment.Right
+
+if W~=nil then
+local Y=IYMouse.X
+local Z=IYMouse.Y
+local _
+
+if IYMouse.X>200 then
+_=Y-205
+aH.TextXAlignment=Enum.TextXAlignment.Right
 else
-xP = x + 25
-nameBox.TextXAlignment = Enum.TextXAlignment.Left
+_=Y+25
+aH.TextXAlignment=Enum.TextXAlignment.Left
 end
-nameBox.Position = UDim2.new(0, xP, 0, y)
-nameBox.Text = t.Name
-nameBox.Visible = true
-nbSelection.Parent = t
-nbSelection.Adornee = t
+aH.Position=UDim2.new(0,_,0,Z)
+aH.Text=W.Name
+aH.Visible=true
+aI.Parent=W
+aI.Adornee=W
 else
-nameBox.Visible = false
-nbSelection.Parent = nil
-nbSelection.Adornee = nil
+aH.Visible=false
+aI.Parent=nil
+aI.Adornee=nil
 end
 end
-nbUpdateFunc = IYMouse.Move:Connect(updateNameBox)
+nbUpdateFunc=IYMouse.Move:Connect(updateNameBox)
 end)
-addcmd('unhovername',{'nohovername'},function(args, speaker)
+
+addcmd('unhovername',{'nohovername'},function(aJ,V)
 if nbUpdateFunc then
 nbUpdateFunc:Disconnect()
-nameBox:Destroy()
-nbSelection:Destroy()
+aH:Destroy()
+aI:Destroy()
 end
 end)
-addcmd('headsize',{},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
-if Players[v] ~= speaker and Players[v].Character:FindFirstChild('Head') then
-local sizeArg = tonumber(args[2])
-local Size = Vector3.new(sizeArg,sizeArg,sizeArg)
-local Head = Players[v].Character:FindFirstChild('Head')
-if Head:IsA("BasePart") then
-if not args[2] or sizeArg == 1 then
-Head.Size = Vector3.new(2,1,1)
+
+addcmd('headsize',{},function(aJ,V)
+local W=getPlayer(aJ[1],V)
+for X,Y in pairs(W)do
+if Players[Y]~=V and Players[Y].Character:FindFirstChild'Head'then
+local Z=tonumber(aJ[2])
+local _=Vector3.new(Z,Z,Z)
+local aK=Players[Y].Character:FindFirstChild'Head'
+if aK:IsA"BasePart"then
+if not aJ[2]or Z==1 then
+aK.Size=Vector3.new(2,1,1)
 else
-Head.Size = Size
+aK.Size=_
 end
 end
 end
 end
 end)
-addcmd('hitbox',{},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-local transparency = args[3] and tonumber(args[3]) or 0.4
-for i,v in pairs(players) do
-if Players[v] ~= speaker and Players[v].Character:FindFirstChild('HumanoidRootPart') then
-local sizeArg = tonumber(args[2])
-local Size = Vector3.new(sizeArg,sizeArg,sizeArg)
-local Root = Players[v].Character:FindFirstChild('HumanoidRootPart')
-if Root:IsA("BasePart") then
-if not args[2] or sizeArg == 1 then
-Root.Size = Vector3.new(2,1,1)
-Root.Transparency = transparency
+
+addcmd('hitbox',{},function(aJ,aK)
+local V=getPlayer(aJ[1],aK)
+local W=aJ[3]and tonumber(aJ[3])or 0.4
+for X,Y in pairs(V)do
+if Players[Y]~=aK and Players[Y].Character:FindFirstChild'HumanoidRootPart'then
+local Z=tonumber(aJ[2])
+local _=Vector3.new(Z,Z,Z)
+local aL=Players[Y].Character:FindFirstChild'HumanoidRootPart'
+if aL:IsA"BasePart"then
+if not aJ[2]or Z==1 then
+aL.Size=Vector3.new(2,1,1)
+aL.Transparency=W
 else
-Root.Size = Size
-Root.Transparency = transparency
+aL.Size=_
+aL.Transparency=W
 end
 end
 end
 end
 end)
-addcmd('stareat',{'stare'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
+
+addcmd('stareat',{'stare'},function(aJ,aK)
+local aL=getPlayer(aJ[1],aK)
+for V,W in pairs(aL)do
 if stareLoop then
 stareLoop:Disconnect()
 end
-if not Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and Players[v].Character:FindFirstChild("HumanoidRootPart") then return end
+if not Players.LocalPlayer.Character:FindFirstChild"HumanoidRootPart"and Players[W].Character:FindFirstChild"HumanoidRootPart"then return end
 local function stareFunc()
-if Players.LocalPlayer.Character.PrimaryPart and Players:FindFirstChild(v) and Players[v].Character ~= nil and Players[v].Character:FindFirstChild("HumanoidRootPart") then
-local chrPos=Players.LocalPlayer.Character.PrimaryPart.Position
-local tPos=Players[v].Character:FindFirstChild("HumanoidRootPart").Position
-local modTPos=Vector3.new(tPos.X,chrPos.Y,tPos.Z)
-local newCF=CFrame.new(chrPos,modTPos)
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(newCF)
-elseif not Players:FindFirstChild(v) then
+if Players.LocalPlayer.Character.PrimaryPart and Players:FindFirstChild(W)and Players[W].Character~=nil and Players[W].Character:FindFirstChild"HumanoidRootPart"then
+local X=Players.LocalPlayer.Character.PrimaryPart.Position
+local Y=Players[W].Character:FindFirstChild"HumanoidRootPart".Position
+local Z=Vector3.new(Y.X,X.Y,Y.Z)
+local _=CFrame.new(X,Z)
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(_)
+elseif not Players:FindFirstChild(W)then
 stareLoop:Disconnect()
 end
 end
-stareLoop = RunService.RenderStepped:Connect(stareFunc)
+
+stareLoop=RunService.RenderStepped:Connect(stareFunc)
 end
 end)
-addcmd('unstareat',{'unstare','nostare','nostareat'},function(args, speaker)
+
+addcmd('unstareat',{'unstare','nostare','nostareat'},function(aJ,aK)
 if stareLoop then
 stareLoop:Disconnect()
 end
 end)
-RolewatchData = {Group = 0, Role = "", Leave = false}
-RolewatchConnection = Players.PlayerAdded:Connect(function(player)
-if RolewatchData.Group == 0 then return end
-if player:IsInGroup(RolewatchData.Group) then
-if tostring(player:GetRoleInGroup(RolewatchData.Group)):lower() == RolewatchData.Role:lower() then
-if RolewatchData.Leave == true then
-Players.LocalPlayer:Kick("\n\nRolewatch\nPlayer \"" .. tostring(player.Name) .. "\" has joined with the Role \"" .. RolewatchData.Role .. "\"\n")
+
+RolewatchData={Group=0,Role="",Leave=false}
+RolewatchConnection=Players.PlayerAdded:Connect(function(aJ)
+if RolewatchData.Group==0 then return end
+if aJ:IsInGroup(RolewatchData.Group)then
+if tostring(aJ:GetRoleInGroup(RolewatchData.Group)):lower()==RolewatchData.Role:lower()then
+if RolewatchData.Leave==true then
+Players.LocalPlayer:Kick("\n\nRolewatch\nPlayer \""..tostring(aJ.Name).."\" has joined with the Role \""..RolewatchData.Role.."\"\n")
 else
-notify("Rolewatch", "Player \"" .. tostring(player.Name) .. "\" has joined with the Role \"" .. RolewatchData.Role .. "\"")
+notify("Rolewatch","Player \""..tostring(aJ.Name).."\" has joined with the Role \""..RolewatchData.Role.."\"")
 end
 end
 end
 end)
-addcmd("rolewatch", {}, function(args, speaker)
-local groupId = tonumber(args[1] or 0)
-local roleName = args[2] and tostring(getstring(2))
-if groupId and roleName then
-RolewatchData.Group = groupId
-RolewatchData.Role = roleName
-notify("Rolewatch", "Watching Group ID \"" .. tostring(groupId) .. "\" for Role \"" .. roleName .. "\"")
+
+addcmd("rolewatch",{},function(aJ,aK)
+local aL=tonumber(aJ[1]or 0)
+local V=aJ[2]and tostring(getstring(2))
+if aL and V then
+RolewatchData.Group=aL
+RolewatchData.Role=V
+notify("Rolewatch","Watching Group ID \""..tostring(aL).."\" for Role \""..V.."\"")
 end
 end)
-addcmd("rolewatchstop", {}, function(args, speaker)
-RolewatchData.Group = 0
-RolewatchData.Role = ""
-RolewatchData.Leave = false
-notify("Rolewatch", "Disabled")
+
+addcmd("rolewatchstop",{},function(aJ,aK)
+RolewatchData.Group=0
+RolewatchData.Role=""
+RolewatchData.Leave=false
+notify("Rolewatch","Disabled")
 end)
-addcmd("rolewatchleave", {"unrolewatch"}, function(args, speaker)
-RolewatchData.Leave = not RolewatchData.Leave
-notify("Rolewatch", RolewatchData.Leave and "Leave has been Enabled" or "Leave has been Disabled")
+
+addcmd("rolewatchleave",{"unrolewatch"},function(aJ,aK)
+RolewatchData.Leave=not RolewatchData.Leave
+notify("Rolewatch",RolewatchData.Leave and"Leave has been Enabled"or"Leave has been Disabled")
 end)
-staffRoles = {"mod", "admin", "staff", "dev", "founder", "owner", "supervis", "manager", "management", "executive", "president", "chairman", "chairwoman", "chairperson", "director"}
-getStaffRole = function(player)
-local playerRole = player:GetRoleInGroup(game.CreatorId)
-local result = {Role = playerRole, Staff = false}
-if player:IsInGroup(1200769) then
-result.Role = "Roblox Employee"
-result.Staff = true
+
+staffRoles={"mod","admin","staff","dev","founder","owner","supervis","manager","management","executive","president","chairman","chairwoman","chairperson","director"}
+
+getStaffRole=function(aJ)
+local aK=aJ:GetRoleInGroup(game.CreatorId)
+local aL={Role=aK,Staff=false}
+if aJ:IsInGroup(1200769)then
+aL.Role="Roblox Employee"
+aL.Staff=true
 end
-for _, role in pairs(staffRoles) do
-if string.find(string.lower(playerRole), role) then
-result.Staff = true
+for V,W in pairs(staffRoles)do
+if string.find(string.lower(aK),W)then
+aL.Staff=true
 end
 end
-return result
+return aL
 end
-addcmd("staffwatch", {}, function(args, speaker)
+
+addcmd("staffwatch",{},function(aJ,aK)
 if staffwatchjoin then
 staffwatchjoin:Disconnect()
 end
-if game.CreatorType == Enum.CreatorType.Group then
-local found = {}
-staffwatchjoin = Players.PlayerAdded:Connect(function(player)
-local result = getStaffRole(player)
-if result.Staff then
-notify("Staffwatch", formatUsername(player) .. " is a " .. result.Role)
+if game.CreatorType==Enum.CreatorType.Group then
+local aL={}
+staffwatchjoin=Players.PlayerAdded:Connect(function(V)
+local W=getStaffRole(V)
+if W.Staff then
+notify("Staffwatch",formatUsername(V).." is a "..W.Role)
 end
 end)
-for _, player in pairs(Players:GetPlayers()) do
-local result = getStaffRole(player)
-if result.Staff then
-table.insert(found, formatUsername(player) .. " is a " .. result.Role)
+for V,W in pairs(Players:GetPlayers())do
+local X=getStaffRole(W)
+if X.Staff then
+table.insert(aL,formatUsername(W).." is a "..X.Role)
 end
 end
-if #found > 0 then
-notify("Staffwatch", table.concat(found, ",\n"))
+if#aL>0 then
+notify("Staffwatch",table.concat(aL,",\n"))
 else
-notify("Staffwatch", "Enabled")
+notify("Staffwatch","Enabled")
 end
 else
-notify("Staffwatch", "Game is not owned by a Group")
+notify("Staffwatch","Game is not owned by a Group")
 end
 end)
-addcmd("unstaffwatch", {}, function(args, speaker)
+
+addcmd("unstaffwatch",{},function(aJ,aK)
 if staffwatchjoin then
 staffwatchjoin:Disconnect()
 end
-notify("Staffwatch", "Disabled")
+notify("Staffwatch","Disabled")
 end)
-addcmd('removeterrain',{'rterrain','noterrain'},function(args, speaker)
-workspace:FindFirstChildOfClass('Terrain'):Clear()
+
+addcmd('removeterrain',{'rterrain','noterrain'},function(aJ,aK)
+workspace:FindFirstChildOfClass'Terrain':Clear()
 end)
-addcmd('clearnilinstances',{'nonilinstances','cni'},function(args, speaker)
+
+addcmd('clearnilinstances',{'nonilinstances','cni'},function(aJ,aK)
 if getnilinstances then
-for i,v in pairs(getnilinstances()) do
-v:Destroy()
+for aL,V in pairs(getnilinstances())do
+V:Destroy()
 end
 else
 notify('Incompatible Exploit','Your exploit does not support this command (missing getnilinstances)')
 end
 end)
-addcmd('destroyheight',{'dh'},function(args, speaker)
-local dh = args[1] or -500
-if isNumber(dh) then
-workspace.FallenPartsDestroyHeight = dh
+
+addcmd('destroyheight',{'dh'},function(aJ,aK)
+local aL=aJ[1]or-500
+if isNumber(aL)then
+workspace.FallenPartsDestroyHeight=aL
 end
 end)
-OrgDestroyHeight = workspace.FallenPartsDestroyHeight
-addcmd("fakeout", {}, function(args, speaker)
-local root = getRoot(speaker.Character)
-local oldpos = root.CFrame
-workspace.FallenPartsDestroyHeight = 0/1/0
-root.CFrame = CFrame.new(Vector3.new(0, OrgDestroyHeight - 25, 0))
+
+OrgDestroyHeight=workspace.FallenPartsDestroyHeight
+addcmd("fakeout",{},function(aJ,aK)
+local aL=getRoot(aK.Character)
+local V=aL.CFrame
+workspace.FallenPartsDestroyHeight=0/0
+aL.CFrame=CFrame.new(Vector3.new(0,OrgDestroyHeight-25,0))
 wait(1)
-root.CFrame = oldpos
-workspace.FallenPartsDestroyHeight = OrgDestroyHeight
+aL.CFrame=V
+workspace.FallenPartsDestroyHeight=OrgDestroyHeight
 end)
-antivoidloop = false
-addcmd("antivoid", {}, function(args, speaker)
-execCmd("unantivoid nonotify")
+
+antivoidloop=false
+addcmd("antivoid",{},function(aJ,aK)
+execCmd"unantivoid nonotify"
 wait()
-antivoidloop = RunService.Stepped:Connect(function()
-local root = getRoot(speaker.Character)
-if root and root.Position.Y <= OrgDestroyHeight + 25 then
-root.Velocity = root.Velocity + Vector3.new(0, 250, 0)
+antivoidloop=RunService.Stepped:Connect(function()
+local aL=getRoot(aK.Character)
+if aL and aL.Position.Y<=OrgDestroyHeight+25 then
+aL.Velocity=aL.Velocity+Vector3.new(0,250,0)
 end
 end)
-notify("antivoid", "Enabled")
+notify("antivoid","Enabled")
 end)
-addcmd("unantivoid", {"noantivoid"}, function(args, speaker)
+
+addcmd("unantivoid",{"noantivoid"},function(aJ,aK)
 antivoidloop:Disconnect()
-antivoidloop = nil
-if args[1] ~= "nonotify" then notify("antivoid", "Disabled") end
+antivoidloop=nil
+if aJ[1]~="nonotify"then notify("antivoid","Disabled")end
 end)
-addcmd('trip',{},function(args, speaker)
-if speaker and speaker.Character and speaker.Character:FindFirstChildOfClass("Humanoid") and getRoot(speaker.Character) then
-local hum = speaker.Character:FindFirstChildOfClass("Humanoid")
-local root = getRoot(speaker.Character)
-hum:ChangeState(0)
-root.Velocity = root.CFrame.LookVector * 30
+
+addcmd('trip',{},function(aJ,aK)
+if aK and aK.Character and aK.Character:FindFirstChildOfClass"Humanoid"and getRoot(aK.Character)then
+local aL=aK.Character:FindFirstChildOfClass"Humanoid"
+local V=getRoot(aK.Character)
+aL:ChangeState(0)
+V.Velocity=V.CFrame.LookVector*30
 end
 end)
-addcmd("removeads", {"adblock"}, function(args, speaker)
-while wait() do
+
+addcmd("removeads",{"adblock"},function(aJ,aK)
+while wait()do
 pcall(function()
-for i, v in pairs(workspace:GetDescendants()) do
-if v:IsA("PackageLink") then
-if v.Parent:FindFirstChild("ADpart") then
-v.Parent:Destroy()
+for aL,V in pairs(workspace:GetDescendants())do
+if V:IsA"PackageLink"then
+if V.Parent:FindFirstChild"ADpart"then
+V.Parent:Destroy()
 end
-if v.Parent:FindFirstChild("AdGuiAdornee") then
-v.Parent.Parent:Destroy()
+if V.Parent:FindFirstChild"AdGuiAdornee"then
+V.Parent.Parent:Destroy()
 end
 end
-end
-end)
 end
 end)
-addcmd("scare", {"spook"}, function(args, speaker)
-local players = getPlayer(args[1], speaker)
-local oldpos = nil
-for _, v in pairs(players) do
-local root = speaker.Character and getRoot(speaker.Character)
-local target = Players[v]
-local targetRoot = target and target.Character and getRoot(target.Character)
-if root and targetRoot and target ~= speaker then
-oldpos = root.CFrame
-root.CFrame = targetRoot.CFrame + targetRoot.CFrame.lookVector * 2
-root.CFrame = CFrame.new(root.Position, targetRoot.Position)
+end
+end)
+
+addcmd("scare",{"spook"},function(aJ,aK)
+local aL=getPlayer(aJ[1],aK)
+local V
+
+for W,X in pairs(aL)do
+local Y=aK.Character and getRoot(aK.Character)
+local Z=Players[X]
+local _=Z and Z.Character and getRoot(Z.Character)
+
+if Y and _ and Z~=aK then
+V=Y.CFrame
+Y.CFrame=_.CFrame+_.CFrame.lookVector*2
+Y.CFrame=CFrame.new(Y.Position,_.Position)
 task.wait(0.5)
-root.CFrame = oldpos
+Y.CFrame=V
 end
 end
 end)
-addcmd("alignmentkeys", {}, function(args, speaker)
-alignmentKeys = UserInputService.InputBegan:Connect(function(input, gameProcessed)
-if gameProcessed then return end
-if input.KeyCode == Enum.KeyCode.Comma then workspace.CurrentCamera:PanUnits(-1) end
-if input.KeyCode == Enum.KeyCode.Period then workspace.CurrentCamera:PanUnits(1) end
+
+addcmd("alignmentkeys",{},function(aJ,aK)
+alignmentKeys=UserInputService.InputBegan:Connect(function(aL,V)
+if V then return end
+if aL.KeyCode==Enum.KeyCode.Comma then workspace.CurrentCamera:PanUnits(-1)end
+if aL.KeyCode==Enum.KeyCode.Period then workspace.CurrentCamera:PanUnits(1)end
 end)
-alignmentKeysEmotes = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.EmotesMenu)
-StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.EmotesMenu, false)
+alignmentKeysEmotes=StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.EmotesMenu)
+StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.EmotesMenu,false)
 end)
-addcmd("unalignmentkeys", {"noalignmentkeys"}, function(args, speaker)
-if type(alignmentKeysEmotes) == "boolean" then
-StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.EmotesMenu, alignmentKeysEmotes)
+
+addcmd("unalignmentkeys",{"noalignmentkeys"},function(aJ,aK)
+if type(alignmentKeysEmotes)=="boolean"then
+StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.EmotesMenu,alignmentKeysEmotes)
 end
 alignmentKeys:Disconnect()
 end)
-addcmd("ctrllock", {}, function(args, speaker)
-local mouseLockController = speaker.PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("CameraModule"):WaitForChild("MouseLockController")
-local boundKeys = mouseLockController:FindFirstChild("BoundKeys")
-if boundKeys then
-boundKeys.Value = "LeftControl"
+
+addcmd("ctrllock",{},function(aJ,aK)
+local aL=aK.PlayerScripts:WaitForChild"PlayerModule":WaitForChild"CameraModule":WaitForChild"MouseLockController"
+local V=aL:FindFirstChild"BoundKeys"
+
+if V then
+V.Value="LeftControl"
 else
-boundKeys = Instance.new("StringValue")
-boundKeys.Name = "BoundKeys"
-boundKeys.Value = "LeftControl"
-boundKeys.Parent = mouseLockController
+V=Instance.new"StringValue"
+V.Name="BoundKeys"
+V.Value="LeftControl"
+V.Parent=aL
 end
 end)
-addcmd("unctrllock", {}, function(args, speaker)
-local mouseLockController = speaker.PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("CameraModule"):WaitForChild("MouseLockController")
-local boundKeys = mouseLockController:FindFirstChild("BoundKeys")
-if boundKeys then
-boundKeys.Value = "LeftShift"
+
+addcmd("unctrllock",{},function(aJ,aK)
+local aL=aK.PlayerScripts:WaitForChild"PlayerModule":WaitForChild"CameraModule":WaitForChild"MouseLockController"
+local V=aL:FindFirstChild"BoundKeys"
+
+if V then
+V.Value="LeftShift"
 else
-boundKeys = Instance.new("StringValue")
-boundKeys.Name = "BoundKeys"
-boundKeys.Value = "LeftShift"
-boundKeys.Parent = mouseLockController
+V=Instance.new"StringValue"
+V.Name="BoundKeys"
+V.Value="LeftShift"
+V.Parent=aL
 end
 end)
-addcmd("listento", {}, function(args, speaker)
-execCmd("unlistento")
-if not args[1] then return end
-local player = Players:FindFirstChild(getPlayer(args[1], speaker)[1])
-local root = player and player.Character and getRoot(player.Character)
-if root then
-SoundService:SetListener(Enum.ListenerType.ObjectPosition, root)
-listentoChar = player.CharacterAdded:Connect(function()
-repeat task.wait() until Players[player.Name].Character ~= nil and getRoot(Players[player.Name].Character)
-SoundService:SetListener(Enum.ListenerType.ObjectPosition, getRoot(Players[player.Name].Character))
+
+addcmd("listento",{},function(aJ,aK)
+execCmd"unlistento"
+if not aJ[1]then return end
+
+local aL=Players:FindFirstChild(getPlayer(aJ[1],aK)[1])
+local V=aL and aL.Character and getRoot(aL.Character)
+
+if V then
+SoundService:SetListener(Enum.ListenerType.ObjectPosition,V)
+listentoChar=aL.CharacterAdded:Connect(function()
+repeat task.wait()until Players[aL.Name].Character~=nil and getRoot(Players[aL.Name].Character)
+SoundService:SetListener(Enum.ListenerType.ObjectPosition,getRoot(Players[aL.Name].Character))
 end)
 end
 end)
-addcmd("unlistento", {}, function(args, speaker)
+
+addcmd("unlistento",{},function(aJ,aK)
 SoundService:SetListener(Enum.ListenerType.Camera)
 listentoChar:Disconnect()
 end)
-addcmd("jerk", {}, function(args, speaker)
-local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-local backpack = speaker:FindFirstChildWhichIsA("Backpack")
-if not humanoid or not backpack then return end
-local tool = Instance.new("Tool")
-tool.Name = "Jerk Off"
-tool.ToolTip = "in the stripped club. straight up \"jorking it\" . and by \"it\" , haha, well. let's justr say. My peanits."
-tool.RequiresHandle = false
-tool.Parent = backpack
-local jorkin = false
-local track = nil
+
+addcmd("jerk",{},function(aJ,aK)
+local aL=aK.Character:FindFirstChildWhichIsA"Humanoid"
+local V=aK:FindFirstChildWhichIsA"Backpack"
+if not aL or not V then return end
+
+local W=Instance.new"Tool"
+W.Name="Jerk Off"
+W.ToolTip="in the stripped club. straight up \"jorking it\" . and by \"it\" , haha, well. let's justr say. My peanits."
+W.RequiresHandle=false
+W.Parent=V
+
+local X=false
+local Y
+
 local function stopTomfoolery()
-jorkin = false
-if track then
-track:Stop()
-track = nil
+X=false
+if Y then
+Y:Stop()
+Y=nil
 end
 end
-tool.Equipped:Connect(function() jorkin = true end)
-tool.Unequipped:Connect(stopTomfoolery)
-humanoid.Died:Connect(stopTomfoolery)
-while task.wait() do
-if not jorkin then continue end
-local isR15 = r15(speaker)
-if not track then
-local anim = Instance.new("Animation")
-anim.AnimationId = not isR15 and "rbxassetid://72042024" or "rbxassetid://698251653"
-track = humanoid:LoadAnimation(anim)
+
+W.Equipped:Connect(function()X=true end)
+W.Unequipped:Connect(stopTomfoolery)
+aL.Died:Connect(stopTomfoolery)
+
+while task.wait()do
+if not X then continue end
+
+local Z=r15(aK)
+if not Y then
+local _=Instance.new"Animation"
+_.AnimationId=not Z and"rbxassetid://72042024"or"rbxassetid://698251653"
+Y=aL:LoadAnimation(_)
 end
-track:Play()
-track:AdjustSpeed(isR15 and 0.7 or 0.65)
-track.TimePosition = 0.6
+
+Y:Play()
+Y:AdjustSpeed(Z and 0.7 or 0.65)
+Y.TimePosition=0.6
 task.wait(0.1)
-while track and track.TimePosition < (not isR15 and 0.65 or 0.7) do task.wait(0.1) end
-if track then
-track:Stop()
-track = nil
+while Y and Y.TimePosition<(not Z and 0.65 or 0.7)do task.wait(0.1)end
+if Y then
+Y:Stop()
+Y=nil
 end
 end
 end)
-addcmd("guiscale", {}, function(args, speaker)
-if args[1] and isNumber(args[1]) then
-local scale = tonumber(args[1])
-if scale % 1 == 0 then scale = scale / 100 end
--- me when i divide and it explodes
-if scale == 0.01 then scale = 1 end
-if scale == 0.02 then scale = 2 end
-if scale >= 0.4 and scale <= 2 then
-guiScale = scale
+
+addcmd("guiscale",{},function(aJ,aK)
+if aJ[1]and isNumber(aJ[1])then
+local aL=tonumber(aJ[1])
+if aL%1==0 then aL=aL/100 end
+
+if aL==0.01 then aL=1 end
+if aL==0.02 then aL=2 end
+
+if aL>=0.4 and aL<=2 then
+guiScale=aL
 end
 else
-guiScale = defaultGuiScale
+guiScale=defaultGuiScale
 end
-Scale.Scale = math.max(Holder.AbsoluteSize.X / 1920, guiScale)
+
+Scale.Scale=math.max(Holder.AbsoluteSize.X/1920,guiScale)
 updatesaves()
 end)
-addcmd("unsuspendvc", {}, function(args, speaker)
+
+addcmd("unsuspendvc",{},function(aJ,aK)
 VoiceChatService:joinVoice()
-if typeof(onVoiceModerated) ~= "RBXScriptConnection" then
-onVoiceModerated = cloneref(game:GetService("VoiceChatInternal")).LocalPlayerModerated:Connect(function()
+
+if typeof(onVoiceModerated)~="RBXScriptConnection"then
+onVoiceModerated=a(game:GetService"VoiceChatInternal").LocalPlayerModerated:Connect(function()
 task.wait(1)
 VoiceChatService:joinVoice()
 end)
 end
 end)
-addcmd("permadeath", {}, function(args, speaker)
+
+addcmd("permadeath",{},function(aJ,aK)
 if replicatesignal then
-permadeath(speaker)
-notify("Permadeath", "Enabled")
+permadeath(aK)
+notify("Permadeath","Enabled")
 else
-notify("Incompatible Exploit", "Your exploit does not support this command (missing replicatesignal)")
+notify("Incompatible Exploit","Your exploit does not support this command (missing replicatesignal)")
 end
 end)
-local freezingua = nil
-frozenParts = {}
-addcmd('freezeunanchored',{'freezeua'},function(args, speaker)
-local badnames = {
+
+local aJ
+frozenParts={}
+addcmd('freezeunanchored',{'freezeua'},function(aK,aL)
+local V={
 "Head",
 "UpperTorso",
 "LowerTorso",
@@ -11409,264 +12521,281 @@ local badnames = {
 "Left Leg",
 "HumanoidRootPart"
 }
-local function FREEZENOOB(v)
-if v:IsA("BasePart" or "UnionOperation") and v.Anchored == false then
-local BADD = false
-for i = 1,#badnames do
-if v.Name == badnames[i] then
-BADD = true
+local function FREEZENOOB(W)
+if W:IsA'BasePart'and W.Anchored==false then
+local X=false
+for Y=1,#V do
+if W.Name==V[Y]then
+X=true
 end
 end
-if speaker.Character and v:IsDescendantOf(speaker.Character) then
-BADD = true
+if aL.Character and W:IsDescendantOf(aL.Character)then
+X=true
 end
-if BADD == false then
-for i,c in pairs(v:GetChildren()) do
-if c:IsA("BodyPosition") or c:IsA("BodyGyro") then
-c:Destroy()
-end
-end
-local bodypos = Instance.new("BodyPosition")
-bodypos.Parent = v
-bodypos.Position = v.Position
-bodypos.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
-local bodygyro = Instance.new("BodyGyro")
-bodygyro.Parent = v
-bodygyro.CFrame = v.CFrame
-bodygyro.MaxTorque = Vector3.new(math.huge,math.huge,math.huge)
-if not table.find(frozenParts,v) then
-table.insert(frozenParts,v)
+if X==false then
+for Y,Z in pairs(W:GetChildren())do
+if Z:IsA"BodyPosition"or Z:IsA"BodyGyro"then
+Z:Destroy()
 end
 end
+local Y=Instance.new"BodyPosition"
+Y.Parent=W
+Y.Position=W.Position
+Y.MaxForce=Vector3.new(math.huge,math.huge,math.huge)
+local Z=Instance.new"BodyGyro"
+Z.Parent=W
+Z.CFrame=W.CFrame
+Z.MaxTorque=Vector3.new(math.huge,math.huge,math.huge)
+if not table.find(frozenParts,W)then
+table.insert(frozenParts,W)
 end
 end
-for i,v in pairs(workspace:GetDescendants()) do
-FREEZENOOB(v)
 end
-freezingua = workspace.DescendantAdded:Connect(FREEZENOOB)
+end
+for W,X in pairs(workspace:GetDescendants())do
+FREEZENOOB(X)
+end
+aJ=workspace.DescendantAdded:Connect(FREEZENOOB)
 end)
-addcmd('thawunanchored',{'thawua','unfreezeunanchored','unfreezeua'},function(args, speaker)
-if freezingua then
-freezingua:Disconnect()
+
+addcmd('thawunanchored',{'thawua','unfreezeunanchored','unfreezeua'},function(aK,aL)
+if aJ then
+aJ:Disconnect()
 end
-for i,v in pairs(frozenParts) do
-for i,c in pairs(v:GetChildren()) do
-if c:IsA("BodyPosition") or c:IsA("BodyGyro") then
-c:Destroy()
+for V,W in pairs(frozenParts)do
+for X,Y in pairs(W:GetChildren())do
+if Y:IsA"BodyPosition"or Y:IsA"BodyGyro"then
+Y:Destroy()
 end
 end
 end
-frozenParts = {}
+frozenParts={}
 end)
-addcmd('tpunanchored',{'tpua'},function(args, speaker)
-local players = getPlayer(args[1], speaker)
-for i,v in pairs(players) do
-local Forces = {}
-for _,part in pairs(workspace:GetDescendants()) do
-if Players[v].Character:FindFirstChild('Head') and part:IsA("BasePart" or "UnionOperation" or "Model") and part.Anchored == false and not part:IsDescendantOf(speaker.Character) and part.Name == "Torso" == false and part.Name == "Head" == false and part.Name == "Right Arm" == false and part.Name == "Left Arm" == false and part.Name == "Right Leg" == false and part.Name == "Left Leg" == false and part.Name == "HumanoidRootPart" == false then
-for i,c in pairs(part:GetChildren()) do
-if c:IsA("BodyPosition") or c:IsA("BodyGyro") then
-c:Destroy()
+
+addcmd('tpunanchored',{'tpua'},function(aK,aL)
+local V=getPlayer(aK[1],aL)
+for W,X in pairs(V)do
+local Y={}
+for Z,_ in pairs(workspace:GetDescendants())do
+if Players[X].Character:FindFirstChild'Head'and _:IsA'BasePart'and _.Anchored==false and not _:IsDescendantOf(aL.Character)and _.Name=="Torso"==false and _.Name=="Head"==false and _.Name=="Right Arm"==false and _.Name=="Left Arm"==false and _.Name=="Right Leg"==false and _.Name=="Left Leg"==false and _.Name=="HumanoidRootPart"==false then
+for aM,aN in pairs(_:GetChildren())do
+if aN:IsA"BodyPosition"or aN:IsA"BodyGyro"then
+aN:Destroy()
 end
 end
-local ForceInstance = Instance.new("BodyPosition")
-ForceInstance.Parent = part
-ForceInstance.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-table.insert(Forces, ForceInstance)
-if not table.find(frozenParts,part) then
-table.insert(frozenParts,part)
+local aM=Instance.new"BodyPosition"
+aM.Parent=_
+aM.MaxForce=Vector3.new(math.huge,math.huge,math.huge)
+table.insert(Y,aM)
+if not table.find(frozenParts,_)then
+table.insert(frozenParts,_)
 end
 end
 end
-for i,c in pairs(Forces) do
-c.Position = Players[v].Character.Head.Position
+for aM,aN in pairs(Y)do
+aN.Position=Players[X].Character.Head.Position
 end
 end
 end)
-keycodeMap = {
-["0"] = 0x30,
-["1"] = 0x31,
-["2"] = 0x32,
-["3"] = 0x33,
-["4"] = 0x34,
-["5"] = 0x35,
-["6"] = 0x36,
-["7"] = 0x37,
-["8"] = 0x38,
-["9"] = 0x39,
-["a"] = 0x41,
-["b"] = 0x42,
-["c"] = 0x43,
-["d"] = 0x44,
-["e"] = 0x45,
-["f"] = 0x46,
-["g"] = 0x47,
-["h"] = 0x48,
-["i"] = 0x49,
-["j"] = 0x4A,
-["k"] = 0x4B,
-["l"] = 0x4C,
-["m"] = 0x4D,
-["n"] = 0x4E,
-["o"] = 0x4F,
-["p"] = 0x50,
-["q"] = 0x51,
-["r"] = 0x52,
-["s"] = 0x53,
-["t"] = 0x54,
-["u"] = 0x55,
-["v"] = 0x56,
-["w"] = 0x57,
-["x"] = 0x58,
-["y"] = 0x59,
-["z"] = 0x5A,
-["enter"] = 0x0D,
-["shift"] = 0x10,
-["ctrl"] = 0x11,
-["alt"] = 0x12,
-["pause"] = 0x13,
-["capslock"] = 0x14,
-["spacebar"] = 0x20,
-["space"] = 0x20,
-["pageup"] = 0x21,
-["pagedown"] = 0x22,
-["end"] = 0x23,
-["home"] = 0x24,
-["left"] = 0x25,
-["up"] = 0x26,
-["right"] = 0x27,
-["down"] = 0x28,
-["insert"] = 0x2D,
-["delete"] = 0x2E,
-["f1"] = 0x70,
-["f2"] = 0x71,
-["f3"] = 0x72,
-["f4"] = 0x73,
-["f5"] = 0x74,
-["f6"] = 0x75,
-["f7"] = 0x76,
-["f8"] = 0x77,
-["f9"] = 0x78,
-["f10"] = 0x79,
-["f11"] = 0x7A,
-["f12"] = 0x7B,
+
+keycodeMap={
+["0"]=0x30,
+["1"]=0x31,
+["2"]=0x32,
+["3"]=0x33,
+["4"]=0x34,
+["5"]=0x35,
+["6"]=0x36,
+["7"]=0x37,
+["8"]=0x38,
+["9"]=0x39,a=
+0x41,b=
+0x42,c=
+0x43,d=
+0x44,e=
+0x45,f=
+0x46,g=
+0x47,h=
+0x48,i=
+0x49,j=
+0x4A,k=
+0x4B,l=
+0x4C,m=
+0x4D,n=
+0x4E,o=
+0x4F,p=
+0x50,q=
+0x51,r=
+0x52,s=
+0x53,t=
+0x54,u=
+0x55,v=
+0x56,w=
+0x57,x=
+0x58,y=
+0x59,z=
+0x5A,enter=
+0x0D,shift=
+0x10,ctrl=
+0x11,alt=
+0x12,pause=
+0x13,capslock=
+0x14,spacebar=
+0x20,space=
+0x20,pageup=
+0x21,pagedown=
+0x22,
+["end"]=0x23,home=
+0x24,left=
+0x25,up=
+0x26,right=
+0x27,down=
+0x28,insert=
+0x2D,delete=
+0x2E,f1=
+0x70,f2=
+0x71,f3=
+0x72,f4=
+0x73,f5=
+0x74,f6=
+0x75,f7=
+0x76,f8=
+0x77,f9=
+0x78,f10=
+0x79,f11=
+0x7A,f12=
+0x7B,
 }
-autoKeyPressing = false
-cancelAutoKeyPress = nil
-addcmd('autokeypress',{'keypress'},function(args, speaker)
-if keypress and keyrelease and args[1] then
-local code = keycodeMap[args[1]:lower()]
-if not code then notify('Auto Key Press',"Invalid key") return end
-execCmd('unautokeypress')
+autoKeyPressing=false
+cancelAutoKeyPress=nil
+
+addcmd('autokeypress',{'keypress'},function(aK,aL)
+if keypress and keyrelease and aK[1]then
+local aM=keycodeMap[aK[1]:lower()]
+if not aM then notify('Auto Key Press',"Invalid key")return end
+execCmd'unautokeypress'
 wait()
-local clickDelay = 0.1
-local releaseDelay = 0.1
-if args[2] and isNumber(args[2]) then clickDelay = args[2] end
-if args[3] and isNumber(args[3]) then releaseDelay = args[3] end
-autoKeyPressing = true
-cancelAutoKeyPress = UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
-if not gameProcessedEvent then
-if (input.KeyCode == Enum.KeyCode.Backspace and UserInputService:IsKeyDown(Enum.KeyCode.Equals)) or (input.KeyCode == Enum.KeyCode.Equals and UserInputService:IsKeyDown(Enum.KeyCode.Backspace)) then
-autoKeyPressing = false
+local aN=0.1
+local V=0.1
+if aK[2]and isNumber(aK[2])then aN=aK[2]end
+if aK[3]and isNumber(aK[3])then V=aK[3]end
+autoKeyPressing=true
+cancelAutoKeyPress=UserInputService.InputBegan:Connect(function(W,X)
+if not X then
+if(W.KeyCode==Enum.KeyCode.Backspace and UserInputService:IsKeyDown(Enum.KeyCode.Equals))or(W.KeyCode==Enum.KeyCode.Equals and UserInputService:IsKeyDown(Enum.KeyCode.Backspace))then
+autoKeyPressing=false
 cancelAutoKeyPress:Disconnect()
 end
 end
 end)
 notify('Auto Key Press',"Press [backspace] and [=] at the same time to stop")
-repeat wait(clickDelay)
-keypress(code)
-wait(releaseDelay)
-keyrelease(code)
-until autoKeyPressing == false
-if cancelAutoKeyPress then cancelAutoKeyPress:Disconnect() keyrelease(code) end
+repeat wait(aN)
+keypress(aM)
+wait(V)
+keyrelease(aM)
+until autoKeyPressing==false
+if cancelAutoKeyPress then cancelAutoKeyPress:Disconnect()keyrelease(aM)end
 else
 notify('Auto Key Press',"Your exploit doesn't have the ability to use auto key press")
 end
 end)
-addcmd('unautokeypress',{'noautokeypress','unkeypress','nokeypress'},function(args, speaker)
-autoKeyPressing = false
-if cancelAutoKeyPress then cancelAutoKeyPress:Disconnect() end
+
+addcmd('unautokeypress',{'noautokeypress','unkeypress','nokeypress'},function(aK,aL)
+autoKeyPressing=false
+if cancelAutoKeyPress then cancelAutoKeyPress:Disconnect()end
 end)
-addcmd('addplugin',{'plugin'},function(args, speaker)
+
+addcmd('addplugin',{'plugin'},function(aK,aL)
 addPlugin(getstring(1))
 end)
-addcmd('removeplugin',{'deleteplugin'},function(args, speaker)
+
+addcmd('removeplugin',{'deleteplugin'},function(aK,aL)
 deletePlugin(getstring(1))
 end)
-addcmd('reloadplugin',{},function(args, speaker)
-local pluginName = getstring(1)
-deletePlugin(pluginName)
+
+addcmd('reloadplugin',{},function(aK,aL)
+local aM=getstring(1)
+deletePlugin(aM)
 wait(1)
-addPlugin(pluginName)
+addPlugin(aM)
 end)
-addcmd("addallplugins", {"loadallplugins"}, function(args, speaker)
+
+addcmd("addallplugins",{"loadallplugins"},function(aK,aL)
 if not listfiles or not isfolder then
-notify("Incompatible Exploit", "Your exploit does not support this command (missing listfiles/isfolder)")
+notify("Incompatible Exploit","Your exploit does not support this command (missing listfiles/isfolder)")
 return
 end
-for _, filePath in ipairs(listfiles("")) do
-local fileName = filePath:match("([^/\\]+%.iy)$")
-if fileName and
-fileName:lower() ~= "iy_fe.iy" and
-not isfolder(fileName) and
-not table.find(PluginsTable, fileName)
+
+for aM,aN in ipairs(listfiles"")do
+local V=aN:match"([^/\\]+%.iy)$"
+
+if V and
+V:lower()~="iy_fe.iy"and
+not isfolder(V)and
+not table.find(PluginsTable,V)
 then
-addPlugin(fileName)
+addPlugin(V)
 end
 end
 end)
-addcmd('removecmd',{'deletecmd'},function(args, speaker)
-removecmd(args[1])
+
+addcmd('removecmd',{'deletecmd'},function(aK,aL)
+removecmd(aK[1])
 end)
-if IsOnMobile then
-local QuickCapture = Instance.new("TextButton")
-local UICorner = Instance.new("UICorner")
-QuickCapture.Name = randomString()
-QuickCapture.Parent = PARENT
-QuickCapture.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-QuickCapture.BackgroundTransparency = 0.14
-QuickCapture.Position = UDim2.new(0.489, 0, 0, 0)
-QuickCapture.Size = UDim2.new(0, 32, 0, 33)
-QuickCapture.Font = Enum.Font.SourceSansBold
-QuickCapture.Text = "IY"
-QuickCapture.TextColor3 = Color3.fromRGB(255, 255, 255)
-QuickCapture.TextSize = 20
-QuickCapture.TextWrapped = true
-QuickCapture.ZIndex = 10
-QuickCapture.Draggable = true
-UICorner.Name = randomString()
-UICorner.CornerRadius = UDim.new(0.5, 0)
-UICorner.Parent = QuickCapture
-QuickCapture.MouseButton1Click:Connect(function()
+
+if b then
+local aK=Instance.new"TextButton"
+local aL=Instance.new"UICorner"
+aK.Name=randomString()
+aK.Parent=PARENT
+aK.BackgroundColor3=Color3.fromRGB(46,46,47)
+aK.BackgroundTransparency=0.14
+aK.Position=UDim2.new(0.489,0,0,0)
+aK.Size=UDim2.new(0,32,0,33)
+aK.Font=Enum.Font.SourceSansBold
+aK.Text="IY"
+aK.TextColor3=Color3.fromRGB(255,255,255)
+aK.TextSize=20
+aK.TextWrapped=true
+aK.ZIndex=10
+aK.Draggable=true
+aL.Name=randomString()
+aL.CornerRadius=UDim.new(0.5,0)
+aL.Parent=aK
+aK.MouseButton1Click:Connect(function()
 Cmdbar:CaptureFocus()
 maximizeHolder()
 end)
-table.insert(shade1, QuickCapture)
-table.insert(text1, QuickCapture)
+table.insert(shade1,aK)
+table.insert(text1,aK)
 end
-Scale.Scale = math.max(Holder.AbsoluteSize.X / 1920, guiScale)
-Scale.Parent = ScaledHolder
-ScaledHolder.Size = UDim2.fromScale(1 / Scale.Scale, 1 / Scale.Scale)
-Scale:GetPropertyChangedSignal("Scale"):Connect(function()
-ScaledHolder.Size = UDim2.fromScale(1 / Scale.Scale, 1 / Scale.Scale)
-for _, v in ScaledHolder:GetDescendants() do
-if v:IsA("GuiObject") and v.Visible then
-v.Visible = false
-v.Visible = true
+
+Scale.Scale=math.max(Holder.AbsoluteSize.X/1920,guiScale)
+Scale.Parent=ScaledHolder
+ScaledHolder.Size=UDim2.fromScale(1/Scale.Scale,1/Scale.Scale)
+Scale:GetPropertyChangedSignal"Scale":Connect(function()
+ScaledHolder.Size=UDim2.fromScale(1/Scale.Scale,1/Scale.Scale)
+for aK,aL in ScaledHolder:GetDescendants()do
+if aL:IsA"GuiObject"and aL.Visible then
+aL.Visible=false
+aL.Visible=true
 end
 end
 end)
+
 updateColors(currentShade1,shade1)
 updateColors(currentShade2,shade2)
 updateColors(currentShade3,shade3)
 updateColors(currentText1,text1)
 updateColors(currentText2,text2)
 updateColors(currentScroll,scroll)
-if PluginsTable ~= nil or PluginsTable ~= {} then
+
+if PluginsTable~=nil or PluginsTable~={}then
 FindPlugins(PluginsTable)
 end
--- Events
-eventEditor.RegisterEvent("OnExecute")
+
+
+eventEditor.RegisterEvent"OnExecute"
 eventEditor.RegisterEvent("OnSpawn",{
 {Type="Player",Name="Player Filter ($1)"}
 })
@@ -11679,282 +12808,372 @@ eventEditor.RegisterEvent("OnDamage",{
 })
 eventEditor.RegisterEvent("OnKilled",{
 {Type="Player",Name="Victim Player ($1)"},
-{Type="Player",Name="Killer Player ($2)",Default = 1}
+{Type="Player",Name="Killer Player ($2)",Default=1}
 })
 eventEditor.RegisterEvent("OnJoin",{
-{Type="Player",Name="Player Filter ($1)",Default = 1}
+{Type="Player",Name="Player Filter ($1)",Default=1}
 })
 eventEditor.RegisterEvent("OnLeave",{
-{Type="Player",Name="Player Filter ($1)",Default = 1}
+{Type="Player",Name="Player Filter ($1)",Default=1}
 })
 eventEditor.RegisterEvent("OnChatted",{
-{Type="Player",Name="Player Filter ($1)",Default = 1},
+{Type="Player",Name="Player Filter ($1)",Default=1},
 {Type="String",Name="Message Filter ($2)"}
 })
-function hookCharEvents(plr,instant)
+
+function hookCharEvents(aK,aL)
 task.spawn(function()
-local char = plr.Character
-if not char then return end
-local humanoid = char:WaitForChild("Humanoid",10)
-if not humanoid then return end
-local oldHealth = humanoid.Health
-humanoid.HealthChanged:Connect(function(health)
-local change = math.abs(oldHealth - health)
-if oldHealth > health then
-eventEditor.FireEvent("OnDamage",plr.Name,tonumber(health))
+local aM=aK.Character
+if not aM then return end
+
+local aN=aM:WaitForChild("Humanoid",10)
+if not aN then return end
+
+local V=aN.Health
+aN.HealthChanged:Connect(function(W)
+math.abs(V-W)
+if V>W then
+eventEditor.FireEvent("OnDamage",aK.Name,tonumber(W))
 end
-oldHealth = health
+V=W
 end)
-humanoid.Died:Connect(function()
-eventEditor.FireEvent("OnDied",plr.Name)
-local killedBy = humanoid:FindFirstChild("creator")
-if killedBy and killedBy.Value and killedBy.Value.Parent then
-eventEditor.FireEvent("OnKilled",plr.Name,killedBy.Name)
+
+aN.Died:Connect(function()
+eventEditor.FireEvent("OnDied",aK.Name)
+
+local W=aN:FindFirstChild"creator"
+if W and W.Value and W.Value.Parent then
+eventEditor.FireEvent("OnKilled",aK.Name,W.Name)
 end
 end)
 end)
 end
-Players.PlayerAdded:Connect(function(plr)
-eventEditor.FireEvent("OnJoin",plr.Name)
-if isLegacyChat then plr.Chatted:Connect(function(msg) eventEditor.FireEvent("OnChatted",tostring(plr),msg) end) end
-plr.CharacterAdded:Connect(function() eventEditor.FireEvent("OnSpawn",tostring(plr)) hookCharEvents(plr) end)
-JoinLog(plr)
-if isLegacyChat then ChatLog(plr) end
+
+Players.PlayerAdded:Connect(function(aK)
+eventEditor.FireEvent("OnJoin",aK.Name)
+if isLegacyChat then aK.Chatted:Connect(function(aL)eventEditor.FireEvent("OnChatted",tostring(aK),aL)end)end
+aK.CharacterAdded:Connect(function()eventEditor.FireEvent("OnSpawn",tostring(aK))hookCharEvents(aK)end)
+JoinLog(aK)
+if isLegacyChat then ChatLog(aK)end
 if ESPenabled then
-repeat wait(1) until plr.Character and getRoot(plr.Character)
-ESP(plr)
+repeat wait(1)until aK.Character and getRoot(aK.Character)
+ESP(aK)
 end
 if CHMSenabled then
-repeat wait(1) until plr.Character and getRoot(plr.Character)
-CHMS(plr)
+repeat wait(1)until aK.Character and getRoot(aK.Character)
+CHMS(aK)
 end
 end)
+
 if not isLegacyChat then
-TextChatService.MessageReceived:Connect(function(message)
-if message.TextSource then
-local player = Players:GetPlayerByUserId(message.TextSource.UserId)
-if not player then return end
-if logsEnabled == true then
-CreateLabel(player.Name, message.Text)
+TextChatService.MessageReceived:Connect(function(aK)
+if aK.TextSource then
+local aL=Players:GetPlayerByUserId(aK.TextSource.UserId)
+if not aL then return end
+
+if logsEnabled==true then
+CreateLabel(aL.Name,aK.Text)
 end
-if player.UserId == Players.LocalPlayer.UserId then
-do_exec(message.Text, Players.LocalPlayer)
+if aL.UserId==Players.LocalPlayer.UserId then
+do_exec(aK.Text,Players.LocalPlayer)
 end
-eventEditor.FireEvent("OnChatted", player.Name, message.Text)
-sendChatWebhook(player, message.Text)
+eventEditor.FireEvent("OnChatted",aL.Name,aK.Text)
+sendChatWebhook(aL,aK.Text)
 end
 end)
 end
-for _,plr in pairs(Players:GetPlayers()) do
+
+for aK,aL in pairs(Players:GetPlayers())do
 pcall(function()
-plr.CharacterAdded:Connect(function() eventEditor.FireEvent("OnSpawn",tostring(plr)) hookCharEvents(plr) end)
-hookCharEvents(plr)
+aL.CharacterAdded:Connect(function()eventEditor.FireEvent("OnSpawn",tostring(aL))hookCharEvents(aL)end)
+hookCharEvents(aL)
 end)
 end
-if spawnCmds and #spawnCmds > 0 then
-for i,v in pairs(spawnCmds) do
-eventEditor.AddCmd("OnSpawn",{v.COMMAND or "",{0},v.DELAY or 0})
+
+if spawnCmds and#spawnCmds>0 then
+for aK,aL in pairs(spawnCmds)do
+eventEditor.AddCmd("OnSpawn",{aL.COMMAND or"",{0},aL.DELAY or 0})
 end
 updatesaves()
 end
-if loadedEventData then eventEditor.LoadData(loadedEventData) end
+
+if f then eventEditor.LoadData(f)end
 eventEditor.Refresh()
-eventEditor.FireEvent("OnExecute")
-if aliases and #aliases > 0 then
-local cmdMap = {}
-for i,v in pairs(cmds) do
-cmdMap[v.NAME:lower()] = v
-for _,alias in pairs(v.ALIAS) do
-cmdMap[alias:lower()] = v
+
+eventEditor.FireEvent"OnExecute"
+
+if aliases and#aliases>0 then
+local aK={}
+for aL,aM in pairs(cmds)do
+aK[aM.NAME:lower()]=aM
+for aN,V in pairs(aM.ALIAS)do
+aK[V:lower()]=aM
 end
 end
-for i = 1, #aliases do
-local cmd = string.lower(aliases[i].CMD)
-local alias = string.lower(aliases[i].ALIAS)
-if cmdMap[cmd] then
-customAlias[alias] = cmdMap[cmd]
+for aL=1,#aliases do
+local aM=string.lower(aliases[aL].CMD)
+local aN=string.lower(aliases[aL].ALIAS)
+if aK[aM]then
+customAlias[aN]=aK[aM]
 end
 end
 refreshaliases()
 end
+
 IYMouse.Move:Connect(checkTT)
+
 CaptureService.CaptureBegan:Connect(function()
-Holder.Visible = false
+Holder.Visible=false
 end)
+
 CaptureService.CaptureEnded:Connect(function()
-task.delay(0.1, function()
-Holder.Visible = true
+task.delay(0.1,function()
+Holder.Visible=true
 end)
 end)
+
 task.spawn(function()
-local success, latestVersionInfo = pcall(function()
-local versionJson = game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/version')
-return HttpService:JSONDecode(versionJson)
+local aK,aL=pcall(function()
+local aK=game:HttpGet'https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/version'
+return HttpService:JSONDecode(aK)
 end)
-if success then
-if currentVersion ~= latestVersionInfo.Version then
+
+if aK then
+if currentVersion~=aL.Version then
 notify('Outdated','Get the new version at infyiff.github.io')
 end
-if latestVersionInfo.Announcement and latestVersionInfo.Announcement ~= '' then
-local AnnGUI = Instance.new("Frame")
-local background = Instance.new("Frame")
-local TextBox = Instance.new("TextLabel")
-local shadow = Instance.new("Frame")
-local PopupText = Instance.new("TextLabel")
-local Exit = Instance.new("TextButton")
-local ExitImage = Instance.new("ImageLabel")
-AnnGUI.Name = randomString()
-AnnGUI.Parent = ScaledHolder
-AnnGUI.Active = true
-AnnGUI.BackgroundTransparency = 1
-AnnGUI.Position = UDim2.new(0.5, -180, 0, -500)
-AnnGUI.Size = UDim2.new(0, 360, 0, 20)
-AnnGUI.ZIndex = 10
-background.Name = "background"
-background.Parent = AnnGUI
-background.Active = true
-background.BackgroundColor3 = currentShade1
-background.BorderSizePixel = 0
-background.Position = UDim2.new(0, 0, 0, 20)
-background.Size = UDim2.new(0, 360, 0, 150)
-background.ZIndex = 10
-TextBox.Parent = background
-TextBox.BackgroundTransparency = 1
-TextBox.Position = UDim2.new(0, 5, 0, 5)
-TextBox.Size = UDim2.new(0, 350, 0, 140)
-TextBox.Font = Enum.Font.SourceSans
-TextBox.TextSize = 18
-TextBox.TextWrapped = true
-TextBox.Text = latestVersionInfo.Announcement
-TextBox.TextColor3 = currentText1
-TextBox.TextXAlignment = Enum.TextXAlignment.Left
-TextBox.TextYAlignment = Enum.TextYAlignment.Top
-TextBox.ZIndex = 10
-shadow.Name = "shadow"
-shadow.Parent = AnnGUI
-shadow.BackgroundColor3 = currentShade2
-shadow.BorderSizePixel = 0
-shadow.Size = UDim2.new(0, 360, 0, 20)
-shadow.ZIndex = 10
-PopupText.Name = "PopupText"
-PopupText.Parent = shadow
-PopupText.BackgroundTransparency = 1
-PopupText.Size = UDim2.new(1, 0, 0.95, 0)
-PopupText.ZIndex = 10
-PopupText.Font = Enum.Font.SourceSans
-PopupText.TextSize = 14
-PopupText.Text = "Server Announcement"
-PopupText.TextColor3 = currentText1
-PopupText.TextWrapped = true
-Exit.Name = "Exit"
-Exit.Parent = shadow
-Exit.BackgroundTransparency = 1
-Exit.Position = UDim2.new(1, -20, 0, 0)
-Exit.Size = UDim2.new(0, 20, 0, 20)
-Exit.Text = ""
-Exit.ZIndex = 10
-ExitImage.Parent = Exit
-ExitImage.BackgroundColor3 = Color3.new(1, 1, 1)
-ExitImage.BackgroundTransparency = 1
-ExitImage.Position = UDim2.new(0, 5, 0, 5)
-ExitImage.Size = UDim2.new(0, 10, 0, 10)
-ExitImage.Image = "rbxassetid://5054663650"
-ExitImage.ZIndex = 10
+
+if aL.Announcement and aL.Announcement~=''then
+local aM=Instance.new"Frame"
+local aN=Instance.new"Frame"
+local V=Instance.new"TextLabel"
+local W=Instance.new"Frame"
+local X=Instance.new"TextLabel"
+local Y=Instance.new"TextButton"
+local Z=Instance.new"ImageLabel"
+
+aM.Name=randomString()
+aM.Parent=ScaledHolder
+aM.Active=true
+aM.BackgroundTransparency=1
+aM.Position=UDim2.new(0.5,-180,0,-500)
+aM.Size=UDim2.new(0,360,0,20)
+aM.ZIndex=10
+
+aN.Name="background"
+aN.Parent=aM
+aN.Active=true
+aN.BackgroundColor3=currentShade1
+aN.BorderSizePixel=0
+aN.Position=UDim2.new(0,0,0,20)
+aN.Size=UDim2.new(0,360,0,150)
+aN.ZIndex=10
+
+V.Parent=aN
+V.BackgroundTransparency=1
+V.Position=UDim2.new(0,5,0,5)
+V.Size=UDim2.new(0,350,0,140)
+V.Font=Enum.Font.SourceSans
+V.TextSize=18
+V.TextWrapped=true
+V.Text=aL.Announcement
+V.TextColor3=currentText1
+V.TextXAlignment=Enum.TextXAlignment.Left
+V.TextYAlignment=Enum.TextYAlignment.Top
+V.ZIndex=10
+
+W.Name="shadow"
+W.Parent=aM
+W.BackgroundColor3=currentShade2
+W.BorderSizePixel=0
+W.Size=UDim2.new(0,360,0,20)
+W.ZIndex=10
+
+X.Name="PopupText"
+X.Parent=W
+X.BackgroundTransparency=1
+X.Size=UDim2.new(1,0,0.95,0)
+X.ZIndex=10
+X.Font=Enum.Font.SourceSans
+X.TextSize=14
+X.Text="Server Announcement"
+X.TextColor3=currentText1
+X.TextWrapped=true
+
+Y.Name="Exit"
+Y.Parent=W
+Y.BackgroundTransparency=1
+Y.Position=UDim2.new(1,-20,0,0)
+Y.Size=UDim2.new(0,20,0,20)
+Y.Text=""
+Y.ZIndex=10
+
+Z.Parent=Y
+Z.BackgroundColor3=Color3.new(1,1,1)
+Z.BackgroundTransparency=1
+Z.Position=UDim2.new(0,5,0,5)
+Z.Size=UDim2.new(0,10,0,10)
+Z.Image="rbxassetid://5054663650"
+Z.ZIndex=10
+
 wait(1)
-AnnGUI:TweenPosition(UDim2.new(0.5, -180, 0, 150), "InOut", "Quart", 0.5, true, nil)
-Exit.MouseButton1Click:Connect(function()
-AnnGUI:TweenPosition(UDim2.new(0.5, -180, 0, -500), "InOut", "Quart", 0.5, true, nil)
+aM:TweenPosition(UDim2.new(0.5,-180,0,150),"InOut","Quart",0.5,true,nil)
+
+Y.MouseButton1Click:Connect(function()
+aM:TweenPosition(UDim2.new(0.5,-180,0,-500),"InOut","Quart",0.5,true,nil)
 wait(0.6)
-AnnGUI:Destroy()
+aM:Destroy()
 end)
 end
 end
 end)
+
 task.spawn(function()
 wait()
-Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.2)
-Logo:TweenSizeAndPosition(UDim2.new(0, 175, 0, 175), UDim2.new(0, 37, 0, 45), "Out", "Quart", 0.3)
+Credits:TweenPosition(UDim2.new(0,0,0.9,0),"Out","Quart",0.2)
+Logo:TweenSizeAndPosition(UDim2.new(0,175,0,175),UDim2.new(0,37,0,45),"Out","Quart",0.3)
 wait(1)
-local OutInfo = TweenInfo.new(1.6809, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
-TweenService:Create(Logo, OutInfo, {ImageTransparency = 1}):Play()
-TweenService:Create(IntroBackground, OutInfo, {BackgroundTransparency = 1}):Play()
-Credits:TweenPosition(UDim2.new(0, 0, 0.9, 30), "Out", "Quart", 0.2)
+local aK=TweenInfo.new(1.6809,Enum.EasingStyle.Sine,Enum.EasingDirection.Out,0,false,0)
+TweenService:Create(Logo,aK,{ImageTransparency=1}):Play()
+TweenService:Create(IntroBackground,aK,{BackgroundTransparency=1}):Play()
+Credits:TweenPosition(UDim2.new(0,0,0.9,30),"Out","Quart",0.2)
 wait(0.2)
 Logo:Destroy()
 Credits:Destroy()
 IntroBackground:Destroy()
 minimizeHolder()
-if IsOnMobile then notify("Unstable Device", "On mobile, Zero Yield may have issues or features that are not functioning correctly.") end
+if b then notify("Unstable Device","On mobile, Zero Yield may have issues or features that are not functioning correctly.")end
 end)
--- This file will be injected into Infinite Yield, to add the commands Zero Yield has to offer
-CMDs[#CMDs + 1] = {NAME = 'hideplayers / hplyrs', DESC = 'Hides all charater models'}
-CMDs[#CMDs + 1] = {NAME = 'showplayers / splyrs', DESC = 'Shows all charater models'}
-CMDs[#CMDs + 1] = {NAME = 'fast', DESC = 'Increases the player\'s movement speed'}
-CMDs[#CMDs + 1] = {NAME = 'slow', DESC = 'Decreases the player\'s movement speed'}
-CMDs[#CMDs + 1] = {NAME = 'time', DESC = 'Sets the in-game time'}
-CMDs[#CMDs + 1] = {NAME = 'day', DESC = 'Sets the in-game time to daytime'}
-CMDs[#CMDs + 1] = {NAME = 'night', DESC = 'Sets the in-game time to nighttime'}
-addcmd("hideplayers", {"hplyrs"}, function(args, speaker)
-local players = game:GetService("Players")
-local player = players.LocalPlayer or players.PlayerAdded:Wait()
-for i, plr in pairs(players:GetPlayers()) do
-if plr.Name ~= speaker.Name then
-local char = plr.Character
-for i, child in pairs(char:GetChildren()) do
-if child:IsA("Part") or child:IsA("MeshPart") then
-child.Transparency = 1
-elseif child:IsA("Accessory") then
-child:FindFirstChild("Handle").Transparency = 1
+
+
+local aK=false
+
+
+CMDs[#CMDs+1]={NAME='hideplayers / hplyrs',DESC='Hides all charater models'}
+CMDs[#CMDs+1]={NAME='showplayers / splyrs',DESC='Shows all charater models'}
+CMDs[#CMDs+1]={NAME='fast',DESC='Increases the player\'s movement speed'}
+CMDs[#CMDs+1]={NAME='slow',DESC='Decreases the player\'s movement speed'}
+CMDs[#CMDs+1]={NAME='time',DESC='Sets the in-game time'}
+CMDs[#CMDs+1]={NAME='day',DESC='Sets the in-game time to daytime'}
+CMDs[#CMDs+1]={NAME='night',DESC='Sets the in-game time to nighttime'}
+CMDs[#CMDs+1]={NAME='bunnyhop / bhop',DESC='Automatically jumps for you'}
+
+addcmd("hideplayers",{"hplyrs"},function(aL,aM)
+local aN=game:GetService"Players"local V=
+aN.LocalPlayer or aN.PlayerAdded:Wait()
+
+for W,X in pairs(aN:GetPlayers())do
+if X.Name~=aM.Name then
+local Y=X.Character
+for Z,_ in pairs(Y:GetChildren())do
+if _:IsA"Part"or _:IsA"MeshPart"then
+_.Transparency=1
+for aO,aP in pairs(_:GetChildren())do
+if aP:IsA"Decal"then
+aP.Transparency=1
 end
 end
-end
-end
-end)
-addcmd("showplayers", {"splyrs"}, function(args, speaker)
-local players = game:GetService("Players")
-local player = players.LocalPlayer or players.PlayerAdded:Wait()
-for _, plr in pairs(players:GetPlayers()) do
-if plr.Name ~= speaker.Name then
-local char = plr.Character
-if char then
-for _, child in pairs(char:GetChildren()) do
-if (child:IsA("Part") or child:IsA("MeshPart")) and child.Name ~= "HumanoidRootPart" then
-child.Transparency = 0
-elseif child:IsA("Accessory") then
-local handle = child:FindFirstChild("Handle")
-if handle then
-handle.Transparency = 0
-end
+elseif _:IsA"Accessory"then
+local aO=_:FindFirstChild"Handle"
+if aO then
+aO.Transparency=1
+for aP,aQ in pairs(aO:GetChildren())do
+if aQ:IsA"Decal"then
+aQ.Transparency=1
 end
 end
 end
 end
 end
-end)
-local defaultSpeed = 16
-addcmd("fast", {}, function(args, speaker)
-local currentSpeed = player.Character.Humanoid.WalkSpeed
-local players = game:GetService("Players")
-local player = players.LocalPlayer or players.PlayerAdded:Wait()
-player.Character.Humanoid.WalkSpeed = currentSpeed + 1
-end)
-addcmd("slow", {}, function(args, speaker)
-local currentSpeed = player.Character.Humanoid.WalkSpeed
-local players = game:GetService("Players")
-local player = players.LocalPlayer or players.PlayerAdded:Wait()
-if currentSpeed > 1 then
-player.Character.Humanoid.WalkSpeed = currentSpeed - 1
+end
 end
 end)
-addcmd("time", {}, function(args, speaker)
-local time = tonumber(args[1])
-if time then
-game:GetService("Lighting").ClockTime = time
+
+
+addcmd("showplayers",{"splyrs"},function(aL,aM)
+local aN=game:GetService"Players"local aO=
+aN.LocalPlayer or aN.PlayerAdded:Wait()
+
+for aP,aQ in pairs(aN:GetPlayers())do
+if aQ.Name~=aM.Name then
+local V=aQ.Character
+if V then
+for W,X in pairs(V:GetChildren())do
+if(X:IsA"Part"or X:IsA"MeshPart")and X.Name~="HumanoidRootPart"then
+X.Transparency=0
+for Y,Z in pairs(X:GetChildren())do
+if Z:IsA"Decal"then
+Z.Transparency=0
+end
+end
+elseif X:IsA"Accessory"then
+local Y=X:FindFirstChild"Handle"
+if Y then
+Y.Transparency=0
+for Z,_ in pairs(Y:GetChildren())do
+if _:IsA"Decal"then
+_.Transparency=0
+end
+end
+end
+end
+end
+end
+end
 end
 end)
-addcmd("day", {}, function(args, speaker)
-game:GetService("Lighting").ClockTime = 12
+
+addcmd("fast",{},function(aL,aM)
+local aN=player.Character.Humanoid.WalkSpeed
+local aO=game:GetService"Players"
+local aP=aO.LocalPlayer or aO.PlayerAdded:Wait()
+aP.Character.Humanoid.WalkSpeed=aN+1
 end)
-addcmd("night", {}, function(args, speaker)
-game:GetService("Lighting").ClockTime = 0
+
+addcmd("slow",{},function(aL,aM)
+local aN=player.Character.Humanoid.WalkSpeed
+local aO=game:GetService"Players"
+local aP=aO.LocalPlayer or aO.PlayerAdded:Wait()
+if aN>1 then
+aP.Character.Humanoid.WalkSpeed=aN-1
+end
+end)
+
+addcmd("time",{},function(aL,aM)
+local aN=tonumber(aL[1])
+if aN then
+game:GetService"Lighting".ClockTime=aN
+end
+end)
+
+addcmd("day",{},function(aL,aM)
+game:GetService"Lighting".ClockTime=12
+end)
+
+addcmd("night",{},function(aL,aM)
+game:GetService"Lighting".ClockTime=0
+end)
+
+addcmd("bhop",{"bunnyhop"},function(aL,aM)
+local aN=game:GetService"Players":FindFirstChild(aM.Name)
+if aN and not aK then
+local aO=aN.Character
+if aO then
+local aP=aO:FindFirstChildOfClass"Humanoid"
+if aP then
+aK=true
+while aK do
+aP:ChangeState(Enum.HumanoidStateType.Physics)
+aP.Jump=true
+wait(0.2)
+end
+end
+end
+end
+end)
+
+addcmd("unbhop",{'stopbhop','unbunnyhop'},function(aL,aM)
+if aK then
+aK=false
+end
 end)
