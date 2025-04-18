@@ -13162,18 +13162,17 @@ if aO then
 local aP=aO:FindFirstChildOfClass"Humanoid"
 if aP then
 aK=true
+task.spawn(function()
 while aK do
-aP:ChangeState(Enum.HumanoidStateType.Physics)
 aP.Jump=true
-wait(0.2)
+task.wait(0.2)
 end
+end)
 end
 end
 end
 end)
 
-addcmd("unbhop",{'stopbhop','unbunnyhop'},function(aL,aM)
-if aK then
+addcmd("unbhop",{"stopbhop"},function(aL,aM)
 aK=false
-end
 end)

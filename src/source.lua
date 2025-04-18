@@ -13161,18 +13161,17 @@ addcmd("bhop", {"bunnyhop"}, function(args, speaker)
 			local humanoid = char:FindFirstChildOfClass("Humanoid")
 			if humanoid then
 				isBhoping = true
-				while isBhoping do
-					humanoid:ChangeState(Enum.HumanoidStateType.Physics)
-					humanoid.Jump = true
-					wait(0.2)
-				end
+				task.spawn(function()
+					while isBhoping do
+						humanoid.Jump = true
+						task.wait(0.2)
+					end
+				end)
 			end
 		end
 	end
 end)
 
-addcmd("unbhop", {'stopbhop', 'unbunnyhop'}, function(args, speaker)
-	if isBhoping then
-		isBhoping = false
-	end
+addcmd("unbhop", {"stopbhop"}, function(args, speaker)
+	isBhoping = false
 end)
