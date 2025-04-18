@@ -18,13 +18,27 @@ addcmd("hideplayers", {"hplyrs"}, function(args, speaker)
 			for i, child in pairs(char:GetChildren()) do
 				if child:IsA("Part") or child:IsA("MeshPart") then
 					child.Transparency = 1
+					for _, face in pairs(child:GetChildren()) do
+						if face:IsA("Decal") then
+							face.Transparency = 1
+						end
+					end
 				elseif child:IsA("Accessory") then
-					child:FindFirstChild("Handle").Transparency = 1
+					local handle = child:FindFirstChild("Handle")
+					if handle then
+						handle.Transparency = 1
+						for _, face in pairs(handle:GetChildren()) do
+							if face:IsA("Decal") then
+								face.Transparency = 1
+							end
+						end
+					end
 				end
 			end
 		end
 	end
 end)
+
 
 addcmd("showplayers", {"splyrs"}, function(args, speaker)
 	local players = game:GetService("Players")
@@ -37,10 +51,20 @@ addcmd("showplayers", {"splyrs"}, function(args, speaker)
 				for _, child in pairs(char:GetChildren()) do
 					if (child:IsA("Part") or child:IsA("MeshPart")) and child.Name ~= "HumanoidRootPart" then
 						child.Transparency = 0
+						for _, face in pairs(child:GetChildren()) do
+							if face:IsA("Decal") then
+								face.Transparency = 0
+							end
+						end
 					elseif child:IsA("Accessory") then
 						local handle = child:FindFirstChild("Handle")
 						if handle then
 							handle.Transparency = 0
+							for _, face in pairs(handle:GetChildren()) do
+								if face:IsA("Decal") then
+									face.Transparency = 0
+								end
+							end
 						end
 					end
 				end
