@@ -20,12 +20,10 @@ jobs:
       - name: Download version and check if release exists
         id: check_release
         run: |
-          # Get version from upstream
           curl -s https://raw.githubusercontent.com/EdgeIY/infiniteyield/refs/heads/master/version -o version.json
           VERSION=$(jq -r '.Version' version.json)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
-          # Check if the release already exists
           if gh release view "$VERSION" &> /dev/null; then
             echo "Release $VERSION already exists. Skipping workflow."
             echo "skip=true" >> "$GITHUB_OUTPUT"
@@ -50,22 +48,27 @@ jobs:
         run: |
           VERSION=${{ steps.check_release.outputs.version }}
 
-          # Replace "Infinite" with "Zero"
           sed -i 's/Infinite/Zero/g' src/source.lua
-
-          # Replace internal version assignment
           sed -i "s/Version[:=] *['\"]\\?[0-9.]*['\"]\\?/Version = \"$VERSION\"/g" src/source.lua
-
-          # Prepend version comment
           sed -i "1i-- Version: $VERSION" src/source.lua
-
-          # Append injected commands
           cat preinjected.lua >> src/source.lua
 
-          # Write minified version to build.lua with warning comment
+      - name: Setup Node.js
+        if: steps.check_release.outputs.skip == 'false'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install luamin
+        if: steps.check_release.outputs.skip == 'false'
+        run: npm install -g luamin
+
+      - name: Minify Lua to one-liner
+        if: steps.check_release.outputs.skip == 'false'
+        run: |
           {
             echo "-- This file is generated automatically and is not meant to be modified."
-            sed '/^\s*$/d;s/^\s*//;s/\s*$//' src/source.lua
+            luamin -f src/source.lua
           } > src/build.lua
 
       - name: Commit updated src files to repo
