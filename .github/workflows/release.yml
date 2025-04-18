@@ -65,7 +65,7 @@ jobs:
           # Write minified version to build.lua with warning comment
           {
             echo "-- This file is generated automatically and is not meant to be modified."
-            tail -n +2 src/source.lua | tr -d '\n\t\r' | sed 's/  */ /g' src/source.lua
+            sed '1d' src/source.lua | tr -d '\n\t\r' | sed 's/  */ /g' src/source.lua
           } > src/build.lua
 
       - name: Commit updated src files to repo
