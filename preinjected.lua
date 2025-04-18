@@ -35,7 +35,7 @@ addcmd("showplayers", {"splyrs"}, function(args, speaker)
 			local char = plr.Character
 			if char then
 				for _, child in pairs(char:GetChildren()) do
-					if child:IsA("Part") or child:IsA("MeshPart") then
+					if (child:IsA("Part") or child:IsA("MeshPart")) and child.Name ~= "HumanoidRootPart" then
 						child.Transparency = 0
 					elseif child:IsA("Accessory") then
 						local handle = child:FindFirstChild("Handle")
