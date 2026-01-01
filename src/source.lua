@@ -1,4 +1,4 @@
--- Version: 6.3.5
+-- Version: 6.3.6
 if IY_LOADED and not _G.IY_DEBUG then
 	-- error("Zero Yield is already running!", 0)
 	return
@@ -61,7 +61,6 @@ Services = setmetatable({}, {
 	end
 })
 
-COREGUI = Services.CoreGui
 Players = Services.Players
 UserInputService = Services.UserInputService
 TweenService = Services.TweenService
@@ -92,8 +91,9 @@ CaptureService = Services.CaptureService
 VoiceChatService = Services.VoiceChatService
 SocialService = Services.SocialService
 
-IYMouse = cloneref(Players.LocalPlayer:GetMouse())
 PlayerGui = cloneref(Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"))
+COREGUI = Services.CoreGui or PlayerGui
+IYMouse = cloneref(Players.LocalPlayer:GetMouse())
 PlaceId, JobId = game.PlaceId, game.JobId
 xpcall(function()
 	IsOnMobile = table.find({Enum.Platform.Android, Enum.Platform.IOS}, UserInputService:GetPlatform())
@@ -143,11 +143,11 @@ if makefolder and isfolder and writefile and isfile then
 				writefile(path, game:HttpGet((path:gsub("infiniteyield/", assets))))
 			end
 		end
-		if IsOnMobile then writefile("infiniteyield/assets/.nomedia") end
+		if IsOnMobile then writefile("infiniteyield/assets/.nomedia", "") end
 	end)
 end
 
-currentVersion = "6.3.5"
+currentVersion = "6.3.6"
 
 ScaledHolder = Instance.new("Frame")
 Scale = Instance.new("UIScale")
@@ -293,25 +293,32 @@ function randomString()
 end
 
 PARENT = nil
+MAX_DISPLAY_ORDER = 2147483647
 if get_hidden_gui or gethui then
-	local hiddenUI = get_hidden_gui or gethui
-	local Main = Instance.new("ScreenGui")
-	Main.Name = randomString()
-	Main.Parent = hiddenUI()
-	PARENT = Main
+    local hiddenUI = get_hidden_gui or gethui
+    local Main = Instance.new("ScreenGui")
+    Main.Name = randomString()
+    Main.ResetOnSpawn = false
+    Main.DisplayOrder = MAX_DISPLAY_ORDER
+    Main.Parent = hiddenUI()
+    PARENT = Main
 elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
-	local Main = Instance.new("ScreenGui")
-	Main.Name = randomString()
-	syn.protect_gui(Main)
-	Main.Parent = COREGUI
-	PARENT = Main
+    local Main = Instance.new("ScreenGui")
+    Main.Name = randomString()
+    Main.ResetOnSpawn = false
+    Main.DisplayOrder = MAX_DISPLAY_ORDER
+    syn.protect_gui(Main)
+    Main.Parent = COREGUI
+    PARENT = Main
 elseif COREGUI:FindFirstChild("RobloxGui") then
-	PARENT = COREGUI.RobloxGui
+    PARENT = COREGUI.RobloxGui
 else
-	local Main = Instance.new("ScreenGui")
-	Main.Name = randomString()
-	Main.Parent = COREGUI
-	PARENT = Main
+    local Main = Instance.new("ScreenGui")
+    Main.Name = randomString()
+    Main.ResetOnSpawn = false
+    Main.DisplayOrder = MAX_DISPLAY_ORDER
+    Main.Parent = COREGUI
+    PARENT = Main
 end
 
 shade1 = {}
@@ -2054,7 +2061,7 @@ function readfileExploit()
 end
 
 function isNumber(str)
-	if tonumber(str) ~= nil or str == 'inf' then
+	if tonumber(str) ~= nil or str == "inf" then
 		return true
 	end
 end
@@ -2066,25 +2073,28 @@ function vtype(o, t)
 end
 
 function getRoot(char)
-	local rootPart = char:FindFirstChildOfClass('Humanoid').RootPart
-	return rootPart
+	if char and char:FindFirstChildOfClass("Humanoid") then
+		return char:FindFirstChildOfClass("Humanoid").RootPart
+	else
+		return nil
+	end
 end
 
 function tools(plr)
-	if plr:FindFirstChildOfClass("Backpack"):FindFirstChildOfClass('Tool') or plr.Character:FindFirstChildOfClass('Tool') then
+	if plr:FindFirstChildOfClass("Backpack"):FindFirstChildOfClass("Tool") or plr.Character:FindFirstChildOfClass("Tool") then
 		return true
 	end
 end
 
 function r15(plr)
-	if plr.Character:FindFirstChildOfClass('Humanoid').RigType == Enum.HumanoidRigType.R15 then
+	if plr.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R15 then
 		return true
 	end
 end
 
 function toClipboard(txt)
 	if everyClipboard then
-		everyClipboard(tostring(txt))
+		everyClipboard(tostring(txt)) -- some executor errored without tostring btw so dont call me out for this
 		notify("Clipboard", "Copied to clipboard")
 	else
 		notify("Clipboard", "Your exploit doesn't have the ability to use the clipboard")
@@ -4540,6 +4550,8 @@ CMDs[#CMDs + 1] = {NAME = 'freeze / fr [player] (CLIENT)', DESC = 'Freezes a pla
 CMDs[#CMDs + 1] = {NAME = 'freezeanims', DESC = 'Freezes your animations / pauses your animations - Does not work on default animations'}
 CMDs[#CMDs + 1] = {NAME = 'unfreezeanims', DESC = 'Unfreezes your animations / plays your animations'}
 CMDs[#CMDs + 1] = {NAME = 'thaw / unfr [player] (CLIENT)', DESC = 'Unfreezes a player'}
+CMDs[#CMDs + 1] = {NAME = 'anchor', DESC = 'Anchors your characters RootPart'}
+CMDs[#CMDs + 1] = {NAME = 'unanchor', DESC = 'Unanchors your characters RootPart'}
 CMDs[#CMDs + 1] = {NAME = 'tpposition / tppos [X Y Z]', DESC = 'Teleports you to certain coordinates'}
 CMDs[#CMDs + 1] = {NAME = 'tweentpposition / ttppos [X Y Z]', DESC = 'Tween to coordinates (bypasses some anti cheats)'}
 CMDs[#CMDs + 1] = {NAME = 'offset [X Y Z]', DESC = 'Offsets you by certain coordinates'}
@@ -4578,7 +4590,7 @@ CMDs[#CMDs + 1] = {NAME = 'muteallvcs', DESC = 'Mutes voice chat for all players
 CMDs[#CMDs + 1] = {NAME = 'unmuteallvcs', DESC = 'Unmutes voice chat for all players'}
 CMDs[#CMDs + 1] = {NAME = 'mutevc [player]', DESC = 'Mutes the voice chat of a player'}
 CMDs[#CMDs + 1] = {NAME = 'unmutevc [player]', DESC = 'Unmutes the voice chat of a player'}
-CMDs[#CMDs + 1] = {NAME = 'phonebook / call', DESC = 'Prompts the Roblox phonebook UI to let you call your friends'}
+CMDs[#CMDs + 1] = {NAME = 'phonebook / call', DESC = 'Prompts the Roblox phonebook UI to let you call your friends. Needs voice chat enabled'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'esp', DESC = 'View all players and their status'}
 CMDs[#CMDs + 1] = {NAME = 'espteam', DESC = 'ESP but teammates are green and bad guys are red'}
@@ -9263,6 +9275,14 @@ addcmd('thaw',{'unfreeze','unfr'},function(args, speaker)
 			end)
 		end
 	end
+end)
+
+addcmd("anchor", {}, function(args, speaker)
+    getRoot(speaker.Character).Anchored = true
+end)
+
+addcmd("unanchor", {}, function(args, speaker)
+    getRoot(speaker.Character).Anchored = false
 end)
 
 oofing = false

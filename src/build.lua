@@ -62,7 +62,6 @@ end
 end
 })
 
-COREGUI=Services.CoreGui
 Players=Services.Players
 UserInputService=Services.UserInputService
 TweenService=Services.TweenService
@@ -93,8 +92,9 @@ CaptureService=Services.CaptureService
 VoiceChatService=Services.VoiceChatService
 SocialService=Services.SocialService
 
-IYMouse=cloneref(Players.LocalPlayer:GetMouse())
 PlayerGui=cloneref(Players.LocalPlayer:FindFirstChildWhichIsA"PlayerGui")
+COREGUI=Services.CoreGui or PlayerGui
+IYMouse=cloneref(Players.LocalPlayer:GetMouse())
 PlaceId,JobId=game.PlaceId,game.JobId
 xpcall(function()
 IsOnMobile=table.find({Enum.Platform.Android,Enum.Platform.IOS},UserInputService:GetPlatform())
@@ -144,11 +144,11 @@ if not isfile(c)then
 writefile(c,game:HttpGet((c:gsub("infiniteyield/",b))))
 end
 end
-if IsOnMobile then writefile"infiniteyield/assets/.nomedia"end
+if IsOnMobile then writefile("infiniteyield/assets/.nomedia","")end
 end)
 end
 
-currentVersion="6.3.5"
+currentVersion="6.3.6"
 
 ScaledHolder=Instance.new"Frame"
 Scale=Instance.new"UIScale"
@@ -294,15 +294,20 @@ return table.concat(c)
 end
 
 PARENT=nil
+MAX_DISPLAY_ORDER=2147483647
 if get_hidden_gui or gethui then
 local b=get_hidden_gui or gethui
 local c=Instance.new"ScreenGui"
 c.Name=randomString()
+c.ResetOnSpawn=false
+c.DisplayOrder=MAX_DISPLAY_ORDER
 c.Parent=b()
 PARENT=c
 elseif(not is_sirhurt_closure)and(syn and syn.protect_gui)then
 local b=Instance.new"ScreenGui"
 b.Name=randomString()
+b.ResetOnSpawn=false
+b.DisplayOrder=MAX_DISPLAY_ORDER
 syn.protect_gui(b)
 b.Parent=COREGUI
 PARENT=b
@@ -311,6 +316,8 @@ PARENT=COREGUI.RobloxGui
 else
 local b=Instance.new"ScreenGui"
 b.Name=randomString()
+b.ResetOnSpawn=false
+b.DisplayOrder=MAX_DISPLAY_ORDER
 b.Parent=COREGUI
 PARENT=b
 end
@@ -2055,7 +2062,7 @@ end
 end
 
 function isNumber(b)
-if tonumber(b)~=nil or b=='inf'then
+if tonumber(b)~=nil or b=="inf"then
 return true
 end
 end
@@ -2067,18 +2074,21 @@ return type(b)==c
 end
 
 function getRoot(b)
-local c=b:FindFirstChildOfClass'Humanoid'.RootPart
-return c
+if b and b:FindFirstChildOfClass"Humanoid"then
+return b:FindFirstChildOfClass"Humanoid".RootPart
+else
+return nil
+end
 end
 
 function tools(b)
-if b:FindFirstChildOfClass"Backpack":FindFirstChildOfClass'Tool'or b.Character:FindFirstChildOfClass'Tool'then
+if b:FindFirstChildOfClass"Backpack":FindFirstChildOfClass"Tool"or b.Character:FindFirstChildOfClass"Tool"then
 return true
 end
 end
 
 function r15(b)
-if b.Character:FindFirstChildOfClass'Humanoid'.RigType==Enum.HumanoidRigType.R15 then
+if b.Character:FindFirstChildOfClass"Humanoid".RigType==Enum.HumanoidRigType.R15 then
 return true
 end
 end
@@ -4541,6 +4551,8 @@ CMDs[#CMDs+1]={NAME='freeze / fr [player] (CLIENT)',DESC='Freezes a player'}
 CMDs[#CMDs+1]={NAME='freezeanims',DESC='Freezes your animations / pauses your animations - Does not work on default animations'}
 CMDs[#CMDs+1]={NAME='unfreezeanims',DESC='Unfreezes your animations / plays your animations'}
 CMDs[#CMDs+1]={NAME='thaw / unfr [player] (CLIENT)',DESC='Unfreezes a player'}
+CMDs[#CMDs+1]={NAME='anchor',DESC='Anchors your characters RootPart'}
+CMDs[#CMDs+1]={NAME='unanchor',DESC='Unanchors your characters RootPart'}
 CMDs[#CMDs+1]={NAME='tpposition / tppos [X Y Z]',DESC='Teleports you to certain coordinates'}
 CMDs[#CMDs+1]={NAME='tweentpposition / ttppos [X Y Z]',DESC='Tween to coordinates (bypasses some anti cheats)'}
 CMDs[#CMDs+1]={NAME='offset [X Y Z]',DESC='Offsets you by certain coordinates'}
@@ -4579,7 +4591,7 @@ CMDs[#CMDs+1]={NAME='muteallvcs',DESC='Mutes voice chat for all players'}
 CMDs[#CMDs+1]={NAME='unmuteallvcs',DESC='Unmutes voice chat for all players'}
 CMDs[#CMDs+1]={NAME='mutevc [player]',DESC='Mutes the voice chat of a player'}
 CMDs[#CMDs+1]={NAME='unmutevc [player]',DESC='Unmutes the voice chat of a player'}
-CMDs[#CMDs+1]={NAME='phonebook / call',DESC='Prompts the Roblox phonebook UI to let you call your friends'}
+CMDs[#CMDs+1]={NAME='phonebook / call',DESC='Prompts the Roblox phonebook UI to let you call your friends. Needs voice chat enabled'}
 CMDs[#CMDs+1]={NAME='',DESC=''}
 CMDs[#CMDs+1]={NAME='esp',DESC='View all players and their status'}
 CMDs[#CMDs+1]={NAME='espteam',DESC='ESP but teammates are green and bad guys are red'}
@@ -9264,6 +9276,14 @@ end
 end)
 end
 end
+end)
+
+addcmd("anchor",{},function(as,at)
+getRoot(at.Character).Anchored=true
+end)
+
+addcmd("unanchor",{},function(as,at)
+getRoot(at.Character).Anchored=false
 end)
 
 oofing=false
