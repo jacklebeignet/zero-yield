@@ -148,7 +148,7 @@ if IsOnMobile then writefile("infiniteyield/assets/.nomedia","")end
 end)
 end
 
-currentVersion="6.3.6"
+currentVersion="6.4"
 
 ScaledHolder=Instance.new"Frame"
 Scale=Instance.new"UIScale"
@@ -2093,6 +2093,15 @@ return true
 end
 end
 
+function breakVelocity()
+local b=Vector3.new(0,0,0)
+for c,d in ipairs(Players.LocalPlayer.Character:GetDescendants())do
+if d:IsA"BasePart"then
+d.Velocity,d.RotVelocity=b,b
+end
+end
+end
+
 function toClipboard(b)
 if everyClipboard then
 everyClipboard(tostring(b))
@@ -2951,83 +2960,87 @@ WayPoints={}
 PluginsTable={}
 end
 
-createPopup=function(c)
-local d=Instance.new"Frame"
+function createPopup(c,d)
 local e=Instance.new"Frame"
-local f=Instance.new"TextLabel"
-local g=Instance.new"Frame"
-local h=Instance.new"TextLabel"
-local i=Instance.new"TextButton"
-local j=Instance.new"ImageLabel"
+local f=Instance.new"Frame"
+local g=Instance.new"TextLabel"
+local h=Instance.new"Frame"
+local i=Instance.new"TextLabel"
+local j=Instance.new"TextButton"
+local k=Instance.new"ImageLabel"
 
-d.Name=randomString()
-d.Parent=ScaledHolder
-d.Active=true
-d.BackgroundTransparency=1
-d.Position=UDim2.new(0.5,-180,0,290)
-d.Size=UDim2.new(0,360,0,20)
-d.ZIndex=10
-
-e.Name="background"
-e.Parent=d
+e.Name=randomString()
+e.Parent=ScaledHolder
 e.Active=true
-e.BackgroundColor3=Color3.fromRGB(36,36,37)
-e.BorderSizePixel=0
-e.Position=UDim2.new(0,0,0,20)
-e.Size=UDim2.new(0,360,0,205)
+e.BackgroundTransparency=1
+e.Position=UDim2.new(0.5,-180,0,-500)
+e.Size=UDim2.new(0,360,0,20)
 e.ZIndex=10
 
-f.Name="Directions"
+f.Name="background"
 f.Parent=e
-f.BackgroundTransparency=1
+f.Active=true
+f.BackgroundColor3=Color3.fromRGB(36,36,37)
 f.BorderSizePixel=0
-f.Position=UDim2.new(0,10,0,10)
-f.Size=UDim2.new(0,340,0,185)
-f.Font=Enum.Font.SourceSans
-f.TextSize=14
-f.Text=c
-f.TextColor3=Color3.new(1,1,1)
-f.TextWrapped=true
-f.TextXAlignment=Enum.TextXAlignment.Left
-f.TextYAlignment=Enum.TextYAlignment.Top
+f.Position=UDim2.new(0,0,0,20)
+f.Size=UDim2.new(0,360,0,205)
 f.ZIndex=10
 
-g.Name="shadow"
-g.Parent=d
-g.BackgroundColor3=Color3.fromRGB(46,46,47)
+g.Name="Directions"
+g.Parent=f
+g.BackgroundTransparency=1
 g.BorderSizePixel=0
-g.Size=UDim2.new(0,360,0,20)
+g.Position=UDim2.new(0,10,0,10)
+g.Size=UDim2.new(0,340,0,185)
+g.Font=Enum.Font.SourceSans
+g.TextSize=14
+g.Text=d
+g.TextColor3=Color3.new(1,1,1)
+g.TextWrapped=true
+g.TextXAlignment=Enum.TextXAlignment.Left
+g.TextYAlignment=Enum.TextYAlignment.Top
 g.ZIndex=10
 
-h.Name="PopupText"
-h.Parent=g
-h.BackgroundTransparency=1
-h.Size=UDim2.new(1,0,0.95,0)
+h.Name="shadow"
+h.Parent=e
+h.BackgroundColor3=Color3.fromRGB(46,46,47)
+h.BorderSizePixel=0
+h.Size=UDim2.new(0,360,0,20)
 h.ZIndex=10
-h.Font=Enum.Font.SourceSans
-h.TextSize=14
-h.Text="File Error"
-h.TextColor3=Color3.new(1,1,1)
-h.TextWrapped=true
 
-i.Name="Exit"
-i.Parent=g
+i.Name="PopupText"
+i.Parent=h
 i.BackgroundTransparency=1
-i.Position=UDim2.new(1,-20,0,0)
-i.Size=UDim2.new(0,20,0,20)
-i.Text=""
+i.Size=UDim2.new(1,0,0.95,0)
 i.ZIndex=10
+i.Font=Enum.Font.SourceSans
+i.TextSize=14
+i.Text=c
+i.TextColor3=Color3.new(1,1,1)
+i.TextWrapped=true
 
-j.Parent=i
-j.BackgroundColor3=Color3.new(1,1,1)
+j.Name="Exit"
+j.Parent=h
 j.BackgroundTransparency=1
-j.Position=UDim2.new(0,5,0,5)
-j.Size=UDim2.new(0,10,0,10)
-j.Image=getcustomasset"infiniteyield/assets/close.png"
+j.Position=UDim2.new(1,-20,0,0)
+j.Size=UDim2.new(0,20,0,20)
+j.Text=""
 j.ZIndex=10
 
-i.MouseButton1Click:Connect(function()
-d:Destroy()
+k.Parent=j
+k.BackgroundColor3=Color3.new(1,1,1)
+k.BackgroundTransparency=1
+k.Position=UDim2.new(0,5,0,5)
+k.Size=UDim2.new(0,10,0,10)
+k.Image=getcustomasset"infiniteyield/assets/close.png"
+k.ZIndex=10
+
+e:TweenPosition(UDim2.new(0.5,-180,0,150),"InOut","Quart",0.5,true,nil)
+
+j.MouseButton1Click:Connect(function()
+e:TweenPosition(UDim2.new(0.5,-180,0,-500),"InOut","Quart",0.5,true,nil)
+task.wait(0.6)
+e:Destroy()
 end)
 end
 
@@ -3078,7 +3091,7 @@ saves()
 else
 nosaves=true
 useFactorySettings()
-createPopup"There was a problem writing a save file to your PC.\n\nPlease contact the developer/support team for your exploit and tell them writefile/readfile is not working.\n\nYour settings, keybinds, waypoints, and aliases will not save if you continue.\n\nThings to try:\n> Make sure a 'workspace' folder is located in the same folder as your exploit\n> If your exploit is inside of a zip/rar file, extract it.\n> Rejoin the game and try again or restart your PC and try again."
+createPopup("File Error","There was a problem writing a save file to your PC.\n\nPlease contact the developer/support team for your exploit and tell them writefile/readfile is not working.\n\nYour settings, keybinds, waypoints, and aliases will not save if you continue.\n\nThings to try:\n> Make sure a 'workspace' folder is located in the same folder as your exploit\n> If your exploit is inside of a zip/rar file, extract it.\n> Rejoin the game and try again or restart your PC and try again.")
 end
 end
 else
@@ -3090,14 +3103,14 @@ saves()
 else
 nosaves=true
 useFactorySettings()
-createPopup"There was a problem writing a save file to your PC.\n\nPlease contact the developer/support team for your exploit and tell them writefile/readfile is not working.\n\nYour settings, keybinds, waypoints, and aliases will not save if you continue.\n\nThings to try:\n> Make sure a 'workspace' folder is located in the same folder as your exploit\n> If your exploit is inside of a zip/rar file, extract it.\n> Rejoin the game and try again or restart your PC and try again."
+createPopup("File Error","There was a problem writing a save file to your PC.\n\nPlease contact the developer/support team for your exploit and tell them writefile/readfile is not working.\n\nYour settings, keybinds, waypoints, and aliases will not save if you continue.\n\nThings to try:\n> Make sure a 'workspace' folder is located in the same folder as your exploit\n> If your exploit is inside of a zip/rar file, extract it.\n> Rejoin the game and try again or restart your PC and try again.")
 end
 end
 else
 if d>=10 then
 nosaves=true
 useFactorySettings()
-createPopup"Sorry, we have attempted to parse your save file, but it is unreadable!\n\nZero Yield is now using factory settings until your exploit's file system works.\n\nYour save file has not been deleted."
+createPopup("File Error","Sorry, we have attempted to parse your save file, but it is unreadable!\n\nZero Yield is now using factory settings until your exploit's file system works.\n\nYour save file has not been deleted.")
 else
 nosaves=true
 useFactorySettings()
@@ -4442,13 +4455,14 @@ Cmdbar.CursorPosition=#Cmdbar.Text+1
 end
 
 CMDs={}
-CMDs[#CMDs+1]={NAME='discord / support / help',DESC='Invite to the Zero Yield support server.'}
+CMDs[#CMDs+1]={NAME='discord / support / help',DESC='Invite to the Zero Yield discord server.'}
 CMDs[#CMDs+1]={NAME='guiscale [number]',DESC='Changes the size of the gui. [number] accepts both decimals and whole numbers. Min is 0.4 and Max is 2'}
 CMDs[#CMDs+1]={NAME='console',DESC='Loads Roblox console'}
 CMDs[#CMDs+1]={NAME='oldconsole',DESC='Loads old Roblox console'}
 CMDs[#CMDs+1]={NAME='explorer / dex',DESC='Opens DEX by Moon'}
 CMDs[#CMDs+1]={NAME='olddex / odex',DESC='Opens Old DEX by Moon'}
 CMDs[#CMDs+1]={NAME='remotespy / rspy',DESC='Opens Simple Spy V3'}
+CMDs[#CMDs+1]={NAME='executor',DESC='Opens an internal executor gui by dnezero'}
 CMDs[#CMDs+1]={NAME='audiologger / alogger',DESC='Opens Edges audio logger'}
 CMDs[#CMDs+1]={NAME='serverinfo / info',DESC='Gives you info about the server'}
 CMDs[#CMDs+1]={NAME='jobid',DESC='Copies the games JobId to your clipboard'}
@@ -4481,6 +4495,8 @@ CMDs[#CMDs+1]={NAME='togglekeepiy',DESC='Toggles keepiy'}
 CMDs[#CMDs+1]={NAME='removeads / adblock',DESC='Automatically removes ad billboards'}
 CMDs[#CMDs+1]={NAME='savegame / saveplace',DESC='Uses saveinstance to save the game'}
 CMDs[#CMDs+1]={NAME='clearerror',DESC='Clears the annoying box and blur when a game kicks you'}
+CMDs[#CMDs+1]={NAME='antigameplaypaused',DESC='Clears the annoying box shown when a game is loading assets due to network lag'}
+CMDs[#CMDs+1]={NAME='unantigameplaypaused',DESC='Disables antigameplaypaused'}
 CMDs[#CMDs+1]={NAME='clientantikick / antikick (CLIENT)',DESC='Prevents localscripts from kicking you'}
 CMDs[#CMDs+1]={NAME='clientantiteleport / antiteleport (CLIENT)',DESC='Prevents localscripts from teleporting you'}
 CMDs[#CMDs+1]={NAME='allowrejoin / allowrj [true/false] (CLIENT)',DESC='Changes if antiteleport allows you to rejoin or not'}
@@ -4557,6 +4573,7 @@ CMDs[#CMDs+1]={NAME='tpposition / tppos [X Y Z]',DESC='Teleports you to certain 
 CMDs[#CMDs+1]={NAME='tweentpposition / ttppos [X Y Z]',DESC='Tween to coordinates (bypasses some anti cheats)'}
 CMDs[#CMDs+1]={NAME='offset [X Y Z]',DESC='Offsets you by certain coordinates'}
 CMDs[#CMDs+1]={NAME='tweenoffset / toffset [X Y Z]',DESC='Tween offset (bypasses some anti cheats)'}
+CMDs[#CMDs+1]={NAME='thru [num]',DESC='Teleports you [num] studs ahead of where your character is facing'}
 CMDs[#CMDs+1]={NAME='notifyposition / notifypos [player]',DESC='Notifies you the coordinates of a character'}
 CMDs[#CMDs+1]={NAME='copyposition / copypos [player]',DESC='Copies the coordinates of a character to your clipboard'}
 CMDs[#CMDs+1]={NAME='walktoposition / walktopos [X Y Z]',DESC='Makes you walk to a coordinate'}
@@ -4571,7 +4588,6 @@ CMDs[#CMDs+1]={NAME='logs',DESC='Opens the logs GUI'}
 CMDs[#CMDs+1]={NAME='chatlogs / clogs',DESC='Log what people say or whisper'}
 CMDs[#CMDs+1]={NAME='joinlogs / jlogs',DESC='Log when people join'}
 CMDs[#CMDs+1]={NAME='chatlogswebhook / logswebhook [url]',DESC='Set a discord webhook for chatlogs to go to (provide no url to disable this)'}
-CMDs[#CMDs+1]={NAME='antichatlogs / antichatlogger',DESC='Prevents Roblox from banning you for your silly chat messages (game needs the legacy chat)'}
 CMDs[#CMDs+1]={NAME='chat / say [text]',DESC='Makes you chat a string (possible mute bypass)'}
 CMDs[#CMDs+1]={NAME='spam [text]',DESC='Makes you spam the chat'}
 CMDs[#CMDs+1]={NAME='unspam',DESC='Turns off spam'}
@@ -4583,12 +4599,11 @@ CMDs[#CMDs+1]={NAME='bubblechat (CLIENT)',DESC='Enables bubble chat for your cli
 CMDs[#CMDs+1]={NAME='unbubblechat / nobubblechat',DESC='Disables the bubblechat command'}
 CMDs[#CMDs+1]={NAME='chatwindow',DESC='Enables the chat window for your client'}
 CMDs[#CMDs+1]={NAME='unchatwindow / nochatwindow',DESC='Disables the chat window for your client'}
+CMDs[#CMDs+1]={NAME='darkchat',DESC='Makes the chat window dark for your client'}
 CMDs[#CMDs+1]={NAME='listento [player]',DESC='Listens to the area around a player. Can also eavesdrop with vc'}
 CMDs[#CMDs+1]={NAME='unlistento',DESC='Disables listento'}
-CMDs[#CMDs+1]={NAME='unsuspendchat',DESC='Unsuspends you from text chat'}
-CMDs[#CMDs+1]={NAME='unsuspendvc',DESC='Unsuspends you from voice chat'}
-CMDs[#CMDs+1]={NAME='muteallvcs',DESC='Mutes voice chat for all players'}
-CMDs[#CMDs+1]={NAME='unmuteallvcs',DESC='Unmutes voice chat for all players'}
+CMDs[#CMDs+1]={NAME='muteallvoices / muteallvcs',DESC='Mutes voice chat for all players'}
+CMDs[#CMDs+1]={NAME='unmuteallvoices / unmuteallvcs',DESC='Unmutes voice chat for all players'}
 CMDs[#CMDs+1]={NAME='mutevc [player]',DESC='Mutes the voice chat of a player'}
 CMDs[#CMDs+1]={NAME='unmutevc [player]',DESC='Unmutes the voice chat of a player'}
 CMDs[#CMDs+1]={NAME='phonebook / call',DESC='Prompts the Roblox phonebook UI to let you call your friends. Needs voice chat enabled'}
@@ -4717,6 +4732,7 @@ CMDs[#CMDs+1]={NAME='rolewatchstop / unrolewatch',DESC='Disable Rolewatch'}
 CMDs[#CMDs+1]={NAME='rolewatchleave',DESC='Toggle if you should leave the game if someone from a watched group joins the server'}
 CMDs[#CMDs+1]={NAME='staffwatch',DESC='Notify if a staff member of the game joins the server'}
 CMDs[#CMDs+1]={NAME='unstaffwatch',DESC='Disable Staffwatch'}
+CMDs[#CMDs+1]={NAME='findfriendgroups',DESC='Notifies you if any players are friends with each other'}
 CMDs[#CMDs+1]={NAME='handlekill / hkill [player] [radius] (TOOL)',DESC='Kills a player using tool damage (YOU NEED A TOOL)'}
 CMDs[#CMDs+1]={NAME='fling',DESC='Flings anyone you touch'}
 CMDs[#CMDs+1]={NAME='unfling',DESC='Disables the fling command'}
@@ -5046,109 +5062,121 @@ end)
 
 onDied()
 
-function getstring(r,s)
-return table.concat(s or cargs," ",r)
+local r={
+truthy={["true"]=true,t=true,["1"]=true,yes=true,y=true,on=true,enable=true,enabled=true},
+falsy={["false"]=true,f=true,["0"]=true,no=true,n=true,off=true,disable=true,disabled=true}
+}
+
+function parseBoolean(s,t)
+s=tostring(s)
+if r.truthy[s]then return true end
+if r.falsy[s]then return false end
+return t or false
 end
 
-findCmd=function(r)
-for s,t in pairs(cmds)do
-if t.NAME:lower()==r:lower()or FindInTable(t.ALIAS,r:lower())then
-return t
-end
-end
-return customAlias[r:lower()]
+function getstring(s,t)
+return table.concat(t or cargs," ",s)
 end
 
-function splitString(r,s)
-local t={}
-if s==nil then s=","end
-for u in string.gmatch(r,"[^"..s.."]+")do
-table.insert(t,u)
+findCmd=function(s)
+for t,u in pairs(cmds)do
+if u.NAME:lower()==s:lower()or FindInTable(u.ALIAS,s:lower())then
+return u
 end
-return t
+end
+return customAlias[s:lower()]
+end
+
+function splitString(s,t)
+local u={}
+if t==nil then t=","end
+for v in string.gmatch(s,"[^"..t.."]+")do
+table.insert(u,v)
+end
+return u
 end
 
 cmdHistory={}
-local r={}
-local s=0
-local t=" "
-local u=0
-function execCmd(v,w,x)
-v=v:gsub("%s+$","")
+local s={}
+local t=0
+local u=" "
+local v=0
+function execCmd(w,x,y)
+w=w:gsub("%s+$","")
 task.spawn(function()
-local y=v
-v=string.gsub(v,"\\\\","%%BackSlash%%")
-local z=splitString(v,"\\")
-for A,B in pairs(z)do
-B=string.gsub(B,"%%BackSlash%%","\\")local
-C, D, E=B:find"^(%d+)%^"
-local F=0
-local G=false
-if E then
-B=B:sub(D+1)local
-H, I, J=B:find"^([%d%.]+)%^"
-if J then
-B=B:sub(I+1)
-F=tonumber(J)or 0
+local z=w
+w=string.gsub(w,"\\\\","%%BackSlash%%")
+local A=splitString(w,"\\")
+for B,C in pairs(A)do
+C=string.gsub(C,"%%BackSlash%%","\\")local
+D, E, F=C:find"^(%d+)%^"
+local G=0
+local H=false
+if F then
+C=C:sub(E+1)local
+I, J, K=C:find"^([%d%.]+)%^"
+if K then
+C=C:sub(J+1)
+G=tonumber(K)or 0
 end
 else
-local H,I=B:find"^inf%^"
-if H then
-G=true
-B=B:sub(I+1)local
-J, K, L=B:find"^([%d%.]+)%^"
-if L then
-B=B:sub(K+1)
-L=tonumber(L)or 1
-F=(L>0 and L or 1)
+local I,J=C:find"^inf%^"
+if I then
+H=true
+C=C:sub(J+1)local
+K, L, M=C:find"^([%d%.]+)%^"
+if M then
+C=C:sub(L+1)
+M=tonumber(M)or 1
+G=(M>0 and M or 1)
 else
-F=1
+G=1
 end
 end
 end
-E=tonumber(E or 1)
+F=tonumber(F or 1)
 
-if B:sub(1,1)=="!"then
-local H=splitString(B:sub(2),t)
-if H[1]and r[H[1] ]then B=r[H[1] ]end
+if C:sub(1,1)=="!"then
+local I=splitString(C:sub(2),u)
+if I[1]and s[I[1] ]then C=s[I[1] ]end
 end
 
-local H=splitString(B,t)
-local I=H[1]
-local J=findCmd(I)
-if J then
-table.remove(H,1)
-cargs=H
-if not w then w=Players.LocalPlayer end
-if x then
-if w==Players.LocalPlayer then
-if cmdHistory[1]~=y and y:sub(1,11)~='lastcommand'and y:sub(1,7)~='lastcmd'then
-table.insert(cmdHistory,1,y)
+local I=splitString(C,u)
+local J=I[1]
+local K=findCmd(J)
+if K then
+table.remove(I,1)
+cargs=I
+if not x then x=Players.LocalPlayer end
+if y then
+if x==Players.LocalPlayer then
+if cmdHistory[1]~=z and z:sub(1,11)~='lastcommand'and z:sub(1,7)~='lastcmd'then
+table.insert(cmdHistory,1,z)
 end
 end
 if#cmdHistory>30 then table.remove(cmdHistory)end
 
-r[I]=B
+s[J]=C
 end
-local K=tick()
-if G then
-while u<K do
-local L,M=pcall(J.FUNC,H,w)
-if not L and _G.IY_DEBUG then
-warn("Command Error:",I,M)
+local L=tick()
+if H then
+while v<L do
+local M,N=pcall(K.FUNC,I,x)
+if not M and _G.IY_DEBUG then
+warn("Command Error:",J,N)
 end
-wait(F)
+wait(G)
 end
 else
-for L=1,E do
-if u>K then break end
-local M,N=pcall(function()
-J.FUNC(H,w)
+for M=1,F do
+if v>L then break end
+local N,O=pcall(function()
+K.FUNC(I,x)
 end)
-if not M and _G.IY_DEBUG then
-warn("Command Error:",I,N)
+if not N and _G.IY_DEBUG then
+warn("Command Error:",J,O)
 end
-if F~=0 then wait(F)end
+if G~=0 then wait(G)end
 end
 end
 end
@@ -5156,26 +5184,26 @@ end
 end)
 end
 
-function addcmd(v,w,x,y)
+function addcmd(w,x,y,z)
 cmds[#cmds+1]=
 {
-NAME=v;
-ALIAS=w or{};
-FUNC=x;
-PLUGIN=y;
+NAME=w;
+ALIAS=x or{};
+FUNC=y;
+PLUGIN=z;
 }
 end
 
-function removecmd(v)
-if v~=" "then
-for w=#cmds,1,-1 do
-if cmds[w].NAME==v or FindInTable(cmds[w].ALIAS,v)then
-table.remove(cmds,w)
-for x,y in pairs(CMDsF:GetChildren())do
-if string.find(y.Text,"^"..v.."$")or string.find(y.Text,"^"..v.." ")or string.find(y.Text," "..v.."$")or string.find(y.Text," "..v.." ")then
-y.TextTransparency=0.7
-y.MouseButton1Click:Connect(function()
-notify(y.Text,"Command has been disabled by you or a plugin")
+function removecmd(w)
+if w~=" "then
+for x=#cmds,1,-1 do
+if cmds[x].NAME==w or FindInTable(cmds[x].ALIAS,w)then
+table.remove(cmds,x)
+for y,z in pairs(CMDsF:GetChildren())do
+if string.find(z.Text,"^"..w.."$")or string.find(z.Text,"^"..w.." ")or string.find(z.Text," "..w.."$")or string.find(z.Text," "..w.." ")then
+z.TextTransparency=0.7
+z.MouseButton1Click:Connect(function()
+notify(z.Text,"Command has been disabled by you or a plugin")
 end)
 end
 end
@@ -5184,409 +5212,409 @@ end
 end
 end
 
-function overridecmd(v,w)
-local x=findCmd(v)
-if x and x.FUNC then x.FUNC=w end
+function overridecmd(w,x)
+local y=findCmd(w)
+if y and y.FUNC then y.FUNC=x end
 end
 
-function addbind(v,w,x,y)
-if y then
+function addbind(w,x,y,z)
+if z then
 binds[#binds+1]=
 {
-COMMAND=v;
-KEY=w;
-ISKEYUP=x;
-TOGGLE=y;
+COMMAND=w;
+KEY=x;
+ISKEYUP=y;
+TOGGLE=z;
 }
 else
 binds[#binds+1]=
 {
-COMMAND=v;
-KEY=w;
-ISKEYUP=x;
+COMMAND=w;
+KEY=x;
+ISKEYUP=y;
 }
 end
 end
 
-function addcmdtext(v,w,x)
-local y=Example:Clone()
-local z=tostring(v)
-local A=tostring(x)
-y.Parent=CMDsF
-y.Visible=false
-y.Text=v
-y.Name='PLUGIN_'..w
-table.insert(text1,y)
-if x and x~=''then
-y:SetAttribute("Title",z)
-y:SetAttribute("Desc",A)
-y.MouseButton1Down:Connect(function()
-if y.Visible and y.TextTransparency==0 then
+function addcmdtext(w,x,y)
+local z=Example:Clone()
+local A=tostring(w)
+local B=tostring(y)
+z.Parent=CMDsF
+z.Visible=false
+z.Text=w
+z.Name='PLUGIN_'..x
+table.insert(text1,z)
+if y and y~=''then
+z:SetAttribute("Title",A)
+z:SetAttribute("Desc",B)
+z.MouseButton1Down:Connect(function()
+if z.Visible and z.TextTransparency==0 then
 Cmdbar:CaptureFocus()
-autoComplete(y.Text)
+autoComplete(z.Text)
 maximizeHolder()
 end
 end)
 end
 end
 
-local v=function(v)
-local w=workspace.CurrentCamera:WorldToScreenPoint(v.Position)
-return Vector2.new(w.X,w.Y)
-end
-
-local w=function()
-return Vector2.new(IYMouse.X,IYMouse.Y)
+local w=function(w)
+local x=workspace.CurrentCamera:WorldToScreenPoint(w.Position)
+return Vector2.new(x.X,x.Y)
 end
 
 local x=function()
-local x
-local y=math.huge
-for z,A in pairs(Players:GetPlayers())do
-if A~=Players.LocalPlayer and A.Character and A.Character:FindFirstChildOfClass"Humanoid"then
-for B,C in pairs(A.Character:GetChildren())do
-if string.find(C.Name,"Torso")then
-local D=(v(C)-w()).Magnitude
-if D<y then
-y=D
-x=A
+return Vector2.new(IYMouse.X,IYMouse.Y)
+end
+
+local y=function()
+local y
+local z=math.huge
+for A,B in pairs(Players:GetPlayers())do
+if B~=Players.LocalPlayer and B.Character and B.Character:FindFirstChildOfClass"Humanoid"then
+for C,D in pairs(B.Character:GetChildren())do
+if string.find(D.Name,"Torso")then
+local E=(w(D)-x()).Magnitude
+if E<z then
+z=E
+y=B
 end
 end
 end
 end
 end
-return x
+return y
 end
 
 SpecialPlayerCases={all=
-function(y)return Players:GetPlayers()end,others=
-function(y)
-local z={}
-for A,B in pairs(Players:GetPlayers())do
-if B~=y then
-table.insert(z,B)
+function(z)return Players:GetPlayers()end,others=
+function(z)
+local A={}
+for B,C in pairs(Players:GetPlayers())do
+if C~=z then
+table.insert(A,C)
 end
 end
-return z
+return A
 end,me=
-function(y)return{y}end,
-["#(%d+)"]=function(y,z,A)
+function(z)return{z}end,
+["#(%d+)"]=function(z,A,B)
+local C={}
+local D=tonumber(A[1])
+local E={unpack(B)}
+for F=1,D do
+if#E==0 then break end
+local G=math.random(1,#E)
+table.insert(C,E[G])
+table.remove(E,G)
+end
+return C
+end,random=
+function(z,A,B)
+local C=Players:GetPlayers()
+local D=Players.LocalPlayer
+table.remove(C,table.find(C,D))
+return{C[math.random(1,#C)]}
+end,
+["%%(.+)"]=function(z,A)
 local B={}
-local C=tonumber(z[1])
-local D={unpack(A)}
-for E=1,C do
-if#D==0 then break end
-local F=math.random(1,#D)
-table.insert(B,D[F])
-table.remove(D,F)
+local C=A[1]
+for D,E in pairs(Players:GetPlayers())do
+if E.Team and string.sub(string.lower(E.Team.Name),1,#C)==string.lower(C)then
+table.insert(B,E)
+end
 end
 return B
-end,random=
-function(y,z,A)
-local B=Players:GetPlayers()
-local C=Players.LocalPlayer
-table.remove(B,table.find(B,C))
-return{B[math.random(1,#B)]}
-end,
-["%%(.+)"]=function(y,z)
-local A={}
-local B=z[1]
-for C,D in pairs(Players:GetPlayers())do
-if D.Team and string.sub(string.lower(D.Team.Name),1,#B)==string.lower(B)then
-table.insert(A,D)
-end
-end
-return A
 end,allies=
-function(y)
-local z={}
-local A=y.Team
-for B,C in pairs(Players:GetPlayers())do
-if C.Team==A then
-table.insert(z,C)
+function(z)
+local A={}
+local B=z.Team
+for C,D in pairs(Players:GetPlayers())do
+if D.Team==B then
+table.insert(A,D)
 end
 end
-return z
+return A
 end,enemies=
-function(y)
-local z={}
-local A=y.Team
-for B,C in pairs(Players:GetPlayers())do
-if C.Team~=A then
-table.insert(z,C)
+function(z)
+local A={}
+local B=z.Team
+for C,D in pairs(Players:GetPlayers())do
+if D.Team~=B then
+table.insert(A,D)
 end
 end
-return z
+return A
 end,team=
-function(y)
-local z={}
-local A=y.Team
-for B,C in pairs(Players:GetPlayers())do
-if C.Team==A then
-table.insert(z,C)
+function(z)
+local A={}
+local B=z.Team
+for C,D in pairs(Players:GetPlayers())do
+if D.Team==B then
+table.insert(A,D)
 end
 end
-return z
+return A
 end,nonteam=
-function(y)
-local z={}
-local A=y.Team
-for B,C in pairs(Players:GetPlayers())do
-if C.Team~=A then
-table.insert(z,C)
+function(z)
+local A={}
+local B=z.Team
+for C,D in pairs(Players:GetPlayers())do
+if D.Team~=B then
+table.insert(A,D)
 end
 end
-return z
+return A
 end,friends=
-function(y,z)
-local A={}
-for B,C in pairs(Players:GetPlayers())do
-if C:IsFriendsWith(y.UserId)and C~=y then
-table.insert(A,C)
+function(z,A)
+local B={}
+for C,D in pairs(Players:GetPlayers())do
+if D:IsFriendsWith(z.UserId)and D~=z then
+table.insert(B,D)
 end
 end
-return A
+return B
 end,nonfriends=
-function(y,z)
-local A={}
-for B,C in pairs(Players:GetPlayers())do
-if not C:IsFriendsWith(y.UserId)and C~=y then
-table.insert(A,C)
+function(z,A)
+local B={}
+for C,D in pairs(Players:GetPlayers())do
+if not D:IsFriendsWith(z.UserId)and D~=z then
+table.insert(B,D)
 end
 end
-return A
+return B
 end,guests=
-function(y,z)
-local A={}
-for B,C in pairs(Players:GetPlayers())do
-if C.Guest then
-table.insert(A,C)
+function(z,A)
+local B={}
+for C,D in pairs(Players:GetPlayers())do
+if D.Guest then
+table.insert(B,D)
 end
 end
-return A
+return B
 end,bacons=
-function(y,z)
-local A={}
-for B,C in pairs(Players:GetPlayers())do
-if C.Character:FindFirstChild'Pal Hair'or C.Character:FindFirstChild'Kate Hair'then
-table.insert(A,C)
-end
-end
-return A
-end,
-["age(%d+)"]=function(y,z)
-local A={}
-local B=tonumber(z[1])
-if not B==nil then return end
+function(z,A)
+local B={}
 for C,D in pairs(Players:GetPlayers())do
-if D.AccountAge<=B then
-table.insert(A,D)
+if D.Character:FindFirstChild'Pal Hair'or D.Character:FindFirstChild'Kate Hair'then
+table.insert(B,D)
 end
 end
-return A
-end,nearest=
-function(y,z,A)
-local B=y.Character
-if not B or not getRoot(B)then return end
-local C=math.huge
-local D
-for E,F in pairs(A)do
-if F~=y and F.Character then
-local G=F:DistanceFromCharacter(getRoot(B).Position)
-if G<C then
-C=G
-D={F}
-end
-end
-end
-return D
-end,farthest=
-function(y,z,A)
-local B=y.Character
-if not B or not getRoot(B)then return end
-local C=0
-local D
-for E,F in pairs(A)do
-if F~=y and F.Character then
-local G=F:DistanceFromCharacter(getRoot(B).Position)
-if G>C then
-C=G
-D={F}
-end
-end
-end
-return D
+return B
 end,
-["group(%d+)"]=function(y,z)
-local A={}
-local B=tonumber(z[1])
-for C,D in pairs(Players:GetPlayers())do
-if D:IsInGroup(B)then
-table.insert(A,D)
-end
-end
-return A
-end,alive=
-function(y,z)
-local A={}
-for B,C in pairs(Players:GetPlayers())do
-if C.Character and C.Character:FindFirstChildOfClass"Humanoid"and C.Character:FindFirstChildOfClass"Humanoid".Health>0 then
-table.insert(A,C)
-end
-end
-return A
-end,dead=
-function(y,z)
-local A={}
-for B,C in pairs(Players:GetPlayers())do
-if(not C.Character or not C.Character:FindFirstChildOfClass"Humanoid")or C.Character:FindFirstChildOfClass"Humanoid".Health<=0 then
-table.insert(A,C)
-end
-end
-return A
-end,
-["rad(%d+)"]=function(y,z)
-local A={}
-local B=tonumber(z[1])
-local C=y.Character
-if not C or not getRoot(C)then return end
+["age(%d+)"]=function(z,A)
+local B={}
+local C=tonumber(A[1])
+if not C==nil then return end
 for D,E in pairs(Players:GetPlayers())do
-if E.Character and getRoot(E.Character)then
-local F=(getRoot(E.Character).Position-getRoot(C).Position).magnitude
-if F<=B then table.insert(A,E)end
+if E.AccountAge<=C then
+table.insert(B,E)
 end
 end
-return A
+return B
+end,nearest=
+function(z,A,B)
+local C=z.Character
+if not C or not getRoot(C)then return end
+local D=math.huge
+local E
+for F,G in pairs(B)do
+if G~=z and G.Character then
+local H=G:DistanceFromCharacter(getRoot(C).Position)
+if H<D then
+D=H
+E={G}
+end
+end
+end
+return E
+end,farthest=
+function(z,A,B)
+local C=z.Character
+if not C or not getRoot(C)then return end
+local D=0
+local E
+for F,G in pairs(B)do
+if G~=z and G.Character then
+local H=G:DistanceFromCharacter(getRoot(C).Position)
+if H>D then
+D=H
+E={G}
+end
+end
+end
+return E
+end,
+["group(%d+)"]=function(z,A)
+local B={}
+local C=tonumber(A[1])
+for D,E in pairs(Players:GetPlayers())do
+if E:IsInGroup(C)then
+table.insert(B,E)
+end
+end
+return B
+end,alive=
+function(z,A)
+local B={}
+for C,D in pairs(Players:GetPlayers())do
+if D.Character and D.Character:FindFirstChildOfClass"Humanoid"and D.Character:FindFirstChildOfClass"Humanoid".Health>0 then
+table.insert(B,D)
+end
+end
+return B
+end,dead=
+function(z,A)
+local B={}
+for C,D in pairs(Players:GetPlayers())do
+if(not D.Character or not D.Character:FindFirstChildOfClass"Humanoid")or D.Character:FindFirstChildOfClass"Humanoid".Health<=0 then
+table.insert(B,D)
+end
+end
+return B
+end,
+["rad(%d+)"]=function(z,A)
+local B={}
+local C=tonumber(A[1])
+local D=z.Character
+if not D or not getRoot(D)then return end
+for E,F in pairs(Players:GetPlayers())do
+if F.Character and getRoot(F.Character)then
+local G=(getRoot(F.Character).Position-getRoot(D).Position).magnitude
+if G<=C then table.insert(B,F)end
+end
+end
+return B
 end,cursor=
-function(y)
-local z={}
-local A=x()
-if A~=nil then table.insert(z,A)end
-return z
-end,npcs=
-function(y,z)
+function(z)
 local A={}
-for B,C in pairs(workspace:GetDescendants())do
-if C:IsA"Model"and getRoot(C)and C:FindFirstChildWhichIsA"Humanoid"and Players:GetPlayerFromCharacter(C)==nil then
-local D=Instance.new"Player"
-D.Name=C.Name.." - "..C:FindFirstChildWhichIsA"Humanoid".DisplayName
-D.Character=C
-table.insert(A,D)
-end
-end
+local B=y()
+if B~=nil then table.insert(A,B)end
 return A
+end,npcs=
+function(z,A)
+local B={}
+for C,D in pairs(workspace:GetDescendants())do
+if D:IsA"Model"and getRoot(D)and D:FindFirstChildWhichIsA"Humanoid"and Players:GetPlayerFromCharacter(D)==nil then
+local E=Instance.new"Player"
+E.Name=D.Name.." - "..D:FindFirstChildWhichIsA"Humanoid".DisplayName
+E.Character=D
+table.insert(B,E)
+end
+end
+return B
 end,
 }
 
-function toTokens(y)
-local z={}
-for A,B in string.gmatch(y,"([+-])([^+-]+)")do
-table.insert(z,{Operator=A,Name=B})
-end
-return z
-end
-
-function onlyIncludeInTable(y,z)
+function toTokens(z)
 local A={}
+for B,C in string.gmatch(z,"([+-])([^+-]+)")do
+table.insert(A,{Operator=B,Name=C})
+end
+return A
+end
+
+function onlyIncludeInTable(z,A)
 local B={}
-for C,D in pairs(z)do A[D.Name]=true end
-for C,D in pairs(y)do if A[D.Name]then table.insert(B,D)end end
-return B
-end
-
-function removeTableMatches(y,z)
-local A={}
-local B={}
-for C,D in pairs(z)do A[D.Name]=true end
-for C,D in pairs(y)do if not A[D.Name]then table.insert(B,D)end end
-return B
-end
-
-function getPlayersByName(y)
-local z,A,B=string.lower(y),#y,{}
-for C,D in pairs(Players:GetPlayers())do
-if z:sub(0,1)=='@'then
-if string.sub(string.lower(D.Name),1,A-1)==z:sub(2)then
-table.insert(B,D)
-end
-else
-if string.sub(string.lower(D.Name),1,A)==z or string.sub(string.lower(D.DisplayName),1,A)==z then
-table.insert(B,D)
-end
-end
-end
-return B
-end
-
-function getPlayer(y,z)
-if y==nil then return{z.Name}end
-local A=splitString(y,",")
-
-local B={}
-
-for C,D in pairs(A)do
-if string.sub(D,1,1)~="+"and string.sub(D,1,1)~="-"then D="+"..D end
-local E=toTokens(D)
-local F=Players:GetPlayers()
-
-for G,H in pairs(E)do
-if H.Operator=="+"then
-local I=H.Name
-local J=false
-for K,L in pairs(SpecialPlayerCases)do
-local M={string.match(I,"^"..K.."$")}
-if#M>0 then
-J=true
-F=onlyIncludeInTable(F,L(z,M,F))
-end
-end
-if not J then
-F=onlyIncludeInTable(F,getPlayersByName(I))
-end
-else
-local I=H.Name
-local J=false
-for K,L in pairs(SpecialPlayerCases)do
-local M={string.match(I,"^"..K.."$")}
-if#M>0 then
-J=true
-F=removeTableMatches(F,L(z,M,F))
-end
-end
-if not J then
-F=removeTableMatches(F,getPlayersByName(I))
-end
-end
-end
-
-for G,H in pairs(F)do table.insert(B,H)end
-end
-
 local C={}
-for D,E in pairs(B)do table.insert(C,E.Name)end
-
+for D,E in pairs(A)do B[E.Name]=true end
+for D,E in pairs(z)do if B[E.Name]then table.insert(C,E)end end
 return C
 end
 
-function formatUsername(y)
-if y.DisplayName~=y.Name then
-return string.format("%s (%s)",y.Name,y.DisplayName)
-end
-return y.Name
+function removeTableMatches(z,A)
+local B={}
+local C={}
+for D,E in pairs(A)do B[E.Name]=true end
+for D,E in pairs(z)do if not B[E.Name]then table.insert(C,E)end end
+return C
 end
 
-getprfx=function(y)
-if y:sub(1,string.len(prefix))==prefix then return{'cmd',string.len(prefix)+1}
+function getPlayersByName(z)
+local A,B,C=string.lower(z),#z,{}
+for D,E in pairs(Players:GetPlayers())do
+if A:sub(0,1)=='@'then
+if string.sub(string.lower(E.Name),1,B-1)==A:sub(2)then
+table.insert(C,E)
+end
+else
+if string.sub(string.lower(E.Name),1,B)==A or string.sub(string.lower(E.DisplayName),1,B)==A then
+table.insert(C,E)
+end
+end
+end
+return C
+end
+
+function getPlayer(z,A)
+if z==nil then return{A.Name}end
+local B=splitString(z,",")
+
+local C={}
+
+for D,E in pairs(B)do
+if string.sub(E,1,1)~="+"and string.sub(E,1,1)~="-"then E="+"..E end
+local F=toTokens(E)
+local G=Players:GetPlayers()
+
+for H,I in pairs(F)do
+if I.Operator=="+"then
+local J=I.Name
+local K=false
+for L,M in pairs(SpecialPlayerCases)do
+local N={string.match(J,"^"..L.."$")}
+if#N>0 then
+K=true
+G=onlyIncludeInTable(G,M(A,N,G))
+end
+end
+if not K then
+G=onlyIncludeInTable(G,getPlayersByName(J))
+end
+else
+local J=I.Name
+local K=false
+for L,M in pairs(SpecialPlayerCases)do
+local N={string.match(J,"^"..L.."$")}
+if#N>0 then
+K=true
+G=removeTableMatches(G,M(A,N,G))
+end
+end
+if not K then
+G=removeTableMatches(G,getPlayersByName(J))
+end
+end
+end
+
+for H,I in pairs(G)do table.insert(C,I)end
+end
+
+local D={}
+for E,F in pairs(C)do table.insert(D,F.Name)end
+
+return D
+end
+
+function formatUsername(z)
+if z.DisplayName~=z.Name then
+return string.format("%s (%s)",z.Name,z.DisplayName)
+end
+return z.Name
+end
+
+getprfx=function(z)
+if z:sub(1,string.len(prefix))==prefix then return{'cmd',string.len(prefix)+1}
 end return
 end
 
-function do_exec(y,z)
-y=y:gsub('/e ','')
-local A=getprfx(y)
-if not A then return end
-y=y:sub(A[2])
-if A[1]=='cmd'then
-execCmd(y,z,true)
+function do_exec(z,A)
+z=z:gsub('/e ','')
+local B=getprfx(z)
+if not B then return end
+z=z:sub(B[2])
+if B[1]=='cmd'then
+execCmd(z,A,true)
 IndexContents('',true,false,true)
 CMDsF.CanvasPosition=n
 end
@@ -5594,32 +5622,32 @@ end
 
 lastTextBoxString,lastTextBoxCon,lastEnteredString=nil,nil,nil
 
-UserInputService.TextBoxFocused:Connect(function(y)
+UserInputService.TextBoxFocused:Connect(function(z)
 if lastTextBoxCon then lastTextBoxCon:Disconnect()end
-if y==Cmdbar then lastTextBoxString=nil return end
-lastTextBoxString=y.Text
-lastTextBoxCon=y:GetPropertyChangedSignal"Text":Connect(function()
+if z==Cmdbar then lastTextBoxString=nil return end
+lastTextBoxString=z.Text
+lastTextBoxCon=z:GetPropertyChangedSignal"Text":Connect(function()
 if not(UserInputService:IsKeyDown(Enum.KeyCode.Return)or UserInputService:IsKeyDown(Enum.KeyCode.KeypadEnter))then
-lastTextBoxString=y.Text
+lastTextBoxString=z.Text
 end
 end)
 end)
 
-UserInputService.InputBegan:Connect(function(y,z)
-if z then
+UserInputService.InputBegan:Connect(function(z,A)
+if A then
 if Cmdbar and Cmdbar:IsFocused()then
-if y.KeyCode==Enum.KeyCode.Up then
-s=s+1
-if s>#cmdHistory then s=#cmdHistory end
-Cmdbar.Text=cmdHistory[s]or""
+if z.KeyCode==Enum.KeyCode.Up then
+t=t+1
+if t>#cmdHistory then t=#cmdHistory end
+Cmdbar.Text=cmdHistory[t]or""
 Cmdbar.CursorPosition=1020
-elseif y.KeyCode==Enum.KeyCode.Down then
-s=s-1
-if s<0 then s=0 end
-Cmdbar.Text=cmdHistory[s]or""
+elseif z.KeyCode==Enum.KeyCode.Down then
+t=t-1
+if t<0 then t=0 end
+Cmdbar.Text=cmdHistory[t]or""
 Cmdbar.CursorPosition=1020
 end
-elseif y.KeyCode==Enum.KeyCode.Return or y.KeyCode==Enum.KeyCode.KeypadEnter then
+elseif z.KeyCode==Enum.KeyCode.Return or z.KeyCode==Enum.KeyCode.KeypadEnter then
 lastEnteredString=lastTextBoxString
 end
 end
@@ -5628,9 +5656,9 @@ end)
 Players.LocalPlayer.Chatted:Connect(function()
 wait()
 if lastEnteredString then
-local y=lastEnteredString
+local z=lastEnteredString
 lastEnteredString=nil
-do_exec(y,Players.LocalPlayer)
+do_exec(z,Players.LocalPlayer)
 end
 end)
 
@@ -5641,14 +5669,14 @@ IndexContents(Cmdbar.Text,true,true)
 end
 end)
 
-local y
+local z
 tabAllowed=true
-Cmdbar.FocusLost:Connect(function(z)
-if z then
-local A=Cmdbar.Text:gsub("^"..prefix,"")
-execCmd(A,Players.LocalPlayer,true)
+Cmdbar.FocusLost:Connect(function(A)
+if A then
+local B=Cmdbar.Text:gsub("^"..prefix,"")
+execCmd(B,Players.LocalPlayer,true)
 end
-if y then y:Disconnect()end
+if z then z:Disconnect()end
 wait()
 if not Cmdbar:IsFocused()then
 Cmdbar.Text=""
@@ -5663,20 +5691,20 @@ CMDsF.CanvasPosition=n
 end)
 
 Cmdbar.Focused:Connect(function()
-s=0
+t=0
 n=CMDsF.CanvasPosition
 if e==true then
 wait(0.2)
 CMDsF.Visible=true
 Settings:TweenPosition(UDim2.new(0,0,0,220),"InOut","Quart",0.2,true,nil)
 end
-y=UserInputService.InputBegan:Connect(function(z,A)
+z=UserInputService.InputBegan:Connect(function(A,B)
 if Cmdbar:IsFocused()then
-if tabAllowed==true and z.KeyCode==Enum.KeyCode.Tab and o~=nil then
+if tabAllowed==true and A.KeyCode==Enum.KeyCode.Tab and o~=nil then
 autoComplete(o)
 end
 else
-y:Disconnect()
+z:Disconnect()
 end
 end)
 end)
@@ -5684,46 +5712,199 @@ end)
 ESPenabled=false
 CHMSenabled=false
 
-function round(z,A)
-local B=10^(A or 0)
-return math.floor(z*B+0.5)/B
+function round(A,B)
+local C=10^(B or 0)
+return math.floor(A*C+0.5)/C
 end
 
-function ESP(z,A)
+function ESP(A,B)
+task.spawn(function()
+for C,D in pairs(COREGUI:GetChildren())do
+if D.Name==A.Name..'_ESP'then
+D:Destroy()
+end
+end
+wait()
+if A.Character and A.Name~=Players.LocalPlayer.Name and not COREGUI:FindFirstChild(A.Name..'_ESP')then
+local C=Instance.new"Folder"
+C.Name=A.Name..'_ESP'
+C.Parent=COREGUI
+repeat wait(1)until A.Character and getRoot(A.Character)and A.Character:FindFirstChildOfClass"Humanoid"
+for D,E in pairs(A.Character:GetChildren())do
+if(E:IsA"BasePart")then
+local F=Instance.new"BoxHandleAdornment"
+F.Name=A.Name
+F.Parent=C
+F.Adornee=E
+F.AlwaysOnTop=true
+F.ZIndex=10
+F.Size=E.Size
+F.Transparency=espTransparency
+if B==true then
+F.Color=BrickColor.new(A.TeamColor==Players.LocalPlayer.TeamColor and"Bright green"or"Bright red")
+else
+F.Color=A.TeamColor
+end
+end
+end
+if A.Character and A.Character:FindFirstChild'Head'then
+local D=Instance.new"BillboardGui"
+local E=Instance.new"TextLabel"
+D.Adornee=A.Character.Head
+D.Name=A.Name
+D.Parent=C
+D.Size=UDim2.new(0,100,0,150)
+D.StudsOffset=Vector3.new(0,1,0)
+D.AlwaysOnTop=true
+E.Parent=D
+E.BackgroundTransparency=1
+E.Position=UDim2.new(0,0,0,-50)
+E.Size=UDim2.new(0,100,0,100)
+E.Font=Enum.Font.SourceSansSemibold
+E.TextSize=20
+E.TextColor3=Color3.new(1,1,1)
+E.TextStrokeTransparency=0
+E.TextYAlignment=Enum.TextYAlignment.Bottom
+E.Text='Name: '..A.Name
+E.ZIndex=10
+local F
+local G
+local H
+H=A.CharacterAdded:Connect(function()
+if ESPenabled then
+F:Disconnect()
+G:Disconnect()
+C:Destroy()
+repeat wait(1)until getRoot(A.Character)and A.Character:FindFirstChildOfClass"Humanoid"
+ESP(A,B)
+H:Disconnect()
+else
+G:Disconnect()
+H:Disconnect()
+end
+end)
+G=A:GetPropertyChangedSignal"TeamColor":Connect(function()
+if ESPenabled then
+F:Disconnect()
+H:Disconnect()
+C:Destroy()
+repeat wait(1)until getRoot(A.Character)and A.Character:FindFirstChildOfClass"Humanoid"
+ESP(A,B)
+G:Disconnect()
+else
+G:Disconnect()
+end
+end)
+local function espLoop()
+if COREGUI:FindFirstChild(A.Name..'_ESP')then
+if A.Character and getRoot(A.Character)and A.Character:FindFirstChildOfClass"Humanoid"and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character)and Players.LocalPlayer.Character:FindFirstChildOfClass"Humanoid"then
+local I=math.floor((getRoot(Players.LocalPlayer.Character).Position-getRoot(A.Character).Position).magnitude)
+E.Text='Name: '..A.Name..' | Health: '..round(A.Character:FindFirstChildOfClass'Humanoid'.Health,1)..' | Studs: '..I
+end
+else
+G:Disconnect()
+H:Disconnect()
+F:Disconnect()
+end
+end
+F=RunService.RenderStepped:Connect(espLoop)
+end
+end
+end)
+end
+
+function CHMS(A)
 task.spawn(function()
 for B,C in pairs(COREGUI:GetChildren())do
-if C.Name==z.Name..'_ESP'then
+if C.Name==A.Name..'_CHMS'then
 C:Destroy()
 end
 end
 wait()
-if z.Character and z.Name~=Players.LocalPlayer.Name and not COREGUI:FindFirstChild(z.Name..'_ESP')then
+if A.Character and A.Name~=Players.LocalPlayer.Name and not COREGUI:FindFirstChild(A.Name..'_CHMS')then
 local B=Instance.new"Folder"
-B.Name=z.Name..'_ESP'
+B.Name=A.Name..'_CHMS'
 B.Parent=COREGUI
-repeat wait(1)until z.Character and getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
-for C,D in pairs(z.Character:GetChildren())do
+repeat wait(1)until A.Character and getRoot(A.Character)and A.Character:FindFirstChildOfClass"Humanoid"
+for C,D in pairs(A.Character:GetChildren())do
 if(D:IsA"BasePart")then
 local E=Instance.new"BoxHandleAdornment"
-E.Name=z.Name
+E.Name=A.Name
 E.Parent=B
 E.Adornee=D
 E.AlwaysOnTop=true
 E.ZIndex=10
 E.Size=D.Size
 E.Transparency=espTransparency
-if A==true then
-E.Color=BrickColor.new(z.TeamColor==Players.LocalPlayer.TeamColor and"Bright green"or"Bright red")
+E.Color=A.TeamColor
+end
+end
+local C
+local D
+local E
+C=A.CharacterAdded:Connect(function()
+if CHMSenabled then
+B:Destroy()
+D:Disconnect()
+repeat wait(1)until getRoot(A.Character)and A.Character:FindFirstChildOfClass"Humanoid"
+CHMS(A)
+C:Disconnect()
 else
-E.Color=z.TeamColor
+D:Disconnect()
+C:Disconnect()
+end
+end)
+D=A:GetPropertyChangedSignal"TeamColor":Connect(function()
+if CHMSenabled then
+B:Destroy()
+C:Disconnect()
+repeat wait(1)until getRoot(A.Character)and A.Character:FindFirstChildOfClass"Humanoid"
+CHMS(A)
+D:Disconnect()
+else
+D:Disconnect()
+end
+end)
+E=B.AncestryChanged:Connect(function()
+D:Disconnect()
+C:Disconnect()
+E:Disconnect()
+end)
+end
+end)
+end
+
+function Locate(A)
+task.spawn(function()
+for B,C in pairs(COREGUI:GetChildren())do
+if C.Name==A.Name..'_LC'then
+C:Destroy()
 end
 end
+wait()
+if A.Character and A.Name~=Players.LocalPlayer.Name and not COREGUI:FindFirstChild(A.Name..'_LC')then
+local B=Instance.new"Folder"
+B.Name=A.Name..'_LC'
+B.Parent=COREGUI
+repeat wait(1)until A.Character and getRoot(A.Character)and A.Character:FindFirstChildOfClass"Humanoid"
+for C,D in pairs(A.Character:GetChildren())do
+if(D:IsA"BasePart")then
+local E=Instance.new"BoxHandleAdornment"
+E.Name=A.Name
+E.Parent=B
+E.Adornee=D
+E.AlwaysOnTop=true
+E.ZIndex=10
+E.Size=D.Size
+E.Transparency=espTransparency
+E.Color=A.TeamColor
 end
-if z.Character and z.Character:FindFirstChild'Head'then
+end
+if A.Character and A.Character:FindFirstChild'Head'then
 local C=Instance.new"BillboardGui"
 local D=Instance.new"TextLabel"
-C.Adornee=z.Character.Head
-C.Name=z.Name
+C.Adornee=A.Character.Head
+C.Name=A.Name
 C.Parent=B
 C.Size=UDim2.new(0,100,0,150)
 C.StudsOffset=Vector3.new(0,1,0)
@@ -5737,242 +5918,89 @@ D.TextSize=20
 D.TextColor3=Color3.new(1,1,1)
 D.TextStrokeTransparency=0
 D.TextYAlignment=Enum.TextYAlignment.Bottom
-D.Text='Name: '..z.Name
+D.Text='Name: '..A.Name
 D.ZIndex=10
 local E
 local F
 local G
-G=z.CharacterAdded:Connect(function()
-if ESPenabled then
-E:Disconnect()
-F:Disconnect()
-B:Destroy()
-repeat wait(1)until getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
-ESP(z,A)
-G:Disconnect()
-else
-F:Disconnect()
-G:Disconnect()
-end
-end)
-F=z:GetPropertyChangedSignal"TeamColor":Connect(function()
-if ESPenabled then
+F=A.CharacterAdded:Connect(function()
+if B~=nil and B.Parent~=nil then
 E:Disconnect()
 G:Disconnect()
 B:Destroy()
-repeat wait(1)until getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
-ESP(z,A)
+repeat wait(1)until getRoot(A.Character)and A.Character:FindFirstChildOfClass"Humanoid"
+Locate(A)
 F:Disconnect()
 else
-F:Disconnect()
-end
-end)
-local function espLoop()
-if COREGUI:FindFirstChild(z.Name..'_ESP')then
-if z.Character and getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character)and Players.LocalPlayer.Character:FindFirstChildOfClass"Humanoid"then
-local H=math.floor((getRoot(Players.LocalPlayer.Character).Position-getRoot(z.Character).Position).magnitude)
-D.Text='Name: '..z.Name..' | Health: '..round(z.Character:FindFirstChildOfClass'Humanoid'.Health,1)..' | Studs: '..H
-end
-else
-F:Disconnect()
 G:Disconnect()
-E:Disconnect()
-end
-end
-E=RunService.RenderStepped:Connect(espLoop)
-end
+F:Disconnect()
 end
 end)
-end
-
-function CHMS(z)
-task.spawn(function()
-for A,B in pairs(COREGUI:GetChildren())do
-if B.Name==z.Name..'_CHMS'then
+G=A:GetPropertyChangedSignal"TeamColor":Connect(function()
+if B~=nil and B.Parent~=nil then
+E:Disconnect()
+F:Disconnect()
 B:Destroy()
-end
-end
-wait()
-if z.Character and z.Name~=Players.LocalPlayer.Name and not COREGUI:FindFirstChild(z.Name..'_CHMS')then
-local A=Instance.new"Folder"
-A.Name=z.Name..'_CHMS'
-A.Parent=COREGUI
-repeat wait(1)until z.Character and getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
-for B,C in pairs(z.Character:GetChildren())do
-if(C:IsA"BasePart")then
-local D=Instance.new"BoxHandleAdornment"
-D.Name=z.Name
-D.Parent=A
-D.Adornee=C
-D.AlwaysOnTop=true
-D.ZIndex=10
-D.Size=C.Size
-D.Transparency=espTransparency
-D.Color=z.TeamColor
-end
-end
-local B
-local C
-local D
-B=z.CharacterAdded:Connect(function()
-if CHMSenabled then
-A:Destroy()
-C:Disconnect()
-repeat wait(1)until getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
-CHMS(z)
-B:Disconnect()
+repeat wait(1)until getRoot(A.Character)and A.Character:FindFirstChildOfClass"Humanoid"
+Locate(A)
+G:Disconnect()
 else
-C:Disconnect()
-B:Disconnect()
-end
-end)
-C=z:GetPropertyChangedSignal"TeamColor":Connect(function()
-if CHMSenabled then
-A:Destroy()
-B:Disconnect()
-repeat wait(1)until getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
-CHMS(z)
-C:Disconnect()
-else
-C:Disconnect()
-end
-end)
-D=A.AncestryChanged:Connect(function()
-C:Disconnect()
-B:Disconnect()
-D:Disconnect()
-end)
-end
-end)
-end
-
-function Locate(z)
-task.spawn(function()
-for A,B in pairs(COREGUI:GetChildren())do
-if B.Name==z.Name..'_LC'then
-B:Destroy()
-end
-end
-wait()
-if z.Character and z.Name~=Players.LocalPlayer.Name and not COREGUI:FindFirstChild(z.Name..'_LC')then
-local A=Instance.new"Folder"
-A.Name=z.Name..'_LC'
-A.Parent=COREGUI
-repeat wait(1)until z.Character and getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
-for B,C in pairs(z.Character:GetChildren())do
-if(C:IsA"BasePart")then
-local D=Instance.new"BoxHandleAdornment"
-D.Name=z.Name
-D.Parent=A
-D.Adornee=C
-D.AlwaysOnTop=true
-D.ZIndex=10
-D.Size=C.Size
-D.Transparency=espTransparency
-D.Color=z.TeamColor
-end
-end
-if z.Character and z.Character:FindFirstChild'Head'then
-local B=Instance.new"BillboardGui"
-local C=Instance.new"TextLabel"
-B.Adornee=z.Character.Head
-B.Name=z.Name
-B.Parent=A
-B.Size=UDim2.new(0,100,0,150)
-B.StudsOffset=Vector3.new(0,1,0)
-B.AlwaysOnTop=true
-C.Parent=B
-C.BackgroundTransparency=1
-C.Position=UDim2.new(0,0,0,-50)
-C.Size=UDim2.new(0,100,0,100)
-C.Font=Enum.Font.SourceSansSemibold
-C.TextSize=20
-C.TextColor3=Color3.new(1,1,1)
-C.TextStrokeTransparency=0
-C.TextYAlignment=Enum.TextYAlignment.Bottom
-C.Text='Name: '..z.Name
-C.ZIndex=10
-local D
-local E
-local F
-E=z.CharacterAdded:Connect(function()
-if A~=nil and A.Parent~=nil then
-D:Disconnect()
-F:Disconnect()
-A:Destroy()
-repeat wait(1)until getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
-Locate(z)
-E:Disconnect()
-else
-F:Disconnect()
-E:Disconnect()
-end
-end)
-F=z:GetPropertyChangedSignal"TeamColor":Connect(function()
-if A~=nil and A.Parent~=nil then
-D:Disconnect()
-E:Disconnect()
-A:Destroy()
-repeat wait(1)until getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"
-Locate(z)
-F:Disconnect()
-else
-F:Disconnect()
+G:Disconnect()
 end
 end)
 local function lcLoop()
-if COREGUI:FindFirstChild(z.Name..'_LC')then
-if z.Character and getRoot(z.Character)and z.Character:FindFirstChildOfClass"Humanoid"and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character)and Players.LocalPlayer.Character:FindFirstChildOfClass"Humanoid"then
-local G=math.floor((getRoot(Players.LocalPlayer.Character).Position-getRoot(z.Character).Position).magnitude)
-C.Text='Name: '..z.Name..' | Health: '..round(z.Character:FindFirstChildOfClass'Humanoid'.Health,1)..' | Studs: '..G
+if COREGUI:FindFirstChild(A.Name..'_LC')then
+if A.Character and getRoot(A.Character)and A.Character:FindFirstChildOfClass"Humanoid"and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character)and Players.LocalPlayer.Character:FindFirstChildOfClass"Humanoid"then
+local H=math.floor((getRoot(Players.LocalPlayer.Character).Position-getRoot(A.Character).Position).magnitude)
+D.Text='Name: '..A.Name..' | Health: '..round(A.Character:FindFirstChildOfClass'Humanoid'.Health,1)..' | Studs: '..H
 end
 else
+G:Disconnect()
 F:Disconnect()
 E:Disconnect()
-D:Disconnect()
 end
 end
-D=RunService.RenderStepped:Connect(lcLoop)
+E=RunService.RenderStepped:Connect(lcLoop)
 end
 end
 end)
 end
 
 
-local z=false
 local A=false
+local B=false
 
 function refreshbinds()
 if Holder_2 then
 Holder_2:ClearAllChildren()
 Holder_2.CanvasSize=UDim2.new(0,0,0,10)
-for B=1,#binds do
-local C=25
-local D=((B*C)-C)
-local E=Example_2:Clone()
-E.Parent=Holder_2
-E.Visible=true
-E.Position=UDim2.new(0,0,0,D+5)
-table.insert(shade2,E)
-table.insert(shade2,E.Text)
-table.insert(text1,E.Text)
-table.insert(shade3,E.Text.Delete)
-table.insert(text2,E.Text.Delete)
-local F=tostring(binds[B].KEY)
-local G
-if F=='RightClick'or F=='LeftClick'then
-G=F
+for C=1,#binds do
+local D=25
+local E=((C*D)-D)
+local F=Example_2:Clone()
+F.Parent=Holder_2
+F.Visible=true
+F.Position=UDim2.new(0,0,0,E+5)
+table.insert(shade2,F)
+table.insert(shade2,F.Text)
+table.insert(text1,F.Text)
+table.insert(shade3,F.Text.Delete)
+table.insert(text2,F.Text.Delete)
+local G=tostring(binds[C].KEY)
+local H
+if G=='RightClick'or G=='LeftClick'then
+H=G
 else
-G=F:sub(14)
+H=G:sub(14)
 end
-if binds[B].TOGGLE then
-E.Text.Text=G.." > "..binds[B].COMMAND.." / "..binds[B].TOGGLE
+if binds[C].TOGGLE then
+F.Text.Text=H.." > "..binds[C].COMMAND.." / "..binds[C].TOGGLE
 else
-E.Text.Text=G.." > "..binds[B].COMMAND.."  "..(binds[B].ISKEYUP and"(keyup)"or"(keydown)")
+F.Text.Text=H.." > "..binds[C].COMMAND.."  "..(binds[C].ISKEYUP and"(keyup)"or"(keydown)")
 end
-Holder_2.CanvasSize=UDim2.new(0,0,0,D+30)
-E.Text.Delete.MouseButton1Click:Connect(function()
-unkeybind(binds[B].COMMAND,binds[B].KEY)
+Holder_2.CanvasSize=UDim2.new(0,0,0,E+30)
+F.Text.Delete.MouseButton1Click:Connect(function()
+unkeybind(binds[C].COMMAND,binds[C].KEY)
 end)
 end
 end
@@ -5982,19 +6010,19 @@ refreshbinds()
 
 toggleOn={}
 
-function unkeybind(B,C)
-for D=#binds,1,-1 do
-if binds[D].COMMAND==B and binds[D].KEY==C then
-toggleOn[binds[D] ]=nil
-table.remove(binds,D)
+function unkeybind(C,D)
+for E=#binds,1,-1 do
+if binds[E].COMMAND==C and binds[E].KEY==D then
+toggleOn[binds[E] ]=nil
+table.remove(binds,E)
 end
 end
 refreshbinds()
 updatesaves()
-if C=='RightClick'or C=='LeftClick'then
-notify('Keybinds Updated','Unbinded '..C..' from '..B)
+if D=='RightClick'or D=='LeftClick'then
+notify('Keybinds Updated','Unbinded '..D..' from '..C)
 else
-notify('Keybinds Updated','Unbinded '..C:sub(14)..' from '..B)
+notify('Keybinds Updated','Unbinded '..D:sub(14)..' from '..C)
 end
 end
 
@@ -6009,53 +6037,53 @@ end
 if Holder_4 then
 Holder_4:ClearAllChildren()
 Holder_4.CanvasSize=UDim2.new(0,0,0,10)
-local B=25
-local C=1
-for D=1,#WayPoints do
-local E=((C*B)-B)
-local F=Example_4:Clone()
-F.Parent=Holder_4
-F.Visible=true
-F.Position=UDim2.new(0,0,0,E+5)
-F.Text.Text=WayPoints[D].NAME
-table.insert(shade2,F)
-table.insert(shade2,F.Text)
-table.insert(text1,F.Text)
-table.insert(shade3,F.Text.Delete)
-table.insert(text2,F.Text.Delete)
-table.insert(shade3,F.Text.TP)
-table.insert(text2,F.Text.TP)
-Holder_4.CanvasSize=UDim2.new(0,0,0,E+30)
-F.Text.Delete.MouseButton1Click:Connect(function()
-execCmd('dpos '..WayPoints[D].NAME)
+local C=25
+local D=1
+for E=1,#WayPoints do
+local F=((D*C)-C)
+local G=Example_4:Clone()
+G.Parent=Holder_4
+G.Visible=true
+G.Position=UDim2.new(0,0,0,F+5)
+G.Text.Text=WayPoints[E].NAME
+table.insert(shade2,G)
+table.insert(shade2,G.Text)
+table.insert(text1,G.Text)
+table.insert(shade3,G.Text.Delete)
+table.insert(text2,G.Text.Delete)
+table.insert(shade3,G.Text.TP)
+table.insert(text2,G.Text.TP)
+Holder_4.CanvasSize=UDim2.new(0,0,0,F+30)
+G.Text.Delete.MouseButton1Click:Connect(function()
+execCmd('dpos '..WayPoints[E].NAME)
 end)
-F.Text.TP.MouseButton1Click:Connect(function()
-execCmd("loadpos "..WayPoints[D].NAME)
+G.Text.TP.MouseButton1Click:Connect(function()
+execCmd("loadpos "..WayPoints[E].NAME)
 end)
-C=C+1
+D=D+1
 end
-for D=1,#pWayPoints do
-local E=((C*B)-B)
-local F=Example_4:Clone()
-F.Parent=Holder_4
-F.Visible=true
-F.Position=UDim2.new(0,0,0,E+5)
-F.Text.Text=pWayPoints[D].NAME
-table.insert(shade2,F)
-table.insert(shade2,F.Text)
-table.insert(text1,F.Text)
-table.insert(shade3,F.Text.Delete)
-table.insert(text2,F.Text.Delete)
-table.insert(shade3,F.Text.TP)
-table.insert(text2,F.Text.TP)
-Holder_4.CanvasSize=UDim2.new(0,0,0,E+30)
-F.Text.Delete.MouseButton1Click:Connect(function()
-execCmd('dpos '..pWayPoints[D].NAME)
+for E=1,#pWayPoints do
+local F=((D*C)-C)
+local G=Example_4:Clone()
+G.Parent=Holder_4
+G.Visible=true
+G.Position=UDim2.new(0,0,0,F+5)
+G.Text.Text=pWayPoints[E].NAME
+table.insert(shade2,G)
+table.insert(shade2,G.Text)
+table.insert(text1,G.Text)
+table.insert(shade3,G.Text.Delete)
+table.insert(text2,G.Text.Delete)
+table.insert(shade3,G.Text.TP)
+table.insert(text2,G.Text.TP)
+Holder_4.CanvasSize=UDim2.new(0,0,0,F+30)
+G.Text.Delete.MouseButton1Click:Connect(function()
+execCmd('dpos '..pWayPoints[E].NAME)
 end)
-F.Text.TP.MouseButton1Click:Connect(function()
-execCmd("loadpos "..pWayPoints[D].NAME)
+G.Text.TP.MouseButton1Click:Connect(function()
+execCmd("loadpos "..pWayPoints[E].NAME)
 end)
-C=C+1
+D=D+1
 end
 end
 end
@@ -6069,37 +6097,37 @@ end
 if Holder_3 then
 Holder_3:ClearAllChildren()
 Holder_3.CanvasSize=UDim2.new(0,0,0,10)
-for B=1,#aliases do
-local C=25
-local D=((B*C)-C)
-local E=Example_3:Clone()
-E.Parent=Holder_3
-E.Visible=true
-E.Position=UDim2.new(0,0,0,D+5)
-E.Text.Text=aliases[B].CMD.." > "..aliases[B].ALIAS
-table.insert(shade2,E)
-table.insert(shade2,E.Text)
-table.insert(text1,E.Text)
-table.insert(shade3,E.Text.Delete)
-table.insert(text2,E.Text.Delete)
-Holder_3.CanvasSize=UDim2.new(0,0,0,D+30)
-E.Text.Delete.MouseButton1Click:Connect(function()
-execCmd('removealias '..aliases[B].ALIAS)
+for C=1,#aliases do
+local D=25
+local E=((C*D)-D)
+local F=Example_3:Clone()
+F.Parent=Holder_3
+F.Visible=true
+F.Position=UDim2.new(0,0,0,E+5)
+F.Text.Text=aliases[C].CMD.." > "..aliases[C].ALIAS
+table.insert(shade2,F)
+table.insert(shade2,F.Text)
+table.insert(text1,F.Text)
+table.insert(shade3,F.Text.Delete)
+table.insert(text2,F.Text.Delete)
+Holder_3.CanvasSize=UDim2.new(0,0,0,E+30)
+F.Text.Delete.MouseButton1Click:Connect(function()
+execCmd('removealias '..aliases[C].ALIAS)
 end)
 end
 end
 end
 
-local B=false
+local C=false
 
 BindTo.MouseButton1Click:Connect(function()
-z=true
+A=true
 BindTo.Text='Press something'
 end)
 
 BindTriggerSelect.MouseButton1Click:Connect(function()
-B=not B
-BindTriggerSelect.Text=B and"KeyUp"or"KeyDown"
+C=not C
+BindTriggerSelect.Text=C and"KeyUp"or"KeyDown"
 end)
 
 newToggle=false
@@ -6117,14 +6145,14 @@ end
 end)
 
 Add_2.MouseButton1Click:Connect(function()
-if A then
+if B then
 if string.find(Cmdbar_2.Text,"\\\\")or string.find(Cmdbar_3.Text,"\\\\")then
 notify('Keybind Error','Only use one backslash to keybind multiple commands into one keybind or command')
 else
 if newToggle and Cmdbar_3.Text~=''and Cmdbar_2.text~=''then
 addbind(Cmdbar_2.Text,keyPressed,false,Cmdbar_3.Text)
 elseif not newToggle and Cmdbar_2.text~=''then
-addbind(Cmdbar_2.Text,keyPressed,B)
+addbind(Cmdbar_2.Text,keyPressed,C)
 else
 return
 end
@@ -6143,41 +6171,41 @@ Exit_2.MouseButton1Click:Connect(function()
 Cmdbar_2.Text='Command'
 Cmdbar_3.Text='Command 2'
 BindTo.Text='Click to bind'
-B=false
+C=false
 BindTriggerSelect.Text="KeyDown"
-A=false
+B=false
 KeybindEditor:TweenPosition(UDim2.new(0.5,-180,0,-500),"InOut","Quart",0.5,true,nil)
 end)
 
-function onInputBegan(C,D)
-if z then
-if C.UserInputType==Enum.UserInputType.Keyboard then
-keyPressed=tostring(C.KeyCode)
+function onInputBegan(D,E)
+if A then
+if D.UserInputType==Enum.UserInputType.Keyboard then
+keyPressed=tostring(D.KeyCode)
 BindTo.Text=keyPressed:sub(14)
-elseif C.UserInputType==Enum.UserInputType.MouseButton1 then
+elseif D.UserInputType==Enum.UserInputType.MouseButton1 then
 keyPressed='LeftClick'
 BindTo.Text='LeftClick'
-elseif C.UserInputType==Enum.UserInputType.MouseButton2 then
+elseif D.UserInputType==Enum.UserInputType.MouseButton2 then
 keyPressed='RightClick'
 BindTo.Text='RightClick'
 end
-z=false
-A=true
+A=false
+B=true
 end
-if not D and#binds>0 then
-for E,F in pairs(binds)do
-if not F.ISKEYUP then
-if(C.UserInputType==Enum.UserInputType.Keyboard and F.KEY:lower()==tostring(C.KeyCode):lower())or(C.UserInputType==Enum.UserInputType.MouseButton1 and F.KEY:lower()=='leftclick')or(C.UserInputType==Enum.UserInputType.MouseButton2 and F.KEY:lower()=='rightclick')then
-if F.TOGGLE then
-local G=toggleOn[F]==true
-toggleOn[F]=not G
-if G then
-execCmd(F.TOGGLE,Players.LocalPlayer)
+if not E and#binds>0 then
+for F,G in pairs(binds)do
+if not G.ISKEYUP then
+if(D.UserInputType==Enum.UserInputType.Keyboard and G.KEY:lower()==tostring(D.KeyCode):lower())or(D.UserInputType==Enum.UserInputType.MouseButton1 and G.KEY:lower()=='leftclick')or(D.UserInputType==Enum.UserInputType.MouseButton2 and G.KEY:lower()=='rightclick')then
+if G.TOGGLE then
+local H=toggleOn[G]==true
+toggleOn[G]=not H
+if H then
+execCmd(G.TOGGLE,Players.LocalPlayer)
 else
-execCmd(F.COMMAND,Players.LocalPlayer)
+execCmd(G.COMMAND,Players.LocalPlayer)
 end
 else
-execCmd(F.COMMAND,Players.LocalPlayer)
+execCmd(G.COMMAND,Players.LocalPlayer)
 end
 end
 end
@@ -6185,12 +6213,12 @@ end
 end
 end
 
-function onInputEnded(C,D)
-if not D and#binds>0 then
-for E,F in pairs(binds)do
-if F.ISKEYUP then
-if(C.UserInputType==Enum.UserInputType.Keyboard and F.KEY:lower()==tostring(C.KeyCode):lower())or(C.UserInputType==Enum.UserInputType.MouseButton1 and F.KEY:lower()=='leftclick')or(C.UserInputType==Enum.UserInputType.MouseButton2 and F.KEY:lower()=='rightclick')then
-execCmd(F.COMMAND,Players.LocalPlayer)
+function onInputEnded(D,E)
+if not E and#binds>0 then
+for F,G in pairs(binds)do
+if G.ISKEYUP then
+if(D.UserInputType==Enum.UserInputType.Keyboard and G.KEY:lower()==tostring(D.KeyCode):lower())or(D.UserInputType==Enum.UserInputType.MouseButton1 and G.KEY:lower()=='leftclick')or(D.UserInputType==Enum.UserInputType.MouseButton2 and G.KEY:lower()=='rightclick')then
+execCmd(G.COMMAND,Players.LocalPlayer)
 end
 end
 end
@@ -6201,8 +6229,8 @@ UserInputService.InputBegan:Connect(onInputBegan)
 UserInputService.InputEnded:Connect(onInputEnded)
 
 ClickTP.Select.MouseButton1Click:Connect(function()
-if A then
-addbind('clicktp',keyPressed,B)
+if B then
+addbind('clicktp',keyPressed,C)
 refreshbinds()
 updatesaves()
 if keyPressed=='RightClick'or keyPressed=='LeftClick'then
@@ -6214,8 +6242,8 @@ end
 end)
 
 ClickDelete.Select.MouseButton1Click:Connect(function()
-if A then
-addbind('clickdel',keyPressed,B)
+if B then
+addbind('clickdel',keyPressed,C)
 refreshbinds()
 updatesaves()
 if keyPressed=='RightClick'or keyPressed=='LeftClick'then
@@ -6228,44 +6256,45 @@ end)
 
 local function clicktpFunc()
 pcall(function()
-local C=Players.LocalPlayer.Character
-local D=C:FindFirstChildOfClass"Humanoid"
-if D and D.SeatPart then
-D.Sit=false
+local D=Players.LocalPlayer.Character
+local E=D:FindFirstChildOfClass"Humanoid"
+if E and E.SeatPart then
+E.Sit=false
 wait(0.1)
 end
 
-local E=D and D.HipHeight>0 and(D.HipHeight+1)
-local F=getRoot(C)
-local G=F.Position
-local H=IYMouse.Hit.Position
-local I=CFrame.new(
-H,
-Vector3.new(G.X,H.Y,G.Z)
+local F=E and E.HipHeight>0 and(E.HipHeight+1)
+local G=getRoot(D)
+local H=G.Position
+local I=IYMouse.Hit.Position
+local J=CFrame.new(
+I,
+Vector3.new(H.X,I.Y,H.Z)
 )*CFrame.Angles(0,math.pi,0)
 
-F.CFrame=I+Vector3.new(0,E or 4,0)
+G.CFrame=J+Vector3.new(0,F or 4,0)
+breakVelocity()
 end)
 end
 
 IYMouse.Button1Down:Connect(function()
-for C,D in pairs(binds)do
-if D.COMMAND=='clicktp'then
-local E=D.KEY
-if E=='RightClick'and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2)and Players.LocalPlayer.Character then
+for D,E in pairs(binds)do
+if E.COMMAND=='clicktp'then
+local F=E.KEY
+if F=='RightClick'and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2)and Players.LocalPlayer.Character then
 clicktpFunc()
-elseif E=='LeftClick'and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1)and Players.LocalPlayer.Character then
+elseif F=='LeftClick'and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1)and Players.LocalPlayer.Character then
 clicktpFunc()
-elseif UserInputService:IsKeyDown(Enum.KeyCode[E:sub(14)])and Players.LocalPlayer.Character then
+elseif UserInputService:IsKeyDown(Enum.KeyCode[F:sub(14)])and Players.LocalPlayer.Character then
 clicktpFunc()
 end
-elseif D.COMMAND=='clickdel'then
-local E=D.KEY
-if E=='RightClick'and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2)then
+elseif E.COMMAND=='clickdel'then
+local F=E.KEY
+if F=='RightClick'and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2)then
 pcall(function()IYMouse.Target:Destroy()end)
-elseif E=='LeftClick'and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1)then
+elseif F=='LeftClick'and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1)then
 pcall(function()IYMouse.Target:Destroy()end)
-elseif UserInputService:IsKeyDown(Enum.KeyCode[E:sub(14)])then
+elseif UserInputService:IsKeyDown(Enum.KeyCode[F:sub(14)])then
 pcall(function()IYMouse.Target:Destroy()end)
 end
 end
@@ -6274,167 +6303,167 @@ end)
 
 PluginsGUI=PluginEditor.background
 
-function addPlugin(C)
-if C:lower()=='plugin file name'or C:lower()=='iy_fe.iy'or C=='iy_fe'then
+function addPlugin(D)
+if D:lower()=='plugin file name'or D:lower()=='iy_fe.iy'or D=='iy_fe'then
 notify('Plugin Error','Please enter a valid plugin')
 else
-local D
 local E
-if C:sub(-3)=='.iy'then
-pcall(function()D=readfile(C)end)
-E=C
+local F
+if D:sub(-3)=='.iy'then
+pcall(function()E=readfile(D)end)
+F=D
 else
-pcall(function()D=readfile(C..'.iy')end)
-E=C..'.iy'
+pcall(function()E=readfile(D..'.iy')end)
+F=D..'.iy'
 end
-if D then
-if not FindInTable(PluginsTable,E)then
-table.insert(PluginsTable,E)
-LoadPlugin(E)
+if E then
+if not FindInTable(PluginsTable,F)then
+table.insert(PluginsTable,F)
+LoadPlugin(F)
 refreshplugins()
 pcall(eventEditor.Refresh)
 else
 notify('Plugin Error','This plugin is already added')
 end
 else
-notify('Plugin Error','Cannot locate file "'..E..'". Is the file in the correct folder?')
+notify('Plugin Error','Cannot locate file "'..F..'". Is the file in the correct folder?')
 end
 end
 end
 
-function deletePlugin(C)
-local D=C..'.iy'
-if C:sub(-3)=='.iy'then
-D=C
+function deletePlugin(D)
+local E=D..'.iy'
+if D:sub(-3)=='.iy'then
+E=D
 end
-for E=#cmds,1,-1 do
-if cmds[E].PLUGIN==D then
-table.remove(cmds,E)
-end
-end
-for E,F in pairs(CMDsF:GetChildren())do
-if F.Name=='PLUGIN_'..D then
-F:Destroy()
+for F=#cmds,1,-1 do
+if cmds[F].PLUGIN==E then
+table.remove(cmds,F)
 end
 end
-for E,F in pairs(PluginsTable)do
-if F==D then
-table.remove(PluginsTable,E)
-notify('Removed Plugin',D..' was removed')
+for F,G in pairs(CMDsF:GetChildren())do
+if G.Name=='PLUGIN_'..E then
+G:Destroy()
+end
+end
+for F,G in pairs(PluginsTable)do
+if G==E then
+table.remove(PluginsTable,F)
+notify('Removed Plugin',E..' was removed')
 end
 end
 IndexContents('',true)
 refreshplugins()
 end
 
-function refreshplugins(C)
+function refreshplugins(D)
 if#PluginsTable>0 then
 PluginsHint:Destroy()
 end
 if Holder_5 then
 Holder_5:ClearAllChildren()
 Holder_5.CanvasSize=UDim2.new(0,0,0,10)
-for D,E in pairs(PluginsTable)do
-local F=E
-local G=25
-local H=((D*G)-G)
-local I=Example_5:Clone()
-I.Parent=Holder_5
-I.Visible=true
-I.Position=UDim2.new(0,0,0,H+5)
-I.Text.Text=F
-table.insert(shade2,I)
-table.insert(shade2,I.Text)
-table.insert(text1,I.Text)
-table.insert(shade3,I.Text.Delete)
-table.insert(text2,I.Text.Delete)
-Holder_5.CanvasSize=UDim2.new(0,0,0,H+30)
-I.Text.Delete.MouseButton1Click:Connect(function()
-deletePlugin(F)
+for E,F in pairs(PluginsTable)do
+local G=F
+local H=25
+local I=((E*H)-H)
+local J=Example_5:Clone()
+J.Parent=Holder_5
+J.Visible=true
+J.Position=UDim2.new(0,0,0,I+5)
+J.Text.Text=G
+table.insert(shade2,J)
+table.insert(shade2,J.Text)
+table.insert(text1,J.Text)
+table.insert(shade3,J.Text.Delete)
+table.insert(text2,J.Text.Delete)
+Holder_5.CanvasSize=UDim2.new(0,0,0,I+30)
+J.Text.Delete.MouseButton1Click:Connect(function()
+deletePlugin(G)
 end)
 end
-if not C then
+if not D then
 updatesaves()
 end
 end
 end
 
 
-function LoadPlugin(C,D)
-local E
+function LoadPlugin(D,E)
+local F
 
 function CatchedPluginLoad()
-E=loadfile(C)()
+F=loadfile(D)()
 end
 
-function handlePluginError(F)
-notify('Plugin Error','An error occurred with the plugin, "'..C..'" and it could not be loaded')
-if FindInTable(PluginsTable,C)then
-for G,H in pairs(PluginsTable)do
-if H==C then
-table.remove(PluginsTable,G)
+function handlePluginError(G)
+notify('Plugin Error','An error occurred with the plugin, "'..D..'" and it could not be loaded')
+if FindInTable(PluginsTable,D)then
+for H,I in pairs(PluginsTable)do
+if I==D then
+table.remove(PluginsTable,H)
 end
 end
 end
 updatesaves()
 
-print("Original Error: "..tostring(F))
+print("Original Error: "..tostring(G))
 print("Plugin Error, stack traceback: "..tostring(debug.traceback()))
 
-E=nil
+F=nil
 
 return false
 end
 
 xpcall(CatchedPluginLoad,handlePluginError)
 
-if E~=nil then
-if not D then
-notify('Loaded Plugin',"Name: "..E.PluginName.."\n".."Description: "..E.PluginDescription)
+if F~=nil then
+if not E then
+notify('Loaded Plugin',"Name: "..F.PluginName.."\n".."Description: "..F.PluginDescription)
 end
-addcmdtext('',C)
-addcmdtext(string.upper('--'..E.PluginName),C,E.PluginDescription)
-if E.Commands then
-for F,G in pairs(E.Commands)do
-local H=''
-local I=F
+addcmdtext('',D)
+addcmdtext(string.upper('--'..F.PluginName),D,F.PluginDescription)
+if F.Commands then
+for G,H in pairs(F.Commands)do
+local I=''
+local J=G
 local function handleNames()
-I=F
-if findCmd(I..H)then
-if isNumber(H)then
-H=H+1
+J=G
+if findCmd(J..I)then
+if isNumber(I)then
+I=I+1
 else
-H=1
+I=1
 end
 handleNames()
 else
-I=I..H
+J=J..I
 end
 end
 handleNames()
-addcmd(I,G.Aliases,G.Function,C)
-if G.ListName then
-local J=G.ListName
-local K={F,unpack(G.Aliases)}
-for L,M in pairs(K)do
-J=J:gsub(M,M..H)
+addcmd(J,H.Aliases,H.Function,D)
+if H.ListName then
+local K=H.ListName
+local L={G,unpack(H.Aliases)}
+for M,N in pairs(L)do
+K=K:gsub(N,N..I)
 end
-addcmdtext(J,C,G.Description)
+addcmdtext(K,D,H.Description)
 else
-addcmdtext(I,C,G.Description)
+addcmdtext(J,D,H.Description)
 end
 end
 end
 IndexContents('',true)
-elseif E==nil then
-E=nil
+elseif F==nil then
+F=nil
 end
 end
 
 function FindPlugins()
 if PluginsTable~=nil and type(PluginsTable)=="table"then
-for C,D in pairs(PluginsTable)do
-LoadPlugin(D,true)
+for D,E in pairs(PluginsTable)do
+LoadPlugin(E,true)
 end
 refreshplugins(true)
 end
@@ -6468,23 +6497,23 @@ SettingsHolder.Visible=true
 PluginsFrame:TweenPosition(UDim2.new(0,0,0,175),"InOut","Quart",0.5,true,nil)
 end)
 
-local C=false
-Players.LocalPlayer.OnTeleport:Connect(function(D)
-if KeepInfYield and(not C)and queueteleport then
-C=true
+local D=false
+Players.LocalPlayer.OnTeleport:Connect(function(E)
+if KeepInfYield and(not D)and queueteleport then
+D=true
 queueteleport"loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()"
 end
 end)
 
-addcmd('addalias',{},function(D,E)
-if#D<2 then return end
-local F=string.lower(D[1])
-local G=string.lower(D[2])
-for H,I in pairs(cmds)do
-if I.NAME:lower()==F or FindInTable(I.ALIAS,F)then
-customAlias[G]=I
-aliases[#aliases+1]={CMD=F,ALIAS=G}
-notify('Aliases Modified',"Added "..G.." as an alias to "..F)
+addcmd('addalias',{},function(E,F)
+if#E<2 then return end
+local G=string.lower(E[1])
+local H=string.lower(E[2])
+for I,J in pairs(cmds)do
+if J.NAME:lower()==G or FindInTable(J.ALIAS,G)then
+customAlias[H]=J
+aliases[#aliases+1]={CMD=G,ALIAS=H}
+notify('Aliases Modified',"Added "..H.." as an alias to "..G)
 updatesaves()
 refreshaliases()
 break
@@ -6492,24 +6521,24 @@ end
 end
 end)
 
-addcmd('removealias',{},function(D,E)
-if#D<1 then return end
-local F=string.lower(D[1])
-if customAlias[F]then
-local G=customAlias[F].NAME
-customAlias[F]=nil
-for H=#aliases,1,-1 do
-if aliases[H].ALIAS==tostring(F)then
-table.remove(aliases,H)
+addcmd('removealias',{},function(E,F)
+if#E<1 then return end
+local G=string.lower(E[1])
+if customAlias[G]then
+local H=customAlias[G].NAME
+customAlias[G]=nil
+for I=#aliases,1,-1 do
+if aliases[I].ALIAS==tostring(G)then
+table.remove(aliases,I)
 end
 end
-notify('Aliases Modified',"Removed the alias "..F.." from "..G)
+notify('Aliases Modified',"Removed the alias "..G.." from "..H)
 updatesaves()
 refreshaliases()
 end
 end)
 
-addcmd('clraliases',{},function(D,E)
+addcmd('clraliases',{},function(E,F)
 customAlias={}
 aliases={}
 notify('Aliases Modified','Removed all aliases')
@@ -6517,12 +6546,12 @@ updatesaves()
 refreshaliases()
 end)
 
-addcmd('discord',{'support','help'},function(D,E)
+addcmd('discord',{'support','help'},function(E,F)
 if everyClipboard then
-toClipboard'https://discord.com/invite/dYHag43eeU'
-notify('Discord Invite','Copied to clipboard!\ndiscord.gg/dYHag43eeU')
+toClipboard'https://discord.com/invite/78ZuWSq'
+notify('Discord Invite','Copied to clipboard!\ndiscord.gg/78ZuWSq')
 else
-notify('Discord Invite','discord.gg/dYHag43eeU')
+notify('Discord Invite','discord.gg/78ZuWSq')
 end
 if httprequest then
 httprequest{
@@ -6535,13 +6564,13 @@ Origin='https://discord.com'
 Body=HttpService:JSONEncode{
 cmd='INVITE_BROWSER',
 nonce=HttpService:GenerateGUID(false),
-args={code='dYHag43eeU'}
+args={code='78ZuWSq'}
 }
 }
 end
 end)
 
-addcmd('keepiy',{},function(D,E)
+addcmd('keepiy',{},function(E,F)
 if queueteleport then
 KeepInfYield=true
 notify('KeepIY','Zero Yield will now run after you teleport')
@@ -6551,7 +6580,7 @@ notify('Incompatible Exploit','Your exploit does not support this command (missi
 end
 end)
 
-addcmd('unkeepiy',{},function(D,E)
+addcmd('unkeepiy',{},function(E,F)
 if queueteleport then
 KeepInfYield=false
 notify('KeepIY','Zero Yield will no longer run after you teleport')
@@ -6561,7 +6590,7 @@ notify('Incompatible Exploit','Your exploit does not support this command (missi
 end
 end)
 
-addcmd('togglekeepiy',{},function(D,E)
+addcmd('togglekeepiy',{},function(E,F)
 if queueteleport then
 KeepInfYield=not KeepInfYield
 updatesaves()
@@ -6570,18 +6599,17 @@ notify('Incompatible Exploit','Your exploit does not support this command (missi
 end
 end)
 
-local D=true
-addcmd('serverinfo',{'info','sinfo'},function(E,F)
-if not D then return end
-D=false
+local E=true
+addcmd('serverinfo',{'info','sinfo'},function(F,G)
+if not E then return end
+E=false
 task.spawn(function()
-local G=Instance.new"Frame"
 local H=Instance.new"Frame"
-local I=Instance.new"TextLabel"
-local J=Instance.new"TextButton"
-local K=Instance.new"ImageLabel"
-local L=Instance.new"Frame"
-local M=Instance.new"TextLabel"
+local I=Instance.new"Frame"
+local J=Instance.new"TextLabel"
+local K=Instance.new"TextButton"
+local L=Instance.new"ImageLabel"
+local M=Instance.new"Frame"
 local N=Instance.new"TextLabel"
 local O=Instance.new"TextLabel"
 local P=Instance.new"TextLabel"
@@ -6591,227 +6619,214 @@ local S=Instance.new"TextLabel"
 local T=Instance.new"TextLabel"
 local U=Instance.new"TextLabel"
 local V=Instance.new"TextLabel"
-local W=Instance.new"TextButton"
+local W=Instance.new"TextLabel"
 local X=Instance.new"TextButton"
 local Y=Instance.new"TextButton"
 local Z=Instance.new"TextButton"
+local _=Instance.new"TextButton"
 
-G.Name=randomString()
-G.Parent=ScaledHolder
-G.Active=true
-G.BackgroundTransparency=1
-G.Position=UDim2.new(0.5,-130,0,-500)
-G.Size=UDim2.new(0,250,0,20)
-G.ZIndex=10
-dragGUI(G)
-
-H.Name="shadow"
-H.Parent=G
-H.BackgroundColor3=currentShade2
-H.BorderSizePixel=0
+H.Name=randomString()
+H.Parent=ScaledHolder
+H.Active=true
+H.BackgroundTransparency=1
+H.Position=UDim2.new(0.5,-130,0,-500)
 H.Size=UDim2.new(0,250,0,20)
 H.ZIndex=10
-table.insert(shade2,H)
+dragGUI(H)
 
-I.Name="PopupText"
+I.Name="shadow"
 I.Parent=H
-I.BackgroundTransparency=1
-I.Size=UDim2.new(1,0,0.95,0)
+I.BackgroundColor3=currentShade2
+I.BorderSizePixel=0
+I.Size=UDim2.new(0,250,0,20)
 I.ZIndex=10
-I.Font=Enum.Font.SourceSans
-I.TextSize=14
-I.Text="Server"
-I.TextColor3=currentText1
-I.TextWrapped=true
-table.insert(text1,I)
+table.insert(shade2,I)
 
-J.Name="Exit"
-J.Parent=H
+J.Name="PopupText"
+J.Parent=I
 J.BackgroundTransparency=1
-J.Position=UDim2.new(1,-20,0,0)
-J.Size=UDim2.new(0,20,0,20)
-J.Text=""
+J.Size=UDim2.new(1,0,0.95,0)
 J.ZIndex=10
+J.Font=Enum.Font.SourceSans
+J.TextSize=14
+J.Text="Server"
+J.TextColor3=currentText1
+J.TextWrapped=true
+table.insert(text1,J)
 
-K.Parent=J
-K.BackgroundColor3=Color3.new(1,1,1)
+K.Name="Exit"
+K.Parent=I
 K.BackgroundTransparency=1
-K.Position=UDim2.new(0,5,0,5)
-K.Size=UDim2.new(0,10,0,10)
-K.Image=getcustomasset"infiniteyield/assets/close.png"
+K.Position=UDim2.new(1,-20,0,0)
+K.Size=UDim2.new(0,20,0,20)
+K.Text=""
 K.ZIndex=10
 
-L.Name="background"
-L.Parent=G
-L.Active=true
-L.BackgroundColor3=currentShade1
-L.BorderSizePixel=0
-L.Position=UDim2.new(0,0,1,0)
-L.Size=UDim2.new(0,250,0,250)
+L.Parent=K
+L.BackgroundColor3=Color3.new(1,1,1)
+L.BackgroundTransparency=1
+L.Position=UDim2.new(0,5,0,5)
+L.Size=UDim2.new(0,10,0,10)
+L.Image=getcustomasset"infiniteyield/assets/close.png"
 L.ZIndex=10
-table.insert(shade1,L)
 
-M.Name="Text Label"
-M.Parent=L
-M.BackgroundTransparency=1
+M.Name="background"
+M.Parent=H
+M.Active=true
+M.BackgroundColor3=currentShade1
 M.BorderSizePixel=0
-M.Position=UDim2.new(0,5,0,80)
-M.Size=UDim2.new(0,100,0,20)
+M.Position=UDim2.new(0,0,1,0)
+M.Size=UDim2.new(0,250,0,250)
 M.ZIndex=10
-M.Font=Enum.Font.SourceSansLight
-M.TextSize=20
-M.Text="Run Time:"
-M.TextColor3=currentText1
-M.TextXAlignment=Enum.TextXAlignment.Left
-table.insert(text1,M)
+table.insert(shade1,M)
 
-N.Name="Text Label2"
-N.Parent=L
+N.Name="Text Label"
+N.Parent=M
 N.BackgroundTransparency=1
 N.BorderSizePixel=0
-N.Position=UDim2.new(0,5,0,130)
+N.Position=UDim2.new(0,5,0,80)
 N.Size=UDim2.new(0,100,0,20)
 N.ZIndex=10
 N.Font=Enum.Font.SourceSansLight
 N.TextSize=20
-N.Text="Statistics:"
+N.Text="Run Time:"
 N.TextColor3=currentText1
 N.TextXAlignment=Enum.TextXAlignment.Left
 table.insert(text1,N)
 
-O.Name="Text Label3"
-O.Parent=L
+O.Name="Text Label2"
+O.Parent=M
 O.BackgroundTransparency=1
 O.BorderSizePixel=0
-O.Position=UDim2.new(0,5,0,10)
+O.Position=UDim2.new(0,5,0,130)
 O.Size=UDim2.new(0,100,0,20)
 O.ZIndex=10
 O.Font=Enum.Font.SourceSansLight
 O.TextSize=20
-O.Text="Local Player:"
+O.Text="Statistics:"
 O.TextColor3=currentText1
 O.TextXAlignment=Enum.TextXAlignment.Left
 table.insert(text1,O)
 
-P.Name="Time"
-P.Parent=L
+P.Name="Text Label3"
+P.Parent=M
 P.BackgroundTransparency=1
 P.BorderSizePixel=0
-P.Position=UDim2.new(0,5,0,105)
+P.Position=UDim2.new(0,5,0,10)
 P.Size=UDim2.new(0,100,0,20)
 P.ZIndex=10
-P.Font=Enum.Font.SourceSans
-P.FontSize=Enum.FontSize.Size14
-P.Text="LOADING"
+P.Font=Enum.Font.SourceSansLight
+P.TextSize=20
+P.Text="Local Player:"
 P.TextColor3=currentText1
 P.TextXAlignment=Enum.TextXAlignment.Left
 table.insert(text1,P)
 
-Q.Name="appearance"
-Q.Parent=L
+Q.Name="Time"
+Q.Parent=M
 Q.BackgroundTransparency=1
 Q.BorderSizePixel=0
-Q.Position=UDim2.new(0,5,0,55)
+Q.Position=UDim2.new(0,5,0,105)
 Q.Size=UDim2.new(0,100,0,20)
 Q.ZIndex=10
 Q.Font=Enum.Font.SourceSans
 Q.FontSize=Enum.FontSize.Size14
-Q.Text="Appearance: LOADING"
+Q.Text="LOADING"
 Q.TextColor3=currentText1
 Q.TextXAlignment=Enum.TextXAlignment.Left
 table.insert(text1,Q)
 
-R.Name="maxplayers"
-R.Parent=L
+R.Name="appearance"
+R.Parent=M
 R.BackgroundTransparency=1
 R.BorderSizePixel=0
-R.Position=UDim2.new(0,5,0,175)
+R.Position=UDim2.new(0,5,0,55)
 R.Size=UDim2.new(0,100,0,20)
 R.ZIndex=10
 R.Font=Enum.Font.SourceSans
 R.FontSize=Enum.FontSize.Size14
-R.Text="LOADING"
+R.Text="Appearance: LOADING"
 R.TextColor3=currentText1
 R.TextXAlignment=Enum.TextXAlignment.Left
 table.insert(text1,R)
 
-S.Name="name"
-S.Parent=L
+S.Name="maxplayers"
+S.Parent=M
 S.BackgroundTransparency=1
 S.BorderSizePixel=0
-S.Position=UDim2.new(0,5,0,215)
-S.Size=UDim2.new(0,240,0,30)
+S.Position=UDim2.new(0,5,0,175)
+S.Size=UDim2.new(0,100,0,20)
 S.ZIndex=10
 S.Font=Enum.Font.SourceSans
 S.FontSize=Enum.FontSize.Size14
-S.Text="Place Name: LOADING"
+S.Text="LOADING"
 S.TextColor3=currentText1
-S.TextWrapped=true
 S.TextXAlignment=Enum.TextXAlignment.Left
-S.TextYAlignment=Enum.TextYAlignment.Top
 table.insert(text1,S)
 
-T.Name="placeid"
-T.Parent=L
+T.Name="name"
+T.Parent=M
 T.BackgroundTransparency=1
 T.BorderSizePixel=0
-T.Position=UDim2.new(0,5,0,195)
-T.Size=UDim2.new(0,100,0,20)
+T.Position=UDim2.new(0,5,0,215)
+T.Size=UDim2.new(0,240,0,30)
 T.ZIndex=10
 T.Font=Enum.Font.SourceSans
 T.FontSize=Enum.FontSize.Size14
-T.Text="Place ID: LOADING"
+T.Text="Place Name: LOADING"
 T.TextColor3=currentText1
+T.TextWrapped=true
 T.TextXAlignment=Enum.TextXAlignment.Left
+T.TextYAlignment=Enum.TextYAlignment.Top
 table.insert(text1,T)
 
-U.Name="playerid"
-U.Parent=L
+U.Name="placeid"
+U.Parent=M
 U.BackgroundTransparency=1
 U.BorderSizePixel=0
-U.Position=UDim2.new(0,5,0,35)
+U.Position=UDim2.new(0,5,0,195)
 U.Size=UDim2.new(0,100,0,20)
 U.ZIndex=10
 U.Font=Enum.Font.SourceSans
 U.FontSize=Enum.FontSize.Size14
-U.Text="Player ID: LOADING"
+U.Text="Place ID: LOADING"
 U.TextColor3=currentText1
 U.TextXAlignment=Enum.TextXAlignment.Left
 table.insert(text1,U)
 
-V.Name="players"
-V.Parent=L
+V.Name="playerid"
+V.Parent=M
 V.BackgroundTransparency=1
 V.BorderSizePixel=0
-V.Position=UDim2.new(0,5,0,155)
+V.Position=UDim2.new(0,5,0,35)
 V.Size=UDim2.new(0,100,0,20)
 V.ZIndex=10
 V.Font=Enum.Font.SourceSans
 V.FontSize=Enum.FontSize.Size14
-V.Text="LOADING"
+V.Text="Player ID: LOADING"
 V.TextColor3=currentText1
 V.TextXAlignment=Enum.TextXAlignment.Left
 table.insert(text1,V)
 
-W.Name="CopyApp"
-W.Parent=L
-W.BackgroundColor3=currentShade2
+W.Name="players"
+W.Parent=M
+W.BackgroundTransparency=1
 W.BorderSizePixel=0
-W.Position=UDim2.new(0,210,0,55)
-W.Size=UDim2.new(0,35,0,20)
-W.Font=Enum.Font.SourceSans
-W.TextSize=14
-W.Text="Copy"
-W.TextColor3=currentText1
+W.Position=UDim2.new(0,5,0,155)
+W.Size=UDim2.new(0,100,0,20)
 W.ZIndex=10
-table.insert(shade2,W)
+W.Font=Enum.Font.SourceSans
+W.FontSize=Enum.FontSize.Size14
+W.Text="LOADING"
+W.TextColor3=currentText1
+W.TextXAlignment=Enum.TextXAlignment.Left
 table.insert(text1,W)
 
-X.Name="CopyPlrID"
-X.Parent=L
+X.Name="CopyApp"
+X.Parent=M
 X.BackgroundColor3=currentShade2
 X.BorderSizePixel=0
-X.Position=UDim2.new(0,210,0,35)
+X.Position=UDim2.new(0,210,0,55)
 X.Size=UDim2.new(0,35,0,20)
 X.Font=Enum.Font.SourceSans
 X.TextSize=14
@@ -6821,11 +6836,11 @@ X.ZIndex=10
 table.insert(shade2,X)
 table.insert(text1,X)
 
-Y.Name="CopyPlcID"
-Y.Parent=L
+Y.Name="CopyPlrID"
+Y.Parent=M
 Y.BackgroundColor3=currentShade2
 Y.BorderSizePixel=0
-Y.Position=UDim2.new(0,210,0,195)
+Y.Position=UDim2.new(0,210,0,35)
 Y.Size=UDim2.new(0,35,0,20)
 Y.Font=Enum.Font.SourceSans
 Y.TextSize=14
@@ -6835,11 +6850,11 @@ Y.ZIndex=10
 table.insert(shade2,Y)
 table.insert(text1,Y)
 
-Z.Name="CopyPlcName"
-Z.Parent=L
+Z.Name="CopyPlcID"
+Z.Parent=M
 Z.BackgroundColor3=currentShade2
 Z.BorderSizePixel=0
-Z.Position=UDim2.new(0,210,0,215)
+Z.Position=UDim2.new(0,210,0,195)
 Z.Size=UDim2.new(0,35,0,20)
 Z.Font=Enum.Font.SourceSans
 Z.TextSize=14
@@ -6849,72 +6864,86 @@ Z.ZIndex=10
 table.insert(shade2,Z)
 table.insert(text1,Z)
 
-local _=L
-G:TweenPosition(UDim2.new(0.5,-130,0,100),"InOut","Quart",0.5,true,nil)
-wait(0.5)
-J.MouseButton1Click:Connect(function()
-G:TweenPosition(UDim2.new(0.5,-130,0,-500),"InOut","Quart",0.5,true,nil)
-wait(0.6)
-G:Destroy()
-D=true
-end)
-local ad=MarketplaceService:GetProductInfo(PlaceId)
-_.name.Text="Place Name: "..ad.Name
-_.playerid.Text="Player ID: "..F.UserId
-_.maxplayers.Text=Players.MaxPlayers.." Players Max"
-_.placeid.Text="Place ID: "..PlaceId
+_.Name="CopyPlcName"
+_.Parent=M
+_.BackgroundColor3=currentShade2
+_.BorderSizePixel=0
+_.Position=UDim2.new(0,210,0,215)
+_.Size=UDim2.new(0,35,0,20)
+_.Font=Enum.Font.SourceSans
+_.TextSize=14
+_.Text="Copy"
+_.TextColor3=currentText1
+_.ZIndex=10
+table.insert(shade2,_)
+table.insert(text1,_)
 
-W.MouseButton1Click:Connect(function()
-toClipboard(F.CharacterAppearanceId)
+local ad=M
+H:TweenPosition(UDim2.new(0.5,-130,0,100),"InOut","Quart",0.5,true,nil)
+wait(0.5)
+K.MouseButton1Click:Connect(function()
+H:TweenPosition(UDim2.new(0.5,-130,0,-500),"InOut","Quart",0.5,true,nil)
+wait(0.6)
+H:Destroy()
+E=true
 end)
+local ae=MarketplaceService:GetProductInfo(PlaceId)
+ad.name.Text="Place Name: "..ae.Name
+ad.playerid.Text="Player ID: "..G.UserId
+ad.maxplayers.Text=Players.MaxPlayers.." Players Max"
+ad.placeid.Text="Place ID: "..PlaceId
+
 X.MouseButton1Click:Connect(function()
-toClipboard(F.UserId)
+toClipboard(G.CharacterAppearanceId)
 end)
 Y.MouseButton1Click:Connect(function()
-toClipboard(PlaceId)
+toClipboard(G.UserId)
 end)
 Z.MouseButton1Click:Connect(function()
-toClipboard(ad.Name)
+toClipboard(PlaceId)
+end)
+_.MouseButton1Click:Connect(function()
+toClipboard(ae.Name)
 end)
 
 repeat
-V=Players:GetPlayers()
-_.players.Text=#V.." Player(s)"
-_.appearance.Text="Appearance: "..F.CharacterAppearanceId
-local ae=math.floor(workspace.DistributedGameTime)
-local af=math.floor(workspace.DistributedGameTime/60)
-local ag=math.floor(workspace.DistributedGameTime/60/60)
-local ah=ae-(af*60)
+W=Players:GetPlayers()
+ad.players.Text=#W.." Player(s)"
+ad.appearance.Text="Appearance: "..G.CharacterAppearanceId
+local af=math.floor(workspace.DistributedGameTime)
+local ag=math.floor(workspace.DistributedGameTime/60)
+local ah=math.floor(workspace.DistributedGameTime/60/60)
 local ai=af-(ag*60)
-if ag<1 then if ai<1 then
-_.Time.Text=ah.." Second(s)"else
-_.Time.Text=ai.." Minute(s), "..ah.." Second(s)"
+local aj=ag-(ah*60)
+if ah<1 then if aj<1 then
+ad.Time.Text=ai.." Second(s)"else
+ad.Time.Text=aj.." Minute(s), "..ai.." Second(s)"
 end
 else
-_.Time.Text=ag.." Hour(s), "..ai.." Minute(s), "..ah.." Second(s)"
+ad.Time.Text=ah.." Hour(s), "..aj.." Minute(s), "..ai.." Second(s)"
 end
 wait(1)
-until _.Parent==nil
+until ad.Parent==nil
 end)
 end)
 
-addcmd("jobid",{},function(ad,ag)
+addcmd("jobid",{},function(ad,ae)
 toClipboard("roblox://placeId="..PlaceId.."&gameInstanceId="..JobId)
 end)
 
-addcmd('notifyjobid',{},function(ad,ag)
+addcmd('notifyjobid',{},function(ad,ae)
 notify('JobId / PlaceId',JobId..' / '..PlaceId)
 end)
 
-addcmd('breakloops',{'break'},function(ad,ag)
-u=tick()
+addcmd('breakloops',{'break'},function(ad,ae)
+v=tick()
 end)
 
-addcmd('gametp',{'gameteleport'},function(ad,ag)
+addcmd('gametp',{'gameteleport'},function(ad,ae)
 TeleportService:Teleport(ad[1])
 end)
 
-addcmd("rejoin",{"rj"},function(ad,ag)
+addcmd("rejoin",{"rj"},function(ad,ae)
 if#Players:GetPlayers()<=1 then
 Players.LocalPlayer:Kick"\nRejoining..."
 wait()
@@ -6924,21 +6953,21 @@ TeleportService:TeleportToPlaceInstance(PlaceId,JobId,Players.LocalPlayer)
 end
 end)
 
-addcmd("autorejoin",{"autorj"},function(ad,ag)
+addcmd("autorejoin",{"autorj"},function(ad,ae)
 GuiService.ErrorMessageChanged:Connect(function()
 execCmd"rejoin"
 end)
 notify("Auto Rejoin","Auto rejoin enabled")
 end)
 
-addcmd("serverhop",{"shop"},function(ad,ag)
+addcmd("serverhop",{"shop"},function(ad,ae)
 
 local ah={}
 local ai=game:HttpGet("https://games.roblox.com/v1/games/"..PlaceId.."/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true")
-local E=HttpService:JSONDecode(ai)
+local aj=HttpService:JSONDecode(ai)
 
-if E and E.data then
-for F,G in next,E.data do
+if aj and aj.data then
+for F,G in next,aj.data do
 if type(G)=="table"and tonumber(G.playing)and tonumber(G.maxPlayers)and G.playing<G.maxPlayers and G.id~=JobId then
 table.insert(ah,1,G.id)
 end
@@ -6952,38 +6981,38 @@ return notify("Serverhop","Couldn't find a server.")
 end
 end)
 
-addcmd("exit",{},function(ad,ag)
+addcmd("exit",{},function(ad,ae)
 game:Shutdown()
 end)
 
 local ad
-addcmd('noclip',{},function(ag,ah)
+addcmd('noclip',{},function(ae,ah)
 Clip=false
 wait(0.1)
 local function NoclipLoop()
 if Clip==false and ah.Character~=nil then
-for ai,E in pairs(ah.Character:GetDescendants())do
-if E:IsA"BasePart"and E.CanCollide==true and E.Name~=floatName then
-E.CanCollide=false
+for ai,aj in pairs(ah.Character:GetDescendants())do
+if aj:IsA"BasePart"and aj.CanCollide==true and aj.Name~=floatName then
+aj.CanCollide=false
 end
 end
 end
 end
 ad=RunService.Stepped:Connect(NoclipLoop)
-if ag[1]and ag[1]=='nonotify'then return end
+if ae[1]and ae[1]=='nonotify'then return end
 notify('Noclip','Noclip Enabled')
 end)
 
-addcmd('clip',{'unnoclip'},function(ag,ah)
+addcmd('clip',{'unnoclip'},function(ae,ah)
 if ad then
 ad:Disconnect()
 end
 Clip=true
-if ag[1]and ag[1]=='nonotify'then return end
+if ae[1]and ae[1]=='nonotify'then return end
 notify('Noclip','Noclip Disabled')
 end)
 
-addcmd('togglenoclip',{},function(ag,ah)
+addcmd('togglenoclip',{},function(ae,ah)
 if Clip then
 execCmd'noclip'
 else
@@ -6995,13 +7024,13 @@ FLYING=false
 QEfly=true
 iyflyspeed=1
 vehicleflyspeed=1
-function sFLY(ag)
+function sFLY(ae)
 local ah=Players.LocalPlayer
 local ai=ah.Character or ah.CharacterAdded:Wait()
-local E=ai:FindFirstChildOfClass"Humanoid"
-if not E then
+local aj=ai:FindFirstChildOfClass"Humanoid"
+if not aj then
 repeat task.wait()until ai:FindFirstChildOfClass"Humanoid"
-E=ai:FindFirstChildOfClass"Humanoid"
+aj=ai:FindFirstChildOfClass"Humanoid"
 end
 
 if flyKeyDown or flyKeyUp then
@@ -7028,8 +7057,8 @@ K.MaxForce=Vector3.new(9e9,9e9,9e9)
 task.spawn(function()
 repeat task.wait()
 local L=workspace.CurrentCamera
-if not ag and E then
-E.PlatformStand=true
+if not ae and aj then
+aj.PlatformStand=true
 end
 
 if G.L+G.R~=0 or G.F+G.B~=0 or G.Q+G.E~=0 then
@@ -7053,28 +7082,30 @@ I=0
 J:Destroy()
 K:Destroy()
 
-if E then E.PlatformStand=false end
+if aj then aj.PlatformStand=false end
 end)
 end
 
 flyKeyDown=UserInputService.InputBegan:Connect(function(J,K)
+if K then return end
 if J.KeyCode==Enum.KeyCode.W then
-G.F=(ag and vehicleflyspeed or iyflyspeed)
+G.F=(ae and vehicleflyspeed or iyflyspeed)
 elseif J.KeyCode==Enum.KeyCode.S then
-G.B=-(ag and vehicleflyspeed or iyflyspeed)
+G.B=-(ae and vehicleflyspeed or iyflyspeed)
 elseif J.KeyCode==Enum.KeyCode.A then
-G.L=-(ag and vehicleflyspeed or iyflyspeed)
+G.L=-(ae and vehicleflyspeed or iyflyspeed)
 elseif J.KeyCode==Enum.KeyCode.D then
-G.R=(ag and vehicleflyspeed or iyflyspeed)
+G.R=(ae and vehicleflyspeed or iyflyspeed)
 elseif J.KeyCode==Enum.KeyCode.E and QEfly then
-G.Q=(ag and vehicleflyspeed or iyflyspeed)*2
+G.Q=(ae and vehicleflyspeed or iyflyspeed)*2
 elseif J.KeyCode==Enum.KeyCode.Q and QEfly then
-G.E=-(ag and vehicleflyspeed or iyflyspeed)*2
+G.E=-(ae and vehicleflyspeed or iyflyspeed)*2
 end
 pcall(function()camera.CameraType=Enum.CameraType.Track end)
 end)
 
 flyKeyUp=UserInputService.InputEnded:Connect(function(J,K)
+if K then return end
 if J.KeyCode==Enum.KeyCode.W then
 G.F=0
 elseif J.KeyCode==Enum.KeyCode.S then
@@ -7101,20 +7132,20 @@ end
 pcall(function()workspace.CurrentCamera.CameraType=Enum.CameraType.Custom end)
 end
 
-local ag=randomString()
+local ae=randomString()
 local ah=randomString()
 local ai
-local E
+local aj
 
 local F=function(F)
 pcall(function()
 FLYING=false
 local G=getRoot(F.Character)
-G:FindFirstChild(ag):Destroy()
+G:FindFirstChild(ae):Destroy()
 G:FindFirstChild(ah):Destroy()
 F.Character:FindFirstChildWhichIsA"Humanoid".PlatformStand=false
 ai:Disconnect()
-E:Disconnect()
+aj:Disconnect()
 end)
 end
 
@@ -7130,7 +7161,7 @@ local M=Vector3.new(9e9,9e9,9e9)
 
 local N=require(G.PlayerScripts:WaitForChild"PlayerModule":WaitForChild"ControlModule")
 local O=Instance.new"BodyVelocity"
-O.Name=ag
+O.Name=ae
 O.Parent=I
 O.MaxForce=L
 O.Velocity=L
@@ -7144,7 +7175,7 @@ P.D=50
 
 ai=G.CharacterAdded:Connect(function()
 local Q=Instance.new"BodyVelocity"
-Q.Name=ag
+Q.Name=ae
 Q.Parent=I
 Q.MaxForce=L
 Q.Velocity=L
@@ -7157,12 +7188,12 @@ R.P=1000
 R.D=50
 end)
 
-E=RunService.RenderStepped:Connect(function()
+aj=RunService.RenderStepped:Connect(function()
 I=getRoot(G.Character)
 J=workspace.CurrentCamera
-if G.Character:FindFirstChildWhichIsA"Humanoid"and I and I:FindFirstChild(ag)and I:FindFirstChild(ah)then
+if G.Character:FindFirstChildWhichIsA"Humanoid"and I and I:FindFirstChild(ae)and I:FindFirstChild(ah)then
 local Q=G.Character:FindFirstChildWhichIsA"Humanoid"
-local R=I:FindFirstChild(ag)
+local R=I:FindFirstChild(ae)
 local S=I:FindFirstChild(ah)
 
 R.MaxForce=M
@@ -7815,8 +7846,22 @@ notify("Incompatible Exploit","Your exploit does not support this command (missi
 end
 end)
 
-addcmd('clearerror',{'clearerrors'},function(O,P)
+addcmd("clearerror",{"clearerrors"},function(O,P)
 GuiService:ClearError()
+end)
+
+addcmd("antigameplaypaused",{},function(O,P)
+pcall(function()networkPaused:Disconnect()end)
+networkPaused=COREGUI.RobloxGui.ChildAdded:Connect(function(Q)
+if Q.Name=="CoreScripts/NetworkPause"then
+Q:Destroy()
+end
+end)
+COREGUI.RobloxGui["CoreScripts/NetworkPause"]:Destroy()
+end)
+
+addcmd("unantigameplaypaused",{},function(O,P)
+networkPaused:Disconnect()
 end)
 
 addcmd('clientantikick',{'antikick'},function(O,P)
@@ -8013,8 +8058,10 @@ end
 end
 end)
 
-addcmd('esptransparency',{},function(O,P)
-espTransparency=(O[1]and isNumber(O[1])and O[1])or 0.3
+addcmd("esptransparency",{},function(O,P)
+espTransparency=tonumber(O[1])or 0.3
+if ESPenabled then execCmd"esp"end
+if CHMSenabled then execCmd"chams"end
 updatesaves()
 end)
 
@@ -8217,21 +8264,21 @@ local Y=U-W
 local Z=math.exp(-V*T)
 
 local _=U+(X*T-Y*(V*T+1))*Z
-local aj=(V*T*(Y*V-X)+X)*Z
+local ak=(V*T*(Y*V-X)+X)*Z
 
 S.p=_
-S.v=aj
+S.v=ak
 
 return _
 end
 
-function Spring.Reset(aj,S)
-aj.p=S
-aj.v=S*0
+function Spring.Reset(ak,S)
+ak.p=S
+ak.v=S*0
 end
 end
 
-local aj=Vector3.new()
+local ak=Vector3.new()
 local S=Vector2.new()
 
 local T=Spring.new(5,Vector3.new())
@@ -8330,48 +8377,48 @@ local X=Q.ViewportSize
 local Y=2*math.tan(cameraFov/2)
 local Z=X.x/X.y*Y
 local _=V.rightVector
-local ak=V.upVector
-local al=V.lookVector
+local al=V.upVector
+local am=V.lookVector
 
-local am=Vector3.new()
-local an=512
+local an=Vector3.new()
+local ao=512
 
-for ao=0,1,0.5 do
 for ap=0,1,0.5 do
-local aq=(ao-0.5)*Z
-local ar=(ap-0.5)*Y
-local as=_*aq-ak*ar+al
-local at=V.p+as*W local
-au, av=workspace:FindPartOnRay(Ray.new(at,as.unit*an))
-local aw=(av-at).magnitude
-if an>aw then
-an=aw
-am=as.unit
+for aq=0,1,0.5 do
+local ar=(ap-0.5)*Z
+local as=(aq-0.5)*Y
+local at=_*ar-al*as+am
+local au=V.p+at*W local
+av, aw=workspace:FindPartOnRay(Ray.new(au,at.unit*ao))
+local ax=(aw-au).magnitude
+if ao>ax then
+ao=ax
+an=at.unit
 end
 end
 end
 
-return al:Dot(am)*an
+return am:Dot(an)*ao
 end
 
-local function StepFreecam(ak)
-local al=T:Update(ak,Input.Vel(ak))
-local am=U:Update(ak,Input.Pan(ak))
+local function StepFreecam(al)
+local am=T:Update(al,Input.Vel(al))
+local an=U:Update(al,Input.Pan(al))
 
-local an=math.sqrt(math.tan(math.rad(35))/math.tan(math.rad(cameraFov/2)))
+local ao=math.sqrt(math.tan(math.rad(35))/math.tan(math.rad(cameraFov/2)))
 
-S=S+am*Vector2.new(0.75,1)*8*(ak/an)
+S=S+an*Vector2.new(0.75,1)*8*(al/ao)
 S=Vector2.new(math.clamp(S.x,-math.rad(90),math.rad(90)),S.y%(2*math.pi))
 
-local ao=CFrame.new(aj)*CFrame.fromOrientation(S.x,S.y,0)*CFrame.new(al*Vector3.new(1,1,1)*64*ak)
-aj=ao.p
+local ap=CFrame.new(ak)*CFrame.fromOrientation(S.x,S.y,0)*CFrame.new(am*Vector3.new(1,1,1)*64*al)
+ak=ap.p
 
-Q.CFrame=ao
-Q.Focus=ao*CFrame.new(0,0,-GetFocusDistance(ao))
+Q.CFrame=ap
+Q.Focus=ap*CFrame.new(0,0,-GetFocusDistance(ap))
 Q.FieldOfView=cameraFov
 end
 
-local ak={}do
+local al={}do
 mouseBehavior=""
 mouseIconEnabled=""
 cameraType=""
@@ -8379,7 +8426,7 @@ cameraFocus=""
 cameraCFrame=""
 cameraFieldOfView=""
 
-function ak.Push()
+function al.Push()
 cameraFieldOfView=Q.FieldOfView
 Q.FieldOfView=70
 
@@ -8396,7 +8443,7 @@ mouseBehavior=UserInputService.MouseBehavior
 UserInputService.MouseBehavior=Enum.MouseBehavior.Default
 end
 
-function ak.Pop()
+function al.Pop()
 Q.FieldOfView=70
 
 Q.CameraType=cameraType
@@ -8416,22 +8463,22 @@ mouseBehavior=nil
 end
 end
 
-function StartFreecam(al)
+function StartFreecam(am)
 if fcRunning then
 StopFreecam()
 end
-local am=Q.CFrame
-if al then
-am=al
+local an=Q.CFrame
+if am then
+an=am
 end
 S=Vector2.new()
-aj=am.p
+ak=an.p
 cameraFov=Q.FieldOfView
 
 T:Reset(Vector3.new())
 U:Reset(Vector2.new())
 
-ak.Push()
+al.Push()
 RunService:BindToRenderStep("Freecam",Enum.RenderPriority.Camera.Value,StepFreecam)
 Input.StartCapture()
 fcRunning=true
@@ -8441,490 +8488,490 @@ function StopFreecam()
 if not fcRunning then return end
 Input.StopCapture()
 RunService:UnbindFromRenderStep"Freecam"
-ak.Pop()
+al.Pop()
 workspace.Camera.FieldOfView=70
 fcRunning=false
 end
 
-addcmd('freecam',{'fc'},function(al,am)
+addcmd('freecam',{'fc'},function(am,an)
 StartFreecam()
 end)
 
-addcmd('freecampos',{'fcpos','fcp','freecamposition','fcposition'},function(al,am)
-if not al[1]then return end
-local an=CFrame.new(al[1],al[2],al[3])
-StartFreecam(an)
+addcmd('freecampos',{'fcpos','fcp','freecamposition','fcposition'},function(am,an)
+if not am[1]then return end
+local ao=CFrame.new(am[1],am[2],am[3])
+StartFreecam(ao)
 end)
 
-addcmd('freecamwaypoint',{'fcwp'},function(al,am)
-local an=tostring(getstring(1,al))
-if am.Character then
-for ao,ap in pairs(WayPoints)do
-local aq=WayPoints[ao].COORD[1]
-local ar=WayPoints[ao].COORD[2]
-local as=WayPoints[ao].COORD[3]
-if tostring(WayPoints[ao].NAME):lower()==tostring(an):lower()then
-StartFreecam(CFrame.new(aq,ar,as))
+addcmd('freecamwaypoint',{'fcwp'},function(am,an)
+local ao=tostring(getstring(1,am))
+if an.Character then
+for ap,aq in pairs(WayPoints)do
+local ar=WayPoints[ap].COORD[1]
+local as=WayPoints[ap].COORD[2]
+local at=WayPoints[ap].COORD[3]
+if tostring(WayPoints[ap].NAME):lower()==tostring(ao):lower()then
+StartFreecam(CFrame.new(ar,as,at))
 end
 end
-for ao,ap in pairs(pWayPoints)do
-if tostring(pWayPoints[ao].NAME):lower()==tostring(an):lower()then
-StartFreecam(CFrame.new(pWayPoints[ao].COORD[1].Position))
+for ap,aq in pairs(pWayPoints)do
+if tostring(pWayPoints[ap].NAME):lower()==tostring(ao):lower()then
+StartFreecam(CFrame.new(pWayPoints[ap].COORD[1].Position))
 end
 end
-end
-end)
-
-addcmd('freecamgoto',{'fcgoto','freecamtp','fctp'},function(al,am)
-local an=getPlayer(al[1],am)
-for ao,ap in pairs(an)do
-StartFreecam(getRoot(Players[ap].Character).CFrame)
 end
 end)
 
-addcmd('unfreecam',{'nofreecam','unfc','nofc'},function(al,am)
+addcmd('freecamgoto',{'fcgoto','freecamtp','fctp'},function(am,an)
+local ao=getPlayer(am[1],an)
+for ap,aq in pairs(ao)do
+StartFreecam(getRoot(Players[aq].Character).CFrame)
+end
+end)
+
+addcmd('unfreecam',{'nofreecam','unfc','nofc'},function(am,an)
 StopFreecam()
 end)
 
-addcmd('freecamspeed',{'fcspeed'},function(al,am)
-local an=al[1]or 1
-if isNumber(an)then
-NAV_KEYBOARD_SPEED=Vector3.new(an,an,an)
+addcmd('freecamspeed',{'fcspeed'},function(am,an)
+local ao=am[1]or 1
+if isNumber(ao)then
+NAV_KEYBOARD_SPEED=Vector3.new(ao,ao,ao)
 end
 end)
 
-addcmd('notifyfreecamposition',{'notifyfcpos'},function(al,am)
+addcmd('notifyfreecamposition',{'notifyfcpos'},function(am,an)
 if fcRunning then
-local an,ao,ap=workspace.CurrentCamera.CFrame.Position.X,workspace.CurrentCamera.CFrame.Position.Y,workspace.CurrentCamera.CFrame.Position.Z
-local aq,ar=string.format,math.round
-notify("Current Position",aq("%s, %s, %s",ar(an),ar(ao),ar(ap)))
+local ao,ap,aq=workspace.CurrentCamera.CFrame.Position.X,workspace.CurrentCamera.CFrame.Position.Y,workspace.CurrentCamera.CFrame.Position.Z
+local ar,as=string.format,math.round
+notify("Current Position",ar("%s, %s, %s",as(ao),as(ap),as(aq)))
 end
 end)
 
-addcmd('copyfreecamposition',{'copyfcpos'},function(al,am)
+addcmd('copyfreecamposition',{'copyfcpos'},function(am,an)
 if fcRunning then
-local an,ao,ap=workspace.CurrentCamera.CFrame.Position.X,workspace.CurrentCamera.CFrame.Position.Y,workspace.CurrentCamera.CFrame.Position.Z
-local aq,ar=string.format,math.round
-toClipboard(aq("%s, %s, %s",ar(an),ar(ao),ar(ap)))
+local ao,ap,aq=workspace.CurrentCamera.CFrame.Position.X,workspace.CurrentCamera.CFrame.Position.Y,workspace.CurrentCamera.CFrame.Position.Z
+local ar,as=string.format,math.round
+toClipboard(ar("%s, %s, %s",as(ao),as(ap),as(aq)))
 end
 end)
 
-addcmd('gotocamera',{'gotocam','tocam'},function(al,am)
-getRoot(am.Character).CFrame=workspace.Camera.CFrame
+addcmd('gotocamera',{'gotocam','tocam'},function(am,an)
+getRoot(an.Character).CFrame=workspace.Camera.CFrame
 end)
 
-addcmd('tweengotocamera',{'tweengotocam','tgotocam','ttocam'},function(al,am)
-TweenService:Create(getRoot(am.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=workspace.Camera.CFrame}):Play()
+addcmd('tweengotocamera',{'tweengotocam','tgotocam','ttocam'},function(am,an)
+TweenService:Create(getRoot(an.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=workspace.Camera.CFrame}):Play()
 end)
 
-addcmd('fov',{},function(al,am)
-local an=al[1]or 70
-if isNumber(an)then
-workspace.CurrentCamera.FieldOfView=an
+addcmd('fov',{},function(am,an)
+local ao=am[1]or 70
+if isNumber(ao)then
+workspace.CurrentCamera.FieldOfView=ao
 end
 end)
 
-local al=Players.LocalPlayer.CameraMaxZoomDistance
-local am=Players.LocalPlayer.CameraMinZoomDistance
-addcmd('lookat',{},function(an,ao)
-if ao.CameraMaxZoomDistance~=0.5 then
-al=ao.CameraMaxZoomDistance
-am=ao.CameraMinZoomDistance
+local am=Players.LocalPlayer.CameraMaxZoomDistance
+local an=Players.LocalPlayer.CameraMinZoomDistance
+addcmd('lookat',{},function(ao,ap)
+if ap.CameraMaxZoomDistance~=0.5 then
+am=ap.CameraMaxZoomDistance
+an=ap.CameraMinZoomDistance
 end
-ao.CameraMaxZoomDistance=0.5
-ao.CameraMinZoomDistance=0.5
+ap.CameraMaxZoomDistance=0.5
+ap.CameraMinZoomDistance=0.5
 wait()
-local ap=getPlayer(an[1],ao)
-for aq,ar in pairs(ap)do
-local as=Players[ar].Character
-if as and as:FindFirstChild'Head'then
-workspace.CurrentCamera.CFrame=CFrame.new(workspace.CurrentCamera.CFrame.p,as.Head.CFrame.p)
+local aq=getPlayer(ao[1],ap)
+for ar,as in pairs(aq)do
+local at=Players[as].Character
+if at and at:FindFirstChild'Head'then
+workspace.CurrentCamera.CFrame=CFrame.new(workspace.CurrentCamera.CFrame.p,at.Head.CFrame.p)
 wait(0.1)
 end
 end
-ao.CameraMaxZoomDistance=al
-ao.CameraMinZoomDistance=am
+ap.CameraMaxZoomDistance=am
+ap.CameraMinZoomDistance=an
 end)
 
-addcmd('fixcam',{'restorecam'},function(an,ao)
+addcmd('fixcam',{'restorecam'},function(ao,ap)
 StopFreecam()
 execCmd'unview'
 workspace.CurrentCamera:remove()
 wait(.1)
-repeat wait()until ao.Character~=nil
-workspace.CurrentCamera.CameraSubject=ao.Character:FindFirstChildWhichIsA'Humanoid'
+repeat wait()until ap.Character~=nil
+workspace.CurrentCamera.CameraSubject=ap.Character:FindFirstChildWhichIsA'Humanoid'
 workspace.CurrentCamera.CameraType="Custom"
-ao.CameraMinZoomDistance=0.5
-ao.CameraMaxZoomDistance=400
-ao.CameraMode="Classic"
-ao.Character.Head.Anchored=false
+ap.CameraMinZoomDistance=0.5
+ap.CameraMaxZoomDistance=400
+ap.CameraMode="Classic"
+ap.Character.Head.Anchored=false
 end)
 
-addcmd("enableshiftlock",{"enablesl","shiftlock"},function(an,ao)
+addcmd("enableshiftlock",{"enablesl","shiftlock"},function(ao,ap)
 local function enableShiftlock()
-ao.DevEnableMouseLock=true
+ap.DevEnableMouseLock=true
 end
-ao:GetPropertyChangedSignal"DevEnableMouseLock":Connect(enableShiftlock)
+ap:GetPropertyChangedSignal"DevEnableMouseLock":Connect(enableShiftlock)
 enableShiftlock()
 notify("Shiftlock","Shift lock should now be available")
 end)
 
-addcmd('firstp',{},function(an,ao)
-ao.CameraMode="LockFirstPerson"
+addcmd('firstp',{},function(ao,ap)
+ap.CameraMode="LockFirstPerson"
 end)
 
-addcmd('thirdp',{},function(an,ao)
-ao.CameraMode="Classic"
+addcmd('thirdp',{},function(ao,ap)
+ap.CameraMode="Classic"
 end)
 
-addcmd('noclipcam',{'nccam'},function(an,ao)
-local ap=(debug and debug.setconstant)or setconstant
-local aq=(debug and debug.getconstants)or getconstants
-if not ap or not getgc or not aq then
+addcmd('noclipcam',{'nccam'},function(ao,ap)
+local aq=(debug and debug.setconstant)or setconstant
+local ar=(debug and debug.getconstants)or getconstants
+if not aq or not getgc or not ar then
 return notify('Incompatible Exploit','Your exploit does not support this command (missing setconstant or getconstants or getgc)')
 end
-local ar=ao.PlayerScripts.PlayerModule.CameraModule.ZoomController.Popper
-for as,at in pairs(getgc())do
-if type(at)=='function'and getfenv(at).script==ar then
-for au,av in pairs(aq(at))do
-if tonumber(av)==.25 then
-ap(at,au,0)
-elseif tonumber(av)==0 then
-ap(at,au,.25)
+local as=ap.PlayerScripts.PlayerModule.CameraModule.ZoomController.Popper
+for at,au in pairs(getgc())do
+if type(au)=='function'and getfenv(au).script==as then
+for av,aw in pairs(ar(au))do
+if tonumber(aw)==.25 then
+aq(au,av,0)
+elseif tonumber(aw)==0 then
+aq(au,av,.25)
 end
 end
 end
 end
 end)
 
-addcmd('maxzoom',{},function(an,ao)
-ao.CameraMaxZoomDistance=an[1]
+addcmd('maxzoom',{},function(ao,ap)
+ap.CameraMaxZoomDistance=ao[1]
 end)
 
-addcmd('minzoom',{},function(an,ao)
-ao.CameraMinZoomDistance=an[1]
+addcmd('minzoom',{},function(ao,ap)
+ap.CameraMinZoomDistance=ao[1]
 end)
 
-addcmd('camdistance',{},function(an,ao)
-local ap=ao.CameraMaxZoomDistance
-local aq=ao.CameraMinZoomDistance
-if ap<tonumber(an[1])then
-ap=an[1]
+addcmd('camdistance',{},function(ao,ap)
+local aq=ap.CameraMaxZoomDistance
+local ar=ap.CameraMinZoomDistance
+if aq<tonumber(ao[1])then
+aq=ao[1]
 end
-ao.CameraMaxZoomDistance=an[1]
-ao.CameraMinZoomDistance=an[1]
+ap.CameraMaxZoomDistance=ao[1]
+ap.CameraMinZoomDistance=ao[1]
 wait()
-ao.CameraMaxZoomDistance=ap
-ao.CameraMinZoomDistance=aq
+ap.CameraMaxZoomDistance=aq
+ap.CameraMinZoomDistance=ar
 end)
 
-addcmd('unlockws',{'unlockworkspace'},function(an,ao)
-for ap,aq in pairs(workspace:GetDescendants())do
-if aq:IsA"BasePart"then
-aq.Locked=false
-end
-end
-end)
-
-addcmd('lockws',{'lockworkspace'},function(an,ao)
-for ap,aq in pairs(workspace:GetDescendants())do
-if aq:IsA"BasePart"then
-aq.Locked=true
-end
-end
-end)
-
-addcmd('delete',{'remove'},function(an,ao)
-for ap,aq in pairs(workspace:GetDescendants())do
-if aq.Name:lower()==getstring(1,an):lower()then
-aq:Destroy()
-end
-end
-notify('Item(s) Deleted','Deleted '..getstring(1,an))
-end)
-
-addcmd('deleteclass',{'removeclass','deleteclassname','removeclassname','dc'},function(an,ao)
-for ap,aq in pairs(workspace:GetDescendants())do
-if aq.ClassName:lower()==getstring(1,an):lower()then
-aq:Destroy()
-end
-end
-notify('Item(s) Deleted','Deleted items with ClassName '..getstring(1,an))
-end)
-
-addcmd('chardelete',{'charremove','cd'},function(an,ao)
-for ap,aq in pairs(ao.Character:GetDescendants())do
-if aq.Name:lower()==getstring(1,an):lower()then
-aq:Destroy()
-end
-end
-notify('Item(s) Deleted','Deleted '..getstring(1,an))
-end)
-
-addcmd('chardeleteclass',{'charremoveclass','chardeleteclassname','charremoveclassname','cdc'},function(an,ao)
-for ap,aq in pairs(ao.Character:GetDescendants())do
-if aq.ClassName:lower()==getstring(1,an):lower()then
-aq:Destroy()
-end
-end
-notify('Item(s) Deleted','Deleted items with ClassName '..getstring(1,an))
-end)
-
-addcmd('deletevelocity',{'dv','removevelocity','removeforces'},function(an,ao)
-for ap,aq in pairs(ao.Character:GetDescendants())do
-if aq:IsA"BodyVelocity"or aq:IsA"BodyGyro"or aq:IsA"RocketPropulsion"or aq:IsA"BodyThrust"or aq:IsA"BodyAngularVelocity"or aq:IsA"AngularVelocity"or aq:IsA"BodyForce"or aq:IsA"VectorForce"or aq:IsA"LineForce"then
-aq:Destroy()
-end
-end
-end)
-
-addcmd('deleteinvisparts',{'deleteinvisibleparts','dip'},function(an,ao)
-for ap,aq in pairs(workspace:GetDescendants())do
-if aq:IsA"BasePart"and aq.Transparency==1 and aq.CanCollide then
-aq:Destroy()
-end
-end
-end)
-
-local an={}
-addcmd('invisibleparts',{'invisparts'},function(ao,ap)
+addcmd('unlockws',{'unlockworkspace'},function(ao,ap)
 for aq,ar in pairs(workspace:GetDescendants())do
-if ar:IsA"BasePart"and ar.Transparency==1 then
-if not table.find(an,ar)then
-table.insert(an,ar)
-end
-ar.Transparency=0
+if ar:IsA"BasePart"then
+ar.Locked=false
 end
 end
 end)
 
-addcmd('uninvisibleparts',{'uninvisparts'},function(ao,ap)
-for aq,ar in pairs(an)do
-ar.Transparency=1
+addcmd('lockws',{'lockworkspace'},function(ao,ap)
+for aq,ar in pairs(workspace:GetDescendants())do
+if ar:IsA"BasePart"then
+ar.Locked=true
 end
-an={}
-end)
-
-addcmd("btools",{},function(ao,ap)
-for aq=1,4 do
-local ar=Instance.new"HopperBin"
-ar.BinType=aq
-ar.Name=randomString()
-ar.Parent=ap:FindFirstChildWhichIsA"Backpack"
 end
 end)
 
-addcmd("f3x",{"fex"},function(ao,ap)
+addcmd('delete',{'remove'},function(ao,ap)
+for aq,ar in pairs(workspace:GetDescendants())do
+if ar.Name:lower()==getstring(1,ao):lower()then
+ar:Destroy()
+end
+end
+notify('Item(s) Deleted','Deleted '..getstring(1,ao))
+end)
+
+addcmd('deleteclass',{'removeclass','deleteclassname','removeclassname','dc'},function(ao,ap)
+for aq,ar in pairs(workspace:GetDescendants())do
+if ar.ClassName:lower()==getstring(1,ao):lower()then
+ar:Destroy()
+end
+end
+notify('Item(s) Deleted','Deleted items with ClassName '..getstring(1,ao))
+end)
+
+addcmd('chardelete',{'charremove','cd'},function(ao,ap)
+for aq,ar in pairs(ap.Character:GetDescendants())do
+if ar.Name:lower()==getstring(1,ao):lower()then
+ar:Destroy()
+end
+end
+notify('Item(s) Deleted','Deleted '..getstring(1,ao))
+end)
+
+addcmd('chardeleteclass',{'charremoveclass','chardeleteclassname','charremoveclassname','cdc'},function(ao,ap)
+for aq,ar in pairs(ap.Character:GetDescendants())do
+if ar.ClassName:lower()==getstring(1,ao):lower()then
+ar:Destroy()
+end
+end
+notify('Item(s) Deleted','Deleted items with ClassName '..getstring(1,ao))
+end)
+
+addcmd('deletevelocity',{'dv','removevelocity','removeforces'},function(ao,ap)
+for aq,ar in pairs(ap.Character:GetDescendants())do
+if ar:IsA"BodyVelocity"or ar:IsA"BodyGyro"or ar:IsA"RocketPropulsion"or ar:IsA"BodyThrust"or ar:IsA"BodyAngularVelocity"or ar:IsA"AngularVelocity"or ar:IsA"BodyForce"or ar:IsA"VectorForce"or ar:IsA"LineForce"then
+ar:Destroy()
+end
+end
+end)
+
+addcmd('deleteinvisparts',{'deleteinvisibleparts','dip'},function(ao,ap)
+for aq,ar in pairs(workspace:GetDescendants())do
+if ar:IsA"BasePart"and ar.Transparency==1 and ar.CanCollide then
+ar:Destroy()
+end
+end
+end)
+
+local ao={}
+addcmd('invisibleparts',{'invisparts'},function(ap,aq)
+for ar,as in pairs(workspace:GetDescendants())do
+if as:IsA"BasePart"and as.Transparency==1 then
+if not table.find(ao,as)then
+table.insert(ao,as)
+end
+as.Transparency=0
+end
+end
+end)
+
+addcmd('uninvisibleparts',{'uninvisparts'},function(ap,aq)
+for ar,as in pairs(ao)do
+as.Transparency=1
+end
+ao={}
+end)
+
+addcmd("btools",{},function(ap,aq)
+for ar=1,4 do
+local as=Instance.new"HopperBin"
+as.BinType=ar
+as.Name=randomString()
+as.Parent=aq:FindFirstChildWhichIsA"Backpack"
+end
+end)
+
+addcmd("f3x",{"fex"},function(ap,aq)
 loadstring(game:HttpGet"https://raw.githubusercontent.com/infyiff/backup/refs/heads/main/f3x.lua")()
 end)
 
-addcmd("partpath",{"partname"},function(ao,ap)
+addcmd("partpath",{"partname"},function(ap,aq)
 selectPart()
 end)
 
-addcmd("antiafk",{"antiidle"},function(ao,ap)
+addcmd("antiafk",{"antiidle"},function(ap,aq)
 if getconnections then
-for aq,ar in pairs(getconnections(ap.Idled))do
-if ar.Disable then
-ar.Disable(ar)
-elseif ar.Disconnect then
-ar.Disconnect(ar)
+for ar,as in pairs(getconnections(aq.Idled))do
+if as.Disable then
+as.Disable(as)
+elseif as.Disconnect then
+as.Disconnect(as)
 end
 end
 else
-ap.Idled:Connect(function()
+aq.Idled:Connect(function()
 Services.VirtualUser:CaptureController()
 Services.VirtualUser:ClickButton2(Vector2.new())
 end)
 end
-if not(ao[1]and tostring(ao[1])=="nonotify")then notify("Anti Idle","Anti idle is enabled")end
+if not(ap[1]and tostring(ap[1])=="nonotify")then notify("Anti Idle","Anti idle is enabled")end
 end)
 
-addcmd("datalimit",{},function(ao,ap)
-local aq=tonumber(ao[1])
-if aq then
-Services.NetworkClient:SetOutgoingKBPSLimit(aq)
+addcmd("datalimit",{},function(ap,aq)
+local ar=tonumber(ap[1])
+if ar then
+Services.NetworkClient:SetOutgoingKBPSLimit(ar)
 end
 end)
 
-addcmd("replicationlag",{"backtrack"},function(ao,ap)
-if tonumber(ao[1])then
-settings():GetService"NetworkSettings".IncomingReplicationLag=ao[1]
+addcmd("replicationlag",{"backtrack"},function(ap,aq)
+if tonumber(ap[1])then
+settings():GetService"NetworkSettings".IncomingReplicationLag=ap[1]
 end
 end)
 
-addcmd("noprompts",{"nopurchaseprompts"},function(ao,ap)
+addcmd("noprompts",{"nopurchaseprompts"},function(ap,aq)
 COREGUI.PurchasePromptApp.Enabled=false
 end)
 
-addcmd("showprompts",{"showpurchaseprompts"},function(ao,ap)
+addcmd("showprompts",{"showpurchaseprompts"},function(ap,aq)
 COREGUI.PurchasePromptApp.Enabled=true
 end)
 
-promptNewRig=function(ao,ap)
-local aq=ao.Character:FindFirstChildWhichIsA"Humanoid"
-if aq then
-AvatarEditorService:PromptSaveAvatar(aq.HumanoidDescription,Enum.HumanoidRigType[ap])
-local ar=AvatarEditorService.PromptSaveAvatarCompleted:Wait()
-if ar==Enum.AvatarPromptResult.Success then
+promptNewRig=function(ap,aq)
+local ar=ap.Character:FindFirstChildWhichIsA"Humanoid"
+if ar then
+AvatarEditorService:PromptSaveAvatar(ar.HumanoidDescription,Enum.HumanoidRigType[aq])
+local as=AvatarEditorService.PromptSaveAvatarCompleted:Wait()
+if as==Enum.AvatarPromptResult.Success then
 execCmd"reset"
 end
 end
 end
 
-addcmd("promptr6",{},function(ao,ap)
-promptNewRig(ap,"R6")
+addcmd("promptr6",{},function(ap,aq)
+promptNewRig(aq,"R6")
 end)
 
-addcmd("promptr15",{},function(ao,ap)
-promptNewRig(ap,"R15")
+addcmd("promptr15",{},function(ap,aq)
+promptNewRig(aq,"R15")
 end)
 
-addcmd("wallwalk",{"walkonwalls"},function(ao,ap)
+addcmd("wallwalk",{"walkonwalls"},function(ap,aq)
 loadstring(game:HttpGet"https://raw.githubusercontent.com/infyiff/backup/main/wallwalker.lua")()
 end)
 
-addcmd('age',{},function(ao,ap)
-local aq=getPlayer(ao[1],ap)
-local ar={}
-for as,at in pairs(aq)do
-local au=Players[at]
-table.insert(ar,au.Name.."'s age is: "..au.AccountAge)
+addcmd('age',{},function(ap,aq)
+local ar=getPlayer(ap[1],aq)
+local as={}
+for at,au in pairs(ar)do
+local av=Players[au]
+table.insert(as,av.Name.."'s age is: "..av.AccountAge)
 end
-notify('Account Age',table.concat(ar,',\n'))
+notify('Account Age',table.concat(as,',\n'))
 end)
 
-addcmd('chatage',{},function(ao,ap)
-local aq=getPlayer(ao[1],ap)
-local ar={}
-for as,at in pairs(aq)do
-local au=Players[at]
-table.insert(ar,au.Name.."'s age is: "..au.AccountAge)
+addcmd('chatage',{},function(ap,aq)
+local ar=getPlayer(ap[1],aq)
+local as={}
+for at,au in pairs(ar)do
+local av=Players[au]
+table.insert(as,av.Name.."'s age is: "..av.AccountAge)
 end
-local as=table.concat(ar,', ')
-chatMessage(as)
+local at=table.concat(as,', ')
+chatMessage(at)
 end)
 
-addcmd('joindate',{'jd'},function(ao,ap)
-local aq=getPlayer(ao[1],ap)
-local ar={}
-for as,at in pairs(aq)do
-local au=Players[at]
+addcmd('joindate',{'jd'},function(ap,aq)
+local ar=getPlayer(ap[1],aq)
+local as={}
+for at,au in pairs(ar)do
+local av=Players[au]
 
-local av=au.AccountAge*24*60*60
-local aw=os.time()
-local V=au.Name.." joined: "..os.date("%m/%d/%y",aw-av)
+local aw=av.AccountAge*24*60*60
+local ax=os.time()
+local V=av.Name.." joined: "..os.date("%m/%d/%y",ax-aw)
 
-table.insert(ar,V)
+table.insert(as,V)
 end
-notify('Join Date (Month/Day/Year)',table.concat(ar,',\n'))
+notify('Join Date (Month/Day/Year)',table.concat(as,',\n'))
 end)
 
-addcmd('chatjoindate',{'cjd'},function(ao,ap)
-local aq=getPlayer(ao[1],ap)
-local ar={}
-for as,at in pairs(aq)do
-local au=Players[at]
+addcmd('chatjoindate',{'cjd'},function(ap,aq)
+local ar=getPlayer(ap[1],aq)
+local as={}
+for at,au in pairs(ar)do
+local av=Players[au]
 
-local av=au.AccountAge*24*60*60
-local aw=os.time()
-local V=au.Name.." joined: "..os.date("%m/%d/%y",aw-av)
+local aw=av.AccountAge*24*60*60
+local ax=os.time()
+local V=av.Name.." joined: "..os.date("%m/%d/%y",ax-aw)
 
-table.insert(ar,V)
+table.insert(as,V)
 end
-local as=table.concat(ar,', ')
-chatMessage(as)
+local at=table.concat(as,', ')
+chatMessage(at)
 end)
 
-addcmd('copyname',{'copyuser'},function(ao,ap)
-local aq=getPlayer(ao[1],ap)
-for ar,as in pairs(aq)do
-local at=tostring(Players[as].Name)
-toClipboard(at)
-end
-end)
-
-addcmd('userid',{'id'},function(ao,ap)
-local aq=getPlayer(ao[1],ap)
-for ar,as in pairs(aq)do
-local at=tostring(Players[as].UserId)
-notify('User ID',at)
+addcmd('copyname',{'copyuser'},function(ap,aq)
+local ar=getPlayer(ap[1],aq)
+for as,at in pairs(ar)do
+local au=tostring(Players[at].Name)
+toClipboard(au)
 end
 end)
 
-addcmd("copyplaceid",{"placeid"},function(ao,ap)
+addcmd('userid',{'id'},function(ap,aq)
+local ar=getPlayer(ap[1],aq)
+for as,at in pairs(ar)do
+local au=tostring(Players[at].UserId)
+notify('User ID',au)
+end
+end)
+
+addcmd("copyplaceid",{"placeid"},function(ap,aq)
 toClipboard(PlaceId)
 end)
 
-addcmd("copygameid",{"gameid"},function(ao,ap)
+addcmd("copygameid",{"gameid"},function(ap,aq)
 toClipboard(game.GameId)
 end)
 
-addcmd('copyid',{'copyuserid'},function(ao,ap)
-local aq=getPlayer(ao[1],ap)
-for ar,as in pairs(aq)do
-local at=tostring(Players[as].UserId)
-toClipboard(at)
+addcmd('copyid',{'copyuserid'},function(ap,aq)
+local ar=getPlayer(ap[1],aq)
+for as,at in pairs(ar)do
+local au=tostring(Players[at].UserId)
+toClipboard(au)
 end
 end)
 
-addcmd('creatorid',{'creator'},function(ao,ap)
+addcmd('creatorid',{'creator'},function(ap,aq)
 if game.CreatorType==Enum.CreatorType.User then
 notify('Creator ID',game.CreatorId)
 elseif game.CreatorType==Enum.CreatorType.Group then
-local aq=GroupService:GetGroupInfoAsync(game.CreatorId).Owner.Id
-ap.UserId=aq
-notify('Creator ID',aq)
+local ar=GroupService:GetGroupInfoAsync(game.CreatorId).Owner.Id
+aq.UserId=ar
+notify('Creator ID',ar)
 end
 end)
 
-addcmd('copycreatorid',{'copycreator'},function(ao,ap)
+addcmd('copycreatorid',{'copycreator'},function(ap,aq)
 if game.CreatorType==Enum.CreatorType.User then
 toClipboard(game.CreatorId)
 notify('Copied ID','Copied creator ID to clipboard')
 elseif game.CreatorType==Enum.CreatorType.Group then
-local aq=GroupService:GetGroupInfoAsync(game.CreatorId).Owner.Id
-toClipboard(aq)
+local ar=GroupService:GetGroupInfoAsync(game.CreatorId).Owner.Id
+toClipboard(ar)
 notify('Copied ID','Copied creator ID to clipboard')
 end
 end)
 
-addcmd('setcreatorid',{'setcreator'},function(ao,ap)
+addcmd('setcreatorid',{'setcreator'},function(ap,aq)
 if game.CreatorType==Enum.CreatorType.User then
-ap.UserId=game.CreatorId
+aq.UserId=game.CreatorId
 notify('Set ID','Set UserId to '..game.CreatorId)
 elseif game.CreatorType==Enum.CreatorType.Group then
-local aq=GroupService:GetGroupInfoAsync(game.CreatorId).Owner.Id
-ap.UserId=aq
-notify('Set ID','Set UserId to '..aq)
+local ar=GroupService:GetGroupInfoAsync(game.CreatorId).Owner.Id
+aq.UserId=ar
+notify('Set ID','Set UserId to '..ar)
 end
 end)
 
-addcmd('appearanceid',{'aid'},function(ao,ap)
-local aq=getPlayer(ao[1],ap)
-for ar,as in pairs(aq)do
-local at=tostring(Players[as].CharacterAppearanceId)
-notify('Appearance ID',at)
+addcmd('appearanceid',{'aid'},function(ap,aq)
+local ar=getPlayer(ap[1],aq)
+for as,at in pairs(ar)do
+local au=tostring(Players[at].CharacterAppearanceId)
+notify('Appearance ID',au)
 end
 end)
 
-addcmd('copyappearanceid',{'caid'},function(ao,ap)
-local aq=getPlayer(ao[1],ap)
-for ar,as in pairs(aq)do
-local at=tostring(Players[as].CharacterAppearanceId)
-toClipboard(at)
+addcmd('copyappearanceid',{'caid'},function(ap,aq)
+local ar=getPlayer(ap[1],aq)
+for as,at in pairs(ar)do
+local au=tostring(Players[at].CharacterAppearanceId)
+toClipboard(au)
 end
 end)
 
-addcmd('norender',{},function(ao,ap)
+addcmd('norender',{},function(ap,aq)
 RunService:Set3dRenderingEnabled(false)
 end)
 
-addcmd('render',{},function(ao,ap)
+addcmd('render',{},function(ap,aq)
 RunService:Set3dRenderingEnabled(true)
 end)
 
-addcmd('2022materials',{'use2022materials'},function(ao,ap)
+addcmd('2022materials',{'use2022materials'},function(ap,aq)
 if sethidden then
 sethidden(MaterialService,"Use2022Materials",true)
 else
@@ -8932,7 +8979,7 @@ notify('Incompatible Exploit','Your exploit does not support this command (missi
 end
 end)
 
-addcmd('un2022materials',{'unuse2022materials'},function(ao,ap)
+addcmd('un2022materials',{'unuse2022materials'},function(ap,aq)
 if sethidden then
 sethidden(MaterialService,"Use2022Materials",false)
 else
@@ -8940,321 +8987,321 @@ notify('Incompatible Exploit','Your exploit does not support this command (missi
 end
 end)
 
-addcmd('goto',{'to'},function(ao,ap)
-local aq=getPlayer(ao[1],ap)
-for ar,as in pairs(aq)do
-if Players[as].Character~=nil then
-if ap.Character:FindFirstChildOfClass'Humanoid'and ap.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
-ap.Character:FindFirstChildOfClass'Humanoid'.Sit=false
-wait(.1)
-end
-getRoot(ap.Character).CFrame=getRoot(Players[as].Character).CFrame+Vector3.new(3,1,0)
-end
-end
-execCmd'breakvelocity'
-end)
-
-addcmd('tweengoto',{'tgoto','tto','tweento'},function(ao,ap)
-local aq=getPlayer(ao[1],ap)
-for ar,as in pairs(aq)do
-if Players[as].Character~=nil then
-if ap.Character:FindFirstChildOfClass'Humanoid'and ap.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
-ap.Character:FindFirstChildOfClass'Humanoid'.Sit=false
-wait(.1)
-end
-TweenService:Create(getRoot(ap.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=getRoot(Players[as].Character).CFrame+Vector3.new(3,1,0)}):Play()
-end
-end
-execCmd'breakvelocity'
-end)
-
-addcmd('vehiclegoto',{'vgoto','vtp','vehicletp'},function(ao,ap)
-local aq=getPlayer(ao[1],ap)
-for ar,as in pairs(aq)do
-if Players[as].Character~=nil then
-local at=ap.Character:FindFirstChildOfClass'Humanoid'.SeatPart
-local au=at:FindFirstAncestorWhichIsA"Model"
-au:MoveTo(getRoot(Players[as].Character).Position)
-end
-end
-end)
-
-addcmd('pulsetp',{'ptp'},function(ao,ap)
-local aq=getPlayer(ao[1],ap)
-for ar,as in pairs(aq)do
-if Players[as].Character~=nil then
-local at=getRoot(ap.Character).CFrame
-local au=ao[2]or 1
-if ap.Character:FindFirstChildOfClass'Humanoid'and ap.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
-ap.Character:FindFirstChildOfClass'Humanoid'.Sit=false
-wait(.1)
-end
-getRoot(ap.Character).CFrame=getRoot(Players[as].Character).CFrame+Vector3.new(3,1,0)
-wait(au)
-getRoot(ap.Character).CFrame=at
-end
-end
-execCmd'breakvelocity'
-end)
-
-local ao={}
-addcmd('vehiclenoclip',{'vnoclip'},function(ap,aq)
-ao={}
-local ar=aq.Character:FindFirstChildOfClass'Humanoid'.SeatPart
-local as=ar.Parent
-repeat
-if as.ClassName~="Model"then
-as=as.Parent
-end
-until as.ClassName=="Model"
-wait(0.1)
-execCmd'noclip'
-for at,au in pairs(as:GetDescendants())do
-if au:IsA"BasePart"and au.CanCollide then
-table.insert(ao,au)
-au.CanCollide=false
-end
-end
-end)
-
-addcmd("vehicleclip",{"vclip","unvnoclip","unvehiclenoclip"},function(ap,aq)
-execCmd"clip"
-for ar,as in pairs(ao)do
-as.CanCollide=true
-end
-ao={}
-end)
-
-addcmd("togglevnoclip",{},function(ap,aq)
-execCmd(Clip and"vnoclip"or"vclip")
-end)
-
-addcmd('clientbring',{'cbring'},function(ap,aq)
+addcmd('goto',{'to'},function(ap,aq)
 local ar=getPlayer(ap[1],aq)
 for as,at in pairs(ar)do
 if Players[at].Character~=nil then
-if Players[at].Character:FindFirstChildOfClass'Humanoid'then
-Players[at].Character:FindFirstChildOfClass'Humanoid'.Sit=false
+if aq.Character:FindFirstChildOfClass'Humanoid'and aq.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aq.Character:FindFirstChildOfClass'Humanoid'.Sit=false
+wait(.1)
 end
-wait()
-getRoot(Players[at].Character).CFrame=getRoot(aq.Character).CFrame+Vector3.new(3,1,0)
+getRoot(aq.Character).CFrame=getRoot(Players[at].Character).CFrame+Vector3.new(3,1,0)
 end
 end
+execCmd'breakvelocity'
+end)
+
+addcmd('tweengoto',{'tgoto','tto','tweento'},function(ap,aq)
+local ar=getPlayer(ap[1],aq)
+for as,at in pairs(ar)do
+if Players[at].Character~=nil then
+if aq.Character:FindFirstChildOfClass'Humanoid'and aq.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aq.Character:FindFirstChildOfClass'Humanoid'.Sit=false
+wait(.1)
+end
+TweenService:Create(getRoot(aq.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=getRoot(Players[at].Character).CFrame+Vector3.new(3,1,0)}):Play()
+end
+end
+execCmd'breakvelocity'
+end)
+
+addcmd('vehiclegoto',{'vgoto','vtp','vehicletp'},function(ap,aq)
+local ar=getPlayer(ap[1],aq)
+for as,at in pairs(ar)do
+if Players[at].Character~=nil then
+local au=aq.Character:FindFirstChildOfClass'Humanoid'.SeatPart
+local av=au:FindFirstAncestorWhichIsA"Model"
+av:MoveTo(getRoot(Players[at].Character).Position)
+end
+end
+end)
+
+addcmd('pulsetp',{'ptp'},function(ap,aq)
+local ar=getPlayer(ap[1],aq)
+for as,at in pairs(ar)do
+if Players[at].Character~=nil then
+local au=getRoot(aq.Character).CFrame
+local av=ap[2]or 1
+if aq.Character:FindFirstChildOfClass'Humanoid'and aq.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aq.Character:FindFirstChildOfClass'Humanoid'.Sit=false
+wait(.1)
+end
+getRoot(aq.Character).CFrame=getRoot(Players[at].Character).CFrame+Vector3.new(3,1,0)
+wait(av)
+getRoot(aq.Character).CFrame=au
+end
+end
+execCmd'breakvelocity'
 end)
 
 local ap={}
-addcmd('loopbring',{},function(aq,ar)
+addcmd('vehiclenoclip',{'vnoclip'},function(aq,ar)
+ap={}
+local as=ar.Character:FindFirstChildOfClass'Humanoid'.SeatPart
+local at=as.Parent
+repeat
+if at.ClassName~="Model"then
+at=at.Parent
+end
+until at.ClassName=="Model"
+wait(0.1)
+execCmd'noclip'
+for au,av in pairs(at:GetDescendants())do
+if av:IsA"BasePart"and av.CanCollide then
+table.insert(ap,av)
+av.CanCollide=false
+end
+end
+end)
+
+addcmd("vehicleclip",{"vclip","unvnoclip","unvehiclenoclip"},function(aq,ar)
+execCmd"clip"
+for as,at in pairs(ap)do
+at.CanCollide=true
+end
+ap={}
+end)
+
+addcmd("togglevnoclip",{},function(aq,ar)
+execCmd(Clip and"vnoclip"or"vclip")
+end)
+
+addcmd('clientbring',{'cbring'},function(aq,ar)
 local as=getPlayer(aq[1],ar)
 for at,au in pairs(as)do
+if Players[au].Character~=nil then
+if Players[au].Character:FindFirstChildOfClass'Humanoid'then
+Players[au].Character:FindFirstChildOfClass'Humanoid'.Sit=false
+end
+wait()
+getRoot(Players[au].Character).CFrame=getRoot(ar.Character).CFrame+Vector3.new(3,1,0)
+end
+end
+end)
+
+local aq={}
+addcmd('loopbring',{},function(ar,as)
+local at=getPlayer(ar[1],as)
+for au,av in pairs(at)do
 task.spawn(function()
-if Players[au].Name~=ar.Name and not FindInTable(ap,Players[au].Name)then
-table.insert(ap,Players[au].Name)
-local av=Players[au].Name
-local aw=Players[au].Character
+if Players[av].Name~=as.Name and not FindInTable(aq,Players[av].Name)then
+table.insert(aq,Players[av].Name)
+local aw=Players[av].Name
+local ax=Players[av].Character
 local V=3
-if aq[2]and isNumber(aq[2])then
-V=aq[2]
+if ar[2]and isNumber(ar[2])then
+V=ar[2]
 end
 local W=0
-if aq[3]and isNumber(aq[3])then
-W=aq[3]
+if ar[3]and isNumber(ar[3])then
+W=ar[3]
 end
 repeat
-for X,Y in pairs(as)do
-if Players:FindFirstChild(au)then
-aw=Players[au].Character
-if aw~=nil and Players[au].Character~=nil and getRoot(aw)and ar.Character~=nil and getRoot(ar.Character)then
-getRoot(aw).CFrame=getRoot(ar.Character).CFrame+Vector3.new(V,1,0)
+for X,Y in pairs(at)do
+if Players:FindFirstChild(av)then
+ax=Players[av].Character
+if ax~=nil and Players[av].Character~=nil and getRoot(ax)and as.Character~=nil and getRoot(as.Character)then
+getRoot(ax).CFrame=getRoot(as.Character).CFrame+Vector3.new(V,1,0)
 end
 wait(W)
 else
-for Z,_ in pairs(ap)do if _==av then table.remove(ap,Z)end end
+for Z,_ in pairs(aq)do if _==aw then table.remove(aq,Z)end end
 end
 end
-until not FindInTable(ap,av)
+until not FindInTable(aq,aw)
 end
 end)
 end
 end)
 
-addcmd('unloopbring',{'noloopbring'},function(aq,ar)
-local as=getPlayer(aq[1],ar)
-for at,au in pairs(as)do
+addcmd('unloopbring',{'noloopbring'},function(ar,as)
+local at=getPlayer(ar[1],as)
+for au,av in pairs(at)do
 task.spawn(function()
-for av,aw in pairs(ap)do if aw==Players[au].Name then table.remove(ap,av)end end
+for aw,ax in pairs(aq)do if ax==Players[av].Name then table.remove(aq,aw)end end
 end)
 end
 end)
 
-local aq=false
 local ar=false
-addcmd('walkto',{'follow'},function(as,at)
-local au=getPlayer(as[1],at)
-for av,aw in pairs(au)do
-if Players[aw].Character~=nil then
-if at.Character:FindFirstChildOfClass'Humanoid'and at.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
-at.Character:FindFirstChildOfClass'Humanoid'.Sit=false
+local as=false
+addcmd('walkto',{'follow'},function(at,au)
+local av=getPlayer(at[1],au)
+for aw,ax in pairs(av)do
+if Players[ax].Character~=nil then
+if au.Character:FindFirstChildOfClass'Humanoid'and au.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+au.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-aq=true
+ar=true
 repeat wait()
-at.Character:FindFirstChildOfClass'Humanoid':MoveTo(getRoot(Players[aw].Character).Position)
-until Players[aw].Character==nil or not getRoot(Players[aw].Character)or aq==false
+au.Character:FindFirstChildOfClass'Humanoid':MoveTo(getRoot(Players[ax].Character).Position)
+until Players[ax].Character==nil or not getRoot(Players[ax].Character)or ar==false
 end
 end
 end)
 
-addcmd('pathfindwalkto',{'pathfindfollow'},function(as,at)
-aq=false
-wait()
-local au=getPlayer(as[1],at)
-local av=Players.LocalPlayer.Character:FindFirstChildOfClass"Humanoid"
-local aw=PathService:CreatePath()
-for V,W in pairs(au)do
-if Players[W].Character~=nil then
-if at.Character:FindFirstChildOfClass'Humanoid'and at.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
-at.Character:FindFirstChildOfClass'Humanoid'.Sit=false
-wait(.1)
-end
-aq=true
-repeat wait()local
-ax=pcall(function()
-aw:ComputeAsync(getRoot(at.Character).Position,getRoot(Players[W].Character).Position)
-local X=aw:GetWaypoints()
-local Y
-for Z,_ in pairs(X)do
-local ax=_.Position
-av:MoveTo(ax)
-repeat
-Y=(ax-av.Parent.PrimaryPart.Position).magnitude
-wait()
-until
-Y<=5
-end
-end)
-if not ax then
-at.Character:FindFirstChildOfClass'Humanoid':MoveTo(getRoot(Players[W].Character).Position)
-end
-until Players[W].Character==nil or not getRoot(Players[W].Character)or aq==false
-end
-end
-end)
-
-addcmd('pathfindwalktowaypoint',{'pathfindwalktowp'},function(as,at)
+addcmd('pathfindwalkto',{'pathfindfollow'},function(at,au)
 ar=false
 wait()
-local au=tostring(getstring(1,as))
-local av=Players.LocalPlayer.Character:FindFirstChildOfClass"Humanoid"
-local aw=PathService:CreatePath()
-if at.Character then
-for ax,V in pairs(WayPoints)do
-if tostring(WayPoints[ax].NAME):lower()==tostring(au):lower()then
-if at.Character:FindFirstChildOfClass'Humanoid'and at.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
-at.Character:FindFirstChildOfClass'Humanoid'.Sit=false
+local av=getPlayer(at[1],au)
+local aw=Players.LocalPlayer.Character:FindFirstChildOfClass"Humanoid"
+local ax=PathService:CreatePath()
+for V,W in pairs(av)do
+if Players[W].Character~=nil then
+if au.Character:FindFirstChildOfClass'Humanoid'and au.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+au.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-local W=Vector3.new(WayPoints[ax].COORD[1],WayPoints[ax].COORD[2],WayPoints[ax].COORD[3])
 ar=true
 repeat wait()local
 ay=pcall(function()
-aw:ComputeAsync(getRoot(at.Character).Position,W)
-local X=aw:GetWaypoints()
+ax:ComputeAsync(getRoot(au.Character).Position,getRoot(Players[W].Character).Position)
+local X=ax:GetWaypoints()
 local Y
 for Z,_ in pairs(X)do
 local ay=_.Position
-av:MoveTo(ay)
+aw:MoveTo(ay)
 repeat
-Y=(ay-av.Parent.PrimaryPart.Position).magnitude
+Y=(ay-aw.Parent.PrimaryPart.Position).magnitude
 wait()
 until
 Y<=5
 end
 end)
 if not ay then
-at.Character:FindFirstChildOfClass'Humanoid':MoveTo(W)
+au.Character:FindFirstChildOfClass'Humanoid':MoveTo(getRoot(Players[W].Character).Position)
 end
-until not at.Character or ar==false
+until Players[W].Character==nil or not getRoot(Players[W].Character)or ar==false
 end
 end
-for ax,ay in pairs(pWayPoints)do
-if tostring(pWayPoints[ax].NAME):lower()==tostring(au):lower()then
-if at.Character:FindFirstChildOfClass'Humanoid'and at.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
-at.Character:FindFirstChildOfClass'Humanoid'.Sit=false
+end)
+
+addcmd('pathfindwalktowaypoint',{'pathfindwalktowp'},function(at,au)
+as=false
+wait()
+local av=tostring(getstring(1,at))
+local aw=Players.LocalPlayer.Character:FindFirstChildOfClass"Humanoid"
+local ax=PathService:CreatePath()
+if au.Character then
+for ay,V in pairs(WayPoints)do
+if tostring(WayPoints[ay].NAME):lower()==tostring(av):lower()then
+if au.Character:FindFirstChildOfClass'Humanoid'and au.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+au.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-local V=pWayPoints[ax].COORD[1].Position
-ar=true
+local W=Vector3.new(WayPoints[ay].COORD[1],WayPoints[ay].COORD[2],WayPoints[ay].COORD[3])
+as=true
+repeat wait()local
+az=pcall(function()
+ax:ComputeAsync(getRoot(au.Character).Position,W)
+local X=ax:GetWaypoints()
+local Y
+for Z,_ in pairs(X)do
+local az=_.Position
+aw:MoveTo(az)
+repeat
+Y=(az-aw.Parent.PrimaryPart.Position).magnitude
+wait()
+until
+Y<=5
+end
+end)
+if not az then
+au.Character:FindFirstChildOfClass'Humanoid':MoveTo(W)
+end
+until not au.Character or as==false
+end
+end
+for ay,az in pairs(pWayPoints)do
+if tostring(pWayPoints[ay].NAME):lower()==tostring(av):lower()then
+if au.Character:FindFirstChildOfClass'Humanoid'and au.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+au.Character:FindFirstChildOfClass'Humanoid'.Sit=false
+wait(.1)
+end
+local V=pWayPoints[ay].COORD[1].Position
+as=true
 repeat wait()local
 W=pcall(function()
-aw:ComputeAsync(getRoot(at.Character).Position,V)
-local W=aw:GetWaypoints()
+ax:ComputeAsync(getRoot(au.Character).Position,V)
+local W=ax:GetWaypoints()
 local X
 for Y,Z in pairs(W)do
 local _=Z.Position
-av:MoveTo(_)
+aw:MoveTo(_)
 repeat
-X=(_-av.Parent.PrimaryPart.Position).magnitude
+X=(_-aw.Parent.PrimaryPart.Position).magnitude
 wait()
 until
 X<=5
 end
 end)
 if not W then
-at.Character:FindFirstChildOfClass'Humanoid':MoveTo(V)
+au.Character:FindFirstChildOfClass'Humanoid':MoveTo(V)
 end
-until not at.Character or ar==false
+until not au.Character or as==false
 end
 end
 end
 end)
 
-addcmd('unwalkto',{'nowalkto','unfollow','nofollow'},function(as,at)
-aq=false
+addcmd('unwalkto',{'nowalkto','unfollow','nofollow'},function(at,au)
 ar=false
+as=false
 end)
 
-addcmd("orbit",{},function(as,at)
+addcmd("orbit",{},function(at,au)
 execCmd"unorbit nonotify"
-local au=Players:FindFirstChild(getPlayer(as[1],at)[1])
-local av=getRoot(at.Character)
-local aw=at.Character:FindFirstChildWhichIsA"Humanoid"
-if au and au.Character and getRoot(au.Character)and av and aw then
-local ax=0
-local ay=tonumber(as[2])or 0.2
-local V=tonumber(as[3])or 6
+local av=Players:FindFirstChild(getPlayer(at[1],au)[1])
+local aw=getRoot(au.Character)
+local ax=au.Character:FindFirstChildWhichIsA"Humanoid"
+if av and av.Character and getRoot(av.Character)and aw and ax then
+local ay=0
+local az=tonumber(at[2])or 0.2
+local V=tonumber(at[3])or 6
 orbit1=RunService.Heartbeat:Connect(function()
 pcall(function()
-ax=ax+ay
-av.CFrame=CFrame.new(getRoot(au.Character).Position)*CFrame.Angles(0,math.rad(ax),0)*CFrame.new(V,0,0)
+ay=ay+az
+aw.CFrame=CFrame.new(getRoot(av.Character).Position)*CFrame.Angles(0,math.rad(ay),0)*CFrame.new(V,0,0)
 end)
 end)
 orbit2=RunService.RenderStepped:Connect(function()
 pcall(function()
-av.CFrame=CFrame.new(av.Position,getRoot(au.Character).Position)
+aw.CFrame=CFrame.new(aw.Position,getRoot(av.Character).Position)
 end)
 end)
-orbit3=aw.Died:Connect(function()execCmd"unorbit"end)
-orbit4=aw.Seated:Connect(function(W)if W then execCmd"unorbit"end end)
-notify("Orbit","Started orbiting "..formatUsername(au))
+orbit3=ax.Died:Connect(function()execCmd"unorbit"end)
+orbit4=ax.Seated:Connect(function(W)if W then execCmd"unorbit"end end)
+notify("Orbit","Started orbiting "..formatUsername(av))
 end
 end)
 
-addcmd("unorbit",{},function(as,at)
+addcmd("unorbit",{},function(at,au)
 if orbit1 then orbit1:Disconnect()end
 if orbit2 then orbit2:Disconnect()end
 if orbit3 then orbit3:Disconnect()end
 if orbit4 then orbit4:Disconnect()end
-if as[1]~="nonotify"then notify("Orbit","Stopped orbiting player")end
+if at[1]~="nonotify"then notify("Orbit","Stopped orbiting player")end
 end)
 
-addcmd('freeze',{'fr'},function(as,at)
-local au=getPlayer(as[1],at)
-if au~=nil then
-for av,aw in pairs(au)do
+addcmd('freeze',{'fr'},function(at,au)
+local av=getPlayer(at[1],au)
+if av~=nil then
+for aw,ax in pairs(av)do
 task.spawn(function()
-for ax,ay in next,Players[aw].Character:GetDescendants()do
-if ay:IsA"BasePart"and not ay.Anchored then
-ay.Anchored=true
+for ay,az in next,Players[ax].Character:GetDescendants()do
+if az:IsA"BasePart"and not az.Anchored then
+az.Anchored=true
 end
 end
 end)
@@ -9263,14 +9310,14 @@ end
 end)
 
 
-addcmd('thaw',{'unfreeze','unfr'},function(as,at)
-local au=getPlayer(as[1],at)
-if au~=nil then
-for av,aw in pairs(au)do
+addcmd('thaw',{'unfreeze','unfr'},function(at,au)
+local av=getPlayer(at[1],au)
+if av~=nil then
+for aw,ax in pairs(av)do
 task.spawn(function()
-for ax,ay in next,Players[aw].Character:GetDescendants()do
-if ay.Name~=floatName and ay:IsA"BasePart"and ay.Anchored then
-ay.Anchored=false
+for ay,az in next,Players[ax].Character:GetDescendants()do
+if az.Name~=floatName and az:IsA"BasePart"and az.Anchored then
+az.Anchored=false
 end
 end
 end)
@@ -9278,45 +9325,45 @@ end
 end
 end)
 
-addcmd("anchor",{},function(as,at)
-getRoot(at.Character).Anchored=true
+addcmd("anchor",{},function(at,au)
+getRoot(au.Character).Anchored=true
 end)
 
-addcmd("unanchor",{},function(as,at)
-getRoot(at.Character).Anchored=false
+addcmd("unanchor",{},function(at,au)
+getRoot(au.Character).Anchored=false
 end)
 
 oofing=false
-addcmd('loopoof',{},function(as,at)
+addcmd('loopoof',{},function(at,au)
 oofing=true
 repeat wait(0.1)
-for au,av in pairs(Players:GetPlayers())do
-if av.Character~=nil and av.Character:FindFirstChild'Head'then
-for aw,ax in pairs(av.Character.Head:GetChildren())do
-if ax:IsA'Sound'then ax.Playing=true end
+for av,aw in pairs(Players:GetPlayers())do
+if aw.Character~=nil and aw.Character:FindFirstChild'Head'then
+for ax,ay in pairs(aw.Character.Head:GetChildren())do
+if ay:IsA'Sound'then ay.Playing=true end
 end
 end
 end
 until oofing==false
 end)
 
-addcmd('unloopoof',{},function(as,at)
+addcmd('unloopoof',{},function(at,au)
 oofing=false
 end)
 
-local as=false
-addcmd('muteboombox',{},function(at,au)
-if not as and SoundService.RespectFilteringEnabled then as=true notify('RespectFilteringEnabled','RespectFilteringEnabled is set to true (the command will still work but may only be clientsided)')end
-local av=getPlayer(at[1],au)
-if av~=nil then
-for aw,ax in pairs(av)do
+local at=false
+addcmd('muteboombox',{},function(au,av)
+if not at and SoundService.RespectFilteringEnabled then at=true notify('RespectFilteringEnabled','RespectFilteringEnabled is set to true (the command will still work but may only be clientsided)')end
+local aw=getPlayer(au[1],av)
+if aw~=nil then
+for ax,ay in pairs(aw)do
 task.spawn(function()
-for ay,V in next,Players[ax].Character:GetDescendants()do
+for az,V in next,Players[ay].Character:GetDescendants()do
 if V:IsA"Sound"and V.Playing==true then
 V.Playing=false
 end
 end
-for ay,V in next,Players[ax]:FindFirstChildOfClass"Backpack":GetDescendants()do
+for az,V in next,Players[ay]:FindFirstChildOfClass"Backpack":GetDescendants()do
 if V:IsA"Sound"and V.Playing==true then
 V.Playing=false
 end
@@ -9326,13 +9373,13 @@ end
 end
 end)
 
-addcmd('unmuteboombox',{},function(at,au)
-if not as and SoundService.RespectFilteringEnabled then as=true notify('RespectFilteringEnabled','RespectFilteringEnabled is set to true (the command will still work but may only be clientsided)')end
-local av=getPlayer(at[1],au)
-if av~=nil then
-for aw,ax in pairs(av)do
+addcmd('unmuteboombox',{},function(au,av)
+if not at and SoundService.RespectFilteringEnabled then at=true notify('RespectFilteringEnabled','RespectFilteringEnabled is set to true (the command will still work but may only be clientsided)')end
+local aw=getPlayer(au[1],av)
+if aw~=nil then
+for ax,ay in pairs(aw)do
 task.spawn(function()
-for ay,V in next,Players[ax].Character:GetDescendants()do
+for az,V in next,Players[ay].Character:GetDescendants()do
 if V:IsA"Sound"and V.Playing==false then
 V.Playing=true
 end
@@ -9342,59 +9389,59 @@ end
 end
 end)
 
-addcmd("reset",{},function(at,au)
-local av=au.Character and au.Character:FindFirstChildWhichIsA"Humanoid"
+addcmd("reset",{},function(au,av)
+local aw=av.Character and av.Character:FindFirstChildWhichIsA"Humanoid"
 if replicatesignal then
-replicatesignal(au.Kill)
-elseif av then
-av:ChangeState(Enum.HumanoidStateType.Dead)
+replicatesignal(av.Kill)
+elseif aw then
+aw:ChangeState(Enum.HumanoidStateType.Dead)
 else
-au.Character:BreakJoints()
+av.Character:BreakJoints()
 end
 end)
 
-addcmd('freezeanims',{},function(at,au)
-local av=au.Character:FindFirstChildOfClass"Humanoid"or au.Character:FindFirstChildOfClass"AnimationController"
-local aw=av:GetPlayingAnimationTracks()
-for ax,ay in pairs(aw)do
-ay:AdjustSpeed(0)
+addcmd('freezeanims',{},function(au,av)
+local aw=av.Character:FindFirstChildOfClass"Humanoid"or av.Character:FindFirstChildOfClass"AnimationController"
+local ax=aw:GetPlayingAnimationTracks()
+for ay,az in pairs(ax)do
+az:AdjustSpeed(0)
 end
 end)
 
-addcmd('unfreezeanims',{},function(at,au)
-local av=au.Character:FindFirstChildOfClass"Humanoid"or au.Character:FindFirstChildOfClass"AnimationController"
-local aw=av:GetPlayingAnimationTracks()
-for ax,ay in pairs(aw)do
-ay:AdjustSpeed(1)
+addcmd('unfreezeanims',{},function(au,av)
+local aw=av.Character:FindFirstChildOfClass"Humanoid"or av.Character:FindFirstChildOfClass"AnimationController"
+local ax=aw:GetPlayingAnimationTracks()
+for ay,az in pairs(ax)do
+az:AdjustSpeed(1)
 end
 end)
 
-addcmd("respawn",{},function(at,au)
-respawn(au)
+addcmd("respawn",{},function(au,av)
+respawn(av)
 end)
 
-addcmd("refresh",{"re"},function(at,au)
-refresh(au)
+addcmd("refresh",{"re"},function(au,av)
+refresh(av)
 end)
 
-addcmd("god",{},function(at,au)
-permadeath(au)
-local av=workspace.CurrentCamera local
-aw, ax=au.Character, av.CFrame
-local ay=aw and aw:FindFirstChildWhichIsA"Humanoid"
-local V=ay:Clone()
+addcmd("god",{},function(au,av)
+permadeath(av)
+local aw=workspace.CurrentCamera local
+ax, ay=av.Character, aw.CFrame
+local az=ax and ax:FindFirstChildWhichIsA"Humanoid"
+local V=az:Clone()
 V.Parent=char
-au.Character=nil
+av.Character=nil
 V:SetStateEnabled(15,false)
 V:SetStateEnabled(1,false)
 V:SetStateEnabled(0,false)
 V.BreakJointsOnDeath=true
-ay:Destroy()
-au.Character=char
-av.CameraSubject=V
-av.CFrame=task.wait()and pos
+az:Destroy()
+av.Character=char
+aw.CameraSubject=V
+aw.CFrame=task.wait()and pos
 V.DisplayDistanceType=Enum.HumanoidDisplayDistanceType.None
-local W=aw:FindFirstChild"Animate"
+local W=ax:FindFirstChild"Animate"
 if W then
 W.Disabled=true
 task.wait()
@@ -9404,23 +9451,23 @@ V.Health=V.MaxHealth
 end)
 
 invisRunning=false
-addcmd('invisible',{'invis'},function(at,au)
+addcmd('invisible',{'invis'},function(au,av)
 if invisRunning then return end
 invisRunning=true
 
-local av=au
-repeat wait(.1)until av.Character
-local aw=av.Character
-aw.Archivable=true
-local ax=false
-local ay=true
-local V=aw:Clone()
+local aw=av
+repeat wait(.1)until aw.Character
+local ax=aw.Character
+ax.Archivable=true
+local ay=false
+local az=true
+local V=ax:Clone()
 V.Parent=Lighting
 local W=workspace.FallenPartsDestroyHeight
 V.Name=""
 local X
 
-local az=RunService.Stepped:Connect(function()
+local aA=RunService.Stepped:Connect(function()
 pcall(function()
 local Y
 if tostring(W):find'-'then
@@ -9428,25 +9475,25 @@ Y=true
 else
 Y=false
 end
-local Z=av.Character.Humanoid.RootPart.Position
+local Z=aw.Character.Humanoid.RootPart.Position
 local _=tostring(Z)
-local az=_:split', '
-tonumber(az[1])
-local aA=tonumber(az[2])
-tonumber(az[3])
+local aA=_:split', '
+tonumber(aA[1])
+local aB=tonumber(aA[2])
+tonumber(aA[3])
 if Y==true then
-if aA<=W then
+if aB<=W then
 Respawn()
 end
 elseif Y==false then
-if aA>=W then
+if aB>=W then
 Respawn()
 end
 end
 end)
 end)
 
-for aA,Y in pairs(V:GetDescendants())do
+for aB,Y in pairs(V:GetDescendants())do
 if Y:IsA"BasePart"then
 if Y.Name=="HumanoidRootPart"then
 Y.Transparency=1
@@ -9457,471 +9504,471 @@ end
 end
 
 function Respawn()
-ay=false
-if ax==true then
+az=false
+if ay==true then
 pcall(function()
-av.Character=aw
+aw.Character=ax
 wait()
-aw.Parent=workspace
-aw:FindFirstChildWhichIsA'Humanoid':Destroy()
-ax=false
+ax.Parent=workspace
+ax:FindFirstChildWhichIsA'Humanoid':Destroy()
+ay=false
 V.Parent=nil
 invisRunning=false
 end)
-elseif ax==false then
+elseif ay==false then
 pcall(function()
-av.Character=aw
+aw.Character=ax
 wait()
-aw.Parent=workspace
-aw:FindFirstChildWhichIsA'Humanoid':Destroy()
+ax.Parent=workspace
+ax:FindFirstChildWhichIsA'Humanoid':Destroy()
 TurnVisible()
 end)
 end
 end
 
-local aA
-aA=V:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
+local aB
+aB=V:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
 Respawn()
-aA:Disconnect()
+aB:Disconnect()
 end)
 
-if ax==true then return end
-ax=true
+if ay==true then return end
+ay=true
 X=workspace.CurrentCamera.CFrame
-local Y=av.Character.Humanoid.RootPart.CFrame
-aw:MoveTo(Vector3.new(0,math.pi*1000000,0))
+local Y=aw.Character.Humanoid.RootPart.CFrame
+ax:MoveTo(Vector3.new(0,math.pi*1000000,0))
 workspace.CurrentCamera.CameraType=Enum.CameraType.Scriptable
 wait(.2)
 workspace.CurrentCamera.CameraType=Enum.CameraType.Custom
 V=V
-aw.Parent=Lighting
+ax.Parent=Lighting
 V.Parent=workspace
 V.Humanoid.RootPart.CFrame=Y
-av.Character=V
+aw.Character=V
 execCmd'fixcam'
-av.Character.Animate.Disabled=true
-av.Character.Animate.Disabled=false
+aw.Character.Animate.Disabled=true
+aw.Character.Animate.Disabled=false
 
 function TurnVisible()
-if ax==false then return end
-az:Disconnect()
+if ay==false then return end
 aA:Disconnect()
+aB:Disconnect()
 X=workspace.CurrentCamera.CFrame
-aw=aw
-local Z=av.Character.Humanoid.RootPart.CFrame
-aw.Humanoid.RootPart.CFrame=Z
+ax=ax
+local Z=aw.Character.Humanoid.RootPart.CFrame
+ax.Humanoid.RootPart.CFrame=Z
 V:Destroy()
-av.Character=aw
-aw.Parent=workspace
-ax=false
-av.Character.Animate.Disabled=true
-av.Character.Animate.Disabled=false
-aA=aw:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
+aw.Character=ax
+ax.Parent=workspace
+ay=false
+aw.Character.Animate.Disabled=true
+aw.Character.Animate.Disabled=false
+aB=ax:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
 Respawn()
-aA:Disconnect()
+aB:Disconnect()
 end)
 invisRunning=false
 end
 notify('Invisible','You now appear invisible to other players')
 end)
 
-addcmd("visible",{"vis","uninvisible"},function(at,au)
+addcmd("visible",{"vis","uninvisible"},function(au,av)
 TurnVisible()
 end)
 
-addcmd("toggleinvis",{},function(at,au)
+addcmd("toggleinvis",{},function(au,av)
 execCmd(invisRunning and"visible"or"invisible")
 end)
 
-addcmd('toolinvisible',{'toolinvis','tinvis'},function(at,au)
-local av=Players.LocalPlayer.Character
-local aw=false
+addcmd('toolinvisible',{'toolinvis','tinvis'},function(au,av)
+local aw=Players.LocalPlayer.Character
+local ax=false
 
-local ax=Instance.new'Part'
-ax.Anchored=true
-ax.CanCollide=true
-ax.Size=Vector3.new(10,1,10)
-ax.Position=Vector3.new(0,10000,0)
-ax.Parent=workspace
-local ay=ax.Touched:connect(function(ay)
-if(ay.Parent.Name==Players.LocalPlayer.Name)then
-if aw==false then
-aw=true
+local ay=Instance.new'Part'
+ay.Anchored=true
+ay.CanCollide=true
+ay.Size=Vector3.new(10,1,10)
+ay.Position=Vector3.new(0,10000,0)
+ay.Parent=workspace
+local az=ay.Touched:connect(function(az)
+if(az.Parent.Name==Players.LocalPlayer.Name)then
+if ax==false then
+ax=true
 local function apply()
-local az=av.Humanoid.RootPart:Clone()
+local aA=aw.Humanoid.RootPart:Clone()
 task.wait(.25)
-av.Humanoid.RootPart:Destroy()
-az.Parent=av
-av:MoveTo(loc)
-aw=false
+aw.Humanoid.RootPart:Destroy()
+aA.Parent=aw
+aw:MoveTo(loc)
+ax=false
 end
-if av then
+if aw then
 apply()
 end
 end
 end
 end)
-repeat wait()until av
-local az
-az=Players.LocalPlayer.CharacterAdded:connect(function(aA)
-ay:Disconnect()
-ax:Destroy()
+repeat wait()until aw
+local aA
+aA=Players.LocalPlayer.CharacterAdded:connect(function(aB)
 az:Disconnect()
+ay:Destroy()
+aA:Disconnect()
 end)
-loc=av.Humanoid.RootPart.Position
-av:MoveTo(ax.Position+Vector3.new(0,.5,0))
+loc=aw.Humanoid.RootPart.Position
+aw:MoveTo(ay.Position+Vector3.new(0,.5,0))
 end)
 
-addcmd("strengthen",{},function(at,au)
-for av,aw in pairs(au.Character:GetDescendants())do
-if aw.ClassName=="Part"then
-if at[1]then
-aw.CustomPhysicalProperties=PhysicalProperties.new(at[1],0.3,0.5)
+addcmd("strengthen",{},function(au,av)
+for aw,ax in pairs(av.Character:GetDescendants())do
+if ax.ClassName=="Part"then
+if au[1]then
+ax.CustomPhysicalProperties=PhysicalProperties.new(au[1],0.3,0.5)
 else
-aw.CustomPhysicalProperties=PhysicalProperties.new(100,0.3,0.5)
+ax.CustomPhysicalProperties=PhysicalProperties.new(100,0.3,0.5)
 end
 end
 end
 end)
 
-addcmd("weaken",{},function(at,au)
-for av,aw in pairs(au.Character:GetDescendants())do
-if aw.ClassName=="Part"then
-if at[1]then
-aw.CustomPhysicalProperties=PhysicalProperties.new(-at[1],0.3,0.5)
+addcmd("weaken",{},function(au,av)
+for aw,ax in pairs(av.Character:GetDescendants())do
+if ax.ClassName=="Part"then
+if au[1]then
+ax.CustomPhysicalProperties=PhysicalProperties.new(-au[1],0.3,0.5)
 else
-aw.CustomPhysicalProperties=PhysicalProperties.new(0,0.3,0.5)
+ax.CustomPhysicalProperties=PhysicalProperties.new(0,0.3,0.5)
 end
 end
 end
 end)
 
-addcmd("unweaken",{"unstrengthen"},function(at,au)
-for av,aw in pairs(au.Character:GetDescendants())do
-if aw.ClassName=="Part"then
-aw.CustomPhysicalProperties=PhysicalProperties.new(0.7,0.3,0.5)
+addcmd("unweaken",{"unstrengthen"},function(au,av)
+for aw,ax in pairs(av.Character:GetDescendants())do
+if ax.ClassName=="Part"then
+ax.CustomPhysicalProperties=PhysicalProperties.new(0.7,0.3,0.5)
 end
 end
 end)
 
-addcmd("breakvelocity",{},function(at,au)
-local av,aw=false,Vector3.new(0,0,0)
+addcmd("breakvelocity",{},function(au,av)
+local aw,ax=false,Vector3.new(0,0,0)
 delay(1,function()
-av=true
+aw=true
 end)
-while not av do
-for ax,ay in ipairs(au.Character:GetDescendants())do
-if ay:IsA"BasePart"then
-ay.Velocity,ay.RotVelocity=aw,aw
+while not aw do
+for ay,az in ipairs(av.Character:GetDescendants())do
+if az:IsA"BasePart"then
+az.Velocity,az.RotVelocity=ax,ax
 end
 end
 wait()
 end
 end)
 
-addcmd('jpower',{'jumppower','jp'},function(at,au)
-local av=at[1]or 50
-if isNumber(av)then
-if au.Character:FindFirstChildOfClass'Humanoid'.UseJumpPower then
-au.Character:FindFirstChildOfClass'Humanoid'.JumpPower=av
+addcmd('jpower',{'jumppower','jp'},function(au,av)
+local aw=au[1]or 50
+if isNumber(aw)then
+if av.Character:FindFirstChildOfClass'Humanoid'.UseJumpPower then
+av.Character:FindFirstChildOfClass'Humanoid'.JumpPower=aw
 else
-au.Character:FindFirstChildOfClass'Humanoid'.JumpHeight=av
+av.Character:FindFirstChildOfClass'Humanoid'.JumpHeight=aw
 end
 end
 end)
 
-addcmd("maxslopeangle",{"msa"},function(at,au)
-local av=at[1]or 89
-if isNumber(av)then
-au.Character:FindFirstChildWhichIsA"Humanoid".MaxSlopeAngle=av
+addcmd("maxslopeangle",{"msa"},function(au,av)
+local aw=au[1]or 89
+if isNumber(aw)then
+av.Character:FindFirstChildWhichIsA"Humanoid".MaxSlopeAngle=aw
 end
 end)
 
-addcmd("gravity",{"grav"},function(at,au)
-local av=at[1]or H
-if isNumber(av)then
-workspace.Gravity=av
+addcmd("gravity",{"grav"},function(au,av)
+local aw=au[1]or H
+if isNumber(aw)then
+workspace.Gravity=aw
 end
 end)
 
-addcmd("hipheight",{"hheight"},function(at,au)
-local av=at[1]or(r15(au)and 2.1 or 0)
-if isNumber(av)then
-au.Character:FindFirstChildWhichIsA"Humanoid".HipHeight=av
+addcmd("hipheight",{"hheight"},function(au,av)
+local aw=au[1]or(r15(av)and 2.1 or 0)
+if isNumber(aw)then
+av.Character:FindFirstChildWhichIsA"Humanoid".HipHeight=aw
 end
 end)
 
-addcmd("dance",{},function(at,au)
+addcmd("dance",{},function(au,av)
 pcall(execCmd,"undance")
-local av={"27789359","30196114","248263260","45834924","33796059","28488254","52155728"}
-if r15(au)then
-av={"3333432454","4555808220","4049037604","4555782893","10214311282","10714010337","10713981723","10714372526","10714076981","10714392151","11444443576"}
+local aw={"27789359","30196114","248263260","45834924","33796059","28488254","52155728"}
+if r15(av)then
+aw={"3333432454","4555808220","4049037604","4555782893","10214311282","10714010337","10713981723","10714372526","10714076981","10714392151","11444443576"}
 end
-local aw=Instance.new"Animation"
-aw.AnimationId="rbxassetid://"..av[math.random(1,#av)]
-danceTrack=au.Character:FindFirstChildWhichIsA"Humanoid":LoadAnimation(aw)
+local ax=Instance.new"Animation"
+ax.AnimationId="rbxassetid://"..aw[math.random(1,#aw)]
+danceTrack=av.Character:FindFirstChildWhichIsA"Humanoid":LoadAnimation(ax)
 danceTrack.Looped=true
 danceTrack:Play()
 end)
 
-addcmd("undance",{"nodance"},function(at,au)
+addcmd("undance",{"nodance"},function(au,av)
 danceTrack:Stop()
 danceTrack:Destroy()
 end)
 
-addcmd('nolimbs',{'rlimbs'},function(at,au)
-if r15(au)then
-for av,aw in pairs(au.Character:GetChildren())do
-if aw:IsA"BasePart"and
-aw.Name=="RightUpperLeg"or
-aw.Name=="LeftUpperLeg"or
-aw.Name=="RightUpperArm"or
-aw.Name=="LeftUpperArm"then
-aw:Destroy()
+addcmd('nolimbs',{'rlimbs'},function(au,av)
+if r15(av)then
+for aw,ax in pairs(av.Character:GetChildren())do
+if ax:IsA"BasePart"and
+ax.Name=="RightUpperLeg"or
+ax.Name=="LeftUpperLeg"or
+ax.Name=="RightUpperArm"or
+ax.Name=="LeftUpperArm"then
+ax:Destroy()
 end
 end
 else
-for av,aw in pairs(au.Character:GetChildren())do
-if aw:IsA"BasePart"and
-aw.Name=="Right Leg"or
-aw.Name=="Left Leg"or
-aw.Name=="Right Arm"or
-aw.Name=="Left Arm"then
-aw:Destroy()
+for aw,ax in pairs(av.Character:GetChildren())do
+if ax:IsA"BasePart"and
+ax.Name=="Right Leg"or
+ax.Name=="Left Leg"or
+ax.Name=="Right Arm"or
+ax.Name=="Left Arm"then
+ax:Destroy()
 end
 end
 end
 end)
 
-addcmd('noarms',{'rarms'},function(at,au)
-if r15(au)then
-for av,aw in pairs(au.Character:GetChildren())do
-if aw:IsA"BasePart"and
-aw.Name=="RightUpperArm"or
-aw.Name=="LeftUpperArm"then
-aw:Destroy()
+addcmd('noarms',{'rarms'},function(au,av)
+if r15(av)then
+for aw,ax in pairs(av.Character:GetChildren())do
+if ax:IsA"BasePart"and
+ax.Name=="RightUpperArm"or
+ax.Name=="LeftUpperArm"then
+ax:Destroy()
 end
 end
 else
-for av,aw in pairs(au.Character:GetChildren())do
-if aw:IsA"BasePart"and
-aw.Name=="Right Arm"or
-aw.Name=="Left Arm"then
-aw:Destroy()
+for aw,ax in pairs(av.Character:GetChildren())do
+if ax:IsA"BasePart"and
+ax.Name=="Right Arm"or
+ax.Name=="Left Arm"then
+ax:Destroy()
 end
 end
 end
 end)
 
-addcmd('nolegs',{'rlegs'},function(at,au)
-if r15(au)then
-for av,aw in pairs(au.Character:GetChildren())do
-if aw:IsA"BasePart"and
-aw.Name=="RightUpperLeg"or
-aw.Name=="LeftUpperLeg"then
-aw:Destroy()
+addcmd('nolegs',{'rlegs'},function(au,av)
+if r15(av)then
+for aw,ax in pairs(av.Character:GetChildren())do
+if ax:IsA"BasePart"and
+ax.Name=="RightUpperLeg"or
+ax.Name=="LeftUpperLeg"then
+ax:Destroy()
 end
 end
 else
-for av,aw in pairs(au.Character:GetChildren())do
-if aw:IsA"BasePart"and
-aw.Name=="Right Leg"or
-aw.Name=="Left Leg"then
-aw:Destroy()
+for aw,ax in pairs(av.Character:GetChildren())do
+if ax:IsA"BasePart"and
+ax.Name=="Right Leg"or
+ax.Name=="Left Leg"then
+ax:Destroy()
 end
 end
 end
 end)
 
-addcmd("sit",{},function(at,au)
-au.Character:FindFirstChildWhichIsA"Humanoid".Sit=true
+addcmd("sit",{},function(au,av)
+av.Character:FindFirstChildWhichIsA"Humanoid".Sit=true
 end)
 
-addcmd("lay",{"laydown"},function(at,au)
-local av=au.Character:FindFirstChildWhichIsA"Humanoid"
-av.Sit=true
+addcmd("lay",{"laydown"},function(au,av)
+local aw=av.Character:FindFirstChildWhichIsA"Humanoid"
+aw.Sit=true
 task.wait(0.1)
-av.RootPart.CFrame=av.RootPart.CFrame*CFrame.Angles(math.pi*0.5,0,0)
-for aw,ax in ipairs(av:GetPlayingAnimationTracks())do
-ax:Stop()
+aw.RootPart.CFrame=aw.RootPart.CFrame*CFrame.Angles(math.pi*0.5,0,0)
+for ax,ay in ipairs(aw:GetPlayingAnimationTracks())do
+ay:Stop()
 end
 end)
 
-addcmd("sitwalk",{},function(at,au)
-local av=au.Character.Animate
-local aw=av.sit:FindFirstChildWhichIsA"Animation".AnimationId
-av.idle:FindFirstChildWhichIsA"Animation".AnimationId=aw
-av.walk:FindFirstChildWhichIsA"Animation".AnimationId=aw
-av.run:FindFirstChildWhichIsA"Animation".AnimationId=aw
-av.jump:FindFirstChildWhichIsA"Animation".AnimationId=aw
-au.Character:FindFirstChildWhichIsA"Humanoid".HipHeight=not r15(au)and-1.5 or 0.5
+addcmd("sitwalk",{},function(au,av)
+local aw=av.Character.Animate
+local ax=aw.sit:FindFirstChildWhichIsA"Animation".AnimationId
+aw.idle:FindFirstChildWhichIsA"Animation".AnimationId=ax
+aw.walk:FindFirstChildWhichIsA"Animation".AnimationId=ax
+aw.run:FindFirstChildWhichIsA"Animation".AnimationId=ax
+aw.jump:FindFirstChildWhichIsA"Animation".AnimationId=ax
+av.Character:FindFirstChildWhichIsA"Humanoid".HipHeight=not r15(av)and-1.5 or 0.5
 end)
 
-addcmd("nosit",{},function(at,au)
-au.Character:FindFirstChildWhichIsA"Humanoid":SetStateEnabled(Enum.HumanoidStateType.Seated,false)
+addcmd("nosit",{},function(au,av)
+av.Character:FindFirstChildWhichIsA"Humanoid":SetStateEnabled(Enum.HumanoidStateType.Seated,false)
 end)
 
-addcmd("unnosit",{},function(at,au)
-au.Character:FindFirstChildWhichIsA"Humanoid":SetStateEnabled(Enum.HumanoidStateType.Seated,true)
+addcmd("unnosit",{},function(au,av)
+av.Character:FindFirstChildWhichIsA"Humanoid":SetStateEnabled(Enum.HumanoidStateType.Seated,true)
 end)
 
-addcmd("jump",{},function(at,au)
-au.Character:FindFirstChildWhichIsA"Humanoid":ChangeState(Enum.HumanoidStateType.Jumping)
-end)
-
-local at
-infJumpDebounce=false
-addcmd("infjump",{"infinitejump"},function(au,av)
-if at then at:Disconnect()end
-infJumpDebounce=false
-at=UserInputService.JumpRequest:Connect(function()
-if not infJumpDebounce then
-infJumpDebounce=true
+addcmd("jump",{},function(au,av)
 av.Character:FindFirstChildWhichIsA"Humanoid":ChangeState(Enum.HumanoidStateType.Jumping)
-wait()
-infJumpDebounce=false
-end
-end)
-end)
-
-addcmd("uninfjump",{"uninfinitejump","noinfjump","noinfinitejump"},function(au,av)
-if at then at:Disconnect()end
-infJumpDebounce=false
 end)
 
 local au
-addcmd("flyjump",{},function(av,aw)
+infJumpDebounce=false
+addcmd("infjump",{"infinitejump"},function(av,aw)
 if au then au:Disconnect()end
+infJumpDebounce=false
 au=UserInputService.JumpRequest:Connect(function()
+if not infJumpDebounce then
+infJumpDebounce=true
 aw.Character:FindFirstChildWhichIsA"Humanoid":ChangeState(Enum.HumanoidStateType.Jumping)
+wait()
+infJumpDebounce=false
+end
 end)
 end)
 
-addcmd("unflyjump",{"noflyjump"},function(av,aw)
+addcmd("uninfjump",{"uninfinitejump","noinfjump","noinfinitejump"},function(av,aw)
 if au then au:Disconnect()end
+infJumpDebounce=false
 end)
 
-local av={}
-addcmd('autojump',{'ajump'},function(aw,ax)
-local ay=ax.Character
-local az=ay and ay:FindFirstChildWhichIsA"Humanoid"
+local av
+addcmd("flyjump",{},function(aw,ax)
+if av then av:Disconnect()end
+av=UserInputService.JumpRequest:Connect(function()
+ax.Character:FindFirstChildWhichIsA"Humanoid":ChangeState(Enum.HumanoidStateType.Jumping)
+end)
+end)
+
+addcmd("unflyjump",{"noflyjump"},function(aw,ax)
+if av then av:Disconnect()end
+end)
+
+local aw={}
+addcmd('autojump',{'ajump'},function(ax,ay)
+local az=ay.Character
+local aA=az and az:FindFirstChildWhichIsA"Humanoid"
 local function autoJump()
-if ay and az then
-local aA=workspace:FindPartOnRay(Ray.new(az.RootPart.Position-Vector3.new(0,1.5,0),az.RootPart.CFrame.lookVector*3),az.Parent)
-local V=workspace:FindPartOnRay(Ray.new(az.RootPart.Position+Vector3.new(0,1.5,0),az.RootPart.CFrame.lookVector*3),az.Parent)
-if aA or V then
-az.Jump=true
+if az and aA then
+local aB=workspace:FindPartOnRay(Ray.new(aA.RootPart.Position-Vector3.new(0,1.5,0),aA.RootPart.CFrame.lookVector*3),aA.Parent)
+local V=workspace:FindPartOnRay(Ray.new(aA.RootPart.Position+Vector3.new(0,1.5,0),aA.RootPart.CFrame.lookVector*3),aA.Parent)
+if aB or V then
+aA.Jump=true
 end
 end
 end
 autoJump()
-av.ajLoop=(av.ajLoop and av.ajLoop:Disconnect()and false)or RunService.RenderStepped:Connect(autoJump)
-av.ajCA=(av.ajCA and av.ajCA:Disconnect()and false)or ax.CharacterAdded:Connect(function(aA)
-ay,az=aA,aA:WaitForChild"Humanoid"
+aw.ajLoop=(aw.ajLoop and aw.ajLoop:Disconnect()and false)or RunService.RenderStepped:Connect(autoJump)
+aw.ajCA=(aw.ajCA and aw.ajCA:Disconnect()and false)or ay.CharacterAdded:Connect(function(aB)
+az,aA=aB,aB:WaitForChild"Humanoid"
 autoJump()
-av.ajLoop=(av.ajLoop and av.ajLoop:Disconnect()and false)or RunService.RenderStepped:Connect(autoJump)
+aw.ajLoop=(aw.ajLoop and aw.ajLoop:Disconnect()and false)or RunService.RenderStepped:Connect(autoJump)
 end)
 end)
 
-addcmd('unautojump',{'noautojump','noajump','unajump'},function(aw,ax)
-av.ajLoop=(av.ajLoop and av.ajLoop:Disconnect()and false)or nil
-av.ajCA=(av.ajCA and av.ajCA:Disconnect()and false)or nil
+addcmd('unautojump',{'noautojump','noajump','unajump'},function(ax,ay)
+aw.ajLoop=(aw.ajLoop and aw.ajLoop:Disconnect()and false)or nil
+aw.ajCA=(aw.ajCA and aw.ajCA:Disconnect()and false)or nil
 end)
 
-addcmd('edgejump',{'ejump'},function(aw,ax)
-local ay=ax.Character
-local az=ay and ay:FindFirstChildWhichIsA"Humanoid"
+addcmd('edgejump',{'ejump'},function(ax,ay)
+local az=ay.Character
+local aA=az and az:FindFirstChildWhichIsA"Humanoid"
 
-local aA
+local aB
 local V
 local W
 local function edgejump()
-if ay and az then
-V=aA
-aA=az:GetState()
-if V~=aA and aA==Enum.HumanoidStateType.Freefall and V~=Enum.HumanoidStateType.Jumping then
-ay.Humanoid.RootPart.CFrame=W
-ay.Humanoid.RootPart.Velocity=Vector3.new(ay.Humanoid.RootPart.Velocity.X,az.JumpPower or az.JumpHeight,ay.Humanoid.RootPart.Velocity.Z)
+if az and aA then
+V=aB
+aB=aA:GetState()
+if V~=aB and aB==Enum.HumanoidStateType.Freefall and V~=Enum.HumanoidStateType.Jumping then
+az.Humanoid.RootPart.CFrame=W
+az.Humanoid.RootPart.Velocity=Vector3.new(az.Humanoid.RootPart.Velocity.X,aA.JumpPower or aA.JumpHeight,az.Humanoid.RootPart.Velocity.Z)
 end
-W=ay.Humanoid.RootPart.CFrame
+W=az.Humanoid.RootPart.CFrame
 end
 end
 edgejump()
-av.ejLoop=(av.ejLoop and av.ejLoop:Disconnect()and false)or RunService.RenderStepped:Connect(edgejump)
-av.ejCA=(av.ejCA and av.ejCA:Disconnect()and false)or ax.CharacterAdded:Connect(function(X)
-ay,az=X,X:WaitForChild"Humanoid"
+aw.ejLoop=(aw.ejLoop and aw.ejLoop:Disconnect()and false)or RunService.RenderStepped:Connect(edgejump)
+aw.ejCA=(aw.ejCA and aw.ejCA:Disconnect()and false)or ay.CharacterAdded:Connect(function(X)
+az,aA=X,X:WaitForChild"Humanoid"
 edgejump()
-av.ejLoop=(av.ejLoop and av.ejLoop:Disconnect()and false)or RunService.RenderStepped:Connect(edgejump)
+aw.ejLoop=(aw.ejLoop and aw.ejLoop:Disconnect()and false)or RunService.RenderStepped:Connect(edgejump)
 end)
 end)
 
-addcmd('unedgejump',{'noedgejump','noejump','unejump'},function(aw,ax)
-av.ejLoop=(av.ejLoop and av.ejLoop:Disconnect()and false)or nil
-av.ejCA=(av.ejCA and av.ejCA:Disconnect()and false)or nil
+addcmd('unedgejump',{'noedgejump','noejump','unejump'},function(ax,ay)
+aw.ejLoop=(aw.ejLoop and aw.ejLoop:Disconnect()and false)or nil
+aw.ejCA=(aw.ejCA and aw.ejCA:Disconnect()and false)or nil
 end)
 
-addcmd("team",{},function(aw,ax)
-local ay=getstring(1,aw)
-local az
-local aA=ax.Character and getRoot(ax.Character)
+addcmd("team",{},function(ax,ay)
+local az=getstring(1,ax)
+local aA
+local aB=ay.Character and getRoot(ay.Character)
 for V,W in ipairs(Teams:GetChildren())do
-if W.Name:lower():match(ay:lower())then
-az=W
+if W.Name:lower():match(az:lower())then
+aA=W
 break
 end
 end
-if not az then
-return notify("Invalid Team",ay.." is not a valid team")
+if not aA then
+return notify("Invalid Team",az.." is not a valid team")
 end
-if aA and firetouchinterest then
+if aB and firetouchinterest then
 for V,W in ipairs(workspace:GetDescendants())do
-if W:IsA"SpawnLocation"and W.BrickColor==az.TeamColor and W.AllowTeamChangeOnTouch==true then
-firetouchinterest(W,aA,0)
-firetouchinterest(W,aA,1)
+if W:IsA"SpawnLocation"and W.BrickColor==aA.TeamColor and W.AllowTeamChangeOnTouch==true then
+firetouchinterest(W,aB,0)
+firetouchinterest(W,aB,1)
 break
 end
 end
 else
-ax.Team=az
+ay.Team=aA
 end
 end)
 
-addcmd('nobgui',{'unbgui','nobillboardgui','unbillboardgui','noname','rohg'},function(aw,ax)
-for ay,az in pairs(ax.Character:GetDescendants())do
-if az:IsA"BillboardGui"or az:IsA"SurfaceGui"then
-az:Destroy()
+addcmd('nobgui',{'unbgui','nobillboardgui','unbillboardgui','noname','rohg'},function(ax,ay)
+for az,aA in pairs(ay.Character:GetDescendants())do
+if aA:IsA"BillboardGui"or aA:IsA"SurfaceGui"then
+aA:Destroy()
 end
 end
 end)
 
-addcmd('loopnobgui',{'loopunbgui','loopnobillboardgui','loopunbillboardgui','loopnoname','looprohg'},function(aw,ax)
-for ay,az in pairs(ax.Character:GetDescendants())do
+addcmd('loopnobgui',{'loopunbgui','loopnobillboardgui','loopunbillboardgui','loopnoname','looprohg'},function(ax,ay)
+for az,aA in pairs(ay.Character:GetDescendants())do
+if aA:IsA"BillboardGui"or aA:IsA"SurfaceGui"then
+aA:Destroy()
+end
+end
+local function charPartAdded(az)
 if az:IsA"BillboardGui"or az:IsA"SurfaceGui"then
-az:Destroy()
-end
-end
-local function charPartAdded(ay)
-if ay:IsA"BillboardGui"or ay:IsA"SurfaceGui"then
 wait()
-ay:Destroy()
+az:Destroy()
 end
 end
-charPartTrigger=ax.Character.DescendantAdded:Connect(charPartAdded)
+charPartTrigger=ay.Character.DescendantAdded:Connect(charPartAdded)
 end)
 
-addcmd('unloopnobgui',{'unloopunbgui','unloopnobillboardgui','unloopunbillboardgui','unloopnoname','unlooprohg'},function(aw,ax)
+addcmd('unloopnobgui',{'unloopunbgui','unloopnobillboardgui','unloopunbillboardgui','unloopnoname','unlooprohg'},function(ax,ay)
 if charPartTrigger then
 charPartTrigger:Disconnect()
 end
 end)
 
-addcmd('spasm',{},function(aw,ax)
-if not r15(ax)then
-local ay=ax.Character
-local az="33796059"
+addcmd('spasm',{},function(ax,ay)
+if not r15(ay)then
+local az=ay.Character
+local aA="33796059"
 SpasmAnim=Instance.new"Animation"
-SpasmAnim.AnimationId="rbxassetid://"..az
-Spasm=ay:FindFirstChildOfClass'Humanoid':LoadAnimation(SpasmAnim)
+SpasmAnim.AnimationId="rbxassetid://"..aA
+Spasm=az:FindFirstChildOfClass'Humanoid':LoadAnimation(SpasmAnim)
 Spasm:Play()
 Spasm:AdjustSpeed(99)
 else
@@ -9929,81 +9976,81 @@ notify('R6 Required','This command requires the r6 rig type')
 end
 end)
 
-addcmd('unspasm',{'nospasm'},function(aw,ax)
+addcmd('unspasm',{'nospasm'},function(ax,ay)
 Spasm:Stop()
 SpasmAnim:Destroy()
 end)
 
-addcmd('headthrow',{},function(aw,ax)
-if not r15(ax)then
-local ay="35154961"
-local az=Instance.new"Animation"
-az.AnimationId="rbxassetid://"..ay
-local aA=ax.Character:FindFirstChildOfClass'Humanoid':LoadAnimation(az)
-aA:Play(0)
-aA:AdjustSpeed(1)
+addcmd('headthrow',{},function(ax,ay)
+if not r15(ay)then
+local az="35154961"
+local aA=Instance.new"Animation"
+aA.AnimationId="rbxassetid://"..az
+local aB=ay.Character:FindFirstChildOfClass'Humanoid':LoadAnimation(aA)
+aB:Play(0)
+aB:AdjustSpeed(1)
 else
 notify('R6 Required','This command requires the r6 rig type')
 end
 end)
 
-local function anim2track(aw)
-local ax=game:GetObjects(aw)
-for ay=1,#ax do
-if ax[ay]:IsA"Animation"then
-return ax[ay].AnimationId
+local function anim2track(ax)
+local ay=game:GetObjects(ax)
+for az=1,#ay do
+if ay[az]:IsA"Animation"then
+return ay[az].AnimationId
 end
 end
-return aw
+return ax
 end
 
-addcmd("animation",{"anim"},function(aw,ax)
-local ay=tostring(aw[1])
-if not ay:find"rbxassetid://"then
-ay="rbxassetid://"..ay
+addcmd("animation",{"anim"},function(ax,ay)
+local az=tostring(ax[1])
+if not az:find"rbxassetid://"then
+az="rbxassetid://"..az
 end
-ay=anim2track(ay)
-local az=Instance.new"Animation"
-az.AnimationId=ay
-local aA=ax.Character:FindFirstChildWhichIsA"Humanoid":LoadAnimation(az)
-aA.Priority=Enum.AnimationPriority.Movement
-aA:Play()
-if aw[2]then aA:AdjustSpeed(tostring(aw[2]))end
+az=anim2track(az)
+local aA=Instance.new"Animation"
+aA.AnimationId=az
+local aB=ay.Character:FindFirstChildWhichIsA"Humanoid":LoadAnimation(aA)
+aB.Priority=Enum.AnimationPriority.Movement
+aB:Play()
+if ax[2]then aB:AdjustSpeed(tostring(ax[2]))end
 end)
 
-addcmd("emote",{"em"},function(aw,ax)
-local ay=humanoid:PlayEmoteAndGetAnimTrackById(aw[1])
-if aw[2]then ay:AdjustSpeed(tostring(aw[2]))end
+addcmd("emote",{"em"},function(ax,ay)
+local az=humanoid:PlayEmoteAndGetAnimTrackById(ax[1])
+if ax[2]then az:AdjustSpeed(tostring(ax[2]))end
 end)
 
 
-addcmd('noanim',{},function(aw,ax)
-ax.Character.Animate.Disabled=true
+addcmd('noanim',{},function(ax,ay)
+ay.Character.Animate.Disabled=true
 end)
 
-addcmd('reanim',{},function(aw,ax)
-ax.Character.Animate.Disabled=false
+addcmd('reanim',{},function(ax,ay)
+ay.Character.Animate.Disabled=false
 end)
 
-addcmd('animspeed',{},function(aw,ax)
-local ay=ax.Character
-local az=ay:FindFirstChildOfClass"Humanoid"or ay:FindFirstChildOfClass"AnimationController"
+addcmd('animspeed',{},function(ax,ay)
+local az=ay.Character
+local aA=az:FindFirstChildOfClass"Humanoid"or az:FindFirstChildOfClass"AnimationController"
 
-for aA,V in next,az:GetPlayingAnimationTracks()do
-V:AdjustSpeed(tonumber(aw[1]or 1))
+for aB,V in next,aA:GetPlayingAnimationTracks()do
+V:AdjustSpeed(tonumber(ax[1]or 1))
 end
 end)
 
-addcmd('copyanimation',{'copyanim','copyemote'},function(aw,ax)
-local ay=getPlayer(aw[1],ax)
-for az,aA in ipairs(ay)do local V=
-Players[aA].Character
-for W,X in pairs(ax.Character:FindFirstChildOfClass'Humanoid':GetPlayingAnimationTracks())do
+addcmd('copyanimation',{'copyanim','copyemote'},function(ax,ay)
+local az=getPlayer(ax[1],ay)
+for aA,aB in ipairs(az)do local V=
+Players[aB].Character
+for W,X in pairs(ay.Character:FindFirstChildOfClass'Humanoid':GetPlayingAnimationTracks())do
 X:Stop()
 end
-for W,X in pairs(Players[aA].Character:FindFirstChildOfClass'Humanoid':GetPlayingAnimationTracks())do
+for W,X in pairs(Players[aB].Character:FindFirstChildOfClass'Humanoid':GetPlayingAnimationTracks())do
 if not string.find(X.Animation.AnimationId,"507768375")then
-local Y=ax.Character:FindFirstChildOfClass'Humanoid':LoadAnimation(X.Animation)
+local Y=ay.Character:FindFirstChildOfClass'Humanoid':LoadAnimation(X.Animation)
 Y:Play(.1,1,X.Speed)
 Y.TimePosition=X.TimePosition
 task.spawn(function()
@@ -10016,11 +10063,11 @@ end
 end
 end)
 
-addcmd("copyanimationid",{"copyanimid","copyemoteid"},function(aw,ax)
-local ay=function(ay)
-local az="Animations Copied"
+addcmd("copyanimationid",{"copyanimid","copyemoteid"},function(ax,ay)
+local az=function(az)
+local aA="Animations Copied"
 
-for aA,V in pairs(ay.Character:FindFirstChildWhichIsA"Humanoid":GetPlayingAnimationTracks())do
+for aB,V in pairs(az.Character:FindFirstChildWhichIsA"Humanoid":GetPlayingAnimationTracks())do
 local W=V.Animation.AnimationId
 local X=W:find"rbxassetid://"and W:match"%d+"
 
@@ -10030,143 +10077,145 @@ local Y,Z=pcall(function()
 return MarketplaceService:GetProductInfo(tonumber(X)).Name
 end)
 local _=Y and Z or"Failed to get name"
-az=az.."\n\nName: ".._.."\nAnimation Id: "..W
+aA=aA.."\n\nName: ".._.."\nAnimation Id: "..W
 else
-az=az.."\n\nAnimation Id: "..W
+aA=aA.."\n\nAnimation Id: "..W
 end
 end
 end
 
-if az~="Animations Copied"then
-toClipboard(az)
+if aA~="Animations Copied"then
+toClipboard(aA)
 else
 notify("Animations","No animations to copy")
 end
 end
 
-if aw[1]then
-ay(Players[getPlayer(aw[1],ax)[1] ])
+if ax[1]then
+az(Players[getPlayer(ax[1],ay)[1] ])
 else
-ay(ax)
+az(ay)
 end
 end)
 
-addcmd('stopanimations',{'stopanims','stopanim'},function(aw,ax)
-local ay=ax.Character
-local az=ay:FindFirstChildOfClass"Humanoid"or ay:FindFirstChildOfClass"AnimationController"
+addcmd('stopanimations',{'stopanims','stopanim'},function(ax,ay)
+local az=ay.Character
+local aA=az:FindFirstChildOfClass"Humanoid"or az:FindFirstChildOfClass"AnimationController"
 
-for aA,V in next,az:GetPlayingAnimationTracks()do
+for aB,V in next,aA:GetPlayingAnimationTracks()do
 V:Stop()
 end
 end)
 
-addcmd('refreshanimations',{'refreshanimation','refreshanims','refreshanim'},function(aw,ax)
-local ay=ax.Character or ax.CharacterAdded:Wait()
-local az=ay and ay:WaitForChild('Humanoid',15)
-local aA=ay and ay:WaitForChild('Animate',15)
-if not az or not aA then
+addcmd('refreshanimations',{'refreshanimation','refreshanims','refreshanim'},function(ax,ay)
+local az=ay.Character or ay.CharacterAdded:Wait()
+local aA=az and az:WaitForChild('Humanoid',15)
+local aB=az and az:WaitForChild('Animate',15)
+if not aA or not aB then
 return notify('Refresh Animations','Failed to get Animate/Humanoid')
 end
-aA.Disabled=true
-for V,W in ipairs(az:GetPlayingAnimationTracks())do
+aB.Disabled=true
+for V,W in ipairs(aA:GetPlayingAnimationTracks())do
 W:Stop()
 end
-aA.Disabled=false
+aB.Disabled=false
 end)
 
-addcmd('allowcustomanim',{'allowcustomanimations'},function(aw,ax)
+addcmd('allowcustomanim',{'allowcustomanimations'},function(ax,ay)
 StarterPlayer.AllowCustomAnimations=true
 execCmd'refreshanimations'
 end)
 
-addcmd('unallowcustomanim',{'unallowcustomanimations'},function(aw,ax)
+addcmd('unallowcustomanim',{'unallowcustomanimations'},function(ax,ay)
 StarterPlayer.AllowCustomAnimations=false
 execCmd'refreshanimations'
 end)
 
-addcmd('loopanimation',{'loopanim'},function(aw,ax)
-local ay=ax.Character
-local az=ay and ay.FindFirstChildWhichIsA(ay,"Humanoid")
-for aA,V in ipairs(az.GetPlayingAnimationTracks(az))do
+addcmd('loopanimation',{'loopanim'},function(ax,ay)
+local az=ay.Character
+local aA=az and az.FindFirstChildWhichIsA(az,"Humanoid")
+for aB,V in ipairs(aA.GetPlayingAnimationTracks(aA))do
 V.Looped=true
 end
 end)
 
-addcmd('tpposition',{'tppos'},function(aw,ax)
-if#aw<3 then return end
-local ay,az,aA=tonumber((aw[1]:gsub(",",""))),tonumber((aw[2]:gsub(",",""))),tonumber((aw[3]:gsub(",","")))
-local V=ax.Character
+addcmd('tpposition',{'tppos'},function(ax,ay)
+if#ax<3 then return end
+local az,aA,aB=tonumber((ax[1]:gsub(",",""))),tonumber((ax[2]:gsub(",",""))),tonumber((ax[3]:gsub(",","")))
+local V=ay.Character
 if V and getRoot(V)then
-getRoot(V).CFrame=CFrame.new(ay,az,aA)
+getRoot(V).CFrame=CFrame.new(az,aA,aB)
 end
 end)
 
-addcmd('tweentpposition',{'ttppos'},function(aw,ax)
-if#aw<3 then return end
-local ay,az,aA=tonumber((aw[1]:gsub(",",""))),tonumber((aw[2]:gsub(",",""))),tonumber((aw[3]:gsub(",","")))
-local V=ax.Character
+addcmd('tweentpposition',{'ttppos'},function(ax,ay)
+if#ax<3 then return end
+local az,aA,aB=tonumber((ax[1]:gsub(",",""))),tonumber((ax[2]:gsub(",",""))),tonumber((ax[3]:gsub(",","")))
+local V=ay.Character
 if V and getRoot(V)then
-TweenService:Create(getRoot(ax.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=CFrame.new(ay,az,aA)}):Play()
+TweenService:Create(getRoot(ay.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=CFrame.new(az,aA,aB)}):Play()
 end
 end)
 
-addcmd('offset',{},function(aw,ax)
-if#aw<3 then
-return
-end
-if ax.Character then
-ax.Character:TranslateBy(Vector3.new(tonumber(aw[1])or 0,tonumber(aw[2])or 0,tonumber(aw[3])or 0))
+addcmd("offset",{},function(ax,ay)
+if#ax<3 then return end
+ay.Character:TranslateBy(Vector3.new(tonumber(ax[1])or 0,tonumber(ax[2])or 0,tonumber(ax[3])or 0))
+end)
+
+addcmd("tweenoffset",{"toffset"},function(ax,ay)
+if#ax<3 then return end
+local az,aA,aB=tonumber(ax[1]),tonumber(ax[2]),tonumber(ax[3])
+local V=getRoot(ay.Character)
+local W=V.Position+Vector3.new(az,aA,aB)
+TweenService:Create(V,TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=CFrame.new(W)}):Play()
+breakVelocity()
+end)
+
+addcmd("clickteleport",{},function(ax,ay)
+if ay~=Players.LocalPlayer then return end
+notify("Click TP","Go to Settings > Keybinds > Add to set up click teleport")
+end)
+
+addcmd("mouseteleport",{"mousetp"},function(ax,ay)
+local az=getRoot(ay.Character)
+local aA=IYMouse.Hit
+if az and aA then
+az.CFrame=CFrame.new(aA.X,aA.Y+3,aA.Z,select(4,az.CFrame:components()))
+breakVelocity()
 end
 end)
 
-addcmd('tweenoffset',{'toffset'},function(aw,ax)
-if#aw<3 then return end
-local ay,az,aA=tonumber(aw[1]),tonumber(aw[2]),tonumber(aw[3])
-local V=ax.Character
-if V and getRoot(V)then
-TweenService:Create(getRoot(ax.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=CFrame.new(ay,az,aA)}):Play()
-end
-end)
-
-addcmd('clickteleport',{},function(aw,ax)
-if ax==Players.LocalPlayer then
-notify('Click TP','Go to Settings > Keybinds > Add to set up click teleport')
-end
-end)
-
-addcmd("mouseteleport",{"mousetp"},function(aw,ax)
-local ay=getRoot(ax.Character)
-local az=IYMouse.Hit
-if ay and az then
-ay.CFrame=CFrame.new(az.X,az.Y+3,az.Z,select(4,ay.CFrame:components()))
-end
-end)
-
-addcmd('tptool',{'teleporttool'},function(aw,ax)
-local ay=Instance.new"Tool"
-ay.Name="Teleport Tool"
-ay.RequiresHandle=false
-ay.Parent=ax.Backpack
-ay.Activated:Connect(function()
-local az=ax.Character or workspace:FindFirstChild(ax.Name)
-local aA=getRoot(az)
-if not az or not aA then
-return warn"Failed to find HumanoidRootPart"
-end
-aA.CFrame=CFrame.new(IYMouse.Hit.X,IYMouse.Hit.Y+3,IYMouse.Hit.Z,select(4,aA.CFrame:components()))
+addcmd("tptool",{"teleporttool"},function(ax,ay)
+local az=Instance.new"Tool"
+az.Name="Teleport Tool"
+az.RequiresHandle=false
+az.Parent=ay:FindFirstChildOfClass"Backpack"
+az.Activated:Connect(function()
+local aA=getRoot(ay.Character)
+local aB=IYMouse.Hit
+if not aA or not aB then return end
+aA.CFrame=CFrame.new(aB.X,aB.Y+3,aB.Z,select(4,aA.CFrame:components()))
+breakVelocity()
 end)
 end)
 
-addcmd('clickdelete',{},function(aw,ax)
-if ax==Players.LocalPlayer then
+addcmd("thru",{},function(ax,ay)
+local az=getRoot(ay.Character)
+local aA=tonumber(ax[1])or 5
+local aB=az.CFrame.Position+(az.CFrame.LookVector*aA)
+az.CFrame=CFrame.new(aB,aB+az.CFrame.LookVector)
+end)
+
+addcmd('clickdelete',{},function(ax,ay)
+if ay==Players.LocalPlayer then
 notify('Click Delete','Go to Settings > Keybinds > Add to set up click delete')
 end
 end)
 
-addcmd('getposition',{'getpos','notifypos','notifyposition'},function(aw,ax)
-local ay=getPlayer(aw[1],ax)
-for az,aA in pairs(ay)do
-local V=Players[aA].Character
+addcmd('getposition',{'getpos','notifypos','notifyposition'},function(ax,ay)
+local az=getPlayer(ax[1],ay)
+for aA,aB in pairs(az)do
+local V=Players[aB].Character
 local W=V and(getRoot(V)or V:FindFirstChildWhichIsA"BasePart")
 W=W and W.Position
 if not W then
@@ -10177,10 +10226,10 @@ notify('Current Position',X)
 end
 end)
 
-addcmd('copyposition',{'copypos'},function(aw,ax)
-local ay=getPlayer(aw[1],ax)
-for az,aA in pairs(ay)do
-local V=Players[aA].Character
+addcmd('copyposition',{'copypos'},function(ax,ay)
+local az=getPlayer(ax[1],ay)
+for aA,aB in pairs(az)do
+local V=Players[aB].Character
 local W=V and(getRoot(V)or V:FindFirstChildWhichIsA"BasePart")
 W=W and W.Position
 if not W then
@@ -10191,42 +10240,42 @@ toClipboard(X)
 end
 end)
 
-addcmd('walktopos',{'walktoposition'},function(aw,ax)
-if ax.Character:FindFirstChildOfClass'Humanoid'and ax.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
-ax.Character:FindFirstChildOfClass'Humanoid'.Sit=false
+addcmd('walktopos',{'walktoposition'},function(ax,ay)
+if ay.Character:FindFirstChildOfClass'Humanoid'and ay.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+ay.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-ax.Character:FindFirstChildOfClass'Humanoid'.WalkToPoint=Vector3.new(aw[1],aw[2],aw[3])
+ay.Character:FindFirstChildOfClass'Humanoid'.WalkToPoint=Vector3.new(ax[1],ax[2],ax[3])
 end)
 
-addcmd('speed',{'ws','walkspeed'},function(aw,ax)
-if aw[2]then
-local ay=aw[2]or 16
-if isNumber(ay)then
-ax.Character:FindFirstChildOfClass'Humanoid'.WalkSpeed=ay
+addcmd('speed',{'ws','walkspeed'},function(ax,ay)
+if ax[2]then
+local az=ax[2]or 16
+if isNumber(az)then
+ay.Character:FindFirstChildOfClass'Humanoid'.WalkSpeed=az
 end
 else
-local ay=aw[1]or 16
-if isNumber(ay)then
-ax.Character:FindFirstChildOfClass'Humanoid'.WalkSpeed=ay
+local az=ax[1]or 16
+if isNumber(az)then
+ay.Character:FindFirstChildOfClass'Humanoid'.WalkSpeed=az
 end
 end
 end)
 
-addcmd('spoofspeed',{'spoofws','spoofwalkspeed'},function(aw,ax)
-if aw[1]and isNumber(aw[1])then
+addcmd('spoofspeed',{'spoofws','spoofwalkspeed'},function(ax,ay)
+if ax[1]and isNumber(ax[1])then
 if hookmetamethod then
-local ay=ax.Character
-local az;
-local aA;aA=hookmetamethod(game,"__index",function(V,W)
-if not checkcaller()and typeof(V)=="Instance"and V:IsA"Humanoid"and(W=="WalkSpeed"or W=="walkSpeed")and V:IsDescendantOf(ay)then
-return az or aw[1]
+local az=ay.Character
+local aA;
+local aB;aB=hookmetamethod(game,"__index",function(V,W)
+if not checkcaller()and typeof(V)=="Instance"and V:IsA"Humanoid"and(W=="WalkSpeed"or W=="walkSpeed")and V:IsDescendantOf(az)then
+return aA or ax[1]
 end
-return aA(V,W)
+return aB(V,W)
 end)
 local V;V=hookmetamethod(game,"__newindex",function(W,X,Y)
-if not checkcaller()and typeof(W)=="Instance"and W:IsA"Humanoid"and(X=="WalkSpeed"or X=="walkSpeed")and W:IsDescendantOf(ay)then
-az=tonumber(Y)
+if not checkcaller()and typeof(W)=="Instance"and W:IsA"Humanoid"and(X=="WalkSpeed"or X=="walkSpeed")and W:IsDescendantOf(az)then
+aA=tonumber(Y)
 end
 return V(W,X,Y)
 end)
@@ -10236,48 +10285,48 @@ end
 end
 end)
 
-addcmd('loopspeed',{'loopws'},function(aw,ax)
-local ay=aw[1]or 16
-if aw[2]then
-ay=aw[2]or 16
+addcmd('loopspeed',{'loopws'},function(ax,ay)
+local az=ax[1]or 16
+if ax[2]then
+az=ax[2]or 16
 end
-if isNumber(ay)then
-local az=ax.Character or workspace:FindFirstChild(ax.Name)
-local aA=az and az:FindFirstChildWhichIsA"Humanoid"
+if isNumber(az)then
+local aA=ay.Character or workspace:FindFirstChild(ay.Name)
+local aB=aA and aA:FindFirstChildWhichIsA"Humanoid"
 local function WalkSpeedChange()
-if az and aA then
-aA.WalkSpeed=ay
+if aA and aB then
+aB.WalkSpeed=az
 end
 end
 WalkSpeedChange()
-av.wsLoop=(av.wsLoop and av.wsLoop:Disconnect()and false)or aA:GetPropertyChangedSignal"WalkSpeed":Connect(WalkSpeedChange)
-av.wsCA=(av.wsCA and av.wsCA:Disconnect()and false)or ax.CharacterAdded:Connect(function(V)
-az,aA=V,V:WaitForChild"Humanoid"
+aw.wsLoop=(aw.wsLoop and aw.wsLoop:Disconnect()and false)or aB:GetPropertyChangedSignal"WalkSpeed":Connect(WalkSpeedChange)
+aw.wsCA=(aw.wsCA and aw.wsCA:Disconnect()and false)or ay.CharacterAdded:Connect(function(V)
+aA,aB=V,V:WaitForChild"Humanoid"
 WalkSpeedChange()
-av.wsLoop=(av.wsLoop and av.wsLoop:Disconnect()and false)or aA:GetPropertyChangedSignal"WalkSpeed":Connect(WalkSpeedChange)
+aw.wsLoop=(aw.wsLoop and aw.wsLoop:Disconnect()and false)or aB:GetPropertyChangedSignal"WalkSpeed":Connect(WalkSpeedChange)
 end)
 end
 end)
 
-addcmd('unloopspeed',{'unloopws'},function(aw,ax)
-av.wsLoop=(av.wsLoop and av.wsLoop:Disconnect()and false)or nil
-av.wsCA=(av.wsCA and av.wsCA:Disconnect()and false)or nil
+addcmd('unloopspeed',{'unloopws'},function(ax,ay)
+aw.wsLoop=(aw.wsLoop and aw.wsLoop:Disconnect()and false)or nil
+aw.wsCA=(aw.wsCA and aw.wsCA:Disconnect()and false)or nil
 end)
 
-addcmd('spoofjumppower',{'spoofjp'},function(aw,ax)
-if aw[1]and isNumber(aw[1])then
+addcmd('spoofjumppower',{'spoofjp'},function(ax,ay)
+if ax[1]and isNumber(ax[1])then
 if hookmetamethod then
-local ay=ax.Character
-local az;
-local aA;aA=hookmetamethod(game,"__index",function(V,W)
-if not checkcaller()and typeof(V)=="Instance"and V:IsA"Humanoid"and(W=="JumpPower"or W=="jumpPower")and V:IsDescendantOf(ay)then
-return az or aw[1]
+local az=ay.Character
+local aA;
+local aB;aB=hookmetamethod(game,"__index",function(V,W)
+if not checkcaller()and typeof(V)=="Instance"and V:IsA"Humanoid"and(W=="JumpPower"or W=="jumpPower")and V:IsDescendantOf(az)then
+return aA or ax[1]
 end
-return aA(V,W)
+return aB(V,W)
 end)
 local V;V=hookmetamethod(game,"__newindex",function(W,X,Y)
-if not checkcaller()and typeof(W)=="Instance"and W:IsA"Humanoid"and(X=="JumpPower"or X=="jumpPower")and W:IsDescendantOf(ay)then
-az=tonumber(Y)
+if not checkcaller()and typeof(W)=="Instance"and W:IsA"Humanoid"and(X=="JumpPower"or X=="jumpPower")and W:IsDescendantOf(az)then
+aA=tonumber(Y)
 end
 return V(W,X,Y)
 end)
@@ -10287,104 +10336,104 @@ end
 end
 end)
 
-addcmd('loopjumppower',{'loopjp','loopjpower'},function(aw,ax)
-local ay=aw[1]or 50
-if isNumber(ay)then
-local az=ax.Character or workspace:FindFirstChild(ax.Name)
-local aA=az and az:FindFirstChildWhichIsA"Humanoid"
+addcmd('loopjumppower',{'loopjp','loopjpower'},function(ax,ay)
+local az=ax[1]or 50
+if isNumber(az)then
+local aA=ay.Character or workspace:FindFirstChild(ay.Name)
+local aB=aA and aA:FindFirstChildWhichIsA"Humanoid"
 local function JumpPowerChange()
+if aA and aB then
+if ay.Character:FindFirstChildOfClass'Humanoid'.UseJumpPower then
+ay.Character:FindFirstChildOfClass'Humanoid'.JumpPower=az
+else
+ay.Character:FindFirstChildOfClass'Humanoid'.JumpHeight=az
+end
+end
+end
+JumpPowerChange()
+aw.jpLoop=(aw.jpLoop and aw.jpLoop:Disconnect()and false)or aB:GetPropertyChangedSignal"JumpPower":Connect(JumpPowerChange)
+aw.jpCA=(aw.jpCA and aw.jpCA:Disconnect()and false)or ay.CharacterAdded:Connect(function(V)
+aA,aB=V,V:WaitForChild"Humanoid"
+JumpPowerChange()
+aw.jpLoop=(aw.jpLoop and aw.jpLoop:Disconnect()and false)or aB:GetPropertyChangedSignal"JumpPower":Connect(JumpPowerChange)
+end)
+end
+end)
+
+addcmd('unloopjumppower',{'unloopjp','unloopjpower'},function(ax,ay)
+local az=ay.Character or workspace:FindFirstChild(ay.Name)
+local aA=az and az:FindFirstChildWhichIsA"Humanoid"
+aw.jpLoop=(aw.jpLoop and aw.jpLoop:Disconnect()and false)or nil
+aw.jpCA=(aw.jpCA and aw.jpCA:Disconnect()and false)or nil
 if az and aA then
-if ax.Character:FindFirstChildOfClass'Humanoid'.UseJumpPower then
-ax.Character:FindFirstChildOfClass'Humanoid'.JumpPower=ay
+if ay.Character:FindFirstChildOfClass'Humanoid'.UseJumpPower then
+ay.Character:FindFirstChildOfClass'Humanoid'.JumpPower=50
 else
-ax.Character:FindFirstChildOfClass'Humanoid'.JumpHeight=ay
-end
-end
-end
-JumpPowerChange()
-av.jpLoop=(av.jpLoop and av.jpLoop:Disconnect()and false)or aA:GetPropertyChangedSignal"JumpPower":Connect(JumpPowerChange)
-av.jpCA=(av.jpCA and av.jpCA:Disconnect()and false)or ax.CharacterAdded:Connect(function(V)
-az,aA=V,V:WaitForChild"Humanoid"
-JumpPowerChange()
-av.jpLoop=(av.jpLoop and av.jpLoop:Disconnect()and false)or aA:GetPropertyChangedSignal"JumpPower":Connect(JumpPowerChange)
-end)
-end
-end)
-
-addcmd('unloopjumppower',{'unloopjp','unloopjpower'},function(aw,ax)
-local ay=ax.Character or workspace:FindFirstChild(ax.Name)
-local az=ay and ay:FindFirstChildWhichIsA"Humanoid"
-av.jpLoop=(av.jpLoop and av.jpLoop:Disconnect()and false)or nil
-av.jpCA=(av.jpCA and av.jpCA:Disconnect()and false)or nil
-if ay and az then
-if ax.Character:FindFirstChildOfClass'Humanoid'.UseJumpPower then
-ax.Character:FindFirstChildOfClass'Humanoid'.JumpPower=50
-else
-ax.Character:FindFirstChildOfClass'Humanoid'.JumpHeight=50
+ay.Character:FindFirstChildOfClass'Humanoid'.JumpHeight=50
 end
 end
 end)
 
-addcmd('tools',{'gears'},function(aw,ax)
-local function copy(ay)
-for az,aA in pairs(ay:GetChildren())do
-if aA:IsA'Tool'or aA:IsA'HopperBin'then
-aA:Clone().Parent=ax:FindFirstChildOfClass"Backpack"
+addcmd('tools',{'gears'},function(ax,ay)
+local function copy(az)
+for aA,aB in pairs(az:GetChildren())do
+if aB:IsA'Tool'or aB:IsA'HopperBin'then
+aB:Clone().Parent=ay:FindFirstChildOfClass"Backpack"
 end
-copy(aA)
+copy(aB)
 end
 end
 copy(Lighting)
-local function copy(ay)
-for az,aA in pairs(ay:GetChildren())do
-if aA:IsA'Tool'or aA:IsA'HopperBin'then
-aA:Clone().Parent=ax:FindFirstChildOfClass"Backpack"
+local function copy(az)
+for aA,aB in pairs(az:GetChildren())do
+if aB:IsA'Tool'or aB:IsA'HopperBin'then
+aB:Clone().Parent=ay:FindFirstChildOfClass"Backpack"
 end
-copy(aA)
+copy(aB)
 end
 end
 copy(ReplicatedStorage)
 notify('Tools','Copied tools from ReplicatedStorage and Lighting')
 end)
 
-addcmd('notools',{'rtools','clrtools','removetools','deletetools','dtools'},function(aw,ax)
-for ay,az in pairs(ax:FindFirstChildOfClass"Backpack":GetDescendants())do
-if az:IsA'Tool'or az:IsA'HopperBin'then
-az:Destroy()
+addcmd('notools',{'rtools','clrtools','removetools','deletetools','dtools'},function(ax,ay)
+for az,aA in pairs(ay:FindFirstChildOfClass"Backpack":GetDescendants())do
+if aA:IsA'Tool'or aA:IsA'HopperBin'then
+aA:Destroy()
 end
 end
-for ay,az in pairs(ax.Character:GetDescendants())do
-if az:IsA'Tool'or az:IsA'HopperBin'then
-az:Destroy()
-end
-end
-end)
-
-addcmd('deleteselectedtool',{'dst'},function(aw,ax)
-for ay,az in pairs(ax.Character:GetDescendants())do
-if az:IsA'Tool'or az:IsA'HopperBin'then
-az:Destroy()
+for az,aA in pairs(ay.Character:GetDescendants())do
+if aA:IsA'Tool'or aA:IsA'HopperBin'then
+aA:Destroy()
 end
 end
 end)
 
-addcmd("console",{},function(aw,ax)
+addcmd('deleteselectedtool',{'dst'},function(ax,ay)
+for az,aA in pairs(ay.Character:GetDescendants())do
+if aA:IsA'Tool'or aA:IsA'HopperBin'then
+aA:Destroy()
+end
+end
+end)
+
+addcmd("console",{},function(ax,ay)
 StarterGui:SetCore("DevConsoleVisible",true)
 end)
 
-addcmd('oldconsole',{},function(aw,ax)
+addcmd('oldconsole',{},function(ax,ay)
 
 notify("Loading",'Hold on a sec')local
-ay, az=pcall(function()
+az, aA=pcall(function()
 return game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/console.lua",true)
 end)local
 
-aA=loadstring(az)
-if typeof(aA)~="function"then
+aB=loadstring(aA)
+if typeof(aB)~="function"then
 return
 end
 
-local V,W=pcall(aA)
+local V,W=pcall(aB)
 if(not V)then
 if printconsole then
 printconsole(W)
@@ -10396,33 +10445,33 @@ wait(1)
 notify('Console','Press F9 to open the console')
 end)
 
-addcmd("explorer",{"dex"},function(aw,ax)
+addcmd("explorer",{"dex"},function(ax,ay)
 notify("Loading","Hold on a sec")
 loadstring(game:HttpGet"https://raw.githubusercontent.com/infyiff/backup/main/dex.lua")()
 end)
 
-addcmd('olddex',{'odex'},function(aw,ax)
+addcmd('olddex',{'odex'},function(ax,ay)
 notify('Loading old explorer','Hold on a sec')
 
-local ay=function(ay)
-local az={}
-if ay then
-local aA=InsertService:LoadLocalAsset(ay)
-if aA then
-table.insert(az,aA)
+local az=function(az)
+local aA={}
+if az then
+local aB=InsertService:LoadLocalAsset(az)
+if aB then
+table.insert(aA,aB)
 end
 end
-return az
+return aA
 end
 
-local az=ay"rbxassetid://10055842438"[1]
-az.Parent=PARENT
+local aA=az"rbxassetid://10055842438"[1]
+aA.Parent=PARENT
 
-local function Load(aA,V)
+local function Load(aB,V)
 local function GiveOwnGlobals(W,X)
 
 
-local aB,aC,aD={},{
+local aC,aD,aE={},{
 script=X,
 getupvalue=function(Y,Z)
 return nil
@@ -10435,10 +10484,10 @@ if getproperties then
 local Z=getproperties(Y)
 if Z[1]and gethiddenproperty then
 local _={}
-for aB,aC in pairs(Z)do
-local aD,aE=pcall(gethiddenproperty,Y,aC)
-if aD then
-_[aC]=aE
+for aC,aD in pairs(Z)do
+local aE,aF=pcall(gethiddenproperty,Y,aD)
+if aE then
+_[aD]=aF
 end
 end
 
@@ -10451,91 +10500,97 @@ end
 return{}
 end
 },{}
-aD.__index=function(aE,Y)
-return aC[Y]==nil and getgenv()[Y]or aC[Y]
+aE.__index=function(aF,Y)
+return aD[Y]==nil and getgenv()[Y]or aD[Y]
 end
-aD.__newindex=function(aE,Y,Z)
-if aC[Y]==nil then
+aE.__newindex=function(aF,Y,Z)
+if aD[Y]==nil then
 getgenv()[Y]=Z
 else
-aC[Y]=Z
+aD[Y]=Z
 end
 end
-setmetatable(aB,aD)
-pcall(setfenv,W,aB)
+setmetatable(aC,aE)
+pcall(setfenv,W,aC)
 return W
 end
 
-local function LoadScripts(aB,aC)
-if aC:IsA"LocalScript"then
+local function LoadScripts(aC,aD)
+if aD:IsA"LocalScript"then
 task.spawn(function()
-GiveOwnGlobals(loadstring(aC.Source,"="..aC:GetFullName()),aC)()
+GiveOwnGlobals(loadstring(aD.Source,"="..aD:GetFullName()),aD)()
 end)
 end
-table.foreach(aC:GetChildren(),LoadScripts)
+table.foreach(aD:GetChildren(),LoadScripts)
 end
 
-LoadScripts(nil,aA)
+LoadScripts(nil,aB)
 end
 
-Load(az)
+Load(aA)
 end)
 
-addcmd('remotespy',{'rspy'},function(aw,ax)
+addcmd('remotespy',{'rspy'},function(ax,ay)
 notify("Loading",'Hold on a sec')
 
 
 loadstring(game:HttpGet"https://raw.githubusercontent.com/infyiff/backup/main/SimpleSpyV3/main.lua")()
 end)
 
-addcmd('audiologger',{'alogger'},function(aw,ax)
+addcmd("executor",{},function(ax,ay)
+
+notify("Loading","Hold on a sec")
+loadstring(game:HttpGet"https://raw.githubusercontent.com/infyiff/backup/refs/heads/main/executor.lua")()
+end)
+
+addcmd('audiologger',{'alogger'},function(ax,ay)
 notify("Loading",'Hold on a sec')
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/infyiff/backup/main/audiologger.lua'),true))()
 end)
 
-local aw
-addcmd('loopgoto',{},function(ax,ay)
-local az=getPlayer(ax[1],ay)
-for aA,aB in pairs(az)do
-aw=nil
-if ay.Character:FindFirstChildOfClass'Humanoid'and ay.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
-ay.Character:FindFirstChildOfClass'Humanoid'.Sit=false
+local ax
+addcmd('loopgoto',{},function(ay,az)
+local aA=getPlayer(ay[1],az)
+for aB,aC in pairs(aA)do
+ax=nil
+if az.Character:FindFirstChildOfClass'Humanoid'and az.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+az.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-aw=Players[aB]
-local aC=3
-if ax[2]and isNumber(ax[2])then
-aC=ax[2]
+ax=Players[aC]
+local aD=3
+if ay[2]and isNumber(ay[2])then
+aD=ay[2]
 end
-local aD=0
-if ax[3]and isNumber(ax[3])then
-aD=ax[3]
+local aE=0
+if ay[3]and isNumber(ay[3])then
+aE=ay[3]
 end
 repeat
-if Players:FindFirstChild(aB)then
-if Players[aB].Character~=nil then
-getRoot(ay.Character).CFrame=getRoot(Players[aB].Character).CFrame+Vector3.new(aC,1,0)
+if Players:FindFirstChild(aC)then
+if Players[aC].Character~=nil then
+getRoot(az.Character).CFrame=getRoot(Players[aC].Character).CFrame+Vector3.new(aD,1,0)
 end
-wait(aD)
+wait(aE)
 else
-aw=nil
+ax=nil
 end
-until aw~=Players[aB]
+until ax~=Players[aC]
 end
 end)
 
-addcmd('unloopgoto',{'noloopgoto'},function(ax,ay)
-aw=nil
+addcmd('unloopgoto',{'noloopgoto'},function(ay,az)
+ax=nil
 end)
 
-addcmd('headsit',{},function(ax,ay)
-local az=getPlayer(ax[1],ay)
+addcmd('headsit',{},function(ay,az)
+local aA=getPlayer(ay[1],az)
 if headSit then headSit:Disconnect()end
-for aA,aB in pairs(az)do
-ay.Character:FindFirstChildOfClass'Humanoid'.Sit=true
+for aB,aC in pairs(aA)do
+az.Character:FindFirstChildOfClass'Humanoid'.Sit=true
 headSit=RunService.Heartbeat:Connect(function()
-if Players:FindFirstChild(Players[aB].Name)and Players[aB].Character~=nil and getRoot(Players[aB].Character)and getRoot(ay.Character)and ay.Character:FindFirstChildOfClass'Humanoid'.Sit==true then
-getRoot(ay.Character).CFrame=getRoot(Players[aB].Character).CFrame*CFrame.Angles(0,math.rad(0),0)*CFrame.new(0,1.6,0.4)
+if Players:FindFirstChild(Players[aC].Name)and Players[aC].Character~=nil and getRoot(Players[aC].Character)and getRoot(az.Character)and az.Character:FindFirstChildOfClass'Humanoid'.Sit==true then
+getRoot(az.Character).CFrame=getRoot(Players[aC].Character).CFrame*CFrame.Angles(0,math.rad(0),0)*CFrame.new(0,1.6,0.4)
 else
 headSit:Disconnect()
 end
@@ -10543,79 +10598,79 @@ end)
 end
 end)
 
-addcmd('chat',{'say'},function(ax,ay)
-local az=getstring(1,ax)
-chatMessage(az)
+addcmd('chat',{'say'},function(ay,az)
+local aA=getstring(1,ay)
+chatMessage(aA)
 end)
 
 
 spamming=false
 spamspeed=1
-addcmd('spam',{},function(ax,ay)
+addcmd('spam',{},function(ay,az)
 spamming=true
-local az=getstring(1,ax)
+local aA=getstring(1,ay)
 repeat wait(spamspeed)
-chatMessage(az)
+chatMessage(aA)
 until spamming==false
 end)
 
-addcmd('nospam',{'unspam'},function(ax,ay)
+addcmd('nospam',{'unspam'},function(ay,az)
 spamming=false
 end)
 
-addcmd('whisper',{'pm'},function(ax,ay)
-local az=getPlayer(ax[1],ay)
-for aA,aB in pairs(az)do
+addcmd('whisper',{'pm'},function(ay,az)
+local aA=getPlayer(ay[1],az)
+for aB,aC in pairs(aA)do
 task.spawn(function()
-local aC=Players[aB].Name
-local aD=getstring(2,ax)
-chatMessage("/w "..aC.." "..aD)
+local aD=Players[aC].Name
+local aE=getstring(2,ay)
+chatMessage("/w "..aD.." "..aE)
 end)
 end
 end)
 
 pmspamming={}
-addcmd('pmspam',{},function(ax,ay)
-local az=getPlayer(ax[1],ay)
-for aA,aB in pairs(az)do
+addcmd('pmspam',{},function(ay,az)
+local aA=getPlayer(ay[1],az)
+for aB,aC in pairs(aA)do
 task.spawn(function()
-local aC=Players[aB].Name
-if FindInTable(pmspamming,aC)then return end
-table.insert(pmspamming,aC)
-local aD=getstring(2,ax)
+local aD=Players[aC].Name
+if FindInTable(pmspamming,aD)then return end
+table.insert(pmspamming,aD)
+local aE=getstring(2,ay)
 repeat
-if Players:FindFirstChild(aB)then
+if Players:FindFirstChild(aC)then
 wait(spamspeed)
-chatMessage("/w "..aC.." "..aD)
+chatMessage("/w "..aD.." "..aE)
 else
-for aE,V in pairs(pmspamming)do if V==aC then table.remove(pmspamming,aE)end end
+for aF,V in pairs(pmspamming)do if V==aD then table.remove(pmspamming,aF)end end
 end
-until not FindInTable(pmspamming,aC)
+until not FindInTable(pmspamming,aD)
 end)
 end
 end)
 
-addcmd('nopmspam',{'unpmspam'},function(ax,ay)
-local az=getPlayer(ax[1],ay)
-for aA,aB in pairs(az)do
+addcmd('nopmspam',{'unpmspam'},function(ay,az)
+local aA=getPlayer(ay[1],az)
+for aB,aC in pairs(aA)do
 task.spawn(function()
-for aC,aD in pairs(pmspamming)do
-if aD==Players[aB].Name then
-table.remove(pmspamming,aC)
+for aD,aE in pairs(pmspamming)do
+if aE==Players[aC].Name then
+table.remove(pmspamming,aD)
 end
 end
 end)
 end
 end)
 
-addcmd('spamspeed',{},function(ax,ay)
-local az=ax[1]or 1
-if isNumber(az)then
-spamspeed=az
+addcmd('spamspeed',{},function(ay,az)
+local aA=ay[1]or 1
+if isNumber(aA)then
+spamspeed=aA
 end
 end)
 
-addcmd('bubblechat',{},function(ax,ay)
+addcmd('bubblechat',{},function(ay,az)
 if isLegacyChat then
 ChatService.BubbleChatEnabled=true
 else
@@ -10623,7 +10678,7 @@ TextChatService.BubbleChatConfiguration.Enabled=true
 end
 end)
 
-addcmd('unbubblechat',{'nobubblechat'},function(ax,ay)
+addcmd('unbubblechat',{'nobubblechat'},function(ay,az)
 if isLegacyChat then
 ChatService.BubbleChatEnabled=false
 else
@@ -10631,90 +10686,120 @@ TextChatService.BubbleChatConfiguration.Enabled=false
 end
 end)
 
-addcmd("chatwindow",{},function(ax,ay)
+addcmd("chatwindow",{},function(ay,az)
 TextChatService.ChatWindowConfiguration.Enabled=true
 end)
 
-addcmd("unchatwindow",{"nochatwindow"},function(ax,ay)
+addcmd("unchatwindow",{"nochatwindow"},function(ay,az)
 TextChatService.ChatWindowConfiguration.Enabled=false
 end)
 
-addcmd('blockhead',{},function(ax,ay)
-ay.Character.Head:FindFirstChildOfClass"SpecialMesh":Destroy()
+addcmd("darkchat",{},function(ay,az)
+local aA=TextChatService:FindFirstChildOfClass"BubbleChatConfiguration"
+local aB=TextChatService:FindFirstChildOfClass"ChatWindowConfiguration"
+local aC=TextChatService:FindFirstChildOfClass"ChatInputBarConfiguration"
+if aA then
+aA.Enabled=true
+aA.BackgroundColor3=Color3.fromRGB()
+aA.BackgroundTransparency=0.3
+aA.TailVisible=true
+aA.TextColor3=Color3.fromRGB(0xFF,0xFF,0xFF)
+end
+if aB then
+aB.Enabled=true
+aB.BackgroundColor3=Color3.fromRGB()
+aB.BackgroundTransparency=0.3
+aB.TextColor3=Color3.fromRGB(0xFF,0xFF,0xFF)
+aB.TextStrokeColor3=Color3.fromRGB()
+aB.TextStrokeTransparency=0.5
+end
+if aC then
+aC.Enabled=true
+aC.BackgroundColor3=Color3.fromRGB()
+aC.BackgroundTransparency=0.5
+aC.PlaceholderColor3=Color3.fromRGB(0xFF,0xFF,0xFF)
+aC.TextColor3=Color3.fromRGB(0xFF,0xFF,0xFF)
+aC.TextStrokeColor3=Color3.fromRGB()
+aC.TextStrokeTransparency=0.5
+end
 end)
 
-addcmd('blockhats',{},function(ax,ay)
-for az,aA in pairs(ay.Character:FindFirstChildOfClass'Humanoid':GetAccessories())do
-for aB,aC in pairs(aA:GetDescendants())do
-if aC:IsA"SpecialMesh"then
-aC:Destroy()
+addcmd('blockhead',{},function(ay,az)
+az.Character.Head:FindFirstChildOfClass"SpecialMesh":Destroy()
+end)
+
+addcmd('blockhats',{},function(ay,az)
+for aA,aB in pairs(az.Character:FindFirstChildOfClass'Humanoid':GetAccessories())do
+for aC,aD in pairs(aB:GetDescendants())do
+if aD:IsA"SpecialMesh"then
+aD:Destroy()
 end
 end
 end
 end)
 
-addcmd('blocktool',{},function(ax,ay)
-for az,aA in pairs(ay.Character:GetChildren())do
-if aA:IsA"Tool"or aA:IsA"HopperBin"then
-for aB,aC in pairs(aA:GetDescendants())do
-if aC:IsA"SpecialMesh"then
-aC:Destroy()
+addcmd('blocktool',{},function(ay,az)
+for aA,aB in pairs(az.Character:GetChildren())do
+if aB:IsA"Tool"or aB:IsA"HopperBin"then
+for aC,aD in pairs(aB:GetDescendants())do
+if aD:IsA"SpecialMesh"then
+aD:Destroy()
 end
 end
 end
 end
 end)
 
-addcmd('creeper',{},function(ax,ay)
-if r15(ay)then
-ay.Character.Head:FindFirstChildOfClass"SpecialMesh":Destroy()
-ay.Character.LeftUpperArm:Destroy()
-ay.Character.RightUpperArm:Destroy()
-ay.Character:FindFirstChildOfClass"Humanoid":RemoveAccessories()
+addcmd('creeper',{},function(ay,az)
+if r15(az)then
+az.Character.Head:FindFirstChildOfClass"SpecialMesh":Destroy()
+az.Character.LeftUpperArm:Destroy()
+az.Character.RightUpperArm:Destroy()
+az.Character:FindFirstChildOfClass"Humanoid":RemoveAccessories()
 else
-ay.Character.Head:FindFirstChildOfClass"SpecialMesh":Destroy()
-ay.Character["Left Arm"]:Destroy()
-ay.Character["Right Arm"]:Destroy()
-ay.Character:FindFirstChildOfClass"Humanoid":RemoveAccessories()
+az.Character.Head:FindFirstChildOfClass"SpecialMesh":Destroy()
+az.Character["Left Arm"]:Destroy()
+az.Character["Right Arm"]:Destroy()
+az.Character:FindFirstChildOfClass"Humanoid":RemoveAccessories()
 end
 end)
 
-function getTorso(ax)
-ax=ax or Players.LocalPlayer.Character
-return ax:FindFirstChild"Torso"or ax:FindFirstChild"UpperTorso"or ax:FindFirstChild"LowerTorso"or ax:FindFirstChild"HumanoidRootPart"
+function getTorso(ay)
+ay=ay or Players.LocalPlayer.Character
+return ay:FindFirstChild"Torso"or ay:FindFirstChild"UpperTorso"or ay:FindFirstChild"LowerTorso"or ay:FindFirstChild"HumanoidRootPart"
 end
 
-addcmd("bang",{"rape"},function(ax,ay)
+addcmd("bang",{"rape"},function(ay,az)
 execCmd"unbang"
 wait()
-local az=ay.Character:FindFirstChildWhichIsA"Humanoid"
+local aA=az.Character:FindFirstChildWhichIsA"Humanoid"
 bangAnim=Instance.new"Animation"
-bangAnim.AnimationId=not r15(ay)and"rbxassetid://148840371"or"rbxassetid://5918726674"
-bang=az:LoadAnimation(bangAnim)
+bangAnim.AnimationId=not r15(az)and"rbxassetid://148840371"or"rbxassetid://5918726674"
+bang=aA:LoadAnimation(bangAnim)
 bang:Play(0.1,1,1)
-bang:AdjustSpeed(ax[2]or 3)
-bangDied=az.Died:Connect(function()
+bang:AdjustSpeed(ay[2]or 3)
+bangDied=aA.Died:Connect(function()
 bang:Stop()
 bangAnim:Destroy()
 bangDied:Disconnect()
 bangLoop:Disconnect()
 end)
-if ax[1]then
-local aA=getPlayer(ax[1],ay)
-for aB,aC in pairs(aA)do
-local aD=Players[aC].Name
-local aE=CFrame.new(0,0,1.1)
+if ay[1]then
+local aB=getPlayer(ay[1],az)
+for aC,aD in pairs(aB)do
+local aE=Players[aD].Name
+local aF=CFrame.new(0,0,1.1)
 bangLoop=RunService.Stepped:Connect(function()
 pcall(function()
-local V=getTorso(Players[aD].Character)
-getRoot(ay.Character).CFrame=V.CFrame*aE
+local V=getTorso(Players[aE].Character)
+getRoot(az.Character).CFrame=V.CFrame*aF
 end)
 end)
 end
 end
 end)
 
-addcmd("unbang",{"unrape"},function(ax,ay)
+addcmd("unbang",{"unrape"},function(ay,az)
 if bangDied then
 bangDied:Disconnect()
 bang:Stop()
@@ -10723,18 +10808,18 @@ bangLoop:Disconnect()
 end
 end)
 
-addcmd('carpet',{},function(ax,ay)
-if not r15(ay)then
+addcmd('carpet',{},function(ay,az)
+if not r15(az)then
 execCmd'uncarpet'
 wait()
-local az=getPlayer(ax[1],ay)
-for aA,aB in pairs(az)do
+local aA=getPlayer(ay[1],az)
+for aB,aC in pairs(aA)do
 carpetAnim=Instance.new"Animation"
 carpetAnim.AnimationId="rbxassetid://282574440"
-carpet=ay.Character:FindFirstChildOfClass'Humanoid':LoadAnimation(carpetAnim)
+carpet=az.Character:FindFirstChildOfClass'Humanoid':LoadAnimation(carpetAnim)
 carpet:Play(.1,1,1)
-local aC=Players[aB].Name
-carpetDied=ay.Character:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
+local aD=Players[aC].Name
+carpetDied=az.Character:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
 carpetLoop:Disconnect()
 carpet:Stop()
 carpetAnim:Destroy()
@@ -10742,7 +10827,7 @@ carpetDied:Disconnect()
 end)
 carpetLoop=RunService.Heartbeat:Connect(function()
 pcall(function()
-getRoot(Players.LocalPlayer.Character).CFrame=getRoot(Players[aC].Character).CFrame
+getRoot(Players.LocalPlayer.Character).CFrame=getRoot(Players[aD].Character).CFrame
 end)
 end)
 end
@@ -10751,7 +10836,7 @@ notify('R6 Required','This command requires the r6 rig type')
 end
 end)
 
-addcmd('uncarpet',{'nocarpet'},function(ax,ay)
+addcmd('uncarpet',{'nocarpet'},function(ay,az)
 if carpetLoop then
 carpetLoop:Disconnect()
 carpetDied:Disconnect()
@@ -10760,143 +10845,143 @@ carpetAnim:Destroy()
 end
 end)
 
-addcmd('friend',{},function(ax,ay)
-local az=getPlayer(ax[1],ay)
-for aA,aB in pairs(az)do
-ay:RequestFriendship(Players[aB])
+addcmd('friend',{},function(ay,az)
+local aA=getPlayer(ay[1],az)
+for aB,aC in pairs(aA)do
+az:RequestFriendship(Players[aC])
 end
 end)
 
-addcmd('unfriend',{},function(ax,ay)
-local az=getPlayer(ax[1],ay)
-for aA,aB in pairs(az)do
-ay:RevokeFriendship(Players[aB])
+addcmd('unfriend',{},function(ay,az)
+local aA=getPlayer(ay[1],az)
+for aB,aC in pairs(aA)do
+az:RevokeFriendship(Players[aC])
 end
 end)
 
-addcmd('bringpart',{},function(ax,ay)
-for az,aA in pairs(workspace:GetDescendants())do
-if aA.Name:lower()==getstring(1,ax):lower()and aA:IsA"BasePart"then
-aA.CFrame=getRoot(ay.Character).CFrame
+addcmd('bringpart',{},function(ay,az)
+for aA,aB in pairs(workspace:GetDescendants())do
+if aB.Name:lower()==getstring(1,ay):lower()and aB:IsA"BasePart"then
+aB.CFrame=getRoot(az.Character).CFrame
 end
 end
 end)
 
-addcmd('bringpartclass',{'bpc'},function(ax,ay)
-for az,aA in pairs(workspace:GetDescendants())do
-if aA.ClassName:lower()==getstring(1,ax):lower()and aA:IsA"BasePart"then
-aA.CFrame=getRoot(ay.Character).CFrame
+addcmd('bringpartclass',{'bpc'},function(ay,az)
+for aA,aB in pairs(workspace:GetDescendants())do
+if aB.ClassName:lower()==getstring(1,ay):lower()and aB:IsA"BasePart"then
+aB.CFrame=getRoot(az.Character).CFrame
 end
 end
 end)
 
 gotopartDelay=0.1
-addcmd('gotopart',{'topart'},function(ax,ay)
-for az,aA in pairs(workspace:GetDescendants())do
-if aA.Name:lower()==getstring(1,ax):lower()and aA:IsA"BasePart"then
-if ay.Character:FindFirstChildOfClass'Humanoid'and ay.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
-ay.Character:FindFirstChildOfClass'Humanoid'.Sit=false
+addcmd('gotopart',{'topart'},function(ay,az)
+for aA,aB in pairs(workspace:GetDescendants())do
+if aB.Name:lower()==getstring(1,ay):lower()and aB:IsA"BasePart"then
+if az.Character:FindFirstChildOfClass'Humanoid'and az.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+az.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
 wait(gotopartDelay)
-getRoot(ay.Character).CFrame=aA.CFrame
+getRoot(az.Character).CFrame=aB.CFrame
 end
 end
 end)
 
-addcmd('tweengotopart',{'tgotopart','ttopart'},function(ax,ay)
-for az,aA in pairs(workspace:GetDescendants())do
-if aA.Name:lower()==getstring(1,ax):lower()and aA:IsA"BasePart"then
-if ay.Character:FindFirstChildOfClass'Humanoid'and ay.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
-ay.Character:FindFirstChildOfClass'Humanoid'.Sit=false
+addcmd('tweengotopart',{'tgotopart','ttopart'},function(ay,az)
+for aA,aB in pairs(workspace:GetDescendants())do
+if aB.Name:lower()==getstring(1,ay):lower()and aB:IsA"BasePart"then
+if az.Character:FindFirstChildOfClass'Humanoid'and az.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+az.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
 wait(gotopartDelay)
-TweenService:Create(getRoot(ay.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=aA.CFrame}):Play()
+TweenService:Create(getRoot(az.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=aB.CFrame}):Play()
 end
 end
 end)
 
-addcmd('gotopartclass',{'gpc'},function(ax,ay)
-for az,aA in pairs(workspace:GetDescendants())do
-if aA.ClassName:lower()==getstring(1,ax):lower()and aA:IsA"BasePart"then
-if ay.Character:FindFirstChildOfClass'Humanoid'and ay.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
-ay.Character:FindFirstChildOfClass'Humanoid'.Sit=false
+addcmd('gotopartclass',{'gpc'},function(ay,az)
+for aA,aB in pairs(workspace:GetDescendants())do
+if aB.ClassName:lower()==getstring(1,ay):lower()and aB:IsA"BasePart"then
+if az.Character:FindFirstChildOfClass'Humanoid'and az.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+az.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
 wait(gotopartDelay)
-getRoot(ay.Character).CFrame=aA.CFrame
+getRoot(az.Character).CFrame=aB.CFrame
 end
 end
 end)
 
-addcmd('tweengotopartclass',{'tgpc'},function(ax,ay)
-for az,aA in pairs(workspace:GetDescendants())do
-if aA.ClassName:lower()==getstring(1,ax):lower()and aA:IsA"BasePart"then
-if ay.Character:FindFirstChildOfClass'Humanoid'and ay.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
-ay.Character:FindFirstChildOfClass'Humanoid'.Sit=false
+addcmd('tweengotopartclass',{'tgpc'},function(ay,az)
+for aA,aB in pairs(workspace:GetDescendants())do
+if aB.ClassName:lower()==getstring(1,ay):lower()and aB:IsA"BasePart"then
+if az.Character:FindFirstChildOfClass'Humanoid'and az.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+az.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
 wait(gotopartDelay)
-TweenService:Create(getRoot(ay.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=aA.CFrame}):Play()
+TweenService:Create(getRoot(az.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=aB.CFrame}):Play()
 end
 end
 end)
 
-addcmd('gotomodel',{'tomodel'},function(ax,ay)
-for az,aA in pairs(workspace:GetDescendants())do
-if aA.Name:lower()==getstring(1,ax):lower()and aA:IsA"Model"then
-if ay.Character:FindFirstChildOfClass'Humanoid'and ay.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
-ay.Character:FindFirstChildOfClass'Humanoid'.Sit=false
+addcmd('gotomodel',{'tomodel'},function(ay,az)
+for aA,aB in pairs(workspace:GetDescendants())do
+if aB.Name:lower()==getstring(1,ay):lower()and aB:IsA"Model"then
+if az.Character:FindFirstChildOfClass'Humanoid'and az.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+az.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
 wait(gotopartDelay)
-getRoot(ay.Character).CFrame=aA:GetModelCFrame()
+getRoot(az.Character).CFrame=aB:GetModelCFrame()
 end
 end
 end)
 
-addcmd('tweengotomodel',{'tgotomodel','ttomodel'},function(ax,ay)
-for az,aA in pairs(workspace:GetDescendants())do
-if aA.Name:lower()==getstring(1,ax):lower()and aA:IsA"Model"then
-if ay.Character:FindFirstChildOfClass'Humanoid'and ay.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
-ay.Character:FindFirstChildOfClass'Humanoid'.Sit=false
+addcmd('tweengotomodel',{'tgotomodel','ttomodel'},function(ay,az)
+for aA,aB in pairs(workspace:GetDescendants())do
+if aB.Name:lower()==getstring(1,ay):lower()and aB:IsA"Model"then
+if az.Character:FindFirstChildOfClass'Humanoid'and az.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+az.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
 wait(gotopartDelay)
-TweenService:Create(getRoot(ay.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=aA:GetModelCFrame()}):Play()
+TweenService:Create(getRoot(az.Character),TweenInfo.new(tweenSpeed,Enum.EasingStyle.Linear),{CFrame=aB:GetModelCFrame()}):Play()
 end
 end
 end)
 
-addcmd('gotopartdelay',{},function(ax,ay)
-local az=ax[1]or 0.1
-if isNumber(az)then
-gotopartDelay=az
+addcmd('gotopartdelay',{},function(ay,az)
+local aA=ay[1]or 0.1
+if isNumber(aA)then
+gotopartDelay=aA
 end
 end)
 
-addcmd('noclickdetectorlimits',{'nocdlimits','removecdlimits'},function(ax,ay)
-for az,aA in ipairs(workspace:GetDescendants())do
-if aA:IsA"ClickDetector"then
-aA.MaxActivationDistance=math.huge
-end
-end
-end)
-
-addcmd('fireclickdetectors',{'firecd','firecds'},function(ax,ay)
-if fireclickdetector then
-if ax[1]then
-local az=getstring(1,ax):lower()
+addcmd('noclickdetectorlimits',{'nocdlimits','removecdlimits'},function(ay,az)
 for aA,aB in ipairs(workspace:GetDescendants())do
-if aB:IsA"ClickDetector"and aB.Name:lower()==az or aB.Parent.Name:lower()==az then
-fireclickdetector(aB)
+if aB:IsA"ClickDetector"then
+aB.MaxActivationDistance=math.huge
+end
+end
+end)
+
+addcmd('fireclickdetectors',{'firecd','firecds'},function(ay,az)
+if fireclickdetector then
+if ay[1]then
+local aA=getstring(1,ay):lower()
+for aB,aC in ipairs(workspace:GetDescendants())do
+if aC:IsA"ClickDetector"and aC.Name:lower()==aA or aC.Parent.Name:lower()==aA then
+fireclickdetector(aC)
 end
 end
 else
-for az,aA in ipairs(workspace:GetDescendants())do
-if aA:IsA"ClickDetector"then
-fireclickdetector(aA)
+for aA,aB in ipairs(workspace:GetDescendants())do
+if aB:IsA"ClickDetector"then
+fireclickdetector(aB)
 end
 end
 end
@@ -10905,27 +10990,27 @@ notify("Incompatible Exploit","Your exploit does not support this command (missi
 end
 end)
 
-addcmd('noproximitypromptlimits',{'nopplimits','removepplimits'},function(ax,ay)
-for az,aA in pairs(workspace:GetDescendants())do
-if aA:IsA"ProximityPrompt"then
-aA.MaxActivationDistance=math.huge
+addcmd('noproximitypromptlimits',{'nopplimits','removepplimits'},function(ay,az)
+for aA,aB in pairs(workspace:GetDescendants())do
+if aB:IsA"ProximityPrompt"then
+aB.MaxActivationDistance=math.huge
 end
 end
 end)
 
-addcmd('fireproximityprompts',{'firepp'},function(ax,ay)
+addcmd('fireproximityprompts',{'firepp'},function(ay,az)
 if fireproximityprompt then
-if ax[1]then
-local az=getstring(1,ax)
-for aA,aB in ipairs(workspace:GetDescendants())do
-if aB:IsA"ProximityPrompt"and aB.Name==az or aB.Parent.Name==az then
-fireproximityprompt(aB)
+if ay[1]then
+local aA=getstring(1,ay)
+for aB,aC in ipairs(workspace:GetDescendants())do
+if aC:IsA"ProximityPrompt"and aC.Name==aA or aC.Parent.Name==aA then
+fireproximityprompt(aC)
 end
 end
 else
-for az,aA in ipairs(workspace:GetDescendants())do
-if aA:IsA"ProximityPrompt"then
-fireproximityprompt(aA)
+for aA,aB in ipairs(workspace:GetDescendants())do
+if aB:IsA"ProximityPrompt"then
+fireproximityprompt(aB)
 end
 end
 end
@@ -10934,35 +11019,35 @@ notify("Incompatible Exploit","Your exploit does not support this command (missi
 end
 end)
 
-local ax
-addcmd('instantproximityprompts',{'instantpp'},function(ay,az)
+local ay
+addcmd('instantproximityprompts',{'instantpp'},function(az,aA)
 if fireproximityprompt then
 execCmd"uninstantproximityprompts"
 wait(0.1)
-ax=ProximityPromptService.PromptButtonHoldBegan:Connect(function(aA)
-fireproximityprompt(aA)
+ay=ProximityPromptService.PromptButtonHoldBegan:Connect(function(aB)
+fireproximityprompt(aB)
 end)
 else
 notify('Incompatible Exploit','Your exploit does not support this command (missing fireproximityprompt)')
 end
 end)
 
-addcmd('uninstantproximityprompts',{'uninstantpp'},function(ay,az)
-if ax~=nil then
-ax:Disconnect()
-ax=nil
+addcmd('uninstantproximityprompts',{'uninstantpp'},function(az,aA)
+if ay~=nil then
+ay:Disconnect()
+ay=nil
 end
 end)
 
-addcmd('notifyping',{'ping'},function(ay,az)
-notify("Ping",math.round(az:GetNetworkPing()*1000).."ms")
+addcmd('notifyping',{'ping'},function(az,aA)
+notify("Ping",math.round(aA:GetNetworkPing()*1000).."ms")
 end)
 
-addcmd('grabtools',{},function(ay,az)
-local aA=az.Character:FindFirstChildWhichIsA"Humanoid"
-for aB,aC in ipairs(workspace:GetChildren())do
-if az.Character and aC:IsA"BackpackItem"and aC:FindFirstChild"Handle"then
-aA:EquipTool(aC)
+addcmd('grabtools',{},function(az,aA)
+local aB=aA.Character:FindFirstChildWhichIsA"Humanoid"
+for aC,aD in ipairs(workspace:GetChildren())do
+if aA.Character and aD:IsA"BackpackItem"and aD:FindFirstChild"Handle"then
+aB:EquipTool(aD)
 end
 end
 
@@ -10970,16 +11055,16 @@ if grabtoolsFunc then
 grabtoolsFunc:Disconnect()
 end
 
-grabtoolsFunc=workspace.ChildAdded:Connect(function(aB)
-if az.Character and aB:IsA"BackpackItem"and aB:FindFirstChild"Handle"then
-aA:EquipTool(aB)
+grabtoolsFunc=workspace.ChildAdded:Connect(function(aC)
+if aA.Character and aC:IsA"BackpackItem"and aC:FindFirstChild"Handle"then
+aB:EquipTool(aC)
 end
 end)
 
 notify("Grabtools","Picking up any dropped tools")
 end)
 
-addcmd('nograbtools',{'ungrabtools'},function(ay,az)
+addcmd('nograbtools',{'ungrabtools'},function(az,aA)
 if grabtoolsFunc then
 grabtoolsFunc:Disconnect()
 end
@@ -10987,184 +11072,184 @@ end
 notify("Grabtools","Grabtools has been disabled")
 end)
 
-local ay={}
-addcmd('removespecifictool',{},function(az,aA)
-if az[1]and aA:FindFirstChildOfClass"Backpack"then
-local aB=string.lower(getstring(1,az))
-local aC=RunService.RenderStepped:Connect(function()
-if aA:FindFirstChildOfClass"Backpack"then
-for aC,aD in pairs(aA:FindFirstChildOfClass"Backpack":GetChildren())do
-if aD.Name:lower()==aB then
-aD:Remove()
+local az={}
+addcmd('removespecifictool',{},function(aA,aB)
+if aA[1]and aB:FindFirstChildOfClass"Backpack"then
+local aC=string.lower(getstring(1,aA))
+local aD=RunService.RenderStepped:Connect(function()
+if aB:FindFirstChildOfClass"Backpack"then
+for aD,aE in pairs(aB:FindFirstChildOfClass"Backpack":GetChildren())do
+if aE.Name:lower()==aC then
+aE:Remove()
 end
 end
 end
 end)
-ay[aB]=aC
-end
-end)
-
-addcmd('unremovespecifictool',{},function(az,aA)
-if az[1]then
-local aB=string.lower(getstring(1,az))
-if ay[aB]~=nil then
-ay[aB]:Disconnect()
-ay[aB]=nil
-end
+az[aC]=aD
 end
 end)
 
-addcmd('clearremovespecifictool',{},function(az,aA)
-for aB in pairs(ay)do
-ay[aB]:Disconnect()
-ay[aB]=nil
+addcmd('unremovespecifictool',{},function(aA,aB)
+if aA[1]then
+local aC=string.lower(getstring(1,aA))
+if az[aC]~=nil then
+az[aC]:Disconnect()
+az[aC]=nil
+end
 end
 end)
 
-addcmd('light',{},function(az,aA)
-local aB=Instance.new"PointLight"
-aB.Parent=getRoot(aA.Character)
-aB.Range=30
-if az[1]then
-aB.Brightness=az[2]
-aB.Range=az[1]
+addcmd('clearremovespecifictool',{},function(aA,aB)
+for aC in pairs(az)do
+az[aC]:Disconnect()
+az[aC]=nil
+end
+end)
+
+addcmd('light',{},function(aA,aB)
+local aC=Instance.new"PointLight"
+aC.Parent=getRoot(aB.Character)
+aC.Range=30
+if aA[1]then
+aC.Brightness=aA[2]
+aC.Range=aA[1]
 else
-aB.Brightness=5
+aC.Brightness=5
 end
 end)
 
-addcmd('unlight',{'nolight'},function(az,aA)
-for aB,aC in pairs(aA.Character:GetDescendants())do
-if aC.ClassName=="PointLight"then
-aC:Destroy()
+addcmd('unlight',{'nolight'},function(aA,aB)
+for aC,aD in pairs(aB.Character:GetDescendants())do
+if aD.ClassName=="PointLight"then
+aD:Destroy()
 end
 end
 end)
 
-addcmd('copytools',{},function(az,aA)
-local aB=getPlayer(az[1],aA)
-for aC,aD in pairs(aB)do
+addcmd('copytools',{},function(aA,aB)
+local aC=getPlayer(aA[1],aB)
+for aD,aE in pairs(aC)do
 task.spawn(function()
-for aE,V in pairs(Players[aD]:FindFirstChildOfClass"Backpack":GetChildren())do
+for aF,V in pairs(Players[aE]:FindFirstChildOfClass"Backpack":GetChildren())do
 if V:IsA'Tool'or V:IsA'HopperBin'then
-V:Clone().Parent=aA:FindFirstChildOfClass"Backpack"
+V:Clone().Parent=aB:FindFirstChildOfClass"Backpack"
 end
 end
 end)
 end
 end)
 
-addcmd('naked',{},function(az,aA)
-for aB,aC in pairs(aA.Character:GetDescendants())do
-if aC:IsA"Clothing"or aC:IsA"ShirtGraphic"then
-aC:Destroy()
+addcmd('naked',{},function(aA,aB)
+for aC,aD in pairs(aB.Character:GetDescendants())do
+if aD:IsA"Clothing"or aD:IsA"ShirtGraphic"then
+aD:Destroy()
 end
 end
 end)
 
-addcmd('noface',{'removeface'},function(az,aA)
-for aB,aC in pairs(aA.Character:GetDescendants())do
-if aC:IsA"Decal"and aC.Name=='face'then
-aC:Destroy()
+addcmd('noface',{'removeface'},function(aA,aB)
+for aC,aD in pairs(aB.Character:GetDescendants())do
+if aD:IsA"Decal"and aD.Name=='face'then
+aD:Destroy()
 end
 end
 end)
 
-addcmd('spawnpoint',{'spawn'},function(az,aA)
-spawnpos=getRoot(aA.Character).CFrame
+addcmd('spawnpoint',{'spawn'},function(aA,aB)
+spawnpos=getRoot(aB.Character).CFrame
 spawnpoint=true
-spDelay=tonumber(az[1])or 0.1
+spDelay=tonumber(aA[1])or 0.1
 notify('Spawn Point','Spawn point created at '..tostring(spawnpos))
 end)
 
-addcmd('nospawnpoint',{'nospawn','removespawnpoint'},function(az,aA)
+addcmd('nospawnpoint',{'nospawn','removespawnpoint'},function(aA,aB)
 spawnpoint=false
 notify('Spawn Point','Removed spawn point')
 end)
 
-addcmd('flashback',{'diedtp'},function(az,aA)
+addcmd('flashback',{'diedtp'},function(aA,aB)
 if q~=nil then
-if aA.Character:FindFirstChildOfClass'Humanoid'and aA.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
-aA.Character:FindFirstChildOfClass'Humanoid'.Sit=false
+if aB.Character:FindFirstChildOfClass'Humanoid'and aB.Character:FindFirstChildOfClass'Humanoid'.SeatPart then
+aB.Character:FindFirstChildOfClass'Humanoid'.Sit=false
 wait(.1)
 end
-getRoot(aA.Character).CFrame=q
+getRoot(aB.Character).CFrame=q
 end
 end)
 
-addcmd('hatspin',{'spinhats'},function(az,aA)
+addcmd('hatspin',{'spinhats'},function(aA,aB)
 execCmd'unhatspin'
 wait(.5)
-for aB,aC in pairs(aA.Character:FindFirstChildOfClass'Humanoid':GetAccessories())do
-local aD=Instance.new"BodyPosition"aD.Name=randomString()aD.Parent=aC.Handle
-local aE=Instance.new"BodyAngularVelocity"aE.Name=randomString()aE.Parent=aC.Handle
-aC.Handle:FindFirstChildOfClass"Weld":Destroy()
-if az[1]then
-aE.AngularVelocity=Vector3.new(0,az[1],0)
-aE.MaxTorque=Vector3.new(0,az[1]*2,0)
+for aC,aD in pairs(aB.Character:FindFirstChildOfClass'Humanoid':GetAccessories())do
+local aE=Instance.new"BodyPosition"aE.Name=randomString()aE.Parent=aD.Handle
+local aF=Instance.new"BodyAngularVelocity"aF.Name=randomString()aF.Parent=aD.Handle
+aD.Handle:FindFirstChildOfClass"Weld":Destroy()
+if aA[1]then
+aF.AngularVelocity=Vector3.new(0,aA[1],0)
+aF.MaxTorque=Vector3.new(0,aA[1]*2,0)
 else
-aE.AngularVelocity=Vector3.new(0,100,0)
-aE.MaxTorque=Vector3.new(0,200,0)
+aF.AngularVelocity=Vector3.new(0,100,0)
+aF.MaxTorque=Vector3.new(0,200,0)
 end
-aD.P=30000
-aD.D=50
+aE.P=30000
+aE.D=50
 spinhats=RunService.Stepped:Connect(function()
 pcall(function()
-aD.Position=Players.LocalPlayer.Character.Head.Position
+aE.Position=Players.LocalPlayer.Character.Head.Position
 end)
 end)
 end
 end)
 
-addcmd('unhatspin',{'unspinhats'},function(az,aA)
+addcmd('unhatspin',{'unspinhats'},function(aA,aB)
 if spinhats then
 spinhats:Disconnect()
 end
-for aB,aC in pairs(aA.Character:FindFirstChildOfClass'Humanoid':GetAccessories())do
-aC.Parent=workspace
-for aD,aE in pairs(aC.Handle)do
-if aE:IsA"BodyPosition"or aE:IsA"BodyAngularVelocity"then
-aE:Destroy()
+for aC,aD in pairs(aB.Character:FindFirstChildOfClass'Humanoid':GetAccessories())do
+aD.Parent=workspace
+for aE,aF in pairs(aD.Handle)do
+if aF:IsA"BodyPosition"or aF:IsA"BodyAngularVelocity"then
+aF:Destroy()
 end
 end
 wait()
-aC.Parent=aA.Character
+aD.Parent=aB.Character
 end
 end)
 
-addcmd('clearhats',{'cleanhats'},function(az,aA)
+addcmd('clearhats',{'cleanhats'},function(aA,aB)
 if firetouchinterest then
-local aB=Players.LocalPlayer
-local aC=aB.Character
-local aD=getRoot(aC).CFrame
-local aE={}
+local aC=Players.LocalPlayer
+local aD=aC.Character
+local aE=getRoot(aD).CFrame
+local aF={}
 
 for V,W in ipairs(workspace:GetChildren())do
 if W:IsA"Accessory"then
-table.insert(aE,W)
+table.insert(aF,W)
 end
 end
 
-for V,W in ipairs(aC:FindFirstChildOfClass"Humanoid":GetAccessories())do
+for V,W in ipairs(aD:FindFirstChildOfClass"Humanoid":GetAccessories())do
 W:Destroy()
 end
 
-for V=1,#aE do
-repeat RunService.Heartbeat:wait()until aE[V]
-firetouchinterest(aE[V].Handle,getRoot(aC),0)
-repeat RunService.Heartbeat:wait()until aC:FindFirstChildOfClass"Accessory"
-aC:FindFirstChildOfClass"Accessory":Destroy()
-repeat RunService.Heartbeat:wait()until not aC:FindFirstChildOfClass"Accessory"
+for V=1,#aF do
+repeat RunService.Heartbeat:wait()until aF[V]
+firetouchinterest(aF[V].Handle,getRoot(aD),0)
+repeat RunService.Heartbeat:wait()until aD:FindFirstChildOfClass"Accessory"
+aD:FindFirstChildOfClass"Accessory":Destroy()
+repeat RunService.Heartbeat:wait()until not aD:FindFirstChildOfClass"Accessory"
 end
 
 execCmd"reset"
 
-aB.CharacterAdded:Wait()
+aC.CharacterAdded:Wait()
 
 for V=1,20 do
 RunService.Heartbeat:Wait()
-if getRoot(aB.Character)then
-getRoot(aB.Character).Humanoid.RootPart.CFrame=aD
+if getRoot(aC.Character)then
+getRoot(aC.Character).Humanoid.RootPart.CFrame=aE
 end
 end
 else
@@ -11172,171 +11257,171 @@ notify("Incompatible Exploit","Your exploit does not support this command (missi
 end
 end)
 
-addcmd('split',{},function(az,aA)
-if r15(aA)then
-aA.Character.UpperTorso.Waist:Destroy()
+addcmd('split',{},function(aA,aB)
+if r15(aB)then
+aB.Character.UpperTorso.Waist:Destroy()
 else
 notify('R15 Required','This command requires the r15 rig type')
 end
 end)
 
-addcmd('nilchar',{},function(az,aA)
-if aA.Character~=nil then
-aA.Character.Parent=nil
+addcmd('nilchar',{},function(aA,aB)
+if aB.Character~=nil then
+aB.Character.Parent=nil
 end
 end)
 
-addcmd('unnilchar',{'nonilchar'},function(az,aA)
-if aA.Character~=nil then
-aA.Character.Parent=workspace
+addcmd('unnilchar',{'nonilchar'},function(aA,aB)
+if aB.Character~=nil then
+aB.Character.Parent=workspace
 end
 end)
 
-addcmd('noroot',{'removeroot','rroot'},function(az,aA)
-if aA.Character~=nil then
-local aB=Players.LocalPlayer.Character
-aB.Parent=nil
-aB.Humanoid.RootPart:Destroy()
-aB.Parent=workspace
+addcmd('noroot',{'removeroot','rroot'},function(aA,aB)
+if aB.Character~=nil then
+local aC=Players.LocalPlayer.Character
+aC.Parent=nil
+aC.Humanoid.RootPart:Destroy()
+aC.Parent=workspace
 end
 end)
 
-addcmd('replaceroot',{'replacerootpart'},function(az,aA)
-if aA.Character~=nil and getRoot(aA.Character)then
-local aB=aA.Character
-local aC=aB.Parent
-local aD=aB and getRoot(aB)
-local aE=aD.CFrame
-aB.Parent=game
-local V=aD:Clone()
-V.Parent=aB
-aD=aD:Destroy()
-V.CFrame=aE
-aB.Parent=aC
+addcmd('replaceroot',{'replacerootpart'},function(aA,aB)
+if aB.Character~=nil and getRoot(aB.Character)then
+local aC=aB.Character
+local aD=aC.Parent
+local aE=aC and getRoot(aC)
+local aF=aE.CFrame
+aC.Parent=game
+local V=aE:Clone()
+V.Parent=aC
+aE=aE:Destroy()
+V.CFrame=aF
+aC.Parent=aD
 end
 end)
 
-addcmd('clearcharappearance',{'clearchar','clrchar'},function(az,aA)
-aA:ClearCharacterAppearance()
+addcmd('clearcharappearance',{'clearchar','clrchar'},function(aA,aB)
+aB:ClearCharacterAppearance()
 end)
 
-addcmd('equiptools',{},function(az,aA)
-for aB,aC in pairs(aA:FindFirstChildOfClass"Backpack":GetChildren())do
-if aC:IsA"Tool"or aC:IsA"HopperBin"then
-aC.Parent=aA.Character
+addcmd('equiptools',{},function(aA,aB)
+for aC,aD in pairs(aB:FindFirstChildOfClass"Backpack":GetChildren())do
+if aD:IsA"Tool"or aD:IsA"HopperBin"then
+aD.Parent=aB.Character
 end
 end
 end)
 
-addcmd('unequiptools',{},function(az,aA)
-aA.Character:FindFirstChildOfClass'Humanoid':UnequipTools()
+addcmd('unequiptools',{},function(aA,aB)
+aB.Character:FindFirstChildOfClass'Humanoid':UnequipTools()
 end)
 
-local function GetHandleTools(az)
-az=az or Players.LocalPlayer
-local aA={}
-for aB,aC in ipairs(az.Character and az.Character:GetChildren()or{})do
-if aC.IsA(aC,"BackpackItem")and aC.FindFirstChild(aC,"Handle")then
-aA[#aA+1]=aC
+local function GetHandleTools(aA)
+aA=aA or Players.LocalPlayer
+local aB={}
+for aC,aD in ipairs(aA.Character and aA.Character:GetChildren()or{})do
+if aD.IsA(aD,"BackpackItem")and aD.FindFirstChild(aD,"Handle")then
+aB[#aB+1]=aD
 end
 end
-for aB,aC in ipairs(az.Backpack:GetChildren())do
-if aC.IsA(aC,"BackpackItem")and aC.FindFirstChild(aC,"Handle")then
-aA[#aA+1]=aC
+for aC,aD in ipairs(aA.Backpack:GetChildren())do
+if aD.IsA(aD,"BackpackItem")and aD.FindFirstChild(aD,"Handle")then
+aB[#aB+1]=aD
 end
 end
-return aA
+return aB
 end
-addcmd('dupetools',{'clonetools'},function(az,aA)
-local aB=tonumber(az[1])or 1
-local aC=aA.Character.Humanoid.RootPart.Position
-local aD,aE={},Vector3.new(math.random(-2E5,2e5),2e5,math.random(-2E5,2e5))
-for V=1,aB do
-local W=aA.Character:WaitForChild"Humanoid"
-wait(.1,W.Parent:MoveTo(aE))
-W.RootPart.Anchored=aA:ClearCharacterAppearance(wait(.1))or true
-local X=GetHandleTools(aA)
+addcmd('dupetools',{'clonetools'},function(aA,aB)
+local aC=tonumber(aA[1])or 1
+local aD=aB.Character.Humanoid.RootPart.Position
+local aE,aF={},Vector3.new(math.random(-2E5,2e5),2e5,math.random(-2E5,2e5))
+for V=1,aC do
+local W=aB.Character:WaitForChild"Humanoid"
+wait(.1,W.Parent:MoveTo(aF))
+W.RootPart.Anchored=aB:ClearCharacterAppearance(wait(.1))or true
+local X=GetHandleTools(aB)
 while#X>0 do
 for Y,Z in ipairs(X)do
 task.spawn(function()
 for _=1,25 do
-Z.Parent=aA.Character
+Z.Parent=aB.Character
 Z.Handle.Anchored=true
 end
 for _=1,5 do
 Z.Parent=workspace
 end
-table.insert(aD,Z.Handle)
+table.insert(aE,Z.Handle)
 end)
 end
-X=GetHandleTools(aA)
+X=GetHandleTools(aB)
 end
 wait(.1)
-aA.Character=aA.Character:Destroy()
-aA.CharacterAdded:Wait():WaitForChild"Humanoid".Parent:MoveTo(aB==V and aC or aE,wait(.1))
-if V==aB or V%5==0 then
-local Y=aA.Character.Humanoid.RootPart
+aB.Character=aB.Character:Destroy()
+aB.CharacterAdded:Wait():WaitForChild"Humanoid".Parent:MoveTo(aC==V and aD or aF,wait(.1))
+if V==aC or V%5==0 then
+local Y=aB.Character.Humanoid.RootPart
 if type(firetouchinterest)=="function"then
-for Z,_ in ipairs(aD)do
+for Z,_ in ipairs(aE)do
 _.Anchored=not firetouchinterest(_,Y,1,firetouchinterest(_,Y,0))and false or false
 end
 else
-for Z,_ in ipairs(aD)do
+for Z,_ in ipairs(aE)do
 task.spawn(function()
-local aF=_.CanCollide
+local aG=_.CanCollide
 _.CanCollide=false
 _.Anchored=false
-for aG=1,10 do
+for aH=1,10 do
 _.CFrame=Y.CFrame
 wait()
 end
-_.CanCollide=aF
+_.CanCollide=aG
 end)
 end
 end
 wait(.1)
-aD={}
+aE={}
 end
-aE=aE+Vector3.new(10,math.random(-5,5),0)
+aF=aF+Vector3.new(10,math.random(-5,5),0)
 end
 end)
 
-addcmd('touchinterests',{'touchinterest','firetouchinterests','firetouchinterest'},function(az,aA)
-local aB=getRoot(aA.Character)or aA.Character:FindFirstChildWhichIsA"BasePart"
+addcmd('touchinterests',{'touchinterest','firetouchinterests','firetouchinterest'},function(aA,aB)
+local aC=getRoot(aB.Character)or aB.Character:FindFirstChildWhichIsA"BasePart"
 
 if not firetouchinterest then
 notify("Incompatible Exploit","Your exploit does not support this command (missing firetouchinterest)")
 return
 end
 
-local function Touch(aC)
-aC=aC.FindFirstAncestorWhichIsA(aC,"Part")
-if aC then
+local function Touch(aD)
+aD=aD.FindFirstAncestorWhichIsA(aD,"Part")
+if aD then
 return task.spawn(function()
-firetouchinterest(aC,aB,1,wait()and firetouchinterest(aC,aB,0))
+firetouchinterest(aD,aC,1,wait()and firetouchinterest(aD,aC,0))
 end)
 end
-aC.CFrame=aB.CFrame
+aD.CFrame=aC.CFrame
 end
 
-if az[1]then
-local aC=getstring(1,az):lower()
-print(aC..' -name')
-for aD,aE in ipairs(workspace:GetDescendants())do
-if aE:IsA"TouchTransmitter"and aE.Name:lower()==aC or aE.Parent.Name:lower()==aC then
-Touch(aE)
+if aA[1]then
+local aD=getstring(1,aA):lower()
+print(aD..' -name')
+for aE,aF in ipairs(workspace:GetDescendants())do
+if aF:IsA"TouchTransmitter"and aF.Name:lower()==aD or aF.Parent.Name:lower()==aD then
+Touch(aF)
 end
 end
 else
-for aC,aD in ipairs(workspace:GetDescendants())do
-if aD.IsA(aD,"TouchTransmitter")then
-Touch(aD)
+for aD,aE in ipairs(workspace:GetDescendants())do
+if aE.IsA(aE,"TouchTransmitter")then
+Touch(aE)
 end
 end
 end
 end)
 
-addcmd('fullbright',{'fb','fullbrightness'},function(az,aA)
+addcmd('fullbright',{'fb','fullbrightness'},function(aA,aB)
 Lighting.Brightness=2
 Lighting.ClockTime=14
 Lighting.FogEnd=100000
@@ -11344,7 +11429,7 @@ Lighting.GlobalShadows=false
 Lighting.OutdoorAmbient=Color3.fromRGB(128,128,128)
 end)
 
-addcmd('loopfullbright',{'loopfb'},function(az,aA)
+addcmd('loopfullbright',{'loopfb'},function(aA,aB)
 if brightLoop then
 brightLoop:Disconnect()
 end
@@ -11359,49 +11444,49 @@ end
 brightLoop=RunService.RenderStepped:Connect(brightFunc)
 end)
 
-addcmd('unloopfullbright',{'unloopfb'},function(az,aA)
+addcmd('unloopfullbright',{'unloopfb'},function(aA,aB)
 if brightLoop then
 brightLoop:Disconnect()
 end
 end)
 
-addcmd('ambient',{},function(az,aA)
-Lighting.Ambient=Color3.new(az[1],az[2],az[3])
-Lighting.OutdoorAmbient=Color3.new(az[1],az[2],az[3])
+addcmd('ambient',{},function(aA,aB)
+Lighting.Ambient=Color3.new(aA[1],aA[2],aA[3])
+Lighting.OutdoorAmbient=Color3.new(aA[1],aA[2],aA[3])
 end)
 
-addcmd('day',{},function(az,aA)
+addcmd('day',{},function(aA,aB)
 Lighting.ClockTime=14
 end)
 
-addcmd('night',{},function(az,aA)
+addcmd('night',{},function(aA,aB)
 Lighting.ClockTime=0
 end)
 
-addcmd('nofog',{},function(az,aA)
+addcmd('nofog',{},function(aA,aB)
 Lighting.FogEnd=100000
-for aB,aC in pairs(Lighting:GetDescendants())do
-if aC:IsA"Atmosphere"then
-aC:Destroy()
+for aC,aD in pairs(Lighting:GetDescendants())do
+if aD:IsA"Atmosphere"then
+aD:Destroy()
 end
 end
 end)
 
-addcmd('brightness',{},function(az,aA)
-Lighting.Brightness=az[1]
+addcmd('brightness',{},function(aA,aB)
+Lighting.Brightness=aA[1]
 end)
 
-addcmd('globalshadows',{'gshadows'},function(az,aA)
+addcmd('globalshadows',{'gshadows'},function(aA,aB)
 Lighting.GlobalShadows=true
 end)
 
-addcmd('unglobalshadows',{'nogshadows','ungshadows','noglobalshadows'},function(az,aA)
+addcmd('unglobalshadows',{'nogshadows','ungshadows','noglobalshadows'},function(aA,aB)
 Lighting.GlobalShadows=false
 end)
 
 origsettings={abt=Lighting.Ambient,oabt=Lighting.OutdoorAmbient,brt=Lighting.Brightness,time=Lighting.ClockTime,fe=Lighting.FogEnd,fs=Lighting.FogStart,gs=Lighting.GlobalShadows}
 
-addcmd('restorelighting',{'rlighting'},function(az,aA)
+addcmd('restorelighting',{'rlighting'},function(aA,aB)
 Lighting.Ambient=origsettings.abt
 Lighting.OutdoorAmbient=origsettings.oabt
 Lighting.Brightness=origsettings.brt
@@ -11411,182 +11496,182 @@ Lighting.FogStart=origsettings.fs
 Lighting.GlobalShadows=origsettings.gs
 end)
 
-addcmd('stun',{'platformstand'},function(az,aA)
-aA.Character:FindFirstChildOfClass'Humanoid'.PlatformStand=true
+addcmd('stun',{'platformstand'},function(aA,aB)
+aB.Character:FindFirstChildOfClass'Humanoid'.PlatformStand=true
 end)
 
-addcmd('unstun',{'nostun','unplatformstand','noplatformstand'},function(az,aA)
-aA.Character:FindFirstChildOfClass'Humanoid'.PlatformStand=false
+addcmd('unstun',{'nostun','unplatformstand','noplatformstand'},function(aA,aB)
+aB.Character:FindFirstChildOfClass'Humanoid'.PlatformStand=false
 end)
 
-addcmd('norotate',{'noautorotate'},function(az,aA)
-aA.Character:FindFirstChildOfClass'Humanoid'.AutoRotate=false
+addcmd('norotate',{'noautorotate'},function(aA,aB)
+aB.Character:FindFirstChildOfClass'Humanoid'.AutoRotate=false
 end)
 
-addcmd('unnorotate',{'autorotate'},function(az,aA)
-aA.Character:FindFirstChildOfClass'Humanoid'.AutoRotate=true
+addcmd('unnorotate',{'autorotate'},function(aA,aB)
+aB.Character:FindFirstChildOfClass'Humanoid'.AutoRotate=true
 end)
 
-addcmd('enablestate',{},function(az,aA)
-local aB=az[1]
-if not tonumber(aB)then local aC=
-Enum.HumanoidStateType[az[1] ]
+addcmd('enablestate',{},function(aA,aB)
+local aC=aA[1]
+if not tonumber(aC)then local aD=
+Enum.HumanoidStateType[aA[1] ]
 end
-aA.Character:FindFirstChildOfClass"Humanoid":SetStateEnabled(aB,true)
+aB.Character:FindFirstChildOfClass"Humanoid":SetStateEnabled(aC,true)
 end)
 
-addcmd('disablestate',{},function(az,aA)
-local aB=az[1]
-if not tonumber(aB)then local aC=
-Enum.HumanoidStateType[az[1] ]
+addcmd('disablestate',{},function(aA,aB)
+local aC=aA[1]
+if not tonumber(aC)then local aD=
+Enum.HumanoidStateType[aA[1] ]
 end
-aA.Character:FindFirstChildOfClass"Humanoid":SetStateEnabled(aB,false)
+aB.Character:FindFirstChildOfClass"Humanoid":SetStateEnabled(aC,false)
 end)
 
-addcmd('drophats',{'drophat'},function(az,aA)
-if aA.Character then
-for aB,aC in pairs(aA.Character:FindFirstChildOfClass'Humanoid':GetAccessories())do
-aC.Parent=workspace
-end
-end
-end)
-
-addcmd('deletehats',{'nohats','rhats'},function(az,aA)
-for aB,aC in next,aA.Character:GetDescendants()do
-if aC:IsA"Accessory"then
-for aD,aE in next,aC:GetDescendants()do
-if aE:IsA"Weld"then
-aE:Destroy()
-end
-end
+addcmd('drophats',{'drophat'},function(aA,aB)
+if aB.Character then
+for aC,aD in pairs(aB.Character:FindFirstChildOfClass'Humanoid':GetAccessories())do
+aD.Parent=workspace
 end
 end
 end)
 
-addcmd('droptools',{'droptool'},function(az,aA)
-for aB,aC in pairs(Players.LocalPlayer.Backpack:GetChildren())do
-if aC:IsA"Tool"then
-aC.Parent=Players.LocalPlayer.Character
+addcmd('deletehats',{'nohats','rhats'},function(aA,aB)
+for aC,aD in next,aB.Character:GetDescendants()do
+if aD:IsA"Accessory"then
+for aE,aF in next,aD:GetDescendants()do
+if aF:IsA"Weld"then
+aF:Destroy()
+end
+end
+end
+end
+end)
+
+addcmd('droptools',{'droptool'},function(aA,aB)
+for aC,aD in pairs(Players.LocalPlayer.Backpack:GetChildren())do
+if aD:IsA"Tool"then
+aD.Parent=Players.LocalPlayer.Character
 end
 end
 wait()
-for aB,aC in pairs(Players.LocalPlayer.Character:GetChildren())do
-if aC:IsA"Tool"then
-aC.Parent=workspace
+for aC,aD in pairs(Players.LocalPlayer.Character:GetChildren())do
+if aD:IsA"Tool"then
+aD.Parent=workspace
 end
 end
 end)
 
-addcmd('droppabletools',{},function(az,aA)
-if aA.Character then
-for aB,aC in pairs(aA.Character:GetChildren())do
-if aC:IsA"Tool"then
-aC.CanBeDropped=true
+addcmd('droppabletools',{},function(aA,aB)
+if aB.Character then
+for aC,aD in pairs(aB.Character:GetChildren())do
+if aD:IsA"Tool"then
+aD.CanBeDropped=true
 end
 end
 end
-if aA:FindFirstChildOfClass"Backpack"then
-for aB,aC in pairs(aA:FindFirstChildOfClass"Backpack":GetChildren())do
-if aC:IsA"Tool"then
-aC.CanBeDropped=true
+if aB:FindFirstChildOfClass"Backpack"then
+for aC,aD in pairs(aB:FindFirstChildOfClass"Backpack":GetChildren())do
+if aD:IsA"Tool"then
+aD.CanBeDropped=true
 end
 end
 end
 end)
 
-local az=""
 local aA=""
-addcmd('reach',{},function(aB,aC)
+local aB=""
+addcmd('reach',{},function(aC,aD)
 execCmd'unreach'
 wait()
-for aD,aE in pairs(aC.Character:GetDescendants())do
-if aE:IsA"Tool"then
-if aB[1]then
-az=aE.Handle.Size
-aA=aE.GripPos
-local aF=Instance.new"SelectionBox"
-aF.Name="SelectionBoxCreated"
-aF.Parent=aE.Handle
-aF.Adornee=aE.Handle
-aE.Handle.Massless=true
-aE.Handle.Size=Vector3.new(0.5,0.5,aB[1])
-aE.GripPos=Vector3.new(0,0,0)
-aC.Character:FindFirstChildOfClass'Humanoid':UnequipTools()
-else
-az=aE.Handle.Size
-aA=aE.GripPos
-local aF=Instance.new"SelectionBox"
-aF.Name="SelectionBoxCreated"
-aF.Parent=aE.Handle
-aF.Adornee=aE.Handle
-aE.Handle.Massless=true
-aE.Handle.Size=Vector3.new(0.5,0.5,60)
-aE.GripPos=Vector3.new(0,0,0)
-aC.Character:FindFirstChildOfClass'Humanoid':UnequipTools()
-end
-end
-end
-end)
-
-addcmd("boxreach",{},function(aB,aC)
-execCmd"unreach"
-wait()
-for aD,aE in pairs(aC.Character:GetDescendants())do
-if aE:IsA"Tool"then
-local aF=tonumber(aB[1])or 60
-az=aE.Handle.Size
-aA=aE.GripPos
+for aE,aF in pairs(aD.Character:GetDescendants())do
+if aF:IsA"Tool"then
+if aC[1]then
+aA=aF.Handle.Size
+aB=aF.GripPos
 local aG=Instance.new"SelectionBox"
 aG.Name="SelectionBoxCreated"
-aG.Parent=aE.Handle
-aG.Adornee=aE.Handle
-aE.Handle.Massless=true
-aE.Handle.Size=Vector3.new(aF,aF,aF)
-aE.GripPos=Vector3.new(0,0,0)
-aC.Character:FindFirstChildOfClass"Humanoid":UnequipTools()
+aG.Parent=aF.Handle
+aG.Adornee=aF.Handle
+aF.Handle.Massless=true
+aF.Handle.Size=Vector3.new(0.5,0.5,aC[1])
+aF.GripPos=Vector3.new(0,0,0)
+aD.Character:FindFirstChildOfClass'Humanoid':UnequipTools()
+else
+aA=aF.Handle.Size
+aB=aF.GripPos
+local aG=Instance.new"SelectionBox"
+aG.Name="SelectionBoxCreated"
+aG.Parent=aF.Handle
+aG.Adornee=aF.Handle
+aF.Handle.Massless=true
+aF.Handle.Size=Vector3.new(0.5,0.5,60)
+aF.GripPos=Vector3.new(0,0,0)
+aD.Character:FindFirstChildOfClass'Humanoid':UnequipTools()
 end
-end
-end)
-
-addcmd('unreach',{'noreach','unboxreach'},function(aB,aC)
-for aD,aE in pairs(aC.Character:GetDescendants())do
-if aE:IsA"Tool"then
-aE.Handle.Size=az
-aE.GripPos=aA
-aE.Handle.SelectionBoxCreated:Destroy()
-end
-end
-end)
-
-addcmd('grippos',{},function(aB,aC)
-for aD,aE in pairs(aC.Character:GetDescendants())do
-if aE:IsA"Tool"then
-aE.Parent=aC:FindFirstChildOfClass"Backpack"
-aE.GripPos=Vector3.new(aB[1],aB[2],aB[3])
-aE.Parent=aC.Character
 end
 end
 end)
 
-addcmd('usetools',{},function(aB,aC)
-local aD=aC:FindFirstChildOfClass"Backpack"
-local aE=tonumber(aB[1])or 1
-local aF=tonumber(aB[2])or false
-for aG,V in ipairs(aD:GetChildren())do
-V.Parent=aC.Character
+addcmd("boxreach",{},function(aC,aD)
+execCmd"unreach"
+wait()
+for aE,aF in pairs(aD.Character:GetDescendants())do
+if aF:IsA"Tool"then
+local aG=tonumber(aC[1])or 60
+aA=aF.Handle.Size
+aB=aF.GripPos
+local aH=Instance.new"SelectionBox"
+aH.Name="SelectionBoxCreated"
+aH.Parent=aF.Handle
+aH.Adornee=aF.Handle
+aF.Handle.Massless=true
+aF.Handle.Size=Vector3.new(aG,aG,aG)
+aF.GripPos=Vector3.new(0,0,0)
+aD.Character:FindFirstChildOfClass"Humanoid":UnequipTools()
+end
+end
+end)
+
+addcmd('unreach',{'noreach','unboxreach'},function(aC,aD)
+for aE,aF in pairs(aD.Character:GetDescendants())do
+if aF:IsA"Tool"then
+aF.Handle.Size=aA
+aF.GripPos=aB
+aF.Handle.SelectionBoxCreated:Destroy()
+end
+end
+end)
+
+addcmd('grippos',{},function(aC,aD)
+for aE,aF in pairs(aD.Character:GetDescendants())do
+if aF:IsA"Tool"then
+aF.Parent=aD:FindFirstChildOfClass"Backpack"
+aF.GripPos=Vector3.new(aC[1],aC[2],aC[3])
+aF.Parent=aD.Character
+end
+end
+end)
+
+addcmd('usetools',{},function(aC,aD)
+local aE=aD:FindFirstChildOfClass"Backpack"
+local aF=tonumber(aC[1])or 1
+local aG=tonumber(aC[2])or false
+for aH,V in ipairs(aE:GetChildren())do
+V.Parent=aD.Character
 task.spawn(function()
-for W=1,aE do
+for W=1,aF do
 V:Activate()
-if aF then
-wait(aF)
+if aG then
+wait(aG)
 end
 end
-V.Parent=aD
+V.Parent=aE
 end)
 end
 end)
 
-addcmd("logs",{},function(aB,aC)
+addcmd("logs",{},function(aC,aD)
 logsEnabled=true
 jLogsEnabled=true
 Toggle.Text="Enabled"
@@ -11594,7 +11679,7 @@ Toggle_2.Text="Enabled"
 logs:TweenPosition(UDim2.new(0,0,1,-265),"InOut","Quart",0.3,true,nil)
 end)
 
-addcmd("chatlogs",{"clogs"},function(aB,aC)
+addcmd("chatlogs",{"clogs"},function(aC,aD)
 logsEnabled=true
 join.Visible=false
 chat.Visible=true
@@ -11608,7 +11693,7 @@ Toggle.Text="Enabled"
 logs:TweenPosition(UDim2.new(0,0,1,-265),"InOut","Quart",0.3,true,nil)
 end)
 
-addcmd("joinlogs",{"jlogs"},function(aB,aC)
+addcmd("joinlogs",{"jlogs"},function(aC,aD)
 jLogsEnabled=true
 chat.Visible=false
 join.Visible=true
@@ -11622,93 +11707,73 @@ Toggle_2.Text="Enabled"
 logs:TweenPosition(UDim2.new(0,0,1,-265),"InOut","Quart",0.3,true,nil)
 end)
 
-addcmd("chatlogswebhook",{"logswebhook"},function(aB,aC)
+addcmd("chatlogswebhook",{"logswebhook"},function(aC,aD)
 if not httprequest then
 return notify("Incompatible Exploit","Your exploit does not support this command (missing request)")
 end
-logsWebhook=aB[1]or nil
+logsWebhook=aC[1]or nil
 updatesaves()
 end)
 
-addcmd("antichatlogs",{"antichatlogger"},function(aB,aC)
-if not isLegacyChat then
-return notify("antichatlogs","Game needs the legacy chat")
-end local
-aD=pcall(function()
-rawset(require(aC:FindFirstChild"PlayerScripts":FindFirstChild"ChatScript".ChatMain),"MessagePosted",{fire=
-function(aD)
-return aD
-end,wait=
-function()
-return
-end,connect=
-function()
-return
-end
-})
-end)
-notify("antichatlogs",aD and"Enabled"or"Failed to enable antichatlogs")
-end)
-
 flinging=false
-addcmd('fling',{},function(aB,aC)
+addcmd('fling',{},function(aC,aD)
 flinging=false
-for aD,aE in pairs(aC.Character:GetDescendants())do
-if aE:IsA"BasePart"then
-aE.CustomPhysicalProperties=PhysicalProperties.new(100,0.3,0.5)
+for aE,aF in pairs(aD.Character:GetDescendants())do
+if aF:IsA"BasePart"then
+aF.CustomPhysicalProperties=PhysicalProperties.new(100,0.3,0.5)
 end
 end
 execCmd'noclip'
 wait(.1)
-local aD=Instance.new"BodyAngularVelocity"
-aD.Name=randomString()
-aD.Parent=getRoot(aC.Character)
-aD.AngularVelocity=Vector3.new(0,99999,0)
-aD.MaxTorque=Vector3.new(0,math.huge,0)
-aD.P=math.huge
-local aE=aC.Character:GetChildren()
-for aF,aG in next,aE do
-if aG:IsA"BasePart"then
-aG.CanCollide=false
-aG.Massless=true
-aG.Velocity=Vector3.new(0,0,0)
+local aE=Instance.new"BodyAngularVelocity"
+aE.Name=randomString()
+aE.Parent=getRoot(aD.Character)
+aE.AngularVelocity=Vector3.new(0,99999,0)
+aE.MaxTorque=Vector3.new(0,math.huge,0)
+aE.P=math.huge
+local aF=aD.Character:GetChildren()
+for aG,aH in next,aF do
+if aH:IsA"BasePart"then
+aH.CanCollide=false
+aH.Massless=true
+aH.Velocity=Vector3.new(0,0,0)
 end
 end
 flinging=true
 local function flingDiedF()
 execCmd'unfling'
 end
-flingDied=aC.Character:FindFirstChildOfClass'Humanoid'.Died:Connect(flingDiedF)
+flingDied=aD.Character:FindFirstChildOfClass'Humanoid'.Died:Connect(flingDiedF)
 repeat
-aD.AngularVelocity=Vector3.new(0,99999,0)
+aE.AngularVelocity=Vector3.new(0,99999,0)
 wait(.2)
-aD.AngularVelocity=Vector3.new(0,0,0)
+aE.AngularVelocity=Vector3.new(0,0,0)
 wait(.1)
 until flinging==false
 end)
 
-addcmd('unfling',{'nofling'},function(aB,aC)
+addcmd('unfling',{'nofling'},function(aC,aD)
 execCmd'clip'
 if flingDied then
 flingDied:Disconnect()
 end
 flinging=false
 wait(.1)
-local aD=aC.Character
-if not aD or not getRoot(aD)then return end
-for aE,aF in pairs(getRoot(aD):GetChildren())do
-if aF.ClassName=='BodyAngularVelocity'then
-aF:Destroy()
+local aE=aD.Character
+if not aE or not getRoot(aE)then return end
+for aF,aG in pairs(getRoot(aE):GetChildren())do
+if aG.ClassName=='BodyAngularVelocity'then
+aG:Destroy()
 end
 end
-for aE,aF in pairs(aD:GetDescendants())do
-if aF.ClassName=="Part"or aF.ClassName=="MeshPart"then
-aF.CustomPhysicalProperties=PhysicalProperties.new(0.7,0.3,0.5)
+for aF,aG in pairs(aE:GetDescendants())do
+if aG.ClassName=="Part"or aG.ClassName=="MeshPart"then
+aG.CustomPhysicalProperties=PhysicalProperties.new(0.7,0.3,0.5)
 end
 end
 end)
 
-addcmd('togglefling',{},function(aB,aC)
+addcmd('togglefling',{},function(aC,aD)
 if flinging then
 execCmd'unfling'
 else
@@ -11716,27 +11781,27 @@ execCmd'fling'
 end
 end)
 
-addcmd("flyfling",{},function(aB,aC)
+addcmd("flyfling",{},function(aC,aD)
 execCmd"unvehiclefly\\unwalkfling"
 task.wait()
-vehicleflyspeed=tonumber(aB[1])or vehicleflyspeed
+vehicleflyspeed=tonumber(aC[1])or vehicleflyspeed
 execCmd"vehiclefly\\walkfling"
 end)
 
-addcmd("unflyfling",{},function(aB,aC)
+addcmd("unflyfling",{},function(aC,aD)
 execCmd"unvehiclefly\\unwalkfling\\breakvelocity"
 end)
 
-addcmd("toggleflyfling",{},function(aB,aC)
+addcmd("toggleflyfling",{},function(aC,aD)
 execCmd(flinging and"unflyfling"or"flyfling")
 end)
 
 walkflinging=false
-addcmd("walkfling",{},function(aB,aC)
+addcmd("walkfling",{},function(aC,aD)
 execCmd"unwalkfling"
-local aD=aC.Character:FindFirstChildWhichIsA"Humanoid"
-if aD then
-aD.Died:Connect(function()
+local aE=aD.Character:FindFirstChildWhichIsA"Humanoid"
+if aE then
+aE.Died:Connect(function()
 execCmd"unwalkfling"
 end)
 end
@@ -11744,68 +11809,68 @@ end
 execCmd"noclip nonotify"
 walkflinging=true
 repeat RunService.Heartbeat:Wait()
-local aE=aC.Character
-local aF=getRoot(aE)
-local aG,V=0.1
+local aF=aD.Character
+local aG=getRoot(aF)
+local aH,V=0.1
 
-while not(aE and aE.Parent and aF and aF.Parent)do
+while not(aF and aF.Parent and aG and aG.Parent)do
 RunService.Heartbeat:Wait()
-aE=aC.Character
-aF=getRoot(aE)
+aF=aD.Character
+aG=getRoot(aF)
 end
 
-V=aF.Velocity
-aF.Velocity=V*10000+Vector3.new(0,10000,0)
+V=aG.Velocity
+aG.Velocity=V*10000+Vector3.new(0,10000,0)
 
 RunService.RenderStepped:Wait()
-if aE and aE.Parent and aF and aF.Parent then
-aF.Velocity=V
+if aF and aF.Parent and aG and aG.Parent then
+aG.Velocity=V
 end
 
 RunService.Stepped:Wait()
-if aE and aE.Parent and aF and aF.Parent then
-aF.Velocity=V+Vector3.new(0,aG,0)
-aG=aG*-1
+if aF and aF.Parent and aG and aG.Parent then
+aG.Velocity=V+Vector3.new(0,aH,0)
+aH=aH*-1
 end
 until walkflinging==false
 end)
 
-addcmd("unwalkfling",{"nowalkfling"},function(aB,aC)
+addcmd("unwalkfling",{"nowalkfling"},function(aC,aD)
 walkflinging=false
 execCmd"unnoclip nonotify"
 end)
 
-addcmd("togglewalkfling",{},function(aB,aC)
+addcmd("togglewalkfling",{},function(aC,aD)
 execCmd(walkflinging and"unwalkfling"or"walkfling")
 end)
 
-addcmd('invisfling',{},function(aB,aC)
-local aD=aC.Character
-aD:FindFirstChildWhichIsA"Humanoid":SetStateEnabled(Enum.HumanoidStateType.Dead,false)
-local aE=Instance.new"Model"
-aE.Parent=aC.Character
-local aF=Instance.new"Part"
-aF.Name="Torso"
-aF.CanCollide=false
-aF.Anchored=true
+addcmd('invisfling',{},function(aC,aD)
+local aE=aD.Character
+aE:FindFirstChildWhichIsA"Humanoid":SetStateEnabled(Enum.HumanoidStateType.Dead,false)
+local aF=Instance.new"Model"
+aF.Parent=aD.Character
 local aG=Instance.new"Part"
-aG.Name="Head"
-aG.Parent=aE
-aG.Anchored=true
+aG.Name="Torso"
 aG.CanCollide=false
+aG.Anchored=true
+local aH=Instance.new"Part"
+aH.Name="Head"
+aH.Parent=aF
+aH.Anchored=true
+aH.CanCollide=false
 local V=Instance.new"Humanoid"
 V.Name="Humanoid"
-V.Parent=aE
-aF.Position=Vector3.new(0,9999,0)
-aC.Character=aE
+V.Parent=aF
+aG.Position=Vector3.new(0,9999,0)
+aD.Character=aF
 wait(3)
-aC.Character=aD
+aD.Character=aE
 wait(3)
 local W=Instance.new"Humanoid"
-aG:Clone()
-W.Parent=aC.Character
-local X=getRoot(aC.Character)
-for Y,Z in pairs(aC.Character:GetChildren())do
+aH:Clone()
+W.Parent=aD.Character
+local X=getRoot(aD.Character)
+for Y,Z in pairs(aD.Character:GetChildren())do
 if Z~=X and Z.Name~="Humanoid"then
 Z:Destroy()
 end
@@ -11814,8 +11879,8 @@ X.Transparency=0
 X.Color=Color3.new(1,1,1)
 local Y
 Y=RunService.Stepped:Connect(function()
-if aC.Character and getRoot(aC.Character)then
-getRoot(aC.Character).CanCollide=false
+if aD.Character and getRoot(aD.Character)then
+getRoot(aD.Character).CanCollide=false
 else
 Y:Disconnect()
 end
@@ -11823,22 +11888,22 @@ end)
 sFLY()
 workspace.CurrentCamera.CameraSubject=X
 local Z=Instance.new"BodyThrust"
-Z.Parent=getRoot(aC.Character)
+Z.Parent=getRoot(aD.Character)
 Z.Force=Vector3.new(99999,999990,99999)
-Z.Location=getRoot(aC.Character).Position
+Z.Location=getRoot(aD.Character).Position
 end)
 
-addcmd("antifling",{},function(aB,aC)
+addcmd("antifling",{},function(aC,aD)
 if antifling then
 antifling:Disconnect()
 antifling=nil
 end
 antifling=RunService.Stepped:Connect(function()
-for aD,aE in pairs(Players:GetPlayers())do
-if aE~=aC and aE.Character then
-for aF,aG in pairs(aE.Character:GetDescendants())do
-if aG:IsA"BasePart"then
-aG.CanCollide=false
+for aE,aF in pairs(Players:GetPlayers())do
+if aF~=aD and aF.Character then
+for aG,aH in pairs(aF.Character:GetDescendants())do
+if aH:IsA"BasePart"then
+aH.CanCollide=false
 end
 end
 end
@@ -11846,97 +11911,97 @@ end
 end)
 end)
 
-addcmd("unantifling",{},function(aB,aC)
+addcmd("unantifling",{},function(aC,aD)
 if antifling then
 antifling:Disconnect()
 antifling=nil
 end
 end)
 
-addcmd("toggleantifling",{},function(aB,aC)
+addcmd("toggleantifling",{},function(aC,aD)
 execCmd(antifling and"unantifling"or"antifling")
 end)
 
-function attach(aB,aC)
-if tools(aB)then
-local aD=aB.Character local aE=
-aC.Character
-local aF=aB.Character:FindFirstChildOfClass"Humanoid"
-local aG=getRoot(aB.Character)
-local V=getRoot(aC.Character)
-aF.Name="1"
-local W=aF:Clone()
-W.Parent=aD
+function attach(aC,aD)
+if tools(aC)then
+local aE=aC.Character local aF=
+aD.Character
+local aG=aC.Character:FindFirstChildOfClass"Humanoid"
+local aH=getRoot(aC.Character)
+local V=getRoot(aD.Character)
+aG.Name="1"
+local W=aG:Clone()
+W.Parent=aE
 W.Name="Humanoid"
 wait()
-aF:Destroy()
-workspace.CurrentCamera.CameraSubject=aD
+aG:Destroy()
+workspace.CurrentCamera.CameraSubject=aE
 W.DisplayDistanceType="None"
-local X=aB:FindFirstChildOfClass"Backpack":FindFirstChildOfClass"Tool"or aB.Character:FindFirstChildOfClass"Tool"
-X.Parent=aD
-aG.CFrame=V.CFrame*CFrame.new(0,0,0)*CFrame.new(math.random(-100,100)/200,math.random(-100,100)/200,math.random(-100,100)/200)
+local X=aC:FindFirstChildOfClass"Backpack":FindFirstChildOfClass"Tool"or aC.Character:FindFirstChildOfClass"Tool"
+X.Parent=aE
+aH.CFrame=V.CFrame*CFrame.new(0,0,0)*CFrame.new(math.random(-100,100)/200,math.random(-100,100)/200,math.random(-100,100)/200)
 local Y=0
 repeat
 wait(.1)
 Y=Y+1
-aG.CFrame=V.CFrame
-until(X.Parent~=aD or not aG or not V or not aG.Parent or not V.Parent or Y>250)and Y>2
+aH.CFrame=V.CFrame
+until(X.Parent~=aE or not aH or not V or not aH.Parent or not V.Parent or Y>250)and Y>2
 else
 notify('Tool Required','You need to have an item in your inventory to use this command')
 end
 end
 
-function kill(aB,aC,aD)
-if tools(aB)then
-if aC~=nil then
-local aE=getRoot(aB.Character).CFrame
-if not aD then
-refresh(aB)
+function kill(aC,aD,aE)
+if tools(aC)then
+if aD~=nil then
+local aF=getRoot(aC.Character).CFrame
+if not aE then
+refresh(aC)
 wait()
-repeat wait()until aB.Character~=nil and getRoot(aB.Character)
+repeat wait()until aC.Character~=nil and getRoot(aC.Character)
 wait(0.3)
 end
-local aF=getRoot(aB.Character)
-attach(aB,aC)
+local aG=getRoot(aC.Character)
+attach(aC,aD)
 repeat
 wait()
-aF.CFrame=CFrame.new(999999,workspace.FallenPartsDestroyHeight+5,999999)
-until not getRoot(aC.Character)or not getRoot(aB.Character)
-local aG=aB.CharacterAdded:Wait()
-local V=aG:FindFirstChildOfClass"Humanoid"or aG.ChildAdded:Wait()
+aG.CFrame=CFrame.new(999999,workspace.FallenPartsDestroyHeight+5,999999)
+until not getRoot(aD.Character)or not getRoot(aC.Character)
+local aH=aC.CharacterAdded:Wait()
+local V=aH:FindFirstChildOfClass"Humanoid"or aH.ChildAdded:Wait()
 while not V:IsA"Humanoid"do
-V=aG:FindFirstChildOfClass"Humanoid"or aG.ChildAdded:Wait()
+V=aH:FindFirstChildOfClass"Humanoid"or aH.ChildAdded:Wait()
 end
-V.RootPart.CFrame=aE
+V.RootPart.CFrame=aF
 end
 else
 notify('Tool Required','You need to have an item in your inventory to use this command')
 end
 end
 
-addcmd("handlekill",{"hkill"},function(aB,aC)
+addcmd("handlekill",{"hkill"},function(aC,aD)
 if not firetouchinterest then
 return notify("Incompatible Exploit","Your exploit does not support this command (missing firetouchinterest)")
 end
-if not aC.Character then return end
-local aD=aC.Character:FindFirstChildWhichIsA"Tool"
-local aE=aD and aD:FindFirstChild"Handle"
-if not aE then
+if not aD.Character then return end
+local aE=aD.Character:FindFirstChildWhichIsA"Tool"
+local aF=aE and aE:FindFirstChild"Handle"
+if not aF then
 return notify("Handle Kill","You need to hold a \"Tool\" that does damage on touch. For example a common Sword tool.")
 end
-local aF=tonumber(aB[2])or math.huge
-if aF~=math.huge then notify("Handle Kill",("Started!\nRadius: %s"):format(tostring(aF):upper()))end
+local aG=tonumber(aC[2])or math.huge
+if aG~=math.huge then notify("Handle Kill",("Started!\nRadius: %s"):format(tostring(aG):upper()))end
 
-while task.wait()and aC.Character and aD.Parent and aD.Parent==aC.Character do
-for aG,V in next,getPlayer(aB[1],aC)do
+while task.wait()and aD.Character and aE.Parent and aE.Parent==aD.Character do
+for aH,V in next,getPlayer(aC[1],aD)do
 V=Players[V]
-if V~=aC and V.Character then
+if V~=aD and V.Character then
 local W=V.Character:FindFirstChildWhichIsA"Humanoid"
 local X=W and getRoot(V.Character)
 
-if X and W.Health>0 and W:GetState()~=Enum.HumanoidStateType.Dead and aC:DistanceFromCharacter(X.Position)<=aF then
-firetouchinterest(aE,X,1)
-firetouchinterest(aE,X,0)
+if X and W.Health>0 and W:GetState()~=Enum.HumanoidStateType.Dead and aD:DistanceFromCharacter(X.Position)<=aG then
+firetouchinterest(aF,X,1)
+firetouchinterest(aF,X,0)
 end
 end
 end
@@ -11945,25 +12010,33 @@ end
 notify("Handle Kill","Stopped!")
 end)
 
-local aB=RunService.Heartbeat
-addcmd('tpwalk',{'teleportwalk'},function(aC,aD)
-tpwalking=true
+tpwalkStack=0
+addcmd("teleportwalk",{"tpwalk"},function(aC,aD)
+pcall(function()tpwalking:Disconnect()end)
+
 local aE=aD.Character
 local aF=aE and aE:FindFirstChildWhichIsA"Humanoid"
-while tpwalking and aE and aF and aF.Parent do
-local aG=aB:Wait()
+local aG=(aC[1]and isNumber(aC[1]))and tonumber(aC[1])or 1
+
+if parseBoolean(aC[2])then
+tpwalkStack=tpwalkStack+aG
+end
+
+tpwalking=RunService.Heartbeat:Connect(function(aH)
+if not(aE and aF and aF.Parent)then
+tpwalking:Disconnect()
+return
+end
+
 if aF.MoveDirection.Magnitude>0 then
-if aC[1]and isNumber(aC[1])then
-aE:TranslateBy(aF.MoveDirection*tonumber(aC[1])*aG*10)
-else
-aE:TranslateBy(aF.MoveDirection*aG*10)
-end
-end
+aE:TranslateBy(aF.MoveDirection*(aG+tpwalkStack)*aH*10)
 end
 end)
+end)
 
-addcmd('untpwalk',{'unteleportwalk'},function(aC,aD)
-tpwalking=false
+addcmd("unteleportwalk",{"untpwalk"},function(aC,aD)
+tpwalkStack=0
+tpwalking:Disconnect()
 end)
 
 function bring(aC,aD,aE)
@@ -11982,12 +12055,12 @@ repeat
 wait()
 aG.CFrame=aF
 until not getRoot(aD.Character)or not getRoot(aC.Character)
-local V=aC.CharacterAdded:Wait()
-local W=V:FindFirstChildOfClass"Humanoid"or V.ChildAdded:Wait()
-while not W:IsA"Humanoid"do
-W=V:FindFirstChildOfClass"Humanoid"or V.ChildAdded:Wait()
+local aH=aC.CharacterAdded:Wait()
+local V=aH:FindFirstChildOfClass"Humanoid"or aH.ChildAdded:Wait()
+while not V:IsA"Humanoid"do
+V=aH:FindFirstChildOfClass"Humanoid"or aH.ChildAdded:Wait()
 end
-W.RootPart.CFrame=aF
+V.RootPart.CFrame=aF
 end
 else
 notify('Tool Required','You need to have an item in your inventory to use this command')
@@ -12004,20 +12077,20 @@ wait()
 repeat wait()until aC.Character~=nil and getRoot(aC.Character)
 wait(0.3)
 end
-local V=getRoot(aC.Character)
-local W=getRoot(aE.Character)
+local aH=getRoot(aC.Character)
+local V=getRoot(aE.Character)
 attach(aC,aD)
 repeat
 wait()
-V.CFrame=W.CFrame
+aH.CFrame=V.CFrame
 until not getRoot(aD.Character)or not getRoot(aC.Character)
 wait(1)
-local X=aC.CharacterAdded:Wait()
-local Y=X:FindFirstChildOfClass"Humanoid"or X.ChildAdded:Wait()
-while not Y:IsA"Humanoid"do
-Y=X:FindFirstChildOfClass"Humanoid"or X.ChildAdded:Wait()
+local W=aC.CharacterAdded:Wait()
+local X=W:FindFirstChildOfClass"Humanoid"or W.ChildAdded:Wait()
+while not X:IsA"Humanoid"do
+X=W:FindFirstChildOfClass"Humanoid"or W.ChildAdded:Wait()
 end
-Y.RootPart.CFrame=aG
+X.RootPart.CFrame=aG
 end
 else
 notify('Tool Required','You need to have an item in your inventory to use this command')
@@ -12096,13 +12169,13 @@ else
 aF=aE.Character.Torso
 end
 local function touchedFunc(aG)
-local V=getRoot(aE.Character)
-if aG:IsA"BasePart"and aG.Position.Y>V.Position.Y-aE.Character:FindFirstChildOfClass'Humanoid'.HipHeight then
-local W=getRoot(aG.Parent)
-if W~=nil then
-V.CFrame=aG.CFrame*CFrame.new(V.CFrame.lookVector.X,W.Size.Z/2+aE.Character:FindFirstChildOfClass'Humanoid'.HipHeight,V.CFrame.lookVector.Z)
-elseif W==nil then
-V.CFrame=aG.CFrame*CFrame.new(V.CFrame.lookVector.X,aG.Size.Y/2+aE.Character:FindFirstChildOfClass'Humanoid'.HipHeight,V.CFrame.lookVector.Z)
+local aH=getRoot(aE.Character)
+if aG:IsA"BasePart"and aG.Position.Y>aH.Position.Y-aE.Character:FindFirstChildOfClass'Humanoid'.HipHeight then
+local V=getRoot(aG.Parent)
+if V~=nil then
+aH.CFrame=aG.CFrame*CFrame.new(aH.CFrame.lookVector.X,V.Size.Z/2+aE.Character:FindFirstChildOfClass'Humanoid'.HipHeight,aH.CFrame.lookVector.Z)
+elseif V==nil then
+aH.CFrame=aG.CFrame*CFrame.new(aH.CFrame.lookVector.X,aG.Size.Y/2+aE.Character:FindFirstChildOfClass'Humanoid'.HipHeight,aH.CFrame.lookVector.Z)
 end
 end
 end
@@ -12125,9 +12198,9 @@ local aG=0.1
 if aD[1]and isNumber(aD[1])then aF=aD[1]end
 if aD[2]and isNumber(aD[2])then aG=aD[2]end
 autoclicking=true
-cancelAutoClick=UserInputService.InputBegan:Connect(function(V,W)
-if not W then
-if(V.KeyCode==Enum.KeyCode.Backspace and UserInputService:IsKeyDown(Enum.KeyCode.Equals))or(V.KeyCode==Enum.KeyCode.Equals and UserInputService:IsKeyDown(Enum.KeyCode.Backspace))then
+cancelAutoClick=UserInputService.InputBegan:Connect(function(aH,V)
+if not V then
+if(aH.KeyCode==Enum.KeyCode.Backspace and UserInputService:IsKeyDown(Enum.KeyCode.Equals))or(aH.KeyCode==Enum.KeyCode.Equals and UserInputService:IsKeyDown(Enum.KeyCode.Backspace))then
 autoclicking=false
 cancelAutoClick:Disconnect()
 end
@@ -12175,33 +12248,33 @@ aE.Name=randomString()
 aE.LineThickness=0.03
 aE.Color3=Color3.new(1,1,1)
 local function updateNameBox()
-local V
-local W=IYMouse.Target
+local aH
+local V=IYMouse.Target
 
+if V then
+local W=V.Parent:FindFirstChildOfClass"Humanoid"or V.Parent.Parent:FindFirstChildOfClass"Humanoid"
 if W then
-local X=W.Parent:FindFirstChildOfClass"Humanoid"or W.Parent.Parent:FindFirstChildOfClass"Humanoid"
-if X then
-V=X.Parent
+aH=W.Parent
 end
 end
 
-if V~=nil then
-local X=IYMouse.X
-local Y=IYMouse.Y
-local Z
+if aH~=nil then
+local W=IYMouse.X
+local X=IYMouse.Y
+local Y
 
 if IYMouse.X>200 then
-Z=X-205
+Y=W-205
 aD.TextXAlignment=Enum.TextXAlignment.Right
 else
-Z=X+25
+Y=W+25
 aD.TextXAlignment=Enum.TextXAlignment.Left
 end
-aD.Position=UDim2.new(0,Z,0,Y)
-aD.Text=V.Name
+aD.Position=UDim2.new(0,Y,0,X)
+aD.Text=aH.Name
 aD.Visible=true
-aE.Parent=V
-aE.Adornee=V
+aE.Parent=aH
+aE.Adornee=aH
 else
 aD.Visible=false
 aE.Parent=nil
@@ -12220,18 +12293,18 @@ end
 end)
 
 addcmd('headsize',{},function(aF,aG)
-local V=getPlayer(aF[1],aG)
-for W,X in pairs(V)do
-if Players[X]~=aG and Players[X].Character:FindFirstChild'Head'then
-local Y=tonumber(aF[2])
-local Z=Vector3.new(Y,Y,Y)
-local _=Players[X].Character:FindFirstChild'Head'
-if _:IsA"BasePart"then
-_.CanCollide=false
-if not aF[2]or Y==1 then
-_.Size=Vector3.new(2,1,1)
+local aH=getPlayer(aF[1],aG)
+for V,W in pairs(aH)do
+if Players[W]~=aG and Players[W].Character:FindFirstChild'Head'then
+local X=tonumber(aF[2])
+local Y=Vector3.new(X,X,X)
+local Z=Players[W].Character:FindFirstChild'Head'
+if Z:IsA"BasePart"then
+Z.CanCollide=false
+if not aF[2]or X==1 then
+Z.Size=Vector3.new(2,1,1)
 else
-_.Size=Z
+Z.Size=Y
 end
 end
 end
@@ -12239,21 +12312,21 @@ end
 end)
 
 addcmd('hitbox',{},function(aF,aG)
-local V=getPlayer(aF[1],aG)
-local W=aF[3]and tonumber(aF[3])or 0.4
-for X,Y in pairs(V)do
-if Players[Y]~=aG and getRoot(Players[Y].Character)then
-local Z=tonumber(aF[2])
-local _=Vector3.new(Z,Z,Z)
-local aH=getRoot(Players[Y].Character)
-if aH:IsA"BasePart"then
-aH.CanCollide=false
-if not aF[2]or Z==1 then
-aH.Size=Vector3.new(2,1,1)
-aH.Transparency=W
+local aH=getPlayer(aF[1],aG)
+local V=aF[3]and tonumber(aF[3])or 0.4
+for W,X in pairs(aH)do
+if Players[X]~=aG and getRoot(Players[X].Character)then
+local Y=tonumber(aF[2])
+local Z=Vector3.new(Y,Y,Y)
+local _=getRoot(Players[X].Character)
+if _:IsA"BasePart"then
+_.CanCollide=false
+if not aF[2]or Y==1 then
+_.Size=Vector3.new(2,1,1)
+_.Transparency=V
 else
-aH.Size=_
-aH.Transparency=W
+_.Size=Z
+_.Transparency=V
 end
 end
 end
@@ -12377,14 +12450,86 @@ end
 notify("Staffwatch","Disabled")
 end)
 
+local function playerGroups()
+local aF=Players:GetPlayers()
+local aG={}
+local aH={}
+local V={}
+
+for W,X in ipairs(aF)do
+aG[X]={}
+end
+
+for W=1,#aF do
+for X=W+1,#aF do
+local Y=aF[W]
+local Z=aF[X]
+
+local _,aI=pcall(function()
+return Y:IsFriendsWithAsync(Z.UserId)
+end)
+
+if _ and aI then
+table.insert(aG[Y],Z)
+table.insert(aG[Z],Y)
+end
+end
+end
+
+local function dfs(aI,W)
+aH[aI]=true
+table.insert(W,aI)
+
+for X,Y in ipairs(aG[aI])do
+if not aH[Y]then
+dfs(Y,W)
+end
+end
+end
+
+for aI,W in ipairs(aF)do
+if not aH[W]then
+local X={}
+dfs(W,X)
+table.insert(V,X)
+end
+end
+
+return V
+end
+
+addcmd("findfriendgroups",{},function(aF,aG)
+notify("Checking Players","This might take a while (slow function)")
+
+local aH=playerGroups()
+local aI=StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.PlayerList)
+
+local V=""
+local W=1
+local X=0
+
+for Y,Z in ipairs(aH)do
+if#Z==1 then continue end
+local _={}
+for aJ,aK in ipairs(Z)do
+table.insert(_,aI and aK.DisplayName or aK.Name)
+end
+V=V..W..". "..table.concat(_,", ").."\n"
+W=W+1
+X=X+1
+end
+
+createPopup("Friend Groups",X==0 and"None"or V)
+end)
+
 addcmd('removeterrain',{'rterrain','noterrain'},function(aF,aG)
 workspace:FindFirstChildOfClass'Terrain':Clear()
 end)
 
 addcmd('clearnilinstances',{'nonilinstances','cni'},function(aF,aG)
 if getnilinstances then
-for aH,V in pairs(getnilinstances())do
-V:Destroy()
+for aH,aI in pairs(getnilinstances())do
+aI:Destroy()
 end
 else
 notify('Incompatible Exploit','Your exploit does not support this command (missing getnilinstances)')
@@ -12420,7 +12565,7 @@ end)
 antivoidWasEnabled=false
 addcmd("fakeout",{},function(aF,aG)
 local aH=getRoot(aG.Character)
-local V=aH.CFrame
+local aI=aH.CFrame
 if antivoidloop then
 execCmd"unantivoid nonotify"
 antivoidWasEnabled=true
@@ -12428,7 +12573,7 @@ end
 workspace.FallenPartsDestroyHeight=0/0
 aH.CFrame=CFrame.new(Vector3.new(0,OrgDestroyHeight-25,0))
 task.wait(1)
-aH.CFrame=V
+aH.CFrame=aI
 workspace.FallenPartsDestroyHeight=OrgDestroyHeight
 if antivoidWasEnabled then
 execCmd"antivoid nonotify"
@@ -12438,23 +12583,23 @@ end)
 
 addcmd("trip",{},function(aF,aG)
 local aH=aG.Character and aG.Character:FindFirstChildWhichIsA"Humanoid"
-local V=aG.Character and getRoot(aG.Character)
-if aH and V then
+local aI=aG.Character and getRoot(aG.Character)
+if aH and aI then
 aH:ChangeState(Enum.HumanoidStateType.FallingDown)
-V.Velocity=V.CFrame.LookVector*30
+aI.Velocity=aI.CFrame.LookVector*30
 end
 end)
 
 addcmd("removeads",{"adblock"},function(aF,aG)
 while wait()do
 pcall(function()
-for aH,V in pairs(workspace:GetDescendants())do
-if V:IsA"PackageLink"then
-if V.Parent:FindFirstChild"ADpart"then
-V.Parent:Destroy()
+for aH,aI in pairs(workspace:GetDescendants())do
+if aI:IsA"PackageLink"then
+if aI.Parent:FindFirstChild"ADpart"then
+aI.Parent:Destroy()
 end
-if V.Parent:FindFirstChild"AdGuiAdornee"then
-V.Parent.Parent:Destroy()
+if aI.Parent:FindFirstChild"AdGuiAdornee"then
+aI.Parent.Parent:Destroy()
 end
 end
 end
@@ -12464,26 +12609,26 @@ end)
 
 addcmd("scare",{"spook"},function(aF,aG)
 local aH=getPlayer(aF[1],aG)
-local V
+local aI
 
-for W,X in pairs(aH)do
-local Y=aG.Character and getRoot(aG.Character)
-local Z=Players[X]
-local _=Z and Z.Character and getRoot(Z.Character)
+for aJ,aK in pairs(aH)do
+local V=aG.Character and getRoot(aG.Character)
+local W=Players[aK]
+local X=W and W.Character and getRoot(W.Character)
 
-if Y and _ and Z~=aG then
-V=Y.CFrame
-Y.CFrame=_.CFrame+_.CFrame.lookVector*2
-Y.CFrame=CFrame.new(Y.Position,_.Position)
+if V and X and W~=aG then
+aI=V.CFrame
+V.CFrame=X.CFrame+X.CFrame.lookVector*2
+V.CFrame=CFrame.new(V.Position,X.Position)
 task.wait(0.5)
-Y.CFrame=V
+V.CFrame=aI
 end
 end
 end)
 
 addcmd("alignmentkeys",{},function(aF,aG)
-alignmentKeys=UserInputService.InputBegan:Connect(function(aH,V)
-if V then return end
+alignmentKeys=UserInputService.InputBegan:Connect(function(aH,aI)
+if aI then return end
 if aH.KeyCode==Enum.KeyCode.Comma then workspace.CurrentCamera:PanUnits(-1)end
 if aH.KeyCode==Enum.KeyCode.Period then workspace.CurrentCamera:PanUnits(1)end
 end)
@@ -12500,29 +12645,29 @@ end)
 
 addcmd("ctrllock",{},function(aF,aG)
 local aH=aG.PlayerScripts:WaitForChild"PlayerModule":WaitForChild"CameraModule":WaitForChild"MouseLockController"
-local V=aH:FindFirstChild"BoundKeys"
+local aI=aH:FindFirstChild"BoundKeys"
 
-if V then
-V.Value="LeftControl"
+if aI then
+aI.Value="LeftControl"
 else
-V=Instance.new"StringValue"
-V.Name="BoundKeys"
-V.Value="LeftControl"
-V.Parent=aH
+aI=Instance.new"StringValue"
+aI.Name="BoundKeys"
+aI.Value="LeftControl"
+aI.Parent=aH
 end
 end)
 
 addcmd("unctrllock",{},function(aF,aG)
 local aH=aG.PlayerScripts:WaitForChild"PlayerModule":WaitForChild"CameraModule":WaitForChild"MouseLockController"
-local V=aH:FindFirstChild"BoundKeys"
+local aI=aH:FindFirstChild"BoundKeys"
 
-if V then
-V.Value="LeftShift"
+if aI then
+aI.Value="LeftShift"
 else
-V=Instance.new"StringValue"
-V.Name="BoundKeys"
-V.Value="LeftShift"
-V.Parent=aH
+aI=Instance.new"StringValue"
+aI.Name="BoundKeys"
+aI.Value="LeftShift"
+aI.Parent=aH
 end
 end)
 
@@ -12531,10 +12676,10 @@ execCmd"unlistento"
 if not aF[1]then return end
 
 local aH=Players:FindFirstChild(getPlayer(aF[1],aG)[1])
-local V=aH and aH.Character and getRoot(aH.Character)
+local aI=aH and aH.Character and getRoot(aH.Character)
 
-if V then
-SoundService:SetListener(Enum.ListenerType.ObjectPosition,V)
+if aI then
+SoundService:SetListener(Enum.ListenerType.ObjectPosition,aI)
 listentoChar=aH.CharacterAdded:Connect(function()
 repeat task.wait()until Players[aH.Name].Character~=nil and getRoot(Players[aH.Name].Character)
 SoundService:SetListener(Enum.ListenerType.ObjectPosition,getRoot(Players[aH.Name].Character))
@@ -12549,48 +12694,48 @@ end)
 
 addcmd("jerk",{},function(aF,aG)
 local aH=aG.Character:FindFirstChildWhichIsA"Humanoid"
-local V=aG:FindFirstChildWhichIsA"Backpack"
-if not aH or not V then return end
+local aI=aG:FindFirstChildWhichIsA"Backpack"
+if not aH or not aI then return end
 
-local W=Instance.new"Tool"
-W.Name="Jerk Off"
-W.ToolTip="in the stripped club. straight up \"jorking it\" . and by \"it\" , haha, well. let's justr say. My peanits."
-W.RequiresHandle=false
-W.Parent=V
+local aJ=Instance.new"Tool"
+aJ.Name="Jerk Off"
+aJ.ToolTip="in the stripped club. straight up \"jorking it\" . and by \"it\" , haha, well. let's justr say. My peanits."
+aJ.RequiresHandle=false
+aJ.Parent=aI
 
-local X=false
-local Y
+local aK=false
+local V
 
 local function stopTomfoolery()
-X=false
-if Y then
-Y:Stop()
-Y=nil
+aK=false
+if V then
+V:Stop()
+V=nil
 end
 end
 
-W.Equipped:Connect(function()X=true end)
-W.Unequipped:Connect(stopTomfoolery)
+aJ.Equipped:Connect(function()aK=true end)
+aJ.Unequipped:Connect(stopTomfoolery)
 aH.Died:Connect(stopTomfoolery)
 
 while task.wait()do
-if not X then continue end
+if not aK then continue end
 
-local Z=r15(aG)
-if not Y then
-local _=Instance.new"Animation"
-_.AnimationId=not Z and"rbxassetid://72042024"or"rbxassetid://698251653"
-Y=aH:LoadAnimation(_)
+local W=r15(aG)
+if not V then
+local X=Instance.new"Animation"
+X.AnimationId=not W and"rbxassetid://72042024"or"rbxassetid://698251653"
+V=aH:LoadAnimation(X)
 end
 
-Y:Play()
-Y:AdjustSpeed(Z and 0.7 or 0.65)
-Y.TimePosition=0.6
+V:Play()
+V:AdjustSpeed(W and 0.7 or 0.65)
+V.TimePosition=0.6
 task.wait(0.1)
-while Y and Y.TimePosition<(not Z and 0.65 or 0.7)do task.wait(0.1)end
-if Y then
-Y:Stop()
-Y=nil
+while V and V.TimePosition<(not W and 0.65 or 0.7)do task.wait(0.1)end
+if V then
+V:Stop()
+V=nil
 end
 end
 end)
@@ -12614,56 +12759,33 @@ Scale.Scale=math.max(Holder.AbsoluteSize.X/1920,guiScale)
 updatesaves()
 end)
 
-addcmd("unsuspendchat",{},function(aF,aG)
-if replicatesignal then
-replicatesignal(TextChatService.UpdateChatTimeout,aG.UserId,0,10)
-else
-notify("Incompatible Exploit","Your exploit does not support this command (missing replicatesignal)")
-end
-end)
-
-addcmd("unsuspendvc",{},function(aF,aG)
-if replicatesignal then
-replicatesignal(VoiceChatService.ClientRetryJoin)
-
-if typeof(onVoiceModerated)~="RBXScriptConnection"then
-onVoiceModerated=Services.VoiceChatInternal.LocalPlayerModerated:Connect(function()
-task.wait(1)
-replicatesignal(VoiceChatService.ClientRetryJoin)
-end)
-end
-else
-notify("Incompatible Exploit","Your exploit does not support this command (missing replicatesignal)")
-end
-end)
-
-addcmd("muteallvcs",{},function(aF,aG)
+addcmd("muteallvoices",{"muteallvcs"},function(aF,aG)
 Services.VoiceChatInternal:SubscribePauseAll(true)
 end)
 
-addcmd("unmuteallvcs",{},function(aF,aG)
+addcmd("unmuteallvoices",{"unmuteallvcs"},function(aF,aG)
 Services.VoiceChatInternal:SubscribePauseAll(false)
 end)
 
 addcmd("mutevc",{},function(aF,aG)
-for aH,V in getPlayer(aF[1],aG)do
-if Players[V]==aG then continue end
-Services.VoiceChatInternal:SubscribePause(Players[V].UserId,true)
+for aH,aI in getPlayer(aF[1],aG)do
+if Players[aI]==aG then continue end
+Services.VoiceChatInternal:SubscribePause(Players[aI].UserId,true)
 end
 end)
 
 addcmd("unmutevc",{},function(aF,aG)
-for aH,V in getPlayer(aF[1],aG)do
-if Players[V]==aG then continue end
-Services.VoiceChatInternal:SubscribePause(Players[V].UserId,false)
+for aH,aI in getPlayer(aF[1],aG)do
+if Players[aI]==aG then continue end
+Services.VoiceChatInternal:SubscribePause(Players[aI].UserId,false)
 end
 end)
 
 addcmd("phonebook",{"call"},function(aF,aG)
-local aH,V=pcall(function()
+local aH,aI=pcall(function()
 return SocialService:CanSendCallInviteAsync(aG)
 end)
-if aH and V then
+if aH and aI then
 SocialService:PromptPhoneBook(aG,"")
 else
 notify("Phonebook","It seems you're not able to call anyone. Sorry!")
@@ -12682,7 +12804,7 @@ end)
 local aF
 frozenParts={}
 addcmd('freezeunanchored',{'freezeua'},function(aG,aH)
-local V={
+local aI={
 "Head",
 "UpperTorso",
 "LowerTorso",
@@ -12705,39 +12827,39 @@ local V={
 "Left Leg",
 "HumanoidRootPart"
 }
-local function FREEZENOOB(W)
-if W:IsA'BasePart'and W.Anchored==false then
-local X=false
-for Y=1,#V do
-if W.Name==V[Y]then
-X=true
+local function FREEZENOOB(aJ)
+if aJ:IsA'BasePart'and aJ.Anchored==false then
+local aK=false
+for V=1,#aI do
+if aJ.Name==aI[V]then
+aK=true
 end
 end
-if aH.Character and W:IsDescendantOf(aH.Character)then
-X=true
+if aH.Character and aJ:IsDescendantOf(aH.Character)then
+aK=true
 end
-if X==false then
-for Y,Z in pairs(W:GetChildren())do
-if Z:IsA"BodyPosition"or Z:IsA"BodyGyro"then
-Z:Destroy()
-end
-end
-local Y=Instance.new"BodyPosition"
-Y.Parent=W
-Y.Position=W.Position
-Y.MaxForce=Vector3.new(math.huge,math.huge,math.huge)
-local Z=Instance.new"BodyGyro"
-Z.Parent=W
-Z.CFrame=W.CFrame
-Z.MaxTorque=Vector3.new(math.huge,math.huge,math.huge)
-if not table.find(frozenParts,W)then
-table.insert(frozenParts,W)
+if aK==false then
+for V,W in pairs(aJ:GetChildren())do
+if W:IsA"BodyPosition"or W:IsA"BodyGyro"then
+W:Destroy()
 end
 end
+local V=Instance.new"BodyPosition"
+V.Parent=aJ
+V.Position=aJ.Position
+V.MaxForce=Vector3.new(math.huge,math.huge,math.huge)
+local W=Instance.new"BodyGyro"
+W.Parent=aJ
+W.CFrame=aJ.CFrame
+W.MaxTorque=Vector3.new(math.huge,math.huge,math.huge)
+if not table.find(frozenParts,aJ)then
+table.insert(frozenParts,aJ)
 end
 end
-for W,X in pairs(workspace:GetDescendants())do
-FREEZENOOB(X)
+end
+end
+for aJ,aK in pairs(workspace:GetDescendants())do
+FREEZENOOB(aK)
 end
 aF=workspace.DescendantAdded:Connect(FREEZENOOB)
 end)
@@ -12746,10 +12868,10 @@ addcmd('thawunanchored',{'thawua','unfreezeunanchored','unfreezeua'},function(aG
 if aF then
 aF:Disconnect()
 end
-for V,W in pairs(frozenParts)do
-for X,Y in pairs(W:GetChildren())do
-if Y:IsA"BodyPosition"or Y:IsA"BodyGyro"then
-Y:Destroy()
+for aI,aJ in pairs(frozenParts)do
+for aK,V in pairs(aJ:GetChildren())do
+if V:IsA"BodyPosition"or V:IsA"BodyGyro"then
+V:Destroy()
 end
 end
 end
@@ -12757,27 +12879,27 @@ frozenParts={}
 end)
 
 addcmd('tpunanchored',{'tpua'},function(aG,aH)
-local V=getPlayer(aG[1],aH)
+local aI=getPlayer(aG[1],aH)
+for aJ,aK in pairs(aI)do
+local V={}
+for W,X in pairs(workspace:GetDescendants())do
+if Players[aK].Character:FindFirstChild'Head'and X:IsA'BasePart'and X.Anchored==false and not X:IsDescendantOf(aH.Character)and X.Name=="Torso"==false and X.Name=="Head"==false and X.Name=="Right Arm"==false and X.Name=="Left Arm"==false and X.Name=="Right Leg"==false and X.Name=="Left Leg"==false and X.Name=="HumanoidRootPart"==false then
+for Y,Z in pairs(X:GetChildren())do
+if Z:IsA"BodyPosition"or Z:IsA"BodyGyro"then
+Z:Destroy()
+end
+end
+local Y=Instance.new"BodyPosition"
+Y.Parent=X
+Y.MaxForce=Vector3.new(math.huge,math.huge,math.huge)
+table.insert(V,Y)
+if not table.find(frozenParts,X)then
+table.insert(frozenParts,X)
+end
+end
+end
 for W,X in pairs(V)do
-local Y={}
-for Z,_ in pairs(workspace:GetDescendants())do
-if Players[X].Character:FindFirstChild'Head'and _:IsA'BasePart'and _.Anchored==false and not _:IsDescendantOf(aH.Character)and _.Name=="Torso"==false and _.Name=="Head"==false and _.Name=="Right Arm"==false and _.Name=="Left Arm"==false and _.Name=="Right Leg"==false and _.Name=="Left Leg"==false and _.Name=="HumanoidRootPart"==false then
-for aI,aJ in pairs(_:GetChildren())do
-if aJ:IsA"BodyPosition"or aJ:IsA"BodyGyro"then
-aJ:Destroy()
-end
-end
-local aI=Instance.new"BodyPosition"
-aI.Parent=_
-aI.MaxForce=Vector3.new(math.huge,math.huge,math.huge)
-table.insert(Y,aI)
-if not table.find(frozenParts,_)then
-table.insert(frozenParts,_)
-end
-end
-end
-for aI,aJ in pairs(Y)do
-aJ.Position=Players[X].Character.Head.Position
+X.Position=Players[aK].Character.Head.Position
 end
 end
 end)
@@ -12860,13 +12982,13 @@ if not aI then notify('Auto Key Press',"Invalid key")return end
 execCmd'unautokeypress'
 wait()
 local aJ=0.1
-local V=0.1
+local aK=0.1
 if aG[2]and isNumber(aG[2])then aJ=aG[2]end
-if aG[3]and isNumber(aG[3])then V=aG[3]end
+if aG[3]and isNumber(aG[3])then aK=aG[3]end
 autoKeyPressing=true
-cancelAutoKeyPress=UserInputService.InputBegan:Connect(function(W,X)
-if not X then
-if(W.KeyCode==Enum.KeyCode.Backspace and UserInputService:IsKeyDown(Enum.KeyCode.Equals))or(W.KeyCode==Enum.KeyCode.Equals and UserInputService:IsKeyDown(Enum.KeyCode.Backspace))then
+cancelAutoKeyPress=UserInputService.InputBegan:Connect(function(V,W)
+if not W then
+if(V.KeyCode==Enum.KeyCode.Backspace and UserInputService:IsKeyDown(Enum.KeyCode.Equals))or(V.KeyCode==Enum.KeyCode.Equals and UserInputService:IsKeyDown(Enum.KeyCode.Backspace))then
 autoKeyPressing=false
 cancelAutoKeyPress:Disconnect()
 end
@@ -12875,7 +12997,7 @@ end)
 notify('Auto Key Press',"Press [backspace] and [=] at the same time to stop")
 repeat wait(aJ)
 keypress(aI)
-wait(V)
+wait(aK)
 keyrelease(aI)
 until autoKeyPressing==false
 if cancelAutoKeyPress then cancelAutoKeyPress:Disconnect()keyrelease(aI)end
@@ -12911,20 +13033,26 @@ return
 end
 
 for aI,aJ in ipairs(listfiles"")do
-local V=aJ:match"([^/\\]+%.iy)$"
+local aK=aJ:match"([^/\\]+%.iy)$"
 
-if V and
-V:lower()~="iy_fe.iy"and
-not isfolder(V)and
-not table.find(PluginsTable,V)
+if aK and
+aK:lower()~="iy_fe.iy"and
+not isfolder(aK)and
+not table.find(PluginsTable,aK)
 then
-addPlugin(V)
+addPlugin(aK)
 end
 end
 end)
 
 addcmd('removecmd',{'deletecmd'},function(aG,aH)
 removecmd(aG[1])
+end)
+
+addcmd("debug",{},function(aG,aH)
+local aI=parseBoolean(aG[1],true)
+_G.IY_DEBUG=aI
+notify("debug",tostring(aI),1)
 end)
 
 if IsOnMobile then
@@ -13013,21 +13141,21 @@ if not aI then return end
 local aJ=aI:WaitForChild("Humanoid",10)
 if not aJ then return end
 
-local V=aJ.Health
-aJ.HealthChanged:Connect(function(W)
-math.abs(V-W)
-if V>W then
-eventEditor.FireEvent("OnDamage",aG.Name,tonumber(W))
+local aK=aJ.Health
+aJ.HealthChanged:Connect(function(V)
+math.abs(aK-V)
+if aK>V then
+eventEditor.FireEvent("OnDamage",aG.Name,tonumber(V))
 end
-V=W
+aK=V
 end)
 
 aJ.Died:Connect(function()
 eventEditor.FireEvent("OnDied",aG.Name)
 
-local W=aJ:FindFirstChild"creator"
-if W and W.Value and W.Value.Parent then
-eventEditor.FireEvent("OnKilled",aG.Name,W.Name)
+local V=aJ:FindFirstChild"creator"
+if V and V.Value and V.Value.Parent then
+eventEditor.FireEvent("OnKilled",aG.Name,V.Name)
 end
 end)
 end)
@@ -13090,8 +13218,8 @@ if aliases and#aliases>0 then
 local aG={}
 for aH,aI in pairs(cmds)do
 aG[aI.NAME:lower()]=aI
-for aJ,V in pairs(aI.ALIAS)do
-aG[V:lower()]=aI
+for aJ,aK in pairs(aI.ALIAS)do
+aG[aK:lower()]=aI
 end
 end
 for aH=1,#aliases do
@@ -13130,11 +13258,11 @@ end
 if aH.Announcement and aH.Announcement~=""then
 local aI=Instance.new"Frame"
 local aJ=Instance.new"Frame"
-local V=Instance.new"TextLabel"
-local W=Instance.new"Frame"
-local X=Instance.new"TextLabel"
-local Y=Instance.new"TextButton"
-local Z=Instance.new"ImageLabel"
+local aK=Instance.new"TextLabel"
+local V=Instance.new"Frame"
+local W=Instance.new"TextLabel"
+local X=Instance.new"TextButton"
+local Y=Instance.new"ImageLabel"
 
 aI.Name=randomString()
 aI.Parent=ScaledHolder
@@ -13153,59 +13281,59 @@ aJ.Position=UDim2.new(0,0,0,20)
 aJ.Size=UDim2.new(0,360,0,150)
 aJ.ZIndex=10
 
-V.Parent=aJ
-V.BackgroundTransparency=1
-V.Position=UDim2.new(0,5,0,5)
-V.Size=UDim2.new(0,350,0,140)
-V.Font=Enum.Font.SourceSans
-V.TextSize=18
-V.TextWrapped=true
-V.Text=aH.Announcement
-V.TextColor3=currentText1
-V.TextXAlignment=Enum.TextXAlignment.Left
-V.TextYAlignment=Enum.TextYAlignment.Top
+aK.Parent=aJ
+aK.BackgroundTransparency=1
+aK.Position=UDim2.new(0,5,0,5)
+aK.Size=UDim2.new(0,350,0,140)
+aK.Font=Enum.Font.SourceSans
+aK.TextSize=18
+aK.TextWrapped=true
+aK.Text=aH.Announcement
+aK.TextColor3=currentText1
+aK.TextXAlignment=Enum.TextXAlignment.Left
+aK.TextYAlignment=Enum.TextYAlignment.Top
+aK.ZIndex=10
+
+V.Name="shadow"
+V.Parent=aI
+V.BackgroundColor3=currentShade2
+V.BorderSizePixel=0
+V.Size=UDim2.new(0,360,0,20)
 V.ZIndex=10
 
-W.Name="shadow"
-W.Parent=aI
-W.BackgroundColor3=currentShade2
-W.BorderSizePixel=0
-W.Size=UDim2.new(0,360,0,20)
+W.Name="PopupText"
+W.Parent=V
+W.BackgroundTransparency=1
+W.Size=UDim2.new(1,0,0.95,0)
 W.ZIndex=10
+W.Font=Enum.Font.SourceSans
+W.TextSize=14
+W.Text="Server Announcement"
+W.TextColor3=currentText1
+W.TextWrapped=true
 
-X.Name="PopupText"
-X.Parent=W
+X.Name="Exit"
+X.Parent=V
 X.BackgroundTransparency=1
-X.Size=UDim2.new(1,0,0.95,0)
+X.Position=UDim2.new(1,-20,0,0)
+X.Size=UDim2.new(0,20,0,20)
+X.Text=""
 X.ZIndex=10
-X.Font=Enum.Font.SourceSans
-X.TextSize=14
-X.Text="Server Announcement"
-X.TextColor3=currentText1
-X.TextWrapped=true
 
-Y.Name="Exit"
-Y.Parent=W
+Y.Parent=X
+Y.BackgroundColor3=Color3.new(1,1,1)
 Y.BackgroundTransparency=1
-Y.Position=UDim2.new(1,-20,0,0)
-Y.Size=UDim2.new(0,20,0,20)
-Y.Text=""
+Y.Position=UDim2.new(0,5,0,5)
+Y.Size=UDim2.new(0,10,0,10)
+Y.Image=getcustomasset"infiniteyield/assets/close.png"
 Y.ZIndex=10
 
-Z.Parent=Y
-Z.BackgroundColor3=Color3.new(1,1,1)
-Z.BackgroundTransparency=1
-Z.Position=UDim2.new(0,5,0,5)
-Z.Size=UDim2.new(0,10,0,10)
-Z.Image=getcustomasset"infiniteyield/assets/close.png"
-Z.ZIndex=10
-
-wait(1)
+task.wait(1)
 aI:TweenPosition(UDim2.new(0.5,-180,0,150),"InOut","Quart",0.5,true,nil)
 
-Y.MouseButton1Click:Connect(function()
+X.MouseButton1Click:Connect(function()
 aI:TweenPosition(UDim2.new(0.5,-180,0,-500),"InOut","Quart",0.5,true,nil)
-wait(0.6)
+task.wait(0.6)
 aI:Destroy()
 end)
 end
@@ -13213,15 +13341,17 @@ end
 end)
 
 task.spawn(function()
-wait()
+task.wait()
+pcall(function()
 Credits:TweenPosition(UDim2.new(0,0,0.9,0),"Out","Quart",0.2)
 Logo:TweenSizeAndPosition(UDim2.new(0,175,0,175),UDim2.new(0,37,0,45),"Out","Quart",0.3)
-wait(1)
+task.wait(1)
 local aG=TweenInfo.new(1.6809,Enum.EasingStyle.Sine,Enum.EasingDirection.Out,0,false,0)
 TweenService:Create(Logo,aG,{ImageTransparency=1}):Play()
 TweenService:Create(IntroBackground,aG,{BackgroundTransparency=1}):Play()
 Credits:TweenPosition(UDim2.new(0,0,0.9,30),"Out","Quart",0.2)
-wait(0.2)
+task.wait(0.2)
+end)
 Logo:Destroy()
 Credits:Destroy()
 IntroBackground:Destroy()
@@ -13242,25 +13372,25 @@ CMDs[#CMDs+1]={NAME='night',DESC='Sets the in-game time to nighttime'}
 CMDs[#CMDs+1]={NAME='bunnyhop / bhop',DESC='Automatically jumps for you'}
 
 addcmd("hideplayers",{"hplyrs"},function(aH,aI)
-local aJ=game:GetService"Players"local V=
+local aJ=game:GetService"Players"local aK=
 aJ.LocalPlayer or aJ.PlayerAdded:Wait()
 
-for W,X in pairs(aJ:GetPlayers())do
-if X.Name~=aI.Name then
-local Y=X.Character
-for Z,_ in pairs(Y:GetChildren())do
-if _:IsA"Part"or _:IsA"MeshPart"then
-_.Transparency=1
-for aK,aL in pairs(_:GetChildren())do
+for V,W in pairs(aJ:GetPlayers())do
+if W.Name~=aI.Name then
+local X=W.Character
+for Y,Z in pairs(X:GetChildren())do
+if Z:IsA"Part"or Z:IsA"MeshPart"then
+Z.Transparency=1
+for _,aL in pairs(Z:GetChildren())do
 if aL:IsA"Decal"then
 aL.Transparency=1
 end
 end
-elseif _:IsA"Accessory"then
-local aK=_:FindFirstChild"Handle"
-if aK then
-aK.Transparency=1
-for aL,aM in pairs(aK:GetChildren())do
+elseif Z:IsA"Accessory"then
+local aL=Z:FindFirstChild"Handle"
+if aL then
+aL.Transparency=1
+for _,aM in pairs(aL:GetChildren())do
 if aM:IsA"Decal"then
 aM.Transparency=1
 end

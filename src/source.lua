@@ -1,4 +1,4 @@
--- Version: 6.3.6
+-- Version: 6.4
 if IY_LOADED and not _G.IY_DEBUG then
 	-- error("Zero Yield is already running!", 0)
 	return
@@ -147,7 +147,7 @@ if makefolder and isfolder and writefile and isfile then
 	end)
 end
 
-currentVersion = "6.3.6"
+currentVersion = "6.4"
 
 ScaledHolder = Instance.new("Frame")
 Scale = Instance.new("UIScale")
@@ -2092,6 +2092,15 @@ function r15(plr)
 	end
 end
 
+function breakVelocity()
+    local V3 = Vector3.new(0, 0, 0)
+    for _, v in ipairs(Players.LocalPlayer.Character:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.Velocity, v.RotVelocity = V3, V3
+        end
+    end
+end
+
 function toClipboard(txt)
 	if everyClipboard then
 		everyClipboard(tostring(txt)) -- some executor errored without tostring btw so dont call me out for this
@@ -2950,8 +2959,8 @@ useFactorySettings = function()
 	PluginsTable = {}
 end
 
-createPopup = function(text)
-	local FileError = Instance.new("Frame")
+function createPopup(title, text)
+	local Popup = Instance.new("Frame")
 	local background = Instance.new("Frame")
 	local Directions = Instance.new("TextLabel")
 	local shadow = Instance.new("Frame")
@@ -2959,16 +2968,16 @@ createPopup = function(text)
 	local Exit = Instance.new("TextButton")
 	local ExitImage = Instance.new("ImageLabel")
 
-	FileError.Name = randomString()
-	FileError.Parent = ScaledHolder
-	FileError.Active = true
-	FileError.BackgroundTransparency = 1
-	FileError.Position = UDim2.new(0.5, -180, 0, 290)
-	FileError.Size = UDim2.new(0, 360, 0, 20)
-	FileError.ZIndex = 10
+	Popup.Name = randomString()
+	Popup.Parent = ScaledHolder
+	Popup.Active = true
+	Popup.BackgroundTransparency = 1
+	Popup.Position = UDim2.new(0.5, -180, 0, -500)
+	Popup.Size = UDim2.new(0, 360, 0, 20)
+	Popup.ZIndex = 10
 
 	background.Name = "background"
-	background.Parent = FileError
+	background.Parent = Popup
 	background.Active = true
 	background.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
 	background.BorderSizePixel = 0
@@ -2992,7 +3001,7 @@ createPopup = function(text)
 	Directions.ZIndex = 10
 
 	shadow.Name = "shadow"
-	shadow.Parent = FileError
+	shadow.Parent = Popup
 	shadow.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
 	shadow.BorderSizePixel = 0
 	shadow.Size = UDim2.new(0, 360, 0, 20)
@@ -3005,7 +3014,7 @@ createPopup = function(text)
 	PopupText.ZIndex = 10
 	PopupText.Font = Enum.Font.SourceSans
 	PopupText.TextSize = 14
-	PopupText.Text = "File Error"
+	PopupText.Text = title
 	PopupText.TextColor3 = Color3.new(1, 1, 1)
 	PopupText.TextWrapped = true
 
@@ -3025,8 +3034,12 @@ createPopup = function(text)
 	ExitImage.Image = getcustomasset("infiniteyield/assets/close.png")
 	ExitImage.ZIndex = 10
 
+	Popup:TweenPosition(UDim2.new(0.5, -180, 0, 150), "InOut", "Quart", 0.5, true, nil)
+
 	Exit.MouseButton1Click:Connect(function()
-		FileError:Destroy()
+		Popup:TweenPosition(UDim2.new(0.5, -180, 0, -500), "InOut", "Quart", 0.5, true, nil)
+		task.wait(0.6)
+		Popup:Destroy()
 	end)
 end
 
@@ -3077,7 +3090,7 @@ function saves()
 				else
 					nosaves = true
 					useFactorySettings()
-					createPopup("There was a problem writing a save file to your PC.\n\nPlease contact the developer/support team for your exploit and tell them writefile/readfile is not working.\n\nYour settings, keybinds, waypoints, and aliases will not save if you continue.\n\nThings to try:\n> Make sure a 'workspace' folder is located in the same folder as your exploit\n> If your exploit is inside of a zip/rar file, extract it.\n> Rejoin the game and try again or restart your PC and try again.")
+					createPopup("File Error", "There was a problem writing a save file to your PC.\n\nPlease contact the developer/support team for your exploit and tell them writefile/readfile is not working.\n\nYour settings, keybinds, waypoints, and aliases will not save if you continue.\n\nThings to try:\n> Make sure a 'workspace' folder is located in the same folder as your exploit\n> If your exploit is inside of a zip/rar file, extract it.\n> Rejoin the game and try again or restart your PC and try again.")
 				end
 			end
 		else
@@ -3089,14 +3102,14 @@ function saves()
 			else
 				nosaves = true
 				useFactorySettings()
-				createPopup("There was a problem writing a save file to your PC.\n\nPlease contact the developer/support team for your exploit and tell them writefile/readfile is not working.\n\nYour settings, keybinds, waypoints, and aliases will not save if you continue.\n\nThings to try:\n> Make sure a 'workspace' folder is located in the same folder as your exploit\n> If your exploit is inside of a zip/rar file, extract it.\n> Rejoin the game and try again or restart your PC and try again.")
+				createPopup("File Error", "There was a problem writing a save file to your PC.\n\nPlease contact the developer/support team for your exploit and tell them writefile/readfile is not working.\n\nYour settings, keybinds, waypoints, and aliases will not save if you continue.\n\nThings to try:\n> Make sure a 'workspace' folder is located in the same folder as your exploit\n> If your exploit is inside of a zip/rar file, extract it.\n> Rejoin the game and try again or restart your PC and try again.")
 			end
 		end
 	else
 		if jsonAttempts >= 10 then
 			nosaves = true
 			useFactorySettings()
-			createPopup("Sorry, we have attempted to parse your save file, but it is unreadable!\n\nZero Yield is now using factory settings until your exploit's file system works.\n\nYour save file has not been deleted.")
+			createPopup("File Error", "Sorry, we have attempted to parse your save file, but it is unreadable!\n\nZero Yield is now using factory settings until your exploit's file system works.\n\nYour save file has not been deleted.")
 		else
 			nosaves = true
 			useFactorySettings()
@@ -4441,13 +4454,14 @@ function autoComplete(str,curText)
 end
 
 CMDs = {}
-CMDs[#CMDs + 1] = {NAME = 'discord / support / help', DESC = 'Invite to the Zero Yield support server.'}
+CMDs[#CMDs + 1] = {NAME = 'discord / support / help', DESC = 'Invite to the Zero Yield discord server.'}
 CMDs[#CMDs + 1] = {NAME = 'guiscale [number]', DESC = 'Changes the size of the gui. [number] accepts both decimals and whole numbers. Min is 0.4 and Max is 2'}
 CMDs[#CMDs + 1] = {NAME = 'console', DESC = 'Loads Roblox console'}
 CMDs[#CMDs + 1] = {NAME = 'oldconsole', DESC = 'Loads old Roblox console'}
 CMDs[#CMDs + 1] = {NAME = 'explorer / dex', DESC = 'Opens DEX by Moon'}
 CMDs[#CMDs + 1] = {NAME = 'olddex / odex', DESC = 'Opens Old DEX by Moon'}
 CMDs[#CMDs + 1] = {NAME = 'remotespy / rspy', DESC = 'Opens Simple Spy V3'}
+CMDs[#CMDs + 1] = {NAME = 'executor', DESC = 'Opens an internal executor gui by dnezero'}
 CMDs[#CMDs + 1] = {NAME = 'audiologger / alogger', DESC = 'Opens Edges audio logger'}
 CMDs[#CMDs + 1] = {NAME = 'serverinfo / info', DESC = 'Gives you info about the server'}
 CMDs[#CMDs + 1] = {NAME = 'jobid', DESC = 'Copies the games JobId to your clipboard'}
@@ -4480,6 +4494,8 @@ CMDs[#CMDs + 1] = {NAME = 'togglekeepiy', DESC = 'Toggles keepiy'}
 CMDs[#CMDs + 1] = {NAME = 'removeads / adblock', DESC = 'Automatically removes ad billboards'}
 CMDs[#CMDs + 1] = {NAME = 'savegame / saveplace', DESC = 'Uses saveinstance to save the game'}
 CMDs[#CMDs + 1] = {NAME = 'clearerror', DESC = 'Clears the annoying box and blur when a game kicks you'}
+CMDs[#CMDs + 1] = {NAME = 'antigameplaypaused', DESC = 'Clears the annoying box shown when a game is loading assets due to network lag'}
+CMDs[#CMDs + 1] = {NAME = 'unantigameplaypaused', DESC = 'Disables antigameplaypaused'}
 CMDs[#CMDs + 1] = {NAME = 'clientantikick / antikick (CLIENT)', DESC = 'Prevents localscripts from kicking you'}
 CMDs[#CMDs + 1] = {NAME = 'clientantiteleport / antiteleport (CLIENT)', DESC = 'Prevents localscripts from teleporting you'}
 CMDs[#CMDs + 1] = {NAME = 'allowrejoin / allowrj [true/false] (CLIENT)', DESC = 'Changes if antiteleport allows you to rejoin or not'}
@@ -4556,6 +4572,7 @@ CMDs[#CMDs + 1] = {NAME = 'tpposition / tppos [X Y Z]', DESC = 'Teleports you to
 CMDs[#CMDs + 1] = {NAME = 'tweentpposition / ttppos [X Y Z]', DESC = 'Tween to coordinates (bypasses some anti cheats)'}
 CMDs[#CMDs + 1] = {NAME = 'offset [X Y Z]', DESC = 'Offsets you by certain coordinates'}
 CMDs[#CMDs + 1] = {NAME = 'tweenoffset / toffset [X Y Z]', DESC = 'Tween offset (bypasses some anti cheats)'}
+CMDs[#CMDs + 1] = {NAME = 'thru [num]', DESC = 'Teleports you [num] studs ahead of where your character is facing'}
 CMDs[#CMDs + 1] = {NAME = 'notifyposition / notifypos [player]', DESC = 'Notifies you the coordinates of a character'}
 CMDs[#CMDs + 1] = {NAME = 'copyposition / copypos [player]', DESC = 'Copies the coordinates of a character to your clipboard'}
 CMDs[#CMDs + 1] = {NAME = 'walktoposition / walktopos [X Y Z]', DESC = 'Makes you walk to a coordinate'}
@@ -4570,7 +4587,6 @@ CMDs[#CMDs + 1] = {NAME = 'logs', DESC = 'Opens the logs GUI'}
 CMDs[#CMDs + 1] = {NAME = 'chatlogs / clogs', DESC = 'Log what people say or whisper'}
 CMDs[#CMDs + 1] = {NAME = 'joinlogs / jlogs', DESC = 'Log when people join'}
 CMDs[#CMDs + 1] = {NAME = 'chatlogswebhook / logswebhook [url]', DESC = 'Set a discord webhook for chatlogs to go to (provide no url to disable this)'}
-CMDs[#CMDs + 1] = {NAME = 'antichatlogs / antichatlogger', DESC = 'Prevents Roblox from banning you for your silly chat messages (game needs the legacy chat)'}
 CMDs[#CMDs + 1] = {NAME = 'chat / say [text]', DESC = 'Makes you chat a string (possible mute bypass)'}
 CMDs[#CMDs + 1] = {NAME = 'spam [text]', DESC = 'Makes you spam the chat'}
 CMDs[#CMDs + 1] = {NAME = 'unspam', DESC = 'Turns off spam'}
@@ -4582,12 +4598,11 @@ CMDs[#CMDs + 1] = {NAME = 'bubblechat (CLIENT)', DESC = 'Enables bubble chat for
 CMDs[#CMDs + 1] = {NAME = 'unbubblechat / nobubblechat', DESC = 'Disables the bubblechat command'}
 CMDs[#CMDs + 1] = {NAME = 'chatwindow', DESC = 'Enables the chat window for your client'}
 CMDs[#CMDs + 1] = {NAME = 'unchatwindow / nochatwindow', DESC = 'Disables the chat window for your client'}
+CMDs[#CMDs + 1] = {NAME = 'darkchat', DESC = 'Makes the chat window dark for your client'}
 CMDs[#CMDs + 1] = {NAME = 'listento [player]', DESC = 'Listens to the area around a player. Can also eavesdrop with vc'}
 CMDs[#CMDs + 1] = {NAME = 'unlistento', DESC = 'Disables listento'}
-CMDs[#CMDs + 1] = {NAME = 'unsuspendchat', DESC = 'Unsuspends you from text chat'}
-CMDs[#CMDs + 1] = {NAME = 'unsuspendvc', DESC = 'Unsuspends you from voice chat'}
-CMDs[#CMDs + 1] = {NAME = 'muteallvcs', DESC = 'Mutes voice chat for all players'}
-CMDs[#CMDs + 1] = {NAME = 'unmuteallvcs', DESC = 'Unmutes voice chat for all players'}
+CMDs[#CMDs + 1] = {NAME = 'muteallvoices / muteallvcs', DESC = 'Mutes voice chat for all players'}
+CMDs[#CMDs + 1] = {NAME = 'unmuteallvoices / unmuteallvcs', DESC = 'Unmutes voice chat for all players'}
 CMDs[#CMDs + 1] = {NAME = 'mutevc [player]', DESC = 'Mutes the voice chat of a player'}
 CMDs[#CMDs + 1] = {NAME = 'unmutevc [player]', DESC = 'Unmutes the voice chat of a player'}
 CMDs[#CMDs + 1] = {NAME = 'phonebook / call', DESC = 'Prompts the Roblox phonebook UI to let you call your friends. Needs voice chat enabled'}
@@ -4716,6 +4731,7 @@ CMDs[#CMDs + 1] = {NAME = 'rolewatchstop / unrolewatch', DESC = 'Disable Rolewat
 CMDs[#CMDs + 1] = {NAME = 'rolewatchleave', DESC = 'Toggle if you should leave the game if someone from a watched group joins the server'}
 CMDs[#CMDs + 1] = {NAME = 'staffwatch', DESC = 'Notify if a staff member of the game joins the server'}
 CMDs[#CMDs + 1] = {NAME = 'unstaffwatch', DESC = 'Disable Staffwatch'}
+CMDs[#CMDs + 1] = {NAME = 'findfriendgroups', DESC = 'Notifies you if any players are friends with each other'}
 CMDs[#CMDs + 1] = {NAME = 'handlekill / hkill [player] [radius] (TOOL)', DESC = 'Kills a player using tool damage (YOU NEED A TOOL)'}
 CMDs[#CMDs + 1] = {NAME = 'fling', DESC = 'Flings anyone you touch'}
 CMDs[#CMDs + 1] = {NAME = 'unfling', DESC = 'Disables the fling command'}
@@ -5045,8 +5061,20 @@ end)
 
 onDied()
 
+local booly = {
+    truthy = { ["true"] = true, ["t"] = true, ["1"] = true, yes = true, y = true, on = true, enable = true, enabled = true },
+    falsy = { ["false"] = true, ["f"] = true, ["0"] = true, no = true, n = true, off = true, disable = true, disabled = true }
+}
+
+function parseBoolean(raw, default)
+    raw = tostring(raw)
+    if booly.truthy[raw] then return true end
+    if booly.falsy[raw] then return false end
+    return default or false
+end
+
 function getstring(begin, args)
-	return table.concat(args or cargs, " ", begin)
+    return table.concat(args or cargs, " ", begin)
 end
 
 findCmd=function(cmd_name)
@@ -6244,6 +6272,7 @@ local function clicktpFunc()
 		) * CFrame.Angles(0, math.pi, 0)
 
 		rootPart.CFrame = newCFrame + Vector3.new(0, hipHeight or 4, 0)
+		breakVelocity()
 	end)
 end
 
@@ -6518,10 +6547,10 @@ end)
 
 addcmd('discord', {'support', 'help'}, function(args, speaker)
 	if everyClipboard then
-		toClipboard('https://discord.com/invite/dYHag43eeU')
-		notify('Discord Invite', 'Copied to clipboard!\ndiscord.gg/dYHag43eeU')
+		toClipboard('https://discord.com/invite/78ZuWSq')
+		notify('Discord Invite', 'Copied to clipboard!\ndiscord.gg/78ZuWSq')
 	else
-		notify('Discord Invite', 'discord.gg/dYHag43eeU')
+		notify('Discord Invite', 'discord.gg/78ZuWSq')
 	end
 	if httprequest then
 		httprequest({
@@ -6534,7 +6563,7 @@ addcmd('discord', {'support', 'help'}, function(args, speaker)
 			Body = HttpService:JSONEncode({
 				cmd = 'INVITE_BROWSER',
 				nonce = HttpService:GenerateGUID(false),
-				args = {code = 'dYHag43eeU'}
+				args = {code = '78ZuWSq'}
 			})
 		})
 	end
@@ -7057,6 +7086,7 @@ function sFLY(vfly)
 	end
 
 	flyKeyDown = UserInputService.InputBegan:Connect(function(input, processed)
+		if processed then return end
 		if input.KeyCode == Enum.KeyCode.W then
 			CONTROL.F = (vfly and vehicleflyspeed or iyflyspeed)
 		elseif input.KeyCode == Enum.KeyCode.S then
@@ -7074,6 +7104,7 @@ function sFLY(vfly)
 	end)
 
 	flyKeyUp = UserInputService.InputEnded:Connect(function(input, processed)
+		if processed then return end
 		if input.KeyCode == Enum.KeyCode.W then
 			CONTROL.F = 0
 		elseif input.KeyCode == Enum.KeyCode.S then
@@ -7814,8 +7845,22 @@ addcmd("savegame", {"saveplace"}, function(args, speaker)
 	end
 end)
 
-addcmd('clearerror',{'clearerrors'},function(args, speaker)
-	GuiService:ClearError()
+addcmd("clearerror", {"clearerrors"}, function(args, speaker)
+    GuiService:ClearError()
+end)
+
+addcmd("antigameplaypaused", {}, function(args, speaker)
+    pcall(function() networkPaused:Disconnect() end)
+    networkPaused = COREGUI.RobloxGui.ChildAdded:Connect(function(obj)
+        if obj.Name == "CoreScripts/NetworkPause" then
+            obj:Destroy()
+        end
+    end)
+    COREGUI.RobloxGui["CoreScripts/NetworkPause"]:Destroy()
+end)
+
+addcmd("unantigameplaypaused", {}, function(args, speaker)
+    networkPaused:Disconnect()
 end)
 
 addcmd('clientantikick',{'antikick'},function(args, speaker)
@@ -8012,9 +8057,11 @@ addcmd('noesp',{'unesp','unespteam'},function(args, speaker)
 	end
 end)
 
-addcmd('esptransparency',{},function(args, speaker)
-	espTransparency = (args[1] and isNumber(args[1]) and args[1]) or 0.3
-	updatesaves()
+addcmd("esptransparency", {}, function(args, speaker)
+    espTransparency = tonumber(args[1]) or 0.3
+    if ESPenabled then execCmd("esp") end
+    if CHMSenabled then execCmd("chams") end
+    updatesaves()
 end)
 
 local espParts = {}
@@ -10109,51 +10156,53 @@ addcmd('tweentpposition',{'ttppos'},function(args, speaker)
 	end
 end)
 
-addcmd('offset',{},function(args, speaker)
-	if #args < 3 then
-		return 
-	end
-	if speaker.Character then
-		speaker.Character:TranslateBy(Vector3.new(tonumber(args[1]) or 0, tonumber(args[2]) or 0, tonumber(args[3]) or 0))
-	end
+addcmd("offset", {}, function(args, speaker)
+    if #args < 3 then return end
+    speaker.Character:TranslateBy(Vector3.new(tonumber(args[1]) or 0, tonumber(args[2]) or 0, tonumber(args[3]) or 0))
 end)
 
-addcmd('tweenoffset',{'toffset'},function(args, speaker)
-	if #args < 3 then return end
-	local tpX,tpY,tpZ = tonumber(args[1]),tonumber(args[2]),tonumber(args[3])
-	local char = speaker.Character
-	if char and getRoot(char) then
-		TweenService:Create(getRoot(speaker.Character), TweenInfo.new(tweenSpeed, Enum.EasingStyle.Linear), {CFrame = CFrame.new(tpX,tpY,tpZ)}):Play()
-	end
+addcmd("tweenoffset", {"toffset"}, function(args, speaker)
+    if #args < 3 then return end
+    local tpX, tpY, tpZ = tonumber(args[1]), tonumber(args[2]), tonumber(args[3])
+    local root = getRoot(speaker.Character)
+    local pos = root.Position + Vector3.new(tpX, tpY, tpZ)
+    TweenService:Create(root, TweenInfo.new(tweenSpeed, Enum.EasingStyle.Linear), {CFrame = CFrame.new(pos)}):Play()
+    breakVelocity()
 end)
 
-addcmd('clickteleport',{},function(args, speaker)
-	if speaker == Players.LocalPlayer then
-		notify('Click TP','Go to Settings > Keybinds > Add to set up click teleport')
-	end
+addcmd("clickteleport", {}, function(args, speaker)
+    if speaker ~= Players.LocalPlayer then return end
+    notify("Click TP", "Go to Settings > Keybinds > Add to set up click teleport")
 end)
 
 addcmd("mouseteleport", {"mousetp"}, function(args, speaker)
-	local root = getRoot(speaker.Character)
-	local pos = IYMouse.Hit
-	if root and pos then
-		root.CFrame = CFrame.new(pos.X, pos.Y + 3, pos.Z, select(4, root.CFrame:components()))
-	end
+    local root = getRoot(speaker.Character)
+    local pos = IYMouse.Hit
+    if root and pos then
+        root.CFrame = CFrame.new(pos.X, pos.Y + 3, pos.Z, select(4, root.CFrame:components()))
+        breakVelocity()
+    end
 end)
 
-addcmd('tptool', {'teleporttool'}, function(args, speaker)
-	local TpTool = Instance.new("Tool")
-	TpTool.Name = "Teleport Tool"
-	TpTool.RequiresHandle = false
-	TpTool.Parent = speaker.Backpack
-	TpTool.Activated:Connect(function()
-		local Char = speaker.Character or workspace:FindFirstChild(speaker.Name)
-		local HRP = getRoot(Char)
-		if not Char or not HRP then
-			return warn("Failed to find HumanoidRootPart")
-		end
-		HRP.CFrame = CFrame.new(IYMouse.Hit.X, IYMouse.Hit.Y + 3, IYMouse.Hit.Z, select(4, HRP.CFrame:components()))
-	end)
+addcmd("tptool", {"teleporttool"}, function(args, speaker)
+    local TpTool = Instance.new("Tool")
+    TpTool.Name = "Teleport Tool"
+    TpTool.RequiresHandle = false
+    TpTool.Parent = speaker:FindFirstChildOfClass("Backpack")
+    TpTool.Activated:Connect(function()
+        local root = getRoot(speaker.Character)
+        local pos = IYMouse.Hit
+        if not root or not pos then return end
+        root.CFrame = CFrame.new(pos.X, pos.Y + 3, pos.Z, select(4, root.CFrame:components()))
+        breakVelocity()
+    end)
+end)
+
+addcmd("thru", {}, function(args, speaker)
+    local root = getRoot(speaker.Character)
+    local num = tonumber(args[1]) or 5
+    local pos = root.CFrame.Position + (root.CFrame.LookVector * num)
+    root.CFrame = CFrame.new(pos, pos + root.CFrame.LookVector)
 end)
 
 addcmd('clickdelete',{},function(args, speaker)
@@ -10487,6 +10536,12 @@ addcmd('remotespy',{'rspy'},function(args, speaker)
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/SimpleSpyV3/main.lua"))()
 end)
 
+addcmd("executor", {}, function(args, speaker)
+    -- by dnezero
+    notify("Loading", "Hold on a sec")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/refs/heads/main/executor.lua"))()
+end)
+
 addcmd('audiologger',{'alogger'},function(args, speaker)
 	notify("Loading",'Hold on a sec')
 	loadstring(game:HttpGet(('https://raw.githubusercontent.com/infyiff/backup/main/audiologger.lua'),true))()
@@ -10636,6 +10691,36 @@ end)
 
 addcmd("unchatwindow", {"nochatwindow"}, function(args, speaker)
 	TextChatService.ChatWindowConfiguration.Enabled = false
+end)
+
+addcmd("darkchat", {}, function(args, speaker)
+    local BCC = TextChatService:FindFirstChildOfClass("BubbleChatConfiguration")
+    local CWC = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
+    local CIBC = TextChatService:FindFirstChildOfClass("ChatInputBarConfiguration")
+    if BCC then
+        BCC.Enabled = true
+        BCC.BackgroundColor3 = Color3.fromRGB()
+        BCC.BackgroundTransparency = 0.3
+        BCC.TailVisible = true
+        BCC.TextColor3 = Color3.fromRGB(0xFF, 0xFF, 0xFF)
+    end
+    if CWC then
+        CWC.Enabled = true
+        CWC.BackgroundColor3 = Color3.fromRGB()
+        CWC.BackgroundTransparency = 0.3
+        CWC.TextColor3 = Color3.fromRGB(0xFF, 0xFF, 0xFF)
+        CWC.TextStrokeColor3 = Color3.fromRGB()
+        CWC.TextStrokeTransparency = 0.5
+    end
+    if CIBC then
+        CIBC.Enabled = true
+        CIBC.BackgroundColor3 = Color3.fromRGB()
+        CIBC.BackgroundTransparency = 0.5
+        CIBC.PlaceholderColor3 = Color3.fromRGB(0xFF, 0xFF, 0xFF)
+        CIBC.TextColor3 = Color3.fromRGB(0xFF, 0xFF, 0xFF)
+        CIBC.TextStrokeColor3 = Color3.fromRGB()
+        CIBC.TextStrokeTransparency = 0.5
+    end
 end)
 
 addcmd('blockhead',{},function(args, speaker)
@@ -11629,26 +11714,6 @@ addcmd("chatlogswebhook", {"logswebhook"}, function(args, speaker)
 	updatesaves()
 end)
 
-addcmd("antichatlogs", {"antichatlogger"}, function(args, speaker)
-	if not isLegacyChat then
-		return notify("antichatlogs", "Game needs the legacy chat")
-	end
-	local MessagePosted, _ = pcall(function()
-		rawset(require(speaker:FindFirstChild("PlayerScripts"):FindFirstChild("ChatScript").ChatMain), "MessagePosted", {
-			["fire"] = function(msg)
-				return msg
-			end,
-			["wait"] = function()
-				return
-			end,
-			["connect"] = function()
-				return
-			end
-		})
-	end)
-	notify("antichatlogs", MessagePosted and "Enabled" or "Failed to enable antichatlogs")
-end)
-
 flinging = false
 addcmd('fling',{},function(args, speaker)
 	flinging = false
@@ -11944,25 +12009,33 @@ addcmd("handlekill", {"hkill"}, function(args, speaker)
 	notify("Handle Kill", "Stopped!")
 end)
 
-local hb = RunService.Heartbeat
-addcmd('tpwalk', {'teleportwalk'}, function(args, speaker)
-	tpwalking = true
-	local chr = speaker.Character
-	local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-	while tpwalking and chr and hum and hum.Parent do
-		local delta = hb:Wait()
-		if hum.MoveDirection.Magnitude > 0 then
-			if args[1] and isNumber(args[1]) then
-				chr:TranslateBy(hum.MoveDirection * tonumber(args[1]) * delta * 10)
-			else
-				chr:TranslateBy(hum.MoveDirection * delta * 10)
-			end
-		end
-	end
+tpwalkStack = 0
+addcmd("teleportwalk", {"tpwalk"}, function(args, speaker)
+    pcall(function() tpwalking:Disconnect() end)
+
+    local character = speaker.Character
+    local humanoid = character and character:FindFirstChildWhichIsA("Humanoid")
+    local speed = (args[1] and isNumber(args[1])) and tonumber(args[1]) or 1
+
+    if parseBoolean(args[2]) then
+        tpwalkStack = tpwalkStack + speed
+    end
+
+    tpwalking = RunService.Heartbeat:Connect(function(delta)
+        if not (character and humanoid and humanoid.Parent) then
+            tpwalking:Disconnect()
+            return
+        end
+
+        if humanoid.MoveDirection.Magnitude > 0 then
+            character:TranslateBy(humanoid.MoveDirection * (speed + tpwalkStack) * delta * 10)
+        end
+    end)
 end)
 
-addcmd('untpwalk', {'unteleportwalk'}, function(args, speaker)
-	tpwalking = false
+addcmd("unteleportwalk", {"untpwalk"}, function(args, speaker)
+    tpwalkStack = 0
+    tpwalking:Disconnect()
 end)
 
 function bring(speaker,target,fast)
@@ -12376,6 +12449,78 @@ addcmd("unstaffwatch", {}, function(args, speaker)
 	notify("Staffwatch", "Disabled")
 end)
 
+local function playerGroups()
+    local players = Players:GetPlayers()
+    local graph = {}
+    local seen = {}
+    local groups = {}
+
+    for _, p in ipairs(players) do
+        graph[p] = {}
+    end
+
+    for i = 1, #players do
+        for j = i + 1, #players do
+            local p1 = players[i]
+            local p2 = players[j]
+
+            local success, result = pcall(function()
+                return p1:IsFriendsWithAsync(p2.UserId)
+            end)
+
+            if success and result then
+                table.insert(graph[p1], p2)
+                table.insert(graph[p2], p1)
+            end
+        end
+    end
+
+    local function dfs(player, group)
+        seen[player] = true
+        table.insert(group, player)
+
+        for _, possible in ipairs(graph[player]) do
+            if not seen[possible] then
+                dfs(possible, group)
+            end
+        end
+    end
+
+    for _, p in ipairs(players) do
+        if not seen[p] then
+            local group = {}
+            dfs(p, group)
+            table.insert(groups, group)
+        end
+    end
+
+    return groups
+end
+
+addcmd("findfriendgroups", {}, function(args, speaker)
+    notify("Checking Players", "This might take a while (slow function)")
+
+    local groups = playerGroups()
+    local playerList = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.PlayerList)
+
+    local result = ""
+    local index = 1
+    local found = 0
+
+    for _, group in ipairs(groups) do
+        if #group == 1 then continue end
+        local names = {}
+        for _, player in ipairs(group) do
+            table.insert(names, playerList and player.DisplayName or player.Name)
+        end
+        result = result .. index .. ". " .. table.concat(names, ", ") .. "\n"
+        index = index + 1
+        found = found + 1
+    end
+
+    createPopup("Friend Groups", found == 0 and "None" or result)
+end)
+
 addcmd('removeterrain',{'rterrain','noterrain'},function(args, speaker)
 	workspace:FindFirstChildOfClass('Terrain'):Clear()
 end)
@@ -12613,34 +12758,11 @@ addcmd("guiscale", {}, function(args, speaker)
 	updatesaves()
 end)
 
-addcmd("unsuspendchat", {}, function(args, speaker)
-	if replicatesignal then
-		replicatesignal(TextChatService.UpdateChatTimeout, speaker.UserId, 0, 10)
-	else
-		notify("Incompatible Exploit", "Your exploit does not support this command (missing replicatesignal)")
-	end
-end)
-
-addcmd("unsuspendvc", {}, function(args, speaker)
-	if replicatesignal then
-		replicatesignal(VoiceChatService.ClientRetryJoin)
-
-		if typeof(onVoiceModerated) ~= "RBXScriptConnection" then
-			onVoiceModerated = Services.VoiceChatInternal.LocalPlayerModerated:Connect(function()
-				task.wait(1)
-				replicatesignal(VoiceChatService.ClientRetryJoin)
-			end)
-		end
-	else
-		notify("Incompatible Exploit", "Your exploit does not support this command (missing replicatesignal)")
-	end
-end)
-
-addcmd("muteallvcs", {}, function(args, speaker)
+addcmd("muteallvoices", {"muteallvcs"}, function(args, speaker)
 	Services.VoiceChatInternal:SubscribePauseAll(true)
 end)
 
-addcmd("unmuteallvcs", {}, function(args, speaker)
+addcmd("unmuteallvoices", {"unmuteallvcs"}, function(args, speaker)
 	Services.VoiceChatInternal:SubscribePauseAll(false)
 end)
 
@@ -12926,6 +13048,12 @@ addcmd('removecmd',{'deletecmd'},function(args, speaker)
 	removecmd(args[1])
 end)
 
+addcmd("debug", {}, function(args, speaker)
+    local opt = parseBoolean(args[1], true)
+    _G.IY_DEBUG = opt
+    notify("debug", tostring(opt), 1)
+end)
+
 if IsOnMobile then
 	local QuickCapture = Instance.new("TextButton")
 	local UICorner = Instance.new("UICorner")
@@ -13199,12 +13327,12 @@ task.spawn(function()
 			ExitImage.Image = getcustomasset("infiniteyield/assets/close.png")
 			ExitImage.ZIndex = 10
 
-			wait(1)
+			task.wait(1)
 			AnnGUI:TweenPosition(UDim2.new(0.5, -180, 0, 150), "InOut", "Quart", 0.5, true, nil)
 
 			Exit.MouseButton1Click:Connect(function()
 				AnnGUI:TweenPosition(UDim2.new(0.5, -180, 0, -500), "InOut", "Quart", 0.5, true, nil)
-				wait(0.6)
+				task.wait(0.6)
 				AnnGUI:Destroy()
 			end)
 		end
@@ -13212,19 +13340,21 @@ task.spawn(function()
 end)
 
 task.spawn(function()
-	wait()
-	Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.2)
-	Logo:TweenSizeAndPosition(UDim2.new(0, 175, 0, 175), UDim2.new(0, 37, 0, 45), "Out", "Quart", 0.3)
-	wait(1)
-	local OutInfo = TweenInfo.new(1.6809, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
-	TweenService:Create(Logo, OutInfo, {ImageTransparency = 1}):Play()
-	TweenService:Create(IntroBackground, OutInfo, {BackgroundTransparency = 1}):Play()
-	Credits:TweenPosition(UDim2.new(0, 0, 0.9, 30), "Out", "Quart", 0.2)
-	wait(0.2)
-	Logo:Destroy()
-	Credits:Destroy()
-	IntroBackground:Destroy()
-	minimizeHolder()
+    task.wait()
+    pcall(function()
+        Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.2)
+        Logo:TweenSizeAndPosition(UDim2.new(0, 175, 0, 175), UDim2.new(0, 37, 0, 45), "Out", "Quart", 0.3)
+        task.wait(1)
+        local OutInfo = TweenInfo.new(1.6809, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
+        TweenService:Create(Logo, OutInfo, {ImageTransparency = 1}):Play()
+        TweenService:Create(IntroBackground, OutInfo, {BackgroundTransparency = 1}):Play()
+        Credits:TweenPosition(UDim2.new(0, 0, 0.9, 30), "Out", "Quart", 0.2)
+        task.wait(0.2)
+    end)
+    Logo:Destroy()
+    Credits:Destroy()
+    IntroBackground:Destroy()
+    minimizeHolder()
 end)
 -- This file will be injected into Infinite Yield, to add the commands Zero Yield has to offer 
 
